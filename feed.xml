@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Noah's Weblog</title>
+  <link>http://noahmaier.net/</link>
+  <description>Notes and interactive pages from whatever I'm studying.</description>
+  <language>en-us</language>
+  <atom:link href="http://noahmaier.net/feed.xml" rel="self" type="application/rss+xml"/>
+  <lastBuildDate>Sun, 04 Oct 2026 21:17:00 GMT</lastBuildDate>
+  <item>
+    <title>The Dark Night of John of the Cross</title>
+    <link>http://noahmaier.net/exhibits/dark-night-john-of-the-cross/</link>
+    <guid isPermaLink="false">https://noahmaier.net/#dark-night-john-of-the-cross</guid>
+    <pubDate>Sun, 04 Oct 2026 21:17:00 GMT</pubDate>
+    <category>theology</category>
+    <category>john of the cross</category>
+    <description><![CDATA[<p>A six-part course on John of the Cross's <em>Ascent of Mount Carmel</em> and <em>Dark Night</em>, in the Kavanaugh and Rodriguez translation. Readers drag experiences onto John's map of the four nights, test his three signs for leaving meditation on sample cases, watch a sunbeam look darker as it gets purer, and step through his log in the fire. Quizzes and spaced review cards throughout.</p><p><a href="http://noahmaier.net/exhibits/dark-night-john-of-the-cross/">Open the interactive page</a></p>]]></description>
+  </item>
+  <item>
+    <title>Bach's Goldberg Variations</title>
+    <link>http://noahmaier.net/exhibits/bachs-goldberg-variations/</link>
+    <guid isPermaLink="false">https://noahmaier.net/#bachs-goldberg-variations</guid>
+    <pubDate>Sun, 04 Oct 2026 19:57:00 GMT</pubDate>
+    <category>music</category>
+    <category>johann sebastian bach</category>
+    <description><![CDATA[<p>A nine-part course on Peter Williams's <em>Bach: The Goldberg Variations</em> (2001), covering his Introduction and the chapters on the work's shape and its movements. The page plays the 32-note bass under different surfaces, maps the thirty variations into Bach's groups of three, lets you build a canon at any interval, and sorts performance choices by Williams's two "shapes" of the work. Quizzes and spaced flashcards throughout.</p><p><a href="http://noahmaier.net/exhibits/bachs-goldberg-variations/">Open the interactive page</a></p>]]></description>
+  </item>
+  <item>
+    <title>What the Output Can't See</title>
+    <link>http://noahmaier.net/exhibits/what-the-output-cant-see/</link>
+    <guid isPermaLink="false">https://noahmaier.net/#what-the-output-cant-see</guid>
+    <pubDate>Sun, 04 Oct 2026 19:00:00 GMT</pubDate>
+    <category>philosophy</category>
+    <category>consciousness</category>
+    <description><![CDATA[<p>A nine-part course on three short pieces by Eliezer Yudkowsky about where consciousness lives. Readers rebuild a question-answering machine from wires, pipes, squirrels or neurons, test his argument against panpsychism on an electron test bench, and weigh the strongest objections, with quizzes and spaced review cards throughout.</p><p><a href="http://noahmaier.net/exhibits/what-the-output-cant-see/">Open the interactive page</a></p>]]></description>
+  </item>
+  <item>
+    <title>Hart's Beauty of the Infinite</title>
+    <link>http://noahmaier.net/exhibits/harts-beauty-of-the-infinite/</link>
+    <guid isPermaLink="false">https://noahmaier.net/#harts-beauty-of-the-infinite</guid>
+    <pubDate>Sun, 04 Oct 2026 18:18:00 GMT</pubDate>
+    <category>theology</category>
+    <category>philosophy</category>
+    <category>david bentley hart</category>
+    <description><![CDATA[<p>A ten-module course on David Bentley Hart's <em>The Beauty of the
+              Infinite</em> (2003) and his case that persuasion can be peaceful,
+              with Nietzsche, Levinas, Derrida, and his other critics given their
+              best lines. Quizzes, hands-on activities, and spaced flashcards
+              throughout.</p><p><a href="http://noahmaier.net/exhibits/harts-beauty-of-the-infinite/">Open the interactive page</a></p>]]></description>
+  </item>
+</channel>
+</rss>
