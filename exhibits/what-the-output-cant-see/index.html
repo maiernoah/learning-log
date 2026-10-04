@@ -6,7 +6,7 @@
 <title>What the Output Can&#x27;t See</title>
 <meta name="description" content="Rebuild a question-answering machine from wires, water pipes, squirrels or neurons, then test where consciousness could live, from your own brain down to a single electron.">
 <style>
-/* ===== Noah's Weblog house style (exhibits) v1 =====
+/* ===== Noah's Weblog house style (exhibits) v2 =====
    Matches noahmaier.net: white page, Times for reading, Verdana for
    controls, blue underlined links, two-tone rules, gray beveled buttons. */
 :root {
@@ -35,13 +35,18 @@
   --serif: "Times New Roman", Times, serif;
   --sans: Verdana, Geneva, Tahoma, sans-serif;
   --mono: "Courier New", Courier, monospace;
+  --measure: 42.75rem;    /* one column width (684px): text, boxes, questions, tables, figures */
 }
 * { box-sizing: border-box; }
 html { background: var(--page); }
 body { margin: 0; padding: 10px 16px 32px; background: var(--page); color: var(--ink);
        font: 18px/1.45 var(--serif); -webkit-text-size-adjust: 100%; }
 .page { max-width: 1020px; }
-main p, .prose { max-width: 38em; }
+/* Text, boxes, questions, tables and figures share one column width, so their left and
+   right edges line up. Add class="wide" only to something that genuinely needs more room. */
+main p, main ul, main ol, main dl, main blockquote, main table, main fieldset, main figure,
+main details, main .box, main h2, main h3, main .view > *, .prose { max-width: var(--measure); }
+.wide { max-width: none !important; }
 a { color: var(--link); } a:visited { color: var(--visited); } a:active { color: var(--active); }
 :focus-visible { outline: 2px dotted var(--ink); outline-offset: 2px; }
 
@@ -64,8 +69,11 @@ label, legend, button, input, select, textarea, table, figcaption, output, .ui, 
 p.meta { margin: 6px 0 12px; }
 
 fieldset { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi);
-           margin: 0 0 16px; padding: 8px 12px 12px; min-width: 0; }
-legend { font-size: 13px; font-weight: bold; padding: 0 4px; }
+           margin: 0 0 16px; padding: 10px 12px 12px; min-width: 0; }
+/* The legend sits inside the box as its first line, so long legends wrap cleanly
+   instead of breaking through the border. */
+legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; font-size: 13px; font-weight: bold; }
+legend + * { clear: both; }
 label { font-size: 13px; }
 .choices { display: flex; flex-wrap: wrap; gap: 6px 18px; }
 .choices label { display: inline-flex; align-items: center; gap: 5px; }
@@ -92,6 +100,7 @@ select, textarea {
 }
 
 table { border-collapse: collapse; font-size: 13px; line-height: 1.4; }
+main table { width: 100%; }
 th, td { border: 1px solid var(--lo); padding: 4px 8px; text-align: left; vertical-align: top; }
 th { background: var(--tint); }
 
@@ -109,14 +118,15 @@ footer address { font-style: normal; font-size: 0.85em; }
 @media (max-width: 780px) { body { font-size: 17px; padding: 8px 16px 28px; } h1 { font-size: 1.8em; } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 @media print { .nav { display: none; } }
-/* ===== Noah's Weblog teaching components v1 =====
+/* ===== Noah's Weblog teaching components v2 =====
    Goes directly after house-style.css. Uses only its variables. */
 
 /* anything hidden by the engine stays hidden, even inside flex rows */
 [hidden] { display: none !important; }
 
 /* course layout: the lesson on the left, contents on the right (like the log) */
-.course { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 32px; align-items: start; }
+.course { display: grid; grid-template-columns: minmax(0, var(--measure)) 230px; justify-content: space-between;
+          gap: 32px; align-items: start; }
 .course > .lesson { min-width: 0; }
 .course-nav { position: sticky; top: 12px; padding-left: 20px; border-left: 1px solid var(--lo);
               box-shadow: inset 1px 0 0 var(--hi); font: 13px/1.5 var(--sans); }
@@ -148,18 +158,18 @@ footer address { font-style: normal; font-size: 0.85em; }
 /* glossary terms in running text link to the glossary */
 a.term { text-decoration-style: dotted; text-underline-offset: 2px; }
 .glossary dt { font-weight: bold; margin: 0.9em 0 0.15em; }
-.glossary dd { margin: 0; max-width: 38em; }
+.glossary dd { margin: 0; }
 
 /* quotes and figures */
-blockquote { margin: 1em 0; padding-left: 14px; border-left: 3px solid var(--lo); font-style: italic; max-width: 36em; }
+blockquote { margin: 1em 0; padding-left: 14px; border-left: 3px solid var(--lo); font-style: italic; }
 figure { margin: 1.3em 0; }
 figure svg, figure img { display: block; max-width: 100%; height: auto; }
-figure svg:not([width]) { width: 100%; max-width: 38em; }  /* give every svg width and height attributes */
-figcaption { margin-top: 6px; color: var(--ink-soft); max-width: 38em; }
+figure svg:not([width]) { width: 100%; }  /* give every svg width and height attributes */
+figcaption { margin-top: 6px; color: var(--ink-soft); }
 svg text { font-family: var(--sans); }
 
 /* reveal: model answers, hints, "why?" prompts */
-details.reveal { margin: 0 0 1em; max-width: 38em; }
+details.reveal { margin: 0 0 1em; }
 details.reveal > summary { font: 13px/1.6 var(--sans); color: var(--link); text-decoration: underline; cursor: pointer; }
 details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px solid var(--hi); }
 
@@ -167,8 +177,8 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
 .box strong.label { display: block; margin-bottom: 2px; }
 
 /* quizzes */
-.quiz { margin: 1.3em 0; max-width: 40em; }
-.quiz fieldset.q legend { font: bold 1em/1.35 var(--serif); padding: 0 4px; }
+.quiz { margin: 1.3em 0; }
+.quiz fieldset.q legend { font: bold 1em/1.35 var(--serif); }
 .q .options { display: grid; gap: 7px; margin: 6px 0 10px; }
 .q .options label { display: flex; gap: 8px; align-items: flex-start; font: 0.95em/1.4 var(--serif); }
 .q .options input { margin-top: 0.3em; flex: none; }
@@ -185,7 +195,7 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
 .quiz-summary:empty { display: none; }
 
 /* flashcards */
-.deck { max-width: 38em; }
+
 .card { background: #fff; border: 1px solid var(--field); box-shadow: inset 1px 1px 0 #b4b4b4;
         padding: 16px 18px; min-height: 9em; margin: 8px 0 10px; }
 .card .front { font-size: 1.2em; }
@@ -233,8 +243,7 @@ table.lens td.on, table.lens th.on { background: var(--hi); font-weight: bold; }
 table.lens tbody tr.pass th::before { content: "\25BA\00a0"; color: var(--c1); }
 
 /* sorting cards */
-.sort-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0 0 1em; }
-@media (max-width: 520px) { .sort-grid { grid-template-columns: 1fr; } }
+#sort-final { margin: 18px 0 16px; }
 .fact { border: 1px solid var(--lo); padding: 8px 10px; display: grid; gap: 8px;
         grid-template-rows: 1fr auto auto; min-width: 0; }
 .fact .t { margin: 0; font-size: 0.95em; line-height: 1.35; }
@@ -401,20 +410,19 @@ svg path.s-navy, svg line { fill: none; }
         </figure>
 
         <h3>Try it: sort the facts</h3>
-        <p class="box"><strong class="label">Try it</strong>For each fact, decide whether it could change what the machine says.</p>
-        <p class="meta"><span id="sort-score" aria-live="polite">Sorted 0 of 8 · 0 correct</span>&nbsp;&nbsp; <button type="button" id="sort-reset">Clear answers</button></p>
-        <div class="sort-grid" id="sort-grid">
-          <div class="fact final" id="sort-final">
-            <div>
-              <p class="meta eyebrow">One more fact, this one about you</p>
-              <p class="say">You are aware that you are aware.</p>
-            </div>
-            <div class="btns">
-              <button type="button" class="pick" id="sort-final-a" data-v="1">Changes the output</button>
-              <button type="button" class="pick" id="sort-final-b" data-v="0">Can't change it</button>
-            </div>
-            <p class="fb" id="sort-final-fb" aria-live="polite"></p>
+        <p class="box"><strong class="label">Try it</strong>Drag each fact into the box for its layer: could it change what the machine says, or not?</p>
+        <div data-sort="facts"></div>
+
+        <div class="fact final" id="sort-final">
+          <div>
+            <p class="meta eyebrow">One more fact, this one about you</p>
+            <p class="say">You are aware that you are aware.</p>
           </div>
+          <div class="btns">
+            <button type="button" class="pick" id="sort-final-a" data-v="1">Changes the output</button>
+            <button type="button" class="pick" id="sort-final-b" data-v="0">Can't change it</button>
+          </div>
+          <p class="fb" id="sort-final-fb" aria-live="polite"></p>
         </div>
 
         <details class="reveal"><summary>Why does "it remembers what you said a minute ago" go in the functional bin?</summary>
@@ -647,9 +655,8 @@ svg path.s-navy, svg line { fill: none; }
         </figure>
 
         <h3>Try it: seen or inferred?</h3>
-        <p class="box"><strong class="label">Try it</strong>For each statement, decide whether you could observe it directly or would have to infer it.</p>
-        <p class="meta" id="infer-score" aria-live="polite">Sorted 0 of 8 · 0 correct</p>
-        <div class="sort-grid" id="infer-grid"></div>
+        <p class="box"><strong class="label">Try it</strong>Drag each statement into a box: could you observe it directly, or would you have to infer it?</p>
+        <div data-sort="infer"></div>
 
         <h3>The other side</h3>
         <p>The case for chicken feelings rests on more than a glance. Researchers point to pain pathways in birds that resemble ours, and to animals giving up rewards to avoid harm. In one study, lame chickens chose feed laced with a painkiller (Danbury and colleagues, 2000). (Outside the essay.)</p>
@@ -827,237 +834,101 @@ svg path.s-navy, svg line { fill: none; }
 window.COURSE = {
   slug: "what-the-output-cant-see",
   quizzes: {
-    pre: [
-      { q: "You rebuild a calculator so its signals are water in pipes, following exactly the same steps. You ask it 17 × 3. What happens?",
-        options: ["It answers 51, the same as before", "It gives a different answer, because water flows slower", "It can't answer, because water can't carry numbers", "It answers, and adds that it is made of water"],
-        answer: 0,
-        why: ["Same steps, same answer.", "Speed can change how long it takes. It can't change which answer comes out.", "Any material can carry signals if the steps are the same.", "To mention water, some step would have to read the material, and no step can."],
-        src: "A ¶4", from: "m1" },
-      { q: "Which fact about a computer could change what it says?",
-        options: ["The mass of its power supply", "Whether its chips are silicon or carbon", "What it has stored in memory", "The color of its case"],
-        answer: 2,
-        why: ["The power supply's mass never shows up in an answer.", "With the same algorithm running, the chip material makes no difference to the answers.", "Stored facts, like Paris being in France, shape its replies.", "Repaint it and nothing it says changes."],
-        src: "A ¶2, ¶3", from: "m2" },
-      { q: "What does panpsychism claim?",
-        options: ["Only humans are conscious", "Consciousness is an illusion", "Computers are conscious and animals aren't", "Consciousness is a basic feature of all matter, even tiny particles"],
-        answer: 3,
-        why: ["That's closer to the opposite view.", "That's a different view, called illusionism.", "Panpsychism isn't about computers versus animals.", "Panpsychists say consciousness goes all the way down, to particles like electrons."],
-        src: "C ¶23", from: "m6" },
-      { q: "You look at a chicken and \"just see\" that it feels pain. On Yudkowsky's account, what are you doing?",
-        options: ["Directly observing its feelings", "Making an automatic inference that feels like seeing", "Measuring activity in its brain", "Remembering a biology lesson"],
-        answer: 1,
-        why: ["On his account you see behavior and infer the feeling.", "He says the brain infers a mind behind the eyes, fast and out of view, so it feels observed.", "Nobody is measuring anything in this example.", "The conclusion arrives without any conscious recall."],
-        src: "C ¶3, ¶19", from: "m7" }
-    ],
-    m1: [
-      { q: "You ask the water-pipe build \"What is 17 × 3?\" What does it answer?",
-        options: ["Something different, since water flows slower", "51, the same as the copper build", "Nothing, since water can't carry numbers", "\"I am made of water\""],
-        answer: 1,
-        why: ["Speed changes timing, not the answer.", "Same algorithm, same answer, whatever carries the signals.", "Water can carry signals as well as copper can, if the steps match.", "No step in the algorithm reads the material."],
-        src: "A ¶4" },
-      { q: "In all four builds, the machine says it is \"electric current flowing through copper wires.\" What does that show?",
-        options: ["The machine knows what it is made of", "Squirrels and neurons secretly run on electricity", "Its answer about its material can't track the material", "The question was badly worded"],
-        answer: 2,
-        why: ["It gives the same answer when built from pipes, so it doesn't know.", "The builds really are different materials.", "The answer comes from the pattern, which is identical in every build.", "The wording is fine. The machine has no way to check."],
-        src: "A ¶6" },
-      { type: "recall", q: "In your own words: why can't any algorithm depend on which material it runs on?",
-        answer: "<p>The same algorithm can always run on a different material. A step that gave one signal on copper and another on water would be a different algorithm. So the output can't depend on the material.</p>",
-        src: "A ¶8" }
-    ],
-    m2: [
-      { q: "Which fact belongs in the functional layer?",
-        options: ["The chips are made of silicon", "The power supply weighs 4.2 kilograms", "The case is painted blue", "The machine has learned that 7 × 8 = 56"],
-        answer: 3,
-        why: ["Swap to carbon chips running the same algorithm and the answers stay the same.", "Mass never shows up in an answer.", "Paint never shows up in an answer.", "Ask it to multiply and this fact shows up in the output."],
-        src: "A ¶2" },
-      { q: "Someone says: \"Melt the chips and the answers change, so the material matters.\" How does the argument respond?",
-        options: ["It agrees, so the argument fails", "Melting stops the algorithm; the claim covers working machines running the same algorithm", "Melted chips still give the same answers", "Melting is a functional-layer fact"],
-        answer: 1,
-        why: ["The argument already allows this case.", "The claim holds \"given a fixed algorithm.\" A melted machine runs no algorithm.", "They don't. Nothing runs.", "Melting breaks the machine. It isn't a fact about the pattern."],
-        src: "A ¶4" },
-      { q: "What single test sorts a fact into a bin?",
-        options: ["Can you see it?", "Is it made of matter?", "Could it change what comes out?", "Did a scientist measure it?"],
-        answer: 2,
-        why: ["You can see the case color, and it's still in the physical bin.", "Everything in the machine is made of matter.", "That's the test: could it affect the output?", "Measurement has nothing to do with the bins."],
-        src: "A ¶1" }
-    ],
-    m3: [
-      { q: "On Yudkowsky's reading, what does \"a simulated storm can't get anything wet\" point at?",
-        options: ["The difference between the physical layer and the functional layer", "Proof that simulations can't think", "A flaw in weather software", "The idea that water is conscious"],
-        answer: 0,
-        why: ["Wetness is physical, so computing rain can't produce it.", "That's Searle's use of the example. Yudkowsky reads it differently.", "The software works fine. Wetness just isn't an output.", "Nothing here is about water being conscious."],
-        src: "A ¶7" },
-      { q: "If consciousness works like wetness, what follows for a perfect brain simulation?",
-        options: ["It would be conscious", "It would get wet", "It would lack consciousness, however perfect", "It would run faster than a brain"],
-        answer: 2,
-        why: ["That follows if consciousness works like the Paris fact.", "Simulations don't make anything wet.", "A physical-layer property doesn't come along with the pattern.", "Speed isn't the point."],
-        src: "A ¶11" },
-      { q: "A weather station inside the simulation measures 40 mm/h of rain. Can it tell whether the computer runs on wires or pipes?",
-        options: ["Yes, by timing how fast the rain falls", "No; its readings are outputs, and outputs can't depend on the material", "Yes, if the pipes leak", "Only if it is very sensitive"],
-        answer: 1,
-        why: ["The simulated rain falls the same way on any material.", "The wall blocks this direction too.", "A leak would be a broken machine, not a reading.", "No level of sensitivity helps when the reading can't depend on the material."],
-        src: "A ¶6" }
-    ],
-    m4: [
-      { q: "Which claim does the argument treat as a fact about consciousness you can check yourself?",
-        options: ["Consciousness is made of electricity", "Only humans are conscious", "Consciousness is part of what makes you say \"I think, therefore I am\"", "Consciousness lives in the brain's material"],
-        answer: 2,
-        why: ["The argument says nothing about what consciousness is made of.", "The argument doesn't claim this.", "Noticing your own awareness can make you say those words.", "That's the view the argument rejects."],
-        src: "A ¶9" },
-      { q: "Which two claims does the conclusion follow from?",
-        options: ["The material can't steer the output; consciousness does steer the output", "Brains are wet; computers are dry", "Descartes was right; Searle was wrong", "Squirrels can carry notes; neurons can fire"],
-        answer: 0,
-        why: ["Steps 1 and 2 together put consciousness with the pattern.", "Wetness is the example, not a premise.", "The argument doesn't rest on who was right.", "Those are details of the thought experiment."],
-        src: "A ¶8, ¶9" },
-      { type: "recall", q: "State the conclusion in one sentence. Which step would an epiphenomenalist attack?",
-        answer: "<p>Consciousness belongs with the pattern of cause and effect, so swapping the material keeps it. An epiphenomenalist attacks step 2, the claim that consciousness helps cause your words.</p>",
-        src: "A ¶11" }
-    ],
-    m5: [
-      { q: "Halfway through the swap, what changes in what you say?",
-        options: ["You start to sound mechanical", "Nothing; every station sends the same signals", "You lose half your memories", "You mention the squirrels"],
-        answer: 1,
-        why: ["Your words depend on the signals, which don't change.", "Same signals at the same times, so the same words.", "Memories are stored in the pattern, which is kept.", "To mention them, something would have to fire differently."],
-        src: "outside, building on A ¶10" },
-      { q: "Chalmers asks what would happen if experience faded during the swap. What is his worry?",
-        options: ["You'd be losing experience while sincerely reporting that nothing changed", "You'd notice the fading and say so", "The squirrels would become conscious instead", "Your brain would stop working"],
-        answer: 0,
-        why: ["He finds a mind that wrong about itself too strange to accept.", "You couldn't say so, since your signals don't change.", "That isn't part of his argument.", "By the setup, the brain keeps working."],
-        src: "outside: Chalmers 1995" },
-      { q: "Why does Yudkowsky bring up microscopes?",
-        options: ["Microscopes can see consciousness directly", "Neurons are too small to matter", "Squirrels can be seen with microscopes", "Introspection can't reveal the brain's material, so people had to look from outside"],
-        answer: 3,
-        why: ["Microscopes show cells, not experience.", "Size isn't the point.", "The squirrels are imaginary.", "The material never shows up from the inside."],
-        src: "A ¶10" }
-    ],
-    m6: [
-      { q: "In option one, the consciousness property never changes how particles move. What follows?",
-        options: ["You could detect it by thinking hard", "It would make you speak faster", "It couldn't change what you say, so introspection couldn't find it", "Electrons would stop moving"],
-        answer: 2,
-        why: ["Thinking runs on motion, which this property doesn't touch.", "It doesn't affect motion, so it can't affect speech.", "Your words can't be downstream of something with no effects.", "Nothing about their motion changes."],
-        src: "B ¶2" },
-      { q: "In option two, a pearl of awareness also makes electrons spin faster. Why doesn't that save panpsychism, on Yudkowsky's view?",
-        options: ["Only the faster spin reaches your words, and an ordinary rule with the same effect would give the same words", "Electrons can't spin", "Pearls are too small to matter", "Spin has nothing to do with brains"],
-        answer: 0,
-        why: ["The awareness part adds nothing your words could depend on.", "Spin is his example, not the issue.", "Size isn't the point.", "The point is that only motion can reach your words."],
-        src: "B ¶3" },
-      { q: "Which reply would a panpsychist like Philip Goff most likely give?",
-        options: ["Electrons can talk", "Panpsychism was never about matter", "Introspection can see electrons", "Consciousness is matter's inner nature, what the spin is from the inside, so it isn't an extra ingredient"],
-        answer: 3,
-        why: ["No panpsychist claims this.", "Panpsychism is a claim about matter.", "No one claims this either.", "They say physics describes what matter does, and consciousness is what it is."],
-        src: "outside: Goff 2019" },
-      { q: "Yudkowsky says it doesn't help to claim both water and electricity have the consciousness property. Why?",
-        options: ["Water isn't conscious", "Any extra property of the material, beyond the motion the brain's pattern uses, sits on the far side of the wall from your words", "Electricity is faster", "Both would then say different things"],
-        answer: 1,
-        why: ["He doesn't argue this.", "Which material has it doesn't matter. Your words can't depend on an extra property like that.", "Speed isn't the point.", "They'd say the same things, since the pattern is the same."],
-        src: "B ¶5" }
-    ],
-    m7: [
-      { q: "Which statement is an inference?",
-        options: ["The dog wagged its tail", "The dog barked twice", "The dog is happy to see you", "The dog ran to the door"],
-        answer: 2,
-        why: ["You can see the tail wag.", "You can hear the barks.", "Happiness is inferred from the wagging and running.", "You can see it run."],
-        src: "C ¶3" },
-      { q: "What is Yudkowsky's main complaint about people who \"just see\" feelings in a chicken?",
-        options: ["They doubt that chickens exist", "They treat an automatic inference as a direct observation", "They dislike chickens", "They trust science too much"],
-        answer: 1,
-        why: ["Nobody doubts that.", "He says the inference feels like seeing, so they don't notice it's an inference.", "He doesn't say this.", "He doesn't say this either."],
-        src: "C ¶19" },
-      { q: "What does the \"stochastic parrot\" critique claim about language models?",
-        options: ["They stitch together language patterns without grasping meaning", "They copy whole web pages word for word", "They are secretly run by people typing", "They have been shown to be conscious"],
-        answer: 0,
-        why: ["That's the critique from Bender and colleagues (2021).", "The critique is about patterns, not copying whole pages.", "No one serious claims this.", "The critique argues the opposite direction."],
-        src: "outside: Bender et al. 2021" }
-    ],
-    m8: [
-      { q: "Why does Yudkowsky worry more about LLMs than about mosquitoes?",
-        options: ["LLMs are made of silicon", "LLMs are bigger", "LLMs talk about and reflect on themselves, which he links to a self-model", "Mosquitoes can't move"],
-        answer: 2,
-        why: ["Material doesn't decide it, by his own argument.", "Size isn't his reason.", "He ties saying \"I feel sad\" to having an \"I\" to attach it to.", "Mosquitoes move fine."],
-        src: "C ¶8, ¶9, ¶22" },
-      { q: "What lesson does he draw from the history of fire and life?",
-        options: ["Things that seem like one mysterious ingredient often turn out to be made of many parts", "Science can't explain fire", "Life and fire are conscious", "Old theories were usually right"],
-        answer: 0,
-        why: ["Both turned out to be processes with many parts. (Phlogiston and vital force are this guide's examples, from outside the essay.)", "Science explained it.", "He doesn't claim this.", "The examples show old single-ingredient theories being replaced."],
-        src: "C ¶21" },
-      { q: "You're sure future studies will make insects look less likely to be conscious. By conservation of expected evidence, what should you do?",
-        options: ["Wait for the studies before changing anything", "Raise your estimate to balance it out", "Ignore the question", "Lower your estimate now"],
-        answer: 3,
-        why: ["If you're sure which way they'll push you, your estimate is already off.", "That moves the wrong way.", "The rule tells you what to do.", "A predictable update should be made now."],
-        src: "C ¶24" },
-      { q: "In the \"Which parts count?\" table, which lens puts the chatbot ahead of the chicken?",
-        options: ["A nervous system", "Reacting to damage and learning", "Talking about its own states", "None of them"],
-        answer: 2,
-        why: ["The chicken has one; the chatbot doesn't.", "The chicken does both; the chatbot has no body.", "The chatbot talks about itself; the chicken doesn't.", "One of them does."],
-        src: "C ¶22" }
-    ],
-    m9: [
-      { q: "An epiphenomenalist says experience rides along and causes nothing. Which step of the argument does that attack?",
-        options: ["Step 1: the material can't steer the output", "Step 2: consciousness does steer the output", "Step 3: the conclusion, directly", "None; it agrees with every step"],
-        answer: 1,
-        why: ["Epiphenomenalists can accept step 1.", "They deny that consciousness causes your words.", "They reject this route to the conclusion, though some may accept the conclusion for other reasons.", "It disagrees with step 2."],
-        src: "outside" },
-      { q: "Why doesn't the squirrel swap settle the dispute with Integrated Information Theory?",
-        options: ["IIT says the physical causal structure matters, and a digital computer can copy the computation without copying that structure", "IIT says squirrels are conscious", "IIT agrees with Yudkowsky", "IIT is only about animals"],
-        answer: 0,
-        why: ["They disagree about what counts as \"the same pattern.\"", "IIT makes no claim about squirrels.", "Its defenders reach a different conclusion about computers.", "IIT is a general theory."],
-        src: "outside: Tononi & Koch 2015" },
-      { type: "recall", q: "What does the argument settle about AI, and what does it leave open?",
-        answer: "<p>If it holds, material alone can't rule out AI consciousness: \"it's only silicon\" fails. It leaves open which patterns produce consciousness, so by itself it can't say whether any particular AI feels anything.</p>",
-        src: "this guide's summary" }
-    ],
-    final: [
-      { q: "A robot's battery is replaced with a heavier one that supplies the same power. Which bin is the battery's weight in?",
-        options: ["Functional layer", "Physical layer", "Both", "Neither"],
-        answer: 1,
-        why: ["The weight can't change anything the robot says.", "Like the power supply's mass, it never reaches the output.", "It can't be in both: it either can change the output or can't.", "Every fact lands in one bin."],
-        src: "A ¶3", from: "m2" },
-      { q: "Two machines run the same algorithm, one on copper and one on water pipes. You ask both the same question. What should you expect?",
-        options: ["Different answers", "Only the copper one answers", "The water one says it's wet", "The same answer"],
-        answer: 3,
-        why: ["Same algorithm means same answers.", "Both run the algorithm.", "No step reads the material.", "The output depends only on the pattern."],
-        src: "A ¶4", from: "m1" },
-      { q: "Searle said a simulated storm leaves nobody wet. Yudkowsky agrees. What does he think it shows?",
-        options: ["Wetness is in the physical layer, which can't reach the output", "Simulations can never think", "Computers are too dry to be conscious", "Storms are conscious"],
-        answer: 0,
-        why: ["The example points at the two layers.", "That's the conclusion he rejects.", "Dryness is the example, not the point.", "Nobody claims this."],
-        src: "A ¶7", from: "m3" },
-      { q: "Which premise of the argument do epiphenomenalists deny?",
-        options: ["The material can't steer the output", "Squirrels can carry notes", "Consciousness does steer the output", "Paris is in France"],
-        answer: 2,
-        why: ["They can accept that one.", "That's part of the thought experiment, not a premise.", "They say experience rides along and causes nothing, including your words.", "That's an example."],
-        src: "A ¶9", from: "m4" },
-      { q: "Which world in the electron test bench would make you say \"I think, therefore I am\" differently?",
-        options: ["The world with a pearl that speeds the spin", "None of them; the motion is the same in all four", "The simulation", "The world with no pearl"],
-        answer: 1,
-        why: ["Its motion matches the others.", "Your words depend only on the motion.", "The line of code produces the same motion.", "The ordinary rule produces the same motion."],
-        src: "B ¶3, ¶4", from: "m6" },
-      { q: "A chatbot prints \"I feel sad.\" Which part is an observation?",
-        options: ["That it printed those words", "That it feels sad", "That it has a self-model", "That it is lying"],
-        answer: 0,
-        why: ["You can read the words on the screen.", "That's inferred from the words.", "That's inferred too.", "That's also an inference."],
-        src: "C ¶3", from: "m7" },
-      { q: "What does Yudkowsky mean by a self-model?",
-        options: ["A photo of yourself", "A robot built to look like you", "A list of your memories", "A system's internal picture of itself, an \"I\" to attach states to"],
-        answer: 3,
-        why: ["It's inside the system, not a picture of it.", "Not a copy of you.", "Memories alone aren't a picture of a self.", "To say \"I am sad,\" there has to be an \"I\" to attach the sadness to."],
-        src: "C ¶8", from: "m8" },
-      { q: "In the replacement thought experiment, what would let you notice the swap?",
-        options: ["Feeling the squirrels", "A change in what you remember", "Nothing; the signals stay the same", "A change in your heartbeat"],
-        answer: 2,
-        why: ["Feeling them would require different signals.", "Memories ride on the same pattern.", "Every station sends the same signals at the same times.", "Nothing downstream changes."],
-        src: "outside, building on A ¶10", from: "m5" },
-      { q: "Why does Yudkowsky say panpsychism fails?",
-        options: ["Electrons are too small", "It makes consciousness a property of the material layer, which can't affect what you say", "Nobody has seen an electron", "It's an old idea"],
-        answer: 1,
-        why: ["Size isn't his reason.", "Consciousness does affect what you say, so it can't be such a property.", "Physicists detect electrons all the time.", "Age isn't his reason."],
-        src: "B ¶5", from: "m6" },
-      { q: "Penrose and Hameroff's proposal, if true, would block the argument at which point?",
-        options: ["Brains wouldn't run copyable algorithms, so there'd be no pattern to move to new material", "Squirrels couldn't carry notes fast enough", "Consciousness would turn out to be wet", "Descartes would be wrong"],
-        answer: 0,
-        why: ["Then the swap couldn't keep the pattern.", "Speed isn't the issue.", "They claim nothing like this.", "They don't challenge Descartes."],
-        src: "outside: Penrose 1989", from: "m9" }
-    ]
+  pre: [
+    {"q":"You rebuild a calculator so its signals are water in pipes, following exactly the same steps. You ask it 17 × 3. What happens?","options":["It answers 51, just as the original version did","It gives a different answer, since water is slower","It can't answer, since water can't carry numbers","It answers 51, then says it is made of water"],"answer":0,"why":["Same steps, same answer.","Speed can change how long it takes. It can't change which answer comes out.","Any material can carry signals if the steps are the same.","To mention water, some step would have to read the material, and no step can."],"src":"A ¶4","from":"m1"},
+    {"q":"Which fact about a computer could change what it says?","options":["The mass of its power supply","Whether its chips are silicon or carbon","What it has stored in memory","The color of its case"],"answer":2,"why":["The power supply's mass never shows up in an answer.","With the same algorithm running, the chip material makes no difference to the answers.","Stored facts, like Paris being in France, shape its replies.","Repaint it and nothing it says changes."],"src":"A ¶2, ¶3","from":"m2"},
+    {"q":"What does panpsychism claim?","options":["Consciousness exists only in animals with big brains","Consciousness is an illusion the brain creates","Consciousness is found in computers but not in animals","Consciousness is a basic feature of all matter"],"answer":3,"why":["That's closer to the opposite view.","That's a different view, called illusionism.","Panpsychism isn't about computers versus animals.","Panpsychists say consciousness goes all the way down, even to tiny particles like electrons."],"src":"C ¶23","from":"m6"},
+    {"q":"You look at a chicken and \"just see\" that it feels pain. On Yudkowsky's account, what are you doing?","options":["Directly seeing its pain, the way you see its color","Making an automatic inference that feels like seeing","Measuring the pain signals that run through its brain","Recalling a fact from an old biology lesson"],"answer":1,"why":["On his account you see behavior and infer the feeling.","He says the brain infers a mind behind the eyes, fast and out of view, so it feels observed.","Nobody is measuring anything in this example.","The conclusion arrives without any conscious recall."],"src":"C ¶3, ¶19","from":"m7"}
+  ],
+  m1: [
+    {"q":"You ask the water-pipe build \"What is 17 × 3?\" What does it answer?","options":["Something different, since water flows slower","51, the same as the copper build","Nothing, since water can't carry numbers","\"I am made of water\""],"answer":1,"why":["Speed changes timing, not the answer.","Same algorithm, same answer, whatever carries the signals.","Water can carry signals as well as copper can, if the steps match.","No step in the algorithm reads the material."],"src":"A ¶4"},
+    {"q":"In all four builds, the machine says it is \"electric current flowing through copper wires.\" What does that show?","options":["The machine can sense what it is made of","Squirrels and neurons secretly run on electricity","Its answer can't track what it is made of","The question was worded too vaguely"],"answer":2,"why":["It gives the same answer when built from pipes, so it can't sense its material.","The builds really are different materials.","The answer comes from the pattern, which is identical in every build.","The wording is fine. The machine has no way to check."],"src":"A ¶6"},
+    {"type":"recall","q":"In your own words: why can't any algorithm depend on which material it runs on?","answer":"<p>The same algorithm can always run on a different material. A step that gave one signal on copper and another on water would be a different algorithm. So the output can't depend on the material.</p>","src":"A ¶8"}
+  ],
+  m2: [
+    {"q":"Which fact belongs in the functional layer?","options":["The chips are made of silicon, not carbon","The power supply weighs 4.2 kilograms","The machine's case is painted bright blue","The machine has learned that 7 × 8 = 56"],"answer":3,"why":["Swap to carbon chips running the same algorithm and the answers stay the same.","Mass never shows up in an answer.","Paint never shows up in an answer.","Ask it to multiply and this fact shows up in the output."],"src":"A ¶2"},
+    {"q":"Someone says: \"Melt the chips and the answers change, so the material matters.\" How does the argument respond?","options":["It agrees, so the whole argument has to be thrown out","The claim covers working machines, not melted ones","Melted chips still run the algorithm and give the same answers","Melting chips is a fact about the functional layer"],"answer":1,"why":["The argument already allows this case.","The claim holds \"given a fixed algorithm.\" A melted machine runs no algorithm.","They don't. Nothing runs.","Melting breaks the machine. It isn't a fact about the pattern."],"src":"A ¶4"},
+    {"q":"What single test sorts a fact into a bin?","options":["Can you see it with your own eyes?","Is it made of physical matter?","Could it change what comes out?","Has a scientist ever measured it?"],"answer":2,"why":["You can see the case color, and it's still in the physical bin.","Everything in the machine is made of matter.","That's the test: could it affect the output?","Measurement has nothing to do with the bins."],"src":"A ¶1"}
+  ],
+  m3: [
+    {"q":"On Yudkowsky's reading, what does \"a simulated storm can't get anything wet\" point at?","options":["The split between the physical and functional layers","Proof that a simulated brain can't really think","A flaw in how weather software models falling rain","The idea that water itself has some consciousness"],"answer":0,"why":["Wetness is physical, so computing rain can't produce it.","That's Searle's use of the example. Yudkowsky reads it differently.","The software works fine. Wetness just isn't an output.","Nothing here is about water being conscious."],"src":"A ¶7"},
+    {"q":"If consciousness works like wetness, what follows for a perfect brain simulation?","options":["It would be conscious, since the copy is perfect","It would make the computer's circuits wet","It would lack consciousness, however perfect","It would run faster than the real brain"],"answer":2,"why":["That follows if consciousness works like the Paris fact.","Simulations don't make anything wet.","A physical-layer property doesn't come along with the pattern.","Speed isn't the point."],"src":"A ¶11"},
+    {"q":"A weather station inside the simulation measures 40 mm/h of rain. Can it tell whether the computer runs on wires or pipes?","options":["Yes, by timing how fast the simulated rain falls","No; its readings can't depend on the material","Yes, by noticing when the pipes start to leak water","Yes, if its rain gauges are sensitive enough"],"answer":1,"why":["The simulated rain falls the same way on any material.","Its readings are outputs, and outputs can't depend on the material. The wall blocks this direction too.","A leak would be a broken machine, not a reading.","No level of sensitivity helps when the reading can't depend on the material."],"src":"A ¶6"}
+  ],
+  m4: [
+    {"q":"Which claim does the argument treat as a fact about consciousness you can check yourself?","options":["Consciousness is a form of electricity running in the brain","Consciousness belongs to humans and not to any other animals","Consciousness helps make you say \"I think, therefore I am\"","Consciousness lives in the brain's material, not its pattern"],"answer":2,"why":["The argument says nothing about what consciousness is made of.","The argument doesn't claim this.","Noticing your own awareness can make you say those words.","That's the view the argument rejects."],"src":"A ¶9"},
+    {"q":"Which two claims does the conclusion follow from?","options":["The material can't steer the output; consciousness does","Brains are wet and alive; computers are dry and dead","Descartes was right about minds; Searle was wrong","Squirrels can carry notes; neurons fire in patterns"],"answer":0,"why":["Steps 1 and 2 together put consciousness with the pattern.","Wetness is the example, not a premise.","The argument doesn't rest on who was right.","Those are details of the thought experiment."],"src":"A ¶8, ¶9"},
+    {"type":"recall","q":"State the conclusion in one sentence. Which step would an epiphenomenalist attack?","answer":"<p>Consciousness belongs with the pattern of cause and effect, so swapping the material keeps it. An epiphenomenalist attacks step 2, the claim that consciousness helps cause your words.</p>","src":"A ¶11"}
+  ],
+  m5: [
+    {"q":"Halfway through the swap, what changes in what you say?","options":["You start to sound slow and mechanical","Nothing, because the signals stay the same","You forget about half of the memories you had","You start mentioning the squirrel stations"],"answer":1,"why":["Your words depend on the signals, which don't change.","Every station sends the same signals at the same times, so the same words come out.","Memories are stored in the pattern, which is kept.","To mention them, something would have to fire differently."],"src":"outside, building on A ¶10"},
+    {"q":"Chalmers asks what would happen if experience faded during the swap. What is his worry?","options":["You'd lose experience yet sincerely say nothing changed","You'd notice the fading and complain about it","The squirrels would slowly become conscious in your place","Your brain would shut down partway through the swap"],"answer":0,"why":["He finds a mind that wrong about itself too strange to accept.","You couldn't complain, since your signals don't change.","That isn't part of his argument.","By the setup, the brain keeps working."],"src":"outside: Chalmers 1995"},
+    {"q":"Why does Yudkowsky bring up microscopes?","options":["Microscopes can see consciousness inside living brain cells","Neurons are too small to matter much for consciousness","The tiny squirrels could be seen through a microscope","Introspection can't reveal what the brain is made of"],"answer":3,"why":["Microscopes show cells, not experience.","Size isn't the point.","The squirrels are imaginary.","The material never shows up from the inside, so people had to look from outside."],"src":"A ¶10"}
+  ],
+  m6: [
+    {"q":"In option one, the consciousness property never changes how particles move. What follows?","options":["You could detect it by thinking hard","It would make you speak faster","Introspection couldn't find it","Electrons would stop moving"],"answer":2,"why":["Thinking runs on motion, which this property doesn't touch.","It doesn't affect motion, so it can't affect speech.","It can't change what you say, and your words can't be downstream of something with no effects.","Nothing about their motion changes."],"src":"B ¶2"},
+    {"q":"In option two, a pearl of awareness also makes electrons spin faster. Why doesn't that save panpsychism, on Yudkowsky's view?","options":["Only the spin reaches your words, not the awareness","Electrons can't spin, so the example is broken","The pearl is too small to change a whole brain","Spin has nothing to do with how a brain works"],"answer":0,"why":["An ordinary rule that sped up the spin the same way would give the same words. The awareness adds nothing.","Spin is his example, not the issue.","Size isn't the point.","The point is that only motion can reach your words."],"src":"B ¶3"},
+    {"q":"Which reply would a panpsychist like Philip Goff most likely give?","options":["Electrons can speak and tell us they are aware","Panpsychism is a claim about minds, not about matter","Introspection can directly see the electrons in your brain","Consciousness is matter's inner nature"],"answer":3,"why":["No panpsychist claims this.","Panpsychism is a claim about matter.","No one claims this either.","They say physics describes what matter does, and consciousness is what it is. So it isn't an extra ingredient."],"src":"outside: Goff 2019"},
+    {"q":"Yudkowsky says it doesn't help to claim both water and electricity have the consciousness property. Why?","options":["Water isn't conscious, even if electricity might be","An extra property of the material can't reach your words","Electricity is faster, so the two would feel different","Both builds would then say different things about themselves"],"answer":1,"why":["He doesn't argue this.","Which material has it doesn't matter. An extra property beyond the motion sits on the far side of the wall from your words.","Speed isn't the point.","They'd say the same things, since the pattern is the same."],"src":"B ¶5"}
+  ],
+  m7: [
+    {"q":"Which statement is an inference?","options":["The dog wagged its tail hard","The dog barked two times","The dog is happy to see you","The dog ran to the front door"],"answer":2,"why":["You can see the tail wag.","You can hear the barks.","Happiness is inferred from the wagging and running.","You can see it run."],"src":"C ¶3"},
+    {"q":"What is Yudkowsky's main complaint about people who \"just see\" feelings in a chicken?","options":["They eat chickens while claiming to care about them","They treat an automatic inference as an observation","They ignore what scientists have found about bird brains","They trust brain science more than their own eyes"],"answer":1,"why":["He doesn't make this complaint.","He says the inference feels like seeing, so they don't notice it's an inference.","He doesn't say this.","He doesn't say this either."],"src":"C ¶19"},
+    {"q":"What does the \"stochastic parrot\" critique claim about language models?","options":["They stitch together words without grasping meaning","They copy whole web pages word for word from training","They are secretly run by people typing the answers","They have been shown to grasp meaning, as people do"],"answer":0,"why":["That's the critique from Bender and colleagues (2021).","The critique is about patterns, not copying whole pages.","No one serious claims this.","The critique argues the opposite direction."],"src":"outside: Bender et al. 2021"}
+  ],
+  m8: [
+    {"q":"Why does Yudkowsky worry more about LLMs than about mosquitoes?","options":["LLMs are made of silicon, and he thinks that matters","LLMs are far bigger and run on huge computers","LLMs report on themselves, which takes a self-model","Mosquitoes can't move or react to anything"],"answer":2,"why":["Material doesn't decide it, by his own argument.","Size isn't his reason.","He ties saying \"I feel sad\" to having an \"I\" to attach it to.","Mosquitoes move fine."],"src":"C ¶8, ¶9, ¶22"},
+    {"q":"What lesson does he draw from the history of fire and life?","options":["What seems like one ingredient is often many parts","Science still can't fully explain fire or life","Life and fire each come from one special hidden substance","Old theories about fire and life were mostly right"],"answer":0,"why":["Both turned out to be processes with many parts. (Phlogiston and vital force are this guide's examples, from outside the essay.)","Science explained both.","He says the opposite: both turned out to be made of many parts.","The examples show old single-ingredient theories being replaced."],"src":"C ¶21"},
+    {"q":"You're sure future studies will make insects look less likely to be conscious. By conservation of expected evidence, what should you do?","options":["Wait for the studies before changing anything","Raise your estimate to balance it out","Drop the question until there is proof","Lower your estimate now, before the studies"],"answer":3,"why":["If you're sure which way they'll push you, your estimate is already off.","That moves the wrong way.","The rule tells you what to do now.","A predictable update should be made now."],"src":"C ¶24"},
+    {"q":"In the \"Which parts count?\" table, which lens puts the chatbot ahead of the chicken?","options":["A nervous system","Reacting to damage and learning","Talking about its own states","None of them"],"answer":2,"why":["The chicken has one; the chatbot doesn't.","The chicken does both; the chatbot has no body.","The chatbot talks about itself; the chicken doesn't.","One of them does."],"src":"C ¶22"}
+  ],
+  m9: [
+    {"q":"An epiphenomenalist says experience rides along and causes nothing. Which step of the argument does that attack?","options":["Step 1: the material can't steer the output","Step 2: consciousness does steer the output","Step 3: the conclusion, directly","None; it agrees with every step"],"answer":1,"why":["Epiphenomenalists can accept step 1.","They deny that consciousness causes your words.","They reject this route to the conclusion, though some may accept the conclusion for other reasons.","It disagrees with step 2."],"src":"outside"},
+    {"q":"Why doesn't the squirrel swap settle the dispute with Integrated Information Theory?","options":["IIT says physical wiring matters, not just the steps","IIT says the squirrels themselves would become conscious","IIT fully agrees with Yudkowsky about the swap","IIT is a theory about animals, not machines"],"answer":0,"why":["IIT says a computer can copy the computation without copying the brain's physical causal structure. So they disagree about what counts as \"the same pattern.\"","IIT makes no claim about squirrels.","Its defenders reach a different conclusion about computers.","IIT is a general theory."],"src":"outside: Tononi & Koch 2015"},
+    {"type":"recall","q":"What does the argument settle about AI, and what does it leave open?","answer":"<p>If it holds, material alone can't rule out AI consciousness: \"it's only silicon\" fails. It leaves open which patterns produce consciousness, so by itself it can't say whether any particular AI feels anything.</p>","src":"this guide's summary"}
+  ],
+  final: [
+    {"q":"A robot's battery is replaced with a heavier one that supplies the same power. Which bin is the battery's weight in?","options":["Functional layer","Physical layer","Both","Neither"],"answer":1,"why":["The weight can't change anything the robot says.","Like the power supply's mass, it never reaches the output.","It can't be in both: it either can change the output or can't.","Every fact lands in one bin."],"src":"A ¶3","from":"m2"},
+    {"q":"Two machines run the same algorithm, one on copper and one on water pipes. You ask both the same question. What should you expect?","options":["A different answer from each one","The water one stays silent","The water one says that it's wet","The same answer from each one"],"answer":3,"why":["Same algorithm means same answers.","Both run the algorithm, so both answer.","No step reads the material.","The output depends only on the pattern."],"src":"A ¶4","from":"m1"},
+    {"q":"Searle said a simulated storm leaves nobody wet. Yudkowsky agrees. What does he think it shows?","options":["Wetness belongs in the physical layer","Simulated brains can't really think","Computers lack the wetness that minds need","Weather programs are badly designed"],"answer":0,"why":["Wetness is physical, so it can't reach the output. The example points at the two layers.","That's the conclusion he rejects.","Wetness is the example, not the point.","The software works fine. Wetness just isn't an output."],"src":"A ¶7","from":"m3"},
+    {"q":"Which premise of the argument do epiphenomenalists deny?","options":["The material can't steer the output","Squirrels can carry notes","Consciousness does steer the output","Paris is in France"],"answer":2,"why":["They can accept that one.","That's part of the thought experiment, not a premise.","They say experience rides along and causes nothing, including your words.","That's an example."],"src":"A ¶9","from":"m4"},
+    {"q":"Which world in the electron test bench would make you say \"I think, therefore I am\" differently?","options":["The world with a pearl that speeds the spin","None; the motion is the same in all four","The simulation run by a line of code","The world with no pearl at all"],"answer":1,"why":["Its motion matches the others.","Your words depend only on the motion.","The line of code produces the same motion.","The ordinary rule produces the same motion."],"src":"B ¶3, ¶4","from":"m6"},
+    {"q":"A chatbot prints \"I feel sad.\" Which part is an observation?","options":["That it printed those words","That it feels sad inside","That it has a self-model","That it is faking the feeling"],"answer":0,"why":["You can read the words on the screen.","That's inferred from the words.","That's inferred too.","That's also an inference."],"src":"C ¶3","from":"m7"},
+    {"q":"What does Yudkowsky mean by a self-model?","options":["A photo or 3D scan of your body","A robot built to look like you","A stored list of your past memories","A system's internal picture of itself"],"answer":3,"why":["It's a picture inside the system, not a photo or scan.","Not a copy of you.","Memories alone aren't a picture of a self.","To say \"I am sad,\" there has to be an \"I\" to attach the sadness to."],"src":"C ¶8","from":"m8"},
+    {"q":"In the replacement thought experiment, what would let you notice the swap?","options":["Feeling the squirrels moving inside","A change in what you remember","Nothing; the signals stay the same","A change in your heartbeat or breathing"],"answer":2,"why":["Feeling them would require different signals.","Memories ride on the same pattern.","Every station sends the same signals at the same times.","Nothing downstream changes."],"src":"outside, building on A ¶10","from":"m5"},
+    {"q":"Why does Yudkowsky say panpsychism fails?","options":["Electrons are too small to hold consciousness","It puts consciousness in the physical layer","Nobody has ever seen a single electron directly","It's an old idea that modern science left behind"],"answer":1,"why":["Size isn't his reason.","The physical layer can't affect what you say. Consciousness does, so it can't be such a property.","Physicists detect electrons all the time.","Age isn't his reason."],"src":"B ¶5","from":"m6"},
+    {"q":"Penrose and Hameroff's proposal, if true, would block the argument at which point?","options":["Brains wouldn't run algorithms that can be copied","Squirrels couldn't carry the notes fast enough","Consciousness would turn out to be wet, like real rain","Descartes would be proven wrong about the mind"],"answer":0,"why":["Then there'd be no pattern to move to new material, so the swap couldn't keep it.","Speed isn't the issue.","They claim nothing like this.","They don't challenge Descartes."],"src":"outside: Penrose 1989","from":"m9"}
+  ]
+},
+  sorts: {
+    facts: {
+      bins: [ { id: "functional", label: "Changes the output", hint: "functional layer" },
+              { id: "physical", label: "Can't change it", hint: "physical layer" } ],
+      items: [
+      { text: "Its memory holds the fact that Paris is in France.", bin: "functional", why: "Ask about Paris and this fact shapes the reply. Functional layer." },
+      { text: "Its power supply weighs 4.2 kilograms.", bin: "physical", why: "Make it heavier or lighter and every answer stays the same. Physical layer." },
+      { text: "Its signals travel as electric current through copper.", bin: "physical", why: "Run the same pattern as water in pipes and the answers match. Physical layer." },
+      { text: "It remembers what you said a minute ago.", bin: "functional", why: "Your earlier words change its next reply. Functional layer." },
+      { text: "Its chips are made of silicon.", bin: "physical", why: "Carbon chips running the same algorithm give the same answers. Physical layer." },
+      { text: "The pipes inside it are wet.", bin: "physical", why: "The wetness stays in the pipes and never reaches an answer. Physical layer." },
+      { text: "It has learned that 7 × 8 = 56.", bin: "functional", why: "Ask it to multiply and this fact shows up in the output. Functional layer." },
+      { text: "Its case is painted blue.", bin: "physical", why: "Repaint it red and nothing it says changes. Physical layer." }
+      ]
+    },
+    infer: {
+      bins: [ { id: "observed", label: "Observed", hint: "you can see or hear it" },
+              { id: "inferred", label: "Inferred", hint: "you have to work it out" } ],
+      items: [
+      { text: "The chicken pulled its foot away from the hot plate.", bin: "observed", why: "You can watch it happen. Observed." },
+      { text: "The chicken felt pain.", bin: "inferred", why: "You see the behavior and infer the feeling. Inferred." },
+      { text: "The chatbot printed \"I feel sad.\"", bin: "observed", why: "The words are on the screen. Observed." },
+      { text: "The chatbot feels sad.", bin: "inferred", why: "You read the words and infer a feeling, or its absence. Inferred." },
+      { text: "Your friend winced and said \"ouch.\"", bin: "observed", why: "You see the wince and hear the word. Observed." },
+      { text: "Your friend is in pain.", bin: "inferred", why: "Even for people, the feeling itself is inferred from what you see and hear. Inferred." },
+      { text: "The wind-up car rolled across the floor.", bin: "observed", why: "You can watch it roll. Observed." },
+      { text: "The wind-up car wants to reach the wall.", bin: "inferred", why: "Wanting is something you'd have to infer, and here the inference is a poor one. Inferred." }
+      ]
+    }
   },
   cards: [
     { front: "What test sorts a fact into the functional or physical layer?", back: "Whether it could change what the system outputs.", src: "A ¶1" },
@@ -1103,6 +974,385 @@ window.COURSE = {
   },
   glossaryCards: true
 };
+</script>
+<script>
+/* ===== Noah's Weblog drag and drop v1 =====
+   Real drag and drop for two activities, usable every way people try:
+     WeblogDnD.order(container, { items: [...in the correct order...] })
+     WeblogDnD.sort(container,  { bins: [{id, label, hint}], items: [{text, bin, why}] })
+   Mouse: drag the whole item. Touch: drag by the handle (the rest scrolls).
+   Tap or click: select an item, then tap where it goes.
+   Keyboard: Space picks up, arrow keys move, Space drops.
+   Self-contained: injects its own styles and needs nothing else. */
+(function () {
+  "use strict";
+  if (window.WeblogDnD) return;
+
+  var CSS = [
+    ".dnd-help{font:13px/1.5 Verdana,Geneva,Tahoma,sans-serif;color:var(--ink-soft,#2b2b2b);margin:0 0 8px}",
+    ".dnd-status{font:13px/1.5 Verdana,Geneva,Tahoma,sans-serif;margin:8px 0}",
+    ".dnd-status:empty{display:none}",
+    ".dnd-actions{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}",
+    ".dnd-item,.dnd-card{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1px solid var(--field,#6e6e6e);",
+    "  padding:8px 10px;cursor:grab;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}",
+    ".dnd-item:focus-visible,.dnd-card:focus-visible{outline:2px dotted var(--ink,#000);outline-offset:2px}",
+    ".dnd-handle{flex:none;display:inline-flex;align-items:center;justify-content:center;width:28px;min-height:28px;margin:-4px 0 -4px -4px;",
+    "  font:18px/1 Verdana,Geneva,sans-serif;color:var(--btn-lo,#808080);cursor:grab;touch-action:none}",
+    ".dnd-text{flex:1;min-width:0}",
+    ".dnd-mark{flex:none;font:bold 12px/1.6 Verdana,Geneva,sans-serif;white-space:nowrap}",
+    ".dnd-dragging{opacity:.35;border-style:dashed}",
+    ".dnd-ghost{position:fixed;z-index:2147483646;pointer-events:none;margin:0;opacity:.95;cursor:grabbing;",
+    "  box-shadow:3px 3px 0 var(--btn-lo,#808080)}",
+    ".dnd-grabbed,.dnd-card[aria-pressed=true]{outline:2px dotted var(--ink,#000);outline-offset:2px;background:var(--tint,#f2f2f2)}",
+    ".dnd-ok{border-left:4px solid var(--c6,#008000)}.dnd-ok .dnd-mark{color:var(--c6,#008000)}",
+    ".dnd-no{border-left:4px solid var(--c2,#800000)}.dnd-no .dnd-mark{color:var(--c2,#800000)}",
+    ".dnd-list{list-style:none;margin:0;padding:0;counter-reset:dnd}",
+    ".dnd-list .dnd-item{margin:0 0 6px}",
+    ".dnd-list .dnd-item::before{counter-increment:dnd;content:counter(dnd) \".\";flex:none;min-width:1.6em;font:bold 13px/1.6 Verdana,Geneva,sans-serif}",
+    ".dnd-tray{border:1px dashed var(--lo,#999);padding:10px;margin:0 0 12px;display:grid;gap:8px;min-height:56px}",
+    ".dnd-tray-label{font:bold 13px/1.4 Verdana,Geneva,sans-serif;margin:0}",
+    ".dnd-bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}",
+    ".dnd-bin{border:2px solid var(--lo,#999);background:#fff;padding:8px 10px 10px;min-height:120px;display:flex;flex-direction:column;gap:6px}",
+    ".dnd-bin.dnd-over{border-color:var(--c1,#000080);background:var(--tint,#f2f2f2)}",
+    ".dnd-bin-head{font:bold 14px/1.3 Verdana,Geneva,sans-serif;margin:0}",
+    ".dnd-bin-hint{font:12px/1.4 Verdana,Geneva,sans-serif;color:var(--ink-soft,#2b2b2b);margin:0}",
+    ".dnd-bin-here{align-self:flex-start}",
+    ".dnd-card .dnd-fb{display:block;font:12px/1.45 Verdana,Geneva,sans-serif;margin-top:4px}",
+    ".dnd-card .dnd-fb:empty{display:none}",
+    ".dnd-card .dnd-body{flex:1;min-width:0}",
+    "[hidden]{display:none!important}",
+    "@media (prefers-reduced-motion:reduce){.dnd-ghost{transition:none}}"
+  ].join("\n");
+
+  function injectStyles() {
+    if (document.getElementById("weblog-dnd-css")) return;
+    var s = document.createElement("style");
+    s.id = "weblog-dnd-css";
+    s.textContent = CSS;
+    document.head.appendChild(s);
+  }
+
+  function el(tag, cls, html) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+  function shuffled(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function plain(html) { var d = document.createElement("div"); d.innerHTML = html; return (d.textContent || "").trim(); }
+
+  /* ---------- pointer dragging shared by both activities ---------- */
+  // Calls hooks.start(), hooks.move(x, y), hooks.drop(x, y). Mouse drags from anywhere on the
+  // item; touch and pen drag only from the handle so the rest of the page still scrolls.
+  function draggable(item, handle, hooks) {
+    var st = null;
+    // listen on window while a drag is possible: the item itself moves in the DOM mid-drag,
+    // which would drop element-level pointer capture
+    function onMove(e) {
+      if (!st || e.pointerId !== st.id) return;
+      if (!st.dragging) {
+        if (Math.abs(e.clientX - st.x) + Math.abs(e.clientY - st.y) < (st.touch ? 3 : 6)) return;
+        st.dragging = true;
+        var r = item.getBoundingClientRect();
+        st.dx = st.x - r.left; st.dy = st.y - r.top;
+        st.ghost = item.cloneNode(true);
+        st.ghost.classList.add("dnd-ghost");
+        st.ghost.removeAttribute("id");
+        st.ghost.setAttribute("aria-hidden", "true");
+        st.ghost.style.width = r.width + "px";
+        document.body.appendChild(st.ghost);
+        item.classList.add("dnd-dragging");
+        hooks.start();
+      }
+      e.preventDefault();
+      st.lx = e.clientX; st.ly = e.clientY;
+      st.ghost.style.left = (e.clientX - st.dx) + "px";
+      st.ghost.style.top = (e.clientY - st.dy) + "px";
+      hooks.move(e.clientX, e.clientY);
+      autoScroll(e.clientY);
+    }
+    function onUp(e) { finish(e, false); }
+    function onCancel(e) { finish(e, true); }
+    function finish(e, cancelled) {
+      if (!st || e.pointerId !== st.id) return;
+      var was = st;
+      st = null;
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onCancel);
+      stopScroll();
+      if (!was.dragging) return;
+      was.ghost.remove();
+      item.classList.remove("dnd-dragging");
+      item._dndJustDragged = true;
+      setTimeout(function () { item._dndJustDragged = false; }, 0);
+      hooks.drop(cancelled ? null : was.lx, cancelled ? null : was.ly);
+    }
+    item.addEventListener("pointerdown", function (e) {
+      if (e.button !== 0 || st) return;
+      if (e.target.closest("a, button, input, select, textarea")) return;
+      var onHandle = handle && handle.contains(e.target);
+      if (e.pointerType !== "mouse" && !onHandle) return;
+      st = { id: e.pointerId, x: e.clientX, y: e.clientY, dragging: false, touch: e.pointerType !== "mouse" };
+      if (onHandle || e.pointerType === "mouse") e.preventDefault();   // no text selection or touch scroll
+      window.addEventListener("pointermove", onMove, { passive: false });
+      window.addEventListener("pointerup", onUp);
+      window.addEventListener("pointercancel", onCancel);
+    });
+  }
+
+  var scrollTimer = null, scrollSpeed = 0;
+  function autoScroll(y) {
+    var edge = 60;
+    scrollSpeed = y < edge ? -Math.ceil((edge - y) / 4) : y > innerHeight - edge ? Math.ceil((y - innerHeight + edge) / 4) : 0;
+    if (scrollSpeed && !scrollTimer) {
+      scrollTimer = setInterval(function () { if (scrollSpeed) window.scrollBy(0, scrollSpeed); }, 16);
+    } else if (!scrollSpeed) stopScroll();
+  }
+  function stopScroll() { clearInterval(scrollTimer); scrollTimer = null; scrollSpeed = 0; }
+
+  /* ---------- put in order ---------- */
+  function order(container, opts) {
+    injectStyles();
+    var items = opts.items || [];
+    container.textContent = "";
+    container.appendChild(el("p", "dnd-help", opts.help ||
+      "Drag the items into order. On a phone, drag by the ≡ handle. " +
+      "Keyboard: Space picks an item up, arrow keys move it, Space drops it."));
+    var list = el("ol", "dnd-list");
+    list.setAttribute("aria-label", opts.label || "Items to put in order");
+    var status = el("p", "dnd-status");
+    status.setAttribute("aria-live", "polite");
+    var check = el("button", "primary", "Check the order"); check.type = "button";
+    var again = el("button", "", "Shuffle and start over"); again.type = "button";
+    var actions = el("div", "dnd-actions"); actions.appendChild(check); actions.appendChild(again);
+    container.appendChild(list); container.appendChild(actions); container.appendChild(status);
+
+    function rows() { return [].slice.call(list.children); }
+    function clearMarks() {
+      rows().forEach(function (li) { li.classList.remove("dnd-ok", "dnd-no"); li.querySelector(".dnd-mark").textContent = ""; });
+      if (status.getAttribute("data-kind") === "result") { status.textContent = ""; status.removeAttribute("data-kind"); }
+    }
+    function say(msg) { status.removeAttribute("data-kind"); status.textContent = msg; }
+    function position(li) { return rows().indexOf(li) + 1; }
+
+    function build() {
+      list.textContent = "";
+      var idx = items.map(function (_, i) { return i; });
+      var mixed = shuffled(idx);
+      for (var tries = 0; items.length > 1 && tries < 20 && mixed.every(function (v, i) { return v === i; }); tries++) mixed = shuffled(idx);
+      mixed.forEach(function (i) {
+        var li = el("li", "dnd-item");
+        li.tabIndex = 0;
+        li.setAttribute("data-i", i);
+        var handle = el("span", "dnd-handle", "≡"); handle.setAttribute("aria-hidden", "true");
+        li.appendChild(handle);
+        li.appendChild(el("span", "dnd-text", items[i]));
+        li.appendChild(el("span", "dnd-mark"));
+        draggable(li, handle, {
+          start: clearMarks,
+          move: function (x, y) {
+            var before = null;
+            rows().some(function (other) {
+              if (other === li) return false;
+              var r = other.getBoundingClientRect();
+              if (y < r.top + r.height / 2) { before = other; return true; }
+              return false;
+            });
+            if (before !== li.nextSibling) list.insertBefore(li, before);
+          },
+          drop: function () { say("Moved to position " + position(li) + "."); li.focus({ preventScroll: true }); }
+        });
+        li.addEventListener("keydown", function (e) {
+          var grabbed = li.classList.contains("dnd-grabbed");
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            li.classList.toggle("dnd-grabbed");
+            clearMarks();
+            say(grabbed ? "Dropped at position " + position(li) + "." :
+              "Picked up. Position " + position(li) + " of " + items.length + ". Arrow keys move it; Space drops it.");
+          } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+            e.preventDefault();
+            var sib = e.key === "ArrowUp" ? li.previousElementSibling : li.nextElementSibling;
+            if (!sib) return;
+            if (grabbed) {
+              li._dndMoving = true;            // moving a focused element can fire blur; keep it grabbed
+              list.insertBefore(li, e.key === "ArrowUp" ? sib : sib.nextSibling);
+              li.focus({ preventScroll: false });
+              setTimeout(function () { li._dndMoving = false; }, 0);
+              say("Position " + position(li) + " of " + items.length + ".");
+            } else sib.focus();
+          } else if (e.key === "Escape" && grabbed) {
+            li.classList.remove("dnd-grabbed"); say("Dropped at position " + position(li) + ".");
+          }
+        });
+        li.addEventListener("blur", function () { if (!li._dndMoving) li.classList.remove("dnd-grabbed"); });
+        list.appendChild(li);
+      });
+      say("");
+    }
+
+    check.addEventListener("click", function () {
+      var good = 0;
+      rows().forEach(function (li, pos) {
+        var ok = +li.getAttribute("data-i") === pos;
+        if (ok) good++;
+        li.classList.toggle("dnd-ok", ok);
+        li.classList.toggle("dnd-no", !ok);
+        li.querySelector(".dnd-mark").textContent = ok ? "✓" : "✗ belongs at " + (+li.getAttribute("data-i") + 1);
+      });
+      status.setAttribute("data-kind", "result");
+      status.innerHTML = good === items.length
+        ? "<strong>All " + items.length + " in the right order.</strong> " + (opts.explain || "")
+        : "<strong>" + good + " of " + items.length + " in the right place.</strong> Move the marked ones and check again.";
+      if (opts.onCheck) opts.onCheck(good, items.length);
+    });
+    again.addEventListener("click", build);
+    build();
+    return { reset: build };
+  }
+
+  /* ---------- sort into bins ---------- */
+  function sort(container, opts) {
+    injectStyles();
+    var bins = opts.bins || [], items = opts.items || [];
+    var saved = (opts.load && opts.load()) || {};
+    container.textContent = "";
+    container.appendChild(el("p", "dnd-help", opts.help ||
+      "Drag a card into a box. On a phone, drag by the ≡ handle, or tap a card and then its box. " +
+      "Keyboard: Space selects a card, then Tab to “Move here”."));
+    var trayLabel = el("p", "dnd-tray-label");
+    var tray = el("div", "dnd-tray");
+    tray.setAttribute("aria-label", "Cards to sort");
+    var binWrap = el("div", "dnd-bins");
+    var status = el("p", "dnd-status");
+    status.setAttribute("aria-live", "polite");
+    var reset = el("button", "", "Start over"); reset.type = "button";
+    var actions = el("div", "dnd-actions"); actions.appendChild(reset);
+    container.appendChild(trayLabel); container.appendChild(tray); container.appendChild(binWrap);
+    container.appendChild(status); container.appendChild(actions);
+
+    var selected = null, cards = [], binEls = {};
+    bins.forEach(function (b) {
+      var box = el("div", "dnd-bin");
+      box.setAttribute("role", "group");
+      box.setAttribute("aria-label", plain(b.label));
+      box.appendChild(el("p", "dnd-bin-head", b.label));
+      if (b.hint) box.appendChild(el("p", "dnd-bin-hint", b.hint));
+      var here = el("button", "dnd-bin-here", "Move here"); here.type = "button"; here.hidden = true;
+      here.setAttribute("aria-label", "Move the selected card to " + plain(b.label));
+      here.addEventListener("click", function () { if (selected) place(selected, b.id, true); });
+      box.addEventListener("click", function (e) {
+        if (selected && !e.target.closest(".dnd-card") && e.target !== here) place(selected, b.id, true);
+      });
+      box.appendChild(here);
+      binWrap.appendChild(box);
+      binEls[b.id] = { box: box, here: here };
+    });
+
+    function select(card) {
+      if (selected === card) card = null;
+      cards.forEach(function (c) { c.el.setAttribute("aria-pressed", c === card ? "true" : "false"); });
+      selected = card;
+      Object.keys(binEls).forEach(function (id) { binEls[id].here.hidden = !card; });
+      if (card) status.textContent = "Selected: “" + plain(card.text) + "”. Now choose a box.";
+    }
+    function binAt(x, y) {
+      var hit = null;
+      Object.keys(binEls).forEach(function (id) {
+        var r = binEls[id].box.getBoundingClientRect();
+        if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) hit = id;
+      });
+      return hit;
+    }
+    function tally() {
+      var placed = cards.filter(function (c) { return c.bin; });
+      var right = placed.filter(function (c) { return c.bin === c.answer; }).length;
+      trayLabel.textContent = placed.length === cards.length ? "All cards sorted." : "Cards to sort (" + (cards.length - placed.length) + " left)";
+      tray.hidden = placed.length === cards.length;
+      var msg = "Sorted " + placed.length + " of " + cards.length + ". " + right + " in the right box.";
+      if (placed.length === cards.length) msg += right === cards.length ? " All correct." : " Drag the marked cards to the other box to fix them.";
+      status.textContent = msg;
+      if (opts.onChange) opts.onChange(placed.length, right, cards.length);
+    }
+    function place(card, binId, announce) {
+      card.bin = binId;
+      binEls[binId].box.appendChild(card.el);
+      var ok = binId === card.answer;
+      card.el.classList.toggle("dnd-ok", ok);
+      card.el.classList.toggle("dnd-no", !ok);
+      card.mark.textContent = ok ? "✓" : "✗";
+      card.fb.innerHTML = "<strong>" + (ok ? "Right." : "Not quite.") + "</strong> " + (card.why || "");
+      saved[card.key] = binId;
+      if (opts.save) opts.save(saved);
+      select(null);
+      tally();
+      if (announce) status.textContent = (ok ? "Right. " : "Not quite. ") + plain(card.why || "") + " " + status.textContent;
+    }
+    function unplace(card) {
+      card.bin = null;
+      card.el.classList.remove("dnd-ok", "dnd-no");
+      card.mark.textContent = ""; card.fb.textContent = "";
+      tray.appendChild(card.el);
+    }
+
+    shuffled(items.map(function (_, i) { return i; })).forEach(function (i) {
+      var it = items[i];
+      var c = { text: it.text, answer: it.bin, why: it.why, key: "i" + i, bin: null };
+      c.el = el("div", "dnd-card");
+      c.el.tabIndex = 0;
+      c.el.setAttribute("role", "button");
+      c.el.setAttribute("aria-pressed", "false");
+      var handle = el("span", "dnd-handle", "≡"); handle.setAttribute("aria-hidden", "true");
+      var body = el("span", "dnd-body");
+      body.appendChild(el("span", "dnd-text", it.text));
+      c.fb = el("span", "dnd-fb");
+      body.appendChild(c.fb);
+      c.mark = el("span", "dnd-mark");
+      c.el.appendChild(handle); c.el.appendChild(body); c.el.appendChild(c.mark);
+      draggable(c.el, handle, {
+        start: function () { select(null); },
+        move: function (x, y) {
+          var hit = binAt(x, y);
+          Object.keys(binEls).forEach(function (id) { binEls[id].box.classList.toggle("dnd-over", id === hit); });
+        },
+        drop: function (x, y) {
+          Object.keys(binEls).forEach(function (id) { binEls[id].box.classList.remove("dnd-over"); });
+          var hit = x == null ? null : binAt(x, y);
+          if (hit) place(c, hit, true);
+        }
+      });
+      c.el.addEventListener("click", function (e) {
+        if (c.el._dndJustDragged) return;
+        e.stopPropagation();
+        select(c);
+      });
+      c.el.addEventListener("keydown", function (e) {
+        if (e.key === " " || e.key === "Enter") { e.preventDefault(); select(c); }
+        else if (e.key === "Escape") select(null);
+      });
+      cards.push(c);
+      tray.appendChild(c.el);
+      if (saved[c.key] && binEls[saved[c.key]]) place(c, saved[c.key], false);
+    });
+
+    reset.addEventListener("click", function () {
+      saved = {};
+      if (opts.save) opts.save(saved);
+      shuffled(cards).forEach(unplace);
+      select(null);
+      tally();
+    });
+    tally();
+    return { reset: function () { reset.click(); } };
+  }
+
+  window.WeblogDnD = { order: order, sort: sort, version: 1 };
+})();
 </script>
 <script>
 /* ===== Noah's Weblog course engine v1 =====
@@ -1155,6 +1405,20 @@ window.COURSE = {
     var x = 0;
     for (var i = 0; i < s.length; i++) x = (x * 31 + s.charCodeAt(i)) | 0;
     return (x >>> 0).toString(36);
+  }
+  function seededShuffle(a, seed) {
+    var x = parseInt(hash(String(seed)), 36) || 1;
+    function rand() {                          // mulberry32
+      x = (x + 0x6D2B79F5) | 0;
+      var t = Math.imul(x ^ (x >>> 15), 1 | x);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(rand() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
   }
   function shuffle(a) {
     a = a.slice();
@@ -1310,10 +1574,15 @@ window.COURSE = {
       } else {
         var name = "q-" + quizId + "-" + i;
         var opts = h("div", { class: "options" });
-        var inputs = item.options.map(function (text, j) {
+        // Options appear in a shuffled order (stable for each question) so the right answer
+        // isn't always in the same place. Set fixed: true for options with a natural order.
+        var shown = item.options.map(function (_, j) { return j; });
+        if (!item.fixed) shown = seededShuffle(shown, quizId + ":" + i + ":" + item.q);
+        var inputs = [];                       // indexed by the option's original position
+        shown.forEach(function (j) {
           var input = h("input", { type: "radio", name: name, value: j });
-          opts.appendChild(h("label", null, [input, h("span", { html: text }), h("span", { class: "mark" })]));
-          return input;
+          opts.appendChild(h("label", null, [input, h("span", { html: item.options[j] }), h("span", { class: "mark" })]));
+          inputs[j] = input;
         });
         var check = h("button", { type: "button", text: "Check answer" });
         var again = h("button", { type: "button", text: "Try again", hidden: true });
@@ -1353,7 +1622,7 @@ window.COURSE = {
             var mark = inp.parentNode.querySelector(".mark"); mark.className = "mark"; mark.textContent = "";
           });
           feedback.textContent = ""; check.hidden = false; again.hidden = true;
-          inputs[0].focus();
+          inputs[shown[0]].focus();
         });
         fs.appendChild(opts);
         fs.appendChild(h("div", { class: "actions" }, [check, again]));
@@ -1466,8 +1735,29 @@ window.COURSE = {
     });
   }
 
+  /* ---------- drag-and-drop activities (assets/dnd.js) ---------- */
+  function buildActivities() {
+    if (!window.WeblogDnD) return;
+    state.sorts = state.sorts || {};
+    [].forEach.call(document.querySelectorAll("[data-sort]"), function (box) {
+      var id = box.getAttribute("data-sort"), cfg = (C.sorts || {})[id];
+      if (!cfg) return;
+      window.WeblogDnD.sort(box, {
+        bins: cfg.bins, items: cfg.items, help: cfg.help,
+        load: function () { return state.sorts[id] || {}; },
+        save: function (placed) { state.sorts[id] = placed; save(); }
+      });
+    });
+    [].forEach.call(document.querySelectorAll("[data-order]"), function (box) {
+      var id = box.getAttribute("data-order"), cfg = (C.orders || {})[id];
+      if (!cfg) return;
+      window.WeblogDnD.order(box, { items: cfg.items, explain: cfg.explain, help: cfg.help, label: cfg.label });
+    });
+  }
+
   /* ---------- start ---------- */
   buildGlossary();
+  buildActivities();
   [].forEach.call(document.querySelectorAll(".quiz[data-quiz]"), renderQuiz);
   Object.keys(C.quizzes || {}).forEach(renderSummary);
   buildDeck();
@@ -1704,69 +1994,9 @@ window.COURSE = {
     update();
   })();
 
-  /* ---------------- shared: two-button sorting cards ---------------- */
-  function sortGame(opts) {
-    var grid = $(opts.grid), before = opts.before ? $(opts.before) : null;
-    var answers = opts.items.map(function () { return null; }), cards = [];
-    function score() {
-      var n = 0, c = 0;
-      answers.forEach(function (v, i) { if (v !== null) { n++; if (v === opts.items[i].a) c++; } });
-      $(opts.score).textContent = "Sorted " + n + " of " + opts.items.length + " · " + c + " correct";
-    }
-    opts.items.forEach(function (f, i) {
-      var el = document.createElement("div"); el.className = "fact";
-      var t = document.createElement("p"); t.className = "t"; t.textContent = f.t;
-      var btns = document.createElement("div"); btns.className = "btns";
-      var fb = document.createElement("p"); fb.className = "fb"; fb.setAttribute("aria-live", "polite");
-      opts.labels.forEach(function (lab, j) {
-        var b = document.createElement("button"); b.type = "button"; b.className = "pick"; b.textContent = lab;
-        b.addEventListener("click", function () {
-          if (answers[i] !== null) return;
-          var right = (j === 0) === f.a; answers[i] = (j === 0);
-          el.setAttribute("data-state", right ? "right" : "wrong");
-          b.setAttribute("aria-pressed", "true");
-          [].forEach.call(btns.querySelectorAll(".pick"), function (x) { if (x !== b) x.disabled = true; });
-          fb.textContent = "";
-          var mk = document.createElement("span"); mk.className = "mk " + (right ? "ok" : "no"); mk.textContent = right ? "Right" : "Other bin";
-          fb.appendChild(mk); fb.appendChild(document.createTextNode(f.why));
-          score();
-        });
-        btns.appendChild(b);
-      });
-      el.appendChild(t); el.appendChild(btns); el.appendChild(fb);
-      if (before) grid.insertBefore(el, before); else grid.appendChild(el);
-      cards.push({ el: el, btns: btns, fb: fb });
-    });
-    score();
-    return {
-      reset: function () {
-        answers = answers.map(function () { return null; });
-        cards.forEach(function (c) {
-          c.el.removeAttribute("data-state"); c.fb.textContent = "";
-          [].forEach.call(c.btns.querySelectorAll(".pick"), function (x) { x.disabled = false; x.removeAttribute("aria-pressed"); });
-        });
-        score();
-      }
-    };
-  }
-
   /* ---------------- Part 2: sort the facts ---------------- */
   (function () {
-    if (!$("sort-grid")) return;
-    var game = sortGame({
-      grid: "sort-grid", before: "sort-final", score: "sort-score",
-      labels: ["Changes the output", "Can't change it"],
-      items: [
-        { t: "Its memory holds the fact that Paris is in France.", a: true, why: "Ask about Paris and this fact shapes the reply. Functional layer." },
-        { t: "Its power supply weighs 4.2 kilograms.", a: false, why: "Make it heavier or lighter and every answer stays the same. Physical layer." },
-        { t: "Its signals travel as electric current through copper.", a: false, why: "Run the same pattern as water in pipes and the answers match. Physical layer." },
-        { t: "It remembers what you said a minute ago.", a: true, why: "Your earlier words change its next reply. Functional layer." },
-        { t: "Its chips are made of silicon.", a: false, why: "Carbon chips running the same algorithm give the same answers. Physical layer." },
-        { t: "The pipes inside it are wet.", a: false, why: "The wetness stays in the pipes and never reaches an answer. Physical layer." },
-        { t: "It has learned that 7 × 8 = 56.", a: true, why: "Ask it to multiply and this fact shows up in the output. Functional layer." },
-        { t: "Its case is painted blue.", a: false, why: "Repaint it red and nothing it says changes. Physical layer." }
-      ]
-    });
+    if (!$("sort-final")) return;
     var finalCard = $("sort-final"), fb = $("sort-final-fb");
     var finals = [$("sort-final-a"), $("sort-final-b")];
     finals.forEach(function (b) {
@@ -1782,11 +2012,6 @@ window.COURSE = {
         var a = document.createElement("a"); a.href = "#m4"; a.textContent = "Part 4 lays this out step by step.";
         fb.appendChild(a);
       });
-    });
-    $("sort-reset").addEventListener("click", function () {
-      game.reset();
-      finalCard.removeAttribute("data-done"); fb.textContent = "";
-      finals.forEach(function (x) { x.disabled = false; x.removeAttribute("aria-pressed"); });
     });
   })();
 
@@ -1943,27 +2168,6 @@ window.COURSE = {
     }
     [].forEach.call(radios, function (r) { r.addEventListener("change", function () { show(+r.value); }); });
     show(0);
-  })();
-
-  /* ---------------- Part 7: seen or inferred? ---------------- */
-  (function () {
-    if (!$("infer-grid")) return;
-    sortGame({
-      grid: "infer-grid", score: "infer-score",
-      labels: ["Observed", "Inferred"],
-      items: [
-        { t: "The chicken pulled its foot away from the hot plate.", a: true, why: "You can watch it happen. Observed." },
-        { t: "The chicken felt pain.", a: false, why: "You see the behavior and infer the feeling. Inferred." },
-        { t: "The chatbot printed \"I feel sad.\"", a: true, why: "The words are on the screen. Observed." },
-        { t: "The chatbot feels sad.", a: false, why: "You read the words and infer a feeling, or its absence. Inferred." },
-        { t: "Your friend winced and said \"ouch.\"", a: true, why: "You see the wince and hear the word. Observed." },
-        { t: "Your friend is in pain.", a: false, why: "Even for people, the feeling itself is inferred from what you see and hear. Inferred." },
-        { t: "The wind-up car rolled across the floor.", a: true, why: "You can watch it roll. Observed." },
-        { t: "The wind-up car wants to reach the wall.", a: false, why: "Wanting is something you'd have to infer, and here the inference is a poor one. Inferred." }
-      ]
-    });
-    var grid = $("infer-grid");
-    grid.classList.add("infer");
   })();
 
   /* ---------------- Part 8: which parts count? ---------------- */

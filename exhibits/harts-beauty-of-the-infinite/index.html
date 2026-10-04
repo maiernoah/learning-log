@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hart's Beauty of the Infinite</title>
 <style>
-/* ===== Noah's Weblog house style (exhibits) v1 =====
+/* ===== Noah's Weblog house style (exhibits) v2 =====
    Matches noahmaier.net: white page, Times for reading, Verdana for
    controls, blue underlined links, two-tone rules, gray beveled buttons. */
 :root {
@@ -34,13 +34,18 @@
   --serif: "Times New Roman", Times, serif;
   --sans: Verdana, Geneva, Tahoma, sans-serif;
   --mono: "Courier New", Courier, monospace;
+  --measure: 42.75rem;    /* one column width (684px): text, boxes, questions, tables, figures */
 }
 * { box-sizing: border-box; }
 html { background: var(--page); }
 body { margin: 0; padding: 10px 16px 32px; background: var(--page); color: var(--ink);
        font: 18px/1.45 var(--serif); -webkit-text-size-adjust: 100%; }
 .page { max-width: 1020px; }
-main p, .prose { max-width: 38em; }
+/* Text, boxes, questions, tables and figures share one column width, so their left and
+   right edges line up. Add class="wide" only to something that genuinely needs more room. */
+main p, main ul, main ol, main dl, main blockquote, main table, main fieldset, main figure,
+main details, main .box, main h2, main h3, main .view > *, .prose { max-width: var(--measure); }
+.wide { max-width: none !important; }
 a { color: var(--link); } a:visited { color: var(--visited); } a:active { color: var(--active); }
 :focus-visible { outline: 2px dotted var(--ink); outline-offset: 2px; }
 
@@ -63,8 +68,11 @@ label, legend, button, input, select, textarea, table, figcaption, output, .ui, 
 p.meta { margin: 6px 0 12px; }
 
 fieldset { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi);
-           margin: 0 0 16px; padding: 8px 12px 12px; min-width: 0; }
-legend { font-size: 13px; font-weight: bold; padding: 0 4px; }
+           margin: 0 0 16px; padding: 10px 12px 12px; min-width: 0; }
+/* The legend sits inside the box as its first line, so long legends wrap cleanly
+   instead of breaking through the border. */
+legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; font-size: 13px; font-weight: bold; }
+legend + * { clear: both; }
 label { font-size: 13px; }
 .choices { display: flex; flex-wrap: wrap; gap: 6px 18px; }
 .choices label { display: inline-flex; align-items: center; gap: 5px; }
@@ -91,6 +99,7 @@ select, textarea {
 }
 
 table { border-collapse: collapse; font-size: 13px; line-height: 1.4; }
+main table { width: 100%; }
 th, td { border: 1px solid var(--lo); padding: 4px 8px; text-align: left; vertical-align: top; }
 th { background: var(--tint); }
 
@@ -122,7 +131,7 @@ html { scroll-padding-top: 52px; }
 .gk { font-family: var(--serif); }
 .small { font: 13px/1.5 var(--sans); }
 .muted { color: var(--ink-soft); }
-.measure { max-width: 38em; }
+.measure { max-width: var(--measure); }
 .lede { max-width: 38em; }
 
 /* course bar: module dots and contents */
@@ -694,7 +703,7 @@ footer p.meta { max-width: 38em; margin: 0 0 6px; }
 
       <section class="step">
         <h3 class="step-label">Try it</h3>
-        <p>Which story does each statement belong to? Choose a side for each one.</p>
+        <p>Which story does each statement belong to? Drag each one into its box.</p>
         <ul class="sort" data-sort="s2" data-bins="v|Story of violence;p|Story of peace">
           <li data-k="v" data-why="The city as a wall against chaos is the ancient map Hart describes.">Every civilization is a fragile wall against the chaos outside it.</li>
           <li data-k="p" data-why="Genesis 1:31, the starting point of Hart's story of peace.">God looked at what he had made and called it very good.</li>
@@ -986,7 +995,7 @@ footer p.meta { max-width: 38em; margin: 0 0 6px; }
 
       <section class="step">
         <h3 class="step-label">Try it</h3>
-        <p>The steps of Hart's history are scrambled. Use the arrows to put them in order, earliest at the top, then check.</p>
+        <p>The steps of Hart's history are scrambled. Drag them into order, earliest at the top, then check.</p>
         <div data-order-wrap>
           <ol class="order" data-order="o5">
             <li data-p="0">Plato: the true world is made of perfect, unchanging Forms; this world is their shadow.</li>
@@ -1305,7 +1314,7 @@ footer p.meta { max-width: 38em; margin: 0 0 6px; }
 
       <section class="step">
         <h3 class="step-label">Try it</h3>
-        <p>Which kind of sacrifice is each of these?</p>
+        <p>Which kind of sacrifice is each of these? Drag each one into its box.</p>
         <ul class="sort" data-sort="s8" data-bins="v|Economy of violence;p|Gift">
           <li data-k="v" data-why="Caiaphas trades one life for the nation's safety: order bought with a victim.">"It is expedient that one man should die for the people."</li>
           <li data-k="p" data-why="A thank offering draws near to God in gratitude; it pays no debt.">Israel's thank offering after a harvest.</li>
@@ -1630,6 +1639,385 @@ footer p.meta { max-width: 38em; margin: 0 0 6px; }
 </div>
 
 <script>
+/* ===== Noah's Weblog drag and drop v1 =====
+   Real drag and drop for two activities, usable every way people try:
+     WeblogDnD.order(container, { items: [...in the correct order...] })
+     WeblogDnD.sort(container,  { bins: [{id, label, hint}], items: [{text, bin, why}] })
+   Mouse: drag the whole item. Touch: drag by the handle (the rest scrolls).
+   Tap or click: select an item, then tap where it goes.
+   Keyboard: Space picks up, arrow keys move, Space drops.
+   Self-contained: injects its own styles and needs nothing else. */
+(function () {
+  "use strict";
+  if (window.WeblogDnD) return;
+
+  var CSS = [
+    ".dnd-help{font:13px/1.5 Verdana,Geneva,Tahoma,sans-serif;color:var(--ink-soft,#2b2b2b);margin:0 0 8px}",
+    ".dnd-status{font:13px/1.5 Verdana,Geneva,Tahoma,sans-serif;margin:8px 0}",
+    ".dnd-status:empty{display:none}",
+    ".dnd-actions{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}",
+    ".dnd-item,.dnd-card{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1px solid var(--field,#6e6e6e);",
+    "  padding:8px 10px;cursor:grab;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}",
+    ".dnd-item:focus-visible,.dnd-card:focus-visible{outline:2px dotted var(--ink,#000);outline-offset:2px}",
+    ".dnd-handle{flex:none;display:inline-flex;align-items:center;justify-content:center;width:28px;min-height:28px;margin:-4px 0 -4px -4px;",
+    "  font:18px/1 Verdana,Geneva,sans-serif;color:var(--btn-lo,#808080);cursor:grab;touch-action:none}",
+    ".dnd-text{flex:1;min-width:0}",
+    ".dnd-mark{flex:none;font:bold 12px/1.6 Verdana,Geneva,sans-serif;white-space:nowrap}",
+    ".dnd-dragging{opacity:.35;border-style:dashed}",
+    ".dnd-ghost{position:fixed;z-index:2147483646;pointer-events:none;margin:0;opacity:.95;cursor:grabbing;",
+    "  box-shadow:3px 3px 0 var(--btn-lo,#808080)}",
+    ".dnd-grabbed,.dnd-card[aria-pressed=true]{outline:2px dotted var(--ink,#000);outline-offset:2px;background:var(--tint,#f2f2f2)}",
+    ".dnd-ok{border-left:4px solid var(--c6,#008000)}.dnd-ok .dnd-mark{color:var(--c6,#008000)}",
+    ".dnd-no{border-left:4px solid var(--c2,#800000)}.dnd-no .dnd-mark{color:var(--c2,#800000)}",
+    ".dnd-list{list-style:none;margin:0;padding:0;counter-reset:dnd}",
+    ".dnd-list .dnd-item{margin:0 0 6px}",
+    ".dnd-list .dnd-item::before{counter-increment:dnd;content:counter(dnd) \".\";flex:none;min-width:1.6em;font:bold 13px/1.6 Verdana,Geneva,sans-serif}",
+    ".dnd-tray{border:1px dashed var(--lo,#999);padding:10px;margin:0 0 12px;display:grid;gap:8px;min-height:56px}",
+    ".dnd-tray-label{font:bold 13px/1.4 Verdana,Geneva,sans-serif;margin:0}",
+    ".dnd-bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}",
+    ".dnd-bin{border:2px solid var(--lo,#999);background:#fff;padding:8px 10px 10px;min-height:120px;display:flex;flex-direction:column;gap:6px}",
+    ".dnd-bin.dnd-over{border-color:var(--c1,#000080);background:var(--tint,#f2f2f2)}",
+    ".dnd-bin-head{font:bold 14px/1.3 Verdana,Geneva,sans-serif;margin:0}",
+    ".dnd-bin-hint{font:12px/1.4 Verdana,Geneva,sans-serif;color:var(--ink-soft,#2b2b2b);margin:0}",
+    ".dnd-bin-here{align-self:flex-start}",
+    ".dnd-card .dnd-fb{display:block;font:12px/1.45 Verdana,Geneva,sans-serif;margin-top:4px}",
+    ".dnd-card .dnd-fb:empty{display:none}",
+    ".dnd-card .dnd-body{flex:1;min-width:0}",
+    "[hidden]{display:none!important}",
+    "@media (prefers-reduced-motion:reduce){.dnd-ghost{transition:none}}"
+  ].join("\n");
+
+  function injectStyles() {
+    if (document.getElementById("weblog-dnd-css")) return;
+    var s = document.createElement("style");
+    s.id = "weblog-dnd-css";
+    s.textContent = CSS;
+    document.head.appendChild(s);
+  }
+
+  function el(tag, cls, html) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+  function shuffled(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function plain(html) { var d = document.createElement("div"); d.innerHTML = html; return (d.textContent || "").trim(); }
+
+  /* ---------- pointer dragging shared by both activities ---------- */
+  // Calls hooks.start(), hooks.move(x, y), hooks.drop(x, y). Mouse drags from anywhere on the
+  // item; touch and pen drag only from the handle so the rest of the page still scrolls.
+  function draggable(item, handle, hooks) {
+    var st = null;
+    // listen on window while a drag is possible: the item itself moves in the DOM mid-drag,
+    // which would drop element-level pointer capture
+    function onMove(e) {
+      if (!st || e.pointerId !== st.id) return;
+      if (!st.dragging) {
+        if (Math.abs(e.clientX - st.x) + Math.abs(e.clientY - st.y) < (st.touch ? 3 : 6)) return;
+        st.dragging = true;
+        var r = item.getBoundingClientRect();
+        st.dx = st.x - r.left; st.dy = st.y - r.top;
+        st.ghost = item.cloneNode(true);
+        st.ghost.classList.add("dnd-ghost");
+        st.ghost.removeAttribute("id");
+        st.ghost.setAttribute("aria-hidden", "true");
+        st.ghost.style.width = r.width + "px";
+        document.body.appendChild(st.ghost);
+        item.classList.add("dnd-dragging");
+        hooks.start();
+      }
+      e.preventDefault();
+      st.lx = e.clientX; st.ly = e.clientY;
+      st.ghost.style.left = (e.clientX - st.dx) + "px";
+      st.ghost.style.top = (e.clientY - st.dy) + "px";
+      hooks.move(e.clientX, e.clientY);
+      autoScroll(e.clientY);
+    }
+    function onUp(e) { finish(e, false); }
+    function onCancel(e) { finish(e, true); }
+    function finish(e, cancelled) {
+      if (!st || e.pointerId !== st.id) return;
+      var was = st;
+      st = null;
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onCancel);
+      stopScroll();
+      if (!was.dragging) return;
+      was.ghost.remove();
+      item.classList.remove("dnd-dragging");
+      item._dndJustDragged = true;
+      setTimeout(function () { item._dndJustDragged = false; }, 0);
+      hooks.drop(cancelled ? null : was.lx, cancelled ? null : was.ly);
+    }
+    item.addEventListener("pointerdown", function (e) {
+      if (e.button !== 0 || st) return;
+      if (e.target.closest("a, button, input, select, textarea")) return;
+      var onHandle = handle && handle.contains(e.target);
+      if (e.pointerType !== "mouse" && !onHandle) return;
+      st = { id: e.pointerId, x: e.clientX, y: e.clientY, dragging: false, touch: e.pointerType !== "mouse" };
+      if (onHandle || e.pointerType === "mouse") e.preventDefault();   // no text selection or touch scroll
+      window.addEventListener("pointermove", onMove, { passive: false });
+      window.addEventListener("pointerup", onUp);
+      window.addEventListener("pointercancel", onCancel);
+    });
+  }
+
+  var scrollTimer = null, scrollSpeed = 0;
+  function autoScroll(y) {
+    var edge = 60;
+    scrollSpeed = y < edge ? -Math.ceil((edge - y) / 4) : y > innerHeight - edge ? Math.ceil((y - innerHeight + edge) / 4) : 0;
+    if (scrollSpeed && !scrollTimer) {
+      scrollTimer = setInterval(function () { if (scrollSpeed) window.scrollBy(0, scrollSpeed); }, 16);
+    } else if (!scrollSpeed) stopScroll();
+  }
+  function stopScroll() { clearInterval(scrollTimer); scrollTimer = null; scrollSpeed = 0; }
+
+  /* ---------- put in order ---------- */
+  function order(container, opts) {
+    injectStyles();
+    var items = opts.items || [];
+    container.textContent = "";
+    container.appendChild(el("p", "dnd-help", opts.help ||
+      "Drag the items into order. On a phone, drag by the ≡ handle. " +
+      "Keyboard: Space picks an item up, arrow keys move it, Space drops it."));
+    var list = el("ol", "dnd-list");
+    list.setAttribute("aria-label", opts.label || "Items to put in order");
+    var status = el("p", "dnd-status");
+    status.setAttribute("aria-live", "polite");
+    var check = el("button", "primary", "Check the order"); check.type = "button";
+    var again = el("button", "", "Shuffle and start over"); again.type = "button";
+    var actions = el("div", "dnd-actions"); actions.appendChild(check); actions.appendChild(again);
+    container.appendChild(list); container.appendChild(actions); container.appendChild(status);
+
+    function rows() { return [].slice.call(list.children); }
+    function clearMarks() {
+      rows().forEach(function (li) { li.classList.remove("dnd-ok", "dnd-no"); li.querySelector(".dnd-mark").textContent = ""; });
+      if (status.getAttribute("data-kind") === "result") { status.textContent = ""; status.removeAttribute("data-kind"); }
+    }
+    function say(msg) { status.removeAttribute("data-kind"); status.textContent = msg; }
+    function position(li) { return rows().indexOf(li) + 1; }
+
+    function build() {
+      list.textContent = "";
+      var idx = items.map(function (_, i) { return i; });
+      var mixed = shuffled(idx);
+      for (var tries = 0; items.length > 1 && tries < 20 && mixed.every(function (v, i) { return v === i; }); tries++) mixed = shuffled(idx);
+      mixed.forEach(function (i) {
+        var li = el("li", "dnd-item");
+        li.tabIndex = 0;
+        li.setAttribute("data-i", i);
+        var handle = el("span", "dnd-handle", "≡"); handle.setAttribute("aria-hidden", "true");
+        li.appendChild(handle);
+        li.appendChild(el("span", "dnd-text", items[i]));
+        li.appendChild(el("span", "dnd-mark"));
+        draggable(li, handle, {
+          start: clearMarks,
+          move: function (x, y) {
+            var before = null;
+            rows().some(function (other) {
+              if (other === li) return false;
+              var r = other.getBoundingClientRect();
+              if (y < r.top + r.height / 2) { before = other; return true; }
+              return false;
+            });
+            if (before !== li.nextSibling) list.insertBefore(li, before);
+          },
+          drop: function () { say("Moved to position " + position(li) + "."); li.focus({ preventScroll: true }); }
+        });
+        li.addEventListener("keydown", function (e) {
+          var grabbed = li.classList.contains("dnd-grabbed");
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            li.classList.toggle("dnd-grabbed");
+            clearMarks();
+            say(grabbed ? "Dropped at position " + position(li) + "." :
+              "Picked up. Position " + position(li) + " of " + items.length + ". Arrow keys move it; Space drops it.");
+          } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+            e.preventDefault();
+            var sib = e.key === "ArrowUp" ? li.previousElementSibling : li.nextElementSibling;
+            if (!sib) return;
+            if (grabbed) {
+              li._dndMoving = true;            // moving a focused element can fire blur; keep it grabbed
+              list.insertBefore(li, e.key === "ArrowUp" ? sib : sib.nextSibling);
+              li.focus({ preventScroll: false });
+              setTimeout(function () { li._dndMoving = false; }, 0);
+              say("Position " + position(li) + " of " + items.length + ".");
+            } else sib.focus();
+          } else if (e.key === "Escape" && grabbed) {
+            li.classList.remove("dnd-grabbed"); say("Dropped at position " + position(li) + ".");
+          }
+        });
+        li.addEventListener("blur", function () { if (!li._dndMoving) li.classList.remove("dnd-grabbed"); });
+        list.appendChild(li);
+      });
+      say("");
+    }
+
+    check.addEventListener("click", function () {
+      var good = 0;
+      rows().forEach(function (li, pos) {
+        var ok = +li.getAttribute("data-i") === pos;
+        if (ok) good++;
+        li.classList.toggle("dnd-ok", ok);
+        li.classList.toggle("dnd-no", !ok);
+        li.querySelector(".dnd-mark").textContent = ok ? "✓" : "✗ belongs at " + (+li.getAttribute("data-i") + 1);
+      });
+      status.setAttribute("data-kind", "result");
+      status.innerHTML = good === items.length
+        ? "<strong>All " + items.length + " in the right order.</strong> " + (opts.explain || "")
+        : "<strong>" + good + " of " + items.length + " in the right place.</strong> Move the marked ones and check again.";
+      if (opts.onCheck) opts.onCheck(good, items.length);
+    });
+    again.addEventListener("click", build);
+    build();
+    return { reset: build };
+  }
+
+  /* ---------- sort into bins ---------- */
+  function sort(container, opts) {
+    injectStyles();
+    var bins = opts.bins || [], items = opts.items || [];
+    var saved = (opts.load && opts.load()) || {};
+    container.textContent = "";
+    container.appendChild(el("p", "dnd-help", opts.help ||
+      "Drag a card into a box. On a phone, drag by the ≡ handle, or tap a card and then its box. " +
+      "Keyboard: Space selects a card, then Tab to “Move here”."));
+    var trayLabel = el("p", "dnd-tray-label");
+    var tray = el("div", "dnd-tray");
+    tray.setAttribute("aria-label", "Cards to sort");
+    var binWrap = el("div", "dnd-bins");
+    var status = el("p", "dnd-status");
+    status.setAttribute("aria-live", "polite");
+    var reset = el("button", "", "Start over"); reset.type = "button";
+    var actions = el("div", "dnd-actions"); actions.appendChild(reset);
+    container.appendChild(trayLabel); container.appendChild(tray); container.appendChild(binWrap);
+    container.appendChild(status); container.appendChild(actions);
+
+    var selected = null, cards = [], binEls = {};
+    bins.forEach(function (b) {
+      var box = el("div", "dnd-bin");
+      box.setAttribute("role", "group");
+      box.setAttribute("aria-label", plain(b.label));
+      box.appendChild(el("p", "dnd-bin-head", b.label));
+      if (b.hint) box.appendChild(el("p", "dnd-bin-hint", b.hint));
+      var here = el("button", "dnd-bin-here", "Move here"); here.type = "button"; here.hidden = true;
+      here.setAttribute("aria-label", "Move the selected card to " + plain(b.label));
+      here.addEventListener("click", function () { if (selected) place(selected, b.id, true); });
+      box.addEventListener("click", function (e) {
+        if (selected && !e.target.closest(".dnd-card") && e.target !== here) place(selected, b.id, true);
+      });
+      box.appendChild(here);
+      binWrap.appendChild(box);
+      binEls[b.id] = { box: box, here: here };
+    });
+
+    function select(card) {
+      if (selected === card) card = null;
+      cards.forEach(function (c) { c.el.setAttribute("aria-pressed", c === card ? "true" : "false"); });
+      selected = card;
+      Object.keys(binEls).forEach(function (id) { binEls[id].here.hidden = !card; });
+      if (card) status.textContent = "Selected: “" + plain(card.text) + "”. Now choose a box.";
+    }
+    function binAt(x, y) {
+      var hit = null;
+      Object.keys(binEls).forEach(function (id) {
+        var r = binEls[id].box.getBoundingClientRect();
+        if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) hit = id;
+      });
+      return hit;
+    }
+    function tally() {
+      var placed = cards.filter(function (c) { return c.bin; });
+      var right = placed.filter(function (c) { return c.bin === c.answer; }).length;
+      trayLabel.textContent = placed.length === cards.length ? "All cards sorted." : "Cards to sort (" + (cards.length - placed.length) + " left)";
+      tray.hidden = placed.length === cards.length;
+      var msg = "Sorted " + placed.length + " of " + cards.length + ". " + right + " in the right box.";
+      if (placed.length === cards.length) msg += right === cards.length ? " All correct." : " Drag the marked cards to the other box to fix them.";
+      status.textContent = msg;
+      if (opts.onChange) opts.onChange(placed.length, right, cards.length);
+    }
+    function place(card, binId, announce) {
+      card.bin = binId;
+      binEls[binId].box.appendChild(card.el);
+      var ok = binId === card.answer;
+      card.el.classList.toggle("dnd-ok", ok);
+      card.el.classList.toggle("dnd-no", !ok);
+      card.mark.textContent = ok ? "✓" : "✗";
+      card.fb.innerHTML = "<strong>" + (ok ? "Right." : "Not quite.") + "</strong> " + (card.why || "");
+      saved[card.key] = binId;
+      if (opts.save) opts.save(saved);
+      select(null);
+      tally();
+      if (announce) status.textContent = (ok ? "Right. " : "Not quite. ") + plain(card.why || "") + " " + status.textContent;
+    }
+    function unplace(card) {
+      card.bin = null;
+      card.el.classList.remove("dnd-ok", "dnd-no");
+      card.mark.textContent = ""; card.fb.textContent = "";
+      tray.appendChild(card.el);
+    }
+
+    shuffled(items.map(function (_, i) { return i; })).forEach(function (i) {
+      var it = items[i];
+      var c = { text: it.text, answer: it.bin, why: it.why, key: "i" + i, bin: null };
+      c.el = el("div", "dnd-card");
+      c.el.tabIndex = 0;
+      c.el.setAttribute("role", "button");
+      c.el.setAttribute("aria-pressed", "false");
+      var handle = el("span", "dnd-handle", "≡"); handle.setAttribute("aria-hidden", "true");
+      var body = el("span", "dnd-body");
+      body.appendChild(el("span", "dnd-text", it.text));
+      c.fb = el("span", "dnd-fb");
+      body.appendChild(c.fb);
+      c.mark = el("span", "dnd-mark");
+      c.el.appendChild(handle); c.el.appendChild(body); c.el.appendChild(c.mark);
+      draggable(c.el, handle, {
+        start: function () { select(null); },
+        move: function (x, y) {
+          var hit = binAt(x, y);
+          Object.keys(binEls).forEach(function (id) { binEls[id].box.classList.toggle("dnd-over", id === hit); });
+        },
+        drop: function (x, y) {
+          Object.keys(binEls).forEach(function (id) { binEls[id].box.classList.remove("dnd-over"); });
+          var hit = x == null ? null : binAt(x, y);
+          if (hit) place(c, hit, true);
+        }
+      });
+      c.el.addEventListener("click", function (e) {
+        if (c.el._dndJustDragged) return;
+        e.stopPropagation();
+        select(c);
+      });
+      c.el.addEventListener("keydown", function (e) {
+        if (e.key === " " || e.key === "Enter") { e.preventDefault(); select(c); }
+        else if (e.key === "Escape") select(null);
+      });
+      cards.push(c);
+      tray.appendChild(c.el);
+      if (saved[c.key] && binEls[saved[c.key]]) place(c, saved[c.key], false);
+    });
+
+    reset.addEventListener("click", function () {
+      saved = {};
+      if (opts.save) opts.save(saved);
+      shuffled(cards).forEach(unplace);
+      select(null);
+      tally();
+    });
+    tally();
+    return { reset: function () { reset.click(); } };
+  }
+
+  window.WeblogDnD = { order: order, sort: sort, version: 1 };
+})();
+</script>
+<script>
 (function(){
 'use strict';
 var $=function(s,r){return (r||document).querySelector(s);};
@@ -1641,83 +2029,92 @@ function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()
 
 /* ---------- question bank ---------- */
 var QB={
-m1:[
- {id:'m1a',q:"What question set Hart's book in motion?",a:1,o:["Can anyone prove that God exists?","Can Christian persuasion be peaceful, or is it a power grab in disguise?","Is modern art more beautiful than ancient art?","Was Nietzsche a bad person?"],w:["Hart isn't writing a proof of God. He thinks Christianity never rested on proofs in the first place.","Nietzsche's heirs say every message hides a will to power. Hart asks whether the Christian message can be the exception.","Art comes up often, but the question is about persuasion and violence.","Hart attacks Nietzsche's ideas and taste, and he also respects Nietzsche's honesty about how radical Christianity is."]},
- {id:'m1b',q:"Why does Hart build his case on beauty instead of a logical proof?",a:1,o:["He thinks logic is evil.","Christianity's appeal works by showing a story and a person, which attract the way beautiful things do.","Beauty can never be misused.","Postmodern thinkers already agree with him about beauty."],w:["He uses plenty of logic. He doubts that a neutral, story-free logic exists.","The church has no argument stronger than the figure of Christ, so the question becomes whether that kind of attraction can be peaceful.","Hart admits beauty can sit beside atrocity. That's why he has to show what kind of beauty Christianity means.","Most of them prefer the sublime and treat beauty as a pleasant surface."]},
- {id:'m1c',q:"In Hart's vocabulary, what is \"totality\"?",a:0,o:["The world pictured as a closed system that explains itself","The total number of people who will be saved","God's infinite love","A style of church music"],w:["Hart borrows the word from Levinas and gives it his own meaning.","It's a way of picturing the world.","That's closer to what Hart calls infinity, the opposite term.","Music matters later, but this term is about how we picture reality as a whole."]}
-],
-m2:[
- {id:'m2a',q:"How does Hart relate Parmenides (unchanging being) to Heraclitus (everything flows)?",a:1,o:["They are opposites with nothing in common.","They are two ends of one picture in which order and chaos are locked in conflict.","Both are early forms of Christianity.","Heraclitus proved Parmenides wrong once and for all."],w:["They look opposite, and Hart thinks they share a map.","One side prizes order, the other celebrates flux, and both treat the struggle as basic.","Both lived centuries before Christianity.","Hart says postmodernism mostly flips old metaphysics over, which keeps its structure."]},
- {id:'m2b',q:"In the Christian account of creation, as Hart reads it, what comes first?",a:1,o:["A chaos that God has to fight","Peace and goodness; violence enters later as an intruder","A war among gods","Nothing, because the world has always existed"],w:["Many ancient myths start that way. As Hart reads Genesis, even the formless deep is God's creation.","God creates freely and calls the result very good. Violence comes later, as a wound.","That's the pattern of Babylonian and Greek myth.","Creation from nothing means the world began, as a gift."]},
- {id:'m2c',q:"Why do Augustine and Hart care that Romulus killed his brother Remus?",a:0,o:["Rome, the model earthly city, was founded on a killing.","It proves Romans were worse than other people.","It shows twins can't share power.","It shows violence is the deepest truth of reality."],w:["Augustine pairs it with Cain and Abel: the earthly city is the city of the brother who kills.","The point is about every city built on force.","That's a reading of the legend, but it isn't Augustine's point.","That's the story of violence. Augustine tells it as a history to be healed."]}
-],
-m3:[
- {id:'m3a',q:"In the postmodern narratives of the sublime, what is the sublime?",a:0,o:["The hidden, formless truth that every picture and idea covers over","A kind of poem","God, as Christians describe him","The most beautiful thing imaginable"],w:["Beauty is the curtain; the sublime is the storm behind it.","Kant's sublime is an experience, and these thinkers turn it into a claim about reality.","Hart says the Christian God is infinite and full of form, nearly the opposite.","These thinkers set the sublime against beauty, as its hidden truth."]},
- {id:'m3b',q:"What is Hart's alternative account of the sublime?",a:1,o:["The sublime is fake.","The sublime is beauty too great to take in, so it belongs inside beauty.","The sublime matters more than beauty.","The sublime is just fear."],w:["He thinks the experience is real.","Infinity has form in the Christian God, so overwhelming experiences are moments of beauty.","That's the view he argues against.","Fear is part of it, and Hart thinks delight is the larger part."]},
- {id:'m3c',q:"What is Hart's main objection to Levinas's ethics?",a:1,o:["It cares too much about other people.","It asks us to answer a faceless, infinite Other and leaves out love for the particular person.","It is too cheerful.","It ignores the Holocaust."],w:["Hart wants more care, aimed at the real person.","Hart's line: often, seeing the color of someone's eyes is where responsibility begins.","Hart finds it the opposite: grim and world-rejecting.","Levinas's thought was shaped by the Holocaust, which took his family. Hart's complaint is about his picture of ethics."]}
-],
-m4:[
- {id:'m4a',q:"What does Nietzsche mean by ressentiment?",a:0,o:["The grudge of the weak against the strong, dressed up as morality","Healthy anger at injustice","A French form of politeness","A Christian sacrament"],w:["Nietzsche says Christians call their grudge justice and love.","Nietzsche's accusation is that what Christians call righteous anger is really envy.","It's the French word for resentment; Nietzsche used it as a technical term.","It's Nietzsche's diagnosis of Christian morality."]},
- {id:'m4b',q:"What does Hart's \"two wines\" comparison show?",a:0,o:["Biblical wine belongs to feasting, fellowship, and covenant; Dionysian wine to frenzy and bloodshed.","Christians should avoid wine.","Dionysus and Christ are the same god.","Ancient wine was stronger than modern wine."],w:["Two wines, two pictures of the world.","Hart jokes that Nietzsche, the teetotaler, couldn't judge either vintage.","That's the merger Hart is resisting.","The point is what each wine means."]},
- {id:'m4c',q:"Which of these does Hart concede to Nietzsche?",a:0,o:["Christians have often acted from resentment, and the church's record is mixed.","The will to power is the truth about reality.","Jesus was a passive dreamer.","Pity is a weakness."],w:["Hart says the word ressentiment hits home for a Christian conscience.","That's the claim Hart denies.","Hart says the Jesus of the Gospels doesn't fit that picture.","Hart treats compassion as part of the beauty Nietzsche failed to see."]},
- {id:'m4d1',q:"Why does Hart bring up Peter weeping after he denied Jesus?",a:0,o:["Classical literature rarely took a common man's tears seriously; the Gospels do, and that reversal of taste is what Nietzsche disliked.","To prove Peter was weak.","To show the disciples were noble warriors.","Because Nietzsche quoted it with approval."],w:["This is Hart's final evidence that the dispute is about taste.","Hart's point is about how the story treats Peter's grief.","They were fishermen, and that's the point.","Nietzsche found scenes like this vulgar."]}
-],
-m4d:[
- {id:'d1',q:"Nietzsche: \"Christian morality is the revenge of the weak on the strong.\"",a:0,o:["Hart concedes Christians often act from resentment, and denies that resentment explains Christ, who loves his persecutors without bitterness.","Hart says the weak deserve revenge.","Hart says Nietzsche never read the Bible."],w:["Hart grants the symptom and disputes the diagnosis.","Hart's story has no room for revenge.","Hart credits Nietzsche with understanding Christianity unusually well."]},
- {id:'d2',q:"Nietzsche: \"Christianity hates the body and this world.\"",a:1,o:["Hart agrees and calls it a strength.","Creation is called good, the body will be raised, and the central rite is a meal of bread and wine.","Hart says the body doesn't matter either way."],w:["Hart thinks hatred of the world is a gnostic or pagan mood.","These are Hart's three pieces of evidence.","Hart's whole book insists the physical world matters."]},
- {id:'d3',q:"Nietzsche: \"Life is will to power; that is simply the truth.\"",a:2,o:["Hart says power doesn't exist.","Hart says Nietzsche was right but too loud.","That's a metaphysical story too, with no neutral proof behind it."],w:["Hart thinks power is real; he denies it is the deepest truth.","Hart rejects the claim itself.","Nietzsche's critique of metaphysics rests on a metaphysics of its own."]},
- {id:'d4',q:"Nietzsche: \"Jesus was a gentle dreamer whom the church betrayed.\"",a:1,o:["Hart agrees the church betrayed Jesus completely.","The Jesus of the Gospels cleanses the temple and argues with irony; Nietzsche invented a Jesus to fit his theory.","Hart says Jesus was a warrior."],w:["Hart admits failures, and he still sees real continuity between Christ and the church.","Hart calls Nietzsche's portrait an imaginative failure.","Hart's Jesus wins by giving himself away."]}
-],
-m5:[
- {id:'m5a',q:"Why does creation from nothing matter so much to Hart?",a:0,o:["It means the world exists as a free gift that didn't have to be given.","It proves the Big Bang.","It means matter is evil.","It means God needed a world."],w:["A gift says something about the giver, and calls for gratitude.","Hart's point is about why anything exists at all, a question physics doesn't settle.","Hart insists creation is good.","Creation adds nothing to God; that's what makes it a gift."]},
- {id:'m5b',q:"In Hart's history, what did Descartes do?",a:0,o:["He set his senses aside and grounded certainty in the thinking self.","He proved that beauty is objective.","He revived Greek religion.","He wrote the Nicene Creed."],w:["In the Third Meditation (1641) he shuts his eyes and stops his ears to begin from the mind alone.","Descartes was after certainty.","He was a Catholic mathematician and philosopher.","The Creed dates from 381."]},
- {id:'m5c',q:"Why does Hart call Kant's revolution \"Ptolemaic\" instead of \"Copernican\"?",a:0,o:["It puts the human knower back at the center, like the old earth-centered model.","Kant studied astronomy.","Kant disliked Copernicus.","It refers to ancient Egypt."],w:["Ptolemy's universe circled the earth; Kant's knowledge circles the self.","Kant did write on astronomy, but that isn't Hart's point.","Kant admired Copernicus and borrowed his name.","Ptolemy lived in Roman Egypt, but the joke is about the center."]}
-],
-m6:[
- {id:'m6a',q:"What does perichoresis describe?",a:0,o:["The way Father, Son, and Spirit live in one another, distinct yet one","A dance performed in Byzantine churches","Three gods cooperating","God's anger at sin"],w:["The word comes from a verb meaning to make room or contain.","It sounds like the Greek word for dancing, a pun Hart enjoys, and it names the shared life of the three persons.","Christian teaching insists on one God.","It's about love within God."]},
- {id:'m6b',q:"What does Hart mean by God's apatheia?",a:1,o:["God doesn't care what happens to us.","God's infinite fullness of love and joy, which nothing outside can wound or add to","God is bored.","God feels every emotion more strongly than we do."],w:["That's the common misreading, borrowed from the English word apathy.","God loved us before we existed; nothing forced or completed that love.","Fullness is the opposite of boredom.","That would make God's life depend on events outside God."]},
- {id:'m6c',q:"What is epektasis in Gregory of Nyssa?",a:0,o:["The soul's endless stretching into God's infinite goodness","The moment the soul reaches the end of God","A punishment for sin","Forgetting the past"],w:["Gregory takes the word from Philippians 3:13: reaching forth to what lies ahead.","God has no end to reach, and Gregory thinks that's good news.","It's the soul's joy.","Paul does speak of forgetting what lies behind, but the stress falls on reaching ahead."]},
- {id:'m6d',q:"Why does Hart reject a God who becomes himself through history and suffering?",a:0,o:["It would make every horror in history part of God's own identity.","History doesn't exist.","Hegel was German.","God can't act in history."],w:["Hart applies Ivan Karamazov's test: would you accept a God whose story needed a child's torture?","Hart takes history very seriously.","That isn't an argument.","Hart thinks God acts in history fully. He denies that God needs history to be God."]}
-],
-m7:[
- {id:'m7a',q:"What is Derrida's puzzle about gifts?",a:0,o:["Any gift seems to create a debt, so a pure gift looks impossible.","Gifts are too expensive.","Only God gives gifts.","Gifts should be wrapped."],w:["Even a thank-you seems to pay the giver back.","It's a puzzle of logic.","Derrida's puzzle is about all giving.","The puzzle concerns what a gift is."]},
- {id:'m7b',q:"How does Hart answer it?",a:0,o:["Real gifts come from desire for the other, hope for a response, and get given again; in God, giving and receiving are one motion.","He agrees no gift is possible.","He says gifts should be anonymous.","He says only money is a real gift."],w:["Hart's answer runs through the Trinity: the Father gives all to the Son, and the Son gives all back.","Hart thinks the gift is real.","Anonymous giving is closer to Derrida's ideal.","Money is the market's way of seeing, which Hart criticizes."]},
- {id:'m7c',q:"What does the Goldberg Variations example show?",a:0,o:["A theme can unfold into endless difference while staying itself.","Bach trained as a theologian.","Music needs chaos underneath it.","Repetition is boring."],w:["The aria returns after thirty variations and sounds deeper.","Bach was a church musician. Hart calls him the greatest Christian theologian as praise for his music.","Hart's point is that it doesn't.","Variation keeps repetition alive."]},
- {id:'m7d',q:"What does the analogy of being claim?",a:0,o:["Creatures resemble God within an ever greater unlikeness.","God and creatures are the same kind of thing.","We can know nothing at all about God.","All words about God are lies."],w:["Our words reach toward God truly and always fall short.","That's what the analogy denies.","The analogy says we can speak of God, imperfectly.","Hart thinks they work best as praise."]}
-],
-m8:[
- {id:'m8a',q:"What does Irenaeus mean by recapitulation?",a:0,o:["Christ re-lives the human story from the beginning and gets it right.","Christ summarizes the Bible in a sermon.","Humanity starts over without Christ.","A recap at the end of an episode."],w:["Obedience where Adam disobeyed: the song sung right.","Irenaeus means a whole life lived.","Christ is the new head of humanity.","Good guess from the English word. The Greek means summing up under one head."]},
- {id:'m8b',q:"What separates Hart's two kinds of sacrifice?",a:0,o:["One keeps order by destroying a victim; the other is a self-giving gift that God answers by giving again.","One uses animals and the other doesn't.","One is Jewish and the other is Christian.","There is no real difference."],w:["The cross is where the two kinds meet; Easter shows which one God sides with.","The difference lies in purpose.","Hart sees the gift kind already in Israel's worship.","The whole module turns on the difference."]},
- {id:'m8c',q:"What is Hart's complaint about reading the cross as a tragedy?",a:0,o:["Tragedy teaches us to accept loss as the way the universe works, and the resurrection refuses that lesson.","Tragedies are too sad for church.","Greek plays are pagan, so Christians can't read them.","Tragedy takes suffering too seriously."],w:["Tragic wisdom finds a reason for loss and asks for acceptance; Easter treats death as an enemy.","Hart's complaint is about what tragedy teaches.","Hart reads them closely. He objects to their view of suffering.","He thinks Christianity takes suffering more seriously, because it never calls a death acceptable."]},
- {id:'m8d',q:"How does Hart read Pilate's \"What is truth?\"",a:0,o:["As a dodge: Pilate turns from the truth in front of him to his one sure truth, the power to crucify.","As a deep insight Hart admires.","As a joke.","As Pilate's conversion."],w:["Power answers persuasion with a cross.","That's Nietzsche's reading.","Hart reads it as deadly serious.","Pilate hands Jesus over."]}
-],
-m9:[
- {id:'m9a',q:"In the Eastern view Hart draws on, what is hell?",a:0,o:["God's same glory, experienced by a closed heart as burning","A place God made to store evil","A total absence of light","A metaphor for bad luck"],w:["Same sun, different material: wax melts and clay hardens.","In this view God made no place for evil; hell is refusal.","The light is still there; it's received as pain.","It's about a person's relation to God."]},
- {id:'m9b',q:"For Gregory of Nyssa, where is the image of God in humanity fully found?",a:0,o:["In the whole community of humanity across all time","In the smartest person","Only in Adam before the fall","In the soul alone, apart from the body"],w:["Every person is an irreplaceable part of the image.","Gregory's image is the whole community.","Adam is the first part of the image; the full image is everyone together.","Gregory's view includes the body and all of history."]},
- {id:'m9c',q:"What does Hart say about Gregory's universalism in this book?",a:0,o:["He explains it and says his church's tradition does not authorize him to argue for it.","He calls it a heresy.","He ignores it.","He says it's official Orthodox teaching."],w:["He later argued for it in That All Shall Be Saved (2019).","He treats it sympathetically.","He discusses it at length.","It isn't official teaching, which is why he holds back."]}
-],
-m10:[
- {id:'m10a',q:"What is Hart's main criticism of the neutral referee who suspects all big stories?",a:0,o:["\"No story is true for everyone\" is itself a big story, imposed on everyone.","Referees should be paid more.","The referee is too religious.","There should be no rules at all."],w:["The referee is wearing a team jersey.","It's a joke option.","Hart's worry runs the other way: the referee pushes religion into private life.","Hart thinks peace needs a particular story."]},
- {id:'m10b',q:"Who does Hart think benefits most when every big story becomes a private preference?",a:0,o:["The market, which turns everything into a price and a choice","The church","Nobody","Philosophers"],w:["Desire trained to want nothing in particular keeps shopping.","The church loses its public voice.","Hart thinks someone always fills the space.","They're not the winners in his account."]},
- {id:'m10c',q:"What does the Greek word martys mean?",a:1,o:["Victim","Witness","Hero","Soldier"],w:["Martyrs often are victims; the word itself means witness.","A martyr testifies by offering.","Close in spirit; the literal meaning is witness.","The opposite of Hart's point."]},
- {id:'m10d',q:"Which form of Christian persuasion does Hart accept?",a:0,o:["Offering the gift freely, ready to be refused, never forcing it","Winning debates by any means","Passing laws that require belief","Staying silent about faith"],w:["Witness: the gift of martyrs.","Any means includes force, which Hart forbids.","Hart's whole argument forbids coercion.","He rejects silence too; the gift should be offered."]}
-],
-x:[
- {id:'x1',m:1,q:"How does Hart structure the whole book?",a:0,o:["Thesis (Part 1), story (Part 2), antithesis (Part 3), with no synthesis","Three proofs of God","A history of the church in order","Introduction, body, conclusion"],w:["He leaves two stories facing each other.","He doesn't think proofs settle this.","Part 1 is about philosophy, Part 2 about doctrine.","Too generic; Hart names his parts."]},
- {id:'x2',m:3,q:"Which thinker traced how power shapes what people accept as knowledge?",a:0,o:["Michel Foucault","Gregory of Nyssa","Anselm","J. S. Bach"],w:["Hart puts Foucault with Deleuze in the cosmological sublime.","Gregory is Hart's hero of the positive infinite.","Anselm wrote on atonement.","Bach is Hart's model of theme and variations."]},
- {id:'x3',m:10,q:"Hart's gift of martyrs answers which worry from Module 1?",a:0,o:["That persuasion is always secretly a power grab","That God doesn't exist","That beauty is boring","That music is meaningless"],w:["Persuasion that refuses force and accepts refusal is Hart's answer.","Hart isn't arguing for God's existence.","Nobody in the book says that.","Music is one of Hart's images of peace."]},
- {id:'x4',m:1,q:"Gnosticism treats the material world as...",a:0,o:["a prison the soul escapes through secret knowledge","God's good gift","a song","a city of peace"],w:["Hart says beauty guards against this.","That's Hart's view, the opposite.","That's Hart's image of creation.","That's Augustine's city of God."]},
- {id:'x5',m:6,q:"Which image best fits Hart's picture of the infinite God?",a:0,o:["A fountain that never runs dry and never stops giving","A wall at the edge of the world","A storm of competing forces","An empty space"],w:["Full, and giving anyway.","That's the boundary-guarding god of the city.","That's the story of violence.","Hart's infinite is full of form."]},
- {id:'x6',m:3,q:"In Kant's account, where does the experience of the sublime end up?",a:0,o:["With the mind discovering its own power over nature","With fear forever","With a vision of God's beauty","With the end of thinking"],w:["Hart calls this Kant's rational triumphalism.","For Kant the fear passes.","That's closer to Hart than to Kant.","Kant thought it showed reason's strength."]}
-]};
+  m1: [
+    {"id":"m1a","q":"What question set Hart's book in motion?","a":1,"o":["Whether anyone can prove, by pure logic, that God really exists","Whether Christian persuasion is peaceful or a power grab in disguise","Whether Christian art is more beautiful than the art of other religions","Whether Nietzsche was right that modern people can no longer believe in God"],"w":["Hart isn't writing a proof of God. He thinks Christianity never rested on proofs in the first place.","Nietzsche's heirs say every message hides a will to power. Hart asks whether the Christian message can be the exception.","Art comes up often, but the question is about persuasion and force.","Hart takes Nietzsche seriously, but the book's question is whether persuasion can be free of force."]},
+    {"id":"m1b","q":"Why does Hart build his case on beauty instead of a logical proof?","a":1,"o":["Logical arguments are secretly a way of dominating people","Christianity wins people through a story and a person, as beauty does","Beauty is harder to misuse than argument, so it is a safer guide","His postmodern opponents already agree that beauty is the deepest truth"],"w":["That's the suspicion Hart argues against. He uses plenty of logic; he doubts that a neutral, story-free logic exists.","The church has no argument stronger than the figure of Christ, so the question becomes whether that kind of attraction can be peaceful.","Hart admits beauty gets misused all the time, in ads and propaganda. His claim is about one particular beauty.","Most of them prefer the sublime and treat beauty as a pleasant surface."]},
+    {"id":"m1c","q":"In Hart's vocabulary, what is \"totality\"?","a":0,"o":["The world pictured as a closed system that explains itself","The whole world, received as a gift from a God beyond it","The belief that God controls every single event in history","The unity of all Christians in one worldwide church"],"w":["Hart borrows the word from Levinas and gives it his own meaning.","That's what Hart calls infinity, the opposite term.","Totality is a picture of a world that needs nothing beyond itself.","The term is about how we picture reality as a whole."]}
+  ],
+  m2: [
+    {"id":"m2a","q":"How does Hart relate Parmenides (unchanging being) to Heraclitus (everything flows)?","a":1,"o":["They are opposite pictures with nothing deep in common","They are two ends of one picture of order and chaos at war","They are early Greek versions of the story of peace","They are rivals, and Heraclitus's flux wins, as postmodern thinkers say"],"w":["They look opposite, and Hart thinks they share one map.","One side prizes order, the other celebrates flux, and both treat the struggle as basic.","Both belong to the map of order and chaos at war, which Hart calls the story of violence.","Hart says postmodernism mostly flips the old picture over, which keeps its structure."]},
+    {"id":"m2b","q":"In the Christian account of creation, as Hart reads it, what comes first?","a":1,"o":["A dark chaos that God tames and shapes into order","Peace and goodness; violence enters later as an intruder","A struggle between good and evil forces of equal power","Nothing, because the world has always existed alongside God"],"w":["Many ancient myths start that way. As Hart reads Genesis, there is no chaos God has to defeat.","God creates freely and calls the result very good. Violence comes later, as a wound.","That's the pattern of some ancient myths. In Genesis nothing rivals God.","Creation from nothing means the world began, as a gift."]},
+    {"id":"m2c","q":"Why do Augustine and Hart care that Romulus killed his brother Remus?","a":0,"o":["Rome, the model earthly city, was founded on bloodshed","Romans were crueler than other ancient peoples","Remus deserved death for jumping over Romulus's boundary line","Violence is the deepest truth of reality, as the legend shows"],"w":["Augustine pairs it with Cain and Abel: the earthly city is the city of the brother who kills.","The point is about every city built on force, not Rome alone.","That's how the legend justifies it. Augustine sides with the brother who was killed.","That's the story of violence. Augustine tells it as a history to be healed."]}
+  ],
+  m3: [
+    {"id":"m3a","q":"In the postmodern narratives of the sublime, what is the sublime?","a":0,"o":["The formless truth hidden behind every picture and idea","A feeling of awe that tells us nothing about reality","The infinite God, full of form, as Christians describe him","Beauty at its highest, the most perfect form imaginable"],"w":["Beauty is the curtain; the sublime is the storm behind it.","Kant's sublime is an experience, and these thinkers turn it into a claim about reality.","That's Hart's own view of the infinite, nearly the opposite.","These thinkers set the sublime against beauty, as its hidden truth."]},
+    {"id":"m3b","q":"What is Hart's alternative account of the sublime?","a":1,"o":["The sublime is an illusion that philosophers should stop talking about","The sublime is beauty too great to take in, so it belongs inside beauty","The sublime is the deeper truth that beauty covers over","The sublime is a kind of fear that has nothing to do with beauty"],"w":["He thinks the experience is real. He places it inside beauty.","Infinity has form in the Christian God, so overwhelming experiences are moments of beauty.","That's the view he argues against.","Fear is part of it, and Hart thinks delight is the larger part."]},
+    {"id":"m3c","q":"What is Hart's main objection to Levinas's ethics?","a":1,"o":["It asks too much of us by putting other people ahead of ourselves","It points us to a faceless Other, who can be obeyed but not loved","It pays attention to looks, like eye color, and so invites bias","It ignores what the Holocaust taught about human evil"],"w":["Hart wants more care, aimed at the real, particular person.","Hart's line: often, seeing the color of someone's eyes is where responsibility begins.","Reversed. Levinas says not to notice eye color; Hart says noticing can begin responsibility.","Levinas's thought was shaped by the Holocaust, which took his family. Hart's complaint is about his picture of ethics."]}
+  ],
+  m4: [
+    {"id":"m4a","q":"What does Nietzsche mean by ressentiment?","a":0,"o":["The weak's grudge against the strong, dressed up as morality","The healthy anger of the oppressed against real injustice","The contempt the strong feel for the weak, which he calls noble","The Christian practice of forgiving those who have wronged you"],"w":["Nietzsche says Christians call their grudge justice and love.","Nietzsche's accusation is that what Christians call righteous anger is really envy.","Reversed. Ressentiment runs from the weak toward the strong, and Nietzsche condemns it.","Nietzsche says Christian forgiveness hides ressentiment. The term names the grudge underneath."]},
+    {"id":"m4b","q":"What does Hart's \"two wines\" comparison show?","a":0,"o":["Biblical wine means feasting and thanks; Dionysian wine means frenzy","Christians should drink less, since wine leads toward Dionysian frenzy","Dionysus and Christ are one god of wine and rebirth under two names","The Bible borrowed its wine rituals from the older cult of Dionysus"],"w":["Two wines, two pictures of the world. Dionysus's wine goes with madness and blood.","Hart celebrates the Bible's wine as a gift. He jokes that Nietzsche, who didn't drink, couldn't judge either vintage.","That's the merger Hart is resisting.","The comparison is about the contrast in what each wine means."]},
+    {"id":"m4c","q":"Which of these does Hart concede to Nietzsche?","a":0,"o":["Christians have often acted from the resentment he describes","The will to power is the deepest truth about all of life","Jesus was a gentle dreamer whom the church soon betrayed","Pity for the weak is a sign of sickness that works against life"],"w":["Hart says the word ressentiment hits home for a Christian conscience, and the church's record is mixed.","That's the claim Hart denies.","Hart says the Jesus of the Gospels doesn't fit that picture.","Hart treats compassion as part of the beauty Nietzsche failed to see."]},
+    {"id":"m4d1","q":"Why does Hart bring up Peter weeping after he denied Jesus?","a":0,"o":["To show the Gospels taking a common man's tears seriously","To show that Peter's faith was too weak to lead the church","To show the disciples were heroes in the classical mold","To show a scene that even Nietzsche admired in the Gospels"],"w":["Classical literature rarely did. For Hart, Nietzsche's dislike of this shows the dispute is about taste.","Hart's point is about how the story treats Peter's grief.","They were fishermen. Classical literature rarely took such people's tears seriously, and that's the point.","Nietzsche found scenes like this vulgar."]}
+  ],
+  m4d: [
+    {"id":"d1","q":"Nietzsche: \"Christian morality is the revenge of the weak on the strong.\"","a":0,"o":["Hart admits Christian resentment but denies it explains Christ","Hart says Christians act from love, not from resentment","Hart says the weak are right to take revenge, since it is justice"],"w":["Hart grants the symptom and disputes the diagnosis. Christ loves his persecutors without bitterness.","Hart concedes that Christians have often acted from resentment.","Hart's story has no room for revenge."]},
+    {"id":"d2","q":"Nietzsche: \"Christianity hates the body and this world.\"","a":1,"o":["Hart agrees, and says turning away from this world is a strength","Hart points to a good creation, a risen body, and a shared meal","Hart says the soul matters to God far more than the body"],"w":["Hart thinks hatred of the world is a gnostic or pagan mood.","Creation is called good, the body will be raised, and the central rite is bread and wine.","Hart's whole book insists the physical world matters, and the body will be raised."]},
+    {"id":"d3","q":"Nietzsche: \"Life is will to power; that is simply the truth.\"","a":2,"o":["Hart says power is an illusion that love will someday dissolve","Hart agrees, but says love is a higher form of the will to power","Hart says that claim is metaphysics too, with no proof behind it"],"w":["Hart thinks power is real; he denies it is the deepest truth.","Hart rejects the claim itself.","Nietzsche's critique of metaphysics rests on a metaphysics of its own."]},
+    {"id":"d4","q":"Nietzsche: \"Jesus was a gentle dreamer whom the church betrayed.\"","a":1,"o":["Hart agrees, and says the church soon betrayed its gentle founder","Hart says the Jesus who cleared the temple was no gentle dreamer","Hart says Jesus was a warrior who won by force, not a dreamer"],"w":["Hart admits failures, and he still sees real continuity between Christ and the church.","The Jesus of the Gospels drives out the money changers and argues with sharp irony. Hart says Nietzsche's Jesus is made up.","Hart's Jesus wins by giving himself away."]}
+  ],
+  m5: [
+    {"id":"m5a","q":"Why does creation from nothing matter so much to Hart?","a":0,"o":["It means the world is a free gift that didn't have to be given","It shows the Big Bang theory is correct about how time began","It means the material world is a lesser, fallen copy of heaven","It means God needed a world to love in order to be complete"],"w":["A gift says something about the giver, and calls for gratitude.","Hart's point is about why anything exists at all, a question physics doesn't settle.","Hart insists creation is good.","Creation adds nothing to God; that's what makes it a gift."]},
+    {"id":"m5b","q":"In Hart's history, what did Descartes do?","a":0,"o":["He set his senses aside to start from the thinking self","He showed that knowledge begins in wonder at beauty","He made God's raw, all-powerful will the center of thought","He showed that we know things only as our minds shape them"],"w":["In the Meditations (1641) he shuts his eyes and stops his ears to find certainty in the mind alone.","That's Hart's own view. Descartes started from doubt.","That's Hart's account of the late medieval nominalists.","That's Kant, who came after Descartes."]},
+    {"id":"m5c","q":"Why does Hart call Kant's revolution \"Ptolemaic\" instead of \"Copernican\"?","a":0,"o":["It puts the human knower at the center, as Ptolemy put the earth","It shows Kant's science was out of date, like Ptolemy's","Kant rejected Copernicus and defended the earth-centered view","Kant placed God, not the human mind, at the center of knowledge"],"w":["Ptolemy's universe circled the earth; Kant's knowledge circles the self.","Kant did write on astronomy, but Hart's point is about where Kant puts the knower.","Kant admired Copernicus and borrowed his name.","Reversed. For Hart, Kant makes knowledge circle the human self."]}
+  ],
+  m6: [
+    {"id":"m6a","q":"What does perichoresis describe?","a":0,"o":["The way Father, Son, and Spirit live in one another","A sacred dance performed in early Byzantine churches","Three separate gods who cooperate closely in one shared plan","God's going out of himself to make room for a world"],"w":["The word comes from a verb meaning to make room or contain. The three stay distinct yet one.","It sounds like the Greek word for dancing, a pun Hart enjoys, and it names the shared life of the three persons.","Christian teaching insists on one God.","The word does come from a verb meaning to make room, but it names the life the three persons share."]},
+    {"id":"m6b","q":"What does Hart mean by God's apatheia?","a":1,"o":["God doesn't truly care what happens to the people he made","God's life is so full of love that nothing can wound or add to it","God keeps calm by keeping himself apart from the world","God feels every emotion, grief included, far more deeply than we do"],"w":["That's the common misreading, borrowed from the English word apathy.","God loved us before we existed; nothing forced or completed that love.","Hart's God acts in history fully. Fullness is not distance.","That would make God's life depend on events outside God."]},
+    {"id":"m6c","q":"What is epektasis in Gregory of Nyssa?","a":0,"o":["The soul's endless stretching into God's infinite goodness","The moment the soul reaches God at last and rests, satisfied","The soul's painful separation from God as punishment for sin","The soul's emptying of all desire so it can rest in God"],"w":["Gregory takes the word from Philippians 3:13: reaching forth to what lies ahead.","God has no end to reach, and Gregory thinks that's good news.","It's the soul's joy.","Gregory's soul never stops desiring; every fulfillment opens a larger desire."]},
+    {"id":"m6d","q":"Why does Hart reject a God who becomes himself through history and suffering?","a":0,"o":["It would make every horror in history part of God's own story","History is a passing shadow that makes no real difference to God","Such a God would be too close to us to deserve worship","God can't act in history, since he stays outside of time"],"w":["Hart applies Ivan Karamazov's test: would you accept a God whose story needed a child's torture?","Hart takes history very seriously.","Hart's God is closer to each thing than it is to itself.","Hart thinks God acts in history fully. He denies that God needs history to be God."]}
+  ],
+  m7: [
+    {"id":"m7a","q":"What is Derrida's puzzle about gifts?","a":0,"o":["Any gift seems to create a debt, so a pure gift looks impossible","Humans can never give a real gift, though God gives freely","Receiving a gift without paying it back is a kind of theft","Gifts given in secret are worth less than gifts given out in the open"],"w":["Even a thank-you seems to pay the giver back.","Derrida's puzzle is about all giving.","Derrida's worry runs the other way: the debt is what spoils the gift.","Derrida's pure gift would have to go unnoticed by anyone."]},
+    {"id":"m7b","q":"How does Hart answer it?","a":0,"o":["He says a real gift hopes for a response and is given again","He agrees that no pure gift is possible, not even from God","He says a true gift is given in secret and expects nothing back","He says a fair trade is the truest kind of gift between people"],"w":["Hart's answer runs through the Trinity: the Father gives all to the Son, and the Son gives all back.","Hart thinks the gift is real.","That's closer to Derrida's ideal. Hart thinks a gift that expects nothing at all is closer to indifference.","Trade is the market's way of seeing, which Hart criticizes."]},
+    {"id":"m7c","q":"What does the Goldberg Variations example show?","a":0,"o":["A theme can unfold into endless difference and stay itself","Bach's music proves God exists better than any argument","Even the best music needs chaos and conflict underneath it","Repeating a theme wears it out, so it must keep changing"],"w":["The aria returns after thirty variations and sounds deeper.","Hart uses music as a picture of creation, not as a proof.","Hart's point is that it doesn't.","When the aria returns, it sounds deeper, not worn out."]},
+    {"id":"m7d","q":"What does the analogy of being claim?","a":0,"o":["Creatures resemble God within an ever greater unlikeness","God and creatures are alike, differing only in size and power","Creatures are so unlike God that we can say nothing about him","Our words about God are poetry that tells us nothing true"],"w":["Our words reach toward God truly and always fall short.","That's what the analogy denies; the unlikeness is always greater.","The analogy says we can speak of God, imperfectly.","Hart thinks words like good and wise reach God truly, and work best as praise."]}
+  ],
+  m8: [
+    {"id":"m8a","q":"What does Irenaeus mean by recapitulation?","a":0,"o":["Christ re-lives the human story and this time gets it right","Christ sums up the whole Bible in his teaching and sermons","God wipes out the old humanity and starts over with a new one","Christ repeats Adam's whole story, including his fall into sin"],"w":["From the beginning: obedience where Adam disobeyed, the song sung right.","Irenaeus means a whole life lived, not a summary in words.","Christ re-lives the old story and heals it; nothing is wiped out.","Christ repeats the story, but obeys where Adam disobeyed."]},
+    {"id":"m8b","q":"What separates Hart's two kinds of sacrifice?","a":0,"o":["One destroys a victim to keep order; the other is a gift God gives back","One uses animals; the other uses bread and wine instead","One belongs to Israel's worship, and the other began with Christianity","One appeases an angry God; the other pays a debt to society"],"w":["The cross is where the two kinds meet; Easter shows which one God sides with.","The difference lies in purpose, not in what is offered.","Hart sees the gift kind already in Israel's worship.","Both of those are the first kind, an economy of violence. The second kind is a gift."]},
+    {"id":"m8c","q":"What is Hart's complaint about reading the cross as a tragedy?","a":0,"o":["Tragedy teaches us to accept loss, a lesson Easter refuses","Tragedy is too sad, and Christians should focus on joy","Greek plays are pagan, so Christians shouldn't read them","Tragedy takes suffering more seriously than Christians should"],"w":["Tragic wisdom finds a reason for loss and asks for acceptance; Easter treats death as an enemy.","Hart's complaint is about what tragedy teaches.","Hart reads them closely. He objects to their view of suffering.","He thinks Christianity takes suffering more seriously, because it never calls a death acceptable."]},
+    {"id":"m8d","q":"How does Hart read Pilate's \"What is truth?\"","a":0,"o":["As a dodge that falls back on his power to crucify","As honest skepticism about truth, which Hart admires","As a reminder that truth is hard to know for certain","As the first step in Pilate's conversion to faith"],"w":["Pilate turns from the truth standing in front of him to his one sure truth. Power answers persuasion with a cross.","That's Nietzsche's reading.","Hart reads it as Pilate turning from the truth standing in front of him.","Pilate hands Jesus over."]}
+  ],
+  m9: [
+    {"id":"m9a","q":"In the Eastern view Hart draws on, what is hell?","a":0,"o":["God's same glory, experienced by a closed heart as burning","A separate place God made to punish those who reject him","A darkness where God's light and love can't reach","A metaphor for the suffering people cause each other on earth"],"w":["Same sun, different material: wax melts and clay hardens.","In this view God made no place for evil; hell is refusal.","The light is still there; it's received as pain.","It's about a person's relation to God."]},
+    {"id":"m9b","q":"For Gregory of Nyssa, where is the image of God in humanity fully found?","a":0,"o":["In the whole community of people across all time","In the saints, the holiest people of every age","In Adam and Eve, as they were before the fall","In each individual soul, considered apart from the body"],"w":["Every person is an irreplaceable part of the image.","Every person, saint or not, is an irreplaceable part of the image.","The first humans are the first part of the image; the full image is everyone together.","Gregory's view includes the body and all of history."]},
+    {"id":"m9c","q":"What does Hart say about Gregory's universalism in this book?","a":0,"o":["He explains it but holds back from arguing for it","He calls it a heresy that Gregory should have dropped","He mentions it in passing and quickly moves on","He argues for it as official Orthodox teaching"],"w":["He says his church's tradition doesn't authorize him to argue for it. He later did, in That All Shall Be Saved (2019).","He treats it sympathetically.","He explains it with care.","It isn't official teaching, which is why he holds back."]}
+  ],
+  m10: [
+    {"id":"m10a","q":"What is Hart's main criticism of the neutral referee who suspects all big stories?","a":0,"o":["Its rule that no story is true for everyone is a story about everyone","It secretly favors religion over science in public debate","It tries too hard to protect the weak from powerful stories","Its rules are too loose, so the loudest story usually ends up winning"],"w":["The referee is wearing a team jersey and imposes that story on everyone.","Hart's worry runs the other way: the referee pushes religion into private life.","Hart calls the goal of protecting the weak a good one.","Hart's complaint is that the referee is a player, not that its rules are loose."]},
+    {"id":"m10b","q":"Who does Hart think benefits most when every big story becomes a private preference?","a":0,"o":["The market, which turns everything into a price","The church, which gets more room to grow in private","Nobody, since every story is treated as equal","Philosophers, who become the judges of every story"],"w":["Everything becomes one choice among many. Desire trained to want nothing in particular keeps shopping.","The church loses its public voice.","Hart thinks someone always fills the space.","They're not the winners in his account."]},
+    {"id":"m10c","q":"What does the Greek word martys mean?","a":1,"o":["Victim","Witness","Hero","Soldier"],"w":["Martyrs often are victims; the word itself means witness.","A martyr testifies by offering.","Close in spirit; the literal meaning is witness.","The opposite of Hart's point."]},
+    {"id":"m10d","q":"Which form of Christian persuasion does Hart accept?","a":0,"o":["Offering the gift freely and letting people refuse it","Winning debates by whatever means work best","Passing laws that favor the faith over other beliefs","Keeping faith private so as not to impose on anyone"],"w":["Witness, the gift of martyrs: offer, accept being refused, never force.","Any means includes force, which Hart forbids.","Hart's whole argument forbids coercion.","He rejects silence too; the gift should be offered."]}
+  ],
+  x: [
+    {"id":"x1","m":1,"q":"How does Hart structure the whole book?","a":0,"o":["Thesis, story, and antithesis, with no synthesis at the end","Three proofs of God, each one building on the one before","A history of the church, in order, from the apostles to today","Thesis, antithesis, and a synthesis that joins the two"],"w":["He leaves two stories facing each other.","He doesn't think proofs settle this.","Part 1 is about philosophy, Part 2 about doctrine.","Hart offers no synthesis; he leaves two stories facing each other."]},
+    {"id":"x2","m":3,"q":"Which thinker traced how power shapes what people accept as knowledge?","a":0,"o":["Michel Foucault","Jacques Derrida","Emmanuel Levinas","Martin Heidegger"],"w":["Hart puts Foucault with Deleuze in the cosmological sublime.","Derrida's theme is meaning that never fully arrives.","Levinas's theme is the face of the other person.","Heidegger's theme is being that shows itself by hiding."]},
+    {"id":"x3","m":10,"q":"Hart's gift of martyrs answers which worry from Module 1?","a":0,"o":["That persuasion is always secretly a power grab","That the Gospels are too old to be trusted as history","That science has made belief in God old-fashioned","That art and music can't tell us anything true"],"w":["Persuasion that refuses force and accepts refusal is Hart's answer.","Module 1's worry is about persuasion and force, not historical records.","The book's worry is persuasion and force, not science.","Music is one of Hart's images of peace, but this isn't the Module 1 worry."]},
+    {"id":"x4","m":1,"q":"Gnosticism treats the material world as...","a":0,"o":["a prison the soul escapes through secret knowledge","God's good gift, to be received with thanks and love","a hymn of praise sung by all of creation","a machine that runs by fixed and necessary laws"],"w":["Hart says beauty guards against this.","That's Hart's view, the opposite.","That's Gregory of Nyssa's image, which Hart uses.","That's the necessity picture Hart sees in Greek and modern thought."]},
+    {"id":"x5","m":6,"q":"Which image best fits Hart's picture of the infinite God?","a":0,"o":["A fountain that is already full and still overflows","A wall guarding the edge of the world against chaos","A storm of forces too vast for any form to hold","A pool, empty and waiting to be filled by our love"],"w":["Full, and giving anyway.","That's the boundary-guarding god of the city.","That's the story of violence and the formless sublime.","Hart's God is already full; nothing adds to him."]},
+    {"id":"x6","m":3,"q":"In Kant's account, where does the experience of the sublime end up?","a":0,"o":["With the mind discovering its own power over nature","With a lasting fear of nature's overwhelming force","With a vision of God's beauty shining through nature","With the mind giving up, defeated by nature's power"],"w":["Hart calls this Kant's rational triumphalism.","For Kant the fear passes.","That's closer to Hart than to Kant.","Kant thought it showed reason's strength."]}
+  ]
+};
 var MOD_KEYS=['m1','m2','m3','m4','m5','m6','m7','m8','m9','m10'];
 
 /* ---------- MCQ ---------- */
+/* Options appear in a shuffled order that stays the same for each question on every visit,
+   so the right answer isn't always in the same place. */
+function seededOrder(arr,seed){
+  var x=0;for(var i=0;i<seed.length;i++)x=(x*31+seed.charCodeAt(i))|0;
+  function rand(){x=(x+0x6D2B79F5)|0;var t=Math.imul(x^(x>>>15),1|x);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;}
+  arr=arr.slice();for(var k=arr.length-1;k>0;k--){var j=Math.floor(rand()*(k+1)),tmp=arr[k];arr[k]=arr[j];arr[j]=tmp;}
+  return arr;
+}
 var ANS=store.get('ans',{});
 function renderMCQ(host,item,opts){
   opts=opts||{};
   var wrap=document.createElement('div');wrap.className='q';
-  var order=item.o.map(function(_,i){return i;});if(opts.shuffle)shuffle(order);
+  var order=item.o.map(function(_,i){return i;});if(opts.shuffle!==false)order=seededOrder(order,item.id);
   var stem=document.createElement('p');stem.className='q-stem';stem.textContent=item.q;wrap.appendChild(stem);
   var box=document.createElement('div');box.className='opts';box.setAttribute('role','group');box.setAttribute('aria-label','Answer choices');wrap.appendChild(box);
   var fb=document.createElement('div');fb.className='fb';fb.hidden=true;fb.setAttribute('aria-live','polite');wrap.appendChild(fb);
@@ -1764,34 +2161,18 @@ $$('[data-predict]').forEach(function(g){
   if(PRED[key])pick(PRED[key],false);
 });
 
-/* ---------- sorting ---------- */
-var SORTS=store.get('sorts',{});
-$$('[data-sort]').forEach(function(list){
-  var key=list.dataset.sort;var bins=list.dataset.bins.split(';').map(function(s){var p=s.split('|');return {k:p[0],label:p[1]};});
-  var score=list.nextElementSibling;var saved=SORTS[key]||{};
-  var items=$$('li',list);
-  items.forEach(function(li,idx){
-    var text=li.innerHTML;li.innerHTML='';
-    var t=document.createElement('span');t.className='s-text';t.innerHTML=text;li.appendChild(t);
-    var row=document.createElement('div');row.className='row';
-    var res=document.createElement('p');res.className='s-res';
-    bins.forEach(function(bn){
-      var b=document.createElement('button');b.type='button';b.className='bin-btn '+bn.k;b.textContent=bn.label;b.setAttribute('aria-pressed','false');
-      b.addEventListener('click',function(){answer(bn.k,true);});row.appendChild(b);
-    });
-    li.appendChild(row);li.appendChild(res);
-    function answer(k,save){
-      var ok=k===li.dataset.k;li.classList.add('answered');li.classList.toggle('ok',ok);li.classList.toggle('no',!ok);
-      $$('button',row).forEach(function(b){b.setAttribute('aria-pressed',b.classList.contains(k)?'true':'false');b.disabled=true;});
-      var right=bins.filter(function(x){return x.k===li.dataset.k;})[0].label;
-      res.innerHTML='';var bb=document.createElement('b');bb.textContent=ok?'Right. ':'It belongs to '+right.toLowerCase()+'. ';res.appendChild(bb);res.appendChild(document.createTextNode(li.dataset.why||''));
-      if(save){saved[idx]=k;SORTS[key]=saved;store.set('sorts',SORTS);}
-      tally();
-    }
-    if(saved[idx])answer(saved[idx],false);
-  });
-  function tally(){var done=items.filter(function(li){return li.classList.contains('answered');});var good=items.filter(function(li){return li.classList.contains('ok');});if(score&&score.classList.contains('score-line'))score.textContent=done.length===items.length?(good.length+' of '+items.length+' right.'):(done.length+' of '+items.length+' sorted');}
-  tally();
+/* ---------- sorting: drag each card into its box (WeblogDnD) ---------- */
+var SORTS=store.get('sorts2',{});
+$$('ul.sort[data-sort]').forEach(function(list){
+  var key=list.dataset.sort;
+  var bins=list.dataset.bins.split(';').map(function(b){var p=b.split('|');return {id:p[0],label:p[1]};});
+  var items=$$('li',list).map(function(li){return {text:li.innerHTML,bin:li.dataset.k,why:li.dataset.why||''};});
+  var host=document.createElement('div');host.className='dnd-host';
+  var score=list.nextElementSibling;if(score&&score.classList.contains('score-line'))score.remove();
+  list.parentNode.replaceChild(host,list);
+  WeblogDnD.sort(host,{bins:bins,items:items,
+    load:function(){return SORTS[key]||{};},
+    save:function(v){SORTS[key]=v;store.set('sorts2',SORTS);}});
 });
 
 /* ---------- matching ---------- */
@@ -1810,22 +2191,12 @@ $$('[data-match]').forEach(function(m){
   });
 });
 
-/* ---------- ordering ---------- */
+/* ---------- ordering: drag the items into order (WeblogDnD) ---------- */
 $$('[data-order-wrap]').forEach(function(w){
-  var ol=$('ol',w),btn=$('[data-check]',w),out=$('.score-line',w);
-  var items=$$('li',ol);var arr=items.slice();
-  do{shuffle(arr);}while(arr.every(function(li,i){return +li.dataset.p===i;}));
-  arr.forEach(function(li){ol.appendChild(li);
-    var txt=document.createElement('span');txt.innerHTML=li.innerHTML;li.innerHTML='';li.appendChild(txt);
-    var mv=document.createElement('span');mv.className='mv';
-    var up=document.createElement('button');up.type='button';up.textContent='↑';up.setAttribute('aria-label','Move up');
-    var dn=document.createElement('button');dn.type='button';dn.textContent='↓';dn.setAttribute('aria-label','Move down');
-    up.addEventListener('click',function(){var p=li.previousElementSibling;if(p){ol.insertBefore(li,p);clear();up.focus();}});
-    dn.addEventListener('click',function(){var n=li.nextElementSibling;if(n){ol.insertBefore(n,li);clear();dn.focus();}});
-    mv.appendChild(up);mv.appendChild(dn);li.appendChild(mv);
-  });
-  function clear(){$$('li',ol).forEach(function(li){li.classList.remove('ok','no');});out.textContent='';}
-  btn.addEventListener('click',function(){var good=0;var cur=$$('li',ol);cur.forEach(function(li,i){var ok=+li.dataset.p===i;if(ok)good++;li.classList.toggle('ok',ok);li.classList.toggle('no',!ok);});out.textContent=good===cur.length?'Correct order. That is Hart\'s whole history in seven steps.':good+' of '+cur.length+' in the right place. Green ones are set; move the red ones.';});
+  var items=$$('li',$('ol',w)).sort(function(a,b){return a.dataset.p-b.dataset.p;}).map(function(li){return li.innerHTML;});
+  var host=document.createElement('div');host.className='dnd-host';
+  w.parentNode.replaceChild(host,w);
+  WeblogDnD.order(host,{items:items,label:'Steps of Hart\'s history'});
 });
 
 /* ---------- flip cards ---------- */
