@@ -77,4 +77,14 @@ const ENTRIES = [
     summary: `A nine-part course on three short pieces by Eliezer Yudkowsky about where consciousness lives. Readers rebuild a question-answering machine from wires, pipes, squirrels or neurons, test his argument against panpsychism on an electron test bench, and weigh the strongest objections, with quizzes and spaced review cards throughout.`,
   },
 
+
+  {
+    slug: "bachs-goldberg-variations",
+    title: "Bach's Goldberg Variations",
+    date: "2026-10-04",
+    time: "13:57",
+    url: "exhibits/bachs-goldberg-variations/",
+    tags: ["music", "johann sebastian bach"],
+    summary: `A nine-part course on Peter Williams's <em>Bach: The Goldberg Variations</em> (2001), covering his Introduction and the chapters on the work's shape and its movements. The page plays the 32-note bass under different surfaces, maps the thirty variations into Bach's groups of three, lets you build a canon at any interval, and sorts performance choices by Williams's two "shapes" of the work. Quizzes and spaced flashcards throughout.`,
+  },
 ];

@@ -1,0 +1,2344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bach&#x27;s Goldberg Variations</title>
+<meta name="description" content="Hear the 32-note bass under every variation, map Bach&#x27;s plan of threes and twos, and build a canon of your own, following Peter Williams&#x27;s handbook.">
+<style>
+/* ===== Noah's Weblog house style (exhibits) v1 =====
+   Matches noahmaier.net: white page, Times for reading, Verdana for
+   controls, blue underlined links, two-tone rules, gray beveled buttons. */
+:root {
+  --page: #ffffff;
+  --ink: #000000;
+  --ink-soft: #2b2b2b;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --active: #ff0000;
+  --lo: #999999;          /* rule, border, axis */
+  --hi: #e2e2e2;          /* rule highlight, gridline */
+  --tint: #f2f2f2;        /* callout and table-header fill */
+  --field: #6e6e6e;       /* input border */
+  --btn: #c0c0c0;         /* button face */
+  --btn-face: #dfdfdf;
+  --btn-lo: #808080;
+  --btn-dark: #0a0a0a;
+  --new: #cc0000;
+  /* data colors, in order: classic HTML named colors */
+  --c1: #000080;  /* navy */
+  --c2: #800000;  /* maroon */
+  --c3: #008080;  /* teal */
+  --c4: #808000;  /* olive (marks only; too light for text) */
+  --c5: #800080;  /* purple */
+  --c6: #008000;  /* green */
+  --serif: "Times New Roman", Times, serif;
+  --sans: Verdana, Geneva, Tahoma, sans-serif;
+  --mono: "Courier New", Courier, monospace;
+}
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body { margin: 0; padding: 10px 16px 32px; background: var(--page); color: var(--ink);
+       font: 18px/1.45 var(--serif); -webkit-text-size-adjust: 100%; }
+.page { max-width: 1020px; }
+main p, .prose { max-width: 38em; }
+a { color: var(--link); } a:visited { color: var(--visited); } a:active { color: var(--active); }
+:focus-visible { outline: 2px dotted var(--ink); outline-offset: 2px; }
+
+h1 { font-size: 2.3em; line-height: 1.1; margin: 0.35em 0 0.15em; }
+h2 { font-size: 1em; font-weight: bold; margin: 1.6em 0 0.7em; padding-bottom: 2px;
+     border-bottom: 1px solid var(--lo); }
+h3 { font-size: 1.15em; line-height: 1.25; margin: 1.2em 0 0.3em; }
+p { margin: 0 0 0.8em; }
+.dek { font-style: italic; margin: 0 0 0.5em; }
+.nav { font: 13px/1.6 var(--sans); margin: 0; }
+hr { border: 0; border-top: 1px solid var(--lo); border-bottom: 1px solid var(--hi);
+     height: 0; margin: 10px 0 14px; }
+code, pre, kbd { font-family: var(--mono); font-size: 0.9em; }
+
+/* controls and small text use Verdana */
+label, legend, button, input, select, textarea, table, figcaption, output, .ui, .meta {
+  font-family: var(--sans); }
+.ui, .meta, figcaption { font-size: 13px; line-height: 1.5; }
+.meta { color: var(--ink-soft); }
+p.meta { margin: 6px 0 12px; }
+
+fieldset { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi);
+           margin: 0 0 16px; padding: 8px 12px 12px; min-width: 0; }
+legend { font-size: 13px; font-weight: bold; padding: 0 4px; }
+label { font-size: 13px; }
+.choices { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.choices label { display: inline-flex; align-items: center; gap: 5px; }
+input[type=radio], input[type=checkbox], input[type=range] { accent-color: var(--c1); }
+
+button {
+  font-size: 13px; line-height: 1.2; color: #000; background: var(--btn);
+  border: 0; border-radius: 0; padding: 6px 12px; cursor: pointer;
+  box-shadow: inset -1px -1px var(--btn-dark), inset 1px 1px #fff,
+              inset -2px -2px var(--btn-lo), inset 2px 2px var(--btn-face);
+}
+button:active, button[aria-pressed="true"] {
+  box-shadow: inset 1px 1px var(--btn-dark), inset -1px -1px #fff,
+              inset 2px 2px var(--btn-lo), inset -2px -2px var(--btn-face);
+  padding: 7px 11px 5px 13px;
+}
+button:disabled { color: var(--btn-lo); text-shadow: 1px 1px #fff; cursor: default; }
+button.primary { font-weight: bold; }
+
+input[type=text], input[type=number], input[type=search], input[type=email],
+select, textarea {
+  font-size: 14px; color: var(--ink); background: #fff; border: 1px solid var(--field);
+  border-radius: 0; box-shadow: inset 1px 1px 0 #b4b4b4; padding: 4px 6px;
+}
+
+table { border-collapse: collapse; font-size: 13px; line-height: 1.4; }
+th, td { border: 1px solid var(--lo); padding: 4px 8px; text-align: left; vertical-align: top; }
+th { background: var(--tint); }
+
+.box { background: var(--tint); box-shadow: inset 1px 1px var(--lo), inset -1px -1px var(--hi);
+       padding: 8px 10px; margin: 0 0 1em; font: 13px/1.5 var(--sans); }
+.result { font-size: 1.15em; }
+.result strong { font-variant-numeric: tabular-nums; }
+
+.meter { height: 16px; background: #fff; border: 1px solid var(--field);
+         box-shadow: inset 1px 1px 0 #b4b4b4; }
+.meter > div { height: 100%; width: 0; background: var(--c1); }
+
+footer address { font-style: normal; font-size: 0.85em; }
+
+@media (max-width: 780px) { body { font-size: 17px; padding: 8px 16px 28px; } h1 { font-size: 1.8em; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media print { .nav { display: none; } }
+/* ===== Noah's Weblog teaching components v1 =====
+   Goes directly after house-style.css. Uses only its variables. */
+
+/* anything hidden by the engine stays hidden, even inside flex rows */
+[hidden] { display: none !important; }
+
+/* course layout: the lesson on the left, contents on the right (like the log) */
+.course { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 32px; align-items: start; }
+.course > .lesson { min-width: 0; }
+.course-nav { position: sticky; top: 12px; padding-left: 20px; border-left: 1px solid var(--lo);
+              box-shadow: inset 1px 0 0 var(--hi); font: 13px/1.5 var(--sans); }
+.course-nav summary { font-weight: bold; cursor: pointer; margin-bottom: 6px; }
+.course-nav ol { margin: 0; padding-left: 0; list-style: none; }
+.course-nav li { margin: 0.3em 0; }
+.course-nav a[aria-current="true"] { color: var(--ink); font-weight: bold; text-decoration: none; }
+.course-nav .check { color: var(--c6); }
+.progress { margin: 0 0 10px; }
+.progress .meter { margin-top: 4px; }
+@media (max-width: 780px) {
+  .course { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .course-nav { position: static; order: -1; padding: 0 0 10px; border-left: 0; box-shadow: none;
+                border-bottom: 1px solid var(--lo); margin-bottom: 14px; }
+}
+
+/* one part at a time */
+.view[hidden] { display: none; }
+.view > h2:first-child { margin-top: 0.3em; }
+.view > h2:focus { outline: none; }
+.objective { font: 13px/1.5 var(--sans); color: var(--ink-soft); margin: -0.2em 0 1.1em; }
+.pager { max-width: none; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+         margin: 2em 0 0; padding-top: 10px; border-top: 1px solid var(--hi); font: 13px/1.5 var(--sans); }
+.pager .next { margin-left: auto; }
+
+/* source references like (p. 4) */
+.src { font: 12px/1 var(--sans); color: var(--ink-soft); white-space: nowrap; }
+
+/* glossary terms in running text link to the glossary */
+a.term { text-decoration-style: dotted; text-underline-offset: 2px; }
+.glossary dt { font-weight: bold; margin: 0.9em 0 0.15em; }
+.glossary dd { margin: 0; max-width: 38em; }
+
+/* quotes and figures */
+blockquote { margin: 1em 0; padding-left: 14px; border-left: 3px solid var(--lo); font-style: italic; max-width: 36em; }
+figure { margin: 1.3em 0; }
+figure svg, figure img { display: block; max-width: 100%; height: auto; }
+figure svg:not([width]) { width: 100%; max-width: 38em; }  /* give every svg width and height attributes */
+figcaption { margin-top: 6px; color: var(--ink-soft); max-width: 38em; }
+svg text { font-family: var(--sans); }
+
+/* reveal: model answers, hints, "why?" prompts */
+details.reveal { margin: 0 0 1em; max-width: 38em; }
+details.reveal > summary { font: 13px/1.6 var(--sans); color: var(--link); text-decoration: underline; cursor: pointer; }
+details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px solid var(--hi); }
+
+/* "A common mix-up" refutation box and "Try it" prompts */
+.box strong.label { display: block; margin-bottom: 2px; }
+
+/* quizzes */
+.quiz { margin: 1.3em 0; max-width: 40em; }
+.quiz fieldset.q legend { font: bold 1em/1.35 var(--serif); padding: 0 4px; }
+.q .options { display: grid; gap: 7px; margin: 6px 0 10px; }
+.q .options label { display: flex; gap: 8px; align-items: flex-start; font: 0.95em/1.4 var(--serif); }
+.q .options input { margin-top: 0.3em; flex: none; }
+.q .options .mark { font: bold 12px/1.6 var(--sans); white-space: nowrap; }
+.q .options .mark.right { color: var(--c6); }
+.q .options .mark.wrong { color: var(--c2); }
+.q .feedback { font: 13px/1.5 var(--sans); margin: 8px 0 0; }
+.q .feedback:empty { display: none; }
+.q .verdict { font-weight: bold; }
+.q .verdict.right { color: var(--c6); }
+.q .verdict.wrong { color: var(--c2); }
+.q textarea { width: 100%; min-height: 4.5em; font: 15px/1.4 var(--serif); margin: 6px 0 8px; }
+.q .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.quiz-summary:empty { display: none; }
+
+/* flashcards */
+.deck { max-width: 38em; }
+.card { background: #fff; border: 1px solid var(--field); box-shadow: inset 1px 1px 0 #b4b4b4;
+        padding: 16px 18px; min-height: 9em; margin: 8px 0 10px; }
+.card .front { font-size: 1.2em; }
+.card .back { border-top: 1px dashed var(--lo); margin-top: 12px; padding-top: 10px; }
+.card .back[hidden] { display: none; }
+.deck .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* printing shows every part */
+@media print {
+  .view[hidden] { display: block !important; }
+  .course { display: block; }
+  .course-nav, .pager, .q .actions, .deck .actions { display: none; }
+}
+/* ===== page-specific rules (use the variables above, no new colors) ===== */
+/* bars of the fundamental bass (part 2) */
+.bass-grid { display: grid; gap: 5px; margin: 10px 0 6px; max-width: 42em; }
+.bass-row { display: grid; grid-template-columns: 8.5em repeat(8, minmax(0, 1fr)); gap: 3px; align-items: stretch; }
+.bass-row .rl { font: 12px/1.3 var(--sans); color: var(--ink-soft); align-self: center; padding-right: 6px; }
+.bar { border: 1px solid var(--lo); background: var(--page); text-align: center; padding: 2px 0 3px;
+       font: 10px/1.2 var(--sans); color: var(--ink-soft); }
+.bar b { display: block; font: bold 17px/1.25 var(--serif); color: var(--c1); }
+.bar i { display: block; font: 10px/1.1 var(--sans); font-style: normal; color: var(--ink-soft); min-height: 1.1em; }
+.bar.cad { border-bottom: 3px solid var(--c3); }
+.bar.now { background: var(--tint); outline: 2px solid var(--c2); outline-offset: -2px; }
+@media (max-width: 780px) {
+  .bass-row { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .bass-row .rl { grid-column: 1 / -1; padding: 4px 0 0; }
+  .bar b { font-size: 15px; }
+}
+
+/* shared bits for interactives */
+.try { max-width: 44em; }
+.try .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+.try .row select { min-width: 9em; }
+.result.small { font-size: 1em; }
+.try .row + .result { margin-top: 10px; }
+.k1 { color: var(--c1); } .k2 { color: var(--c2); } .k3 { color: var(--c3); }
+.k5 { color: var(--c5); } .k6 { color: var(--c6); }
+.note-sound { font: 12px/1.5 var(--sans); color: var(--ink-soft); }
+
+/* svg drawing classes (colors from the stylesheet) */
+svg .axis { stroke: var(--lo); stroke-width: 1; fill: none; }
+svg .faint { stroke: var(--hi); stroke-width: 1; fill: none; }
+svg .dash { stroke: var(--lo); stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+svg .lbl { fill: var(--ink-soft); font-size: 13px; }
+svg .lbl-b { fill: var(--ink); font-size: 14px; font-weight: bold; }
+svg .lbl-f { fill: var(--c2); font-size: 14px; font-weight: bold; }
+svg .bassline { stroke: var(--c1); stroke-width: 2; fill: none; }
+svg .bassdot { fill: var(--c1); }
+svg .offdot { fill: var(--hi); stroke: var(--lo); stroke-width: 1; }
+svg .cadmark { fill: var(--c3); }
+svg .cadtxt { fill: var(--c3); font-size: 13px; font-weight: bold; }
+svg .lead { fill: var(--c1); }
+svg .fol { fill: var(--c2); }
+svg .now { fill: var(--c2); }
+svg .tl-dot { fill: var(--lo); }
+svg .tl-cur { fill: var(--c2); }
+svg .grp-a { fill: var(--tint); stroke: var(--lo); stroke-width: 1; }
+svg .grp-b { fill: var(--page); stroke: var(--lo); stroke-width: 1; }
+svg .brace { stroke: var(--c1); stroke-width: 2; fill: none; }
+svg .wkey { fill: var(--page); stroke: var(--ink); stroke-width: 1; }
+svg .bkey { fill: var(--ink); stroke: var(--ink); stroke-width: 1; }
+svg .key-on { fill: var(--c1); stroke: var(--ink); stroke-width: 1; }
+svg .key-on-m { fill: var(--c5); stroke: var(--ink); stroke-width: 1; }
+svg .keynum { fill: var(--page); font-size: 14px; font-weight: bold; }
+svg .keyname { fill: var(--ink-soft); font-size: 12px; }
+
+/* plan explorer (part 4) */
+.plan { display: grid; grid-template-columns: 5.2em repeat(3, minmax(0, 1fr)); gap: 4px; max-width: 42em; margin: 8px 0; }
+.plan .hd { font: bold 12px/1.3 var(--sans); align-self: end; padding-bottom: 2px; }
+.plan .gl { font: 12px/1.3 var(--sans); color: var(--ink-soft); align-self: center; }
+.plan button { width: 100%; text-align: left; white-space: normal; padding: 5px 6px; font-size: 12px; min-height: 3.4em; }
+.plan button:active, .plan button[aria-pressed="true"] { padding: 6px 5px 4px 7px; }
+.plan .aria-cell { grid-column: 2 / -1; }
+.plan .aria-cell button { min-height: 0; }
+.plan .mks { display: block; font-size: 17px; line-height: 1; letter-spacing: 2px; min-height: 1em; margin-top: 2px; }
+.legend-row { font: 12px/1.6 var(--sans); }
+@media (max-width: 780px) {
+  .plan { grid-template-columns: 3.6em repeat(3, minmax(0, 1fr)); gap: 3px; }
+  .plan button { font-size: 11px; padding: 4px; }
+}
+
+/* sorting activities (parts 7 and 9) */
+table.sorter { width: 100%; max-width: 42em; margin: 6px 0 10px; }
+table.sorter td { vertical-align: middle; }
+table.sorter td.opt { white-space: nowrap; text-align: center; width: 7.5em; }
+table.sorter td.fb { font-size: 12px; }
+table.sorter td.fb .right { color: var(--c6); font-weight: bold; }
+table.sorter td.fb .wrong { color: var(--c2); font-weight: bold; }
+@media (max-width: 780px) {
+  table.sorter, table.sorter tbody, table.sorter tr, table.sorter td { display: block; width: auto; }
+  table.sorter thead { display: none; }
+  table.sorter tr { border: 1px solid var(--lo); margin-bottom: 6px; }
+  table.sorter td { border: 0; }
+  table.sorter td.opt { display: inline-block; text-align: left; width: auto; padding-right: 14px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>Bach's Goldberg Variations</h1>
+    <p class="dek">Hear the 32-note bass under every variation, map Bach's plan of threes and twos, and build a canon of your own, following Peter Williams's handbook.</p>
+    <p class="nav">[ <a href="../../index.html#bachs-goldberg-variations">&#9668; Noah's Weblog</a> | <a href="../../about.html">About</a> ]</p>
+    <hr>
+  </header>
+
+  <div class="course">
+    <main class="lesson">
+
+      <!-- ============ START HERE ============ -->
+      <section class="view" id="start" data-title="Start here">
+        <h2>Start here</h2>
+        <p class="box">This page teaches <em>Bach: The Goldberg Variations</em> by Peter Williams (2001): its Introduction, Chapter 2 ("Overall shape") and Chapter 3 ("The movements"). It is a study guide written in plain language, not a copy of the original. <a href="#source">About the source</a>.</p>
+        <p>Bach's Goldberg Variations is a set of thirty keyboard pieces, framed by a slow Aria at the start and the end. Williams notes one plain way to state its size: the largest single keyboard work published anywhere in the 1700s <span class="src">(p. 1)</span>. All of it grows from one short line of 32 bass notes.</p>
+        <p>This page shows how that works. You'll hear the bass under different surfaces, see the plan Bach built on paper, and build a canon yourself. You'll also see where the plan bends, and why Williams wonders whether it was meant to.</p>
+        <p class="note-sound">Some parts play sound. Nothing plays until you press a Play button.</p>
+        <h3>By the end you'll be able to</h3>
+        <ul class="prose">
+          <li>Explain what the Goldberg Variations actually vary, and what they leave behind.</li>
+          <li>Describe Bach's plan of ten groups of three, and point to where he breaks it.</li>
+          <li>Build a canon at a chosen interval and predict what changes as the interval grows.</li>
+          <li>Compare the shape a listener hears with the shape on paper, and sort a performer's choices by which shape they serve.</li>
+          <li>Judge the evidence behind the famous story of the sleepless Count.</li>
+        </ul>
+        <h3>Guess first</h3>
+        <p>Answer these before you start. Guessing wrong is fine; trying first makes the answers stick.</p>
+        <div class="quiz" data-quiz="pre"></div>
+      </section>
+
+      <!-- ============ PART 1 ============ -->
+      <section class="view module" id="m1" data-title="1. The sleepless Count">
+        <h2>1. The sleepless Count</h2>
+        <p class="objective">In this part: weigh the famous story behind the name "Goldberg" against the dates.</p>
+
+        <h3>Words to know</h3>
+        <p>A <a class="term" href="#g-harpsichord">harpsichord</a> is a keyboard instrument whose strings are plucked. A <a class="term" href="#g-manual">manual</a> is one of its keyboards; the Goldberg asks for an instrument with two. <a class="term" href="#g-clavier-bung">Clavierübung</a> means "Keyboard Practice," the title Bach gave his published keyboard books.</p>
+
+        <h3>What the title page says</h3>
+        <p>Bach's printed title page never mentions anyone named Goldberg. In German it reads, roughly, "Keyboard Practice, consisting of an Aria with diverse variations for the harpsichord with 2 manuals" <span class="src">(p. 3)</span>. It adds that the music was prepared "for the soul's delight of music-lovers."</p>
+        <p>Williams says that phrase carried more weight for a Lutheran believer than it does for us. Refreshing the spirit was a way to prepare for further work, done for the sake of one's neighbor. The volume was offered as a pious gift, not a show-off's product <span class="src">(pp. 3–4)</span>.</p>
+
+        <h3>The story</h3>
+        <p>The nickname comes from J. N. Forkel, who wrote the first major book about Bach in 1802 <span class="src">(p. 4)</span>. Forkel says Count Keyserlingk of Dresden was often ill and couldn't sleep. A young musician in his household, Johann Gottlieb Goldberg, spent those nights in the next room, playing for him.</p>
+        <p>The Count asked Bach for keyboard pieces "so gentle and somewhat merry" that they might cheer his sleepless nights. Bach chose to write variations, though he had thought them a thankless task "because of the basic harmony always being the same" <span class="src">(pp. 4–5)</span>.</p>
+
+        <h3>Why Williams doubts it</h3>
+        <p>No dedication to the Count appears on the title page or on any known copy. Williams admits that alone doesn't settle it <span class="src">(p. 5)</span>.</p>
+        <p>The dates are harder to explain. Bach probably wrote the set around 1739–40, and Goldberg was born in 1727 <span class="src">(p. 5)</span>. That makes the player in the story about twelve years old, young for music this demanding.</p>
+        <p>Williams's likeliest explanation is simpler. In November 1741 Bach stayed with the Count in Dresden <span class="src">(p. 4)</span>. He probably brought a signed copy of the newly printed set and gave it to him. The tale may have reached Forkel through Bach's son Wilhelm Friedemann, and grown along the way <span class="src">(p. 5)</span>.</p>
+        <p>Two more details bother Williams. "Gentle and somewhat merry" hardly describes the whole work. And Bach had already mastered variations on a repeating harmony: the Chaconne in D minor for violin and the Passacaglia in C minor for organ. Calling that kind of writing "thankless" doesn't fit <span class="src">(p. 6)</span>.</p>
+
+        <p class="box"><strong class="label">An analogy</strong>Think of a family story about how a grandparent once met someone famous. Each retelling can be sincere and still add details. Where the analogy breaks down: Williams isn't accusing anyone of lying. He is checking a story against dates and documents.</p>
+
+        <h3>Try it: step through the dates</h3>
+        <p>Press Next to walk the timeline. Watch how old Goldberg is, and how late the story arrives.</p>
+        <div class="try">
+          <figure>
+            <svg id="tl-svg" width="600" height="110" viewBox="0 0 600 110" role="img" aria-label="Timeline from 1727 to 1975. The current event is marked in red."></svg>
+            <figcaption>Dates from Williams's Introduction (pp. 1–8). The spacing is to scale.</figcaption>
+          </figure>
+          <fieldset>
+            <legend>Timeline</legend>
+            <p class="result" id="tl-text" aria-live="polite"></p>
+            <p class="ui" id="tl-age"></p>
+            <div class="row">
+              <button type="button" id="tl-back">&#9668; Back</button>
+              <button type="button" class="primary" id="tl-next">Next &#9658;</button>
+            </div>
+          </fieldset>
+        </div>
+
+        <details class="reveal">
+          <summary>Why? Why does the date of composition matter so much to the story?</summary>
+          <div><p>The story says the Count asked first and Bach wrote second. If the music already existed by 1739–40, the request may have come after it, not before, and the player in the story was a child. Williams notes that only Forkel's last clause implies the set was written for the Count. The rest could mean Bach already had the variations and found them suitable <span class="src">(p. 5)</span>.</p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"The Goldberg Variations were written for Goldberg." The name comes from a story printed in 1802, sixty-one years after the set was printed. The title page names no count and no player <span class="src">(pp. 3–5)</span>.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m1"></div>
+      </section>
+
+      <!-- ============ PART 2 ============ -->
+      <section class="view module" id="m2" data-title="2. Variations on a bass, not a tune">
+        <h2>2. Variations on a bass, not a tune</h2>
+        <p class="objective">In this part: find out what actually stays the same from one variation to the next.</p>
+
+        <h3>Words to know</h3>
+        <p>A <a class="term" href="#g-variation">variation</a> is a new version of a piece of music that keeps some things and changes others. The <a class="term" href="#g-bass-line">bass line</a> is the lowest part. A <a class="term" href="#g-chord">chord</a> is several notes sounded together; a series of chords is the music's harmony.</p>
+
+        <h3>The puzzle in the title</h3>
+        <p>The title promises "an Aria with diverse variations." Yet the Aria's tune never comes back, not even in disguise, until the whole Aria returns unchanged at the very end <span class="src">(p. 35)</span>. Bach doesn't even write it out again. The score just says <em>Aria da capo è fine</em>: play the Aria from the beginning, and stop <span class="src">(p. 35)</span>.</p>
+        <p>Williams's answer is that the variations are built on the Aria's harmonies, a series of chords, and not on its melody <span class="src">(p. 35)</span>. He says he never hears the Aria's tune in them, and assumes you aren't meant to.</p>
+
+        <h3>The real theme</h3>
+        <p>What carries over is the bass: 32 notes, one per bar. Williams prints a reduced version and calls it the <a class="term" href="#g-fundamental-bass">fundamental bass</a> <span class="src">(p. 36)</span>. Bach never sets it out this plainly. In each movement it is "coloured": decorated, moved, or replaced by another note of the same chord <span class="src">(p. 36)</span>.</p>
+        <p>Even the Aria is one of these treatments. Williams calls it a melodious setting of the harmonies over a model bass, more a variation than a theme <span class="src">(pp. 35, 54)</span>. It is written in the style of a slow, tender <a class="term" href="#g-sarabande">sarabande</a> <span class="src">(p. 54)</span>.</p>
+        <p>This was a real choice. The usual variations of the time decorated a tune and its simple chords with stock patterns. Williams agrees that writing those would have been a "thankless task," and says none of Bach's mature variation sets is of that kind <span class="src">(p. 6)</span>.</p>
+        <p>The bass is also unusually singable. It falls step by step, then climbs to a <a class="term" href="#g-cadence">cadence</a>, a phrase ending that sounds like arriving <span class="src">(pp. 36–37)</span>. Williams calls it "curiously melodious," no mere stock bass.</p>
+
+        <p class="box"><strong class="label">An analogy</strong>A jazz band can read one chord chart and play a dozen different tunes over it, and the song is still recognizably the same song. Where it breaks down: jazz players improvise, while Bach wrote every note. He also bends the bass itself, moving it, inverting its chords and, in places, making it chromatic.</p>
+
+        <h3>Try it: one bass, many surfaces</h3>
+        <p>Pick a surface, press Play, and follow the highlighted bar. Then switch surfaces and listen for what stays put.</p>
+        <div class="try" id="surf">
+          <fieldset>
+            <legend>Surface above the bass</legend>
+            <div class="choices" id="surf-choices">
+              <label><input type="radio" name="surf" value="alone" checked> Bass alone</label>
+              <label><input type="radio" name="surf" value="sarabande"> Slow chords, like a sarabande</label>
+              <label><input type="radio" name="surf" value="running"> Running notes</label>
+              <label><input type="radio" name="surf" value="gigue"> Skipping rhythm, like a gigue</label>
+              <label><input type="radio" name="surf" value="quick"> Quick, one bass note per short bar</label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>How much</legend>
+            <div class="choices">
+              <label><input type="radio" name="surf-len" value="8" checked> First phrase (bars 1–8)</label>
+              <label><input type="radio" name="surf-len" value="32"> All 32 bars</label>
+            </div>
+            <div class="row">
+              <button type="button" class="primary" id="surf-play">&#9658; Play</button>
+              <button type="button" id="surf-stop">Stop</button>
+            </div>
+          </fieldset>
+          <figure>
+            <div class="bass-grid" id="bass-grid" role="img" aria-label="The 32 bass notes in four rows of eight bars. Each row ends at a cadence: G, D, E minor, G."></div>
+            <figcaption>The fundamental bass, redrawn from Williams's Example 2 <span class="src">(p. 36)</span>. Thick bottom edges mark the four cadences. Where Williams gives two choices (bars 21–23), the second is shown in small type. The surfaces are simple patterns made by this page, not Bach's notes; the chords follow the figures in Williams's example.</figcaption>
+          </figure>
+          <p class="result" id="surf-result" aria-live="polite">Press Play to hear the bass.</p>
+        </div>
+
+        <details class="reveal">
+          <summary>Why? Why would a bass make a better theme than a tune for thirty movements?</summary>
+          <div><p>A tune fixes the top line and its rhythm, so every variation sounds like a decorated copy of the same song. A bass and its chords fix only the path of the harmony. Above that path Bach is free to write a canon, a fugue, a dance or a keyboard showpiece. Williams calls the thirty movements "distinct essays" in different kinds of music, all over one series of chords <span class="src">(p. 35)</span>.</p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"Each variation decorates the Aria's melody." That is how many variation sets of the time worked, including Bach's own early ones, where the point was to keep catching glimpses of the tune <span class="src">(p. 35)</span>. In the Goldberg the melody vanishes after the first movement. What returns thirty times is the bass and its chords.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m2"></div>
+      </section>
+
+      <!-- ============ PART 3 ============ -->
+      <section class="view module" id="m3" data-title="3. Four notes become thirty-two">
+        <h2>3. Four notes become thirty-two</h2>
+        <p class="objective">In this part: trace how an old four-note pattern grew into the 32-bar bass, and map where each phrase lands.</p>
+
+        <h3>Words to know</h3>
+        <p>A <a class="term" href="#g-ground-bass">ground bass</a> is a short bass line repeated over and over while the parts above it change. A <a class="term" href="#g-chaconne">chaconne</a> is a piece built that way. The <a class="term" href="#g-tonic">tonic</a> is a key's home note (G, in G major); the <a class="term" href="#g-dominant">dominant</a> is its fifth note (D); the <a class="term" href="#g-relative-minor">relative minor</a> of G major is E minor.</p>
+
+        <h3>An old opening</h3>
+        <p>The Goldberg bass opens with four falling notes: G, F&#9839;, E, D. In the 1600s those four notes were a standard repeating bass <span class="src">(p. 38)</span>. Corelli used them in G major, Biber in the minor, and Italian guitarists and French harpsichordists built long pieces on them <span class="src">(pp. 38–39)</span>.</p>
+        <p>Composers then stretched the pattern to eight notes. Williams shows eight-bar versions by Handel, Muffat and Purcell <span class="src">(pp. 37–38)</span>. Handel's two chaconnes in G use the same first eight bass notes as the Goldberg, in the same key <span class="src">(p. 43)</span>. Williams thinks it out of the question that Bach knew nothing of these traditions <span class="src">(p. 38)</span>.</p>
+
+        <h3>Doubling, then doubling again</h3>
+        <p>Bach went further. Sixteen notes take the bass to its halfway point on D. A matching sixteen bring it home to G. Williams puts it this way: it is as if the theme began as four notes, then became eight, then sixteen, then thirty-two <span class="src">(p. 37)</span>. The powers of two that run through the work start here.</p>
+        <p>The four eight-bar phrases end with cadences in G, D, E minor and G. The first lands in G, the tonic. The second lands in D, the dominant. The third lands in E minor, the relative minor. The last returns to G <span class="src">(p. 38)</span>. Williams calls the plan as simple as can be, and strong enough to survive the three variations in the minor.</p>
+
+        <h3>Why length matters</h3>
+        <p>A four- or eight-bar bass comes round again and again, like a loop. That is what makes a chaconne. A bass four times longer can't work as a short loop: each pass becomes a full, separate movement <span class="src">(p. 38)</span>. Bach also drops the chaconne's dance style; none of the variations sounds like the chaconnes of Purcell or Muffat <span class="src">(p. 39)</span>.</p>
+        <p>One more subtlety. Played alone, the bass sounds to most listeners as if it starts on an <a class="term" href="#g-upbeat">upbeat</a>, but every movement treats it as starting on the <a class="term" href="#g-downbeat">downbeat</a>. Williams suggests this sets up a kind of "metrical tension" in the whole work <span class="src">(pp. 36–37)</span>.</p>
+
+        <h3>Try it: grow the theme</h3>
+        <p>Step from four notes to thirty-two. Press Play at each stage to hear it.</p>
+        <div class="try">
+          <figure>
+            <svg id="grow-svg" width="600" height="236" viewBox="0 0 600 236" role="img" aria-label="The 32 bass notes drawn as a line of dots by pitch. The notes in the current stage are dark blue; the rest are gray."></svg>
+            <figcaption>Each dot is one bar of the fundamental bass, placed by pitch (higher is higher). Redrawn and simplified from Williams's Example 2 <span class="src">(p. 36)</span>.</figcaption>
+          </figure>
+          <fieldset>
+            <legend>Stage</legend>
+            <p class="result" id="grow-text" aria-live="polite"></p>
+            <div class="row">
+              <button type="button" id="grow-back">&#9668; Back</button>
+              <button type="button" class="primary" id="grow-next">Next &#9658;</button>
+              <button type="button" id="grow-play">&#9658; Play this stage</button>
+              <button type="button" id="grow-stop">Stop</button>
+            </div>
+          </fieldset>
+        </div>
+
+        <details class="reveal">
+          <summary>Why? Why would stretching the bass to 32 bars stop the variations sounding like a chaconne?</summary>
+          <div><p>A chaconne's effect comes from a short loop heard many times in a row, so the ear tracks the loop. At 32 bars, one pass is a whole movement with its own two halves and four cadences. You hear a new piece each time instead of the next lap of a loop <span class="src">(p. 38)</span>.</p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"Bach invented the bass." Its opening was common property, used by Corelli, Biber, Purcell, Handel and others <span class="src">(pp. 37–39)</span>. Williams thinks such a shared bass pushed Bach to make an original gesture with it <span class="src">(p. 39)</span>. The originality lies in the doubling, the cadence plan and what he built on top.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m3"></div>
+      </section>
+
+      <!-- ============ PART 4 ============ -->
+      <section class="view module" id="m4" data-title="4. The plan in threes">
+        <h2>4. The plan in threes</h2>
+        <p class="objective">In this part: map the thirty variations into ten groups of three, and find where the pattern breaks.</p>
+
+        <h3>Words to know</h3>
+        <p>A <a class="term" href="#g-canon">canon</a> is a piece in which one voice copies another, note for note, after a delay. A <a class="term" href="#g-genre">genre</a> is a recognizable kind of piece, such as a dance or a fugue. <a class="term" href="#g-hand-crossing">Hand-crossing</a> means one hand reaching over the other on the keyboard. Williams calls the bright hand-crossing variations <a class="term" href="#g-arabesque">arabesques</a>.</p>
+
+        <h3>Ten groups of three</h3>
+        <p>Williams says the work has two shapes: one you hear, and one laid out on paper <span class="src">(p. 40)</span>. Part 9 covers the first. This part covers the second.</p>
+        <p>On paper, the thirty variations fall into ten groups of three. A dance or other genre piece comes first. A bright arabesque comes second, usually with crossed hands on two manuals. A canon comes third <span class="src">(p. 40)</span>. The canons rise by one step each time, from the unison in No. 3 to the ninth in No. 27 <span class="src">(pp. 41–42, 46)</span>.</p>
+        <p>The groups aren't marked in the score <span class="src">(p. 42)</span>, and they're often hard to hear. Some canons don't sound like canons (No. 3), while some pieces that aren't canons do (No. 2) <span class="src">(p. 40)</span>. In most canons a free bass part runs underneath, partly covering the copying <span class="src">(pp. 40–41)</span>.</p>
+
+        <h3>Where the pattern breaks</h3>
+        <p>The first group reverses the order: the hand-crossing piece comes before the genre piece. The last group is irregular too <span class="src">(p. 42)</span>. Williams calls the result "symmetrically irregular." He offers two readings. The reversal might mean the plan only took its final form gradually. Or perhaps Bach broke the pattern on purpose, to avoid a scheme that looked too calculated, or to make the work begin and end with energy <span class="src">(p. 42)</span>.</p>
+        <p>Inside each group, Williams says, the hardest task for the composer comes third and the hardest to play comes second <span class="src">(p. 47)</span>. But the groups take very different shapes, as if they were meant to stay in the mind rather than the ear. And one of the hardest variations to play well is the very first <span class="src">(p. 47)</span>.</p>
+        <p>Other regularities sit on top. Strict fugal pieces appear at Nos. 10, 16 and 22 <span class="src">(p. 46)</span>. Thirty is 3 &#215; 3 &#215; 3 + 3, and Bach's previous keyboard book had 27 pieces. Williams warns that this need not mean a deliberate link <span class="src">(p. 43)</span>.</p>
+
+        <h3>Try it: explore the plan</h3>
+        <p>Turn on a highlight, then click any variation to read Williams's notes on it.</p>
+        <p class="box"><strong class="label">Try this</strong>Turn on "Canons." Which group has none? Then turn on "Hand-crossing." Which group starts with one?</p>
+        <div class="try">
+          <fieldset>
+            <legend>Highlight</legend>
+            <div class="choices" id="plan-toggles">
+              <label><input type="checkbox" value="canon"> <span class="k2">&#9632;</span> Canons</label>
+              <label><input type="checkbox" value="hand"> <span class="k1">&#9632;</span> Hand-crossing</label>
+              <label><input type="checkbox" value="two"> <span class="k3">&#9632;</span> Two manuals required</label>
+              <label><input type="checkbox" value="minor"> <span class="k5">&#9632;</span> Minor key</label>
+              <label><input type="checkbox" value="fugal"> <span class="k6">&#9632;</span> Fugal</label>
+            </div>
+          </fieldset>
+          <div class="plan" id="plan-grid" role="group" aria-label="The thirty variations in ten groups of three"></div>
+          <p class="result small" id="plan-count" aria-live="polite">No highlight on.</p>
+          <div class="box" id="plan-detail" aria-live="polite">Click a variation to see its details.</div>
+          <p class="meta">Time signatures, manuals, voices and labels from Williams's table <span class="src">(pp. 41–42)</span>; "C" is common time and "&#162;" is <a class="term" href="#g-alla-breve">alla breve</a>.</p>
+        </div>
+
+        <details class="reveal">
+          <summary>Why? Why might Bach have made the groups so hard to hear?</summary>
+          <div><p>Williams suggests the groups were meant to stay a plan in the mind, not a pattern for the ear <span class="src">(p. 47)</span>. The big differences in genre from piece to piece keep the work from feeling like a diagram <span class="src">(pp. 45–46)</span>. And the shared bass makes you hear each piece as a variation first, whatever its slot <span class="src">(p. 47)</span>.</p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"The variations get steadily harder and more exciting." That was common in the simpler variation sets of the day. The later hand-crossing pieces do have more voices than the earlier ones <span class="src">(p. 47)</span>. But Williams says the Goldberg's overall shape contradicts anything so straightforward <span class="src">(p. 47)</span>.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m4"></div>
+      </section>
+
+      <!-- ============ PART 5 ============ -->
+      <section class="view module" id="m5" data-title="5. The canon ladder">
+        <h2>5. The canon ladder</h2>
+        <p class="objective">In this part: build a canon yourself, then see how Bach's nine canons differ.</p>
+
+        <h3>Words to know</h3>
+        <p>An <a class="term" href="#g-interval">interval</a> is the distance in pitch between two notes. <a class="term" href="#g-unison">Unison</a> means the same note; a second is one step apart; a third, two steps; and so on up to the octave and the ninth. <a class="term" href="#g-inversus">Inversus</a> is Latin for "inverted": the follower plays the leader's line upside down. A <a class="term" href="#g-suspension">suspension</a> is a note held over into the next chord, where it clashes and then steps down to settle.</p>
+
+        <h3>Two settings make a canon</h3>
+        <p>In a canon one voice, the leader, is copied by another, the follower. A round like "Row, Row, Row Your Boat" is the simplest kind (that example is ours, not Williams's). Every canon has two settings. The interval says how far above or below the follower plays. The delay says how long it waits.</p>
+        <p>Bach varies both. He also varies which voice goes first, and in some canons the roles swap partway through. The delay ranges from half a bar to two bars <span class="src">(p. 48)</span>. The nine canons use eight different time signatures <span class="src">(p. 42)</span>. Williams reads all this variety as a deliberate survey of what canon can do <span class="src">(p. 48)</span>.</p>
+
+        <h3>Climbing the ladder</h3>
+        <p>The interval rises one step per canon: unison in No. 3, second in No. 6, third in No. 9, and so on to the ninth in No. 27 <span class="src">(pp. 41–42)</span>. Two canons answer inversus: the fourth (No. 12) and the fifth (No. 15) <span class="src">(p. 41)</span>. Williams points out a symmetry. Unison, second, third and an inverted fourth are followed by an inverted fifth, sixth, seventh and octave <span class="src">(p. 48)</span>.</p>
+        <p>Each interval brings its own problems. At the unison the two voices keep crossing <span class="src">(p. 58)</span>. In the canon at the second, almost every main beat is a suspension <span class="src">(p. 61)</span>. In No. 24 the follower answers an octave below, then later an octave above <span class="src">(p. 80)</span>.</p>
+        <p>The canons also have to fit the 32-bar harmonies. Williams treats canon as the hardest composing task in each group <span class="src">(p. 47)</span>. In most of them a third, free voice adds a bass, as in a <a class="term" href="#g-trio-sonata">trio sonata</a>. Only No. 27, at the ninth, is a pure two-voice round with no bass <span class="src">(pp. 40–41, 85)</span>.</p>
+        <p>The ninth is an oddity. It has no bass. A ninth is a second plus an octave, so it repeats the interval of No. 6. And no canon at the tenth follows <span class="src">(p. 48)</span>. The scholar Werner Breig suggested the work was first planned with only 24 variations. Williams mentions the idea, but notes it leaves you guessing which were added, and why <span class="src">(p. 48)</span>.</p>
+
+        <h3>Try it: build a canon</h3>
+        <p>The leader below was written to work as a round at the unison or octave. Press Play, then try a second, a third or a seventh and watch the clash counter.</p>
+        <div class="try" id="canon">
+          <fieldset>
+            <legend>Follower</legend>
+            <div class="row">
+              <label for="cn-int">Interval</label>
+              <select id="cn-int">
+                <option value="0">unison</option>
+                <option value="1">second</option>
+                <option value="2">third</option>
+                <option value="3">fourth</option>
+                <option value="4">fifth</option>
+                <option value="5">sixth</option>
+                <option value="6">seventh</option>
+                <option value="7" selected>octave</option>
+                <option value="8">ninth</option>
+              </select>
+            </div>
+            <div class="choices" style="margin-top:8px">
+              <label><input type="radio" name="cn-dir" value="-1" checked> below the leader</label>
+              <label><input type="radio" name="cn-dir" value="1"> above the leader</label>
+            </div>
+            <div class="choices" style="margin-top:8px">
+              <label><input type="radio" name="cn-del" value="2"> half a bar later</label>
+              <label><input type="radio" name="cn-del" value="4" checked> one bar later</label>
+              <label><input type="radio" name="cn-del" value="8"> two bars later</label>
+            </div>
+            <div class="choices" style="margin-top:8px">
+              <label><input type="checkbox" id="cn-inv"> upside down (inversus)</label>
+            </div>
+            <div class="row">
+              <button type="button" class="primary" id="cn-play">&#9658; Play the canon</button>
+              <button type="button" id="cn-lead">Play the leader alone</button>
+              <button type="button" id="cn-stop">Stop</button>
+            </div>
+          </fieldset>
+          <figure>
+            <svg id="cn-svg" width="530" height="260" viewBox="0 0 530 260" role="img" aria-label="Piano roll of the canon. Leader notes in navy, follower notes in maroon."></svg>
+            <figcaption>A piano roll: time runs left to right, pitch goes up. The four-bar leader is made up for this page. Every note on a beat belongs to the G major chord, which is why it works at the unison and octave. Bach's leaders had to fit the changing chords of the 32-bar bass, a much harder job. The follower moves by steps of the G major scale.</figcaption>
+          </figure>
+          <p class="result" id="cn-result" aria-live="polite"></p>
+        </div>
+
+        <details class="reveal">
+          <summary>Why? Why does a canon at the unison make the voices cross so often?</summary>
+          <div><p>At the unison both voices sing the same tune in the same range, just at different moments. Whichever voice is on the higher stretch of the tune is on top, so the two keep trading places. Williams notes the closely crossing parts of No. 3 for this reason <span class="src">(p. 58)</span>. Try it above: set "unison" and look at the roll.</p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"A canon at the fifth means the follower comes in five beats later." The interval is a distance in pitch. The delay is a separate setting; in the Goldberg it ranges from half a bar to two bars <span class="src">(p. 48)</span>.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m5"></div>
+      </section>
+
+      <!-- ============ PART 6 ============ -->
+      <section class="view module" id="m6" data-title="6. The plan in twos">
+        <h2>6. The plan in twos</h2>
+        <p class="objective">In this part: count the twos, fours, eights, sixteens and thirty-twos that run through the work.</p>
+
+        <h3>Words to know</h3>
+        <p>A movement in <a class="term" href="#g-binary-form">binary form</a> has two halves, each usually played twice. A phrase is a musical sentence; it ends at a <a class="term" href="#g-cadence">cadence</a>.</p>
+
+        <h3>A catalogue of binaries</h3>
+        <p>Alongside the threes, Williams finds "a whole catalogue of binaries" <span class="src">(pp. 43–44)</span>. The work has two halves, one beginning and one ending with the Aria. Every movement has two exact halves, each played twice. There are two modes (major and minor) and two manuals <span class="src">(p. 44)</span>.</p>
+        <p>The numbers keep doubling. Melody and harmony move in two-bar units, four-bar sub-phrases and eight-bar phrases. Each half of the theme has 16 bars, and each half of the work has 16 movements. There are 32 pieces on 32 pages, over a bass of 32 bars <span class="src">(p. 44)</span>.</p>
+
+        <h3>Hidden, not shouted</h3>
+        <p>No. 16, the <a class="term" href="#g-french-overture">Ouverture</a>, begins the second half. In the original engraving its first bar alone is indented after the title, a discreet hint <span class="src">(p. 44)</span>. Musically the hint is loud: after the fade-away ending of No. 15, No. 16 bursts in <span class="src">(p. 44)</span>.</p>
+        <p>Equal halves were unusual. In most binary movements of the time the second half was longer, a habit that later grew into sonata form <span class="src">(pp. 44–45)</span>. Equal halves are unlikely to happen by chance <span class="src">(p. 44)</span>.</p>
+        <p>The two-, four- and eight-bar phrases are strikingly clear, yet the music never stops flowing <span class="src">(p. 45)</span>. The canons often overlap their phrase endings, which blurs the four-square pattern <span class="src">(p. 45)</span>. The music scholar Donald Tovey called the four-bar phrases "quatrains" <span class="src">(p. 44)</span>.</p>
+        <p>Bach doesn't make any of this obvious. Only 31 of the 32 movements are written out: the closing Aria is just an instruction <span class="src">(p. 44)</span>. Williams suggests the composer may simply not have cared to spell the symmetries out <span class="src">(p. 44)</span>.</p>
+
+        <h3>Try it: powers of two</h3>
+        <p>Choose a size to group the 32 bars of the theme, then read what else in the work comes in that number.</p>
+        <div class="try">
+          <fieldset>
+            <legend>Group the bars in</legend>
+            <div class="row" id="two-buttons">
+              <button type="button" data-n="2">2s</button>
+              <button type="button" data-n="4">4s</button>
+              <button type="button" data-n="8" aria-pressed="true">8s</button>
+              <button type="button" data-n="16">16s</button>
+              <button type="button" data-n="32">32</button>
+            </div>
+          </fieldset>
+          <figure>
+            <svg id="two-svg" width="600" height="120" viewBox="0 0 600 120" role="img" aria-label="32 bars grouped by the chosen size, with teal triangles at the four cadences."></svg>
+            <figcaption>The 32 bars of the theme. Teal triangles mark the cadences at bars 8, 16, 24 and 32 <span class="src">(p. 38)</span>.</figcaption>
+          </figure>
+          <p class="result" id="two-text" aria-live="polite"></p>
+        </div>
+
+        <details class="reveal">
+          <summary>Why? Why would equal halves have stood out in 1740?</summary>
+          <div><p>Because the normal habit ran the other way: binary movements of the time almost always had a longer second half <span class="src">(pp. 44–45)</span>. Williams says exact halves were not at all common and unlikely to arise by chance <span class="src">(p. 44)</span>. So when every movement has them, that points to a plan. Why was the second half usually longer? Our own guess, not Williams's: it had more ground to cover, travelling away from the home key and back.</p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"The numbers are a secret code." Williams is wary of intricate symbolic schemes built around the work <span class="src">(p. 2)</span> and of fanciful number-counting <span class="src">(p. 8)</span>. He notes that Bach hid his symmetries instead of displaying them <span class="src">(pp. 44, 92)</span>. The twos are structural. They grow out of the bass and its phrases.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m6"></div>
+      </section>
+
+      <!-- ============ PART 7 ============ -->
+      <section class="view module" id="m7" data-title="7. Thirty kinds of piece, one upbeat">
+        <h2>7. Thirty kinds of piece, one upbeat</h2>
+        <p class="objective">In this part: see how Bach made each variation a different kind of piece, and the rule that limited his choices.</p>
+
+        <h3>Words to know</h3>
+        <p>The <a class="term" href="#g-downbeat">downbeat</a> is the first, strongest beat of a bar. An <a class="term" href="#g-upbeat">upbeat</a> is one or more notes that come before it, like the "Hap-" in "Happy birthday." A <a class="term" href="#g-quodlibet">quodlibet</a> (Latin, "what you please") is a medley that weaves popular tunes together.</p>
+
+        <h3>A mix with no precedent</h3>
+        <p>Bach had already tried giving variations different characters in his early Aria variata, though its tempo differences were slight <span class="src">(p. 39)</span>. The Goldberg goes much further. Each variation is a strongly characterized, independent kind of piece. Williams says there was really no precedent for this "genre-mix" <span class="src">(p. 39)</span>.</p>
+        <p>The list includes a sarabande-like Aria, a gigue, perhaps a polonaise and a minuet, a little fugue, a <a class="term" href="#g-french-overture">French overture</a>, nine canons, virtuoso duets, a slow arioso and a quodlibet <span class="src">(pp. 41–42)</span>.</p>
+
+        <h3>The no-upbeat rule</h3>
+        <p>Every movement treats the bass as starting on a downbeat <span class="src">(p. 36)</span>. So Bach needed 31 kinds of piece that could start with no upbeat, and he kept to this strictly <span class="src">(p. 46)</span>. That ruled out the allemande and courante, and the usual passepied, bourrée and gigue, all of which normally begin with an upbeat <span class="src">(p. 46)</span>.</p>
+        <p>Sarabandes, minuets, polonaises and marches were possible. So were gavotte-like or gigue-like pieces, as long as the written upbeat was dropped <span class="src">(p. 46)</span>.</p>
+        <p>You can see the rule at work. No. 4 has the cross-rhythms of a passepied but isn't a true one, since a passepied should start with an upbeat <span class="src">(p. 59)</span>. Bach's own copy marks No. 7 <em>al tempo di giga</em>, "in the time of a gigue," which surprised players who had heard it as a gentle siciliano <span class="src">(p. 62)</span>.</p>
+
+        <h3>Fugue and overture</h3>
+        <p>No. 10 is a small four-voice <a class="term" href="#g-fughetta">fughetta</a>. Its subject paraphrases the opening of the bass, with entries every four bars <span class="src">(pp. 64–65)</span>. In 1777 Bach's former pupil Kirnberger singled it out as "even a regular four-part fugue" <span class="src">(p. 64)</span>.</p>
+        <p>No. 16 is a French overture: a grand opening in jerky dotted rhythms, then a short, dashing fugue <span class="src">(pp. 70–72)</span>. It starts with the biggest chord yet, as different from No. 15 as possible <span class="src">(pp. 70–71)</span>.</p>
+
+        <h3>The one exception</h3>
+        <p>No. 30 is the only movement with an upbeat <span class="src">(pp. 47, 88)</span>. It is a quodlibet, and the tunes at the start of each half aren't Bach's, so they keep their own upbeats <span class="src">(p. 47)</span>.</p>
+        <p>More generally, Williams isn't sure the dance-like variations are immediately recognizable as dances. The bass makes you hear them as variations <span class="src">(p. 47)</span>.</p>
+
+        <h3>Try it: hear an upbeat</h3>
+        <p>Play both versions. The low click marks each downbeat. Listen for where the tune begins against it.</p>
+        <div class="try">
+          <fieldset>
+            <legend>Two openings</legend>
+            <div class="row">
+              <button type="button" id="ub-down">&#9658; Starts on the downbeat</button>
+              <button type="button" id="ub-up">&#9658; Starts with an upbeat</button>
+            </div>
+            <p class="result small" id="ub-text" aria-live="polite">Both tunes were made up for this page.</p>
+          </fieldset>
+        </div>
+
+        <h3>Try it: which dances fit the rule?</h3>
+        <p>For each dance, decide whether it fits a scheme with no upbeats. Then press Check.</p>
+        <div class="try" id="dance-sort"></div>
+
+        <details class="reveal">
+          <summary>Why? Why does a bass that starts on the downbeat rule out upbeat dances?</summary>
+          <div><p>The first note of the bass belongs on the first downbeat of every movement <span class="src">(p. 36)</span>. A dance that opens with an upbeat puts notes before that beat, and its character depends on that lead-in. Bach chose kinds of piece that needed no lead-in, or dropped the lead-in from those that usually have one <span class="src">(p. 46)</span>.</p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"A variation with a dance label is that dance." Several are only like the dance. No. 4 lacks a passepied's upbeat <span class="src">(p. 59)</span>. No. 7 is "in the time of" a gigue <span class="src">(p. 62)</span>. Williams calls the polonaise label for No. 1 a guess <span class="src">(p. 56)</span>.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m7"></div>
+      </section>
+
+      <!-- ============ PART 8 ============ -->
+      <section class="view module" id="m8" data-title="8. Major, minor, chromatic">
+        <h2>8. Major, minor, chromatic</h2>
+        <p class="objective">In this part: hear how Bach darkens the bass in the three minor variations.</p>
+
+        <h3>Words to know</h3>
+        <p><a class="term" href="#g-chromatic">Chromatic</a> notes are the half steps that fall outside a key's scale. The <a class="term" href="#g-chromatic-fourth">Chromatic Fourth</a> is a bass that falls (or rises) four notes' distance by half steps. <a class="term" href="#g-affekt">Affekt</a> was the term of Bach's time for the mood a piece expresses.</p>
+
+        <h3>Three in the minor</h3>
+        <p>Three variations move from G major to G minor: Nos. 15, 21 and 25 <span class="src">(pp. 41–42)</span>. The bass plan survives the change easily <span class="src">(p. 38)</span>. Where the theme cadenced in E minor, No. 15's second half moves to E&#9837; major, whose beauty Williams says "cannot be missed" <span class="src">(p. 69)</span>.</p>
+        <p>Williams ties this to an old tradition. Louis Couperin's Passacaille in G minor moves into G major and later makes its bass chromatic <span class="src">(p. 49)</span>. Bach uses all three kinds of bass: major, minor and chromatic <span class="src">(pp. 49–50)</span>.</p>
+
+        <h3>The Chromatic Fourth</h3>
+        <p>The chromatic version fills the bass's opening fall, G down to D, with every half step: G, F&#9839;, F, E, E&#9837;, D <span class="src">(p. 83)</span>. This "Chromatic Fourth" was a familiar figure in the music of the time <span class="src">(pp. 43, 50, 77)</span>. It is clearest at the start of No. 21 <span class="src">(p. 50)</span>.</p>
+        <p>No. 25 is built on one Chromatic Fourth after another, falling and rising, in the bass and the tenor <span class="src">(pp. 50, 83)</span>. Bach marked it "adagio" in his own copy <span class="src">(p. 81)</span>. Williams calls it "unquestionably the emotional high point of the work" <span class="src">(p. 82)</span>. Its third phrase now cadences in E&#9837; minor, which he calls "a spectacular transformation" <span class="src">(p. 82)</span>.</p>
+        <p>No. 15, the first minor variation, is full of slurred pairs of falling notes, a "dragging motif" familiar from older organ chorales and meant to evoke a sad Affekt <span class="src">(pp. 51, 69)</span>. It ends on a bare open fifth, "left floating like the last voice in a children's round" <span class="src">(p. 70)</span>.</p>
+
+        <h3>Sad, or just shaped?</h3>
+        <p>Williams then asks a hard question. Does No. 25 express sadness, or is it doing something more purely musical: showing one more shape the same harmonic frame can take <span class="src">(pp. 83–84)</span>? No. 25 can be called "sad" and No. 26 "happy," he says, but neither label is required <span class="src">(p. 84)</span>.</p>
+
+        <h3>Try it: three ways down from G to D</h3>
+        <p>Pick a bass, press Play, and count the steps on the keyboard.</p>
+        <div class="try">
+          <fieldset>
+            <legend>Bass</legend>
+            <div class="choices" id="tet-choices">
+              <label><input type="radio" name="tet" value="major" checked> Major: G F&#9839; E D</label>
+              <label><input type="radio" name="tet" value="minor"> Minor: G F&#9839; E&#9837; D</label>
+              <label><input type="radio" name="tet" value="chrom"> Chromatic: G F&#9839; F E E&#9837; D</label>
+            </div>
+            <div class="choices" style="margin-top:8px">
+              <label><input type="checkbox" id="tet-chords" checked> add simple chords</label>
+            </div>
+            <div class="row">
+              <button type="button" class="primary" id="tet-play">&#9658; Play</button>
+              <button type="button" id="tet-stop">Stop</button>
+            </div>
+          </fieldset>
+          <figure>
+            <svg id="tet-svg" width="420" height="200" viewBox="0 0 420 200" role="img" aria-label="Keyboard from C to A with the bass notes numbered in the order they are played."></svg>
+            <figcaption>The numbers show the order of the bass notes. The chromatic line follows the pitch order of No. 25's bass in bars 1–4, where Bach decorates it further <span class="src">(p. 83)</span>. The chords are a plain harmonization made for this page, not Bach's.</figcaption>
+          </figure>
+          <p class="result" id="tet-result" aria-live="polite"></p>
+        </div>
+
+        <details class="reveal">
+          <summary>Why? Does the chromatic line sound sad because it is sad?</summary>
+          <div><p>Williams leaves this open. Perhaps music like No. 25 really expresses and arouses emotion. Or perhaps it is plaintive only by association, while doing something purely musical: showing one more shape the harmonic frame can take <span class="src">(pp. 83–84)</span>. One association, as our own note rather than Williams's: falling chromatic basses had a long history in laments before Bach.</p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"The minor variations use a different theme." The bass plan survives the move to the minor <span class="src">(p. 38)</span>. Even in No. 25 the chromatic bass stays within the rule of one chord or note per bar <span class="src">(p. 82)</span>. Bach flattens some notes or fills the gaps with half steps.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m8"></div>
+      </section>
+
+      <!-- ============ PART 9 ============ -->
+      <section class="view module" id="m9" data-title="9. Two shapes, and the last return">
+        <h2>9. Two shapes, and the last return</h2>
+        <p class="objective">In this part: compare the shape a listener hears with the shape on paper, and decide how a performer might choose.</p>
+
+        <h3>Words to know</h3>
+        <p>Williams's <a class="term" href="#g-perceptual-shape">perceptual shape</a> is the shape you hear as the music passes. His <a class="term" href="#g-conceptual-shape">conceptual shape</a> is the plan on paper. An <a class="term" href="#g-arch-form">arch form</a> rises to a center and comes back down.</p>
+
+        <h3>The shape you hear</h3>
+        <p>Heard in time, the work moves by sharp contrasts <span class="src">(p. 40)</span>. It reaches a semi-climax at the French overture in the middle. It sinks into the pathos of No. 25. Excitement builds toward the end, with festivity in No. 29 and a full, choral sound in No. 30. Then the Aria returns and dies away <span class="src">(p. 40)</span>. Williams adds that the build-up is certainly there "as usually played."</p>
+
+        <h3>The shape on paper</h3>
+        <p>The conceptual shape is static, always there on the page: ten groups of three that by themselves neither build nor release tension <span class="src">(p. 40)</span>. Its outline approaches an arch: Aria, Overture in the middle, Aria. In that shape there need be no crescendo into the finale <span class="src">(p. 40)</span>.</p>
+        <p>Players, Williams says, can reflect either shape, but hardly both. He suspects the arch is closer to what a composer had in mind before public recitals became normal <span class="src">(p. 40)</span>. Public performance, he adds, must always have favored the climax <span class="src">(p. 88)</span>.</p>
+
+        <h3>The finale</h3>
+        <p>Nos. 28 and 29 pair up as brilliant, climactic pieces, and No. 29 is the only variation that keeps the tempo and mood of the one before it <span class="src">(p. 87)</span>. No. 30, the Quodlibet, works like the chorale at the end of a Leipzig cantata, where everyone joins in, but in higher spirits <span class="src">(p. 89)</span>.</p>
+        <p>The Quodlibet weaves popular songs into the bass's harmonies. Forkel reported that Bach's family met to sing quodlibets and "laugh heartily" <span class="src">(p. 89)</span>. Words written into one copy suggest two of the tunes. In Williams's translation they are "I have been so long away from you" and "Cabbage and beets have driven me away" <span class="src">(p. 90)</span>. Williams cautions that other words may have been meant, especially for the first <span class="src">(p. 89)</span>.</p>
+
+        <h3>The Aria again</h3>
+        <p>Then the Aria returns, note for note <span class="src">(p. 92)</span>. Williams finds it changed all the same: once a greeting, now a farewell <span class="src">(p. 2)</span>. After the last five variations its melody stands out, and it can sound wistful or resigned, "the same notes but now final" <span class="src">(p. 92)</span>. He adds a practical point. A player who skips the repeats in the returning Aria breaks the work's binary pattern <span class="src">(p. 92)</span>.</p>
+
+        <h3>Try it: which shape does this choice serve?</h3>
+        <p>For each performer's choice, decide which of Williams's shapes it serves. Then press Check.</p>
+        <div class="try" id="shape-sort"></div>
+
+        <details class="reveal">
+          <summary>Why? How can the same notes sound different the second time?</summary>
+          <div><p>Williams says no such return can have a neutral Affekt <span class="src">(p. 92)</span>. What you have just heard changes what you hear: the Aria now arrives after thirty movements, and you know it is the end. He admits he isn't sure anyone can fully describe the effect <span class="src">(p. 2)</span>.</p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"The Quodlibet is a joke tacked onto a serious work." Williams reads it as the grand finale to the canons and the closing "chorale" of the cycle, high-spirited but planned <span class="src">(pp. 47, 89)</span>.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m9"></div>
+      </section>
+
+      <!-- ============ REVIEW ============ -->
+      <section class="view" id="review" data-title="Review cards">
+        <h2>Review cards</h2>
+        <p>Cards you get right come back after longer and longer gaps: tomorrow, then in three days, then a week. Cards you miss come back right away. Spacing review out like this beats rereading.</p>
+        <div class="deck" id="deck"></div>
+      </section>
+
+      <!-- ============ FINAL CHECK ============ -->
+      <section class="view" id="final" data-title="Final check">
+        <h2>Final check</h2>
+        <p>These questions mix all the parts together.</p>
+        <div class="quiz" data-quiz="final"></div>
+        <div class="quiz-summary" data-for="final"></div>
+      </section>
+
+      <!-- ============ GLOSSARY ============ -->
+      <section class="view" id="glossary" data-title="Glossary">
+        <h2>Glossary</h2>
+        <p class="meta"><a href="#" onclick="history.back(); return false;">&#9668; Back to where you were</a></p>
+        <dl class="glossary" id="glossary-list"></dl>
+      </section>
+
+      <!-- ============ SOURCE ============ -->
+      <section class="view" id="source" data-title="About the source">
+        <h2>About the source</h2>
+        <p>Peter Williams, <em>Bach: The Goldberg Variations</em>, Cambridge Music Handbooks (Cambridge: Cambridge University Press, 2001). <a href="https://www.cambridge.org/gb/academic/subjects/music/eighteenth-century-music/bach-goldberg-variations">The book at Cambridge University Press</a>.</p>
+        <p>This guide covers the Introduction, Chapter 2 ("Overall shape") and Chapter 3 ("The movements"). It leaves out Chapter 1, on the work's background and Bach's earlier "Keyboard Practice" books, and Chapter 4, on how later musicians received the work.</p>
+        <p>It also simplifies. Williams compares the Goldberg with dozens of other pieces; this guide keeps only a few. It doesn't reproduce his music examples. The bass diagrams redraw his Example 2 with one choice shown where he gives alternatives. The sound in the interactives is made by this page: the surfaces over the bass, the canon tune and the chords in Part 8 are illustrations, not Bach's notes. Williams's discussion of instruments and notation is shortened to a few points.</p>
+        <p>Many of Williams's points are his own readings, and he marks them as guesses ("perhaps," "I imagine"). This guide tries to keep those marks. The book appeared in 2001, and later research may have added to it.</p>
+        <p class="meta">Page numbers in this guide, like <span class="src">(p. 4)</span>, point to the printed page numbers of the original.</p>
+      </section>
+
+    </main>
+
+    <aside class="course-nav" aria-label="Contents">
+      <details open>
+        <summary>Contents</summary>
+        <div class="progress">
+          <span id="progress-text"></span>
+          <div class="meter" id="progress-bar" role="progressbar" aria-label="Parts done" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill"></div></div>
+        </div>
+        <ol id="contents-list"></ol>
+      </details>
+    </aside>
+  </div>
+
+  <footer>
+    <hr>
+    <address>Part of <a href="../../index.html">Noah's Weblog</a>. A study guide to Peter Williams's <em>Bach: The Goldberg Variations</em>.</address>
+  </footer>
+</div>
+
+<script>
+window.COURSE = {
+  slug: "bachs-goldberg-variations",
+  quizzes: {
+    pre: [
+      { q: "From one variation to the next, what stays the same?",
+        options: ["The Aria's melody, decorated in new ways", "The bass line and its chords", "The time signature", "The number of voices"],
+        answer: 1,
+        why: ["That was the usual method of the time, but the Aria's tune never returns until the end.",
+              "Right: the variations are built on the Aria's harmonies over a 32-note bass, not on its tune.",
+              "The time signatures change constantly; the nine canons alone use eight.",
+              "The number of voices ranges from two to four."],
+        src: "p. 35", from: "m2" },
+      { q: "Nos. 3, 6, 9 and so on up to 27 are canons. How do they change through the work?",
+        options: ["They get faster each time", "They switch between major and minor in turn", "The pitch distance between the copying voices grows by one step each time", "Each one adds a voice"],
+        answer: 2,
+        why: ["Tempo varies freely; there is no steady speeding up.",
+              "Only two canons are in the minor (Nos. 15 and 21).",
+              "Right: unison in No. 3, a second in No. 6, a third in No. 9, up to a ninth in No. 27.",
+              "Most have three voices; the last canon has only two."],
+        src: "pp. 41–42", from: "m5" },
+      { q: "A famous story says Bach wrote the set for a sleepless count's young harpsichordist. How does Williams treat it?",
+        options: ["As proven by a dedication on the title page", "As probably embroidered: the dates and the missing dedication don't fit", "As a joke Bach told about his own music", "As confirmed by letters from Goldberg"],
+        answer: 1,
+        why: ["There is no dedication to the Count on the title page or any known copy.",
+              "Right. There's no dedication, and Goldberg would have been about twelve when the music was likely written.",
+              "The story comes from Forkel's 1802 biography, not from Bach.",
+              "Williams cites no letters from Goldberg."],
+        src: "p. 5", from: "m1" },
+      { q: "How many of the 31 written-out movements begin with an upbeat?",
+        options: ["None", "Exactly one", "About half", "All of them"],
+        answer: 1,
+        why: ["Close, but one movement breaks the rule.",
+              "Right: only No. 30, the Quodlibet, whose borrowed tunes bring their own upbeats.",
+              "Bach kept strictly to pieces that start on the downbeat.",
+              "The bass starts on the downbeat, and almost every movement does too."],
+        src: "pp. 46–47", from: "m7" }
+    ],
+
+    m1: [
+      { q: "Which fact does Williams use against the story as Forkel tells it?",
+        options: ["Bach never visited Dresden", "The music was probably written around 1739–40, and Goldberg was born in 1727", "The title page is dedicated to a different count", "Forkel never corresponded with any of Bach's sons"],
+        answer: 1,
+        why: ["Bach did visit: he stayed with Count Keyserlingk in November 1741.",
+              "Right. That makes the player in the story about twelve, young for such demanding music.",
+              "The title page has no dedication at all.",
+              "Williams thinks Forkel probably learned the story from Bach's sons."],
+        src: "pp. 4–5" },
+      { q: "What is Williams's likeliest explanation of how the Count got the variations?",
+        options: ["Bach composed them overnight in Dresden at the Count's request", "Goldberg composed them and Bach signed them", "Bach gave the Count a signed copy of the newly printed set during his 1741 visit", "The Count paid for the engraving in Nuremberg"],
+        answer: 2,
+        why: ["Nothing in the evidence supports a sudden commission on the spot.",
+              "Williams never suggests Goldberg wrote them.",
+              "Right. The story may then have grown in the retelling before it reached Forkel.",
+              "Williams mentions no payment by the Count."],
+        src: "p. 5" },
+      { type: "recall",
+        q: "In your own words: why does Forkel's phrase \"gentle and somewhat merry\" make Williams doubt Forkel's grasp of the music?",
+        answer: "<p>The phrase hardly fits the work as a whole, which is often brilliant and demanding. Williams wonders whether players were meant to pick only some variations, whether Forkel's respect got in the way, or whether modern performances are more brilliant than the music needs.</p>",
+        src: "p. 6" }
+    ],
+
+    m2: [
+      { q: "You listen to Variation 23 and can't find the Aria's tune anywhere. What would Williams say?",
+        options: ["It's hidden in an inner voice and you're meant to find it", "That's expected: the variations work on the Aria's chords and bass, not its tune", "Variation 23 is an exception; most variations quote the tune", "The tune is there, but played backwards"],
+        answer: 1,
+        why: ["Williams says he never hears the tune in the variations and assumes he isn't meant to.",
+              "Right. The tune returns only when the whole Aria comes back at the end.",
+              "No variation quotes the tune; that's the point of the title's puzzle.",
+              "Nothing in the book suggests this."],
+        src: "p. 35" },
+      { q: "What does Williams mean by the \"fundamental bass\"?",
+        options: ["The lowest note on the harpsichord", "The Aria's bass part exactly as Bach wrote it", "A note held through the whole piece", "A reduced, one-note-per-bar version of the bass that every movement shares"],
+        answer: 3,
+        why: ["It's a line of 32 notes, not a single note.",
+              "Bach never writes it this plainly; even in the Aria it is decorated.",
+              "That would be a drone or pedal note, which this isn't.",
+              "Right. Bach colors it in every movement, but its 32 notes and their chords stay underneath."],
+        src: "p. 36" },
+      { q: "Why does Williams treat the Aria as one of the variations instead of as the bare theme?",
+        options: ["It is a melodious setting of the harmonies over the model bass, one treatment among many", "It is in a minor key", "Bach labeled it Variation 0", "It has no bass line"],
+        answer: 0,
+        why: ["Right. The Aria is itself a sarabande-style piece over the same bass.",
+              "The Aria is in G major.",
+              "Bach called it simply \"Aria.\"",
+              "It has a bass line; that bass is the real theme."],
+        src: "pp. 35, 54" }
+    ],
+
+    m3: [
+      { q: "Where does the third eight-bar phrase of the bass cadence?",
+        options: ["G major", "D major", "G minor", "E minor"],
+        answer: 3,
+        why: ["G is where the first and last phrases land.",
+              "D is where the second phrase lands, at the halfway point.",
+              "G minor is the key of three whole variations, not a cadence point of the theme.",
+              "Right: tonic, dominant, relative minor, tonic."],
+        src: "p. 38" },
+      { q: "What does Williams say happens when a simple bass is stretched four times longer?",
+        options: ["It becomes a chaconne with more repeats", "Its repeating, loop-like quality goes away, and each pass becomes a full movement", "It has to change key in every bar", "It can only be used for canons"],
+        answer: 1,
+        why: ["The opposite: the stretching removes the chaconne effect.",
+              "Right. That is why the Goldberg's variations are separate pieces, not a chaconne.",
+              "It changes key with its phrases, not bar by bar.",
+              "Every kind of piece in the set uses the same bass."],
+        src: "p. 38" },
+      { type: "recall",
+        q: "The opening notes G, F♯, E, D were common property. What, then, is original about Bach's theme?",
+        answer: "<p>Not the opening notes but what he did with them: doubling a stock four- or eight-note bass to 32 bars with a clear cadence plan (G, D, E minor, G), dropping the chaconne's dance style, and building thirty different movements on it. Williams imagines Bach felt a shared bass demanded an original gesture.</p>",
+        src: "pp. 37–39" }
+    ],
+
+    m4: [
+      { q: "In a regular group of three, which place does the canon take?",
+        options: ["First", "Second", "Third", "It varies at random"],
+        answer: 2,
+        why: ["First place usually goes to a dance or genre piece.",
+              "Second place usually goes to the hand-crossing arabesque.",
+              "Right: Nos. 3, 6, 9 and so on to 27.",
+              "The canons are placed regularly, every third variation."],
+        src: "p. 40" },
+      { q: "Which group breaks the pattern by having no canon?",
+        options: ["Group 1 (Nos. 1–3)", "Group 5 (Nos. 13–15)", "Group 10 (Nos. 28–30)", "None: every group has a canon"],
+        answer: 2,
+        why: ["Group 1 reverses its first two pieces, but No. 3 is a canon.",
+              "No. 15 is the canon at the fifth.",
+              "Right. It ends with the Quodlibet instead of a canon at the tenth.",
+              "Turn on the Canons highlight above and count."],
+        src: "pp. 41–42, 48" },
+      { q: "A friend says: \"If Bach planned groups of three, he'd have labeled them.\" What does the evidence suggest?",
+        options: ["Bach did label them, in his own copy", "The groups are unmarked, and Williams thinks they were meant to be conceived more than heard", "The groups were invented by the 1853 editors", "The groups only exist in the first half"],
+        answer: 1,
+        why: ["Williams notes the groups are not marked in the score.",
+              "Right. Bach also hid other symmetries, so leaving the groups unmarked fits his habits.",
+              "Williams's table rests on the music itself: genre, manuals and canon intervals.",
+              "The pattern runs through both halves."],
+        src: "pp. 42, 47" }
+    ],
+
+    m5: [
+      { q: "In a canon inversus at the fourth, the follower...",
+        options: ["plays the leader's line backwards", "enters four bars later", "plays the leader's line upside down, a fourth away", "plays four times as fast"],
+        answer: 2,
+        why: ["Backwards is a different trick (a crab canon), not what inversus means.",
+              "The fourth is a distance in pitch, not a delay.",
+              "Right. Where the leader rises, the follower falls by the same number of steps.",
+              "The speed doesn't change."],
+        src: "p. 67" },
+      { q: "Which canon is a pure two-voice round with no bass?",
+        options: ["No. 27, at the ninth", "No. 3, at the unison", "No. 15, at the fifth", "No. 24, at the octave"],
+        answer: 0,
+        why: ["Right. Its two lines are all there is.",
+              "No. 3 has a bass that \"goes on rumbling about,\" in Williams's words.",
+              "No. 15's bass is closely woven into the canon.",
+              "No. 24 has light bass notes under the canon."],
+        src: "p. 85" },
+      { q: "Why is canon the hardest composing task in each group?",
+        options: ["Canons have to be played fastest", "Canons need two harpsichords", "Canons are always in the minor", "The follower must copy the leader exactly, and both must still fit the fixed 32-bar harmony"],
+        answer: 3,
+        why: ["Speed is a player's problem; Williams puts the hardest playing in second place.",
+              "One harpsichord is enough for all of them.",
+              "Only two of the nine are in the minor.",
+              "Right. The copy can't bend to fit the chords, so the leader has to be written to work both ways at once."],
+        src: "pp. 47–48, 85" }
+    ],
+
+    m6: [
+      { q: "What detail in the original print marks No. 16 as the start of the second half?",
+        options: ["It's printed in red", "Its first bar is indented after the title \"Ouverture\"", "Bach wrote \"Part Two\" above it", "It's the only piece in a minor key"],
+        answer: 1,
+        why: ["Nothing in the book suggests colored printing.",
+              "Right: a discreet hint, in Williams's words.",
+              "There is no such heading.",
+              "No. 16 is in G major; the minor pieces are 15, 21 and 25."],
+        src: "p. 44" },
+      { q: "Most binary movements of the time had a longer second half. What does that make the Goldberg's equal halves?",
+        options: ["Typical of the period", "A printing error", "Unlikely to be accidental: a sign of planning", "Proof the music was meant for dancing"],
+        answer: 2,
+        why: ["The opposite: equal halves were not at all common.",
+              "They occur throughout, by design.",
+              "Right. Williams says exact halves were unlikely to arise by chance.",
+              "Williams doesn't connect the halves to dancing."],
+        src: "pp. 44–45" },
+      { q: "Why are there 32 pieces but only 31 written out?",
+        options: ["The returning Aria is not written out; the score just says to play it again", "One variation was lost", "Two variations share a page", "The Aria was printed separately"],
+        answer: 0,
+        why: ["Right: \"Aria da capo è fine.\"",
+              "All thirty variations survive.",
+              "The count is of pieces, not pages.",
+              "The Aria opens the printed volume."],
+        src: "pp. 35, 44" }
+    ],
+
+    m7: [
+      { q: "Why couldn't Bach include an allemande or a courante?",
+        options: ["They are in duple time", "They need two manuals", "They had gone out of fashion", "They normally begin with an upbeat, and every movement here starts on the downbeat"],
+        answer: 3,
+        why: ["The courante is in triple time, and meter wasn't the problem.",
+              "Manuals have nothing to do with it.",
+              "Fashion isn't Williams's reason.",
+              "Right. The bass starts on the downbeat, and Bach kept every piece in step with it."],
+        src: "p. 46" },
+      { q: "Why does No. 30 open with an upbeat when no other movement does?",
+        options: ["The songs it borrows aren't Bach's, and they come with their own upbeats", "Bach forgot the rule at the end", "It's in a minor key", "It's really the Aria's repeat"],
+        answer: 0,
+        why: ["Right. A quodlibet weaves in popular tunes, so it keeps their shape.",
+              "Williams treats the exception as explained, not careless.",
+              "No. 30 is in G major.",
+              "The Aria returns separately, after No. 30."],
+        src: "p. 47" },
+      { q: "What two-part design marks a French overture like No. 16?",
+        options: ["A slow minuet, then a fast gigue", "A canon, then a round", "A grand opening in dotted rhythms, then a quick fugue", "Two halves in different keys"],
+        answer: 2,
+        why: ["Neither dance is part of the overture.",
+              "Neither section is a canon.",
+              "Right. Bach keeps the fugue unusually short.",
+              "All Goldberg movements share the bass's key plan."],
+        src: "pp. 70–72" }
+    ],
+
+    m8: [
+      { q: "Which notes make up the Chromatic Fourth from G down to D?",
+        options: ["G, F♯, E, D", "G, F♯, F, E, E♭, D", "G, F♯, E♭, D", "G, A, B, C, D"],
+        answer: 1,
+        why: ["That's the plain major version, with whole steps.",
+              "Right: every half step between G and D.",
+              "That's the minor version; it still skips F and E.",
+              "That climbs up a fifth instead of falling a fourth."],
+        src: "p. 83" },
+      { q: "Which variation does Williams call the emotional high point of the work?",
+        options: ["No. 15", "No. 21", "No. 30", "No. 25"],
+        answer: 3,
+        why: ["No. 15 is the first minor variation, but not his choice.",
+              "No. 21 opens with a chromatic bass, but not his choice.",
+              "No. 30 is festive, not the emotional peak.",
+              "Right. Bach marked it adagio in his own copy."],
+        src: "p. 82" },
+      { q: "In No. 25, what happens to the theme's cadence in E minor?",
+        options: ["It disappears", "It becomes a cadence in E♭ minor", "It becomes a cadence in E major", "It stays in E minor"],
+        answer: 1,
+        why: ["The cadence point is kept; only its key changes.",
+              "Right: \"a spectacular transformation,\" in Williams's words.",
+              "E major would brighten it; Bach darkens it.",
+              "In the minor, Bach moves it."],
+        src: "p. 82" }
+    ],
+
+    m9: [
+      { q: "Which pair of performer choices fits Williams's conceptual shape?",
+        options: ["Taking an interval after No. 15, then a big crescendo into No. 30", "Skipping the repeats in the returning Aria", "Going straight from No. 15 into No. 16, and playing No. 29 delicately on two manuals", "Treating Nos. 29 and 30 as one loud climax"],
+        answer: 2,
+        why: ["Both suit the climax-building approach; Williams says an interval after No. 15 disguises the conceptual plan.",
+              "That breaks the binary pattern the plan depends on.",
+              "Right. The arch needs no crescendo into the finale.",
+              "That's the climax-building, perceptual approach."],
+        src: "pp. 40, 70, 88" },
+      { q: "What is a quodlibet?",
+        options: ["A slow dance", "A canon with no bass", "A medley that weaves popular tunes together", "A kind of French overture"],
+        answer: 2,
+        why: ["It isn't a dance.",
+              "That describes No. 27.",
+              "Right. The Latin means \"what you please.\"",
+              "That's No. 16."],
+        src: "p. 89" },
+      { type: "recall",
+        q: "Explain how the returning Aria can sound different even though its notes are the same.",
+        answer: "<p>No return can be neutral. After thirty movements, and after the last five in particular, the melody stands out, and you hear it knowing it is the end. Williams says it changes from a greeting to a farewell: the same notes, now final.</p>",
+        src: "pp. 2, 92" }
+    ],
+
+    final: [
+      { q: "A pianist plans to \"bring out the Aria's melody in every variation.\" What problem would Williams point out?",
+        options: ["The melody is too high for the piano", "There is no Aria melody in the variations to bring out; what they share is the bass and its chords", "The melody is only in the canons", "The melody should be played only in the minor variations"],
+        answer: 1,
+        why: ["Range isn't the issue.",
+              "Right. The tune returns only with the Aria at the end.",
+              "The canons don't carry it either.",
+              "No variation carries it."],
+        src: "p. 35", from: "m2" },
+      { q: "What do Handel's two G major chaconnes share with the Goldberg?",
+        options: ["The same first eight bass notes, in the same key", "The same number of variations", "The same nine canons", "The same title"],
+        answer: 0,
+        why: ["Right. Williams uses them to show the bass's family tree.",
+              "Handel's sets have 21 and 62 variations.",
+              "One of them ends with a single simple canon.",
+              "Handel called his \"Chaconne.\""],
+        src: "p. 43", from: "m3" },
+      { q: "No. 17 is a hand-crossing duet. Where does it sit in its group of three?",
+        options: ["First", "Second", "Third", "It isn't in a group"],
+        answer: 1,
+        why: ["First place in that group is No. 16, the Overture.",
+              "Right: group 16–17–18, with the canon at the sixth third.",
+              "Third place is No. 18, the canon at the sixth.",
+              "Every variation belongs to one of the ten groups."],
+        src: "pp. 41–42", from: "m4" },
+      { q: "The canons start at the unison in No. 3 and rise one step every three variations. Which interval is No. 21?",
+        options: ["The sixth", "The fifth", "The octave", "The seventh"],
+        answer: 3,
+        why: ["The sixth is No. 18.",
+              "The fifth is No. 15.",
+              "The octave is No. 24.",
+              "Right: 3 unison, 6 second, 9 third, 12 fourth, 15 fifth, 18 sixth, 21 seventh."],
+        src: "pp. 41–42", from: "m5" },
+      { q: "Which two canons answer upside down (inversus)?",
+        options: ["The unison and the octave", "The fourth and the fifth", "The second and the ninth", "All nine"],
+        answer: 1,
+        why: ["Williams wonders why the octave isn't inverted too.",
+              "Right: Nos. 12 and 15, on either side of the middle of the ladder.",
+              "Neither is inverted.",
+              "Only two are."],
+        src: "pp. 41, 46", from: "m5" },
+      { q: "Which of these is NOT on Williams's list of twos?",
+        options: ["Two halves of the work", "32 pieces on 32 pages", "Three voices in every movement", "16 movements in each half"],
+        answer: 2,
+        why: ["That is on the list.",
+              "That is on the list.",
+              "Right. Voices range from two to four, and three is not a two anyway.",
+              "That is on the list."],
+        src: "p. 44", from: "m6" },
+      { q: "Why is No. 4 \"no true passepied\"?",
+        options: ["It's in a minor key", "It has no bass", "It's a canon", "A passepied should start with an upbeat, and No. 4 can't"],
+        answer: 3,
+        why: ["No. 4 is in G major.",
+              "It has four voices, bass included.",
+              "No. 4 is imitative but not a canon.",
+              "Right. It keeps the passepied's cross-rhythms but obeys the no-upbeat rule."],
+        src: "p. 59", from: "m7" },
+      { q: "Forkel printed the story of the sleepless Count in 1802. Roughly how long after the set was printed?",
+        options: ["About 10 years", "About 25 years", "About 60 years", "About 100 years"],
+        answer: 2,
+        why: ["Too short: the print dates from 1741.",
+              "Still too short.",
+              "Right: 61 years after the 1741 print.",
+              "Too long."],
+        src: "pp. 2, 4", from: "m1" },
+      { q: "No. 25's bass runs G | F♯ F | E E♭ | D over four bars. What has Bach done to the plain G F♯ E D?",
+        options: ["Filled the gaps with half steps", "Turned it upside down", "Moved it to D major", "Shortened it to two bars"],
+        answer: 0,
+        why: ["Right: the Chromatic Fourth, still landing on D in bar 4.",
+              "It still falls from G to D.",
+              "It's in G minor.",
+              "It still takes four bars, one per original note."],
+        src: "p. 83", from: "m8" },
+      { q: "What does Williams say about a performance that reflects both the perceptual and the conceptual shape?",
+        options: ["It's easy and expected", "It's hardly possible; players can reflect one or the other", "The score requires it", "Bach demanded it in his own copy"],
+        answer: 1,
+        why: ["He says the opposite.",
+              "Right. He suspects the arch was closer to the composer's ideal.",
+              "The score marks neither shape.",
+              "Bach's copy has no such instruction."],
+        src: "p. 40", from: "m9" },
+      { q: "Which statement about the groups of three is accurate?",
+        options: ["Bach marked them in the score", "They are unmarked and often hard to hear", "They apply only to the canons", "They were added by the 1853 edition"],
+        answer: 1,
+        why: ["They aren't marked.",
+              "Right. Some canons hardly sound canonic, and some non-canons do.",
+              "Canons fill only one slot; a regular group also has a genre piece and an arabesque.",
+              "They come from the music, not an editor."],
+        src: "pp. 40, 42", from: "m4" },
+      { q: "The Aria is written in the style of which dance?",
+        options: ["A gigue", "An allemande", "A sarabande", "A bourrée"],
+        answer: 2,
+        why: ["A gigue is fast; the Aria is slow.",
+              "An allemande starts with an upbeat, which the rule excludes.",
+              "Right: a slow, tender sarabande.",
+              "A bourrée starts with an upbeat, which the rule excludes."],
+        src: "p. 54", from: "m2" }
+    ]
+  },
+
+  cards: [
+    { front: "What do the Goldberg Variations vary?", back: "The Aria's 32-bar bass line and its chords, not the Aria's melody.", src: "pp. 35–36" },
+    { front: "What are the three kinds of piece in a regular group of three?", back: "A dance or other genre piece, then a hand-crossing \"arabesque,\" then a canon.", src: "p. 40" },
+    { front: "How do the nine canons change through the work?", back: "The interval rises one step each time: unison (No. 3), second (No. 6), third (No. 9), and on to the ninth (No. 27).", src: "pp. 41–42" },
+    { front: "Which canons answer inversus (upside down)?", back: "The canon at the fourth (No. 12) and the canon at the fifth (No. 15).", src: "p. 41" },
+    { front: "Where do the four eight-bar phrases of the bass cadence?", back: "G (tonic), D (dominant), E minor (relative minor), G.", src: "p. 38" },
+    { front: "How did the theme grow, in Williams's picture?", back: "As if from four notes to eight, then sixteen, then thirty-two.", src: "p. 37" },
+    { front: "Which movement has an upbeat, and why?", back: "Only No. 30, the Quodlibet. Its borrowed tunes aren't Bach's, so they keep their upbeats.", src: "pp. 47, 88" },
+    { front: "Which kinds of piece did the no-upbeat rule exclude?", back: "The allemande and courante, and the usual passepied, bourrée and gigue.", src: "p. 46" },
+    { front: "Which variations are in the minor?", back: "Nos. 15, 21 and 25, all in G minor.", src: "pp. 41–42" },
+    { front: "What is the Chromatic Fourth in the Goldberg?", back: "G, F♯, F, E, E♭, D: the bass's falling fourth filled in with half steps. It's clearest at the start of No. 21; No. 25 is built on it.", src: "pp. 50, 83" },
+    { front: "What is the difference between Williams's perceptual and conceptual shapes?", back: "Perceptual: the contrasts and climaxes you hear in time. Conceptual: the static plan on paper, ten groups of three in an arch from Aria to Overture to Aria.", src: "p. 40" },
+    { front: "Why does Williams doubt Forkel's story of the sleepless Count?", back: "No dedication to the Count; the music was likely composed about 1739–40, when Goldberg (born 1727) was about twelve; and details like 'gentle and somewhat merry' and 'thankless task' don't fit the music.", src: "pp. 5–6" },
+    { front: "What marks the start of the second half of the work?", back: "No. 16, the Ouverture. In the print its first bar alone is indented.", src: "p. 44" },
+    { front: "Which canon has no bass at all?", back: "No. 27, the canon at the ninth: a pure two-voice round.", src: "p. 85" },
+    { front: "What does the returning Aria become, in Williams's reading?", back: "The same notes, changed from a greeting to a farewell.", src: "pp. 2, 92" },
+    { front: "Which variation does Williams call the emotional high point?", back: "No. 25, the G minor adagio built on Chromatic Fourths.", src: "p. 82" }
+  ],
+
+  glossary: {
+    "Affekt": "The term of Bach's time for the mood or passion a piece of music expresses.",
+    "alla breve": "A time signature (written &#162;) counted in two broad beats per bar.",
+    "arabesque": "Williams's name for the bright hand-crossing variations that usually come second in each group of three.",
+    "arch form": "A shape that rises to a center and comes back down. Here: Aria, the Overture in the middle, Aria.",
+    "bass line": "The lowest part in a piece of music.",
+    "binary form": "A movement in two halves, each usually played twice.",
+    "cadence": "A phrase ending that sounds like arriving somewhere, like a comma or a period in speech.",
+    "canon": "A piece in which one voice copies another note for note after a delay.",
+    "chaconne": "A piece made of continuous variations over a short, repeating bass or chord pattern.",
+    "chord": "Several notes sounded together. A series of chords is the music's harmony.",
+    "chromatic": "Using the half steps that fall outside a key's normal scale.",
+    "Chromatic Fourth": "A bass that falls (or rises) the distance of a fourth by half steps, such as G, F♯, F, E, E♭, D.",
+    "Clavierübung": "German for \"Keyboard Practice,\" the title Bach gave his published keyboard books. The Goldberg is often called the fourth.",
+    "conceptual shape": "Williams's term for the work's plan on paper: groups of three, the canon ladder, the arch.",
+    "dominant": "The fifth note of a key, and the chord built on it. In G major, D.",
+    "downbeat": "The first and strongest beat of a bar.",
+    "French overture": "A grand opening section in jerky, dotted rhythms followed by a quick fugue. No. 16 is one; Bach spells it \"Ouverture.\"",
+    "fughetta": "A short fugue: a piece in which a brief theme enters in one voice after another.",
+    "fundamental bass": "Williams's reduced version of the bass the Goldberg varies: 32 notes, one per bar.",
+    "genre": "A recognizable kind of piece, such as a dance, a fugue or an overture.",
+    "ground bass": "A short bass line repeated over and over while the parts above it change.",
+    "hand-crossing": "A keyboard technique in which one hand reaches over the other.",
+    "harpsichord": "A keyboard instrument whose strings are plucked. The Goldberg asks for one with two manuals.",
+    "interval": "The distance in pitch between two notes: unison, second, third and so on.",
+    "inversus": "Latin for \"inverted.\" In a canon, the follower plays the leader's line upside down.",
+    "manual": "One keyboard of an instrument. A two-manual harpsichord has two, one above the other.",
+    "perceptual shape": "Williams's term for the shape of the work as you hear it in time: contrasts, climaxes and the final fading.",
+    "quodlibet": "Latin for \"what you please\": a medley that weaves popular tunes together. No. 30 is one.",
+    "relative minor": "The minor key that shares a key signature with a major key. For G major, E minor.",
+    "sarabande": "A slow, stately dance in triple time, often leaning on the second beat.",
+    "suspension": "A note held over into the next chord, where it clashes, then steps down to settle.",
+    "tonic": "The home note and chord of a key. In G major, G.",
+    "trio sonata": "Baroque chamber music for two melody instruments over a bass part.",
+    "unison": "Exactly the same pitch.",
+    "upbeat": "One or more notes that come before the first downbeat of a piece or phrase.",
+    "variation": "A new version of a piece of music that keeps some elements and changes others."
+  },
+  glossaryCards: true
+};
+</script>
+<script>
+/* ===== Noah's Weblog course engine v1 =====
+   Reads window.COURSE and the page's .view sections, then builds the
+   contents list, progress meter, one-part-at-a-time navigation, quizzes,
+   spaced-repetition flashcards, and the glossary. No libraries. */
+(function () {
+  "use strict";
+
+  var C = window.COURSE || {};
+  var SLUG = C.slug || location.pathname.split("/").filter(Boolean).pop() || "exhibit";
+  var KEY = "ll:" + SLUG + ":";           // every exhibit shares one origin, so keys carry the slug
+  var DAY = 86400000;
+  var INTERVALS = [0, 1, 3, 7, 16, 35];   // days until a flashcard comes back, by box
+
+  /* ---------- storage ---------- */
+  var store = {
+    get: function (k, d) {
+      try { var v = localStorage.getItem(KEY + k); return v === null ? d : JSON.parse(v); }
+      catch (e) { return d; }
+    },
+    set: function (k, v) { try { localStorage.setItem(KEY + k, JSON.stringify(v)); } catch (e) {} }
+  };
+  var state = store.get("state", null) || {};
+  state.done = state.done || {};
+  state.answers = state.answers || {};
+  state.cards = state.cards || {};
+  function save() { store.set("state", state); }
+
+  /* ---------- helpers ---------- */
+  function h(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      var v = attrs[k];
+      if (v == null || v === false) return;
+      if (k === "text") n.textContent = v;
+      else if (k === "html") n.innerHTML = v;
+      else if (k === "on") Object.keys(v).forEach(function (ev) { n.addEventListener(ev, v[ev]); });
+      else n.setAttribute(k, v === true ? "" : v);
+    });
+    (kids || []).forEach(function (c) {
+      if (c != null) n.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    });
+    return n;
+  }
+  function slugify(s) {
+    return String(s).toLowerCase().replace(/<[^>]*>/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+  function hash(s) {
+    var x = 0;
+    for (var i = 0; i < s.length; i++) x = (x * 31 + s.charCodeAt(i)) | 0;
+    return (x >>> 0).toString(36);
+  }
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function srcTag(src) { return src ? " <span class=\"src\">(" + src + ")</span>" : ""; }
+
+  /* ---------- views and contents ---------- */
+  var views = [].slice.call(document.querySelectorAll(".view"));
+  var navViews = views.filter(function (v) { return v.getAttribute("data-nav") !== "no"; });
+  var modules = views.filter(function (v) { return v.classList.contains("module"); });
+  function titleOf(v) {
+    var head = v.querySelector("h2");
+    return v.getAttribute("data-title") || (head ? head.textContent : v.id);
+  }
+
+  var contentsList = document.getElementById("contents-list");
+  var progressText = document.getElementById("progress-text");
+  var progressFill = document.getElementById("progress-fill");
+  var progressBar = document.getElementById("progress-bar");
+
+  function buildContents() {
+    if (!contentsList) return;
+    contentsList.textContent = "";
+    navViews.forEach(function (v) {
+      var li = h("li", null, [h("a", { href: "#" + v.id, text: titleOf(v), "data-view": v.id })]);
+      if (state.done[v.id]) li.appendChild(h("span", { class: "check", text: " ✓", "aria-label": "done" }));
+      contentsList.appendChild(li);
+    });
+  }
+  function updateProgress() {
+    if (!modules.length) return;
+    var n = modules.filter(function (m) { return state.done[m.id]; }).length;
+    var pct = Math.round(100 * n / modules.length);
+    if (progressText) progressText.textContent = n + " of " + modules.length + " parts done";
+    if (progressFill) progressFill.style.width = pct + "%";
+    if (progressBar) progressBar.setAttribute("aria-valuenow", pct);
+  }
+  function markDone(id) {
+    if (state.done[id]) return;
+    state.done[id] = true;
+    save(); buildContents(); markCurrent(currentId); updateProgress();
+  }
+
+  /* ---------- one part at a time ---------- */
+  var currentId = null;
+  function hasQuestions(view) {
+    return [].some.call(view.querySelectorAll(".quiz[data-quiz]"), function (q) {
+      return ((C.quizzes || {})[q.getAttribute("data-quiz")] || []).length > 0;
+    });
+  }
+  function markCurrent(id) {
+    if (!contentsList) return;
+    [].forEach.call(contentsList.querySelectorAll("a"), function (a) {
+      if (a.getAttribute("data-view") === id) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+  }
+  function show(id, focus) {
+    var view = document.getElementById(id);
+    if (!view || !view.classList.contains("view")) return;
+    views.forEach(function (v) { v.hidden = v !== view; });
+    currentId = id;
+    markCurrent(id);
+    if (view.getAttribute("data-nav") !== "no") { state.last = id; save(); }
+    // a part with no questions counts as done once it has been opened
+    if (view.classList.contains("module") && !hasQuestions(view)) markDone(id);
+    if (focus) {
+      var course = document.querySelector(".course") || view;
+      if (course.getBoundingClientRect().top < 0) course.scrollIntoView();
+      var head = view.querySelector("h2");
+      if (head) { head.setAttribute("tabindex", "-1"); head.focus({ preventScroll: true }); }
+    }
+  }
+  function route() {
+    var id = "";
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { id = location.hash.slice(1); }
+    var target = id && document.getElementById(id);
+    if (!target) { show(navViews[0] ? navViews[0].id : views[0].id, false); return; }
+    var view = target.classList.contains("view") ? target : target.closest(".view");
+    if (!view) return;                       // an anchor outside the lesson: let the browser handle it
+    show(view.id, true);
+    if (target !== view) target.scrollIntoView();
+  }
+
+  function buildPagers() {
+    navViews.forEach(function (v, i) {
+      var prev = navViews[i - 1], next = navViews[i + 1];
+      if (!prev && !next) return;
+      var p = h("p", { class: "pager" });
+      if (prev) p.appendChild(h("a", { href: "#" + prev.id, text: "◄ " + titleOf(prev) }));
+      if (next) p.appendChild(h("button", {
+        type: "button", class: "primary next", text: "Next: " + titleOf(next) + " ►",
+        on: { click: function () { location.hash = next.id; } }
+      }));
+      v.appendChild(p);
+    });
+  }
+
+  function buildResume() {
+    var first = navViews[0];
+    if (!first || !state.last || state.last === first.id) return;
+    var last = document.getElementById(state.last);
+    if (!last) return;
+    var box = h("p", { class: "box" }, ["Welcome back. ",
+      h("a", { href: "#" + last.id, text: "Pick up where you left off: " + titleOf(last) }), "."]);
+    var head = first.querySelector("h2");
+    if (head && head.nextSibling) first.insertBefore(box, head.nextSibling); else first.appendChild(box);
+  }
+
+  /* ---------- quizzes ---------- */
+  function renderQuiz(box) {
+    var quizId = box.getAttribute("data-quiz");
+    var items = (C.quizzes || {})[quizId] || [];
+    var module = box.closest(".module");
+    box.textContent = "";
+
+    function allAnswered() {
+      return items.every(function (_, i) { return state.answers[quizId + ":" + i]; });
+    }
+    function afterAnswer() {
+      save();
+      if (module && allAnswered()) markDone(module.id);
+      renderSummary(quizId);
+    }
+
+    items.forEach(function (item, i) {
+      var key = quizId + ":" + i;
+      var fs = h("fieldset", { class: "q" });
+      fs.appendChild(h("legend", { html: (items.length > 1 ? (i + 1) + ". " : "") + item.q + srcTag(item.src) }));
+      var feedback = h("p", { class: "feedback", role: "status", "aria-live": "polite" });
+
+      if (item.type === "recall") {
+        var ta = h("textarea", { "aria-label": "Your answer", placeholder: "Write your answer, then compare." });
+        var model = h("div", { class: "box", hidden: true, html: "<strong class=\"label\">A good answer</strong>" + item.answer });
+        var rate = h("div", { class: "actions", hidden: true }, [
+          h("button", { type: "button", text: "I had it", on: { click: function () { state.answers[key] = { right: true, recall: true }; feedback.textContent = "Noted."; afterAnswer(); } } }),
+          h("button", { type: "button", text: "Not yet", on: { click: function () { state.answers[key] = { right: false, recall: true }; feedback.textContent = "Noted. This one comes back in the review."; afterAnswer(); } } })
+        ]);
+        var showBtn = h("button", { type: "button", text: "Show a good answer", on: { click: function () {
+          model.hidden = false; rate.hidden = false; showBtn.hidden = true;
+          if (!state.answers[key]) { state.answers[key] = { right: null, recall: true }; afterAnswer(); }
+        } } });
+        fs.appendChild(ta);
+        fs.appendChild(h("div", { class: "actions" }, [showBtn]));
+        fs.appendChild(model);
+        fs.appendChild(rate);
+        fs.appendChild(feedback);
+        if (state.answers[key]) { model.hidden = false; rate.hidden = false; showBtn.hidden = true; }
+      } else {
+        var name = "q-" + quizId + "-" + i;
+        var opts = h("div", { class: "options" });
+        var inputs = item.options.map(function (text, j) {
+          var input = h("input", { type: "radio", name: name, value: j });
+          opts.appendChild(h("label", null, [input, h("span", { html: text }), h("span", { class: "mark" })]));
+          return input;
+        });
+        var check = h("button", { type: "button", text: "Check answer" });
+        var again = h("button", { type: "button", text: "Try again", hidden: true });
+
+        var paint = function (pick) {
+          var right = pick === item.answer;
+          inputs.forEach(function (inp, j) {
+            inp.disabled = true;
+            inp.checked = j === pick;
+            var mark = inp.parentNode.querySelector(".mark");
+            mark.className = "mark";
+            mark.textContent = "";
+            if (j === item.answer) { mark.className = "mark right"; mark.textContent = j === pick ? "◄ correct" : "◄ the answer"; }
+            else if (j === pick) { mark.className = "mark wrong"; mark.textContent = "◄ your pick"; }
+          });
+          var why = (item.why && item.why[pick]) || item.explain || "";
+          var extra = "";
+          if (quizId === "pre" && item.from) {
+            var fromView = document.getElementById(item.from);
+            extra = " You'll see why in <a href=\"#" + item.from + "\">" + (fromView ? titleOf(fromView) : item.from) + "</a>.";
+          }
+          feedback.innerHTML = "<span class=\"verdict " + (right ? "right" : "wrong") + "\">" +
+            (right ? "Right." : "Not quite.") + "</span> " + why + extra;
+          check.hidden = true; again.hidden = false;
+        };
+        check.addEventListener("click", function () {
+          var pick = -1;
+          inputs.forEach(function (inp, j) { if (inp.checked) pick = j; });
+          if (pick < 0) { feedback.textContent = "Pick an answer first."; return; }
+          state.answers[key] = { pick: pick, right: pick === item.answer };
+          paint(pick);
+          afterAnswer();
+        });
+        again.addEventListener("click", function () {
+          inputs.forEach(function (inp) {
+            inp.disabled = false; inp.checked = false;
+            var mark = inp.parentNode.querySelector(".mark"); mark.className = "mark"; mark.textContent = "";
+          });
+          feedback.textContent = ""; check.hidden = false; again.hidden = true;
+          inputs[0].focus();
+        });
+        fs.appendChild(opts);
+        fs.appendChild(h("div", { class: "actions" }, [check, again]));
+        fs.appendChild(feedback);
+        var saved = state.answers[key];
+        if (saved && typeof saved.pick === "number") paint(saved.pick);
+      }
+      box.appendChild(fs);
+    });
+  }
+
+  function renderSummary(quizId) {
+    var out = document.querySelector('.quiz-summary[data-for="' + quizId + '"]');
+    if (!out) return;
+    var items = (C.quizzes || {})[quizId] || [];
+    var answered = items.filter(function (_, i) { return state.answers[quizId + ":" + i]; });
+    out.textContent = "";
+    if (answered.length < items.length) return;
+    var scored = items.map(function (it, i) { return { it: it, a: state.answers[quizId + ":" + i] }; })
+      .filter(function (x) { return x.a.right !== null; });
+    var right = scored.filter(function (x) { return x.a.right; }).length;
+    var p = h("p", { class: "result" }, ["You got ", h("strong", { text: right + " of " + scored.length }), "."]);
+    out.appendChild(p);
+    var revisit = [];
+    scored.forEach(function (x) { if (!x.a.right && x.it.from && revisit.indexOf(x.it.from) < 0) revisit.push(x.it.from); });
+    if (revisit.length) {
+      var q = h("p", { class: "meta" }, ["Worth another look: "]);
+      revisit.forEach(function (id, i) {
+        var v = document.getElementById(id);
+        if (i) q.appendChild(document.createTextNode(", "));
+        q.appendChild(h("a", { href: "#" + id, text: v ? titleOf(v) : id }));
+      });
+      out.appendChild(q);
+    }
+  }
+
+  /* ---------- flashcards with spaced review ---------- */
+  function buildDeck() {
+    var deckBox = document.getElementById("deck");
+    if (!deckBox) return;
+    var cards = (C.cards || []).map(function (c) { return { front: c.front, back: c.back + srcTag(c.src) }; });
+    if (C.glossaryCards !== false) {
+      Object.keys(C.glossary || {}).forEach(function (term) {
+        cards.push({ front: "What does <em>" + term + "</em> mean?", back: C.glossary[term] });
+      });
+    }
+    cards.forEach(function (c) { c.id = "c" + hash(c.front); });
+    if (!cards.length) { deckBox.appendChild(h("p", { class: "meta", text: "No cards for this page." })); return; }
+
+    var status = h("p", { class: "meta", "aria-live": "polite" });
+    var card = h("div", { class: "card" });
+    var front = h("div", { class: "front" });
+    var back = h("div", { class: "back", hidden: true });
+    card.appendChild(front); card.appendChild(back);
+    var showBtn = h("button", { type: "button", class: "primary", text: "Show answer" });
+    var missBtn = h("button", { type: "button", text: "Not yet", hidden: true });
+    var gotBtn = h("button", { type: "button", text: "Got it", hidden: true });
+    var allBtn = h("button", { type: "button", text: "Practice all cards anyway", hidden: true });
+    deckBox.appendChild(status);
+    deckBox.appendChild(card);
+    deckBox.appendChild(h("div", { class: "actions" }, [showBtn, missBtn, gotBtn, allBtn]));
+
+    var queue = [];
+    function isDue(c) { var r = state.cards[c.id]; return !r || r.due <= Date.now(); }
+    function learned() { return cards.filter(function (c) { var r = state.cards[c.id]; return r && r.box >= 1; }).length; }
+    function next() {
+      back.hidden = true; missBtn.hidden = true; gotBtn.hidden = true;
+      if (!queue.length) {
+        card.hidden = true; showBtn.hidden = true; allBtn.hidden = false;
+        var upcoming = cards.map(function (c) { return state.cards[c.id]; }).filter(Boolean)
+          .map(function (r) { return r.due; }).filter(function (d) { return d > Date.now(); }).sort()[0];
+        status.textContent = "Nothing due right now. " + learned() + " of " + cards.length + " remembered so far." +
+          (upcoming ? " Next review: " + new Date(upcoming).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) + "." : "");
+        return;
+      }
+      card.hidden = false; showBtn.hidden = false; allBtn.hidden = true;
+      front.innerHTML = queue[0].front;
+      back.innerHTML = queue[0].back;
+      status.textContent = queue.length + (queue.length === 1 ? " card" : " cards") + " to go. " +
+        learned() + " of " + cards.length + " remembered so far.";
+    }
+    showBtn.addEventListener("click", function () {
+      back.hidden = false; showBtn.hidden = true; missBtn.hidden = false; gotBtn.hidden = false; gotBtn.focus();
+    });
+    missBtn.addEventListener("click", function () {
+      var c = queue.shift();
+      state.cards[c.id] = { box: 0, due: Date.now() };
+      queue.push(c);                      // comes back later in this session
+      save(); next(); showBtn.focus();
+    });
+    gotBtn.addEventListener("click", function () {
+      var c = queue.shift();
+      var r = state.cards[c.id] || { box: 0 };
+      var box = Math.min((r.box || 0) + 1, INTERVALS.length - 1);
+      state.cards[c.id] = { box: box, due: Date.now() + INTERVALS[box] * DAY };
+      save(); next(); (queue.length ? showBtn : allBtn).focus();
+    });
+    allBtn.addEventListener("click", function () { queue = shuffle(cards); next(); showBtn.focus(); });
+    queue = shuffle(cards.filter(isDue));
+    next();
+  }
+
+  /* ---------- glossary ---------- */
+  function buildGlossary() {
+    var dl = document.getElementById("glossary-list");
+    if (!dl) return;
+    Object.keys(C.glossary || {}).sort(function (a, b) { return a.localeCompare(b); }).forEach(function (term) {
+      dl.appendChild(h("dt", { id: "g-" + slugify(term), html: term }));
+      dl.appendChild(h("dd", { html: C.glossary[term] }));
+    });
+  }
+
+  /* ---------- start ---------- */
+  buildGlossary();
+  [].forEach.call(document.querySelectorAll(".quiz[data-quiz]"), renderQuiz);
+  Object.keys(C.quizzes || {}).forEach(renderSummary);
+  buildDeck();
+  buildPagers();
+  buildContents();
+  updateProgress();
+  buildResume();
+  var nav = document.querySelector(".course-nav details");
+  if (nav && window.matchMedia("(max-width: 780px)").matches) nav.removeAttribute("open");
+  window.addEventListener("hashchange", route);
+  route();
+})();
+</script>
+<!-- page-specific interactive scripts go after the engine -->
+<script>
+(function () {
+  "use strict";
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function $(id) { return document.getElementById(id); }
+  function svg(tag, attrs, parent, text) {
+    var n = document.createElementNS(SVGNS, tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    if (text != null) n.textContent = text;
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
+  function radioValue(name) {
+    var r = document.querySelector('input[name="' + name + '"]:checked');
+    return r ? r.value : null;
+  }
+  var SHARPS = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
+  var FLATS = { 1: "D♭", 3: "E♭", 6: "G♭", 8: "A♭", 10: "B♭" };
+  function noteName(m, flat) {
+    var pc = ((m % 12) + 12) % 12;
+    if (flat && FLATS[pc] && pc !== 6) return FLATS[pc];
+    return SHARPS[pc];
+  }
+  function voiceChord(pcs) {
+    return pcs.map(function (pc) { var m = 60 + pc; if (m < 62) m += 12; return m; })
+      .sort(function (a, b) { return a - b; });
+  }
+
+  /* ---------------- sound: a small plucked-string synth ---------------- */
+  var Sound = (function () {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    var ctx = null, out = null, timers = [], onStop = null;
+    function ready() {
+      if (!AC) return false;
+      try {
+        if (!ctx) ctx = new AC();
+        if (ctx.state === "suspended") ctx.resume();
+        if (!out) { out = ctx.createGain(); out.gain.value = 0.3; out.connect(ctx.destination); }
+        return true;
+      } catch (e) { return false; }
+    }
+    function hz(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+    function pluck(m, t, len, vel) {
+      var f = hz(m), v = vel || 0.5, tail = Math.max(0.25, len);
+      var o1 = ctx.createOscillator(), o2 = ctx.createOscillator();
+      var mix = ctx.createGain(), lp = ctx.createBiquadFilter(), g = ctx.createGain();
+      o1.type = "sawtooth"; o2.type = "square";
+      o1.frequency.value = f; o2.frequency.value = f * 2.003; mix.gain.value = 0.16;
+      lp.type = "lowpass"; lp.Q.value = 0.7;
+      lp.frequency.setValueAtTime(Math.min(8000, f * 10), t);
+      lp.frequency.exponentialRampToValueAtTime(Math.max(380, f * 2.4), t + 0.5);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(v, t + 0.005);
+      g.gain.exponentialRampToValueAtTime(v * 0.3, t + 0.3);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + tail + 0.4);
+      o1.connect(lp); o2.connect(mix); mix.connect(lp); lp.connect(g); g.connect(out);
+      o1.start(t); o2.start(t); o1.stop(t + tail + 0.45); o2.stop(t + tail + 0.45);
+    }
+    function click(t, strong) {
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = "sine"; o.frequency.value = strong ? 110 : 220;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(strong ? 0.6 : 0.2, t + 0.003);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.09);
+      o.connect(g); g.connect(out); o.start(t); o.stop(t + 0.1);
+    }
+    function stop() {
+      timers.forEach(clearTimeout); timers = [];
+      if (out) { try { out.disconnect(); } catch (e) {} out = null; }
+      var f = onStop; onStop = null; if (f) f(false);
+    }
+    // events: {t, m, len, vel} or {t, click: true|false}; cues: {t, fn}
+    function play(events, cues, total, done) {
+      stop();
+      if (!ready()) return false;
+      var t0 = ctx.currentTime + 0.08;
+      events.forEach(function (e) {
+        if (e.click != null) click(t0 + e.t, e.click); else pluck(e.m, t0 + e.t, e.len, e.vel);
+      });
+      (cues || []).forEach(function (c) { timers.push(setTimeout(c.fn, (c.t + 0.08) * 1000)); });
+      onStop = done || null;
+      timers.push(setTimeout(function () { var f = onStop; onStop = null; timers = []; if (f) f(true); }, (total + 0.35) * 1000));
+      return true;
+    }
+    return { play: play, stop: stop, ok: !!AC };
+  })();
+  var NO_SOUND = "Your browser can't play sound here, but the diagram still works.";
+
+  /* ---------------- the fundamental bass (Williams, Example 2, p. 36) ---------------- */
+  var BASS = [55, 54, 52, 50, 47, 48, 50, 43,
+              55, 54, 52, 57, 54, 55, 57, 50,
+              62, 59, 60, 59, 55, 57, 59, 52,
+              48, 47, 45, 50, 47, 48, 50, 43];
+  var ALT = { 20: "E", 21: "C", 22: "low B" };          // second choices Williams gives in bars 21-23
+  var G = [7, 11, 2], D = [2, 6, 9], X = [4, 7, 1], Am = [9, 0, 4], Em = [4, 7, 11],
+      A = [9, 1, 4], B = [11, 3, 6], C = [0, 4, 7];
+  // chords follow the figures in Example 2; unfigured bars get plain triads (bar 21: E minor, since Williams gives G or E)
+  var CHORDS = [G, D, X, D, G, Am, D, G,
+                G, D, Em, A, D, G, A, D,
+                D, G, Am, B, Em, Am, B, Em,
+                C, G, Am, D, G, C, D, G];
+  var CAD = { 7: "G", 15: "D", 23: "E minor", 31: "G" };
+  var ROWS = ["Phrase 1, to G", "Phrase 2, to D", "Phrase 3, to E minor", "Phrase 4, back to G"];
+
+  /* ================= Part 1: timeline ================= */
+  (function () {
+    var host = $("tl-svg"); if (!host) return;
+    var EV = [
+      { y: 1727, label: "1727", text: "Johann Gottlieb Goldberg is born.", src: "p. 5", age: "Goldberg's age: newborn." },
+      { y: 1739.5, label: "c. 1740", text: "Bach probably composes the variations, around 1739–40.", src: "p. 5", age: "Goldberg's age: about 12." },
+      { y: 1741, label: "1741", text: "The set is engraved in Nuremberg and goes on sale. Its title page names no count and no player.", src: "pp. 2\u20133, 5", age: "Goldberg's age: about 14." },
+      { y: 1741.85, label: "Nov. 1741", text: "Bach stays with Count Keyserlingk in Dresden, and probably gives him a signed copy.", src: "pp. 4–5", age: "Goldberg's age: about 14." },
+      { y: 1754, label: "1754", text: "Bach's Obituary is published. It lists “An Aria with 30 Variations, for two Claviere” (keyboards).", src: "p. 3", age: "13 years after the print." },
+      { y: 1776, label: "1776", text: "In London, Sir John Hawkins prints the Aria and Variations 9 and 10 in his History of Music.", src: "p. 2", age: "35 years after the print." },
+      { y: 1802, label: "1802", text: "Forkel's biography tells the story of the sleepless Count and young Goldberg.", src: "p. 4", age: "61 years after the print." },
+      { y: 1853, label: "1853", text: "The Bach Society edition prints the set with Bach's three earlier “Keyboard Practice” books, and the name Clavierübung IV sticks.", src: "pp. 6–7", age: "112 years after the print." },
+      { y: 1935, label: "1935", text: "Ralph Kirkpatrick's edition quotes Thomas Browne: “there is something in it of Divinity more than the eare discovers.”", src: "p. 1", age: "194 years after the print." },
+      { y: 1975, label: "1975", text: "Bach's own copy of the print turns up in France, with his corrections and the “Fourteen Canons” written in.", src: "p. 8", age: "234 years after the print." }
+    ];
+    var i = 0;
+    function x(year) { return 30 + (year - 1720) * (540 / 260); }
+    function draw() {
+      clear(host);
+      svg("line", { x1: 20, y1: 60, x2: 580, y2: 60, "class": "axis" }, host);
+      [1750, 1800, 1850, 1900, 1950].forEach(function (yr) {
+        svg("line", { x1: x(yr), y1: 55, x2: x(yr), y2: 65, "class": "axis" }, host);
+        svg("text", { x: x(yr), y: 84, "text-anchor": "middle", "class": "lbl" }, host, String(yr));
+      });
+      EV.forEach(function (e, k) {
+        if (k !== i) svg("circle", { cx: x(e.y), cy: 60, r: 4, "class": "tl-dot" }, host);
+      });
+      var e = EV[i], cx = x(e.y);
+      svg("circle", { cx: cx, cy: 60, r: 7, "class": "tl-cur" }, host);
+      var anchor = cx < 80 ? "start" : (cx > 520 ? "end" : "middle");
+      svg("text", { x: cx, y: 38, "text-anchor": anchor, "class": "lbl-b" }, host, e.label);
+      $("tl-text").innerHTML = "<strong>" + e.label + ".</strong> " + e.text + " <span class=\"src\">(" + e.src + ")</span>";
+      $("tl-age").textContent = e.age + "  (" + (i + 1) + " of " + EV.length + ")";
+      $("tl-back").disabled = i === 0;
+      $("tl-next").disabled = i === EV.length - 1;
+    }
+    $("tl-back").addEventListener("click", function () { if (i > 0) { i--; draw(); } });
+    $("tl-next").addEventListener("click", function () { if (i < EV.length - 1) { i++; draw(); } });
+    draw();
+  })();
+
+  /* ================= Part 2: one bass, many surfaces ================= */
+  (function () {
+    var grid = $("bass-grid"); if (!grid) return;
+    var cells = [];
+    for (var r = 0; r < 4; r++) {
+      var row = document.createElement("div"); row.className = "bass-row";
+      var lab = document.createElement("div"); lab.className = "rl"; lab.textContent = ROWS[r];
+      row.appendChild(lab);
+      for (var c = 0; c < 8; c++) {
+        var k = r * 8 + c;
+        var cell = document.createElement("div");
+        cell.className = "bar" + (CAD[k] ? " cad" : "");
+        cell.innerHTML = (k + 1) + "<b>" + noteName(BASS[k]) + "</b><i>" + (ALT[k] ? "or " + ALT[k] : "") + "</i>";
+        row.appendChild(cell); cells.push(cell);
+      }
+      grid.appendChild(row);
+    }
+    var NAMES = { alone: "the bass alone", sarabande: "slow chords", running: "running notes",
+                  gigue: "a skipping gigue rhythm", quick: "quick short bars" };
+    function mark(k) { cells.forEach(function (c, j) { c.classList.toggle("now", j === k); }); }
+    function build(kind, n) {
+      var ev = [], cues = [], bar;
+      var spec = { alone: 2.0, sarabande: 2.4, running: 1.8, gigue: 1.8, quick: 0.75 };
+      bar = spec[kind];
+      for (var k = 0; k < n; k++) {
+        var t = k * bar, b = BASS[k], ch = voiceChord(CHORDS[k]);
+        ev.push({ t: t, m: b, len: bar * 0.95, vel: 0.55 });
+        if (kind === "sarabande") {
+          var beat = bar / 3;
+          ch.forEach(function (m) { ev.push({ t: t + beat, m: m, len: beat * 1.9, vel: 0.22 }); });
+          ev.push({ t: t, m: ch[2] + 12, len: beat * 0.95, vel: 0.2 });
+        } else if (kind === "running") {
+          var up = [ch[0], ch[1], ch[2], ch[0] + 12, ch[1] + 12, ch[2] + 12];
+          var pat = [0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 2, 3], s = bar / 12;
+          pat.forEach(function (p, j) { ev.push({ t: t + j * s, m: up[p], len: s, vel: 0.24 }); });
+        } else if (kind === "gigue") {
+          var half = bar / 2, q = half / 3;
+          [0, 1].forEach(function (h) {
+            var base = t + h * half, top = h ? ch[1] + 12 : ch[2] + 12;
+            ev.push({ t: base, m: top, len: q * 1.5, vel: 0.26 });
+            ev.push({ t: base + q * 1.5, m: h ? ch[2] : ch[1], len: q * 0.5, vel: 0.2 });
+            ev.push({ t: base + q * 2, m: h ? ch[0] + 12 : ch[2], len: q, vel: 0.22 });
+          });
+        } else if (kind === "quick") {
+          var e8 = bar / 3;
+          ch.forEach(function (m) { ev.push({ t: t, m: m, len: e8 * 0.8, vel: 0.16 }); });
+          ev.push({ t: t + e8, m: ch[2] + 12, len: e8 * 0.8, vel: 0.2 });
+          ev.push({ t: t + 2 * e8, m: ch[1] + 12, len: e8 * 0.8, vel: 0.2 });
+        }
+        (function (kk) {
+          cues.push({ t: kk * bar, fn: function () {
+            mark(kk);
+            var alt = ALT[kk] ? " (or " + ALT[kk] + ")" : "";
+            $("surf-result").innerHTML = "Bar <strong>" + (kk + 1) + "</strong> of " + n + ": bass <strong>" +
+              noteName(BASS[kk]) + "</strong>" + alt + (CAD[kk] ? ", a cadence in " + CAD[kk] : "") + ".";
+          } });
+        })(k);
+      }
+      return { ev: ev, cues: cues, total: n * bar };
+    }
+    function done(kind, n) {
+      return function (finished) {
+        mark(-1);
+        $("surf-result").innerHTML = (finished ? "Finished " + n + " bars of " + NAMES[kind] + ". " : "Stopped. ") +
+          "Every surface sits on the same bass and chords; only the music on top changes.";
+      };
+    }
+    $("surf-play").addEventListener("click", function () {
+      var kind = radioValue("surf"), n = +radioValue("surf-len");
+      var s = build(kind, n);
+      if (!Sound.play(s.ev, s.cues, s.total, done(kind, n))) $("surf-result").textContent = NO_SOUND;
+    });
+    $("surf-stop").addEventListener("click", function () { Sound.stop(); });
+  })();
+
+  /* ================= Part 3: grow the theme ================= */
+  (function () {
+    var host = $("grow-svg"); if (!host) return;
+    var STAGES = [
+      { n: 4, text: "<strong>4 notes:</strong> G, F♯, E, D. A standard repeating bass of the 1600s, used by Corelli in G major and Biber in the minor <span class=\"src\">(pp. 38\u201339)</span>." },
+      { n: 8, text: "<strong>8 notes:</strong> G F♯ E D B C D G. The length of the G major chaconne basses by Handel, Muffat and Purcell. It lands on G <span class=\"src\">(pp. 37–38)</span>." },
+      { n: 16, text: "<strong>16 notes:</strong> the first half of the Goldberg bass. Phrase 2 ends on D, the dominant, at the halfway point <span class=\"src\">(pp. 37–38)</span>." },
+      { n: 32, text: "<strong>32 notes:</strong> the whole bass. A mirror sixteen go to E minor, then home to G. Each pass is now long enough to be a full movement <span class=\"src\">(pp. 37–38)</span>." }
+    ];
+    var i = 0;
+    var X0 = 34, DX = 17.4;
+    function px(k) { return X0 + k * DX + DX / 2; }
+    function py(m) { return 175 - (m - 43) * 7.2; }
+    function draw() {
+      clear(host);
+      var n = STAGES[i].n;
+      [8, 16, 24].forEach(function (b) {
+        svg("line", { x1: X0 + b * DX, y1: 20, x2: X0 + b * DX, y2: 190, "class": "dash" }, host);
+      });
+      svg("line", { x1: X0, y1: 190, x2: X0 + 32 * DX, y2: 190, "class": "axis" }, host);
+      [1, 8, 16, 24, 32].forEach(function (b) {
+        svg("text", { x: px(b - 1), y: 208, "text-anchor": "middle", "class": "lbl" }, host, String(b));
+      });
+      svg("text", { x: 0, y: 208, "class": "lbl" }, host, "bar");
+      var pts = [];
+      for (var k = 0; k < n; k++) pts.push(px(k) + "," + py(BASS[k]));
+      svg("polyline", { points: pts.join(" "), "class": "bassline" }, host);
+      for (var k2 = 0; k2 < 32; k2++) {
+        svg("circle", { cx: px(k2), cy: py(BASS[k2]), r: k2 < n ? 4.5 : 3.5, "class": k2 < n ? "bassdot" : "offdot" }, host);
+      }
+      if (n === 32 || n === 16 || n === 8) {
+        Object.keys(CAD).forEach(function (key) {
+          var k3 = +key; if (k3 >= n) return;
+          svg("path", { d: "M" + (px(k3) - 6) + " 198 L" + (px(k3) + 6) + " 198 L" + px(k3) + " 190 Z", "class": "cadmark" }, host);
+          svg("text", { x: px(k3), y: 226, "text-anchor": k3 === 31 ? "end" : "middle", "class": "cadtxt" }, host, CAD[k3]);
+        });
+      }
+      if (n === 4) svg("text", { x: px(1) + 30, y: py(54) - 18, "class": "lbl" }, host, "G F♯ E D: four falling steps");
+      $("grow-text").innerHTML = STAGES[i].text + "  <span class=\"meta\">(Stage " + (i + 1) + " of 4)</span>";
+      $("grow-back").disabled = i === 0;
+      $("grow-next").disabled = i === STAGES.length - 1;
+    }
+    $("grow-back").addEventListener("click", function () { if (i > 0) { i--; Sound.stop(); draw(); } });
+    $("grow-next").addEventListener("click", function () { if (i < STAGES.length - 1) { i++; Sound.stop(); draw(); } });
+    $("grow-play").addEventListener("click", function () {
+      var n = STAGES[i].n, bar = 0.9, ev = [];
+      for (var k = 0; k < n; k++) {
+        ev.push({ t: k * bar, m: BASS[k], len: bar * 0.95, vel: 0.55 });
+        voiceChord(CHORDS[k]).forEach(function (m) { ev.push({ t: k * bar, m: m, len: bar * 0.9, vel: 0.12 }); });
+      }
+      if (!Sound.play(ev, [], n * bar, null)) $("grow-text").innerHTML = STAGES[i].text + " " + NO_SOUND;
+    });
+    $("grow-stop").addEventListener("click", function () { Sound.stop(); });
+    draw();
+  })();
+
+  /* ================= Part 4: plan explorer ================= */
+  (function () {
+    var grid = $("plan-grid"); if (!grid) return;
+    // [number, time, manuals, voices, Williams's label, note, page]
+    var V = [
+      [0, "3/4", "1", "3", "melodic, like a sarabande", "A slow, tender sarabande with a singing melody and no upbeat.", "p. 54"],
+      [1, "3/4", "1", "2", "hand-crossing (a polonaise?)", "Williams calls the polonaise label a guess. One of the hardest variations to play well.", "pp. 47, 56"],
+      [2, "2/4", "1", "3", "imitative, as a trio-sonata", "Like two violins over a steady cello, so nearly a canon that Williams wonders if it was a trial run.", "p. 57"],
+      [3, "12/8", "1", "3", "canon at the unison", "Both voices use the same notes, so they cross constantly. Perhaps the first canon written.", "p. 58"],
+      [4, "3/8", "1", "4", "imitative, as a passepied", "Built almost entirely on one short note-pattern, right way up or upside down.", "p. 58"],
+      [5, "3/4", "1 or 2", "2", "hand-crossing, duet", "The bass notes on the main beats spell out the Goldberg bass especially clearly.", "p. 61"],
+      [6, "3/8", "1", "3", "canon at the second", "Every main beat except at cadences is a suspension. The work's first chromatic touches.", "p. 61"],
+      [7, "6/8", "1 or 2", "2", "dotted gigue (‘al tempo di giga’)", "Bach's own copy marks it ‘al tempo di giga’, surprising players who heard a gentle siciliano.", "p. 62"],
+      [8, "3/4", "2", "2", "hand-crossing, duet", "Splits the two-bar phrases into one-bar phrases. The hands overlap three times.", "p. 63"],
+      [9, "C", "1", "3", "canon at the third", "Answered a third below. For the first time the original bass is hard to trace.", "p. 64"],
+      [10, "¢", "1", "4", "‘fughetta’", "A little four-voice fugue whose subject paraphrases the opening of the bass.", "pp. 64–65"],
+      [11, "12/16", "2", "2", "hand-crossing, duet", "Williams doubts it must be ‘presto possibile’ (as fast as possible): a steady, lyrical manner is ‘not out of place’.", "pp. 65\u201366"],
+      [12, "3/4", "1", "3", "canon inversus at the fourth", "The follower plays the leader's line upside down.", "p. 67"],
+      [13, "3/4", "2", "3", "melodic, like a sarabande doublée", "An ornate melody, like a violin or oboe solo in a cantata aria.", "pp. 67–68"],
+      [14, "3/4", "2", "2", "hand-crossing, duet", "Sheer high spirits after No. 13. The texture changes every four bars.", "p. 68"],
+      [15, "2/4", "1", "3", "canon inversus at the fifth, minor", "The first minor variation. It ends on a bare open fifth, \u2018left floating\u2019.", "pp. 69–70"],
+      [16, "¢, then 3/8", "1", "2–4", "‘ouverture’, followed by stretto fugue", "Opens the second half with the biggest chord yet: a French overture in miniature.", "pp. 70–72"],
+      [17, "3/4", "2", "2", "hand-crossing, duet", "Its figures recall Bach's arrangement of a Vivaldi concerto and Scarlatti's sonatas of 1738.", "p. 73"],
+      [18, "¢", "1", "3", "canon at the sixth, as a trio-sonata", "A tight canon: the answer comes after only half a bar.", "p. 74"],
+      [19, "3/8", "1", "3", "minuet?", "Succinct: each bass note lasts one short bar. A minuet, or something more boisterous? Williams leaves it open. One small note-pattern runs through every bar.", "p. 75"],
+      [20, "3/4", "2", "2", "hand-crossing, duet", "Three swapping patterns for the hands; the bass still sits on the first note of each bar.", "p. 76"],
+      [21, "C", "1", "3", "canon at the seventh, minor", "Opens over a chromatic falling bass.", "pp. 50, 77"],
+      [22, "¢", "1", "4", "‘allabreve’, as a gavotte?", "Four voices, densely imitative. The bass leaves the theme only once.", "p. 78"],
+      [23, "3/4", "2", "2–4", "hand-crossing, duet", "Built almost entirely from scales, ‘full of a reckless humour’.", "p. 79"],
+      [24, "9/8", "1", "3", "canon at the octave", "Answered an octave below, then an octave above, in a gently rocking 9/8.", "p. 80"],
+      [25, "3/4", "2", "3", "‘adagio’ arioso, minor", "The emotional high point of the work, in Williams's view.", "pp. 81–82"],
+      [26, "18/16", "2", "3", "hand-crossing, sarabande filigree?", "A sarabande hides in the chords under a fast, bubbling line.", "p. 84"],
+      [27, "6/8", "2", "2", "canon at the ninth, a round", "The only canon with no bass: two voices and nothing else.", "p. 85"],
+      [28, "3/4", "2", "2–4", "hand-crossing, trills", "Dominated by written-out trills.", "p. 86"],
+      [29, "3/4", "1 or 2", "2–3", "hand-alternating, as a batterie", "The only variation that keeps the tempo and mood of the one before it.", "p. 87"],
+      [30, "C", "1", "4", "‘quodlibet’", "A medley of popular songs, and the only movement with an upbeat.", "pp. 47, 88–89"]
+    ];
+    var CAT = {
+      canon: { set: [3, 6, 9, 12, 15, 18, 21, 24, 27], cls: "k2", name: "Canons" },
+      hand: { set: [1, 5, 8, 11, 14, 17, 20, 23, 26, 28, 29], cls: "k1", name: "Hand-crossing (or alternating)" },
+      two: { set: [8, 11, 13, 14, 17, 20, 23, 25, 26, 27, 28], cls: "k3", name: "Two manuals required" },
+      minor: { set: [15, 21, 25], cls: "k5", name: "Minor key" },
+      fugal: { set: [10, 16, 22], cls: "k6", name: "Fugal" }
+    };
+    var ORDER = ["canon", "hand", "two", "minor", "fugal"];
+    var SHORT = ["", "hand-crossing", "trio-sonata style", "canon, unison", "passepied-like", "hand-crossing",
+      "canon, 2nd", "gigue", "hand-crossing", "canon, 3rd", "fughetta", "hand-crossing", "canon, 4th, inverted",
+      "sarabande doubl\u00E9e", "hand-crossing", "canon, 5th, inverted", "overture", "hand-crossing", "canon, 6th",
+      "minuet?", "hand-crossing", "canon, 7th", "alla breve", "hand-crossing", "canon, octave", "adagio",
+      "hand-crossing", "canon, 9th", "hand-crossing, trills", "hand-alternating", "quodlibet"];
+    var buttons = {}, current = null;
+    function addHead(t) { var d = document.createElement("div"); d.className = "hd"; d.textContent = t; grid.appendChild(d); }
+    function addButton(num, label, extra) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-pressed", "false");
+      b.innerHTML = label + "<span class=\"mks\"></span>";
+      b.addEventListener("click", function () { select(num, b, extra); });
+      return b;
+    }
+    function ariaRow(extra) {
+      var gl = document.createElement("div"); gl.className = "gl"; gl.textContent = "";
+      grid.appendChild(gl);
+      var wrap = document.createElement("div"); wrap.className = "aria-cell";
+      var b = addButton(0, extra ? "Aria, repeated (not written out)" : "Aria", extra);
+      wrap.appendChild(b); grid.appendChild(wrap);
+      if (!extra) buttons[0] = b; else buttons.end = b;
+    }
+    addHead(""); addHead("1st: genre piece"); addHead("2nd: arabesque"); addHead("3rd: canon");
+    ariaRow(false);
+    for (var gI = 0; gI < 10; gI++) {
+      var gl = document.createElement("div"); gl.className = "gl";
+      gl.textContent = "Group " + (gI + 1);
+      grid.appendChild(gl);
+      for (var j = 1; j <= 3; j++) {
+        var num = gI * 3 + j;
+        var short = SHORT[num];
+        var b = addButton(num, "<strong>" + num + "</strong> " + short, false);
+        buttons[num] = b; grid.appendChild(b);
+      }
+    }
+    ariaRow(true);
+
+    function select(num, b, extra) {
+      if (current) current.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-pressed", "true"); current = b;
+      var v = V[num];
+      var title = num === 0 ? (extra ? "Aria, repeated" : "Aria") : "Variation " + num;
+      var cats = ORDER.filter(function (k) { return CAT[k].set.indexOf(num) >= 0; }).map(function (k) { return CAT[k].name.toLowerCase(); });
+      var note = extra ? "Bach doesn't write it out again: the score says ‘Aria da capo è fine’. Same notes, now a farewell." : v[5];
+      var page = extra ? "pp. 2, 35, 92" : v[6];
+      $("plan-detail").innerHTML = "<strong>" + title + "</strong>: " + v[4] + ". " +
+        "Time " + v[1] + "; " + v[2] + (v[2] === "1" ? " manual" : " manuals") + "; " + v[3] + " voices." +
+        (cats.length ? " Counts as: " + cats.join(", ") + "." : "") +
+        "<br>" + note + " <span class=\"src\">(" + page + ")</span>";
+    }
+    function paint() {
+      var on = [].slice.call(document.querySelectorAll("#plan-toggles input:checked")).map(function (x) { return x.value; });
+      Object.keys(buttons).forEach(function (key) {
+        var num = key === "end" ? 0 : +key, b = buttons[key];
+        var mk = b.querySelector(".mks"); mk.innerHTML = "";
+        var names = [];
+        on.forEach(function (c) {
+          if (CAT[c].set.indexOf(num) >= 0) {
+            var s = document.createElement("span"); s.className = CAT[c].cls; s.textContent = "■"; mk.appendChild(s);
+            names.push(CAT[c].name);
+          }
+        });
+        b.setAttribute("aria-label", (num === 0 ? "Aria" : "Variation " + num) + (names.length ? ". Highlighted: " + names.join(", ") : ""));
+      });
+      var msg = [];
+      on.forEach(function (c) {
+        var s = CAT[c].set, line = CAT[c].name + ": " + s.length;
+        if (c === "canon") line += ". Group 10 has none";
+        if (c === "hand") line += ". Group 1 starts with one; group 10 has two";
+        if (c === "minor") line += ": Nos. 15, 21, 25";
+        if (c === "fugal") line += ": Nos. 10, 16, 22, six apart";
+        msg.push(line + ".");
+      });
+      $("plan-count").textContent = msg.length ? msg.join(" ") : "No highlight on.";
+    }
+    $("plan-toggles").addEventListener("change", paint);
+    paint();
+  })();
+
+  /* ================= Part 5: canon builder ================= */
+  (function () {
+    var host = $("cn-svg"); if (!host) return;
+    // leader: [scale degree from G4, start beat, length in beats]; 4 bars of 4/4. Made up for this page.
+    var LEAD = [[4, 0, 1], [2, 1, 0.5], [3, 1.5, 0.5], [4, 2, 1], [0, 3, 1],
+                [2, 4, 0.5], [3, 4.5, 0.5], [4, 5, 0.5], [5, 5.5, 0.5], [4, 6, 1], [2, 7, 1],
+                [7, 8, 1], [4, 9, 0.5], [5, 9.5, 0.5], [4, 10, 1], [2, 11, 1],
+                [0, 12, 1.5], [1, 13.5, 0.5], [2, 14, 1], [0, 15, 1]];
+    var STEPS = [0, 2, 4, 5, 7, 9, 11];
+    var INT = ["unison", "second", "third", "fourth", "fifth", "sixth", "seventh", "octave", "ninth"];
+    function midi(d) { var o = Math.floor(d / 7), i = ((d % 7) + 7) % 7; return 67 + 12 * o + STEPS[i]; }
+    function settings() {
+      return { step: +$("cn-int").value, dir: +radioValue("cn-dir"), delay: +radioValue("cn-del"), inv: $("cn-inv").checked };
+    }
+    function follower(s) {
+      var first = LEAD[0][0];
+      return LEAD.map(function (n) {
+        var d = s.inv ? first - (n[0] - first) : n[0];
+        return [d + s.dir * s.step, n[1] + s.delay, n[2]];
+      });
+    }
+    function soundingAt(voice, t) {
+      for (var i = 0; i < voice.length; i++) if (voice[i][1] <= t && t < voice[i][1] + voice[i][2]) return voice[i];
+      return null;
+    }
+    function clashes(lead, fol, delay) {
+      var n = 0, total = 0;
+      for (var t = delay; t < 16; t += 1) {
+        var a = soundingAt(lead, t), b = soundingAt(fol, t);
+        if (!a || !b) continue;
+        total++;
+        var iv = Math.abs(midi(a[0]) - midi(b[0])) % 12;
+        if (iv === 1 || iv === 2 || iv === 6 || iv === 10 || iv === 11) n++;
+      }
+      return { n: n, total: total };
+    }
+    function draw() {
+      var s = settings(), fol = follower(s);
+      clear(host);
+      var all = LEAD.concat(fol).map(function (n) { return n[0]; });
+      var lo = Math.min.apply(null, all) - 1, hi = Math.max.apply(null, all) + 1;
+      var span = hi - lo, top = 34, rowH = Math.min(14, 190 / span);
+      var X0 = 40, BW = 20;          // px per beat
+      var bottom = top + span * rowH, Htot = Math.round(bottom + 30);
+      host.setAttribute("viewBox", "0 0 530 " + Htot);
+      host.setAttribute("height", Htot);
+      function y(d) { return top + (hi - d) * rowH; }
+      svg("rect", { x: X0, y: 6, width: 12, height: 10, "class": "lead" }, host);
+      svg("text", { x: X0 + 18, y: 15, "class": "lbl-b" }, host, "leader");
+      svg("rect", { x: X0 + 90, y: 6, width: 12, height: 10, "class": "fol" }, host);
+      svg("text", { x: X0 + 108, y: 15, "class": "lbl-f" }, host, "follower");
+      for (var b = 0; b <= 24; b += 4) {
+        svg("line", { x1: X0 + b * BW, y1: top - 4, x2: X0 + b * BW, y2: bottom + 4, "class": b ? "faint" : "axis" }, host);
+        if (b < 24) svg("text", { x: X0 + b * BW + 4, y: bottom + 22, "class": "lbl" }, host, "bar " + (b / 4 + 1));
+      }
+      for (var d = Math.ceil(lo / 7) * 7; d <= hi; d += 7) {
+        svg("line", { x1: X0, y1: y(d) + rowH / 2, x2: X0 + 24 * BW, y2: y(d) + rowH / 2, "class": "dash" }, host);
+        svg("text", { x: X0 - 6, y: y(d) + rowH / 2 + 4, "text-anchor": "end", "class": "lbl" }, host, "G" + (4 + d / 7));
+      }
+      LEAD.forEach(function (n) { svg("rect", { x: X0 + n[1] * BW + 1, y: y(n[0]) + 1, width: n[2] * BW - 2, height: rowH - 2, "class": "lead" }, host); });
+      fol.forEach(function (n) { svg("rect", { x: X0 + n[1] * BW + 1, y: y(n[0]) + 1, width: n[2] * BW - 2, height: rowH - 2, "class": "fol" }, host); });
+      var c = clashes(LEAD, fol, s.delay);
+      var where = s.step === 0 ? "on the same notes" : (s.step === 7 ? "an " : "a ") + INT[s.step] + (s.dir < 0 ? " below" : " above");
+      var when = s.delay === 2 ? "half a bar later" : (s.delay === 4 ? "one bar later" : "two bars later");
+      $("cn-result").innerHTML = "The follower plays the leader's tune <strong>" + where + "</strong>, <strong>" + when + "</strong>" +
+        (s.inv ? ", <strong>upside down</strong>" : "") + ". On <strong>" + c.n + " of " + c.total +
+        "</strong> shared beats the two voices clash (a second, seventh or tritone apart)." +
+        (c.n === 0 ? " No clashes: this setting fits this tune." : "");
+      return fol;
+    }
+    function events(withFol) {
+      var ev = [], q = 0.42;
+      LEAD.forEach(function (n) { ev.push({ t: n[1] * q, m: midi(n[0]), len: n[2] * q, vel: 0.36 }); });
+      if (withFol) follower(settings()).forEach(function (n) { ev.push({ t: n[1] * q, m: midi(n[0]), len: n[2] * q, vel: 0.36 }); });
+      var end = withFol ? 16 + settings().delay : 16;
+      return { ev: ev, total: end * q };
+    }
+    ["cn-int", "cn-inv"].forEach(function (id) { $(id).addEventListener("change", function () { Sound.stop(); draw(); }); });
+    [].forEach.call(document.querySelectorAll('input[name="cn-dir"], input[name="cn-del"]'), function (r) {
+      r.addEventListener("change", function () { Sound.stop(); draw(); });
+    });
+    $("cn-play").addEventListener("click", function () { var e = events(true); if (!Sound.play(e.ev, [], e.total, null)) $("cn-result").textContent = NO_SOUND; });
+    $("cn-lead").addEventListener("click", function () { var e = events(false); if (!Sound.play(e.ev, [], e.total, null)) $("cn-result").textContent = NO_SOUND; });
+    $("cn-stop").addEventListener("click", function () { Sound.stop(); });
+    draw();
+  })();
+
+  /* ================= Part 6: powers of two ================= */
+  (function () {
+    var host = $("two-svg"); if (!host) return;
+    var TEXT = {
+      2: "<strong>2:</strong> two-bar phrases, heard from the Aria's opening as a question and answer <span class=\"src\">(pp. 44–45)</span>. Also two halves to the work, two exact halves to every movement (each played twice), two modes and two manuals <span class=\"src\">(p. 44)</span>.",
+      4: "<strong>4:</strong> four-bar sub-phrases of melody and harmony, ending at lighter, imperfect cadences. Tovey called them “quatrains” <span class=\"src\">(p. 44)</span>.",
+      8: "<strong>8:</strong> eight-bar phrases ending at full cadences: G, D, E minor, G <span class=\"src\">(pp. 38, 44)</span>.",
+      16: "<strong>16:</strong> sixteen bars in each half of the theme, and sixteen movements in each half of the work. No. 16 opens the second half <span class=\"src\">(p. 44)</span>.",
+      32: "<strong>32:</strong> a bass of 32 bars, and 32 pieces on 32 pages, counting the unwritten return of the Aria <span class=\"src\">(pp. 44, 92)</span>."
+    };
+    var W = 16.5, X0 = 36, Y = 50, Hc = 30;
+    function draw(n) {
+      clear(host);
+      for (var k = 0; k < 32; k++) {
+        var grp = Math.floor(k / n);
+        svg("rect", { x: X0 + k * W, y: Y, width: W, height: Hc, "class": grp % 2 ? "grp-b" : "grp-a" }, host);
+      }
+      for (var g = 0; g < 32 / n; g++) {
+        var x1 = X0 + g * n * W + 2, x2 = X0 + (g + 1) * n * W - 2;
+        svg("path", { d: "M" + x1 + " 42 L" + x1 + " 36 L" + x2 + " 36 L" + x2 + " 42", "class": "brace" }, host);
+        if (n >= 4) svg("text", { x: (x1 + x2) / 2, y: 28, "text-anchor": "middle", "class": "lbl" }, host, n + " bars");
+      }
+      [7, 15, 23, 31].forEach(function (k) {
+        var cx = X0 + k * W + W / 2;
+        svg("path", { d: "M" + (cx - 6) + " 92 L" + (cx + 6) + " 92 L" + cx + " 84 Z", "class": "cadmark" }, host);
+      });
+      [1, 8, 16, 24, 32].forEach(function (b) {
+        svg("text", { x: X0 + (b - 1) * W + W / 2, y: 110, "text-anchor": "middle", "class": "lbl" }, host, String(b));
+      });
+      svg("text", { x: 0, y: 70, "class": "lbl" }, host, "bars");
+      $("two-text").innerHTML = TEXT[n];
+      [].forEach.call(document.querySelectorAll("#two-buttons button"), function (b) {
+        b.setAttribute("aria-pressed", String(+b.getAttribute("data-n") === n));
+      });
+    }
+    [].forEach.call(document.querySelectorAll("#two-buttons button"), function (b) {
+      b.addEventListener("click", function () { draw(+b.getAttribute("data-n")); });
+    });
+    draw(8);
+  })();
+
+  /* ================= sorting activity (parts 7 and 9) ================= */
+  function sorter(hostId, cols, items, intro) {
+    var host = $(hostId); if (!host) return;
+    var table = document.createElement("table"); table.className = "sorter";
+    var thead = document.createElement("thead");
+    thead.innerHTML = "<tr><th>" + intro + "</th>" + cols.map(function (c) { return "<th>" + c + "</th>"; }).join("") + "<th>Feedback</th></tr>";
+    table.appendChild(thead);
+    var tbody = document.createElement("tbody");
+    items.forEach(function (it, i) {
+      var tr = document.createElement("tr");
+      var name = hostId + "-" + i;
+      tr.innerHTML = "<td>" + it.text + "</td>" + cols.map(function (c, j) {
+        return "<td class=\"opt\"><label><input type=\"radio\" name=\"" + name + "\" value=\"" + j + "\"> " + c + "</label></td>";
+      }).join("") + "<td class=\"fb\" aria-live=\"polite\"></td>";
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    host.appendChild(table);
+    var row = document.createElement("div"); row.className = "row";
+    var check = document.createElement("button"); check.type = "button"; check.className = "primary"; check.textContent = "Check";
+    var reset = document.createElement("button"); reset.type = "button"; reset.textContent = "Start over";
+    row.appendChild(check); row.appendChild(reset); host.appendChild(row);
+    var res = document.createElement("p"); res.className = "result"; res.setAttribute("aria-live", "polite"); host.appendChild(res);
+    check.addEventListener("click", function () {
+      var right = 0, answered = 0;
+      items.forEach(function (it, i) {
+        var v = radioValue(hostId + "-" + i), fb = tbody.rows[i].querySelector(".fb");
+        if (v === null) { fb.textContent = "Pick one."; return; }
+        answered++;
+        var ok = +v === it.answer; if (ok) right++;
+        fb.innerHTML = "<span class=\"" + (ok ? "right" : "wrong") + "\">" + (ok ? "Right." : "Not quite.") + "</span> " + it.why;
+      });
+      res.innerHTML = answered < items.length ? "Answer every row, then check again." :
+        "You sorted <strong>" + right + " of " + items.length + "</strong> correctly.";
+    });
+    reset.addEventListener("click", function () {
+      [].forEach.call(host.querySelectorAll("input"), function (x) { x.checked = false; });
+      [].forEach.call(host.querySelectorAll(".fb"), function (x) { x.textContent = ""; });
+      res.textContent = "";
+    });
+  }
+
+  sorter("dance-sort", ["Fits", "Ruled out"], [
+    { text: "Allemande", answer: 1, why: "It normally starts with an upbeat <span class=\"src\">(p. 46)</span>." },
+    { text: "Sarabande", answer: 0, why: "No upbeat; the Aria, No. 13 and No. 26 are sarabande-like <span class=\"src\">(pp. 46, 54, 67, 84)</span>." },
+    { text: "Courante", answer: 1, why: "It normally starts with an upbeat <span class=\"src\">(p. 46)</span>." },
+    { text: "Minuet", answer: 0, why: "Possible; No. 19 may be one <span class=\"src\">(pp. 46, 75)</span>." },
+    { text: "Bourrée", answer: 1, why: "The usual bourrée starts with an upbeat <span class=\"src\">(p. 46)</span>." },
+    { text: "Polonaise", answer: 0, why: "Possible; Williams wonders if No. 1 is one <span class=\"src\">(pp. 46, 56)</span>." },
+    { text: "March", answer: 0, why: "Possible, though Bach didn't use one <span class=\"src\">(p. 46)</span>." },
+    { text: "A standard gigue, with its upbeat", answer: 1, why: "Ruled out as usually written. No. 7 is gigue-like, with no upbeat <span class=\"src\">(pp. 46, 62)</span>." }
+  ], "Dance");
+
+  sorter("shape-sort", ["Perceptual", "Conceptual"], [
+    { text: "Take an interval after No. 15.", answer: 0, why: "A concert habit. Williams says a break there disguises the conceptual plan, in which No. 16 restarts at once <span class=\"src\">(p. 70)</span>." },
+    { text: "Build excitement steadily from No. 25 to the end.", answer: 0, why: "That is the climax of the perceptual shape; Williams finds it natural to play the last variations in quick succession <span class=\"src\">(pp. 40, 88)</span>." },
+    { text: "Play No. 29 delicately, on two manuals.", answer: 1, why: "In the arch there need be no crescendo into the finale, and two manuals would be more delicate <span class=\"src\">(p. 40)</span>." },
+    { text: "Go straight from No. 15 into No. 16, with no break.", answer: 1, why: "In the plan, No. 16 restarts the sequence as dramatically as possible <span class=\"src\">(p. 70)</span>." },
+    { text: "Treat Nos. 29 and 30 together as one big tutti climax.", answer: 0, why: "The practical, climax-building reading that public performance has favored <span class=\"src\">(p. 88)</span>." },
+    { text: "Repeat both halves of the returning Aria.", answer: 1, why: "Skipping the repeats breaks the work's binary pattern <span class=\"src\">(p. 92)</span>." }
+  ], "Choice");
+
+  /* ================= Part 7: upbeat demo ================= */
+  (function () {
+    if (!$("ub-down")) return;
+    var BEAT = 0.5;
+    // tunes made up for this page; [midi, start beat, beats]
+    var DOWN = [[67, 0, 1], [71, 1, 1], [74, 2, 1], [72, 3, 1.5], [71, 4.5, 0.5], [69, 5, 1], [67, 6, 3]];
+    var UP = [[62, 0, 1], [67, 1, 1], [71, 2, 1], [74, 3, 1], [72, 4, 1.5], [71, 5.5, 0.5], [69, 6, 1], [67, 7, 2]];
+    function go(tune, firstDown, label) {
+      var ev = [];
+      for (var b = 0; b < 9; b++) {
+        var strong = ((b - firstDown) % 3 + 3) % 3 === 0;
+        ev.push({ t: b * BEAT, click: strong });
+      }
+      tune.forEach(function (n) { ev.push({ t: n[1] * BEAT, m: n[0], len: n[2] * BEAT, vel: 0.4 }); });
+      if (!Sound.play(ev, [], 9 * BEAT, null)) { $("ub-text").textContent = NO_SOUND; return; }
+      $("ub-text").innerHTML = label;
+    }
+    $("ub-down").addEventListener("click", function () {
+      go(DOWN, 0, "The first note lands with the first low click: a <strong>downbeat</strong> start, like every Goldberg movement but one.");
+    });
+    $("ub-up").addEventListener("click", function () {
+      go(UP, 1, "One note comes before the first low click: an <strong>upbeat</strong>, like the start of an allemande or bourrée.");
+    });
+  })();
+
+  /* ================= Part 8: three ways down from G to D ================= */
+  (function () {
+    var host = $("tet-svg"); if (!host) return;
+    var Gm = [7, 10, 2], Dm6 = [2, 6, 9], Bb = [10, 2, 5], CmEb = [0, 3, 7], CE = [0, 4, 7], Dmaj = [2, 6, 9];
+    var SETS = {
+      major: { notes: [[55, 0, 1], [54, 1, 1], [52, 2, 1], [50, 3, 1]], chords: [G, D, X, Dmaj], name: "Major", flat: false, col: "key-on" },
+      minor: { notes: [[55, 0, 1], [54, 1, 1], [51, 2, 1], [50, 3, 1]], chords: [Gm, Dm6, CmEb, Dmaj], name: "Minor", flat: true, col: "key-on-m" },
+      chrom: { notes: [[55, 0, 1], [54, 1, 0.5], [53, 1.5, 0.5], [52, 2, 0.5], [51, 2.5, 0.5], [50, 3, 1]],
+               chords: [Gm, Dm6, Bb, CE, CmEb, Dmaj], name: "Chromatic", flat: true, col: "key-on-m" }
+    };
+    var WHITE = [48, 50, 52, 53, 55, 57], BLACK = [[49, 0], [51, 1], [54, 3], [56, 4]];
+    var KW = 64, X0 = 18, Y0 = 20, WH = 140, BH = 86, BWd = 38;
+    function draw(set, lit) {
+      clear(host);
+      var order = {};
+      set.notes.forEach(function (n, i) { if (order[n[0]] == null) order[n[0]] = i + 1; });
+      WHITE.forEach(function (m, i) {
+        var on = order[m] != null;
+        svg("rect", { x: X0 + i * KW, y: Y0, width: KW, height: WH, "class": on ? set.col : "wkey" }, host);
+        svg("text", { x: X0 + i * KW + KW / 2, y: Y0 + WH + 16, "text-anchor": "middle", "class": "keyname" }, host, noteName(m, set.flat));
+        if (on) svg("text", { x: X0 + i * KW + KW / 2, y: Y0 + WH - 14, "text-anchor": "middle", "class": "keynum" }, host, String(order[m]));
+      });
+      BLACK.forEach(function (bk) {
+        var m = bk[0], on = order[m] != null, x = X0 + (bk[1] + 1) * KW - BWd / 2;
+        svg("rect", { x: x, y: Y0, width: BWd, height: BH, "class": on ? set.col : "bkey" }, host);
+        if (on) {
+          svg("text", { x: x + BWd / 2, y: Y0 + BH - 12, "text-anchor": "middle", "class": "keynum" }, host, String(order[m]));
+          svg("text", { x: x + BWd / 2, y: Y0 - 6, "text-anchor": "middle", "class": "keyname" }, host, noteName(m, set.flat));
+        }
+      });
+      if (lit != null) {
+        var m2 = set.notes[lit][0], wi = WHITE.indexOf(m2), bx;
+        if (wi >= 0) bx = X0 + wi * KW + KW / 2;
+        else BLACK.forEach(function (bk) { if (bk[0] === m2) bx = X0 + (bk[1] + 1) * KW; });
+        svg("path", { d: "M" + (bx - 7) + " " + (Y0 + WH + 32) + " L" + (bx + 7) + " " + (Y0 + WH + 32) + " L" + bx + " " + (Y0 + WH + 23) + " Z", "class": "now" }, host);
+      }
+    }
+    function describe(key) {
+      var s = SETS[key], names = s.notes.map(function (n) { return noteName(n[0], s.flat); });
+      var steps = [];
+      for (var i = 1; i < s.notes.length; i++) steps.push(s.notes[i - 1][0] - s.notes[i][0]);
+      return "<strong>" + s.name + ":</strong> " + names.join(" – ") + ". Steps down, in half steps: <strong>" + steps.join(", ") +
+        "</strong>. Same start, same goal, four bars either way.";
+    }
+    function current() { return radioValue("tet"); }
+    [].forEach.call(document.querySelectorAll('input[name="tet"]'), function (r) {
+      r.addEventListener("change", function () { Sound.stop(); draw(SETS[current()]); $("tet-result").innerHTML = describe(current()); });
+    });
+    $("tet-play").addEventListener("click", function () {
+      var key = current(), s = SETS[key], bar = 1.9, ev = [], cues = [];
+      var withChords = $("tet-chords").checked;
+      s.notes.forEach(function (n, i) {
+        ev.push({ t: n[1] * bar, m: n[0], len: n[2] * bar * 0.95, vel: 0.6 });
+        if (withChords) voiceChord(s.chords[i]).forEach(function (m) { ev.push({ t: n[1] * bar, m: m, len: n[2] * bar * 0.9, vel: 0.16 }); });
+        cues.push({ t: n[1] * bar, fn: function () { draw(s, i); } });
+      });
+      var ok = Sound.play(ev, cues, 4 * bar, function () { draw(s); });
+      $("tet-result").innerHTML = ok ? describe(key) : NO_SOUND;
+    });
+    $("tet-stop").addEventListener("click", function () { Sound.stop(); });
+    draw(SETS.major);
+    $("tet-result").innerHTML = describe("major");
+  })();
+})();
+</script>
+</body>
+</html>
