@@ -119,4 +119,14 @@ const ENTRIES = [
     tags: ["fundraising", "philosophy"],
     summary: `A ten-part training for nonprofit executive directors, drawn from Noah's notes for <em>The Fundraising Act</em>. It argues that generosity is already present and the fundraiser's job is to clear what blocks it. It works through Mauss and the Bhagavad Gita on gifts, overflow versus guilt, the money story every fundraiser carries, asking from love, releasing the outcome, the seven steps under every gift, and the daily floor that keeps a practice alive. Readers clear rocks from a stream, compare two givers by dollars and by sacrifice, diagnose a hard ask, find where stalled gifts are really stuck, and work backwards from a goal to a daily number. Quizzes and spaced review cards throughout.`,
   },
+
+  {
+    slug: "cameron-berg-inside-the-machine",
+    title: "Cameron Berg's Look Inside the Machine",
+    date: "2026-10-04",
+    time: "17:49",
+    url: "exhibits/cameron-berg-inside-the-machine/",
+    tags: ["artificial intelligence", "consciousness", "cameron berg"],
+    summary: `A nine-part course on six papers by Cameron Berg and his collaborators (2024 to 2026) about what happens inside AI models that act like minds: self-other overlap and deception, models reporting experience under self-reference, Dark Triad feature steering, hidden coalitions among agents, the pain axis, and Berg's theory that learning requires feeling. Readers find a pain direction and turn the steering dial, run the burglar test, cut a network of agents, try the button experiments, separate surprise from valence, and sort measurements from interpretations. Quizzes and spaced review cards throughout.`,
+  },
 ];
