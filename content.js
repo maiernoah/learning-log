@@ -14,7 +14,7 @@
    ========================================================================== */
 
 const SITE = {
-  title: "Noah's Learning Log",
+  title: "Noah's Weblog",
   tagline: "Notes and interactive pages from whatever I'm studying.",
   author: "Noah",
 

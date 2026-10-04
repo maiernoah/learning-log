@@ -1,4 +1,4 @@
-# Noah's Learning Log
+# Noah's Weblog
 
 A log of things I'm learning. Most entries link to an exhibit: a small interactive page built to work through one idea.
 

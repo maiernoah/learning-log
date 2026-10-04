@@ -6,7 +6,7 @@
      <script src="../../return.js"></script>
 
    Optional: change the button text with data-label, e.g.
-     <script src="../../return.js" data-label="Back to Noah's Learning Log"></script>
+     <script src="../../return.js" data-label="Back to Noah's Weblog"></script>
 
    The button links to the exhibit's own entry on the front page.
    ========================================================================== */

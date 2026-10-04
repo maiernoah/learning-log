@@ -21,7 +21,7 @@
   if (!site || !raw) problems.push(contentLoadError());
 
   site = Object.assign(
-    { title: "Learning Log", tagline: "", author: "", email: "", blurb: "",
+    { title: "Noah's Weblog", tagline: "", author: "", email: "", blurb: "",
       frontPageCount: 10, newForDays: 14, links: [] },
     site || {}
   );
