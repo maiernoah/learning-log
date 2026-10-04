@@ -10,7 +10,6 @@ on:
 
 permissions:
   contents: write   # to commit feed.xml
-  pages: write      # to ask GitHub Pages to republish afterwards
 
 concurrency:
   group: feed
@@ -27,8 +26,6 @@ jobs:
       - name: Build feed.xml from content.js
         run: node tools/build-feed.js
       - name: Commit feed.xml if it changed
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           if [ -z "$(git status --porcelain -- feed.xml)" ]; then
             echo "feed.xml is already up to date."
@@ -39,6 +36,4 @@ jobs:
           git add feed.xml
           git commit -m "Update feed.xml"
           git pull --rebase origin main
-          git push origin HEAD:main
-          # A push made by this workflow may not start a Pages build on its own, so request one.
-          gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" || echo "Pages build request failed; the next push will publish the feed."
+          git push origin HEAD:main   # this push republishes the site
