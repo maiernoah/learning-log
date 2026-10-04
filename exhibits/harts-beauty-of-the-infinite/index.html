@@ -1,0 +1,2072 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hart's Beauty of the Infinite</title>
+<style>
+/* ===== Learning Log house style (exhibits) v1 =====
+   Matches noahmaier.net: white page, Times for reading, Verdana for
+   controls, blue underlined links, two-tone rules, gray beveled buttons. */
+:root {
+  --page: #ffffff;
+  --ink: #000000;
+  --ink-soft: #2b2b2b;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --active: #ff0000;
+  --lo: #999999;          /* rule, border, axis */
+  --hi: #e2e2e2;          /* rule highlight, gridline */
+  --tint: #f2f2f2;        /* callout and table-header fill */
+  --field: #6e6e6e;       /* input border */
+  --btn: #c0c0c0;         /* button face */
+  --btn-face: #dfdfdf;
+  --btn-lo: #808080;
+  --btn-dark: #0a0a0a;
+  --new: #cc0000;
+  /* data colors, in order: classic HTML named colors */
+  --c1: #000080;  /* navy */
+  --c2: #800000;  /* maroon */
+  --c3: #008080;  /* teal */
+  --c4: #808000;  /* olive (marks only; too light for text) */
+  --c5: #800080;  /* purple */
+  --c6: #008000;  /* green */
+  --serif: "Times New Roman", Times, serif;
+  --sans: Verdana, Geneva, Tahoma, sans-serif;
+  --mono: "Courier New", Courier, monospace;
+}
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body { margin: 0; padding: 10px 16px 32px; background: var(--page); color: var(--ink);
+       font: 18px/1.45 var(--serif); -webkit-text-size-adjust: 100%; }
+.page { max-width: 1020px; }
+main p, .prose { max-width: 38em; }
+a { color: var(--link); } a:visited { color: var(--visited); } a:active { color: var(--active); }
+:focus-visible { outline: 2px dotted var(--ink); outline-offset: 2px; }
+
+h1 { font-size: 2.3em; line-height: 1.1; margin: 0.35em 0 0.15em; }
+h2 { font-size: 1em; font-weight: bold; margin: 1.6em 0 0.7em; padding-bottom: 2px;
+     border-bottom: 1px solid var(--lo); }
+h3 { font-size: 1.15em; line-height: 1.25; margin: 1.2em 0 0.3em; }
+p { margin: 0 0 0.8em; }
+.dek { font-style: italic; margin: 0 0 0.5em; }
+.nav { font: 13px/1.6 var(--sans); margin: 0; }
+hr { border: 0; border-top: 1px solid var(--lo); border-bottom: 1px solid var(--hi);
+     height: 0; margin: 10px 0 14px; }
+code, pre, kbd { font-family: var(--mono); font-size: 0.9em; }
+
+/* controls and small text use Verdana */
+label, legend, button, input, select, textarea, table, figcaption, output, .ui, .meta {
+  font-family: var(--sans); }
+.ui, .meta, figcaption { font-size: 13px; line-height: 1.5; }
+.meta { color: var(--ink-soft); }
+p.meta { margin: 6px 0 12px; }
+
+fieldset { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi);
+           margin: 0 0 16px; padding: 8px 12px 12px; min-width: 0; }
+legend { font-size: 13px; font-weight: bold; padding: 0 4px; }
+label { font-size: 13px; }
+.choices { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.choices label { display: inline-flex; align-items: center; gap: 5px; }
+input[type=radio], input[type=checkbox], input[type=range] { accent-color: var(--c1); }
+
+button {
+  font-size: 13px; line-height: 1.2; color: #000; background: var(--btn);
+  border: 0; border-radius: 0; padding: 6px 12px; cursor: pointer;
+  box-shadow: inset -1px -1px var(--btn-dark), inset 1px 1px #fff,
+              inset -2px -2px var(--btn-lo), inset 2px 2px var(--btn-face);
+}
+button:active, button[aria-pressed="true"] {
+  box-shadow: inset 1px 1px var(--btn-dark), inset -1px -1px #fff,
+              inset 2px 2px var(--btn-lo), inset -2px -2px var(--btn-face);
+  padding: 7px 11px 5px 13px;
+}
+button:disabled { color: var(--btn-lo); text-shadow: 1px 1px #fff; cursor: default; }
+button.primary { font-weight: bold; }
+
+input[type=text], input[type=number], input[type=search], input[type=email],
+select, textarea {
+  font-size: 14px; color: var(--ink); background: #fff; border: 1px solid var(--field);
+  border-radius: 0; box-shadow: inset 1px 1px 0 #b4b4b4; padding: 4px 6px;
+}
+
+table { border-collapse: collapse; font-size: 13px; line-height: 1.4; }
+th, td { border: 1px solid var(--lo); padding: 4px 8px; text-align: left; vertical-align: top; }
+th { background: var(--tint); }
+
+.box { background: var(--tint); box-shadow: inset 1px 1px var(--lo), inset -1px -1px var(--hi);
+       padding: 8px 10px; margin: 0 0 1em; font: 13px/1.5 var(--sans); }
+.result { font-size: 1.15em; }
+.result strong { font-variant-numeric: tabular-nums; }
+
+.meter { height: 16px; background: #fff; border: 1px solid var(--field);
+         box-shadow: inset 1px 1px 0 #b4b4b4; }
+.meter > div { height: 100%; width: 0; background: var(--c1); }
+
+footer address { font-style: normal; font-size: 0.85em; }
+
+@media (max-width: 780px) { body { font-size: 17px; padding: 8px 16px 28px; } h1 { font-size: 1.8em; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media print { .nav { display: none; } }
+
+/* ===== Layout for this exhibit (house variables only) =====
+   Color roles carried over from the original page:
+   story of violence = --c2 maroon, story of peace = --c1 navy,
+   gold light in the drawings = --c4 olive, correct = --c6 green. */
+
+/* state toggles the scripts rely on */
+[hidden] { display: none !important; }
+
+html { scroll-padding-top: 52px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.gk { font-family: var(--serif); }
+.small { font: 13px/1.5 var(--sans); }
+.muted { color: var(--ink-soft); }
+.measure { max-width: 38em; }
+.lede { max-width: 38em; }
+
+/* course bar: module dots and contents */
+.topbar { position: sticky; top: 0; z-index: 10; background: var(--page);
+          border-bottom: 1px solid var(--hi); }
+.topbar-in { display: flex; align-items: center; gap: 10px; padding: 6px 0;
+             border-bottom: 1px solid var(--lo); font: 13px/1.4 var(--sans); }
+.brand { font: italic 16px/1.2 var(--serif); white-space: nowrap; }
+.dots { display: flex; gap: 3px; margin-left: auto; }
+.dot { min-width: 23px; height: 22px; padding: 0 2px; display: inline-flex; align-items: center;
+       justify-content: center; border: 1px solid var(--lo); background: var(--page);
+       font: 11px/1 var(--sans); color: var(--link); font-variant-numeric: tabular-nums; }
+.dot.done, .dot.done:visited { background: var(--c1); border-color: var(--c1); color: var(--page); }
+.dot[aria-current="true"] { border-color: var(--ink); font-weight: bold; }
+.toc { position: relative; margin: 0; }
+.toc summary { list-style: none; cursor: pointer; font: 13px/1.2 var(--sans); white-space: nowrap;
+  padding: 5px 10px; background: var(--btn);
+  box-shadow: inset -1px -1px var(--btn-dark), inset 1px 1px var(--page),
+              inset -2px -2px var(--btn-lo), inset 2px 2px var(--btn-face); }
+.toc summary::-webkit-details-marker { display: none; }
+.toc summary::after { content: " \25BC"; font-size: 9px; }
+.toc[open] summary {
+  box-shadow: inset 1px 1px var(--btn-dark), inset -1px -1px var(--page),
+              inset 2px 2px var(--btn-lo), inset -2px -2px var(--btn-face); }
+.toc-panel { position: absolute; right: 0; top: calc(100% + 4px); z-index: 11;
+             width: min(300px, calc(100vw - 32px)); max-height: 70vh; overflow: auto;
+             background: var(--page); border: 1px solid var(--btn-lo); padding: 4px 6px; }
+.toc-panel a { display: grid; grid-template-columns: 1.6em minmax(0, 1fr); gap: 4px;
+               padding: 3px 2px; font: 13px/1.4 var(--sans); }
+.toc-panel .n { color: var(--ink-soft); }
+.toc-panel hr { margin: 4px 0; }
+@media (max-width: 600px) { .brand { display: none; } .dots { margin-left: 0; } .toc { margin-left: auto; } }
+@media (max-width: 380px) { .dots { gap: 2px; } .dot { min-width: 20px; } }
+
+/* opening */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 320px); gap: 8px 32px;
+        align-items: start; }
+@media (max-width: 820px) { .hero { grid-template-columns: minmax(0, 1fr); } }
+figure { margin: 0 0 1em; min-width: 0; }
+figcaption { margin-top: 6px; max-width: 38em; }
+.mosaic-fig { margin-top: 1.6em; }
+.mosaic-box { width: 100%; max-width: 100%; aspect-ratio: 1 / 1; border: 1px solid var(--lo);
+              background: var(--page); }
+@media (max-width: 820px) { .mosaic-box { aspect-ratio: 16 / 10; } .mosaic-fig { margin-top: 0; } }
+#mosaic { display: block; width: 100%; height: 100%; }
+
+/* polls and warm-up questions: fieldsets of toggle buttons */
+.poll, fieldset.predict { max-width: 38em; }
+.poll .pills { margin: 4px 0 2px; }
+.poll .poll-note { margin-bottom: 0; }
+
+/* how the course works */
+.steps-key { width: 100%; max-width: 46em; margin: 0 0 1em; }
+.steps-key th { white-space: nowrap; }
+
+/* map of the book */
+.flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin: 0 0 1em; }
+.node { position: relative; display: block; min-width: 0; padding: 6px 8px 8px;
+        border: 1px solid var(--lo); border-top: 3px solid var(--lo); color: var(--ink);
+        text-decoration: none; background: var(--page); }
+.node.p1 { border-top-color: var(--c2); }
+.node.p2 { border-top-color: var(--c4); }
+.node.p3 { border-top-color: var(--c3); }
+.node-k { display: block; font: bold 11px/1.4 var(--sans); color: var(--ink-soft); }
+.node strong { display: block; font-size: 1.05em; line-height: 1.25; margin: 2px 0; }
+a.node strong { color: var(--link); text-decoration: underline; }
+a.node:visited strong { color: var(--visited); }
+.node-s { display: block; font: 13px/1.45 var(--sans); color: var(--ink-soft); }
+.sub { display: flex; flex-wrap: wrap; gap: 2px 10px; margin-top: 4px; font: 13px/1.5 var(--sans); }
+.node:not(:last-child)::after { content: "\25BA"; position: absolute; right: -17px; top: 45%;
+        font: 12px/1 var(--sans); color: var(--ink-soft); }
+@media (max-width: 900px) {
+  .flow { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .node:not(:last-child)::after { content: "\25BC"; right: auto; left: 10px; top: auto; bottom: -18px; }
+}
+.legend { display: flex; flex-wrap: wrap; gap: 4px 18px; font: 13px/1.5 var(--sans);
+          color: var(--ink-soft); margin: 0 0 0.8em; }
+.story { font: bold 12px/1.5 var(--sans); white-space: nowrap; }
+.story::before { content: "\2022\00a0"; }
+.story.v { color: var(--c2); }
+.story.p { color: var(--c1); }
+
+/* modules */
+.part-head { margin-top: 2.2em; }
+.part-head h2 { margin-top: 0.3em; }
+.module { margin-top: 1.8em; }
+.module::before { content: ""; display: block; border-top: 1px solid var(--lo);
+                  border-bottom: 1px solid var(--hi); margin: 0 0 12px; }
+.mod-head p.meta { margin-bottom: 0; }
+.mod-head h2 { margin-top: 0.4em; }
+.mod-sum { font-style: italic; }
+.done-badge { display: inline-block; font: bold 11px/1.5 var(--sans); color: var(--c6);
+              border: 1px solid var(--c6); padding: 0 5px; }
+.mod-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 32px; }
+.col { min-width: 0; }
+@media (min-width: 1000px) {
+  .mod-body { grid-template-columns: minmax(0, 38em) minmax(0, 220px); }
+  .col { grid-column: 1; grid-row: 1; }
+  .gloss { grid-column: 2; grid-row: 1; position: sticky; top: 52px; align-self: start; }
+}
+.gloss { min-width: 0; margin-top: 1em; padding-top: 4px; border-top: 1px solid var(--lo); }
+.gloss h3 { font: bold 13px/1.4 var(--sans); margin: 0 0 6px; }
+.gloss dl { display: grid; gap: 10px; margin: 0 0 0.6em; }
+.gloss dl > div { min-width: 0; }
+.gloss dt { font-weight: bold; line-height: 1.3; }
+.gloss dd { margin: 0; font-size: 16px; line-height: 1.4; color: var(--ink-soft); }
+@media (max-width: 999px) {
+  .gloss dl { grid-template-columns: repeat(auto-fit, minmax(min(100%, 15em), 1fr)); gap: 10px 24px; }
+}
+.step h4 { margin: 1em 0 0.4em; }
+ol.ideas, ul.ideas { max-width: 38em; padding-left: 1.6em; margin: 0 0 0.8em; }
+.ideas li { margin-bottom: 0.5em; }
+blockquote { margin: 0 0 0.8em 2em; max-width: 34em; font-style: italic; }
+blockquote cite { display: block; font: normal 13px/1.5 var(--sans); color: var(--ink-soft); }
+.reveal, .truth { max-width: 38em; }
+.push { border-left: 2px solid var(--c3); padding-left: 12px; max-width: 38em; margin: 0 0 1em; }
+.push h4 { font: bold 13px/1.4 var(--sans); margin: 0.8em 0 0.3em; }
+.push h4:first-child { margin-top: 0; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 20px;
+       max-width: 38em; margin: 0 0 1em; }
+@media (max-width: 560px) { .two { grid-template-columns: minmax(0, 1fr); } }
+.side { min-width: 0; border-top: 2px solid var(--lo); padding-top: 4px; }
+.side.v { border-top-color: var(--c2); }
+.side.p { border-top-color: var(--c1); }
+.side h5 { font: bold 13px/1.4 var(--sans); margin: 0 0 4px; }
+.side.v h5 { color: var(--c2); }
+.side.p h5 { color: var(--c1); }
+.side ul { margin: 0; padding-left: 1.2em; }
+details { max-width: 38em; margin: 0 0 1em; }
+summary { cursor: pointer; font: bold 13px/1.6 var(--sans); }
+details.deeper > div, details.teacher .prose { margin-top: 8px; }
+.thinkers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 22px; margin: 0 0 1em; }
+@media (max-width: 620px) { .thinkers { grid-template-columns: minmax(0, 1fr); } }
+.thinker { min-width: 0; border-top: 1px solid var(--lo); padding-top: 4px; }
+.thinker .tk { display: block; font: bold 11px/1.5 var(--sans); color: var(--ink-soft); }
+.thinker h5 { font-size: 1.05em; margin: 2px 0 4px; }
+.thinker p { font-size: 16px; margin: 0 0 6px; }
+.thinker p.hw { font: 13px/1.5 var(--sans); color: var(--ink-soft); }
+
+/* drawings */
+.figwrap { margin: 0 0 1em; }
+.fig { display: block; width: 100%; max-width: 420px; height: auto; }
+.city .wild { fill: var(--tint); stroke: var(--lo); stroke-width: 1; }
+.city .wall { fill: var(--page); stroke: var(--ink); stroke-width: 2; stroke-dasharray: 7 3; }
+.city .scrib { fill: none; stroke: var(--c2); stroke-width: 1.5; stroke-linecap: round; }
+.city .temple { fill: none; stroke: var(--c1); stroke-width: 1.5; }
+.city text { font-family: var(--sans); font-size: 11px; }
+.city .tw { fill: var(--c2); }
+.city .tc { fill: var(--c1); paint-order: stroke; stroke: var(--page); stroke-width: 4px; stroke-linejoin: round; }
+.peri { display: block; width: 100%; max-width: 300px; height: auto; }
+.peri .ring { fill: none; stroke-width: 2; }
+.peri .r1 { stroke: var(--c1); }
+.peri .r2 { stroke: var(--c2); }
+.peri .r3 { stroke: var(--c3); }
+.peri .core { fill: var(--c4); }
+.peri text { fill: var(--ink-soft); font-family: var(--sans); font-size: 12px; }
+.lightbox svg { display: block; width: 100%; max-width: 380px; height: auto;
+                border: 1px solid var(--lo); background: var(--page); }
+.l-sun { fill: var(--c4); }
+.l-halo { fill: none; stroke: var(--c4); stroke-width: 1.5; }
+.l-ray { fill: none; stroke: var(--c4); stroke-width: 1.5; stroke-dasharray: 6 7; }
+.l-vessel { fill: none; stroke: var(--ink); stroke-width: 2; }
+.l-glow { fill: var(--c4); }
+.l-lid { fill: var(--lo); opacity: 0; }
+.l-spark { fill: var(--c2); opacity: 0; }
+.l-text { fill: var(--ink-soft); font-family: var(--sans); font-size: 12px; }
+.lightbox[data-state="closed"] .l-glow { opacity: 0; }
+.lightbox[data-state="closed"] .l-lid,
+.lightbox[data-state="closed"] .l-spark { opacity: 1; }
+
+/* hands-on areas */
+.lab { display: grid; gap: 8px; min-width: 0; margin: 0 0 1em; }
+.lab p { margin: 0; }
+.vessel-box { width: 100%; max-width: 38em; aspect-ratio: 3 / 2; border: 1px solid var(--lo);
+              background: var(--page); }
+#vessel { display: block; width: 100%; height: 100%; }
+.stats span { white-space: nowrap; margin-right: 1em; }
+.bars { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 2px; max-width: 38em; }
+.bar { border: 1px solid var(--lo); padding: 4px 0; text-align: center; background: var(--page);
+       font: bold 13px/1.4 var(--sans); color: var(--ink-soft); }
+.bar.on { background: var(--c1); border-color: var(--c1); color: var(--page); }
+.bar.sour.on { background: var(--c2); border-color: var(--c2); }
+.tags { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13em), 1fr));
+        gap: 8px; margin: 0 0 1em; }
+.tagbtn { display: grid; gap: 6px; align-content: start; min-height: 5.5em; text-align: left; }
+.tagbtn .tn { font-weight: bold; }
+.tagbtn .tg { display: none; justify-self: start; font: bold 12px/1.4 var(--sans); color: var(--c2);
+              background: var(--page); border: 1px dashed var(--c2); padding: 1px 5px; }
+.tagbtn.tagged .tg { display: block; }
+.flips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0 0 1em; }
+@media (max-width: 560px) { .flips { grid-template-columns: minmax(0, 1fr); } }
+.flip { display: grid; gap: 4px; align-content: start; min-height: 6.5em; text-align: left; line-height: 1.45; }
+.flip .ff { font-weight: bold; }
+.flip .hint { font-size: 11px; color: var(--ink-soft); }
+.flip[aria-pressed="true"] { background: var(--btn-face); }
+.flip[aria-pressed="false"] .fbk { display: none; }
+.flip[aria-pressed="true"] .ff-hide { display: none; }
+
+/* check yourself: answer buttons */
+.quiz { display: grid; gap: 18px; margin: 0 0 1em; }
+.q { display: grid; gap: 6px; max-width: 38em; }
+.q-stem { font-weight: bold; margin: 0; }
+.opts { display: grid; gap: 4px; }
+.opt { display: flex; gap: 8px; align-items: flex-start; width: 100%; text-align: left; line-height: 1.45; }
+.opt-l { font-weight: bold; min-width: 1em; }
+.opt:disabled { cursor: default; }
+.opt.right, .opt.wrong { background: var(--page); box-shadow: none; text-shadow: none; padding: 4px 10px; }
+.opt.right { color: var(--c6); border: 2px solid var(--c6); font-weight: bold; }
+.opt.right::after { content: "\25C4"; margin-left: auto; padding-left: 8px; }
+.opt.wrong { color: var(--c2); border: 2px solid var(--c2); text-decoration: line-through; }
+.fb { display: grid; gap: 4px; background: var(--tint); padding: 8px 10px; font: 13px/1.5 var(--sans);
+      box-shadow: inset 1px 1px var(--lo), inset -1px -1px var(--hi); }
+.fb p { margin: 0; }
+.fb.right strong { color: var(--c6); }
+.fb.wrong strong { color: var(--c2); }
+.mx-tag { font-weight: bold; color: var(--ink-soft); }
+
+/* sorting, matching, ordering */
+.sort { list-style: none; padding: 0; margin: 0 0 0.6em; max-width: 38em; border-top: 1px solid var(--lo); }
+.sort li { display: grid; gap: 6px; padding: 8px 0; border-bottom: 1px solid var(--hi); }
+.sort .s-res { display: none; margin: 0; font: 13px/1.5 var(--sans); }
+.sort li.answered .s-res { display: block; }
+.sort li.ok .s-res b { color: var(--c6); }
+.sort li.no .s-res b { color: var(--c2); }
+.bin-btn.v { color: var(--c2); }
+.bin-btn.p { color: var(--c1); }
+.bin-btn[aria-pressed="true"]:disabled { font-weight: bold; text-shadow: none; }
+.bin-btn.v[aria-pressed="true"]:disabled { color: var(--c2); }
+.bin-btn.p[aria-pressed="true"]:disabled { color: var(--c1); }
+.score-line { font: bold 13px/1.5 var(--sans); }
+p.score-line { margin: 0 0 1em; }
+.match { display: grid; gap: 8px; margin: 0 0 1em; }
+.mrow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 13em); gap: 4px 12px;
+        align-items: center; padding-bottom: 8px; border-bottom: 1px solid var(--hi); }
+@media (max-width: 620px) { .mrow { grid-template-columns: minmax(0, 1fr); } }
+.mrow select { width: 100%; }
+.mrow .mres { grid-column: 1 / -1; font: 13px/1.5 var(--sans); }
+.mrow.ok .mres b { color: var(--c6); }
+.mrow.no .mres b { color: var(--c2); }
+.order { list-style: none; padding: 0; margin: 0 0 8px; max-width: 38em; counter-reset: ord;
+         border-top: 1px solid var(--lo); }
+.order li { counter-increment: ord; display: grid; grid-template-columns: 1.6em minmax(0, 1fr) auto;
+            gap: 8px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--hi); }
+.order li::before { content: counter(ord) "."; font-weight: bold; }
+.order li.ok { color: var(--c6); }
+.order li.no { color: var(--c2); }
+.mv { display: flex; gap: 4px; }
+.mv button { min-width: 34px; }
+
+/* explain it */
+.explain { display: grid; gap: 6px; max-width: 38em; margin: 0 0 1em; }
+.explain label { font-weight: bold; line-height: 1.5; }
+.explain textarea { width: 100%; min-height: 7em; resize: vertical; }
+.explain p.nudge { margin: 0; }
+.wc { font: 13px/1.5 var(--sans); color: var(--ink-soft); }
+.model { background: var(--tint); padding: 8px 10px; box-shadow: inset 1px 1px var(--lo), inset -1px -1px var(--hi); }
+.model h5 { font: bold 13px/1.4 var(--sans); margin: 0 0 4px; }
+.model p { margin: 0 0 6px; }
+.model p:last-child { margin-bottom: 0; }
+
+/* review */
+.review-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; align-items: start; }
+@media (max-width: 900px) { .review-grid { grid-template-columns: minmax(0, 1fr); } }
+.card-shell { min-width: 0; }
+.card-shell h3 { margin-top: 0.4em; }
+.fc { min-height: 9em; padding: 10px 12px; margin: 0 0 8px; background: var(--page);
+      border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi); }
+.fc-mod { display: block; font: bold 11px/1.5 var(--sans); color: var(--ink-soft); }
+.fc-front { font-size: 1.4em; line-height: 1.2; margin: 4px 0 6px; }
+.fc-back { margin: 0; }
+#fc-show-row, #fc-rate, #fc-empty .row { margin: 0 0 6px; }
+.fc-stat { display: flex; flex-wrap: wrap; gap: 2px 14px; margin-top: 8px; font: 13px/1.5 var(--sans); color: var(--ink-soft); }
+.fc-stat b { color: var(--ink); }
+#mx-body { display: grid; gap: 10px; }
+#mx-body button.gold { font-weight: bold; }
+.mx-top { display: flex; justify-content: space-between; gap: 8px; font: 13px/1.5 var(--sans); color: var(--ink-soft); }
+.missed { margin: 0; padding-left: 1.3em; font: 13px/1.5 var(--sans); }
+
+/* finish, glossary, reading */
+.prompts { max-width: 38em; padding-left: 1.6em; margin: 0 0 1em; }
+.prompts li { margin-bottom: 0.5em; }
+.gl { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18em), 1fr)); gap: 10px 28px; margin: 0; }
+.gl div { min-width: 0; padding-top: 4px; border-top: 1px solid var(--hi); }
+.gl dt { font-weight: bold; }
+.gl dd { margin: 0; font-size: 16px; }
+.gl a { font: 12px/1.5 var(--sans); }
+.reading { max-width: 38em; padding-left: 1.4em; margin: 0 0 1em; }
+.reading li { margin-bottom: 0.4em; }
+footer p.meta { max-width: 38em; margin: 0 0 6px; }
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <h1>Hart's Beauty of the Infinite</h1>
+  <p class="dek">Study David Bentley Hart's argument that persuasion can be peaceful in ten interactive modules, with quizzes and flashcards to check what you've learned.</p>
+  <p class="nav">[ <a href="../../index.html#harts-beauty-of-the-infinite">&#9668; Noah's Learning Log</a> | <a href="../../about.html">About</a> ]</p>
+  <hr>
+</header>
+<main id="top">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#top">Beauty of the Infinite</a>
+    <nav class="dots" aria-label="Module progress">
+      <a class="dot" href="#m1" aria-label="Module 1, The Question">1</a>
+      <a class="dot" href="#m2" aria-label="Module 2, Two Stories of the World">2</a>
+      <a class="dot" href="#m3" aria-label="Module 3, The Veil of the Sublime">3</a>
+      <a class="dot" href="#m4" aria-label="Module 4, Nietzsche's Challenge">4</a>
+      <a class="dot" href="#m5" aria-label="Module 5, The Christian Interruption">5</a>
+      <a class="dot" href="#m6" aria-label="Module 6, The Infinite Is Beautiful">6</a>
+      <a class="dot" href="#m7" aria-label="Module 7, Gift, Music, Language">7</a>
+      <a class="dot" href="#m8" aria-label="Module 8, The Story Retold">8</a>
+      <a class="dot" href="#m9" aria-label="Module 9, The Last Word">9</a>
+      <a class="dot" href="#m10" aria-label="Module 10, Persuasion as Peace">10</a>
+    </nav>
+    <details class="toc">
+      <summary>Contents</summary>
+      <div class="toc-panel">
+        <a href="#how"><span class="n">·</span><span>How this course works</span></a>
+        <a href="#map"><span class="n">·</span><span>Map of the book</span></a>
+        <hr>
+        <a href="#m1"><span class="n">1</span><span>The Question</span></a>
+        <a href="#m2"><span class="n">2</span><span>Two Stories of the World</span></a>
+        <a href="#m3"><span class="n">3</span><span>The Veil of the Sublime</span></a>
+        <a href="#m4"><span class="n">4</span><span>Nietzsche's Challenge</span></a>
+        <a href="#m5"><span class="n">5</span><span>The Christian Interruption</span></a>
+        <a href="#m6"><span class="n">6</span><span>The Infinite Is Beautiful</span></a>
+        <a href="#m7"><span class="n">7</span><span>Gift, Music, Language</span></a>
+        <a href="#m8"><span class="n">8</span><span>The Story Retold</span></a>
+        <a href="#m9"><span class="n">9</span><span>The Last Word</span></a>
+        <a href="#m10"><span class="n">10</span><span>Persuasion as Peace</span></a>
+        <hr>
+        <a href="#review"><span class="n">·</span><span>Review: flashcards and mixed quiz</span></a>
+        <a href="#finish"><span class="n">·</span><span>Where you landed, essays, seminar</span></a>
+        <a href="#glossary"><span class="n">·</span><span>Glossary</span></a>
+      </div>
+    </details>
+  </div>
+</div>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow meta">A guided course on David Bentley Hart, <i>The Beauty of the Infinite</i> (2003)</p>
+    <h2 class="question">Can you persuade someone without forcing them?</h2>
+    <p class="lede">That question sits underneath a long, demanding book of theology. A group of modern philosophers answer no: every sermon, argument, and sales pitch is a quiet grab for power. David Bentley Hart, an Eastern Orthodox theologian, answers yes, and his reason is beauty.</p>
+    <p class="lede">This course walks through his case in ten modules and gives his opponents their best lines too. You don't have to agree with him. You do have to understand him well enough to argue.</p>
+    <fieldset class="poll" data-poll="start">
+      <legend class="poll-q" id="poll-start-q">Before you start: is every attempt to persuade someone a kind of power play?</legend>
+      <div class="pills row" role="group" aria-labelledby="poll-start-q">
+        <button type="button" class="btn" data-v="Yes, always">Yes, always</button>
+        <button type="button" class="btn" data-v="Sometimes">Sometimes</button>
+        <button type="button" class="btn" data-v="No, it can be peaceful">No, it can be peaceful</button>
+        <button type="button" class="btn" data-v="Not sure yet">Not sure yet</button>
+      </div>
+      <p class="poll-note meta" aria-live="polite">Your answer stays in this browser. The last section asks again.</p>
+    </fieldset>
+  </div>
+  <figure class="mosaic-fig">
+    <div class="mosaic-box"><canvas id="mosaic" aria-label="A field of gold mosaic tiles catching moving light" role="img"></canvas></div>
+    <figcaption>In Byzantine church mosaics, the gold ground stands for divine light. Move your pointer over it. Hart's book argues that light like this, given freely, is a better picture of reality than a storm of competing forces.</figcaption>
+  </figure>
+</section>
+
+<section class="section" id="how">
+  <h2>How this course works</h2>
+  <div class="prose">
+    <p>Every module follows the same seven steps. The order is deliberate.</p>
+  </div>
+  <table class="steps-key">
+    <tbody>
+    <tr><th scope="row">Warm-up</th><td>Guess before you learn. Wrong guesses still help you remember the answer later.</td></tr>
+    <tr><th scope="row">Picture it</th><td>An everyday comparison that gives the idea a shape.</td></tr>
+    <tr><th scope="row">The idea</th><td>Hart's argument in plain language, with his terms defined.</td></tr>
+    <tr><th scope="row">Try it</th><td>Sort, match, listen, or build something with the idea.</td></tr>
+    <tr><th scope="row">Pushback</th><td>The strongest case against Hart, stated fairly.</td></tr>
+    <tr><th scope="row">Check yourself</th><td>Quick questions with explanations for every answer.</td></tr>
+    <tr><th scope="row">Explain it</th><td>Write it in your own words, then compare with a model.</td></tr>
+    </tbody>
+  </table>
+  <div class="prose">
+    <p class="cite meta">Why this order: trying to answer before studying improves later recall even when the first attempt fails (Richland, Kornell &amp; Kao, 2009). Quizzing yourself beats rereading (Roediger &amp; Karpicke, 2006), and a major review rated practice testing and spaced practice the two most useful study techniques (Dunlosky et al., 2013). Explaining in your own words, using concrete examples, and pairing words with pictures round out the six strategies promoted by The Learning Scientists. The flashcards at the end reschedule themselves over days, and the mixed quiz shuffles modules together on purpose, which trains you to tell similar ideas apart.</p>
+  </div>
+  <details class="teacher">
+    <summary>For teachers</summary>
+    <div class="prose" style="margin-top:.7rem">
+      <p>One module per class session works well. The Pushback panels make good debate prompts, and the Explain it boxes work as exit tickets. Run the mixed quiz as a warm-up on later days to space the practice. Nothing here is graded or sent anywhere; answers stay in each student's browser.</p>
+      <p>Hart's book is written for graduate readers. The summaries here simplify, and they mark the places where Hart's reading of history or of other thinkers is disputed.</p>
+    </div>
+  </details>
+</section>
+
+<section class="section" id="map">
+  <h2>Map of the book</h2>
+  <div class="prose"><p>Hart builds the book like an argument in three movements. He calls them thesis, story (the Greek word is <i>diegesis</i>, a narration), and antithesis. Look at this map before you start and come back to it whenever you lose your place.</p></div>
+  <div class="flow">
+    <a class="node" href="#m1"><span class="node-k">Introduction</span><strong>The Question</strong><span class="node-s">Can Christian persuasion be peace, or is it power in disguise?</span></a>
+    <div class="node p1"><span class="node-k">Part 1 · Thesis</span><strong>Dionysus against the Crucified</strong><span class="node-s">The story of violence told by Nietzsche and his heirs, and where it cracks.</span>
+      <div class="sub"><a href="#m2">2 Two stories</a><a href="#m3">3 The sublime</a><a href="#m4">4 Nietzsche</a><a href="#m5">5 Interruption</a></div></div>
+    <div class="node p2"><span class="node-k">Part 2 · Story</span><strong>The Beauty of the Infinite</strong><span class="node-s">The Christian story told in four moments, following the Nicene Creed.</span>
+      <div class="sub"><a href="#m6">6 Trinity</a><a href="#m7">7 Creation</a><a href="#m8">8 Salvation</a><a href="#m9">9 Eschaton</a></div></div>
+    <a class="node p3" href="#m10"><span class="node-k">Part 3 · Antithesis</span><strong>Rhetoric without Reserve</strong><span class="node-s">The opening question turned around on the questioners.</span></a>
+  </div>
+  <div class="legend"><span><span class="story v">story of violence</span> conflict is the deepest truth</span><span><span class="story p">story of peace</span> goodness comes first</span></div>
+  <p class="cite meta measure">Hart offers no synthesis at the end. The book leaves two stories facing each other and asks the reader to choose.</p>
+</section>
+
+<!-- ========== MODULE 1 ========== -->
+<article class="module" id="m1" data-module="1">
+  <header class="mod-head">
+    <p class="eyebrow meta">Module 1 · Introduction</p>
+    <h2>The Question</h2>
+    <p class="mod-sum">Christianity calls itself a message of peace. A group of modern thinkers say every message is secretly a grab for power. Hart's whole book answers them.</p>
+    <span class="done-badge" hidden>Checked</span>
+  </header>
+  <div class="mod-body">
+    <aside class="gloss" aria-label="Key terms for module 1">
+      <h3>Key terms</h3>
+      <dl>
+        <div><dt>Gospel</dt><dd>"Good news." The Christian message about Jesus.</dd></div>
+        <div><dt>Rhetoric</dt><dd>The art of persuading. Hart thinks Christianity is rhetoric through and through.</dd></div>
+        <div><dt>Postmodern</dt><dd>Hart's loose label for thinkers suspicious of any big story that claims to explain everything.</dd></div>
+        <div><dt>Totality</dt><dd>The world pictured as a closed system that explains itself.</dd></div>
+        <div><dt>Infinity</dt><dd>In Hart's sense, the world received as a gift from a God beyond it.</dd></div>
+      </dl>
+    </aside>
+    <div class="col">
+      <section class="step">
+        <h3 class="step-label">Warm-up</h3>
+        <p>Two people want you at their party. Ana says, "Come, or I'll tell everyone your secret." Ben shows you photos from last year: the music, the food, the view from the roof at sunset. Both are trying to change your mind.</p>
+        <fieldset class="predict" data-predict="w1" role="group" aria-labelledby="w1q">
+          <legend id="w1q">Is Ben's way just a nicer version of Ana's?</legend>
+          <div class="row">
+          <button type="button" class="btn" data-v="a">Yes, both are pressure</button>
+          <button type="button" class="btn" data-v="b">No, Ben is inviting and Ana is forcing</button>
+          <button type="button" class="btn" data-v="c">It depends on Ben's motive</button>
+        </div>
+        </fieldset>
+        <div class="reveal box" hidden>Hold on to your answer. A whole school of modern philosophy says Ben is doing what Ana does, only more cleverly. Hart thinks Ben's kind of persuasion can be real peace, and he gives the difference a name: beauty. If you picked "it depends on Ben's motive," you've already found the place where the two sides fight.</div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Picture it</h3>
+        <p>Ana works by threat. Ben works by showing you something good and leaving the choice with you. Hart's book asks which kind of persuader Christianity is.</p>
+        <p>His opponents say Ben is Ana with better manners. The photos are a softer kind of pressure, and the goal is still to get his way. Hart says Ben's kind of persuasion can be the real thing, and the rest of the book tries to show how.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">The idea</h3>
+        <p>Christians describe their faith as a gospel of peace: reconciliation with God and with one another, offered as a gift.</p>
+        <p>Friedrich Nietzsche (1844–1900) proposed that beneath every value lies a <i>will to power</i>, a drive to dominate. Later thinkers often grouped as postmodern (Jacques Derrida, Gilles Deleuze, Michel Foucault, Jean-François Lyotard) turned this into a habit of suspicion. Take any sermon, law, or argument apart, they say, and you'll find a strategy of control. If they are right, Christian preaching is a fraud: the friendly face of an empire.</p>
+        <p>Hart grants that the challenge is fair. He admits Christianity's historical record is mixed. He also says the Christian message invites the test, because it claims that the world is ruled by violence and that one man, Jesus of Nazareth, has overcome it.</p>
+        <p>Then he makes his move. Christianity has never mainly won people with airtight proofs. It tells a story, points to a person, and asks people to see that person as good and lovely. So the real question is whether beauty can persuade without violence. Hart says yes, on one condition: beauty has to run through the whole Christian story, from God to creation to salvation to the end of time, without contradiction. If beauty is only packaging, it's a trick.</p>
+        <p class="truth box"><b>How Hart argues.</b> He thinks no neutral logic can settle a contest between whole stories about reality. So he tries to show that the Christian story hangs together and is more beautiful, and lets that do the persuading.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Try it</h3>
+        <p>In his Introduction Hart lists six features of beauty. Read each one, guess what it means, then tap to check your guess.</p>
+        <div class="flips">
+          <button type="button" class="flip" aria-pressed="false"><span class="ff">1. Beauty is objective.</span><span class="hint ff-hide">Guess, then tap</span><span class="fbk">Beauty arrives before you decide to want it. A sunset surprises you; you don't invent it. That's why, for Hart, beauty can announce God's goodness: it comes as a gift.</span></button>
+          <button type="button" class="flip" aria-pressed="false"><span class="ff">2. Beauty is the true form of distance.</span><span class="hint ff-hide">Guess, then tap</span><span class="fbk">The space between you and what you love is good space. You can only see a mountain from some distance. Hart thinks the distance between people, and between God and the world, is first of all room for delight.</span></button>
+          <button type="button" class="flip" aria-pressed="false"><span class="ff">3. Beauty evokes desire.</span><span class="hint ff-hide">Guess, then tap</span><span class="fbk">Beauty makes you want, and the wanting can be trained. Hart rejects Kant's idea that the purest response is cool and disinterested. Love includes desire.</span></button>
+          <button type="button" class="flip" aria-pressed="false"><span class="ff">4. Beauty crosses boundaries.</span><span class="hint ff-hide">Guess, then tap</span><span class="fbk">Beauty turns up in the high and the low, the spiritual and the physical, the grand and the tiny. It ignores the neat lines philosophers draw between them.</span></button>
+          <button type="button" class="flip" aria-pressed="false"><span class="ff">5. Beauty guards against gnosticism.</span><span class="hint ff-hide">Guess, then tap</span><span class="fbk">The ancient gnostics taught that matter is a prison and salvation is secret knowledge that lets the soul escape. Worldly beauty says the physical world is God's good work, worth loving.</span></button>
+          <button type="button" class="flip" aria-pressed="false"><span class="ff">6. Beauty resists becoming a symbol.</span><span class="hint ff-hide">Guess, then tap</span><span class="fbk">You can't swap a beautiful thing for its "deeper meaning" and throw the thing away. Hart applies this to Jesus: the cross and the empty tomb happened to a particular man. No general life lesson can stand in for them.</span></button>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Pushback</h3>
+        <div class="panel push">
+          <h4>The strongest objection</h4>
+          <p>Beauty gets used to manipulate all the time. Advertising runs on it. So does propaganda, from royal portraits to the staged rallies of the 1930s. Hart himself admits that beauty can sit beside atrocity: flowers growing over killing fields, music played in death camps. Why trust beauty at all?</p>
+          <h4>Hart's reply</h4>
+          <p>He agrees that beauty in general proves nothing. His claim is narrower. The particular beauty in the Christian story has the shape of a person who wins by giving himself away. So Hart owes his readers a demonstration that this beauty stays peaceful at every step. Part 2 of the book is that demonstration.</p>
+          <h4>Your turn</h4>
+          <p>Is the narrower claim enough? What would count as evidence for or against it?</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Check yourself</h3>
+        <div class="quiz" data-quiz="m1"></div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Explain it</h3>
+        <div class="explain" data-explain="m1">
+          <label for="ex-m1">Explain the Nietzschean suspicion to someone who has never heard of it. Use one example from advertising, politics, or school.</label>
+          <textarea id="ex-m1" placeholder="Write two or three sentences..."></textarea>
+          <div class="row"><button type="button" class="btn primary">Compare with a model answer</button><span class="wc" aria-live="polite"></span></div>
+          <p class="nudge meta" hidden>Try a sentence or two first. A rough attempt helps you remember, even if it's wrong. Tap again to see it anyway.</p>
+          <div class="model" hidden><h5>A model answer</h5><p>The suspicion says: whenever someone tries to convince you, ask what they gain. A school assembly about "community values" might really be about keeping students easy to manage. Nietzsche's followers apply this test to everything, religion included. On their reading, Christian talk of love and humility is a clever way for the powerless to gain control over the powerful.</p><p class="small muted">Check yours: did you name the hidden goal (power) and show how a nice-sounding message could serve it?</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+
+<div class="part-head" id="part1">
+  <p class="eyebrow meta">Part 1 · Thesis</p>
+  <h2>Dionysus against the Crucified</h2>
+  <p>Hart spends the first part of the book describing the story his opponents tell: a world whose deepest truth is conflict. He wants to understand it from the inside before he answers it.</p>
+</div>
+
+<!-- ========== MODULE 2 ========== -->
+<article class="module" id="m2" data-module="2">
+  <header class="mod-head">
+    <p class="eyebrow meta">Module 2 · Part 1, section I</p>
+    <h2>Two Stories of the World</h2>
+    <p class="mod-sum">Hart thinks every big picture of reality tells one of two stories about the deepest level: a story of violence or a story of peace.</p>
+    <span class="done-badge" hidden>Checked</span>
+  </header>
+  <div class="mod-body">
+    <aside class="gloss" aria-label="Key terms for module 2">
+      <h3>Key terms</h3>
+      <dl>
+        <div><dt>Ontology</dt><dd>The study of being: what it means for anything to exist at all.</dd></div>
+        <div><dt>Metaphysics</dt><dd>Hart uses it loosely for any big theory of what is real at the deepest level.</dd></div>
+        <div><dt>Apollo</dt><dd>Greek god of order, reason, and form; patron of the walled city.</dd></div>
+        <div><dt>Dionysus</dt><dd>Greek god of wine, ecstasy, and the wild country outside the walls.</dd></div>
+        <div><dt>Privation</dt><dd>Evil understood as a lack, like a hole in fabric: real damage with no substance of its own.</dd></div>
+      </dl>
+    </aside>
+    <div class="col">
+      <section class="step">
+        <h3 class="step-label">Warm-up</h3>
+        <fieldset class="predict" data-predict="w2" role="group" aria-labelledby="w2q">
+          <legend id="w2q">Imagine the universe at its deepest level. Which picture feels closer to the truth?</legend>
+          <div class="row">
+          <button type="button" class="btn" data-v="a">A storm of forces; any calm is a truce</button>
+          <button type="button" class="btn" data-v="b">A song; any noise is a wrong note</button>
+          <button type="button" class="btn" data-v="c">Neither</button>
+        </div>
+        </fieldset>
+        <div class="reveal box" hidden>There's no wrong answer here. Hart says these two pictures are the two great stories people tell about reality, and that you can't prove either one from evidence alone. The rest of the book is about which one deserves belief.</div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Picture it</h3>
+        <figure class="figwrap">
+          <svg class="fig city" viewBox="0 0 340 190" role="img" aria-label="A walled city of order surrounded by wild country">
+            <rect class="wild" x="0" y="0" width="340" height="190"/>
+            <path class="scrib" d="M18 30 q14 -14 28 0 t28 0"/><path class="scrib" d="M262 34 q12 -12 24 0 t24 0"/><path class="scrib" d="M24 150 q10 12 22 0 t22 0 t22 0"/><path class="scrib" d="M258 158 q14 -12 28 0 t28 0"/><path class="scrib" d="M40 92 l10 -10 l10 10 l10 -10"/><path class="scrib" d="M280 98 l8 -9 l8 9 l8 -9"/>
+            <circle class="wall" cx="170" cy="98" r="62"/>
+            <path class="temple" d="M144 112 h52 M148 112 v-22 M160 112 v-22 M172 112 v-22 M184 112 v-22 M192 112 v-22 M142 90 h56 l-28 -16 z"/>
+            <text class="tc" x="170" y="136" text-anchor="middle">APOLLO · ORDER · LAW</text>
+            <text class="tw" x="14" y="182">DIONYSUS · THE WILD</text>
+            <text class="tw" x="326" y="18" text-anchor="end">FRENZY · FLUX</text>
+          </svg>
+          <figcaption>The ancient map: a fragile city of order holding back the chaos outside.</figcaption>
+        </figure>
+        <p>Picture an ancient Greek city: walls, laws, temples to Apollo. Outside lies the wild country of Dionysus. The city survives by holding the wild back, by force when it has to: soldiers, punishments, executions. Peace inside the walls is a truce enforced against the chaos outside.</p>
+        <p>Old philosophy mostly stood on the walls and sided with order. Many postmodern thinkers cheer for the wild. Hart's point is that both keep the same map, with order and chaos locked in a struggle that never ends. He compares them to two mirrors facing each other: the corridor between them looks endless and only repeats one image.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">The idea</h3>
+        <p>The theologian John Milbank (<i>Theology and Social Theory</i>, 1990) named this map an <i>ontology of violence</i>: the belief that conflict is the deepest truth, and peace is always a pause between battles. Hart builds on Milbank's diagnosis.</p>
+        <p>Hart traces the map back to two early Greek thinkers. Parmenides taught that true being is one and unchanging. Heraclitus taught that everything flows and that war is the father of all things. Hart reads them as the two ends of one picture. Western philosophy mostly sided with Parmenides and order; the postmodern turn sides with Heraclitus and flux. Turning a picture upside down leaves the same picture.</p>
+        <p>Christianity, Hart argues, tells a different story. In Genesis there is no chaos God has to defeat. God creates freely, from nothing, and looks at the result: "behold, it was very good" (Genesis 1:31). Violence enters afterward, as sin, an intruder with no right to be there. Peace comes first and violence second. Evil is a privation, like a hole torn in cloth.</p>
+        <p>Augustine (354–430) set the two stories side by side in <i>The City of God</i>. In Roman legend, Romulus founded Rome by killing his twin Remus for jumping over the boundary line he had marked out. Augustine paired the story with Cain killing Abel. The earthly city belongs to the brother who kills. The city of God belongs to the brother who was killed.</p>
+        <div class="two">
+          <div class="side v"><h5>The story of violence</h5><ul><li>Conflict is basic.</li><li>Peace is a truce enforced by power.</li><li>Order must be imposed on chaos.</li></ul></div>
+          <div class="side p"><h5>The story of peace</h5><ul><li>Goodness is basic.</li><li>Violence is a wound that can heal.</li><li>Differences can fit together in harmony.</li></ul></div>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Try it</h3>
+        <p>Which story does each statement belong to? Choose a side for each one.</p>
+        <ul class="sort" data-sort="s2" data-bins="v|Story of violence;p|Story of peace">
+          <li data-k="v" data-why="The city as a wall against chaos is the ancient map Hart describes.">Every civilization is a fragile wall against the chaos outside it.</li>
+          <li data-k="p" data-why="Genesis 1:31, the starting point of Hart's story of peace.">God looked at what he had made and called it very good.</li>
+          <li data-k="v" data-why="This is Heraclitus's line, and the heart of the ontology of violence.">War is the father of all things.</li>
+          <li data-k="p" data-why="This is the idea of privation: evil has no substance of its own.">Evil is like a hole in fabric: real damage, nothing in itself.</li>
+          <li data-k="v" data-why="Peace as a pause between battles is the definition of the ontology of violence.">Every peace treaty is only a pause in a war that never ends.</li>
+          <li data-k="p" data-why="Hart's story treats difference as harmony, like voices in music.">People's differences can fit together like parts in a choir.</li>
+          <li data-k="v" data-why="Celebrating the endless war of forces is Nietzsche's and Deleuze's response to the story of violence.">The bravest response to life is to celebrate the endless clash of forces.</li>
+          <li data-k="p" data-why="Augustine's city of God belongs to Abel, the brother who was killed.">The true city belongs to the victim.</li>
+        </ul>
+        <p class="score-line" aria-live="polite"></p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Pushback</h3>
+        <div class="panel push">
+          <h4>The strongest objection</h4>
+          <p>Look at nature: predators eat prey. Look at history: wars everywhere. The story of violence sounds like realism, and the story of peace sounds like wishful thinking.</p>
+          <h4>Hart's reply</h4>
+          <p>Both stories look at the same evidence. The story of peace has a place for violence (as sin and damage), and the story of violence has a place for peace (as a pause). Neither can be proved from the evidence alone, because nobody can stand outside reality and inspect its foundations. Hart admits that at this level reason alone can't decide, and each side has to persuade. Critics call this circular. Defenders call it honest. You'll meet the issue again in Module 10.</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Check yourself</h3>
+        <div class="quiz" data-quiz="m2"></div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Explain it</h3>
+        <div class="explain" data-explain="m2">
+          <label for="ex-m2">Describe something you saw recently (a game, a group project, an argument) twice: once the way the story of violence would tell it, once the way the story of peace would.</label>
+          <textarea id="ex-m2" placeholder="Story of violence: ... Story of peace: ..."></textarea>
+          <div class="row"><button type="button" class="btn primary">Compare with a model answer</button><span class="wc" aria-live="polite"></span></div>
+          <p class="nudge meta" hidden>Try a sentence or two first. A rough attempt helps you remember, even if it's wrong. Tap again to see it anyway.</p>
+          <div class="model" hidden><h5>A model answer</h5><p><b>Story of violence:</b> In our group project two people clashed, and the final version was whatever the louder one forced through. The "teamwork" was a truce between competing egos.</p><p><b>Story of peace:</b> The group was meant to combine different strengths, and the clash was a breakdown of that purpose. Their ideas could have fit together, and the fight was the thing that needed fixing.</p><p class="small muted">Check yours: in the first telling, is conflict the truth about groups? In the second, is conflict a failure of what groups are for?</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+
+<!-- ========== MODULE 3 ========== -->
+<article class="module" id="m3" data-module="3">
+  <header class="mod-head">
+    <p class="eyebrow meta">Module 3 · Part 1, section II</p>
+    <h2>The Veil of the Sublime</h2>
+    <p class="mod-sum">Many postmodern thinkers say the deepest truth can't be pictured or put into words. Hart thinks they've made the formless the master of the beautiful.</p>
+    <span class="done-badge" hidden>Checked</span>
+  </header>
+  <div class="mod-body">
+    <aside class="gloss" aria-label="Key terms for module 3">
+      <h3>Key terms</h3>
+      <dl>
+        <div><dt>Sublime</dt><dd>The experience of something too vast or powerful to take in.</dd></div>
+        <div><dt>Unrepresentable</dt><dd>What can't be captured in an image, an idea, or words.</dd></div>
+        <div><dt>Différance</dt><dd>Derrida's coined word: meaning keeps differing and being put off, never fully arriving.</dd></div>
+        <div><dt>Immanence</dt><dd>Everything lies inside the world; nothing stands beyond it.</dd></div>
+      </dl>
+    </aside>
+    <div class="col">
+      <section class="step">
+        <h3 class="step-label">Warm-up</h3>
+        <fieldset class="predict" data-predict="w3" role="group" aria-labelledby="w3q">
+          <legend id="w3q">Think of something too big to take in: a storm at sea, a canyon, the night sky far from city lights. What was the feeling closer to?</legend>
+          <div class="row">
+          <button type="button" class="btn" data-v="a">Delight</button>
+          <button type="button" class="btn" data-v="b">Being overwhelmed</button>
+          <button type="button" class="btn" data-v="c">Both at once</button>
+        </div>
+        </fieldset>
+        <div class="reveal box" hidden>Philosophers call the overwhelming version the <i>sublime</i>. The question for this module is which feeling tells the truth about reality. Hart's opponents say the overwhelming one does. Hart says the two belong together, and that delight is the larger of them.</div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Picture it</h3>
+        <p>A garden, and a thunderstorm seen from a cliff edge. The garden is beautiful: shaped, graspable, pleasing. The storm is sublime: too big and powerful to take in, thrilling and a little frightening. Immanuel Kant separated the two in his <i>Critique of Judgment</i> (1790). For Kant, the sublime first overwhelms your imagination, then makes you aware that your mind has a power nature can't crush.</p>
+        <p>Now picture beauty as a painted curtain and the sublime as the storm behind it. Many postmodern thinkers say the storm is the truth and the curtain is a pleasant lie.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">The idea</h3>
+        <p>Hart sorts these thinkers into four "narratives of the sublime." He admits the sorting is his own and somewhat arbitrary. Each names a different hidden truth behind the curtain.</p>
+        <div class="thinkers">
+          <div class="thinker"><span class="tk">The differential sublime</span><h5>Jacques Derrida</h5><p>Meaning never fully arrives. Every word points to other words, forever. Derrida's spelling <i>différance</i>, with an <i>a</i>, names this constant differing and delay.</p><p class="hw">Hart's worry: Derrida still describes the origin of meaning as a kind of violence.</p></div>
+          <div class="thinker"><span class="tk">The cosmological sublime</span><h5>Gilles Deleuze, Michel Foucault</h5><p>Beneath the world's order churns a chaos of forces. Deleuze celebrates it. Foucault traces how power shapes what people accept as knowledge.</p><p class="hw">Hart's worry: if force is the final truth, nothing in principle separates a hospice from a death camp except preference.</p></div>
+          <div class="thinker"><span class="tk">The ontological sublime</span><h5>Martin Heidegger, Jean-Luc Nancy</h5><p>Being shows itself only by hiding. Things arrive and pass away in an event no one controls.</p><p class="hw">Hart's worry: existence becomes fate, with destruction built into it.</p></div>
+          <div class="thinker"><span class="tk">The ethical sublime</span><h5>Emmanuel Levinas</h5><p>The other person is infinitely beyond anything I can grasp, and their face commands me before I can think.</p><p class="hw">Hart's worry: an Other with no features can be obeyed, but not loved.</p></div>
+        </div>
+        <p>According to Hart, all four share one assumption: beauty belongs to the surface and can't be trusted. The truth is formless, and every form covers it over. So beauty is at best a rest stop and at worst a lie.</p>
+        <p>Hart's alternative: the infinite has form. In the Christian God, infinity is a fullness of love and beauty. The sublime still exists, as the experience of more beauty than you can take in. It sits inside beauty as one of its moments.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Try it</h3>
+        <p>Match each statement to the thinker whose "narrative of the sublime" it describes. Try it without looking back at the cards above.</p>
+        <div class="match" data-match="m3m">
+          <div class="mrow" data-k="df"><label for="mm1">Under every order lies a chaos of competing forces, and history records who dominated whom.</label><select id="mm1"><option value="">Choose a thinker</option><option value="dr">Derrida</option><option value="df">Deleuze and Foucault</option><option value="hn">Heidegger and Nancy</option><option value="lv">Levinas</option></select><span class="mres"></span></div>
+          <div class="mrow" data-k="dr"><label for="mm2">Words never land on a final meaning; each one points to others, without end.</label><select id="mm2"><option value="">Choose a thinker</option><option value="dr">Derrida</option><option value="df">Deleuze and Foucault</option><option value="hn">Heidegger and Nancy</option><option value="lv">Levinas</option></select><span class="mres"></span></div>
+          <div class="mrow" data-k="lv"><label for="mm3">Another person's face makes an infinite demand on me before I understand anything about them.</label><select id="mm3"><option value="">Choose a thinker</option><option value="dr">Derrida</option><option value="df">Deleuze and Foucault</option><option value="hn">Heidegger and Nancy</option><option value="lv">Levinas</option></select><span class="mres"></span></div>
+          <div class="mrow" data-k="hn"><label for="mm4">Being shows up only by withdrawing; things arrive and vanish in an event beyond anyone's control.</label><select id="mm4"><option value="">Choose a thinker</option><option value="dr">Derrida</option><option value="df">Deleuze and Foucault</option><option value="hn">Heidegger and Nancy</option><option value="lv">Levinas</option></select><span class="mres"></span></div>
+          <div class="row"><button type="button" class="btn primary" data-check>Check my matches</button><span class="score-line" aria-live="polite"></span></div>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Pushback</h3>
+        <div class="panel push">
+          <h4>In fairness to Levinas</h4>
+          <p>Hart's harshest pages are aimed at Emmanuel Levinas, so hear Levinas's side first. Levinas was a Jewish philosopher whose parents and brothers were murdered in the Holocaust. He had watched ideologies sort human beings into categories and then destroy them. He wanted an ethics no system could swallow: a demand that comes from another person before any theory gets a chance to label them. That's why he said the best way to meet someone is not even to notice the color of their eyes.</p>
+          <h4>Hart's reply</h4>
+          <p>A demand from a faceless Other can be obeyed, but it can't be loved. Real responsibility, Hart says, often begins exactly when you notice the color of someone's eyes. Many scholars think Hart's reading of Levinas is unfair and far too severe.</p>
+          <h4>Your turn</h4>
+          <p>Does noticing details about a person help you see them clearly, or tempt you to put them in a box?</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Check yourself</h3>
+        <div class="quiz" data-quiz="m3"></div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Explain it</h3>
+        <div class="explain" data-explain="m3">
+          <label for="ex-m3">Hart says seeing the color of someone's eyes can be the beginning of responsibility. Agree or disagree, with an example from your life or a story you know.</label>
+          <textarea id="ex-m3" placeholder="I agree / disagree, because..."></textarea>
+          <div class="row"><button type="button" class="btn primary">Compare with a model answer</button><span class="wc" aria-live="polite"></span></div>
+          <p class="nudge meta" hidden>Try a sentence or two first. A rough attempt helps you remember, even if it's wrong. Tap again to see it anyway.</p>
+          <div class="model" hidden><h5>Two model answers</h5><p><b>Agree:</b> At the end of <i>To Kill a Mockingbird</i>, Scout stands on Boo Radley's porch and sees the street from his side. Up close he stops being a neighborhood legend and becomes a particular person, and that's when she feels responsible to him.</p><p><b>Disagree:</b> Noticing details can trigger stereotypes. A judge or a teacher may treat people more fairly by setting appearance aside, which is Levinas's worry.</p><p class="small muted">Either side works if your example shows how seeing (or not seeing) the particular person changes what you owe them.</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+
+<!-- ========== MODULE 4 ========== -->
+<article class="module" id="m4" data-module="4">
+  <header class="mod-head">
+    <p class="eyebrow meta">Module 4 · Part 1, section III</p>
+    <h2>Nietzsche's Challenge</h2>
+    <p class="mod-sum">Nietzsche set Dionysus against the Crucified. Hart thinks Nietzsche understood how strange Christianity is better than most Christians do, and then judged it with bad taste.</p>
+    <span class="done-badge" hidden>Checked</span>
+  </header>
+  <div class="mod-body">
+    <aside class="gloss" aria-label="Key terms for module 4">
+      <h3>Key terms</h3>
+      <dl>
+        <div><dt>Will to power</dt><dd>Nietzsche's name for life's basic drive: to grow, overcome, and dominate.</dd></div>
+        <div><dt>Ressentiment</dt><dd>French for "resentment." The grudge of the weak against the strong, dressed up as morality.</dd></div>
+        <div><dt>Slave revolt in morality</dt><dd>Nietzsche's claim that the weak flipped the values of the strong, calling meekness good and strength evil.</dd></div>
+        <div><dt>Platonism</dt><dd>The belief that the true world is a separate world of perfect, unchanging ideas beyond this one.</dd></div>
+      </dl>
+    </aside>
+    <div class="col">
+      <section class="step">
+        <h3 class="step-label">Warm-up</h3>
+        <fieldset class="predict" data-predict="w4" role="group" aria-labelledby="w4q">
+          <legend id="w4q">Have you ever seen someone use "being nice" as a way to win?</legend>
+          <div class="row">
+          <button type="button" class="btn" data-v="a">Yes, often</button>
+          <button type="button" class="btn" data-v="b">Sometimes</button>
+          <button type="button" class="btn" data-v="c">Rarely</button>
+        </div>
+        </fieldset>
+        <div class="reveal box" hidden>Nietzsche built a whole theory on that experience. He thought Christian love was, at bottom, "being nice" as a weapon. Keep your own examples in mind as you read his case, and ask whether they prove what he thinks they prove.</div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Picture it</h3>
+        <p>Two gods. Dionysus, Greek god of wine and wild ecstasy, is torn apart in myth and reborn, like a vine cut back to the root that grows again each spring. For Nietzsche he stands for life saying yes to itself, cruelty and suffering included. The Crucified is Jesus on the cross, who for Nietzsche stands for life condemned: suffering treated as an accusation against the world.</p>
+        <p>Nietzsche ended his last book, <i>Ecce Homo</i> (written 1888), by setting them against each other: Dionysus versus the Crucified. Hart borrows the phrase for the title of Part 1.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">The idea</h3>
+        <h4>Nietzsche's case, at its strongest</h4>
+        <ol class="ideas">
+          <li><b>A slave revolt in morality.</b> Ancient nobles called strength, pride, health, and beauty good. The weak couldn't beat them, so they flipped the values: humility, pity, and meekness became good, and the strong became evil. Christianity spread this revolt across the world (<i>On the Genealogy of Morals</i>, 1887).</li>
+          <li><b>Ressentiment.</b> Behind Christian love sits the bitter grudge of the powerless.</li>
+          <li><b>Will to power.</b> Life is growth, conquest, and expansion. A morality that shelters the weak works against life.</li>
+          <li><b>Hatred of the body.</b> Christianity invents a soul and another world so that people will despise this one. Nietzsche called it Platonism for the people.</li>
+          <li><b>The church betrayed Jesus.</b> Jesus himself, Nietzsche says in <i>The Antichrist</i>, was a gentle dreamer who lived in an inner world of peace and could found nothing. There was only one Christian, and he died on the cross.</li>
+        </ol>
+        <p>Hart takes all of this seriously. He says theology owes Nietzsche a debt, because Nietzsche saw how shocking the Christian message really was: a God who dies like a slave, and good news for the weak.</p>
+        <h4>Hart's replies</h4>
+        <ol class="ideas">
+          <li><b>The will to power is a story too.</b> "Life is essentially overpowering" is a claim about the deepest level of reality. That is metaphysics, the very thing Nietzsche claims to have left behind.</li>
+          <li><b>Christianity loves the world.</b> Creation is called good, the body will be raised, and the central rite is a shared meal of bread and wine. The body-haters of the ancient world were mostly pagan philosophers and gnostics.</li>
+          <li><b>Two wines.</b> Compare them in the activity below.</li>
+          <li><b>Nietzsche's Jesus is made up.</b> The Jesus of the Gospels drives the money changers out of the temple, argues with sharp irony, and makes demands. A passive dreamer doesn't fit the texts.</li>
+          <li><b>In the end, it's taste.</b> The Gospels record that after Peter denied knowing Jesus, "he went out, and wept bitterly" (Matthew 26:75). Classical literature rarely treated a common man's tears as serious; they were usually material for comedy. The literary critic Erich Auerbach made the same point in <i>Mimesis</i> (1946). The Gospel treats Peter's grief as grave, and that reversal of taste is what Nietzsche hated. Hart's verdict:</li>
+        </ol>
+        <blockquote>Nietzsche had atrocious taste.<cite>Hart, end of Part 1, section III</cite></blockquote>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Try it</h3>
+        <p>First, tap each wine to compare them.</p>
+        <div class="flips">
+          <button type="button" class="flip" aria-pressed="false"><span class="ff">Dionysus's wine</span><span class="hint ff-hide">Tap to reveal</span><span class="fbk">In Greek myth it goes with frenzy, madness, and blood. In Euripides' <i>Bacchae</i>, women maddened by Dionysus tear King Pentheus apart, led by his own mother.</span></button>
+          <button type="button" class="flip" aria-pressed="false"><span class="ff">The Bible's wine</span><span class="hint ff-hide">Tap to reveal</span><span class="fbk">"Wine that maketh glad the heart of man" (Psalm 104:15). A gift and a thank offering. Jesus's first sign at a wedding in Cana (John 2). The cup of the Last Supper, to be drunk "new in the kingdom of God" (Mark 14:25).</span></button>
+        </div>
+        <p class="small muted">Hart adds a joke: Nietzsche didn't drink, so he couldn't judge either vintage.</p>
+        <p>Now run a debate round. For each of Nietzsche's accusations, pick the reply Hart actually gives.</p>
+        <div class="quiz" data-quiz="m4d"></div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Pushback</h3>
+        <div class="panel push">
+          <h4>The strongest objection</h4>
+          <p>If the contest comes down to taste, Hart hasn't won anything. He has announced his preferences, and Nietzsche announced his.</p>
+          <h4>Hart's reply</h4>
+          <p>He accepts part of this. There is no neutral proof here. He thinks the Christian story can make sense of Nietzsche's story (as one more tale of power), while Nietzsche's story can only dismiss Jesus as impossible. He also concedes a great deal: Christians have often acted from resentment, and the word ressentiment hits home for a Christian conscience.</p>
+          <h4>Your turn</h4>
+          <p>Is "my story can explain yours, and yours can't explain mine" a good reason to prefer a story?</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Check yourself</h3>
+        <div class="quiz" data-quiz="m4"></div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Explain it</h3>
+        <div class="explain" data-explain="m4">
+          <label for="ex-m4">Write Nietzsche's best argument against Christianity in your own words, as if you believed it. Then write Hart's best reply in two sentences.</label>
+          <textarea id="ex-m4" placeholder="Nietzsche: ... Hart: ..."></textarea>
+          <div class="row"><button type="button" class="btn primary">Compare with a model answer</button><span class="wc" aria-live="polite"></span></div>
+          <p class="nudge meta" hidden>Try a sentence or two first. A rough attempt helps you remember, even if it's wrong. Tap again to see it anyway.</p>
+          <div class="model" hidden><h5>A model answer</h5><p><b>Nietzsche:</b> Christianity is what happens when people who can't win decide to make winning wicked. Calling humility a virtue lets the weak feel superior to the strong, and it drags everyone toward a smaller, sicklier life.</p><p><b>Hart:</b> "Life is will to power" is a belief about reality that nobody has proved, and the Gospels' Jesus doesn't fit Nietzsche's picture of a weak dreamer. The Christian story treats creation, the body, and even a fisherman's tears as precious, and Nietzsche's dislike of that is a matter of taste.</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+
+<!-- ========== MODULE 5 ========== -->
+<article class="module" id="m5" data-module="5">
+  <header class="mod-head">
+    <p class="eyebrow meta">Module 5 · Part 1, section IV</p>
+    <h2>The Christian Interruption</h2>
+    <p class="mod-sum">Hart's version of Western history: Christianity broke into Greek philosophy with the idea that the world is a free gift, and modern philosophy has been fighting that idea ever since.</p>
+    <span class="done-badge" hidden>Checked</span>
+  </header>
+  <div class="mod-body">
+    <aside class="gloss" aria-label="Key terms for module 5">
+      <h3>Key terms</h3>
+      <dl>
+        <div><dt>Creation <i>ex nihilo</i></dt><dd>Latin for "from nothing." God makes the world without using anything that already existed.</dd></div>
+        <div><dt>Transcendence</dt><dd>God's being beyond the world as its source, never one thing among others.</dd></div>
+        <div><dt>Necessity</dt><dd>What must be, and could not have been otherwise.</dd></div>
+        <div><dt>Nominalism</dt><dd>A late medieval movement that stressed God's sheer will and treated only individual things as real.</dd></div>
+      </dl>
+    </aside>
+    <div class="col">
+      <section class="step">
+        <h3 class="step-label">Warm-up</h3>
+        <fieldset class="predict" data-predict="w5" role="group" aria-labelledby="w5q">
+          <legend id="w5q">A paycheck and a birthday present can both hand you $50. What's the difference?</legend>
+          <div class="row">
+          <button type="button" class="btn" data-v="a">One is earned, one is freely given</button>
+          <button type="button" class="btn" data-v="b">No real difference</button>
+          <button type="button" class="btn" data-v="c">The present means more</button>
+        </div>
+        </fieldset>
+        <div class="reveal box" hidden>Hart's whole reading of history turns on that difference. If the world exists the way a paycheck exists (because it must), you study it like a machine. If it exists the way a present does (because someone wanted to give it), the right first response is gratitude.</div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Picture it</h3>
+        <p>A clock and a present. A clock's gears turn because they must; remove one gear and the whole thing stops. A present exists because someone wanted to give it. Much Greek philosophy pictured the world like the clock: always existing, unable to be other than it is. The Jewish and Christian teaching of creation from nothing pictures it like the present: it didn't have to exist, and it exists because God freely wanted it.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">The idea</h3>
+        <p>Hart calls this a Christian "interruption" of Western thought. Three ideas came with it.</p>
+        <ol class="ideas">
+          <li><b>The world is a gift.</b> Nothing forced God to create, and God gains nothing by creating. The world's existence is pure generosity.</li>
+          <li><b>God is truly beyond the world.</b> In much ancient philosophy, the highest principle was the top rung of the cosmic ladder. In Christian thought, as Hart reads it, God is the source of the whole ladder's being. That also makes God closer to each thing than it is to itself; Augustine said God is more inward than his inmost self (<i>Confessions</i> 3.6.11).</li>
+          <li><b>Knowing starts in wonder.</b> If the world is a gift, you know it best by first receiving it with delight. Hart puts it strongly: beauty is where true knowledge begins and ends.</li>
+        </ol>
+        <p>Then comes what Hart sees as a long forgetting. Late medieval nominalists pictured God as raw, all-powerful will, more like a giant ruler. René Descartes (<i>Meditations</i>, 1641) set out to find certainty by shutting his eyes and ears and doubting his senses; truth would start from the thinking self. Immanuel Kant argued that we know things only as our own minds shape them. Kant called this his Copernican revolution. Hart says it should be called Ptolemaic, after the old earth-centered model of the universe, because it puts the human knower back at the center.</p>
+        <p>G. W. F. Hegel then pictured God and history as one great process pushed forward by conflict. After him, Nietzsche and Heidegger described being as a war of forces or a fated coming and going. Hart's summary: modern philosophy is theology's rebellious child. It inherited Christianity's questions and keeps trying to answer them without God.</p>
+        <p class="truth box"><b>Contested.</b> This is Hart's reading of history, and historians argue about it. Some think it gives nominalism too much blame. Many admirers of Descartes and Kant see their caution as honesty after the scientific revolution showed that the senses can mislead.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Try it</h3>
+        <p>The steps of Hart's history are scrambled. Use the arrows to put them in order, earliest at the top, then check.</p>
+        <div data-order-wrap>
+          <ol class="order" data-order="o5">
+            <li data-p="0">Plato: the true world is made of perfect, unchanging Forms; this world is their shadow.</li>
+            <li data-p="1">The Christian interruption: creation from nothing, the Trinity, a God beyond the world (Gregory of Nyssa, Augustine).</li>
+            <li data-p="2">Nominalism: God pictured as raw will; the world's beauty cut loose from God.</li>
+            <li data-p="3">Descartes: shut your eyes; certainty starts from the thinking self.</li>
+            <li data-p="4">Kant: we know things only as our minds shape them.</li>
+            <li data-p="5">Hegel: God and history as one process driven forward by conflict.</li>
+            <li data-p="6">Nietzsche and Heidegger: being as a war of forces, or a fated coming and going.</li>
+          </ol>
+          <div class="row" style="margin-top:.6rem"><button type="button" class="btn primary" data-check>Check my order</button><span class="score-line" aria-live="polite"></span></div>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Pushback</h3>
+        <div class="panel push">
+          <h4>The strongest objection</h4>
+          <p>After Galileo, people learned that the senses can fool you: the earth feels still, and it moves. Starting from what you can be sure of looks like intellectual honesty. Descartes and Kant were being careful.</p>
+          <h4>Hart's reply</h4>
+          <p>Every act of knowing rests on trust, he says, borrowing an idea from the eighteenth-century thinker J. G. Hamann. You trust your senses, your language, and your teachers. Trying to doubt everything first moves all your trust onto yourself.</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Check yourself</h3>
+        <div class="quiz" data-quiz="m5"></div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Explain it</h3>
+        <div class="explain" data-explain="m5">
+          <label for="ex-m5">Explain why it matters to Hart whether the world exists like a paycheck (by necessity) or like a present (as a gift).</label>
+          <textarea id="ex-m5" placeholder="If the world is a gift, then..."></textarea>
+          <div class="row"><button type="button" class="btn primary">Compare with a model answer</button><span class="wc" aria-live="polite"></span></div>
+          <p class="nudge meta" hidden>Try a sentence or two first. A rough attempt helps you remember, even if it's wrong. Tap again to see it anyway.</p>
+          <div class="model" hidden><h5>A model answer</h5><p>If the world exists by necessity, it's a machine, and the best way to know it is to take it apart and control it. If it's a gift, it says something about the giver, and the best way to know it starts with gratitude and delight. Hart thinks modern philosophy chose the machine and lost the ability to see the world as beautiful.</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+
+<div class="part-head" id="part2">
+  <p class="eyebrow meta">Part 2 · Story</p>
+  <h2>The Beauty of the Infinite</h2>
+  <p>Now Hart tells the Christian story himself, in four moments that follow the Nicene Creed (381): Trinity, Creation, Salvation, and Eschaton (the last things). He notes that the early church learned them in the opposite order. Easter came first; then the church worked out what salvation means, then what creation is, and last, who God must be.</p>
+</div>
+
+<!-- ========== MODULE 6 ========== -->
+<article class="module" id="m6" data-module="6">
+  <header class="mod-head">
+    <p class="eyebrow meta">Module 6 · Part 2, I: Trinity</p>
+    <h2>The Infinite Is Beautiful</h2>
+    <p class="mod-sum">Christians say God is three persons sharing one life of love. Hart argues that this makes God's infinity full of form and delight, and so beautiful.</p>
+    <span class="done-badge" hidden>Checked</span>
+  </header>
+  <div class="mod-body">
+    <aside class="gloss" aria-label="Key terms for module 6">
+      <h3>Key terms</h3>
+      <dl>
+        <div><dt>Trinity</dt><dd>One God who is Father, Son, and Holy Spirit.</dd></div>
+        <div><dt>Perichoresis <span class="gk">περιχώρησις</span></dt><dd>pair-ee-kho-RAY-sis. The way the three persons live in one another.</dd></div>
+        <div><dt>Apatheia <span class="gk">ἀπάθεια</span></dt><dd>ah-pah-THAY-ah. God's life is so full that nothing outside can wound it or add to it.</dd></div>
+        <div><dt>Epektasis <span class="gk">ἐπέκτασις</span></dt><dd>ep-EK-ta-sis. The soul's endless stretching toward God.</dd></div>
+        <div><dt>Theophany</dt><dd>A showing of God.</dd></div>
+      </dl>
+    </aside>
+    <div class="col">
+      <section class="step">
+        <h3 class="step-label">Warm-up</h3>
+        <fieldset class="predict" data-predict="w6" role="group" aria-labelledby="w6q">
+          <legend id="w6q">Which picture of love fits better?</legend>
+          <div class="row">
+          <button type="button" class="btn" data-v="a">A pool, waiting to be filled</button>
+          <button type="button" class="btn" data-v="b">A fountain, always overflowing</button>
+          <button type="button" class="btn" data-v="c">Both</button>
+        </div>
+        </fieldset>
+        <div class="reveal box" hidden>Hart's God is the fountain: already complete, and giving anyway. Human love is usually both: it needs and it gives. Watch how Hart uses the difference.</div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Picture it</h3>
+        <figure class="figwrap">
+          <svg class="peri" viewBox="0 0 320 300" role="img" aria-label="Three overlapping rings turning slowly around a shared center">
+            <g class="spin">
+              <circle class="core" cx="160" cy="150" r="22"/>
+              <circle class="ring r1" cx="160" cy="112" r="62"/>
+              <circle class="ring r2" cx="127" cy="169" r="62"/>
+              <circle class="ring r3" cx="193" cy="169" r="62"/>
+            </g>
+            <text x="160" y="30" text-anchor="middle">FATHER</text>
+            <text x="38" y="270" text-anchor="middle">SON</text>
+            <text x="282" y="270" text-anchor="middle">SPIRIT</text>
+          </svg>
+          <figcaption>Every picture of the Trinity falls short. This one shows three distinct rings sharing one center and one motion.</figcaption>
+        </figure>
+        <p>Picture three dancers so perfectly in step that they share one motion, while each stays distinct. The dance needs no audience to be complete. If it invites an audience onto the floor, that's generosity.</p>
+        <p>The early church's word for this shared life is <i>perichoresis</i>. It comes from a Greek verb meaning "to make room" or "to contain." It also sounds like the Greek word for dancing, and theologians, Hart included, enjoy the pun.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">The idea</h3>
+        <ol class="ideas">
+          <li><b>God is love because God is three.</b> The Father gives himself wholly to the Son, the Son answers, and the Spirit is the joy and overflow of that love. So delight, regard, and friendship exist inside God before any world exists.</li>
+          <li><b>The baptism of Jesus.</b> As Jesus comes up from the water, a voice says: "Thou art my beloved Son, in whom I am well pleased" (Mark 1:11). Hart calls this scene a theophany: the Father speaks, the Son is addressed, the Spirit descends like a dove. When God speaks his own Word, what he says is pleasure. Delight sits at the center of God.</li>
+          <li><b>Apatheia.</b> The English word apathy comes from this Greek word, which misleads readers. Hart uses it to say that God's life is so full of love and joy that nothing outside can wound it or add to it. God loved us before we existed. Hart insists on this because a God who needed history to become himself would make every evil in history part of God's own story. He borrows a test from Ivan Karamazov in Dostoevsky's <i>The Brothers Karamazov</i> (1880): would you accept a final harmony that required the torture of one child? A God built out of history's suffering fails that test.</li>
+          <li><b>The infinite is beautiful.</b> Most Greek philosophers treated the infinite (<i>apeiron</i>, "the boundless") as shapeless and bad. Gregory of Nyssa (c. 335–c. 395) called God infinite in the best sense: endless goodness, endless beauty. Plotinus (c. 204–270) had already called the One infinite in a positive way. Hart argues Gregory's infinite differs because it is the Trinity: full of form, relation, and love.</li>
+          <li><b>Epektasis.</b> Paul writes of "reaching forth unto those things which are before" (Philippians 3:13). Gregory built a spirituality on that verb. Since God is infinite, the soul never reaches the end of God, and that is the joy of it: every fulfillment opens a larger desire. Gregory's image is a vessel that grows as it is filled. Try it below.</li>
+        </ol>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Try it</h3>
+        <div class="lab">
+          <div class="vessel-box"><canvas id="vessel" role="img" aria-label="A vessel being filled with gold light; when nearly full, it grows larger"></canvas></div>
+          <div class="row"><button type="button" class="btn primary" id="v-pour">Pour</button><button type="button" class="btn" id="v-reset">Start over</button></div>
+          <p class="result stats" aria-live="polite"><span>Received <strong id="v-rec">0.0</strong></span> <span>Times it grew <strong id="v-grow">0</strong></span> <span>Holds <strong id="v-cap">1.0×</strong> its first size</span></p>
+          <p class="playnote meta" id="v-note">Pour a few times. The dashed outlines show how big the vessel used to be.</p>
+        </div>
+        <p>Gregory's point: the more the soul receives of God, the more it is able to receive. You never reach "full," and that is good news, because the thing you want has no end.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Pushback</h3>
+        <div class="panel push">
+          <h4>The strongest objection</h4>
+          <p>Many modern theologians (Jürgen Moltmann, Robert Jenson, and others influenced by Hegel) argue that a God who can't suffer can't really love. After the Holocaust, they say, we need a God who suffers with us.</p>
+          <h4>Hart's reply</h4>
+          <p>In Jesus, God the Son really suffers and dies in his human nature. God's divine life remains untouched, and Hart says that's the good news: only a God who is not trapped inside suffering can heal it.</p>
+        </div>
+        <details class="deeper"><summary>Go deeper: Rahner's rule</summary><div><p>The Catholic theologian Karl Rahner (1967) gave modern theology a rule: the Trinity we meet in history (the Father sending the Son, the Spirit descending) is the Trinity as God really is. Hart accepts the rule with one warning. It must not be read as saying God becomes God through history. God acts in history fully as himself, and he would be the same God without a world.</p></div></details>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Check yourself</h3>
+        <div class="quiz" data-quiz="m6"></div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Explain it</h3>
+        <div class="explain" data-explain="m6">
+          <label for="ex-m6">Gregory says the soul is like a vessel that grows as it's filled. Explain the image, and say whether it describes anything in your own experience (a skill, a friendship, music).</label>
+          <textarea id="ex-m6" placeholder="The image means..."></textarea>
+          <div class="row"><button type="button" class="btn primary">Compare with a model answer</button><span class="wc" aria-live="polite"></span></div>
+          <p class="nudge meta" hidden>Try a sentence or two first. A rough attempt helps you remember, even if it's wrong. Tap again to see it anyway.</p>
+          <div class="model" hidden><h5>A model answer</h5><p>Normally, filling something ends your wanting: a glass of water fills and you stop. Gregory says that with God, receiving makes you able to receive more, so desire never gets bored or used up. Learning guitar feels like this: each song I learn lets me hear more in other songs, and I want to learn harder ones.</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+
+<!-- ========== MODULE 7 ========== -->
+<article class="module" id="m7" data-module="7">
+  <header class="mod-head">
+    <p class="eyebrow meta">Module 7 · Part 2, II: Creation</p>
+    <h2>Gift, Music, Language</h2>
+    <p class="mod-sum">Hart describes creation three ways: as a gift God didn't need to give, as music, and as speech.</p>
+    <span class="done-badge" hidden>Checked</span>
+  </header>
+  <div class="mod-body">
+    <aside class="gloss" aria-label="Key terms for module 7">
+      <h3>Key terms</h3>
+      <dl>
+        <div><dt>Agape and eros</dt><dd>Greek words for self-giving love and desiring love. Hart says real love includes both.</dd></div>
+        <div><dt>Logos <span class="gk">λόγος</span></dt><dd>"Word" or "reason." In John's Gospel, Christ is the Word through whom all things were made.</dd></div>
+        <div><dt>Analogy of being</dt><dd>Creatures resemble God within an ever greater unlikeness.</dd></div>
+        <div><dt>Variation</dt><dd>In music, a new version of a theme that changes it while keeping it recognizable.</dd></div>
+      </dl>
+    </aside>
+    <div class="col">
+      <section class="step">
+        <h3 class="step-label">Warm-up</h3>
+        <fieldset class="predict" data-predict="w7" role="group" aria-labelledby="w7q">
+          <legend id="w7q">When someone gives you a gift, do you owe them something?</legend>
+          <div class="row">
+          <button type="button" class="btn" data-v="a">Yes</button>
+          <button type="button" class="btn" data-v="b">No</button>
+          <button type="button" class="btn" data-v="c">Just a thank-you</button>
+        </div>
+        </fieldset>
+        <div class="reveal box" hidden>The philosopher Jacques Derrida thought this question makes a pure gift impossible: even a thank-you pays the giver back. Hart disagrees, and his answer tells you a lot about how he pictures God.</div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Picture it</h3>
+        <p>Hold three images side by side. A present, which nobody had to give. A piece of music, where a short theme grows into many variations. And a sentence spoken aloud, where every word means something because of the speaker. Hart uses all three for creation.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">The idea</h3>
+        <h4>Creation as gift</h4>
+        <p>Creation adds nothing to God; Revelation says all things were created "for thy pleasure" (Revelation 4:11). Derrida (<i>Given Time</i>, 1991) argued that any gift creates a debt, so a truly pure gift would have to be given by no one, to no one, without anyone noticing.</p>
+        <p>Hart answers that the puzzle assumes a real gift must be free of desire. Real gifts come from wanting the other person, and they hope for a response. A gift that expects nothing at all is closer to indifference. Real gifts are also given again and again: an engagement ring means little without years of giving that follow it. In God, giving and receiving are one motion: the Father gives everything to the Son, and the Son gives everything back. Creation is let into that circle. That's why Hart rejects the old split between <i>agape</i> (self-giving love) and <i>eros</i> (desire), made famous by the Swedish theologian Anders Nygren in the 1930s.</p>
+        <h4>Creation as music</h4>
+        <p>Gregory of Nyssa called creation a hymn. Hart's favorite example is J. S. Bach. In the <i>Goldberg Variations</i> (1741), a short aria is followed by thirty variations on its bass line, and every third variation is a canon. Then the aria returns, and after everything in between it sounds deeper. Hart thinks the music of creation needs no chaos underneath it. Evil is a discord, damage to the music, with no place in the score. In his picture the Spirit works like a composer who can bring any line back into harmony.</p>
+        <h4>Creation as language</h4>
+        <p>"And God said, Let there be light: and there was light" (Genesis 1:3). Each creature is like a word spoken within God's eternal Word. That's why we can speak about God using words from creation (good, wise, beautiful, father) while knowing the words always fall short. Hart calls this the <i>analogy of being</i>: creatures resemble God within an ever greater unlikeness. Talk about God, he says, should sound more like praise than like a dictionary.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Try it</h3>
+        <div class="lab" id="goldberg">
+          <p><b>Theme and variations.</b> These are the first eight bass notes of the <i>Goldberg</i> aria, with simple variations written for this course. Listen to the theme, then each variation, then the theme's return.</p>
+          <div class="bars" aria-hidden="true"><span class="bar">G</span><span class="bar">F♯</span><span class="bar">E</span><span class="bar">D</span><span class="bar">B</span><span class="bar">C</span><span class="bar">D</span><span class="bar">G</span></div>
+          <div class="row">
+            <button type="button" class="btn" data-play="theme">Theme</button>
+            <button type="button" class="btn" data-play="chords">Variation 1: chords</button>
+            <button type="button" class="btn" data-play="broken">Variation 2: broken chords</button>
+            <button type="button" class="btn" data-play="song">Variation 3: a song on top</button>
+            <button type="button" class="btn" data-play="reprise">The theme returns</button>
+          </div>
+          <div class="row">
+            <button type="button" class="btn" data-play="sour">A discord</button>
+            <button type="button" class="btn" data-play="resolve">A dissonance that resolves</button>
+            <button type="button" class="btn" data-stop>Stop</button>
+          </div>
+          <p class="playnote meta" aria-live="polite">Sound starts when you press a button. In Hart's picture, a dissonance that resolves belongs to the music; sin is a discord that refuses to resolve.</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Pushback</h3>
+        <div class="panel push">
+          <h4>Derrida's side</h4>
+          <p>A gift that "hopes for a response" sounds like the very debt Derrida worried about. Love can turn possessive.</p>
+          <h4>Hart's reply</h4>
+          <p>He separates a debt, which you must pay, from a love you are invited to return freely. He grants that sin turns giving into control all the time, and he calls that a corruption of giving.</p>
+          <h4>The problem of evil</h4>
+          <p>If creation is God's music, why is there so much noise: disease, disaster, cruelty? Hart answers that evil is privation, damage to the music, and he refuses to call suffering a necessary part of the harmony. He wrote a short book on this after the 2004 Indian Ocean tsunami, <i>The Doors of the Sea</i> (2005).</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Check yourself</h3>
+        <div class="quiz" data-quiz="m7"></div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Explain it</h3>
+        <div class="explain" data-explain="m7">
+          <label for="ex-m7">Name something you love that keeps showing new sides (a song, a place, a person). Use it to explain Hart's "theme and variations" picture of creation.</label>
+          <textarea id="ex-m7" placeholder="Something I love that keeps showing new sides..."></textarea>
+          <div class="row"><button type="button" class="btn primary">Compare with a model answer</button><span class="wc" aria-live="polite"></span></div>
+          <p class="nudge meta" hidden>Try a sentence or two first. A rough attempt helps you remember, even if it's wrong. Tap again to see it anyway.</p>
+          <div class="model" hidden><h5>A model answer</h5><p>The trail behind my house looks different every season: snow, mud, wildflowers, dry grass. Each season is a variation, and the trail is the theme. Hart thinks creation works like that: every creature is a fresh variation on God's goodness, none of them repeats another, and together they deepen the theme.</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+
+<!-- ========== MODULE 8 ========== -->
+<article class="module" id="m8" data-module="8">
+  <header class="mod-head">
+    <p class="eyebrow meta">Module 8 · Part 2, III: Salvation</p>
+    <h2>The Story Retold</h2>
+    <p class="mod-sum">In Hart's reading, Jesus saves by living the human story rightly from beginning to end, and by giving himself as a gift that violence can't cancel.</p>
+    <span class="done-badge" hidden>Checked</span>
+  </header>
+  <div class="mod-body">
+    <aside class="gloss" aria-label="Key terms for module 8">
+      <h3>Key terms</h3>
+      <dl>
+        <div><dt>Recapitulation</dt><dd>From the Greek <i>anakephalaiōsis</i>, "summing up under one head" (Ephesians 1:10). Christ re-lives humanity's story and gets it right.</dd></div>
+        <div><dt>Kenosis <span class="gk">κένωσις</span></dt><dd>Self-emptying (Philippians 2:7). Christ "made himself of no reputation."</dd></div>
+        <div><dt>Scapegoat</dt><dd>A victim whose expulsion or death keeps a group together (René Girard's term for a social pattern).</dd></div>
+        <div><dt>Atonement</dt><dd>How Christ's life and death reconcile people with God.</dd></div>
+      </dl>
+    </aside>
+    <div class="col">
+      <section class="step">
+        <h3 class="step-label">Warm-up</h3>
+        <fieldset class="predict" data-predict="w8" role="group" aria-labelledby="w8q">
+          <legend id="w8q">Someone owes a debt they can never pay. What should happen?</legend>
+          <div class="row">
+          <button type="button" class="btn" data-v="a">Punish them</button>
+          <button type="button" class="btn" data-v="b">Cancel the debt</button>
+          <button type="button" class="btn" data-v="c">Someone else pays</button>
+          <button type="button" class="btn" data-v="d">Something else</button>
+        </div>
+        </fieldset>
+        <div class="reveal box" hidden>Western Christians have often explained salvation with the third answer. Hart thinks that answer is true as far as it goes, and that the story is bigger than any accounting. Keep your answer; you'll test it against two kinds of sacrifice below.</div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Picture it</h3>
+        <p>Imagine a song that everyone learned wrong. Each generation taught it to the next with the same sour notes, until nobody remembered how it went. Then someone sings it again from the first bar, correctly, and teaches it to everyone who will listen. That is Irenaeus's idea of <i>recapitulation</i> (around 180 AD): Christ re-lives the human story from the beginning and gets it right, obedience where Adam disobeyed, faithfulness where humanity broke faith.</p>
+        <div class="lab" id="retold">
+          <div class="bars" aria-hidden="true"><span class="bar">1</span><span class="bar">2</span><span class="bar">3</span><span class="bar">4</span><span class="bar">5</span><span class="bar">6</span><span class="bar">7</span><span class="bar">8</span></div>
+          <div class="row">
+            <button type="button" class="btn" data-play="wrong">The song, learned wrong</button>
+            <button type="button" class="btn" data-play="right">The song, retold</button>
+            <button type="button" class="btn" data-stop>Stop</button>
+          </div>
+          <p class="playnote meta" aria-live="polite">It's the same melody from Module 7's third variation. Listen for the sour notes in bars 2, 4, and 6.</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">The idea</h3>
+        <ol class="ideas">
+          <li><b>Christ is the form.</b> Christians don't offer a theory first; they point to a person, a particular Jewish teacher from Nazareth. Hart says no general moral lesson can replace him (remember the sixth feature of beauty).</li>
+          <li><b>Pilate's question.</b> At the trial Pilate asks, "What is truth?" (John 18:38). Nietzsche admired Pilate's cool skepticism. Hart reads it as a dodge: Pilate turns from the truth standing in front of him to the one truth he is sure of: "knowest thou not that I have power to crucify thee?" (John 19:10). Power answers persuasion with a cross.</li>
+          <li><b>Two kinds of sacrifice.</b> In the first, a society keeps order by killing or expelling a victim; the high priest Caiaphas reasons that "it is expedient for us, that one man should die for the people" (John 11:50). In the second, a gift is offered freely to God, who keeps giving back. Israel's worship, Hart argues, was already moving toward the second kind. In the near-sacrifice of Isaac (Genesis 22), the gift is offered and then given back. At the cross both kinds meet: Rome's violence and Christ's self-gift. The resurrection shows which one God sides with.</li>
+          <li><b>Anselm reread.</b> Anselm's <i>Why God Became Man</i> (about 1098) is often summarized as: God's honor was offended, so someone had to die to pay. Hart argues Anselm meant something gentler: in God, justice and mercy are one, Christ freely gives a gift worth more than every debt, and the Father hands that gift on to us. Many readers still find Anselm harsher than Hart does.</li>
+          <li><b>Against tragedy.</b> Some British theologians (Donald MacKinnon, Nicholas Lash) wanted the cross read like a Greek tragedy, to keep Christians honest about suffering. Hart says tragedy is too comforting. It teaches you to accept loss as the way the universe works. Easter refuses that lesson. It treats death as an enemy that God has reversed, and it gives no death a hidden meaning that makes it acceptable.</li>
+        </ol>
+        <div class="two">
+          <div class="side v"><h5>Sacrifice as an economy of violence</h5><ul><li>Purpose: keep order.</li><li>The victim is destroyed and forgotten.</li><li>God (or the gods) must be paid off.</li><li>Last word: the cross.</li></ul></div>
+          <div class="side p"><h5>Sacrifice as gift</h5><ul><li>Purpose: draw near to God in love.</li><li>The giver is given back.</li><li>God gives first and keeps giving.</li><li>Last word: the empty tomb.</li></ul></div>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Try it</h3>
+        <p>Which kind of sacrifice is each of these?</p>
+        <ul class="sort" data-sort="s8" data-bins="v|Economy of violence;p|Gift">
+          <li data-k="v" data-why="Caiaphas trades one life for the nation's safety: order bought with a victim.">"It is expedient that one man should die for the people."</li>
+          <li data-k="p" data-why="A thank offering draws near to God in gratitude; it pays no debt.">Israel's thank offering after a harvest.</li>
+          <li data-k="v" data-why="Executing a disturber of the peace to keep the province calm is the economy of violence in its plainest form.">Rome executing a troublemaker to keep a province quiet.</li>
+          <li data-k="p" data-why="Hart treats Christ's whole life, given to the Father, as the perfect gift; the cross is what violence did in response.">Christ's whole life given to the Father, all the way to the end.</li>
+          <li data-k="v" data-why="This is Girard's scapegoat pattern.">A village blames one outsider for a plague and drives him out.</li>
+          <li data-k="p" data-why="The Eucharist repeats Christ's self-gift as a shared meal.">Bread and wine shared at the Lord's table.</li>
+        </ul>
+        <p class="score-line" aria-live="polite"></p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Pushback</h3>
+        <div class="panel push">
+          <h4>From René Girard's direction</h4>
+          <p>Girard (<i>The Scapegoat</i>, 1982) showed how societies hide their violence behind sacred stories. Any talk of sacrifice risks making God want blood, so Christians should drop sacrificial language altogether.</p>
+          <h4>From the tragic theologians</h4>
+          <p>Easter triumphalism makes Christians glib about suffering ("everything happens for a reason").</p>
+          <h4>Hart's reply</h4>
+          <p>To Girard: sacrifice in the Bible has many meanings, and the gift kind can't be dropped without losing Israel's whole story. To the tragic theologians: he agrees evil has no "reason." That's exactly why he rejects tragedy, which finds a reason (fate, cosmic order) and asks you to accept it.</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Check yourself</h3>
+        <div class="quiz" data-quiz="m8"></div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Explain it</h3>
+        <div class="explain" data-explain="m8">
+          <label for="ex-m8">Explain why Hart treats Easter as a protest against death. Then give the strongest argument that his view is too optimistic.</label>
+          <textarea id="ex-m8" placeholder="Easter is a protest because... The strongest objection is..."></textarea>
+          <div class="row"><button type="button" class="btn primary">Compare with a model answer</button><span class="wc" aria-live="polite"></span></div>
+          <p class="nudge meta" hidden>Try a sentence or two first. A rough attempt helps you remember, even if it's wrong. Tap again to see it anyway.</p>
+          <div class="model" hidden><h5>A model answer</h5><p>A tragedy says: this is how the world works, so accept it. Easter says the world was never meant to work that way: God raised the murdered man and sided with the victim against the powers that killed him. So every death stays an outrage.</p><p>Objection: people are still dying, and Easter happened two thousand years ago. A grieving person might hear Hart's hope as a promise that hasn't been kept.</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+
+<!-- ========== MODULE 9 ========== -->
+<article class="module" id="m9" data-module="9">
+  <header class="mod-head">
+    <p class="eyebrow meta">Module 9 · Part 2, IV: Eschaton</p>
+    <h2>The Last Word</h2>
+    <p class="mod-sum">Christian hope looks for a new creation that keeps every good thing. Hart reads hell as the same light of God received by a closed heart.</p>
+    <span class="done-badge" hidden>Checked</span>
+  </header>
+  <div class="mod-body">
+    <aside class="gloss" aria-label="Key terms for module 9">
+      <h3>Key terms</h3>
+      <dl>
+        <div><dt>Eschaton <span class="gk">ἔσχατον</span></dt><dd>"The last thing." The end of history and the new creation.</dd></div>
+        <div><dt>Kingdom of God</dt><dd>God's rule fully arrived: justice, peace, and joy for all creation.</dd></div>
+        <div><dt>Resurrection of the body</dt><dd>The Christian hope that people will be raised whole, flesh included.</dd></div>
+        <div><dt>Universalism</dt><dd>The belief that all will finally be saved.</dd></div>
+      </dl>
+    </aside>
+    <div class="col">
+      <section class="step">
+        <h3 class="step-label">Warm-up</h3>
+        <fieldset class="predict" data-predict="w9" role="group" aria-labelledby="w9q">
+          <legend id="w9q">If the world had a final chapter, what should it do with the earlier chapters?</legend>
+          <div class="row">
+          <button type="button" class="btn" data-v="a">Erase them and start fresh</button>
+          <button type="button" class="btn" data-v="b">Redeem them, keeping what was good</button>
+          <button type="button" class="btn" data-v="c">Leave them as they were</button>
+        </div>
+        </fieldset>
+        <div class="reveal box" hidden>Hart's answer is the second. The new creation keeps time, bodies, and every particular person, healed. That makes the question of who or what is left out urgent, which is where this module goes.</div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Picture it</h3>
+        <p>An old saying: the same sun melts wax and hardens clay. The sun stays the same; the material differs. Many Eastern Christian teachers describe heaven and hell this way. There is one divine light. An open heart receives it as beauty. A heart that has sealed itself shut receives the same light as burning.</p>
+        <div class="lab lightbox" data-state="open">
+          <svg viewBox="0 0 360 240" role="img" aria-label="Light from above falling on a vessel that can be open or closed">
+            <circle class="l-halo" cx="180" cy="40" r="32"/>
+            <circle class="l-sun" cx="180" cy="40" r="18"/>
+            <line class="l-ray" x1="180" y1="58" x2="128" y2="146"/><line class="l-ray" x1="180" y1="58" x2="150" y2="146"/><line class="l-ray" x1="180" y1="58" x2="172" y2="146"/><line class="l-ray" x1="180" y1="58" x2="194" y2="146"/><line class="l-ray" x1="180" y1="58" x2="216" y2="146"/><line class="l-ray" x1="180" y1="58" x2="236" y2="146"/>
+            <path class="l-glow" d="M124 152 Q124 214 180 214 Q236 214 236 152 Z"/>
+            <path class="l-vessel" d="M120 150 Q120 218 180 218 Q240 218 240 150"/>
+            <path class="l-lid" d="M112 152 Q180 118 248 152 Z"/>
+            <circle class="l-spark" cx="140" cy="138" r="3"/><circle class="l-spark" cx="166" cy="128" r="2.5"/><circle class="l-spark" cx="196" cy="128" r="3"/><circle class="l-spark" cx="222" cy="136" r="2.5"/>
+            <text class="l-text" x="180" y="236" text-anchor="middle" id="l-cap">Open: the light fills it</text>
+          </svg>
+          <div class="row" role="group" aria-label="Heart state">
+            <button type="button" class="btn gold" data-light="open" aria-pressed="true">Open heart</button>
+            <button type="button" class="btn" data-light="closed" aria-pressed="false">Closed heart</button>
+          </div>
+          <p class="playnote meta">Same sun, same light. Only the receiving changes.</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">The idea</h3>
+        <ol class="ideas">
+          <li><b>The kingdom comes from outside history.</b> "The day of the Lord so cometh as a thief in the night" (1 Thessalonians 5:2). Hart reads this as judgment on history. No political program builds the kingdom, and no "march of progress" earns it.</li>
+          <li><b>Hell as refusal.</b> Drawing on the Eastern tradition, Hart describes hell as God's glory received as an overwhelming sublime by a self sealed inward, unable to receive love as gift. Notice how this links back to Module 3.</li>
+          <li><b>New creation.</b> Paul writes that "the creature itself also shall be delivered from the bondage of corruption" (Romans 8:21). Augustine said that in the resurrection, God will be seen in all bodies. Hart pictures the kingdom as music that never ends: new variations forever, with the discords gone.</li>
+          <li><b>All humanity as God's image.</b> Gregory of Nyssa taught that the "humanity" God made in his image is the whole community of every person across all time. Each person is an irreplaceable part of it. Gregory also taught that all would finally be saved. Hart explains Gregory's universalism in this book and says his church's tradition does not authorize him to argue for it. (He later did argue for it, in <i>That All Shall Be Saved</i>, 2019.)</li>
+        </ol>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Pushback</h3>
+        <div class="panel push">
+          <h4>The strongest objection</h4>
+          <p>Most Christian traditions, Catholic, Protestant, and many Orthodox, teach that hell may be final. Critics of universalism also ask about freedom: if everyone is saved in the end, do anyone's choices really matter?</p>
+          <h4>Gregory's reply, as Hart presents it</h4>
+          <p>Freedom is the ability to reach the good. A will that rejects God is sick, and healing it gives it back its freedom. Evil is finite and runs out; God's goodness is infinite.</p>
+          <h4>Your turn</h4>
+          <p>Which picture of freedom do you find more convincing: freedom as choosing among options, or freedom as becoming what you were made to be?</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Check yourself</h3>
+        <div class="quiz" data-quiz="m9"></div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Explain it</h3>
+        <div class="explain" data-explain="m9">
+          <label for="ex-m9">Explain the "same sun" picture of heaven and hell. Name one thing it gets right and one thing it leaves unclear.</label>
+          <textarea id="ex-m9" placeholder="The picture says..."></textarea>
+          <div class="row"><button type="button" class="btn primary">Compare with a model answer</button><span class="wc" aria-live="polite"></span></div>
+          <p class="nudge meta" hidden>Try a sentence or two first. A rough attempt helps you remember, even if it's wrong. Tap again to see it anyway.</p>
+          <div class="model" hidden><h5>A model answer</h5><p>The picture says God stays the same in heaven and in hell; people differ. Everyone meets the same love, and some experience it as joy while others experience it as pain. It gets right that, in this view, God stays loving toward everyone. It leaves unclear whether a closed heart can ever open, which is exactly where universalists and their critics disagree.</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+
+<div class="part-head" id="part3">
+  <p class="eyebrow meta">Part 3 · Antithesis</p>
+  <h2>Rhetoric without Reserve</h2>
+  <p>In the short last part, Hart turns the opening question around. Maybe the people who suspect every big story are carrying a hidden violence of their own.</p>
+</div>
+
+<!-- ========== MODULE 10 ========== -->
+<article class="module" id="m10" data-module="10">
+  <header class="mod-head">
+    <p class="eyebrow meta">Module 10 · Part 3</p>
+    <h2>Persuasion as Peace</h2>
+    <p class="mod-sum">Hart argues that the "neutral" suspicion of all big stories has a violence of its own, and that Christian witness can offer real peace if it never uses force.</p>
+    <span class="done-badge" hidden>Checked</span>
+  </header>
+  <div class="mod-body">
+    <aside class="gloss" aria-label="Key terms for module 10">
+      <h3>Key terms</h3>
+      <dl>
+        <div><dt>Hermeneutics</dt><dd>The art of interpretation. Here, a philosophy of permanent suspicion toward big stories.</dd></div>
+        <div><dt>Metanarrative</dt><dd>A big story that claims to explain all the others. Lyotard defined the postmodern as "incredulity toward metanarratives."</dd></div>
+        <div><dt>Martyr <span class="gk">μάρτυς</span></dt><dd>Greek for "witness."</dd></div>
+        <div><dt>The market</dt><dd>In Hart's usage, the culture that turns everything into a price and a choice.</dd></div>
+      </dl>
+    </aside>
+    <div class="col">
+      <section class="step">
+        <h3 class="step-label">Warm-up</h3>
+        <fieldset class="predict" data-predict="w10" role="group" aria-labelledby="w10q">
+          <legend id="w10q">In arguments about the meaning of life, could anyone be a truly neutral referee?</legend>
+          <div class="row">
+          <button type="button" class="btn" data-v="a">Yes: science</button>
+          <button type="button" class="btn" data-v="b">Yes: the law</button>
+          <button type="button" class="btn" data-v="c">No one is neutral</button>
+        </div>
+        </fieldset>
+        <div class="reveal box" hidden>Hart's answer is the third. Every referee brings a view about what counts as a fair rule, and that view is itself one of the positions in the contest.</div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Picture it</h3>
+        <p>A referee wearing a team jersey. Some philosophers propose a referee for the contest of worldviews: everyone may tell their story, as long as no story claims to be the true story of everything. Hart points at the jersey. "No story is true for everyone" is itself a story about everyone.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">The idea</h3>
+        <ol class="ideas">
+          <li><b>The war of persuasions.</b> Ludwig Wittgenstein noted that when two whole worldviews meet and reasons run out, all that's left is persuasion, and each side tends to call the other a fool or a heretic (<i>On Certainty</i>, written 1949–51).</li>
+          <li><b>The suspicious referee.</b> John Caputo's "radical hermeneutics" tries to keep the peace by suspecting every big story. Caputo's goal is good: protect the weak from powerful stories that crush them. Hart's worry is that this quietly demands every faith shrink into a private hobby, and strips people of the traditions that make them who they are.</li>
+          <li><b>The market.</b> Who benefits when every big story becomes a private preference? Hart's answer: the global market. Everything gets a price and becomes one option among many. Desire is trained to want nothing in particular and keep shopping. Hart suggests that Nietzsche's will to power ends up looking like consumer choice.</li>
+          <li><b>The gift of martyrs.</b> For Hart, Christian persuasion has one legitimate shape: witness. Offer the gift, accept being refused, never force. The risen Christ meets two disciples on the road to Emmaus as a stranger and is recognized when he breaks bread with them (Luke 24). Violence can kill a witness, and in doing so it produces more witnesses.</li>
+          <li><b>No synthesis.</b> Hart offers one particular peace, the peace of Christ, and stakes everything on its beauty being persuasive. He admits there is no neutral ground from which to prove it.</li>
+        </ol>
+        <p class="truth box"><b>Hart's concession.</b> He says Christian history has often abandoned this way of persuading and been seduced by power. Whether Christians actually live by the gift of martyrs is the open question he leaves.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Try it</h3>
+        <p>You are the market. Tap each item to stick a price tag on it. (The prices are invented for the exercise.)</p>
+        <div class="tags">
+          <button type="button" class="tagbtn"><span class="tn">A sunset over the ocean</span><span class="tg">Ocean-view upgrade: $90 a night</span></button>
+          <button type="button" class="tagbtn"><span class="tn">Your grandmother's ring</span><span class="tg">Resale value: $340</span></button>
+          <button type="button" class="tagbtn"><span class="tn">Your best friend</span><span class="tg">One follower in an ad audience</span></button>
+          <button type="button" class="tagbtn"><span class="tn">A song you love</span><span class="tg">A fraction of a cent per play</span></button>
+          <button type="button" class="tagbtn"><span class="tn">An hour of your attention</span><span class="tg">Sold to advertisers in slices</span></button>
+          <button type="button" class="tagbtn"><span class="tn">A belief you'd die for</span><span class="tg">One lifestyle option among many</span></button>
+        </div>
+        <p class="reveal box" id="tags-done" hidden>Which tags felt wrong? Hart would say that feeling is the point. Some things can only be known as gifts, and the market can only see them as exchange. That's his case that the market is the real winner when every big story is pushed into private life.</p>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Pushback</h3>
+        <div class="panel push">
+          <h4>The strongest objection</h4>
+          <p>A religion that wants to convert the whole world is still trying to conquer it, just patiently. Caputo's suspicion exists because big stories have crushed minorities again and again.</p>
+          <h4>Hart's reply</h4>
+          <p>The test is method. Force is forbidden; only offering, inviting, and willingness to suffer rejection are allowed. He also rejects two easy exits: political "realism" that accepts violence as normal, and a self-protective pacifism that lets others suffer so its own hands stay clean. Both, he says, give up on the peace Christ actually offers.</p>
+          <h4>Your turn</h4>
+          <p>Can you think of a time someone shared a deep belief with you in a way that felt like a gift? What made it feel that way?</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Check yourself</h3>
+        <div class="quiz" data-quiz="m10"></div>
+      </section>
+
+      <section class="step">
+        <h3 class="step-label">Explain it</h3>
+        <div class="explain" data-explain="m10">
+          <label for="ex-m10">Go back to Ben from Module 1. Rewrite his invitation so it fits Hart's "gift of martyrs." What does Ben do if you say no?</label>
+          <textarea id="ex-m10" placeholder="Ben says... If you say no, Ben..."></textarea>
+          <div class="row"><button type="button" class="btn primary">Compare with a model answer</button><span class="wc" aria-live="polite"></span></div>
+          <p class="nudge meta" hidden>Try a sentence or two first. A rough attempt helps you remember, even if it's wrong. Tap again to see it anyway.</p>
+          <div class="model" hidden><h5>A model answer</h5><p>Ben shows you the photos and says, "I'd love for you to come. There's a place for you either way." If you say no, he doesn't sulk, guilt you, or spread rumors. He still saves you a plate and invites you next time. His invitation stays a gift because refusing it costs you nothing he controls.</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+
+<!-- ========== REVIEW ========== -->
+<section class="section" id="review">
+  <h2>Review</h2>
+  <div class="prose"><p>Come back to this section on later days. Spacing your practice out is what makes it stick.</p></div>
+  <div class="review-grid">
+    <div class="card-shell">
+      <h3>Flashcards</h3>
+      <p class="small muted">Say the answer out loud before you flip. Cards you know come back after 1, 3, 7, then 16 days; cards you miss come back today.</p>
+      <div class="fc" id="fc-card">
+        <span class="fc-mod" id="fc-mod"></span>
+        <p class="fc-front" id="fc-front"></p>
+        <p class="fc-back" id="fc-back" hidden></p>
+      </div>
+      <div class="row" id="fc-show-row"><button type="button" class="btn primary" id="fc-show">Show answer</button></div>
+      <div class="row" id="fc-rate" hidden>
+        <button type="button" class="btn" data-rate="miss">Missed it</button>
+        <button type="button" class="btn" data-rate="shaky">Shaky</button>
+        <button type="button" class="btn" data-rate="knew">Knew it</button>
+      </div>
+      <div id="fc-empty" hidden><p>Nothing due right now. Come back tomorrow, or study ahead.</p><div class="row" style="margin-top:.5rem"><button type="button" class="btn" id="fc-ahead">Study all cards anyway</button></div></div>
+      <div class="fc-stat" id="fc-stat" aria-live="polite"></div>
+    </div>
+    <div class="card-shell">
+      <h3>Mixed quiz</h3>
+      <p class="small muted">Ten questions drawn from all ten modules, shuffled. Mixing topics makes you work out which idea each question is about.</p>
+      <div id="mx-body"><div class="row"><button type="button" class="btn primary" id="mx-start">Start a mixed quiz</button></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="finish">
+  <h2>Where you landed</h2>
+  <fieldset class="poll" data-poll="end">
+    <legend class="poll-q" id="poll-end-q">Now that you've heard both sides: is every attempt to persuade someone a kind of power play?</legend>
+    <div class="pills row" role="group" aria-labelledby="poll-end-q">
+      <button type="button" class="btn" data-v="Yes, always">Yes, always</button>
+      <button type="button" class="btn" data-v="Sometimes">Sometimes</button>
+      <button type="button" class="btn" data-v="No, it can be peaceful">No, it can be peaceful</button>
+      <button type="button" class="btn" data-v="Not sure yet">Not sure yet</button>
+    </div>
+    <p class="poll-note meta" id="poll-compare" aria-live="polite">You haven't answered the opening question yet. It's at the top of the page.</p>
+  </fieldset>
+
+  <h3>Essay prompts</h3>
+  <ol class="prompts">
+    <li>Hart admits that reason alone can't decide between the story of violence and the story of peace. Does that admission weaken his argument or make it more honest? Use at least two modules.</li>
+    <li>Pick one opponent (Nietzsche, Derrida, Levinas, or Caputo). State their view as fairly as you can, give Hart's reply, and say who has the better of it and why.</li>
+    <li>Hart says the market is the real winner when every big story becomes private. Test the claim against something in your own life: a phone, a feed, a store, a school.</li>
+  </ol>
+
+  <h3>Seminar questions</h3>
+  <ol class="prompts">
+    <li>Can beauty be used to manipulate? How would Hart tell manipulation from invitation?</li>
+    <li>Levinas said the ideal is not to notice the color of someone's eyes. Hart says noticing is where responsibility starts. Who's right?</li>
+    <li>Does a gift create a debt? Does your answer change for gifts between friends, from parents, from strangers?</li>
+    <li>Is Easter a consolation, a protest, or both?</li>
+    <li>If you had to defend the story of violence, what would be your best evidence? How would Hart answer it?</li>
+  </ol>
+</section>
+
+<section class="section" id="glossary">
+  <h2>Glossary</h2>
+  <dl class="gl" id="gl-list"></dl>
+</section>
+
+<section class="section" id="reading">
+  <h2>Further reading</h2>
+  <ul class="reading">
+    <li>David Bentley Hart, <i>The Beauty of the Infinite: The Aesthetics of Christian Truth</i> (Eerdmans, 2003). The source for this course. The Introduction is the most approachable part.</li>
+    <li>David Bentley Hart, <i>The Experience of God</i> (Yale, 2013). A shorter, clearer treatment of God and being.</li>
+    <li>David Bentley Hart, <i>The Doors of the Sea</i> (Eerdmans, 2005). His short book on suffering.</li>
+    <li>Gregory of Nyssa, <i>The Life of Moses</i>. The classic source for epektasis.</li>
+    <li>Friedrich Nietzsche, <i>The Antichrist</i>. Read Hart's opponent in his own words.</li>
+    <li>Augustine, <i>Confessions</i>. The book Hart says is about a self that never stops changing toward God.</li>
+  </ul>
+</section>
+
+</main>
+<footer>
+  <hr>
+  <p class="meta">Based on David Bentley Hart, <i>The Beauty of the Infinite: The Aesthetics of Christian Truth</i> (Grand Rapids: Eerdmans, 2003). Summaries are paraphrases written for students; marked passages flag places where Hart's readings are disputed.</p>
+  <p class="meta">Scripture quotations from the King James Version. Your answers and notes are saved only in this browser.</p>
+  <address>Part of <a href="../../index.html">Noah's Learning Log</a>.</address>
+</footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s);};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+var store={get:function(k,d){try{var v=localStorage.getItem('hbi:'+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},set:function(k,v){try{localStorage.setItem('hbi:'+k,JSON.stringify(v));}catch(e){}}};
+var reduceMotion=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ---------- question bank ---------- */
+var QB={
+m1:[
+ {id:'m1a',q:"What question set Hart's book in motion?",a:1,o:["Can anyone prove that God exists?","Can Christian persuasion be peaceful, or is it a power grab in disguise?","Is modern art more beautiful than ancient art?","Was Nietzsche a bad person?"],w:["Hart isn't writing a proof of God. He thinks Christianity never rested on proofs in the first place.","Nietzsche's heirs say every message hides a will to power. Hart asks whether the Christian message can be the exception.","Art comes up often, but the question is about persuasion and violence.","Hart attacks Nietzsche's ideas and taste, and he also respects Nietzsche's honesty about how radical Christianity is."]},
+ {id:'m1b',q:"Why does Hart build his case on beauty instead of a logical proof?",a:1,o:["He thinks logic is evil.","Christianity's appeal works by showing a story and a person, which attract the way beautiful things do.","Beauty can never be misused.","Postmodern thinkers already agree with him about beauty."],w:["He uses plenty of logic. He doubts that a neutral, story-free logic exists.","The church has no argument stronger than the figure of Christ, so the question becomes whether that kind of attraction can be peaceful.","Hart admits beauty can sit beside atrocity. That's why he has to show what kind of beauty Christianity means.","Most of them prefer the sublime and treat beauty as a pleasant surface."]},
+ {id:'m1c',q:"In Hart's vocabulary, what is \"totality\"?",a:0,o:["The world pictured as a closed system that explains itself","The total number of people who will be saved","God's infinite love","A style of church music"],w:["Hart borrows the word from Levinas and gives it his own meaning.","It's a way of picturing the world.","That's closer to what Hart calls infinity, the opposite term.","Music matters later, but this term is about how we picture reality as a whole."]}
+],
+m2:[
+ {id:'m2a',q:"How does Hart relate Parmenides (unchanging being) to Heraclitus (everything flows)?",a:1,o:["They are opposites with nothing in common.","They are two ends of one picture in which order and chaos are locked in conflict.","Both are early forms of Christianity.","Heraclitus proved Parmenides wrong once and for all."],w:["They look opposite, and Hart thinks they share a map.","One side prizes order, the other celebrates flux, and both treat the struggle as basic.","Both lived centuries before Christianity.","Hart says postmodernism mostly flips old metaphysics over, which keeps its structure."]},
+ {id:'m2b',q:"In the Christian account of creation, as Hart reads it, what comes first?",a:1,o:["A chaos that God has to fight","Peace and goodness; violence enters later as an intruder","A war among gods","Nothing, because the world has always existed"],w:["Many ancient myths start that way. As Hart reads Genesis, even the formless deep is God's creation.","God creates freely and calls the result very good. Violence comes later, as a wound.","That's the pattern of Babylonian and Greek myth.","Creation from nothing means the world began, as a gift."]},
+ {id:'m2c',q:"Why do Augustine and Hart care that Romulus killed his brother Remus?",a:0,o:["Rome, the model earthly city, was founded on a killing.","It proves Romans were worse than other people.","It shows twins can't share power.","It shows violence is the deepest truth of reality."],w:["Augustine pairs it with Cain and Abel: the earthly city is the city of the brother who kills.","The point is about every city built on force.","That's a reading of the legend, but it isn't Augustine's point.","That's the story of violence. Augustine tells it as a history to be healed."]}
+],
+m3:[
+ {id:'m3a',q:"In the postmodern narratives of the sublime, what is the sublime?",a:0,o:["The hidden, formless truth that every picture and idea covers over","A kind of poem","God, as Christians describe him","The most beautiful thing imaginable"],w:["Beauty is the curtain; the sublime is the storm behind it.","Kant's sublime is an experience, and these thinkers turn it into a claim about reality.","Hart says the Christian God is infinite and full of form, nearly the opposite.","These thinkers set the sublime against beauty, as its hidden truth."]},
+ {id:'m3b',q:"What is Hart's alternative account of the sublime?",a:1,o:["The sublime is fake.","The sublime is beauty too great to take in, so it belongs inside beauty.","The sublime matters more than beauty.","The sublime is just fear."],w:["He thinks the experience is real.","Infinity has form in the Christian God, so overwhelming experiences are moments of beauty.","That's the view he argues against.","Fear is part of it, and Hart thinks delight is the larger part."]},
+ {id:'m3c',q:"What is Hart's main objection to Levinas's ethics?",a:1,o:["It cares too much about other people.","It asks us to answer a faceless, infinite Other and leaves out love for the particular person.","It is too cheerful.","It ignores the Holocaust."],w:["Hart wants more care, aimed at the real person.","Hart's line: often, seeing the color of someone's eyes is where responsibility begins.","Hart finds it the opposite: grim and world-rejecting.","Levinas's thought was shaped by the Holocaust, which took his family. Hart's complaint is about his picture of ethics."]}
+],
+m4:[
+ {id:'m4a',q:"What does Nietzsche mean by ressentiment?",a:0,o:["The grudge of the weak against the strong, dressed up as morality","Healthy anger at injustice","A French form of politeness","A Christian sacrament"],w:["Nietzsche says Christians call their grudge justice and love.","Nietzsche's accusation is that what Christians call righteous anger is really envy.","It's the French word for resentment; Nietzsche used it as a technical term.","It's Nietzsche's diagnosis of Christian morality."]},
+ {id:'m4b',q:"What does Hart's \"two wines\" comparison show?",a:0,o:["Biblical wine belongs to feasting, fellowship, and covenant; Dionysian wine to frenzy and bloodshed.","Christians should avoid wine.","Dionysus and Christ are the same god.","Ancient wine was stronger than modern wine."],w:["Two wines, two pictures of the world.","Hart jokes that Nietzsche, the teetotaler, couldn't judge either vintage.","That's the merger Hart is resisting.","The point is what each wine means."]},
+ {id:'m4c',q:"Which of these does Hart concede to Nietzsche?",a:0,o:["Christians have often acted from resentment, and the church's record is mixed.","The will to power is the truth about reality.","Jesus was a passive dreamer.","Pity is a weakness."],w:["Hart says the word ressentiment hits home for a Christian conscience.","That's the claim Hart denies.","Hart says the Jesus of the Gospels doesn't fit that picture.","Hart treats compassion as part of the beauty Nietzsche failed to see."]},
+ {id:'m4d1',q:"Why does Hart bring up Peter weeping after he denied Jesus?",a:0,o:["Classical literature rarely took a common man's tears seriously; the Gospels do, and that reversal of taste is what Nietzsche disliked.","To prove Peter was weak.","To show the disciples were noble warriors.","Because Nietzsche quoted it with approval."],w:["This is Hart's final evidence that the dispute is about taste.","Hart's point is about how the story treats Peter's grief.","They were fishermen, and that's the point.","Nietzsche found scenes like this vulgar."]}
+],
+m4d:[
+ {id:'d1',q:"Nietzsche: \"Christian morality is the revenge of the weak on the strong.\"",a:0,o:["Hart concedes Christians often act from resentment, and denies that resentment explains Christ, who loves his persecutors without bitterness.","Hart says the weak deserve revenge.","Hart says Nietzsche never read the Bible."],w:["Hart grants the symptom and disputes the diagnosis.","Hart's story has no room for revenge.","Hart credits Nietzsche with understanding Christianity unusually well."]},
+ {id:'d2',q:"Nietzsche: \"Christianity hates the body and this world.\"",a:1,o:["Hart agrees and calls it a strength.","Creation is called good, the body will be raised, and the central rite is a meal of bread and wine.","Hart says the body doesn't matter either way."],w:["Hart thinks hatred of the world is a gnostic or pagan mood.","These are Hart's three pieces of evidence.","Hart's whole book insists the physical world matters."]},
+ {id:'d3',q:"Nietzsche: \"Life is will to power; that is simply the truth.\"",a:2,o:["Hart says power doesn't exist.","Hart says Nietzsche was right but too loud.","That's a metaphysical story too, with no neutral proof behind it."],w:["Hart thinks power is real; he denies it is the deepest truth.","Hart rejects the claim itself.","Nietzsche's critique of metaphysics rests on a metaphysics of its own."]},
+ {id:'d4',q:"Nietzsche: \"Jesus was a gentle dreamer whom the church betrayed.\"",a:1,o:["Hart agrees the church betrayed Jesus completely.","The Jesus of the Gospels cleanses the temple and argues with irony; Nietzsche invented a Jesus to fit his theory.","Hart says Jesus was a warrior."],w:["Hart admits failures, and he still sees real continuity between Christ and the church.","Hart calls Nietzsche's portrait an imaginative failure.","Hart's Jesus wins by giving himself away."]}
+],
+m5:[
+ {id:'m5a',q:"Why does creation from nothing matter so much to Hart?",a:0,o:["It means the world exists as a free gift that didn't have to be given.","It proves the Big Bang.","It means matter is evil.","It means God needed a world."],w:["A gift says something about the giver, and calls for gratitude.","Hart's point is about why anything exists at all, a question physics doesn't settle.","Hart insists creation is good.","Creation adds nothing to God; that's what makes it a gift."]},
+ {id:'m5b',q:"In Hart's history, what did Descartes do?",a:0,o:["He set his senses aside and grounded certainty in the thinking self.","He proved that beauty is objective.","He revived Greek religion.","He wrote the Nicene Creed."],w:["In the Third Meditation (1641) he shuts his eyes and stops his ears to begin from the mind alone.","Descartes was after certainty.","He was a Catholic mathematician and philosopher.","The Creed dates from 381."]},
+ {id:'m5c',q:"Why does Hart call Kant's revolution \"Ptolemaic\" instead of \"Copernican\"?",a:0,o:["It puts the human knower back at the center, like the old earth-centered model.","Kant studied astronomy.","Kant disliked Copernicus.","It refers to ancient Egypt."],w:["Ptolemy's universe circled the earth; Kant's knowledge circles the self.","Kant did write on astronomy, but that isn't Hart's point.","Kant admired Copernicus and borrowed his name.","Ptolemy lived in Roman Egypt, but the joke is about the center."]}
+],
+m6:[
+ {id:'m6a',q:"What does perichoresis describe?",a:0,o:["The way Father, Son, and Spirit live in one another, distinct yet one","A dance performed in Byzantine churches","Three gods cooperating","God's anger at sin"],w:["The word comes from a verb meaning to make room or contain.","It sounds like the Greek word for dancing, a pun Hart enjoys, and it names the shared life of the three persons.","Christian teaching insists on one God.","It's about love within God."]},
+ {id:'m6b',q:"What does Hart mean by God's apatheia?",a:1,o:["God doesn't care what happens to us.","God's infinite fullness of love and joy, which nothing outside can wound or add to","God is bored.","God feels every emotion more strongly than we do."],w:["That's the common misreading, borrowed from the English word apathy.","God loved us before we existed; nothing forced or completed that love.","Fullness is the opposite of boredom.","That would make God's life depend on events outside God."]},
+ {id:'m6c',q:"What is epektasis in Gregory of Nyssa?",a:0,o:["The soul's endless stretching into God's infinite goodness","The moment the soul reaches the end of God","A punishment for sin","Forgetting the past"],w:["Gregory takes the word from Philippians 3:13: reaching forth to what lies ahead.","God has no end to reach, and Gregory thinks that's good news.","It's the soul's joy.","Paul does speak of forgetting what lies behind, but the stress falls on reaching ahead."]},
+ {id:'m6d',q:"Why does Hart reject a God who becomes himself through history and suffering?",a:0,o:["It would make every horror in history part of God's own identity.","History doesn't exist.","Hegel was German.","God can't act in history."],w:["Hart applies Ivan Karamazov's test: would you accept a God whose story needed a child's torture?","Hart takes history very seriously.","That isn't an argument.","Hart thinks God acts in history fully. He denies that God needs history to be God."]}
+],
+m7:[
+ {id:'m7a',q:"What is Derrida's puzzle about gifts?",a:0,o:["Any gift seems to create a debt, so a pure gift looks impossible.","Gifts are too expensive.","Only God gives gifts.","Gifts should be wrapped."],w:["Even a thank-you seems to pay the giver back.","It's a puzzle of logic.","Derrida's puzzle is about all giving.","The puzzle concerns what a gift is."]},
+ {id:'m7b',q:"How does Hart answer it?",a:0,o:["Real gifts come from desire for the other, hope for a response, and get given again; in God, giving and receiving are one motion.","He agrees no gift is possible.","He says gifts should be anonymous.","He says only money is a real gift."],w:["Hart's answer runs through the Trinity: the Father gives all to the Son, and the Son gives all back.","Hart thinks the gift is real.","Anonymous giving is closer to Derrida's ideal.","Money is the market's way of seeing, which Hart criticizes."]},
+ {id:'m7c',q:"What does the Goldberg Variations example show?",a:0,o:["A theme can unfold into endless difference while staying itself.","Bach trained as a theologian.","Music needs chaos underneath it.","Repetition is boring."],w:["The aria returns after thirty variations and sounds deeper.","Bach was a church musician. Hart calls him the greatest Christian theologian as praise for his music.","Hart's point is that it doesn't.","Variation keeps repetition alive."]},
+ {id:'m7d',q:"What does the analogy of being claim?",a:0,o:["Creatures resemble God within an ever greater unlikeness.","God and creatures are the same kind of thing.","We can know nothing at all about God.","All words about God are lies."],w:["Our words reach toward God truly and always fall short.","That's what the analogy denies.","The analogy says we can speak of God, imperfectly.","Hart thinks they work best as praise."]}
+],
+m8:[
+ {id:'m8a',q:"What does Irenaeus mean by recapitulation?",a:0,o:["Christ re-lives the human story from the beginning and gets it right.","Christ summarizes the Bible in a sermon.","Humanity starts over without Christ.","A recap at the end of an episode."],w:["Obedience where Adam disobeyed: the song sung right.","Irenaeus means a whole life lived.","Christ is the new head of humanity.","Good guess from the English word. The Greek means summing up under one head."]},
+ {id:'m8b',q:"What separates Hart's two kinds of sacrifice?",a:0,o:["One keeps order by destroying a victim; the other is a self-giving gift that God answers by giving again.","One uses animals and the other doesn't.","One is Jewish and the other is Christian.","There is no real difference."],w:["The cross is where the two kinds meet; Easter shows which one God sides with.","The difference lies in purpose.","Hart sees the gift kind already in Israel's worship.","The whole module turns on the difference."]},
+ {id:'m8c',q:"What is Hart's complaint about reading the cross as a tragedy?",a:0,o:["Tragedy teaches us to accept loss as the way the universe works, and the resurrection refuses that lesson.","Tragedies are too sad for church.","Greek plays are pagan, so Christians can't read them.","Tragedy takes suffering too seriously."],w:["Tragic wisdom finds a reason for loss and asks for acceptance; Easter treats death as an enemy.","Hart's complaint is about what tragedy teaches.","Hart reads them closely. He objects to their view of suffering.","He thinks Christianity takes suffering more seriously, because it never calls a death acceptable."]},
+ {id:'m8d',q:"How does Hart read Pilate's \"What is truth?\"",a:0,o:["As a dodge: Pilate turns from the truth in front of him to his one sure truth, the power to crucify.","As a deep insight Hart admires.","As a joke.","As Pilate's conversion."],w:["Power answers persuasion with a cross.","That's Nietzsche's reading.","Hart reads it as deadly serious.","Pilate hands Jesus over."]}
+],
+m9:[
+ {id:'m9a',q:"In the Eastern view Hart draws on, what is hell?",a:0,o:["God's same glory, experienced by a closed heart as burning","A place God made to store evil","A total absence of light","A metaphor for bad luck"],w:["Same sun, different material: wax melts and clay hardens.","In this view God made no place for evil; hell is refusal.","The light is still there; it's received as pain.","It's about a person's relation to God."]},
+ {id:'m9b',q:"For Gregory of Nyssa, where is the image of God in humanity fully found?",a:0,o:["In the whole community of humanity across all time","In the smartest person","Only in Adam before the fall","In the soul alone, apart from the body"],w:["Every person is an irreplaceable part of the image.","Gregory's image is the whole community.","Adam is the first part of the image; the full image is everyone together.","Gregory's view includes the body and all of history."]},
+ {id:'m9c',q:"What does Hart say about Gregory's universalism in this book?",a:0,o:["He explains it and says his church's tradition does not authorize him to argue for it.","He calls it a heresy.","He ignores it.","He says it's official Orthodox teaching."],w:["He later argued for it in That All Shall Be Saved (2019).","He treats it sympathetically.","He discusses it at length.","It isn't official teaching, which is why he holds back."]}
+],
+m10:[
+ {id:'m10a',q:"What is Hart's main criticism of the neutral referee who suspects all big stories?",a:0,o:["\"No story is true for everyone\" is itself a big story, imposed on everyone.","Referees should be paid more.","The referee is too religious.","There should be no rules at all."],w:["The referee is wearing a team jersey.","It's a joke option.","Hart's worry runs the other way: the referee pushes religion into private life.","Hart thinks peace needs a particular story."]},
+ {id:'m10b',q:"Who does Hart think benefits most when every big story becomes a private preference?",a:0,o:["The market, which turns everything into a price and a choice","The church","Nobody","Philosophers"],w:["Desire trained to want nothing in particular keeps shopping.","The church loses its public voice.","Hart thinks someone always fills the space.","They're not the winners in his account."]},
+ {id:'m10c',q:"What does the Greek word martys mean?",a:1,o:["Victim","Witness","Hero","Soldier"],w:["Martyrs often are victims; the word itself means witness.","A martyr testifies by offering.","Close in spirit; the literal meaning is witness.","The opposite of Hart's point."]},
+ {id:'m10d',q:"Which form of Christian persuasion does Hart accept?",a:0,o:["Offering the gift freely, ready to be refused, never forcing it","Winning debates by any means","Passing laws that require belief","Staying silent about faith"],w:["Witness: the gift of martyrs.","Any means includes force, which Hart forbids.","Hart's whole argument forbids coercion.","He rejects silence too; the gift should be offered."]}
+],
+x:[
+ {id:'x1',m:1,q:"How does Hart structure the whole book?",a:0,o:["Thesis (Part 1), story (Part 2), antithesis (Part 3), with no synthesis","Three proofs of God","A history of the church in order","Introduction, body, conclusion"],w:["He leaves two stories facing each other.","He doesn't think proofs settle this.","Part 1 is about philosophy, Part 2 about doctrine.","Too generic; Hart names his parts."]},
+ {id:'x2',m:3,q:"Which thinker traced how power shapes what people accept as knowledge?",a:0,o:["Michel Foucault","Gregory of Nyssa","Anselm","J. S. Bach"],w:["Hart puts Foucault with Deleuze in the cosmological sublime.","Gregory is Hart's hero of the positive infinite.","Anselm wrote on atonement.","Bach is Hart's model of theme and variations."]},
+ {id:'x3',m:10,q:"Hart's gift of martyrs answers which worry from Module 1?",a:0,o:["That persuasion is always secretly a power grab","That God doesn't exist","That beauty is boring","That music is meaningless"],w:["Persuasion that refuses force and accepts refusal is Hart's answer.","Hart isn't arguing for God's existence.","Nobody in the book says that.","Music is one of Hart's images of peace."]},
+ {id:'x4',m:1,q:"Gnosticism treats the material world as...",a:0,o:["a prison the soul escapes through secret knowledge","God's good gift","a song","a city of peace"],w:["Hart says beauty guards against this.","That's Hart's view, the opposite.","That's Hart's image of creation.","That's Augustine's city of God."]},
+ {id:'x5',m:6,q:"Which image best fits Hart's picture of the infinite God?",a:0,o:["A fountain that never runs dry and never stops giving","A wall at the edge of the world","A storm of competing forces","An empty space"],w:["Full, and giving anyway.","That's the boundary-guarding god of the city.","That's the story of violence.","Hart's infinite is full of form."]},
+ {id:'x6',m:3,q:"In Kant's account, where does the experience of the sublime end up?",a:0,o:["With the mind discovering its own power over nature","With fear forever","With a vision of God's beauty","With the end of thinking"],w:["Hart calls this Kant's rational triumphalism.","For Kant the fear passes.","That's closer to Hart than to Kant.","Kant thought it showed reason's strength."]}
+]};
+var MOD_KEYS=['m1','m2','m3','m4','m5','m6','m7','m8','m9','m10'];
+
+/* ---------- MCQ ---------- */
+var ANS=store.get('ans',{});
+function renderMCQ(host,item,opts){
+  opts=opts||{};
+  var wrap=document.createElement('div');wrap.className='q';
+  var order=item.o.map(function(_,i){return i;});if(opts.shuffle)shuffle(order);
+  var stem=document.createElement('p');stem.className='q-stem';stem.textContent=item.q;wrap.appendChild(stem);
+  var box=document.createElement('div');box.className='opts';box.setAttribute('role','group');box.setAttribute('aria-label','Answer choices');wrap.appendChild(box);
+  var fb=document.createElement('div');fb.className='fb';fb.hidden=true;fb.setAttribute('aria-live','polite');wrap.appendChild(fb);
+  var letters='ABCD';
+  order.forEach(function(oi,pos){
+    var b=document.createElement('button');b.type='button';b.className='opt';b.dataset.i=oi;
+    var l=document.createElement('span');l.className='opt-l';l.textContent=letters[pos];
+    var t=document.createElement('span');t.textContent=item.o[oi];
+    b.appendChild(l);b.appendChild(t);
+    b.addEventListener('click',function(){choose(oi,false);});
+    box.appendChild(b);
+  });
+  function choose(oi,silent){
+    $$('.opt',box).forEach(function(b){b.disabled=true;var i=+b.dataset.i;if(i===item.a)b.classList.add('right');else if(i===oi)b.classList.add('wrong');});
+    var ok=oi===item.a;fb.hidden=false;fb.className='fb '+(ok?'right':'wrong');fb.innerHTML='';
+    var p=document.createElement('p');var s=document.createElement('strong');s.textContent=ok?'Correct. ':'Not quite. ';p.appendChild(s);p.appendChild(document.createTextNode(item.w[oi]));fb.appendChild(p);
+    if(!ok){var p2=document.createElement('p');p2.textContent='The answer is "'+item.o[item.a]+'." '+item.w[item.a];fb.appendChild(p2);}
+    if(opts.tag){var p3=document.createElement('p');p3.className='mx-tag';p3.textContent=opts.tag;fb.appendChild(p3);}
+    if(!silent&&opts.record!==false){ANS[item.id]=oi;store.set('ans',ANS);}
+    if(opts.onDone)opts.onDone(ok,silent);
+  }
+  host.appendChild(wrap);
+  if(opts.restore&&ANS[item.id]!==undefined)choose(ANS[item.id],true);
+  return wrap;
+}
+$$('[data-quiz]').forEach(function(host){var key=host.dataset.quiz;(QB[key]||[]).forEach(function(it){renderMCQ(host,it,{restore:true,onDone:updateProgress});});});
+
+/* ---------- progress ---------- */
+function updateProgress(){
+  MOD_KEYS.forEach(function(k,i){
+    var done=QB[k].every(function(it){return ANS[it.id]!==undefined;});
+    var dot=$$('.dots .dot')[i];if(dot)dot.classList.toggle('done',done);
+    var badge=$('#'+k+' .done-badge');if(badge)badge.hidden=!done;
+  });
+}
+updateProgress();
+
+/* ---------- predictions ---------- */
+var PRED=store.get('pred',{});
+$$('[data-predict]').forEach(function(g){
+  var key=g.dataset.predict,rev=g.nextElementSibling;
+  function pick(v,save){$$('button',g).forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false');});if(rev)rev.hidden=false;if(save){PRED[key]=v;store.set('pred',PRED);}}
+  $$('button',g).forEach(function(b){b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(b.dataset.v,true);});});
+  if(PRED[key])pick(PRED[key],false);
+});
+
+/* ---------- sorting ---------- */
+var SORTS=store.get('sorts',{});
+$$('[data-sort]').forEach(function(list){
+  var key=list.dataset.sort;var bins=list.dataset.bins.split(';').map(function(s){var p=s.split('|');return {k:p[0],label:p[1]};});
+  var score=list.nextElementSibling;var saved=SORTS[key]||{};
+  var items=$$('li',list);
+  items.forEach(function(li,idx){
+    var text=li.innerHTML;li.innerHTML='';
+    var t=document.createElement('span');t.className='s-text';t.innerHTML=text;li.appendChild(t);
+    var row=document.createElement('div');row.className='row';
+    var res=document.createElement('p');res.className='s-res';
+    bins.forEach(function(bn){
+      var b=document.createElement('button');b.type='button';b.className='bin-btn '+bn.k;b.textContent=bn.label;b.setAttribute('aria-pressed','false');
+      b.addEventListener('click',function(){answer(bn.k,true);});row.appendChild(b);
+    });
+    li.appendChild(row);li.appendChild(res);
+    function answer(k,save){
+      var ok=k===li.dataset.k;li.classList.add('answered');li.classList.toggle('ok',ok);li.classList.toggle('no',!ok);
+      $$('button',row).forEach(function(b){b.setAttribute('aria-pressed',b.classList.contains(k)?'true':'false');b.disabled=true;});
+      var right=bins.filter(function(x){return x.k===li.dataset.k;})[0].label;
+      res.innerHTML='';var bb=document.createElement('b');bb.textContent=ok?'Right. ':'It belongs to '+right.toLowerCase()+'. ';res.appendChild(bb);res.appendChild(document.createTextNode(li.dataset.why||''));
+      if(save){saved[idx]=k;SORTS[key]=saved;store.set('sorts',SORTS);}
+      tally();
+    }
+    if(saved[idx])answer(saved[idx],false);
+  });
+  function tally(){var done=items.filter(function(li){return li.classList.contains('answered');});var good=items.filter(function(li){return li.classList.contains('ok');});if(score&&score.classList.contains('score-line'))score.textContent=done.length===items.length?(good.length+' of '+items.length+' right.'):(done.length+' of '+items.length+' sorted');}
+  tally();
+});
+
+/* ---------- matching ---------- */
+$$('[data-match]').forEach(function(m){
+  var names={dr:'Derrida',df:'Deleuze and Foucault',hn:'Heidegger and Nancy',lv:'Levinas'};
+  var btn=$('[data-check]',m),out=$('.score-line',m);
+  btn.addEventListener('click',function(){
+    var rows=$$('.mrow',m),good=0,blank=0;
+    rows.forEach(function(r){var sel=$('select',r),res=$('.mres',r);var v=sel.value;r.classList.remove('ok','no');res.innerHTML='';
+      if(!v){blank++;return;}
+      var ok=v===r.dataset.k;if(ok)good++;r.classList.add(ok?'ok':'no');
+      var b=document.createElement('b');b.textContent=ok?'Right.':'Not quite.';res.appendChild(b);
+      if(!ok)res.appendChild(document.createTextNode(' Try again. Hint: look for the key word ('+({dr:'words',df:'forces',hn:'withdrawing',lv:'face'})[r.dataset.k]+').'));
+    });
+    out.textContent=blank?('Choose a thinker for every statement ('+blank+' left).'):(good===rows.length?'All four right.':good+' of '+rows.length+' right.');
+  });
+});
+
+/* ---------- ordering ---------- */
+$$('[data-order-wrap]').forEach(function(w){
+  var ol=$('ol',w),btn=$('[data-check]',w),out=$('.score-line',w);
+  var items=$$('li',ol);var arr=items.slice();
+  do{shuffle(arr);}while(arr.every(function(li,i){return +li.dataset.p===i;}));
+  arr.forEach(function(li){ol.appendChild(li);
+    var txt=document.createElement('span');txt.innerHTML=li.innerHTML;li.innerHTML='';li.appendChild(txt);
+    var mv=document.createElement('span');mv.className='mv';
+    var up=document.createElement('button');up.type='button';up.textContent='↑';up.setAttribute('aria-label','Move up');
+    var dn=document.createElement('button');dn.type='button';dn.textContent='↓';dn.setAttribute('aria-label','Move down');
+    up.addEventListener('click',function(){var p=li.previousElementSibling;if(p){ol.insertBefore(li,p);clear();up.focus();}});
+    dn.addEventListener('click',function(){var n=li.nextElementSibling;if(n){ol.insertBefore(n,li);clear();dn.focus();}});
+    mv.appendChild(up);mv.appendChild(dn);li.appendChild(mv);
+  });
+  function clear(){$$('li',ol).forEach(function(li){li.classList.remove('ok','no');});out.textContent='';}
+  btn.addEventListener('click',function(){var good=0;var cur=$$('li',ol);cur.forEach(function(li,i){var ok=+li.dataset.p===i;if(ok)good++;li.classList.toggle('ok',ok);li.classList.toggle('no',!ok);});out.textContent=good===cur.length?'Correct order. That is Hart\'s whole history in seven steps.':good+' of '+cur.length+' in the right place. Green ones are set; move the red ones.';});
+});
+
+/* ---------- flip cards ---------- */
+$$('.flip').forEach(function(f){f.addEventListener('click',function(){f.setAttribute('aria-pressed',f.getAttribute('aria-pressed')==='true'?'false':'true');});});
+
+/* ---------- explain boxes ---------- */
+var EX=store.get('ex',{});
+$$('[data-explain]').forEach(function(box){
+  var key=box.dataset.explain,ta=$('textarea',box),btn=$('button',box),model=$('.model',box),nudge=$('.nudge',box),wc=$('.wc',box);var asked=false,timer=0;
+  if(EX[key])ta.value=EX[key];
+  function words(){return (ta.value.trim().match(/\S+/g)||[]).length;}
+  function upd(){var n=words();wc.textContent=n?n+(n===1?' word':' words'):'';}
+  upd();
+  ta.addEventListener('input',function(){upd();clearTimeout(timer);timer=setTimeout(function(){EX[key]=ta.value;store.set('ex',EX);},400);});
+  btn.addEventListener('click',function(){
+    if(words()<10&&!asked){asked=true;nudge.hidden=false;btn.textContent='Show it anyway';return;}
+    nudge.hidden=true;model.hidden=false;btn.textContent='Model answer shown below';btn.disabled=true;
+  });
+});
+
+/* ---------- polls ---------- */
+var POLL=store.get('poll',{});
+function showCompare(){var c=$('#poll-compare');if(!c)return;
+  if(POLL.start&&POLL.end){c.textContent=POLL.start===POLL.end?('You started at "'+POLL.start+'" and you are still there. Can you now explain why, using one argument from each side?'):('You started at "'+POLL.start+'" and moved to "'+POLL.end+'." Which module moved you?');}
+  else if(POLL.start){c.textContent='At the start you answered "'+POLL.start+'."';}
+}
+$$('[data-poll]').forEach(function(p){var key=p.dataset.poll;
+  function pick(v,save){$$('button',p).forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false');});if(save){POLL[key]=v;store.set('poll',POLL);}
+    if(key==='start'){var n=$('.poll-note',p);n.textContent='Saved: "'+v+'." The last section asks again, after you have heard both sides.';}
+    showCompare();}
+  $$('button',p).forEach(function(b){b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(b.dataset.v,true);});});
+  if(POLL[key])pick(POLL[key],false);
+});
+showCompare();
+
+/* ---------- table of contents ---------- */
+var toc=$('.toc');if(toc){$$('a',toc).forEach(function(a){a.addEventListener('click',function(){toc.open=false;});});
+  document.addEventListener('click',function(e){if(toc.open&&!toc.contains(e.target))toc.open=false;});}
+
+/* ---------- scroll spy ---------- */
+if('IntersectionObserver' in window){
+  var dots=$$('.dots .dot');
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(en){if(en.isIntersecting){var n=+en.target.dataset.module;dots.forEach(function(d,i){d.setAttribute('aria-current',i===n-1?'true':'false');});}});},{rootMargin:'-35% 0px -60% 0px'});
+  $$('.module').forEach(function(m){io.observe(m);});
+}
+
+/* ---------- mosaic ---------- */
+(function(){
+  var cv=$('#mosaic');if(!cv||!cv.getContext)return;var ctx=cv.getContext('2d');
+  var tiles=[],W=0,H=0,light={x:.68,y:.3},target={x:.68,y:.3},raf=0,visible=true,last=0,t0=performance.now(),gold=[128,128,0],grout='#fff';
+  function hex(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(function(c){return c+c;}).join('');var n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255];}
+  function readColors(){try{gold=hex(cssv('--c4'));}catch(e){}grout=cssv('--page')||'#fff';}
+  function build(){var r=cv.getBoundingClientRect();if(!r.width)return;var dpr=Math.min(2,window.devicePixelRatio||1);W=r.width;H=r.height;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);
+    var s=Math.max(9,Math.min(15,W/34));tiles=[];
+    for(var y=0;y<H+s;y+=s){for(var x=0;x<W+s;x+=s){tiles.push({x:x+(Math.random()-.5)*2,y:y+(Math.random()-.5)*2,s:s-2.2-Math.random()*1.6,r:(Math.random()-.5)*.14,k:.72+Math.random()*.38,ph:Math.random()*6.28});}}
+    readColors();draw(performance.now());}
+  function draw(now){if(!W)return;var t=(now-t0)/1000;ctx.fillStyle=grout;ctx.fillRect(0,0,W,H);
+    if(!reduceMotion){light.x+=(target.x-light.x)*.06;light.y+=(target.y-light.y)*.06;}
+    var lx=light.x*W,ly=light.y*H,rad=Math.max(W,H)*.42;
+    for(var i=0;i<tiles.length;i++){var p=tiles[i];var dx=p.x-lx,dy=p.y-ly;var d2=(dx*dx+dy*dy)/(rad*rad);
+      var glow=Math.exp(-d2*1.5),base=p.k*.95,mix=Math.min(.6,glow*.6);
+      var c0=Math.min(255,Math.round(gold[0]*base*(1-mix)+255*mix)),c1=Math.min(255,Math.round(gold[1]*base*(1-mix)+255*mix)),c2=Math.min(255,Math.round(gold[2]*base*(1-mix)+255*mix));
+      ctx.fillStyle='rgb('+c0+','+c1+','+c2+')';ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s);ctx.restore();}
+  }
+  function loop(now){raf=0;if(!visible||document.hidden)return;if(now-last>40){draw(now);last=now;}if(Math.abs(target.x-light.x)+Math.abs(target.y-light.y)>.004)raf=requestAnimationFrame(loop);}
+  function start(){if(reduceMotion||raf)return;raf=requestAnimationFrame(loop);}
+  cv.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();target.x=(e.clientX-r.left)/r.width;target.y=(e.clientY-r.top)/r.height;if(reduceMotion){light.x=target.x;light.y=target.y;draw(performance.now());}else start();});
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){visible=es[0].isIntersecting;if(visible)start();}).observe(cv);}
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)start();});
+  if(window.matchMedia){var mq=window.matchMedia('(prefers-color-scheme: dark)');var onc=function(){readColors();draw(performance.now());};if(mq.addEventListener)mq.addEventListener('change',onc);}
+  new MutationObserver(function(){readColors();draw(performance.now());}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  window.addEventListener('resize',function(){clearTimeout(build._t);build._t=setTimeout(build,150);});
+  build();start();
+})();
+
+/* ---------- vessel ---------- */
+(function(){
+  var cv=$('#vessel');if(!cv||!cv.getContext)return;var ctx=cv.getContext('2d');
+  var cap=1,level=0,received=0,grows=0,hist=[1],disp={cap:1,level:0,pour:0},busy=false,W=0,H=0;
+  var elRec=$('#v-rec'),elGrow=$('#v-grow'),elCap=$('#v-cap'),elNote=$('#v-note');
+  function resize(){var r=cv.getBoundingClientRect();if(!r.width)return;var dpr=Math.min(2,window.devicePixelRatio||1);W=r.width;H=r.height;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw();}
+  function shape(cx,base,h){var w=h*.8,top=base-h;ctx.beginPath();ctx.moveTo(cx-w*.3,top);
+    ctx.bezierCurveTo(cx-w*.3,top+h*.18,cx-w*.58,top+h*.3,cx-w*.56,top+h*.58);
+    ctx.bezierCurveTo(cx-w*.54,top+h*.88,cx-w*.22,base,cx,base);
+    ctx.bezierCurveTo(cx+w*.22,base,cx+w*.54,top+h*.88,cx+w*.56,top+h*.58);
+    ctx.bezierCurveTo(cx+w*.58,top+h*.3,cx+w*.3,top+h*.18,cx+w*.3,top);}
+  function draw(){if(!W)return;ctx.clearRect(0,0,W,H);
+    var ink=cssv('--ink'),gold=cssv('--c4'),rule=cssv('--lo'),wash=cssv('--c4');
+    var cx=W/2,base=H-14,Hmax=Math.min(H*.78,W*.9);var cur=disp.cap;
+    hist.forEach(function(c){if(c>=cur-1e-6)return;var h=Hmax*Math.sqrt(c/cur);shape(cx,base,h);ctx.strokeStyle=rule;ctx.globalAlpha=1;ctx.lineWidth=1;ctx.setLineDash([3,4]);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;});
+    var h=Hmax,frac=Math.max(0,Math.min(1,disp.level/cur)),fh=h*frac;
+    ctx.save();shape(cx,base,h);ctx.clip();ctx.fillStyle=gold;ctx.globalAlpha=1;ctx.fillRect(0,base-fh,W,fh+2);ctx.restore();ctx.globalAlpha=1;
+    shape(cx,base,h);ctx.strokeStyle=ink;ctx.lineWidth=2;ctx.stroke();
+    if(disp.pour>0){ctx.globalAlpha=1;ctx.fillStyle=gold;var w=5;ctx.fillRect(cx-w/2,4,w,Math.max(0,base-fh-4));ctx.globalAlpha=1;}
+  }
+  function tween(props,ms,cb){if(reduceMotion||ms<=0){for(var k in props)disp[k]=props[k];draw();cb&&cb();return;}
+    var from={};for(var k2 in props)from[k2]=disp[k2];var s=performance.now();
+    (function step(now){var t=Math.min(1,(now-s)/ms);var e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;for(var k3 in props)disp[k3]=from[k3]+(props[k3]-from[k3])*e;draw();if(t<1)requestAnimationFrame(step);else cb&&cb();})(s);}
+  function stats(){elRec.textContent=received.toFixed(1);elGrow.textContent=grows;elCap.textContent=cap.toFixed(1)+'×';}
+  $('#v-pour').addEventListener('click',function(){if(busy)return;busy=true;var add=cap*.34;level+=add;received+=add;stats();
+    tween({level:level,pour:1},650,function(){tween({pour:0},200,function(){
+      if(level>=cap*.95){grows++;var nc=cap*1.7;hist.push(nc);cap=nc;stats();elNote.textContent=grows===1?'Nearly full, so it grew. The dashed line shows its old size.':'It grew again. Gregory says this never stops: every fullness opens a larger capacity.';tween({cap:nc},900,function(){busy=false;});}
+      else{elNote.textContent='Keep pouring.';busy=false;}
+    });});
+  });
+  $('#v-reset').addEventListener('click',function(){cap=1;level=0;received=0;grows=0;hist=[1];disp={cap:1,level:0,pour:0};busy=false;stats();elNote.textContent='Pour a few times. The dashed outlines show how big the vessel used to be.';draw();});
+  window.addEventListener('resize',function(){clearTimeout(resize._t);resize._t=setTimeout(resize,120);});
+  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  if(window.matchMedia){var mq=window.matchMedia('(prefers-color-scheme: dark)');if(mq.addEventListener)mq.addEventListener('change',draw);}
+  resize();stats();
+})();
+
+/* ---------- sound ---------- */
+var Sound=(function(){
+  var ac=null,master=null,live=[],timers=[];
+  function ctx(){if(!ac){var C=window.AudioContext||window.webkitAudioContext;if(!C)return null;ac=new C();master=ac.createGain();master.gain.value=.6;var lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.value=3400;var comp=ac.createDynamicsCompressor();master.connect(lp);lp.connect(comp);comp.connect(ac.destination);}
+    if(ac.state==='suspended')ac.resume();return ac;}
+  function tone(m,t,d,type,vol,det){var o=ac.createOscillator(),g=ac.createGain();o.type=type||'triangle';o.frequency.value=440*Math.pow(2,(m-69)/12);if(det)o.detune.value=det;
+    g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+0.012);g.gain.exponentialRampToValueAtTime(0.0001,t+d);o.connect(g);g.connect(master);o.start(t);o.stop(t+d+0.05);live.push(o);o.onended=function(){live=live.filter(function(x){return x!==o;});};}
+  function stop(){live.forEach(function(o){try{o.stop();}catch(e){}});live=[];timers.forEach(clearTimeout);timers=[];$$('.bar.on').forEach(function(b){b.classList.remove('on','sour');});}
+  function play(ev,bars,B,cells,sour){stop();var a=ctx();if(!a)return false;var t0=a.currentTime+0.08;ev.forEach(function(e){tone(e.m,t0+e.t,e.d,e.type,e.v||.14,e.det||0);});
+    if(cells){for(var i=0;i<bars;i++){(function(i){timers.push(setTimeout(function(){cells.forEach(function(c,j){c.classList.toggle('on',j===i);c.classList.toggle('sour',!!(j===i&&sour&&sour.indexOf(j)>-1));});},(0.08+i*B)*1000));})(i);}}
+    timers.push(setTimeout(function(){if(cells)cells.forEach(function(c){c.classList.remove('on','sour');});},(0.08+bars*B)*1000+150));return true;}
+  return {play:play,stop:stop};
+})();
+var BASS=[55,54,52,50,47,48,50,43];
+var CH=[[59,62,67],[57,62,66],[59,64,67],[57,62,66],[59,62,67],[60,64,67],[57,62,66],[59,62,67]];
+var MEL=[71,69,67,66,67,64,66,67];
+function seq(kind,B,opt){opt=opt||{};var ev=[];var mel=opt.mel||MEL;
+  for(var i=0;i<8;i++){var t=i*B+(opt.late&&opt.late[i]?opt.late[i]:0);var ch=(opt.ch&&opt.ch[i])||CH[i];
+    ev.push({m:BASS[i],t:t,d:B*.95,type:'triangle',v:.2});
+    if(kind==='chords'||kind==='reprise'){ch.forEach(function(n){ev.push({m:n,t:t,d:B*.48,v:.06});ev.push({m:n,t:t+B/2,d:B*.45,v:.05});});}
+    if(kind==='broken'||kind==='song'){var pat=[ch[0],ch[1],ch[2],ch[0]+12,ch[2],ch[1],ch[0],ch[1]];pat.forEach(function(n,j){ev.push({m:n,t:t+j*B/8,d:B/8*1.7,v:kind==='song'?.04:.07});});}
+    if(kind==='song'||kind==='reprise'){ev.push({m:mel[i],t:t,d:B*.92,type:'sine',v:.16,det:opt.det&&opt.det[i]?opt.det[i]:0});}
+  }return ev;}
+function demo(kind,B){var ev=[];var bars=[4,5,6,7];
+  bars.forEach(function(bi,k){var t=k*B;ev.push({m:BASS[bi],t:t,d:B*.95,v:.2});
+    if(bi===5&&kind==='sour'){[61,62,66].forEach(function(n){ev.push({m:n,t:t,d:B*.95,v:.07});});}
+    else if(bi===5&&kind==='resolve'){[60,65,67].forEach(function(n){ev.push({m:n,t:t,d:B*.5,v:.07});});[60,64,67].forEach(function(n){ev.push({m:n,t:t+B/2,d:B*.48,v:.07});});}
+    else{CH[bi].forEach(function(n){ev.push({m:n,t:t,d:B*.95,v:.06});});}
+  });return ev;}
+function wirePlayer(rootSel){var root=$(rootSel);if(!root)return;var cells=$$('.bar',root),note=$('.playnote',root),orig=note?note.textContent:'';
+  $$('[data-play]',root).forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.play,ok=true;
+    if(k==='theme')ok=Sound.play(seq('theme',.9),8,.9,cells);
+    else if(k==='chords')ok=Sound.play(seq('chords',.9),8,.9,cells);
+    else if(k==='broken')ok=Sound.play(seq('broken',1.0),8,1.0,cells);
+    else if(k==='song')ok=Sound.play(seq('song',1.1),8,1.1,cells);
+    else if(k==='reprise')ok=Sound.play(seq('reprise',1.35),8,1.35,cells);
+    else if(k==='sour')ok=Sound.play(demo('sour',1.1),4,1.1,cells.slice(4),[1]);
+    else if(k==='resolve')ok=Sound.play(demo('resolve',1.1),4,1.1,cells.slice(4));
+    else if(k==='wrong')ok=Sound.play(seq('song',1.1,{mel:[71,68,67,65,67,63,66,67],det:[0,0,30,0,-25,0,35,0],late:[0,0,0,.22,0,0,0,0]}),8,1.1,cells,[1,3,5]);
+    else if(k==='right')ok=Sound.play(seq('reprise',1.15),8,1.15,cells);
+    if(note)note.textContent=ok?orig:'This browser blocked audio. Try another browser, or read the description above.';
+  });});
+  $$('[data-stop]',root).forEach(function(b){b.addEventListener('click',Sound.stop);});
+}
+wirePlayer('#goldberg');wirePlayer('#retold');
+
+/* ---------- same light ---------- */
+$$('.lightbox').forEach(function(box){var cap=$('#l-cap',box);
+  $$('[data-light]',box).forEach(function(b){b.addEventListener('click',function(){var s=b.dataset.light;box.dataset.state=s;
+    $$('[data-light]',box).forEach(function(x){var on=x.dataset.light===s;x.setAttribute('aria-pressed',on?'true':'false');x.classList.toggle('gold',on);});
+    if(cap)cap.textContent=s==='open'?'Open: the light fills it':'Closed: the same light burns on the lid';});});});
+
+/* ---------- price tags ---------- */
+(function(){var btns=$$('.tagbtn'),done=$('#tags-done');var TAGS=store.get('tags',{});
+  btns.forEach(function(b,i){b.setAttribute('aria-pressed','false');function set(on,save){b.classList.toggle('tagged',on);b.setAttribute('aria-pressed',on?'true':'false');if(save){TAGS[i]=on;store.set('tags',TAGS);}check();}
+    b.addEventListener('click',function(){set(!b.classList.contains('tagged'),true);});if(TAGS[i])set(true,false);});
+  function check(){if(done)done.hidden=!btns.every(function(b){return b.classList.contains('tagged');});}check();})();
+
+/* ---------- flashcards ---------- */
+var CARDS=[
+ {id:'ov',t:'Ontology of violence',d:"The belief that conflict is the deepest truth about reality and peace is only a truce. Milbank's term; Hart's main target.",m:2},
+ {id:'op',t:'Ontology of peace',d:'The belief that goodness and peace come first, and violence is an intruder, a wound with no substance of its own.',m:2},
+ {id:'to',t:'Totality',d:'The world pictured as a closed system that explains itself.',m:1},
+ {id:'in',t:'Infinity (in Hart\'s sense)',d:'The world received as a gift from a God beyond it, whose infinity is full of form and love.',m:1},
+ {id:'su',t:'The sublime',d:'An experience of something too vast to take in. For many postmodern thinkers, the formless truth behind every beautiful surface.',m:3},
+ {id:'mn',t:'Metanarrative',d:'A big story claiming to explain all the others. Lyotard defined the postmodern as incredulity toward them.',m:10},
+ {id:'ad',t:'Apollo and Dionysus',d:'Greek gods of order and of wild ecstasy: the walled city and the wilderness. For Hart, two poles of one map.',m:2},
+ {id:'wp',t:'Will to power',d:"Nietzsche's name for life's basic drive to grow, overcome, and dominate.",m:4},
+ {id:'rs',t:'Ressentiment',d:'The grudge of the weak against the strong, dressed up as morality. Nietzsche\'s diagnosis of Christian love.',m:4},
+ {id:'gn',t:'Gnosticism',d:'An ancient belief that matter is a prison and salvation is secret knowledge that frees the soul from the world.',m:1},
+ {id:'ex',t:'Creation ex nihilo',d:'Creation "from nothing": the world exists as a free gift and didn\'t have to exist.',m:5},
+ {id:'pc',t:'Perichoresis',d:'The way Father, Son, and Spirit live in one another, distinct yet one life of love.',m:6},
+ {id:'ap',t:'Apatheia',d:"God's life is so full of love and joy that nothing outside can wound it or add to it. It names fullness.",m:6},
+ {id:'ep',t:'Epektasis',d:"Gregory of Nyssa's word for the soul's endless stretching toward God. The vessel that grows as it is filled.",m:6},
+ {id:'an',t:'Analogy of being',d:'Creatures resemble God within an ever greater unlikeness, so our words about God are true and always fall short.',m:7},
+ {id:'gv',t:"Hart's answer to Derrida on gifts",d:'Real gifts come from desire for the other, hope for a response, and are given again. In God, giving and receiving are one motion.',m:7},
+ {id:'ke',t:'Kenosis',d:'Self-emptying (Philippians 2:7). Christ gives himself away without ceasing to be God.',m:8},
+ {id:'rc',t:'Recapitulation',d:"Irenaeus's idea: Christ re-lives the human story from the start and gets it right, like a song finally sung correctly.",m:8},
+ {id:'sg',t:'Scapegoat',d:'A victim whose expulsion or death keeps a group together. Girard\'s term; for Hart, sacrifice as an economy of violence.',m:8},
+ {id:'tr',t:"Hart's objection to tragic theology",d:'Tragedy teaches acceptance of loss as cosmic order. Easter refuses it and treats death as an enemy God reverses.',m:8},
+ {id:'es',t:'Eschaton',d:'"The last thing": the end of history and the new creation, which keeps every good thing.',m:9},
+ {id:'hl',t:'Hell, in the Eastern view Hart draws on',d:"God's same glory, received by a closed heart as burning.",m:9},
+ {id:'mk',t:'The market (Hart\'s usage)',d:'The culture that turns everything into a price and a choice. Hart says it wins when every big story is made private.',m:10},
+ {id:'mt',t:'Martyr',d:'Greek for "witness." For Hart, the only legitimate shape of Christian persuasion: offer the gift, accept refusal, never force.',m:10}
+];
+(function(){
+  var st=store.get('cards',{}),DAY=864e5,INT=[0,1,3,7,16],queue=[],cur=null,ahead=false;
+  var front=$('#fc-front'),back=$('#fc-back'),mod=$('#fc-mod'),showRow=$('#fc-show-row'),rate=$('#fc-rate'),empty=$('#fc-empty'),card=$('#fc-card'),stat=$('#fc-stat');
+  if(!front)return;
+  function due(c){var s=st[c.id];return !s||s.due<=Date.now();}
+  function stats(){var nw=0,lr=0,so=0,dn=0;CARDS.forEach(function(c){var s=st[c.id];if(!s)nw++;else if(s.box>=2)so++;else lr++;if(due(c))dn++;});
+    stat.innerHTML='';[['New',nw],['Learning',lr],['Solid',so],['Due now',dn]].forEach(function(p){var s=document.createElement('span');s.textContent=p[0]+' ';var b=document.createElement('b');b.textContent=p[1];s.appendChild(b);stat.appendChild(s);});}
+  function next(){cur=queue.shift();if(!cur){card.hidden=true;showRow.hidden=true;rate.hidden=true;empty.hidden=false;stats();return;}
+    card.hidden=false;empty.hidden=true;front.textContent=cur.t;back.textContent=cur.d;back.hidden=true;mod.textContent='Module '+cur.m;showRow.hidden=false;rate.hidden=true;}
+  function build(){queue=shuffle(CARDS.filter(function(c){return ahead||due(c);}));next();stats();}
+  $('#fc-show').addEventListener('click',function(){back.hidden=false;showRow.hidden=true;rate.hidden=false;var k=$('[data-rate="knew"]',rate);if(k)k.focus();});
+  $$('[data-rate]',rate).forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.rate,s=st[cur.id]||{box:0,due:0};
+    if(k==='miss'){s.box=0;s.due=Date.now();queue.push(cur);}
+    else if(k==='shaky'){s.box=Math.max(1,s.box);s.due=Date.now()+INT[1]*DAY;}
+    else{s.box=Math.min(4,s.box+1);s.due=Date.now()+INT[s.box]*DAY;}
+    st[cur.id]=s;store.set('cards',st);next();stats();var sh=$('#fc-show');if(!showRow.hidden&&sh)sh.focus();});});
+  $('#fc-ahead').addEventListener('click',function(){ahead=true;build();});
+  build();
+})();
+
+/* ---------- mixed quiz ---------- */
+(function(){
+  var body=$('#mx-body');if(!body)return;
+  var pool=[];MOD_KEYS.forEach(function(k,i){QB[k].forEach(function(it){pool.push({it:it,m:i+1});});});QB.x.forEach(function(it){pool.push({it:it,m:it.m});});
+  function start(){var set=shuffle(pool.slice()).slice(0,10),idx=0,score=0,missed=[];
+    function show(){body.innerHTML='';if(idx>=set.length)return finish();var cur=set[idx];
+      var top=document.createElement('div');top.className='mx-top';var a=document.createElement('span');a.textContent='Question '+(idx+1)+' of '+set.length;var b=document.createElement('span');b.textContent='Score '+score;top.appendChild(a);top.appendChild(b);body.appendChild(top);
+      var host=document.createElement('div');body.appendChild(host);
+      var nx=document.createElement('div');nx.className='row';nx.hidden=true;var btn=document.createElement('button');btn.type='button';btn.className='btn gold sm';btn.textContent=idx===set.length-1?'See results':'Next question';nx.appendChild(btn);
+      renderMCQ(host,cur.it,{shuffle:true,record:false,tag:'From Module '+cur.m,onDone:function(ok){if(ok)score++;else missed.push(cur);b.textContent='Score '+score;nx.hidden=false;btn.focus();}});
+      body.appendChild(nx);btn.addEventListener('click',function(){idx++;show();});
+      var first=$('.opt',host);if(first&&idx>0)first.focus();}
+    function finish(){body.innerHTML='';var h=document.createElement('p');h.className='fc-front';h.textContent=score+' of '+set.length;body.appendChild(h);
+      var p=document.createElement('p');p.textContent=score===set.length?'A clean sweep. Try again in a few days; spacing it out is what makes it stick.':(missed.length?'Review the modules behind the ones you missed:':'');body.appendChild(p);
+      if(missed.length){var ul=document.createElement('ul');ul.className='missed';missed.forEach(function(x){var li=document.createElement('li');var a=document.createElement('a');a.href='#m'+x.m;a.textContent='Module '+x.m;li.appendChild(a);li.appendChild(document.createTextNode(': '+x.it.q));ul.appendChild(li);});body.appendChild(ul);}
+      var row=document.createElement('div');row.className='row';var again=document.createElement('button');again.type='button';again.className='btn gold sm';again.textContent='New mixed quiz';again.addEventListener('click',start);row.appendChild(again);body.appendChild(row);}
+    show();}
+  $('#mx-start').addEventListener('click',start);
+})();
+
+/* ---------- glossary ---------- */
+(function(){var gl=$('#gl-list');if(!gl)return;CARDS.slice().sort(function(a,b){return a.t.localeCompare(b.t);}).forEach(function(c){var d=document.createElement('div');var dt=document.createElement('dt');dt.textContent=c.t;var dd=document.createElement('dd');dd.textContent=c.d+' ';var a=document.createElement('a');a.href='#m'+c.m;a.textContent='Module '+c.m;dd.appendChild(a);d.appendChild(dt);d.appendChild(dd);gl.appendChild(d);});})();
+
+})();
+</script>
+</body>
+</html>

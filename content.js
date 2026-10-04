@@ -54,6 +54,20 @@ const ENTRIES = [
   ------------------------------------------------------------------------- */
 
   {
+    slug: "harts-beauty-of-the-infinite",
+    title: "Hart's Beauty of the Infinite",
+    date: "2026-10-04",
+    time: "12:18",
+    url: "exhibits/harts-beauty-of-the-infinite/",
+    tags: ["theology", "philosophy"],
+    summary: `A ten-module course on David Bentley Hart's <em>The Beauty of the
+              Infinite</em> (2003) and his case that persuasion can be peaceful,
+              with Nietzsche, Levinas, Derrida, and his other critics given their
+              best lines. Quizzes, hands-on activities, and spaced flashcards
+              throughout.`,
+  },
+
+  {
     slug: "sample-dialup-speeds",
     title: "Sample exhibit: how long a page took over dial-up",
     date: "2026-10-04",
