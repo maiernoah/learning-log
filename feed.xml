@@ -3,7 +3,7 @@
 <channel>
   <title>Noah's Weblog</title>
   <link>https://noahmaier.net/</link>
-  <description>Notes and interactive pages from whatever I'm studying.</description>
+  <description>Webpages, notes, and videos to help me learn complicated things.</description>
   <language>en-us</language>
   <atom:link href="https://noahmaier.net/feed.xml" rel="self" type="application/rss+xml"/>
   <lastBuildDate>Sun, 04 Oct 2026 21:54:00 GMT</lastBuildDate>

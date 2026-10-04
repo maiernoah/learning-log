@@ -15,7 +15,7 @@
 
 const SITE = {
   title: "Noah's Weblog",
-  tagline: "Notes and interactive pages from whatever I'm studying.",
+  tagline: "Webpages, notes, and videos to help me learn complicated things.",
   author: "Noah",
 
   // The site's address. The RSS feed (feed.xml) builds its links from it.
