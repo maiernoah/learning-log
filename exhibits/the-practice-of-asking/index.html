@@ -277,6 +277,30 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
   #ctp-svg .t-small { font-size: 14px; }
 }
 
+/* part 8: seven-step strip and diagnosis */
+.steps-strip { list-style: none; counter-reset: step; display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 6px; padding: 0; margin: 0 0 12px; }
+.steps-strip li { counter-increment: step; border: 1px solid var(--lo); background: var(--page); padding: 6px 4px; font: 12px/1.3 var(--sans); text-align: center; }
+.steps-strip li::before { content: counter(step) ". "; font-weight: bold; }
+.steps-strip li.is-answer { border: 2px solid var(--c6); background: var(--tint); font-weight: bold; }
+.steps-strip li.is-pick { border: 2px dashed var(--c2); }
+#dx-desc { font-style: italic; }
+.dx-choices { margin: 0 0 10px; }
+.dx-choices label { padding: 4px 6px 4px 0; font-size: 14px; }
+
+/* part 9: calculator */
+.calc-grid { display: grid; grid-template-columns: 1fr minmax(7em, 11em); gap: 8px 12px; align-items: center; }
+.calc-grid input { font-variant-numeric: tabular-nums; }
+.funnel { margin: 4px 0 10px; font: 13px/1.4 var(--sans); }
+.funnel-row { display: grid; grid-template-columns: 11em 1fr 4.5em; gap: 8px; align-items: center; margin: 0 0 6px; }
+.funnel-track { display: block; height: 14px; border: 1px solid var(--field); background: var(--page); }
+.funnel-bar { display: block; height: 100%; background: var(--c1); }
+.funnel-num { text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 520px) {
+  .calc-grid { grid-template-columns: 1fr 7em; }
+  .funnel-row { grid-template-columns: 8.5em 1fr 3.5em; }
+}
+.steps-table td .src { white-space: normal; }
+
 </style>
 </head>
 <body>
@@ -305,6 +329,8 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
           <li>Name the money story you carry and predict where it shows up in an ask.</li>
           <li>Diagnose a hard ask by checking the four things that have to be true first.</li>
           <li>Separate what you control in a donor relationship from what you don't, and decide what to release.</li>
+          <li>Diagnose a stalled gift by finding which of the seven steps is really stuck.</li>
+          <li>Work backwards from a fundraising goal to a daily activity floor.</li>
         </ul>
         <h3>Guess first</h3>
         <p>Answer these before you start. Guessing wrong is fine; trying first makes the answers stick.</p>
@@ -321,8 +347,12 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
         <p>Every profession tells a story about itself. That story decides who joins, how they act, and how high they aim. The notes call this the ceiling. <span class="src">(Generosity as Substrate)</span></p>
         <p>The common story about fundraising is that it is a necessary evil. It is the awkward part of the job that pays for the real work. Leaders who believe this apologize for the development office. Boards treat the annual fund as an embarrassment. Talented people leave the field, and the ones who stay ask timidly. <span class="src">(Generosity as Substrate)</span></p>
         <p>The training offers a different story. Fundraising is one of the oldest forms of human cooperation: gathering resources around a shared purpose. It is how cathedrals were built, universities endowed, hospitals founded and movements kept alive. In this story it is a necessary good. <span class="src">(Generosity as Substrate; What Fundraising Is and Isn't)</span></p>
-        <p>The notes define it plainly. Fundraising is the practice of sustained human attention directed at another person. The word <em>practice</em> matters. A practice is defined by repetition. You never complete it. It trains you, and the methods grow out of what it builds in you. <span class="src">(What Fundraising Is and Isn't)</span></p>
+        <p>The notes define it plainly. Fundraising is not selling, begging, or marketing with a different name. It is the practice of sustained human attention directed at another person. The word <em>practice</em> matters. A practice is defined by repetition. You never complete it. It trains you, and the methods grow out of what it builds in you. <span class="src">(What Fundraising Is and Isn't)</span></p>
         <p>The notes are just as hard on the opposite mistake. Fundraisers ask people for money; that is the job. Language so lofty that the ask disappears is its own kind of cowardice. What changes is orientation. In sales the transaction is the product. In fundraising the relationship is the product, and the gift is one expression of it. <span class="src">(What Fundraising Is and Isn't)</span></p>
+
+        <h3>Dreams attract; need repels</h3>
+        <p>The necessary-evil story has a favorite line: we need the money. Jerold Panas spent decades interviewing the field's most successful fundraisers and most generous donors. <span class="src">(Book draft, ch. 11)</span> His most radical claim cuts against that line. Donors don't give because organizations have needs. They give to dreams, visions and opportunities. To the people who make the largest gifts, need repels. <span class="src">(Donor Motivations; What Fundraising Is and Isn't)</span></p>
+        <p>So "We need $2 million to keep the doors open" isn't a case for support. The notes call it an admission of failure dressed up as an ask. Donors don't give to sinking ships. Describe your organization as desperate and you make it unfundable. Describe it as something going somewhere, and you invite people to come along. The notes tell a story they credit to Chris Rock: if your car runs out of gas, don't stand by the road waving for help. Start pushing, and someone will stop to help you push. <span class="src">(What Fundraising Is and Isn't; Persistence and Follow-Up)</span></p>
 
         <h3>An example</h3>
         <p>An analogy: a friend tells you about a restaurant they love and says you should come along next time. Nobody calls that selling. It's an invitation into something they enjoy. The analogy has limits. A gift asks much more of the giver than a dinner does, and the fundraiser has a stake in the answer.</p>
@@ -342,7 +372,7 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
             <text class="t-lab t-strong" x="224" y="44" text-anchor="middle">the fundraiser</text>
             <text class="t-small" x="224" y="150" text-anchor="middle">values become action</text>
           </svg>
-          <figcaption>Without the bridge, a donor's values stay private. With it, they become action. Drawn from the notes' manifesto, which calls the fundraiser a connector. <span class="src">(Position: Philanthropy and Fundraising)</span></figcaption>
+          <figcaption>Without the bridge, a donor's values stay private. With it, they become action. The notes' position statement calls the fundraiser a connector, not an extractor: someone who sees what a donor cares about and what the world needs, and builds the bridge. <span class="src">(Position: Philanthropy and Fundraising)</span></figcaption>
         </figure>
 
         <h3>Try it</h3>
@@ -371,7 +401,7 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
         <p>The central claim of the training fits in one sentence. Generosity is the substrate: it is already present in every person, community and culture. Fundraising removes whatever stands between a person and that generosity. It doesn't manufacture it. <span class="src">(Generosity as Substrate)</span></p>
         <p>The notes use an image. Generosity moves the way water flows downhill. Nobody pushes water. It moves when the path is clear. <span class="src">(Generosity as Substrate)</span></p>
         <p>What blocks the path? The notes list fear, confusion and distrust. They list red tape, the sense that a gift won't matter, and the feeling that the ask is a transaction. They add the suspicion that the organization doesn't understand the donor, the memory of being asked badly before, and the drag of a busy life. Each one is specific. Each can be removed by someone paying close attention. <span class="src">(Generosity as Substrate)</span></p>
-        <p>So the notes compare the work to midwifery: the baby is coming, and your job is to help. <span class="src">(Generosity as Substrate)</span> They borrow a line from John Gardner that the fundraising writer Jerold Panas embraced: the fundraiser's job is to unlock what is already there. <span class="src">(What the Fundraiser Enables)</span></p>
+        <p>So the notes compare the work to midwifery: the baby is coming, and your job is to help. <span class="src">(Generosity as Substrate)</span> They borrow a line they attribute to John Gardner, which Panas embraced: the fundraiser's job is to unlock what is already there. <span class="src">(What the Fundraiser Enables)</span></p>
         <p>There is a practical reason persuasion fails. Wealthy donors are approached by many organizations every year. Once a donor feels pushed instead of invited, you have probably lost them for good. People remember being pushed. <span class="src">(What Fundraising Is and Isn't)</span></p>
 
         <h3>Try it: clear the path</h3>
@@ -431,7 +461,8 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
         <h3>The harder picture</h3>
         <p>Anthropology adds something less comfortable. In <em>The Gift</em> (1925), Marcel Mauss studied gift exchange across many societies. He found that gifts were never quite free. They carried three obligations: to give, to receive, and to give back. Gifts built alliances and status, and they could be coercive. The <a class="term" href="#g-potlatch">potlatch</a> feasts of the Pacific Northwest, where hosts gained standing by giving wealth away, are a famous case. <span class="src">(Anthropology)</span></p>
         <p>A review included in the notes calls this the biggest gap in the substrate argument, and suggests owning it. Gifts have always carried social weight, and that weight is how generosity has worked all along. A gala, in this reading, is a modern potlatch. <span class="src">(Anthropology)</span> The practical upshot, as this page reads it: you can work with a donor's wish to be seen without resenting it.</p>
-        <p>Mauss also wrote about the hau, a Māori idea he read as the spirit of the gift. Something of the giver travels with the thing given, and that's why a gift binds people. Lewis Hyde took up the idea in his own book, also called <em>The Gift</em> (1983). For the notes, the lesson is practical. A donor making a real gift enters a relationship, and the fundraiser is the channel it passes through. If the fundraiser is detached from the work, the gift's spirit can't pass through, and a transaction replaces the gift. <span class="src">(The Easy Ask)</span></p>
+        <p>The notes have a stewardship rule that fits here. Fit recognition to the person, not to the size of the gift. Some donors want their name on a wall. Others would find that mortifying and want a quiet handwritten note. The only way to know is to ask, and to remember the answer. <span class="src">(Stewardship and Donor Retention)</span></p>
+        <p>Mauss also wrote about the hau, a Māori idea he read as the spirit of the gift. Something of the giver travels with the thing given, and that's why a gift binds people. Lewis Hyde took up the idea in his own book, also called <em>The Gift</em> (1983). Hyde's best-known claim, which this page adds from outside the notes, is that a gift has to keep moving; held onto as a possession, it stops working as a gift. For the notes, the lesson is practical. A donor making a real gift enters a relationship, and the fundraiser is the channel it passes through. If the fundraiser is detached from the work, the gift's spirit can't pass through, and a transaction replaces the gift. <span class="src">(The Easy Ask)</span></p>
 
         <figure>
           <svg width="684" height="300" viewBox="0 0 460 202" role="img" aria-label="A cycle of three steps: give, receive, give back, connected by arrows. In the center: hau, something of the giver travels with the gift.">
@@ -481,9 +512,10 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
         <p>Why do people give? The notes answer that generosity is a natural overflow. A person who feels they have enough wants that surplus to mean something. Giving from that place feels like expression. Giving from guilt feels like a tax. <span class="src">(Abundance vs Obligation)</span></p>
         <p>The Greek idea of eudaimonia helps here. It is usually translated as happiness, but the notes use it for something fuller: a fullness of being in which nothing is lacking. Happiness, in this sense, is a way of being, more than a prize collected after an achievement. From that place, the notes say, generosity is expression more than sacrifice. <span class="src">(Abundance vs Obligation; Happiness as Wholeness)</span></p>
         <p>That's why the notes push against guilt. Their advice is direct: stop guilt-tripping donors and help them feel abundant. Generosity follows. <span class="src">(Philosophy Calls: Philosophy of Giving)</span></p>
+        <p>Panas's interviews point the same way. Major donors talked about falling in love with institutions. They dismissed taxes as a main reason to give; most made the gift first and called their accountant afterward. Panas studied only successful donors, so treat this as a pattern among them, not a law. <span class="src">(Book draft, ch. 3 and 11)</span></p>
         <p>A second idea sharpens this. Whatever is useful is useful for the sake of something else. A hammer serves the nail, the nail serves the house, and the house serves shelter. Somewhere the chain has to end in something valued for itself. <span class="src">(The Usefulness Problem)</span> The notes cite the Brazilian Indigenous writer Ailton Krenak, who put it bluntly in a book title: <em>Life Is Not Useful</em>. <span class="src">(Philosophy Calls: Philosophy of Giving)</span> The argument is old. Aristotle opens his <em>Nicomachean Ethics</em> with a version of it; that link is added here, not drawn from the notes.</p>
-        <p>The donor who only asks "what's my ROI?" is stuck in that chain. The notes don't dismiss the question. Answer it well. Then help the donor notice that what they cherish most was never valuable for what it produced. Fulfillment should come through the act of giving, not later as a reward delivered by an impact report. A relationship held together only by reports lasts as long as the reports keep pleasing. <span class="src">(The Usefulness Problem)</span></p>
-        <p>The same trap catches fundraisers. When impact becomes an idol, every coffee becomes a moral calculation. The guilt never ends, because there is always a better way to spend the dollar. The notes credit effective altruism with real gains, like moving money to neglected causes. They also see this trap in it at full strength. Their answer is short: you're worthy now, and so is the donor. <span class="src">(The Achievement Trap; Fundraising Meta-Philosophy)</span></p>
+        <p>The notes call this the usefulness problem. The donor who only asks "what's my ROI?" (return on investment) is stuck in that chain. The notes don't dismiss the question. Answer it well. Then help the donor notice that what they cherish most was never valuable for what it produced. Fulfillment should come through the act of giving, not later as a reward delivered by an impact report. A relationship held together only by reports lasts as long as the reports keep pleasing. <span class="src">(The Usefulness Problem)</span></p>
+        <p>The same trap catches fundraisers, and the notes call it the achievement trap. When impact becomes an idol, every coffee becomes a moral calculation. The guilt never ends, because there is always a better way to spend the dollar. The notes credit effective altruism with real gains, like moving money to neglected causes. They also see this trap in it at full strength. Their answer is short: you're worthy now, and so is the donor. <span class="src">(The Achievement Trap; Fundraising Meta-Philosophy)</span></p>
         <p>Then there's the widow. In the Gospels of Mark and Luke, Jesus watches rich people put large sums into the temple treasury. A poor widow puts in two small coins, all she had to live on. He says she gave more than all of them. Her gift did little for the temple budget. It did a great deal as an act of trust. <span class="src">(Fundraising Meta-Philosophy)</span></p>
 
         <h3>Try it: two givers</h3>
@@ -544,8 +576,9 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
         <p>Start with the competition. Many EDs picture a fixed pot of philanthropy with every other nonprofit fighting over it. The notes see a different rival. The money you're asking for is mostly sitting in an index fund, or headed for a second home or an eighth vacation. Your real competitor is inertia, the default of doing nothing. A dollar that moves from passive wealth into giving usually wasn't headed to another charity. <span class="src">(What Fundraising Is and Isn't; Fundraising Meta-Philosophy)</span></p>
         <p>Wealthy people often don't know how rich they are, either. The notes tell of a billionaire who held up two dresses in a store and realized, for the first time, that she could buy both. Wealth grows faster than identity adjusts. Part of your job is to show someone a use of their resources worthy of who they want to be. <span class="src">(Fundraising Meta-Philosophy)</span></p>
         <p>So why does asking still feel hard? Because every fundraiser carries a money story. The notes call these stories the operating system that runs under every ask. <span class="src">(Your Money Story)</span></p>
-        <p>The stories vary. Someone who grew up with too little may flinch at a million-dollar number, because it feels unreal. Someone who grew up comfortable may treat a gift as unremarkable, because money felt easy. Someone taught that asking is rude may feel their throat close at the moment of the ask, whatever their training. The notes observe that the United States is a culture of giving but not a culture of asking. Don't ask for seconds. Don't ask for help. <span class="src">(Your Money Story)</span></p>
-        <p>None of this resolves quickly. The notes call it a lifelong project that deepens instead of ending. But a fundraiser who hasn't started it is driving with the parking brake on. <span class="src">(Your Money Story)</span></p>
+        <p>The stories vary. Someone who grew up with too little may flinch at a million-dollar number, because it feels unreal. Someone who grew up comfortable may carry guilt about having more, or treat a gift as unremarkable because money felt easy. Some inherited a tangle from parents who fought about money or never mentioned it. Some carry an immigrant story in which money means survival. Someone taught that asking is rude may feel their throat close at the moment of the ask, whatever their training. The notes observe that the United States is a culture of giving but not a culture of asking. Don't ask for seconds. Don't ask for help. <span class="src">(Your Money Story)</span></p>
+        <p>This page adds one more story, drawn from two other notes: that a yes proves you're enough. The notes describe fundraisers who experience rejection as evidence that they are not enough. They also warn against giving driven by a secret belief that it will make you good, worthy, enough. Their answer is short: you're worthy now. <span class="src">(Fundraising as Spiritual Path; Fundraising Meta-Philosophy)</span></p>
+        <p>None of this resolves quickly. The notes call it a lifelong project that deepens instead of ending. Their first steps: notice your limiting beliefs about money, write them down, and talk them through with someone you trust, such as a therapist, a mentor, or a colleague who has been in the work a long time. A fundraiser who hasn't started is driving with the parking brake on. <span class="src">(Your Money Story)</span></p>
 
         <h3>Try it: which story are you carrying?</h3>
         <p>Check any line that sounds like you. Nothing here is saved or sent anywhere.</p>
@@ -561,6 +594,15 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
         </details>
 
         <p class="box"><strong class="label">A common mix-up</strong>"My friends will resent me if I ask." The notes list this among the common myths. Your friends know your values, and many are looking for a way to be part of something meaningful. <span class="src">(Myths About Asking)</span></p>
+
+        <details class="reveal"><summary>Four more myths about asking, and the notes' replies</summary>
+          <div>
+            <p>"Asking for money is rude or pushy." Done with respect, it invites someone to make a difference.</p>
+            <p>"Good causes sell themselves." Donors give because they're asked, because they trust you, and because they see what their gift does.</p>
+            <p>"Only extroverts can fundraise." The work is mostly listening. Introverts are often better at it.</p>
+            <p>"If you mess up the ask, you're a bad fundraiser." The ask is one of seven steps; Part 8 shows the other six. <span class="src">(Myths About Asking)</span></p>
+          </div>
+        </details>
 
         <p class="box"><strong class="label">Practice this week</strong>Get low-stakes reps. Ask for a discount at a place you go often. Tell a stranger what you do for a living. The notes call it training for a marathon you just learned to run, so be kind to yourself. <span class="src">(Book draft, ch. 10)</span></p>
 
@@ -580,7 +622,13 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
         <p>The Catholic priest and writer Henri Nouwen gave this a spiritual footing in <em>A Spirituality of Fundraising</em>. As the notes summarize him, fundraising is announcing a vision that has gripped you and inviting another person to take part in it. Asked that way, the ask is a gift to the donor. Asked from fear or need, it turns into a transaction, and the donor feels it. Don't ask begrudgingly or apologetically. <span class="src">(The Easy Ask)</span></p>
         <p>The notes add a distinction from the coach Joe Hudson: wonder versus curiosity. Curiosity wants to close the loop. It has an answer in mind and narrows toward it. Wonder keeps the loop open, the way a child looks at a turtle for the first time. Hudson warns that wonder bent even slightly toward strategy becomes creepy. The fix is to hold your agenda loosely. You're a fundraiser and you have an agenda; pretending otherwise is dishonest. <span class="src">(Wonder vs Curiosity)</span></p>
         <p>The notes offer a quick test. When you ask a question, do you already have a rough sense of the answer you hope to hear? Then you're in curiosity. If you have no idea, and that feels exciting, you're in wonder. <span class="src">(Wonder vs Curiosity)</span></p>
+
+        <h3>Start where they are</h3>
+        <p>You can't math someone into caring. A rigorous case that your cause is the most efficient use of a dollar won't move someone who gives to forests because they met their spouse in a forest. That isn't irrational. It's human. <span class="src">(Fundraising Meta-Philosophy)</span></p>
+        <p>So the notes' rule is to accept people where they are and move them three steps forward. A political canvasser who knocks on a door and explains why the voter is wrong persuades nobody. The one who asks what the voter cares about, and connects it to the candidate's record, moves votes. Never open by attacking someone's current giving. <span class="src">(Fundraising Meta-Philosophy; Meeting People Where They Are)</span></p>
+        <p>The notes' example: listening to a couple talk about their life, you learn they adopted a child from India. Now you can connect what's happening in India to your mission, and the connection is real because you found it by listening. Sometimes the dots connect. Sometimes they don't, and you move on. <span class="src">(Meeting People Where They Are; Fundraising Meta-Philosophy)</span></p>
         <p>Love has a hard edge too. If you wouldn't put your own money into the work, in an amount that would cost you something, the notes say you have no business asking anyone else. Their test: if a close friend asked you, off the clock, whether to give to your organization, what would you say? <span class="src">(The Easy Ask)</span></p>
+        <p>The notes add an argument from the Quaker writer and teacher Parker Palmer's <em>Let Your Life Speak</em>: work done against the grain of who you are will eventually break you, however skilled you become. So the most important career decision a fundraiser makes is which organization to raise money for. <span class="src">(The Easy Ask)</span></p>
 
         <figure>
           <svg width="684" height="270" viewBox="0 0 460 182" role="img" aria-label="Two diagrams. Curiosity: lines narrow from a wide question to one point, the answer you wanted. Wonder: lines open from one question to a wide edge, more of the person.">
@@ -614,7 +662,7 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
         </fieldset>
         <p class="result" id="pri-result" aria-live="polite"></p>
         <div id="pri-detail"></div>
-        <p>These four come from the notes, which add a sharp line: when an ask is hard, the work is almost never to get better at asking. It's to find the missing piece upstream. <span class="src">(The Easy Ask)</span></p>
+        <p>The notes call these the four priors: things that have to be in place before an ask can feel easy. They add a sharp line: when an ask is hard, the work is almost never to get better at asking. It's to find the missing piece upstream. <span class="src">(The Easy Ask)</span></p>
 
         <details class="reveal"><summary>Why? Three of the four are about the donor. Why is "you love the work" on the list?</summary>
           <div><p>Because it's the one fundraisers most often skip, since it points at them. A fundraiser without it cultivates poorly, reports dishonestly, and avoids the ask until the moment is wrong. It looks like a technique problem and gets treated as one. No script fixes it. <span class="src">(The Easy Ask)</span></p></div>
@@ -637,10 +685,13 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
 
         <p>You prepare. You show up fully. You make the ask. Then you release the result. The notes call this the practice of detachment. <span class="src">(The Practice of Detachment)</span></p>
         <p>Nearly every contemplative tradition teaches a version of it. The Bhagavad Gita says you have a right to your work, but not to its fruits (chapter 2). The Christian mystic prays and leaves the rest to God. The fundraiser's version: prepare, listen, ask, release. Your worth isn't set by whether the number moved this quarter. <span class="src">(The Practice of Detachment)</span></p>
-        <p>This is hard because institutions run on outcomes: goals, deadlines, thermometers, dashboards. The notes call the pull the grasping pattern. You notice it when you email someone because they're a peg toward your goal, not because it's right. Naming it is the practice. <span class="src">(Book draft, ch. 11)</span></p>
+        <p>It helps to be exact about the line. You control your preparation, your relationships, your attention and your craft. You don't control timing, markets, family dynamics, tax law, competing asks, or the private process by which someone decides to give. <span class="src">(The Practice of Detachment)</span></p>
+        <p>This is hard because institutions run on outcomes: goals, deadlines, campaign thermometers, dashboards. The notes call the pull the grasping pattern. You notice it when you email someone because they're a peg toward your goal, not because it's right. Naming it is the practice. <span class="src">(Book draft, ch. 11)</span></p>
         <p>Detachment has a tactical side. Drawing on Oren Klaff's book <em>Pitch Anything</em>, the notes call neediness the most destructive force in a donor meeting. When a donor glances at the clock, the needy fundraiser talks faster, adds data, laughs too hard, and asks "Does that make sense?" Each move says: I need you more than you need me. <span class="src">(Eradicating Neediness)</span></p>
         <p>The notes' first rule is to want nothing. Before you walk in, decide that you want this gift, that the work deserves it, and that you don't need it. The organization will survive without it. So will you. Asking from love and asking without need turn out to be the same move. <span class="src">(Eradicating Neediness)</span></p>
-        <p>A no is information. It is rarely about you. "I don't give to buildings" and "I'm going through a divorce" are different situations behind the same word. Many early nos mean "not yet." Panas tells of a donor who cut a hospital from his will, was courted with birthday cards for three years, and left it $3 million. The notes also set a limit: after four clear, literal asks and four nos, move on. Their suggested reply to a no is wonder: "That's helpful to know. What kinds of things are feeling meaningful to you right now?" <span class="src">(Rejection as Information)</span></p>
+        <p>Rule two: announce your willingness to leave. When a donor's attention drifts, don't chase it. Say something like "I can see this might not be the right time. Why don't we pick this up another day?" Rule three: go to what you do best. When a meeting goes sideways, return to your strongest story or your most vivid moment from the field. When you're being excellent, you aren't performing, and neediness has no room. <span class="src">(Eradicating Neediness)</span></p>
+        <p>A no is information. It is rarely about you. "I don't give to buildings" and "I'm going through a divorce" are different situations behind the same word. Many early nos mean "not yet," and persistence is a form of attention. Panas tells of a donor who cut a hospital from his will, was courted with birthday cards for three years, and left it $3 million. The notes also set a limit: after four clear, literal asks and four nos, move on. Their suggested reply to a no is wonder: "That's helpful to know. What kinds of things are feeling meaningful to you right now?" <span class="src">(Rejection as Information)</span></p>
+        <p>The notes also care how a relationship ends, because the donor learns from the ending. They describe three departures. The no: receive it without defensiveness, then send a handwritten note thanking the donor for the conversation. The early exit: ask why, listen without trying to keep them, then send a final letter acknowledging what you had together. The completion: a reflection on what you saw the donor become, more than a list of deliverables. <span class="src">(Book draft, ch. 7)</span></p>
         <p>Holding both sides is the skill. The notes call it total commitment to the work and total surrender of the outcome. <span class="src">(The Practice of Detachment)</span></p>
 
         <h3>Try it</h3>
@@ -649,7 +700,7 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
         <p>Everything you hold gets your full effort. Everything else gets released. Notice that the ask itself is yours to hold. Only the answer is released.</p>
 
         <details class="reveal"><summary>Why? Why would offering to leave make a drifting donor lean back in?</summary>
-          <div><p>The notes' rule is to say something like "I can see this might not be the right time. Why don't we pick this up another day?" The note gives two reasons. The offer triggers loss aversion: what was available is about to go away. And it shows you respect your own time and theirs. <span class="src">(Eradicating Neediness)</span> This page's reading: rule one comes first for a reason. The offer only reads as respect if you really don't need the meeting.</p></div>
+          <div><p>The note gives two reasons. The offer triggers <a class="term" href="#g-loss-aversion">loss aversion</a>, the tendency the psychologists Daniel Kahneman and Amos Tversky documented to feel a loss more sharply than an equal gain. What was available is about to go away. And it shows you respect your own time and theirs. <span class="src">(Eradicating Neediness)</span> This page's reading: rule one comes first for a reason. The offer only reads as respect if you really don't need the meeting.</p></div>
         </details>
 
         <p class="box"><strong class="label">A common mix-up</strong>"Detachment means caring less." The notes mean caring fully about the person and the work while letting go of the result. Commitment and surrender are held together. <span class="src">(The Practice of Detachment)</span></p>
@@ -661,8 +712,138 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
       </section>
 
       <!-- ============ PART 8 ============ -->
-      <section class="view module" id="m8" data-title="8. The path that forms you">
-        <h2>8. The path that forms you</h2>
+      <section class="view module" id="m8" data-title="8. The seven steps">
+        <h2>8. The seven steps</h2>
+        <p class="objective">In this part: put the ask in its place as one step of seven, and find where a stalled gift is really stuck.</p>
+
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-prospecting">Prospecting</a>: finding people with both the capacity and the interest to give. <a class="term" href="#g-qualifying">Qualifying</a>: getting into real conversation, deep enough to learn what someone cares about, what constrains them, and what they could give. <a class="term" href="#g-pledge">Pledge</a>: a firm promise to give, with an amount and dates.</p>
+
+        <p>Most EDs carry a picture of fundraising with one frightening moment at its center: the ask. The notes shrink that moment by putting it in a sequence. All fundraising reduces to seven steps: prospecting, qualifying, asking, securing the commitment, saying thank you, following up, and upgrading. <span class="src">(Seven Steps of Fundraising)</span></p>
+        <p>The ask is one step of seven, and maybe not the most important one. The notes put it bluntly: even if you're bad at the moment of asking, you can be a great fundraiser if you're good at the other six. <span class="src">(Seven Steps of Fundraising; Myths About Asking)</span></p>
+        <p>The steps run in order, and each depends on the one before. You can't ask someone you haven't qualified. You can't upgrade someone you haven't followed up with. People who jump steps underperform at every step. People who keep each donor in sequence, even slowly, build a pipeline that lasts. <span class="src">(Seven Steps of Fundraising)</span></p>
+
+        <h3>Try it: put them in order</h3>
+        <p>Drag the seven steps into the order a gift moves through them.</p>
+        <div data-order="steps"></div>
+
+        <h3>Each step has its own trap</h3>
+        <p>Every step comes with a mindset that can stall it. The notes' reframes, step by step:</p>
+        <table class="steps-table">
+          <thead><tr><th scope="col">Step</th><th scope="col">The trap</th><th scope="col">The reframe</th></tr></thead>
+          <tbody>
+            <tr><td>Prospecting</td><td>Leaving people off the list until you're sure they can give.</td><td>If you wonder whether someone belongs on the list, the answer is yes. Narrow later. <span class="src">(Building Your Prospect List)</span></td></tr>
+            <tr><td>Qualifying</td><td>Keeping the relationship social, so you never learn what the donor cares about.</td><td>Many "asking problems" are really qualifying or follow-up problems. <span class="src">(Seven Steps of Fundraising)</span></td></tr>
+            <tr><td>Asking</td><td>Treating the ask as the whole job.</td><td>It's one step of seven. Do the other six well and a clumsy ask still works. <span class="src">(Myths About Asking)</span></td></tr>
+            <tr><td>Commitments</td><td>Feeling pushy about holding someone to a yes.</td><td>People need help keeping their promises. A vague yes sours into something neither of you wants to mention. <span class="src">(Chasing Commitments)</span></td></tr>
+            <tr><td>Thank you</td><td>Letting the tax receipt do the thanking.</td><td>Thank within 48 hours, same day for major gifts. Call with no ask. Write by hand. <span class="src">(Stewardship and Donor Retention; Thank Yous)</span></td></tr>
+            <tr><td>Following up</td><td>Going quiet until the next ask.</td><td>Small contacts with no ask in them, like an article, an introduction, or a note, keep the relationship alive. <span class="src">(Stewardship and Donor Retention)</span></td></tr>
+            <tr><td>Upgrading</td><td>Celebrating the first gift as the finish line.</td><td>The first gift opens the door. Measure whether you keep a donor for twenty years. <span class="src">(Thank Yous; Metrics and Measuring)</span></td></tr>
+          </tbody>
+        </table>
+        <p>The notes borrow an image from Rick Rubin's record-making for the follow-up step. The small contacts between asks are like the tambourines and shakers on a Tom Petty record. Nobody notices them consciously. They keep the song moving. <span class="src">(Stewardship and Donor Retention)</span></p>
+
+        <h3>Diagnose before you practice</h3>
+        <p>Because the steps depend on each other, they work as a diagnostic tool. When something stalls, walk the steps and ask which one is broken. The most common finding surprises people. The ED who thinks she has an asking problem often has a qualifying problem, or a follow-up problem. She is sitting across from someone who hasn't yet said what they care about, so the ask lands awkwardly. The fix is to practice qualifying, not the pitch. <span class="src">(Seven Steps of Fundraising)</span></p>
+
+        <h3>Try it: find the broken step</h3>
+        <p>Read each stalled gift. Pick the step where it's really stuck.</p>
+        <ol class="steps-strip" id="dx-strip" aria-label="The seven steps">
+          <li data-step="prospecting">Prospecting</li>
+          <li data-step="qualifying">Qualifying</li>
+          <li data-step="asking">Asking</li>
+          <li data-step="commitments">Commitments</li>
+          <li data-step="thanks">Thank you</li>
+          <li data-step="followup">Following up</li>
+          <li data-step="upgrading">Upgrading</li>
+        </ol>
+        <fieldset id="dx-panel">
+          <legend id="dx-legend">Stalled gift 1</legend>
+          <p id="dx-desc"></p>
+          <div class="choices dx-choices" id="dx-opts" role="radiogroup" aria-labelledby="dx-legend"></div>
+          <div class="row-actions">
+            <button type="button" class="primary" id="dx-check">Check</button>
+            <button type="button" id="dx-next" hidden>Next &#9658;</button>
+            <button type="button" id="dx-reset" hidden>Start over</button>
+          </div>
+          <p class="fb" id="dx-fb" role="status" aria-live="polite"></p>
+        </fieldset>
+        <p class="result" id="dx-result" aria-live="polite"></p>
+
+        <h3>What's missing from the list</h3>
+        <p>Nearly every fundraising framework has a step called "cultivate" or "strategize." The notes leave both out on purpose, because that's where people hide. They cultivate instead of asking and strategize instead of following up. For major gifts the notes allow a half-step of strategy before the ask. Otherwise strategy lives inside the rhythm of action. Their limit: fifteen minutes of preparation per donor per week, then pick up the phone. <span class="src">(Seven Steps of Fundraising; Strategy as Fuel Not Shelter)</span></p>
+        <p>The same logic applies to plans. The notes say fundraising strategy should be reduced, not produced. Identify your people, reach out on a steady rhythm, deepen each relationship, ask, follow up, upgrade. A twenty-page strategy document mostly delays that. Their blunt guess is that many fundraisers do about one hour of actual fundraising a week. The rest is preparing for it or avoiding it. <span class="src">(Fundraising Meta-Philosophy)</span></p>
+
+        <h3>The ask is yours</h3>
+        <p>One more trap sits at the ask itself. The notes call it the "not me" reflex: "Someone else should make this ask." "The ED should handle this donor." "Let's wait until next quarter." Each one is relief that the hard thing landed on someone else. Every time you defer it, you've flinched. <span class="src">(Book draft, ch. 11; Saying the Hard Thing)</span> One example of this page's own: an ED who hands a planned ask to the board chair because the conversation feels uncomfortable.</p>
+        <p>Handing the ask to a well-connected peer often feels safer. Panas's research cuts against the usual advice here. Donors cared more about respect for the person asking than about whether that person was their peer. A passionate staff member often outperforms a lukewarm peer. <span class="src">(Donor Motivations; Book draft, ch. 3)</span></p>
+
+        <details class="reveal"><summary>Why? Why leave out "cultivate" when everyone else includes it?</summary>
+          <div><p>Because a step with no clear finish line invites hiding. You can cultivate a donor for years and never risk a no. One way to see the design: every step on the notes' list ends in something you can see: a name added, a real conversation, an ask made, a pledge signed, a note sent. Leaving cultivation off is a decision about human behavior, more than about fundraising theory. <span class="src">(Seven Steps of Fundraising; Strategy as Fuel Not Shelter)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"I'm just bad at asking." Maybe. More often the stall is a step earlier or later: a donor who was never qualified, or one who heard nothing between gifts. Map the stall to the steps before you rehearse your pitch. <span class="src">(Seven Steps of Fundraising)</span></p>
+
+        <p class="box"><strong class="label">Practice this week</strong>List your three most stalled gifts. For each one, name the step where it's really stuck. Then do the next action for that step, not for the ask.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m8"></div>
+      </section>
+
+      <!-- ============ PART 9 ============ -->
+      <section class="view module" id="m9" data-title="9. The daily floor and the long haul">
+        <h2>9. The daily floor and the long haul</h2>
+        <p class="objective">In this part: set a daily activity floor, work backwards from a goal to a weekly rhythm, and see why the pressure you feel comes with the role.</p>
+
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-pipeline">Pipeline</a>: everyone currently moving through the seven steps. <a class="term" href="#g-golden-hours">Golden Hours</a>: the part of the day when donors can be reached, kept for conversations.</p>
+
+        <p>Formation without activity produces fundraisers who understand donors deeply and don't talk to enough of them. The notes' fix is a floor: a minimum amount of contact every day, no exceptions. In their words: "Formation without a daily behavioral floor is aspiration without accountability." <span class="src">(Accountability and Cadence; Formation and Activity)</span></p>
+        <p>The floor is modest on purpose. Every day: five outbound contacts, by phone rather than email; one qualified next step, such as a meeting scheduled or an ask prepared; and one personal note, by hand or typewriter. Every week: three new people added to the prospect list, one ask made or moved forward, and fifteen minutes on who's stuck or gone cold. <span class="src">(Accountability and Cadence)</span></p>
+        <p>Five calls a day sounds small. The notes do the math: over a year it comes to about 1,250 contacts, 250 next steps and 250 personal notes. That's a full pipeline. <span class="src">(Accountability and Cadence)</span></p>
+        <p>Protect the hours when people can be reached. The notes call roughly 9 to 4 the Golden Hours and keep them for conversations: calls, meetings, outreach. Database updates, memos, email drafts and research go before or after. All of those feel productive. None of them fill the pipeline. <span class="src">(Protect the Golden Hours)</span></p>
+        <p>The notes don't oppose tools. Most people need a database, and plenty of prospecting happens on video calls. The question, every time, is whether a tool is serving the relationship or replacing it. A templated thank-you produces templated gratitude. <span class="src">(The Industry's Mistake)</span></p>
+
+        <h3>Work backwards from the goal</h3>
+        <p>Activity needs a number. The notes work backwards from the goal, one step at a time. Their worked example: you need $500,000 and your average gift is $25,000, so you need 20 commitments. If half your asks become commitments, you need 40 asks. If 60% of qualified prospects reach an ask, you need about 67 of them. If 30% of real conversations produce a qualified prospect, you need about 225 conversations. If one contact in five becomes a conversation, you need to reach out about 1,125 times. Now you know what your year looks like, and your week. <span class="src">(Metrics and Measuring)</span></p>
+
+        <h3>Try it: your numbers</h3>
+        <p>Start with the notes' example, then put in your own goal and your best guess at each rate.</p>
+        <fieldset id="calc-panel">
+          <legend>Working backwards</legend>
+          <div class="calc-grid">
+            <label for="calc-goal">Goal for the year ($)</label><input type="number" id="calc-goal" min="1" step="1000" value="500000" inputmode="numeric">
+            <label for="calc-avg">Average gift ($)</label><input type="number" id="calc-avg" min="1" step="500" value="25000" inputmode="numeric">
+            <label for="calc-close">Asks that become commitments (%)</label><input type="number" id="calc-close" min="1" max="100" value="50" inputmode="numeric">
+            <label for="calc-ask">Qualified prospects who reach an ask (%)</label><input type="number" id="calc-ask" min="1" max="100" value="60" inputmode="numeric">
+            <label for="calc-qual">Conversations that produce a qualified prospect (%)</label><input type="number" id="calc-qual" min="1" max="100" value="30" inputmode="numeric">
+            <label for="calc-conv">Contacts per real conversation (1 in N)</label><input type="number" id="calc-conv" min="1" value="5" inputmode="numeric">
+          </div>
+        </fieldset>
+        <div class="funnel" id="calc-funnel" aria-hidden="true"></div>
+        <p class="result" id="calc-result" aria-live="polite"></p>
+        <p class="meta">The calculator rounds up to whole people at each step. The notes round their example by hand, so the two differ by a few. "Per week" assumes 50 working weeks.</p>
+
+        <h3>How you last</h3>
+        <p>The notes are unusually honest about the cost. Fundraising is emotionally brutal, and the pressure is structural, not personal. Feeling it doesn't mean you're failing. It means you're doing the job. <span class="src">(The Emotional Gauntlet of Fundraising)</span></p>
+        <p>They name three sources. You need a founder's conviction about the mission without a founder's authority. You face endless proof: anyone can ask for your numbers at any moment, in a way nobody asks a program officer. And the craft has no standing of its own; it's judged only by whether checks arrive. So the useful question changes. Instead of "how do I stop feeling insecure?" ask "how do I do excellent work inside a context that will never stop generating insecurity?" <span class="src">(The Emotional Gauntlet of Fundraising)</span></p>
+        <p>Formation builds that capacity over years. For the ten seconds after a no, the notes offer one tool: take one deep breath before you respond. For the longer haul they add others. When you want to quit for the day, make one more call. Write goals with a personal stake attached. And treat exercise, sleep and food as part of the job; the notes call exercise the number one mental health tool. <span class="src">(Mental Toughness)</span></p>
+        <p>Years in the field can breed cynicism, from watching foundations fund weaker work or program officers protect their careers. The notes' advice is to go through it. Feel the anger and heartbreak fully, then go back to work. Pushed down, it leaks out in defensive emails and over-pitching. <span class="src">(Coaching Call: Love and Cynicism)</span></p>
+        <p>And celebrate. When someone says yes, the instinct is to shrug and push the rock further up the hill. The notes call celebration a discipline that prevents burnout: if a yes brings no joy, you will eventually stop asking. <span class="src">(Fundraising Meta-Philosophy)</span></p>
+
+        <details class="reveal"><summary>Why? Why a floor of five calls, not a goal of fifty?</summary>
+          <div><p>The notes call five modest, achievable and non-negotiable. <span class="src">(Accountability and Cadence)</span> This page's reading: a floor has to survive your worst week. A minimum you hit every day builds more than an ambitious target you hit only on good days.</p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"Activity numbers are the enemy of real relationships." The notes grant that bad metrics, like counts of emails sent, have worn fundraisers down. They also say the reaction went too far. Philosophy doesn't fill pipelines. Activity does, and activity needs a number. <span class="src">(Metrics and Measuring)</span></p>
+
+        <p class="box"><strong class="label">Practice this week</strong>Block the first two Golden Hours on three mornings this week. Make five calls in each block, and write one personal note each day. Afterward, notice which of the three sources of pressure showed up.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m9"></div>
+      </section>
+
+      <!-- ============ PART 10 ============ -->
+      <section class="view module" id="m10" data-title="10. The path that forms you">
+        <h2>10. The path that forms you</h2>
         <p class="objective">In this part: see why the training treats fundraising as a practice that changes the person doing it, and how to test whether that idea is helping you.</p>
 
         <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-formation">Formation</a>: change in the person doing the work. <a class="term" href="#g-optimization">Optimization</a>: better performance from the same person.</p>
@@ -670,7 +851,7 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
         <p>The notes make two spiritual claims and keep them apart. The first is about the donor: giving is itself a path. Real giving loosens attachment and connects a person to something larger. It brings a kind of joy that buying things doesn't. The donor who gives once has made a transaction. The donor who keeps giving, and wrestles with it, is on a path, and the fundraiser's job is to support it. <span class="src">(Fundraising as Spiritual Path)</span></p>
         <p>The second claim is about you. Done seriously, the work keeps you in contact with the parts of yourself that most need attention. You must ask for money, which surfaces your stories about worth. You must take rejection without collapsing or hardening; the traditions call that equanimity. You must set your ego aside for someone else's experience. You must sit with wealthy people whose views you may dislike, and still see them clearly. And you must handle money, one of the most charged things in human life. <span class="src">(Fundraising as Spiritual Path)</span></p>
         <p>That's why the notes separate formation from optimization. Optimization improves performance and leaves the person the same: a better script, a faster workflow. Formation changes the person. A year of daily practice paying real attention produces someone new, and that capacity reorganizes everything else. The notes' summary: train the instrument, not the technique. You are the instrument. <span class="src">(The Instrument; Formation)</span></p>
-        <p>Formation alone isn't enough. The notes warn that formation without steady activity produces beautiful, broke fundraisers, who understand donors deeply and don't talk to enough of them. Activity without formation produces burned-out grinders who hit their numbers and hate their lives. The love is the reason the activity matters, and the activity is how the love reaches anyone. <span class="src">(Formation and Activity)</span></p>
+        <p>Formation alone isn't enough, which is why Parts 8 and 9 exist. The notes warn that formation without steady activity produces beautiful, broke fundraisers, who understand donors deeply and don't talk to enough of them. Activity without formation produces burned-out grinders who hit their numbers and hate their lives. The love is the reason the activity matters, and the activity is how the love reaches anyone. <span class="src">(Formation and Activity)</span></p>
 
         <figure>
           <svg width="684" height="300" viewBox="0 0 460 202" role="img" aria-label="Four stacked layers. From bottom to top: foundation, formation, who you are; structure, the seven steps, what you do; execution, daily minimums, how you do it; resilience, toughness, how you last.">
@@ -687,7 +868,7 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
             <text class="t-lab t-strong" x="56" y="175">Foundation: formation</text>
             <text class="t-small" x="404" y="175" text-anchor="end">who you are</text>
           </svg>
-          <figcaption>The notes' four layers, simplified. Formation sits underneath; structure, daily execution and resilience are built on it. <span class="src">(Formation and Activity)</span></figcaption>
+          <figcaption>The notes' four layers, simplified. Formation sits underneath. The seven steps (Part 8), the daily floor and resilience (Part 9) are built on it. <span class="src">(Formation and Activity)</span></figcaption>
         </figure>
 
         <h3>Try it</h3>
@@ -697,7 +878,7 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
 
         <h3>Where this argument is weakest</h3>
         <p>The notes are candid about the risk in all this. Fundraising asks wealthy people for money. The power dynamics are real, and spiritual language can make extraction feel noble without changing it. Their test is about behavior. If the spiritual frame makes you a better listener, more honest with donors, more willing to sit with discomfort, and less attached to outcomes, it's doing its job. If it makes you feel elevated while you act from the same anxiety, it's decoration. <span class="src">(Fundraising as Spiritual Path)</span></p>
-        <p>The philosopher Byung-Chul Han names a related trap: people who exploit themselves while believing they are realizing themselves. The notes turn his warning on their own methods and ask: is this a ritual, or the performance of having a ritual? <span class="src">(Book draft, ch. 11)</span></p>
+        <p>The notes build the practice around small rituals: a daily call, a handwritten note, a typewritten letter that can't be revised. Byung-Chul Han, a philosopher who writes about burnout culture, names the trap hiding in that. People exploit themselves while believing they are realizing themselves. The notes turn his warning on their own rituals and ask: is this a ritual, or the performance of having a ritual? <span class="src">(Book draft, ch. 10 and 11)</span></p>
         <p>The notes describe the result Noah hopes his coaching has in one sentence. Students don't say "he helped us raise money." They say "he changed how I think about asking." The money follows. <span class="src">(Book draft, ch. 10)</span></p>
 
         <details class="reveal"><summary>Why? Why would fundraising change a person more than many other jobs?</summary>
@@ -709,7 +890,7 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
         <p class="box"><strong class="label">Practice this week</strong>Write down why you started this work. The real reason, not the career one. Read it before your next ask. <span class="src">(Fundraising as Spiritual Path)</span></p>
 
         <h3>Check yourself</h3>
-        <div class="quiz" data-quiz="m8"></div>
+        <div class="quiz" data-quiz="m10"></div>
       </section>
 
       <!-- ============ REVIEW ============ -->
@@ -749,12 +930,13 @@ svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
           <li>Ailton Krenak, <em>Life Is Not Useful</em> (2020).</li>
           <li>Jerold Panas, <em>Mega Gifts</em> and <em>Asking</em>; Oren Klaff, <em>Pitch Anything</em> (2011).</li>
           <li>Joe Hudson's coaching work at Art of Accomplishment; Sanford Meisner's acting method; Byung-Chul Han, <em>The Burnout Society</em> (2010).</li>
+          <li>Parker Palmer, <em>Let Your Life Speak</em> (2000); Daniel Kahneman and Amos Tversky on loss aversion; Rick Rubin on record-making.</li>
         </ul>
-        <p>Added by this page, not drawn from the notes: Aristotle, <em>Nicomachean Ethics</em>, Book I, for the usefulness chain; and the distinction between quoting the notes and this page's own reading, which is marked where it appears.</p>
+        <p>Some things here come from this page, not the notes: Aristotle's <em>Nicomachean Ethics</em>, Book I, for the usefulness chain, and Lewis Hyde's claim that a gift must keep moving. Where the page offers its own reading of the notes, it says so.</p>
         <h3>What this training simplifies or leaves out</h3>
-        <p>It leaves out the craft: prospecting, qualifying, cultivation plans, events, campaigns and stewardship systems. The notes cover those at length elsewhere. This page keeps to the philosophy underneath them.</p>
+        <p>Parts 8 and 9 give the seven steps, the daily floor and the working-backwards method in outline. The notes go much further on each: prospect research, qualifying conversations, events, campaigns and stewardship systems. This page keeps to what an ED needs to see the whole shape.</p>
         <p>Several claims here are the notes' arguments, not research findings. That generosity is everyone's natural state, that the money is effectively unlimited, and that fundraising forms the fundraiser are positions to test against your own experience.</p>
-        <p>The notes flag their own weak points, and so does this page. Panas interviewed only successful fundraisers and generous donors, so the traits he found may be results of success instead of causes. His donors were mostly older, white and male. The material is almost entirely American. Later anthropologists dispute Mauss's reading of the hau. The notes call themselves rough and sometimes contradictory. On whether a small gift "matters more" than a large one or is "equally complete," this training gives both versions. On the donor who asks about ROI, one draft says answer it well and another says redirect; this training follows the first. The section on Mauss draws on a reviewer's suggestions included in the notes.</p>
+        <p>The notes flag their own weak points, and so does this page. Panas interviewed only successful fundraisers and generous donors, so the traits he found may be results of success instead of causes. His donors were mostly older, white and male. The material is almost entirely American. Later anthropologists dispute Mauss's reading of the hau. The notes call themselves rough and sometimes contradictory. On whether a small gift "matters more" than a large one or is "equally complete," this training gives both versions. On the donor who asks about ROI, one draft says answer it well and another says redirect; this training follows the first. On thank-you timing, one note says 24 hours and another sets 48 as the ceiling; this page uses 48. The section on Mauss draws on a reviewer's suggestions included in the notes.</p>
       </section>
 
     </main>
@@ -825,7 +1007,18 @@ window.COURSE = {
               "Talking faster and adding data are the classic signs of neediness.",
               "\"Does that make sense?\" is on the notes' list of needy, approval-seeking moves.",
               "Rushing the ask to a drifting donor is chasing, the opposite of the notes' advice."],
-        src: "Eradicating Neediness", from: "m7" }
+        src: "Eradicating Neediness", from: "m7" },
+      { q: "An ED says, \"I'm just bad at asking.\" Where does this training say the problem often is?",
+        options: ["In qualifying, before the ask happens",
+                  "In her tone of voice during the ask",
+                  "In the size of the number she names",
+                  "In the time of year she chooses to ask"],
+        answer: 0,
+        why: ["The notes' most common diagnosis: an \"asking problem\" that's really a qualifying problem (or a follow-up problem).",
+              "Tone matters, but the notes look upstream first.",
+              "The number matters, but the notes look upstream first.",
+              "Timing matters, but the notes look upstream first."],
+        src: "Seven Steps of Fundraising", from: "m8" }
     ],
 
     m1: [
@@ -963,7 +1156,7 @@ window.COURSE = {
         answer: 0,
         why: ["Right. Money sitting in an index fund or headed for a second home is the real rival.",
               "The notes call the fixed-pot picture a damaging myth.",
-              "The notes say not to attack a donor's current giving. Connect to what they already care about.",
+              "Another fixed-pot picture. The notes see idle money as the real rival.",
               "Not the rival the notes name."],
         src: "What Fundraising Is and Isn't" },
       { q: "An ED grew up with very little money. Where does the training predict her money story is most likely to show up?",
@@ -1056,6 +1249,84 @@ window.COURSE = {
     ],
 
     m8: [
+      { q: "A donor gave $5,000 two years running, then stopped returning calls. Between gifts, she heard from you only at renewal time. Which step was weakest?",
+        options: ["Following up", "Asking", "Prospecting", "Thank you"],
+        answer: 0,
+        why: ["Right. A donor who feels neglected between gifts won't come back for more.",
+              "The asks worked twice. What failed was the time between them.",
+              "She was already a donor, so finding her wasn't the problem.",
+              "Thanks may have been fine. The silence between renewals is the follow-up step."],
+        src: "Seven Steps of Fundraising" },
+      { q: "Why do the notes leave \"cultivate\" off the list of steps?",
+        options: ["It's where people hide instead of asking",
+                  "Cultivation doesn't matter for major gifts",
+                  "Donors tend to find cultivation intrusive",
+                  "It's the board's job, not the staff's job"],
+        answer: 0,
+        why: ["Right. People cultivate instead of asking and strategize instead of following up.",
+              "The notes keep relationship-building; they fold it into the steps instead of making it a hiding place.",
+              "Not the notes' reason. The problem is what cultivation lets the fundraiser avoid.",
+              "Not the notes' reason. Handing work to others is its own trap, the \"not me\" reflex."],
+        src: "Seven Steps of Fundraising; Strategy as Fuel Not Shelter" },
+      { q: "An ED has put off a planned ask for two months. She tells her development director, \"Maybe you take this one. I'd rather not be the one to bring up money with her.\" What is this, in the training's terms?",
+        options: ["The \"not me\" reflex", "Healthy delegation", "Detachment from outcome", "The grasping pattern"],
+        answer: 0,
+        why: ["Right. Relief that the hard thing landed on someone else. Every time you defer it, you've flinched.",
+              "Delegation is fine when it's about fit. Here the reason she gives is her own discomfort, after two months of delay.",
+              "Detachment releases the result. It never hands off the ask itself.",
+              "Grasping is reaching for people as pegs toward a goal. This is the opposite: backing away."],
+        src: "Book draft, ch. 11" },
+      { type: "recall",
+        q: "Name the seven steps in order. Then name the step where your own fundraising most often stalls, and one thing you'd do differently there.",
+        answer: "<p>Prospecting, qualifying, asking, securing commitments, thanking, following up, upgrading. A strong answer then names one stalled step honestly and a concrete next action for that step, such as \"Following up: one no-ask call to each of last year's donors this month.\"</p>",
+        src: "Seven Steps of Fundraising" }
+    ],
+
+    m9: [
+      { q: "Your goal is $200,000. Your average gift is $10,000, and half your asks become commitments. How many asks do you need this year?",
+        options: ["10", "20", "40", "80"], fixed: true,
+        answer: 2,
+        why: ["That's half the commitments you need. Start with goal divided by average gift.",
+              "That's the number of commitments: $200,000 \u00f7 $10,000. Only half of asks convert, so you need twice as many asks.",
+              "Right. 20 commitments \u00f7 50% = 40 asks.",
+              "That doubles it twice. 20 commitments \u00f7 0.5 = 40."],
+        src: "Metrics and Measuring" },
+      { q: "In the notes' Golden Hours, roughly 9 to 4, what belongs on your calendar?",
+        options: ["Calls and meetings, while donors can be reached",
+                  "Database updates, while donors are at work",
+                  "Strategy memos, while your mind is sharpest",
+                  "Internal meetings, so the whole team stays aligned"],
+        answer: 0,
+        why: ["Right. Conversations only. Everything else goes before or after.",
+              "Database work feels productive and fills nothing. It goes outside the Golden Hours.",
+              "Strategy goes in the hours before or after. The notes cap prep at fifteen minutes per donor a week.",
+              "Internal coordination belongs outside the Golden Hours."],
+        src: "Protect the Golden Hours" },
+      { q: "An ED feels constant pressure to justify her development numbers. What do the notes say about this?",
+        options: ["It comes with the role, not with her failing",
+                  "It means her metrics have been set up the wrong way",
+                  "It fades once she reaches her annual goal",
+                  "It shows she lacks the temperament for it"],
+        answer: 0,
+        why: ["Right. The notes call the pressure structural: the proving never ends.",
+              "Bad metrics exist, but the notes say this pressure comes with the role itself.",
+              "The notes call it perpetual. Anyone can ask for the numbers at any moment.",
+              "The notes call it structural, not a personality flaw."],
+        src: "The Emotional Gauntlet of Fundraising" },
+      { q: "A donor has just told you no. What is the notes' tool for the next ten seconds?",
+        options: ["One deep breath, then respond",
+                  "Ask her to reconsider right away",
+                  "End the call and email her later",
+                  "Restate the case, only shorter"],
+        answer: 0,
+        why: ["Right. One breath, not two, lets you respond from training instead of fear.",
+              "That's reacting from fear. The notes treat a no as information first.",
+              "Retreating isn't the tool. Breathe, then respond with wonder about what she cares about.",
+              "Re-pitching after a no is pushing. Breathe first, then get curious."],
+        src: "Mental Toughness" }
+    ],
+
+    m10: [
       { q: "What is the notes' test for whether the spiritual framing of fundraising is doing its job?",
         options: ["Whether it makes you listen better and grasp less",
                   "Whether donors respond well to spiritual language",
@@ -1094,7 +1365,7 @@ window.COURSE = {
         why: ["Right. The notes say the profession is closer to midwifery than salesmanship.",
               "The notes grant the overlap with sales but say the relationship is the product.",
               "The training rejects persuasion as the core of the job.",
-              "The training puts the ED and staff in the asking role, not only the board."],
+              "Stewardship matters, but the training speaks to the ED as someone who asks."],
         src: "Generosity as Substrate", from: "m2" },
       { q: "Why does the training welcome Mauss's finding that gifts carry obligation and status?",
         options: ["Status has always moved gifts, so EDs can work with it",
@@ -1162,17 +1433,6 @@ window.COURSE = {
               "That's the \"not me\" reflex.",
               "Hinting avoids the ask. The notes call a clear ask part of the relationship."],
         src: "Fundraising Meta-Philosophy", from: "m1" },
-      { q: "According to the notes, what does formation without steady activity produce?",
-        options: ["Beautiful, broke fundraisers",
-                  "Burned-out, grinding salespeople",
-                  "Fundraisers who over-ask donors",
-                  "Organizations with no strategy"],
-        answer: 0,
-        why: ["Right. They understand donors deeply and don't talk to enough of them.",
-              "That's what activity without formation produces.",
-              "Not the notes' prediction.",
-              "Not the notes' prediction."],
-        src: "Formation and Activity", from: "m8" },
       { q: "What do the notes suggest doing instead of guilt-tripping donors?",
         options: ["Help them feel abundant; generosity follows",
                   "Use urgency about the need instead of guilt",
@@ -1184,13 +1444,36 @@ window.COURSE = {
               "The notes say you can't math someone into caring.",
               "Obligation is the frame the notes want to move away from."],
         src: "Philosophy Calls: Philosophy of Giving", from: "m4" },
-      { q: "In the Gita, which kind of giving is done because it is right, expecting nothing back?",
-        options: ["Sattvic", "Rajasic", "Tamasic"],
+      { q: "Which list puts the seven steps in the notes' order?",
+        options: ["Prospect, qualify, ask, commit, thank, follow up, upgrade",
+                  "Prospect, cultivate, ask, thank, report, follow up, upgrade",
+                  "Qualify, prospect, ask, thank, commit, follow up, upgrade",
+                  "Prospect, qualify, ask, thank, commit, upgrade, follow up"],
         answer: 0,
-        why: ["Right. The Gita ranks it highest.",
-              "Rajasic giving is done for a return, or grudgingly.",
-              "Tamasic giving is careless or contemptuous."],
-        src: "Universality of Generosity", from: "m3" },
+        why: ["Right. Each step depends on the one before.",
+              "The notes leave out \"cultivate\" on purpose; it's where people hide.",
+              "You can't qualify someone you haven't found yet.",
+              "The commitment comes before the thank-you, and following up comes before upgrading."],
+        src: "Seven Steps of Fundraising", from: "m8" },
+      { q: "Why do the notes set the daily floor at five calls instead of something bigger?",
+        options: ["It's modest enough to hit every single day",
+                  "Five calls is the most anyone can do well",
+                  "Donors expect about five calls before a gift",
+                  "It matches the five steps that matter most"],
+        answer: 0,
+        why: ["Right. A floor has to survive your worst week. The notes call five modest, achievable and non-negotiable.",
+              "Not the reason. Five is a floor, not a ceiling.",
+              "The number is about your rhythm, not the donor's expectations.",
+              "All seven steps matter, and the number isn't tied to them."],
+        src: "Accountability and Cadence", from: "m9" },
+      { q: "You need $100,000. Your average gift is $5,000, and two of every five asks convert. How many asks do you need?",
+        options: ["20", "40", "50", "100"], fixed: true,
+        answer: 2,
+        why: ["That's the number of commitments: $100,000 \u00f7 $5,000.",
+              "That assumes half of asks convert. Here it's two in five.",
+              "Right. 20 commitments \u00f7 40% = 50 asks.",
+              "That assumes one in five convert. Here it's two in five."],
+        src: "Metrics and Measuring", from: "m9" },
       { type: "recall",
         q: "What will you do differently in your next ask? Be specific: which donor, which practice from this training.",
         answer: "<p>A strong answer names a real person and one concrete change. For example: \"With Maria, I'll take thirty seconds beforehand to find what moves me about her, ask without apologizing, and send a handwritten note whatever she says.\"</p>" }
@@ -1232,7 +1515,7 @@ window.COURSE = {
       items: [
         { text: "How well you prepare for the meeting", bin: "hold", why: "Fully yours." },
         { text: "Whether you make a clear, specific ask", bin: "hold", why: "The ask is yours. Its answer isn't." },
-        { text: "How fast you send a thank-you", bin: "hold", why: "The notes push acknowledging a gift within 24 hours." },
+        { text: "How fast you send a thank-you", bin: "hold", why: "The notes' ceiling is 48 hours, and same day for major gifts." },
         { text: "Whether you follow up after a no", bin: "hold", why: "Persistence is yours. The notes call it attention." },
         { text: "What the donor's financial advisor recommends", bin: "release", why: "You can inform it, but it isn't yours to decide." },
         { text: "The donor's family dynamics", bin: "release", why: "Real and important, and not yours to run." },
@@ -1256,45 +1539,99 @@ window.COURSE = {
     }
   },
 
-  orders: {},
+  orders: {
+    steps: {
+      items: ["Prospecting", "Qualifying", "Asking", "Commitments", "Thank you", "Following up", "Upgrading"],
+      label: "The seven steps, first to last",
+      explain: "Each step depends on the one before. Skipping one weakens all the others."
+    }
+  },
 
   cards: [
+    { front: "What does it mean to call generosity a substrate?", back: "It is already present in people before anyone asks. Fundraising clears what blocks it instead of creating it.", src: "Generosity as Substrate" },
     { front: "What blocks the path between a person and their generosity? Name three things.", back: "Any three of: fear, confusion, distrust, red tape, the sense a gift won't matter, a transactional feel, feeling misunderstood, being asked badly before, the drag of a busy life.", src: "Generosity as Substrate" },
-    { front: "How does this training define fundraising?", back: "The practice of sustained human attention directed at another person.", src: "What Fundraising Is and Isn't" },
+    { front: "How does this training define fundraising?", back: "The practice of sustained human attention directed at another person. Not selling, begging, or marketing with a different name.", src: "What Fundraising Is and Isn't" },
+    { front: "Why does \"We need the money\" backfire?", back: "Donors give to dreams, visions and opportunities. Need repels the people who make the largest gifts. Donors don't give to sinking ships.", src: "Donor Motivations" },
     { front: "What three obligations did Mauss find in gift exchange?", back: "To give, to receive, and to give back.", src: "Anthropology" },
+    { front: "How should recognition be set, according to the notes?", back: "Fit it to the person, not the size of the gift. Some want a name on a wall; others want a quiet note. Ask, and listen.", src: "Stewardship and Donor Retention" },
     { front: "What is the usefulness problem?", back: "Useful things are useful for something else. If every gift must prove its return, the chain never reaches anything valued for itself.", src: "The Usefulness Problem" },
+    { front: "What is the achievement trap?", back: "Making impact an idol, so every dollar becomes a moral calculation and the guilt never ends. The notes' answer: you're worthy now.", src: "The Achievement Trap" },
     { front: "What does the circle image say about small gifts?", back: "A small circle is as complete as a large one. A small gift given fully is a whole act of generosity.", src: "Philosophy Calls: Philosophy of Giving" },
     { front: "Who is an ED really competing with for a major gift?", back: "Inertia and passive wealth: the index fund, the second home. Other nonprofits are rarely the real rival.", src: "What Fundraising Is and Isn't" },
+    { front: "Name the money stories this training describes.", back: "Scarcity; guilt or ease from having more; tangles inherited from family; the childhood rule against asking; and, added by this page from two other notes, the worth story (a yes proves you're enough).", src: "Your Money Story" },
     { front: "What four things have to be true for an ask to feel easy?", back: "The donor believes in the mission, trusts the people, the relationship can carry the number, and you love the work.", src: "The Easy Ask" },
     { front: "What's the quick test for wonder versus curiosity?", back: "If you already have the answer you hope to hear, it's curiosity. If you don't, and that feels exciting, it's wonder.", src: "Wonder vs Curiosity" },
-    { front: "What is the \"want nothing\" rule?", back: "Want the gift, believe the work deserves it, and decide you don't need it.", src: "Eradicating Neediness" },
+    { front: "What does \"move them three steps forward\" mean?", back: "Accept people where they are and connect what they already care about to your work. You can't drag anyone to your position, or math them into caring.", src: "Meeting People Where They Are" },
+    { front: "What are the three rules for eradicating neediness?", back: "Want nothing (want the gift, don't need it). Announce your willingness to leave. Go to what you do best.", src: "Eradicating Neediness" },
     { front: "What does a donor's no usually mean, according to the training?", back: "Information about fit, and often \"not yet.\" After four clear asks and four nos, move on.", src: "Rejection as Information" },
+    { front: "What are the three departures?", back: "The no (receive it gracefully, send a handwritten thank-you), the early exit (ask why, listen, send a final letter), and the completion (reflect on what the donor became).", src: "Book draft, ch. 7" },
+    { front: "What are the seven steps, in order?", back: "Prospecting, qualifying, asking, commitments, thank you, following up, upgrading.", src: "Seven Steps of Fundraising" },
+    { front: "What is the most common hidden cause of an \"asking problem\"?", back: "A qualifying problem: the donor hasn't yet said what they care about, so the ask lands awkwardly.", src: "Seven Steps of Fundraising" },
+    { front: "Why is \"cultivate\" missing from the seven steps?", back: "It's where people hide: they cultivate instead of asking and strategize instead of following up.", src: "Seven Steps of Fundraising" },
+    { front: "What is the \"not me\" reflex?", back: "Relief when the hard thing lands on someone else: \"Someone else should make this ask.\" \"Let's wait until next quarter.\" Every deferral is a flinch.", src: "Book draft, ch. 11" },
+    { front: "What is the notes' daily floor?", back: "Five outbound contacts, one qualified next step, one personal note. Every day, no exceptions.", src: "Accountability and Cadence" },
+    { front: "How do you work backwards from a goal?", back: "Goal ÷ average gift = commitments. Divide by each conversion rate in turn to get asks, qualified prospects, conversations and contacts.", src: "Metrics and Measuring" },
+    { front: "What three forces make fundraising pressure structural?", back: "A founder's conviction without a founder's authority, endless proof of your numbers, and a craft judged only by whether checks arrive.", src: "The Emotional Gauntlet of Fundraising" },
     { front: "What do formation without activity, and activity without formation, each produce?", back: "Beautiful, broke fundraisers; and burned-out grinders who hit their numbers and hate their lives.", src: "Formation and Activity" },
     { front: "What is the behavioral test for calling fundraising a spiritual path?", back: "Whether it makes you listen better, tell donors the truth, sit with discomfort, and grasp less. If not, it's decoration.", src: "Fundraising as Spiritual Path" }
   ],
 
   glossary: {
-    "substrate": "The layer underneath that something else rests on or grows from. The training uses it to say generosity is already present in people before anyone asks.",
-    "practice": "Something done again and again for what it builds in you, with no finish line. The training calls fundraising a practice, in contrast to a task you complete.",
-    "eudaimonia": "A Greek word usually translated as happiness or flourishing. For the philosophers the notes draw on, it meant a whole life with nothing lacking, more than a passing good mood.",
+    "achievement trap": "The notes' name for making impact an idol: every dollar becomes a moral calculation, and the guilt never ends because a better use always exists.",
     "agape": "A Greek word Christians use for self-giving love: love that gives without first asking what it will get.",
+    "annual fund": "The yearly drive for gifts that pay for ongoing operations, usually many smaller gifts renewed each year.",
+    "campaign thermometer": "A chart, often drawn as a thermometer, showing a campaign's progress toward its goal.",
+    "capital campaign": "A time-limited drive to raise a large sum for a specific purpose, such as a building, usually built on a few very large gifts.",
+    "closing": "Pushing a conversation toward a decision or a signed commitment.",
+    "cultivation": "Building a relationship with a donor before asking. The notes leave it off their seven steps because people hide in it.",
     "dāna": "Generosity, or the practice of giving, in Buddhism. It is taught as a way to loosen attachment.",
-    "zakat": "Required annual giving of a share of one's wealth, one of the Five Pillars of Islam. The word is linked to purification and growth.",
-    "xenia": "The ancient Greek duty of hospitality to strangers and guests, protected by Zeus.",
-    "sattvic giving": "In the Bhagavad Gita, giving done because it is right, to a worthy person at the right time, expecting nothing back. The Gita ranks it highest.",
-    "rajasic giving": "In the Bhagavad Gita, giving done for a return or a reward, or given grudgingly.",
-    "tamasic giving": "In the Bhagavad Gita, giving done carelessly, at the wrong time or place, to the wrong person, or with contempt.",
-    "reciprocity": "Giving back for what you received. Marcel Mauss found it was one of three obligations that come with a gift.",
-    "hau": "A Māori word Marcel Mauss used for the spirit of a gift: something of the giver that travels with it. Later anthropologists dispute his reading.",
-    "potlatch": "A ceremonial feast among Indigenous peoples of the Pacific Northwest coast, where hosts gain standing by giving wealth away.",
-    "money story": "The beliefs and feelings about money a person formed early in life, usually unexamined, that shape how they ask and give.",
-    "wonder": "In Joe Hudson's sense, staying open inside a question without steering toward an answer. Curiosity, by contrast, wants to close the question.",
-    "neediness": "Acting as if you need the other person's yes. In a donor meeting it shows up as talking faster, over-explaining and seeking approval.",
+    "daily minimums": "The notes' activity floor: five outbound contacts, one qualified next step and one personal note every day.",
     "detachment": "Doing the work fully while letting go of the result. Caring about the person and the cause without tying your worth to the outcome.",
+    "development office": "The staff in a nonprofit responsible for raising money.",
+    "effective altruism": "A movement that uses evidence and reasoning to direct giving where it does the most measurable good.",
+    "equanimity": "Steadiness of mind that neither collapses nor hardens when things go badly. The notes' word for what rejection can train.",
+    "eudaimonia": "A Greek word usually translated as happiness or flourishing. The notes use it for a fullness of being in which nothing is lacking.",
     "formation": "Change in the person doing the work. The training's word for what a long practice does to you.",
-    "optimization": "Improving performance while leaving the person the same: a better script, a faster process."
+    "four priors": "The four things that have to be true for an ask to feel easy: the donor believes in the mission, trusts the people, the relationship can carry the number, and you love the work.",
+    "gala": "A formal fundraising dinner or party, often with a public moment of giving such as a paddle raise.",
+    "gift chart": "A table showing how many gifts of each size a campaign needs to reach its goal.",
+    "golden hours": "The notes' name for roughly 9 to 4, when donors can be reached. Kept for calls and meetings; everything else goes before or after.",
+    "grasping pattern": "Reaching for people as pegs toward a goal instead of acting from judgment and trust. The notes say naming it is the practice.",
+    "hau": "A Māori word Marcel Mauss used for the spirit of a gift: something of the giver that travels with it. Later anthropologists dispute his reading.",
+    "impact report": "A report telling donors what their gifts accomplished.",
+    "index fund": "An investment that tracks a whole market, such as the S&P 500. The notes use it to picture idle wealth.",
+    "loss aversion": "The tendency, documented by Daniel Kahneman and Amos Tversky, to feel a loss more sharply than an equal gain.",
+    "major gift": "A gift large enough that it is usually asked for in person, after a relationship has formed. The dollar line differs by organization.",
+    "matching gift": "A pledge to match other donors' gifts, often up to a limit and by a deadline.",
+    "money story": "The beliefs and feelings about money a person formed early in life, usually unexamined, that shape how they ask and give.",
+    "neediness": "Acting as if you need the other person's yes. In a donor meeting it shows up as talking faster, over-explaining and seeking approval.",
+    "not-me reflex": "Relief when a hard task lands on someone else. In fundraising: \"someone else should make this ask\" or \"let's wait until next quarter.\"",
+    "open rate": "The share of people who open an email that was sent to them.",
+    "optimization": "Improving performance while leaving the person the same: a better script, a faster process.",
+    "paddle raise": "A moment at a gala when guests raise numbered paddles to pledge gifts in public.",
+    "participation rate": "The share of a group, such as a board or alumni, who give at all.",
+    "pipeline": "Everyone currently moving through the seven steps, from prospects to donors being upgraded.",
+    "pledge": "A firm promise to give, with an amount and dates.",
+    "potlatch": "A ceremonial feast among Indigenous peoples of the Pacific Northwest coast, where hosts gain standing by giving wealth away.",
+    "practice": "Something done again and again for what it builds in you, with no finish line. The training calls fundraising a practice, in contrast to a task you complete.",
+    "prospecting": "Finding people with both the capacity and the interest to give. The first of the seven steps.",
+    "qualifying": "Getting into real conversation, deep enough to learn what someone cares about, what constrains them, and what they could give. The second of the seven steps.",
+    "rajasic giving": "In the Bhagavad Gita, giving done for a return or a reward, or given grudgingly.",
+    "reciprocity": "Giving back for what you received. Marcel Mauss found it was one of three obligations that come with a gift.",
+    "ROI": "Return on investment: what you get back compared with what you put in.",
+    "sattvic giving": "In the Bhagavad Gita, giving done because it is right, to a worthy person at the right time, expecting nothing back. The Gita ranks it highest.",
+    "seven steps": "The notes' sequence for every gift: prospecting, qualifying, asking, commitments, thank you, following up, upgrading.",
+    "stewardship": "Caring for donors after a gift: thanking them, reporting on the gift, and keeping the relationship alive.",
+    "stretch gift": "A gift larger than the giver usually makes. The notes urge fundraisers to make their own, at a level that makes them hold their breath before pressing send.",
+    "substrate": "The layer underneath that something else rests on or grows from. The training uses it to say generosity is already present in people before anyone asks.",
+    "tamasic giving": "In the Bhagavad Gita, giving done carelessly, at the wrong time or place, to the wrong person, or with contempt.",
+    "touches between asks": "Small contacts with no ask in them, like an article, an introduction or a note, that keep a relationship alive between gifts.",
+    "usefulness problem": "The notes' name for judging every gift only by what it produces, so nothing is ever valued for itself.",
+    "wonder": "In Joe Hudson's sense, staying open inside a question without steering toward an answer. Curiosity, by contrast, wants to close the question.",
+    "xenia": "The ancient Greek duty of hospitality to strangers and guests, protected by Zeus.",
+    "zakat": "Required annual giving of a share of one's wealth, one of the Five Pillars of Islam. The word is linked to purification and growth."
   },
-  glossaryCards: true
+  glossaryCards: false
 };
 </script>
 <script>
@@ -2122,7 +2459,7 @@ window.COURSE = {
         desc: "She has never met anyone who works for you, and she isn't sure they can be trusted.",
         opts: [
           { t: "Invite her to spend a morning with the team and see the work", k: "clear",
-            why: "Trust in people is built by meeting people. The notes' rule: if the donor doesn't trust the people, stop pitching and start arranging encounters." },
+            why: "Trust in people is built by meeting people. The notes' rule: if the donor doesn't trust the people, stop pitching and arrange for her to meet them." },
           { t: "Make the case again, this time with your strongest outcome data", k: "push",
             why: "Better data answers a question about the program. Her doubt is about the people, and a harder pitch can read as defensive." },
           { t: "Send the audited financials and the latest annual report", k: "other",
@@ -2144,7 +2481,7 @@ window.COURSE = {
           { t: "Open with your tightest pitch so she sees you're more organized", k: "push",
             why: "A better pitch is still a pitch. She'll file you with the other three." },
           { t: "Ask what she cares about right now, and listen without steering", k: "clear",
-            why: "Her obstruction is not being heard. The notes call the fundraiser the person in the room who listens." },
+            why: "Her obstruction is not being heard, and only listening removes it. Part 6 shows the kind of question that works: one you don't already know the answer to." },
           { t: "Send a short video she can watch whenever it suits her", k: "other",
             why: "Convenient for both of you, and it removes the one thing she's missing: being heard." }
         ] },
@@ -2152,9 +2489,9 @@ window.COURSE = {
         desc: "Every contact from your organization so far has been a request for money.",
         opts: [
           { t: "Give him a few months of silence so the asks can fade", k: "other",
-            why: "Silence leaves the pattern in place. The notes' fix is contact with no ask in it, the small touches between asks." },
+            why: "Silence leaves the pattern in place. What changes it is contact with no ask in it." },
           { t: "Call with no ask at all: a thank-you, an article, an introduction", k: "clear",
-            why: "The notes call these touches between asks the quiet instruments that keep a relationship alive." },
+            why: "Small contacts with no ask in them. The notes compare them to the tambourines on a record: nobody notices them, but they keep the song moving. Part 8 comes back to them." },
           { t: "Make the ask now, before the relationship cools any further", k: "push",
             why: "Another ask confirms the pattern he already resents." }
         ] },
@@ -2419,13 +2756,13 @@ window.COURSE = {
         move: "Start where they are. Find what they already care about and connect it to your work, without arguing them out of their current giving. If the dots don't connect, move on. (Fundraising Meta-Philosophy)" },
       { id: "trust", q: "Does this donor trust the people running it?",
         name: "the donor's trust in the people",
-        move: "Stop pitching and start arranging encounters with the people doing the work. (The Easy Ask)" },
+        move: "Stop pitching. Arrange for the donor to meet the people doing the work and see it up close. (The Easy Ask)" },
       { id: "rel", q: "Is the relationship thick enough to carry a real number?",
         name: "a relationship that can carry the number",
-        move: "Stop closing and start showing up. (The Easy Ask)" },
+        move: "Stop closing and start showing up: no-ask calls, notes, introductions. Keep asking while you build it. (The Easy Ask)" },
       { id: "love", q: "Do you love the work? Would you tell a close friend, off the clock, to give?",
         name: "your own love for the work",
-        move: "Get clearer about why. Find your way back to conviction, or ask whether you belong at this organization. The notes cite Parker Palmer: work done against your grain eventually breaks you. (The Easy Ask)" }
+        move: "Get clearer about why. Find your way back to conviction, or ask whether you belong at this organization. Parker Palmer's warning, as the notes use it: work done against your grain eventually breaks you. (The Easy Ask)" }
     ];
     var ANS = [["yes", "Yes"], ["unsure", "Not sure"], ["no", "No"]];
     Q.forEach(function (item, i) {
@@ -2472,6 +2809,157 @@ window.COURSE = {
         detail.appendChild(box);
       });
     }
+    update();
+  })();
+})();
+
+/* ===== Parts 8 and 9: seven-step diagnosis and working-backwards calculator ===== */
+(function () {
+  "use strict";
+  function $(id) { return document.getElementById(id); }
+  function el(tag, attrs, text) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  /* ---------- Find the broken step (part 8) ---------- */
+  (function diagnose() {
+    var strip = $("dx-strip");
+    if (!strip) return;
+    var STEPS = [
+      ["prospecting", "Prospecting"], ["qualifying", "Qualifying"], ["asking", "Asking"],
+      ["commitments", "Commitments"], ["thanks", "Thank you"], ["followup", "Following up"], ["upgrading", "Upgrading"]
+    ];
+    var NAME = {}; STEPS.forEach(function (s) { NAME[s[0]] = s[1]; });
+    var CASES = [
+      { d: "You freeze every time you reach the ask. Looking back, the donor never said what she cares about, and you're not sure she knows what you'd ask her to fund.",
+        a: "qualifying",
+        why: "The notes' most common diagnosis: an “asking problem” that's really a qualifying problem. The groundwork is missing, so the ask lands awkwardly." },
+      { d: "Donors give once and rarely again. Between gifts, they hear from you only at renewal time.",
+        a: "followup",
+        why: "A donor who felt neglected between the gift and the next ask won't come back for more. The small contacts between asks are missing." },
+      { d: "Three donors said yes in meetings last spring. No pledge forms, no dates. The money hasn't come.",
+        a: "commitments",
+        why: "People need help keeping their promises. A yes with no terms sours into something neither of you wants to bring up." },
+      { d: "Your prospect list is the same 40 names it was three years ago. You leave people off unless you're sure they can give.",
+        a: "prospecting",
+        why: "The notes' cardinal rule: if you wonder whether someone belongs on the list, the answer is yes. Narrow later." },
+      { d: "Gifts arrive, and the tax receipt goes out three weeks later as a form letter.",
+        a: "thanks",
+        why: "The notes' standard: thank within 48 hours, same day for major gifts, with a call or a handwritten note, never just the receipt." },
+      { d: "You've met a donor monthly for a year. She loves the work and has asked twice how she can help. Each time, you change the subject.",
+        a: "asking",
+        why: "Everything upstream is in place. This one really is the ask, held back to protect the relationship. That withholds intimacy from it." },
+      { d: "A loyal donor has given the same $1,000 every year for ten years. Nobody has ever invited her to do more.",
+        a: "upgrading",
+        why: "The first gift is the beginning. The notes measure success by whether you keep and grow a donor over twenty years." }
+    ];
+    var legend = $("dx-legend"), desc = $("dx-desc"), opts = $("dx-opts");
+    var checkBtn = $("dx-check"), nextBtn = $("dx-next"), resetBtn = $("dx-reset");
+    var fb = $("dx-fb"), result = $("dx-result");
+    var items = [].slice.call(strip.querySelectorAll("li"));
+    var cur = 0, firstTry = 0, tried = false, done = 0;
+
+    function paintStrip(pick, answer) {
+      items.forEach(function (li) {
+        var s = li.getAttribute("data-step");
+        li.className = (s === answer ? "is-answer" : "") + (pick && s === pick && s !== answer ? " is-pick" : "");
+      });
+    }
+    function tally() {
+      if (!done) { result.textContent = "Pick a step, then check."; return; }
+      result.innerHTML = "Diagnosed <strong>" + firstTry + " of " + done + "</strong> on the first try.";
+    }
+    function show() {
+      var c = CASES[cur];
+      legend.textContent = "Stalled gift " + (cur + 1) + " of " + CASES.length;
+      desc.textContent = c.d;
+      opts.textContent = "";
+      STEPS.forEach(function (s) {
+        var id = "dx-o" + cur + "-" + s[0];
+        var input = el("input", { type: "radio", name: "dx-pick", id: id, value: s[0] });
+        var label = el("label", { "for": id });
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(s[1]));
+        opts.appendChild(label);
+      });
+      fb.textContent = ""; tried = false;
+      checkBtn.hidden = false; nextBtn.hidden = true; resetBtn.hidden = true;
+      paintStrip(null, null);
+      tally();
+    }
+    checkBtn.addEventListener("click", function () {
+      var picked = opts.querySelector("input:checked");
+      if (!picked) { fb.textContent = "Pick a step first."; return; }
+      var c = CASES[cur], ok = picked.value === c.a;
+      if (!tried) { done += 1; if (ok) firstTry += 1; tried = true; }
+      if (ok) {
+        fb.innerHTML = "<span class=\"v-right\">Right: " + NAME[c.a] + ".</span> " + c.why;
+        paintStrip(null, c.a);
+        [].forEach.call(opts.querySelectorAll("input"), function (i) { i.disabled = true; });
+        checkBtn.hidden = true;
+        if (cur < CASES.length - 1) { nextBtn.hidden = false; nextBtn.focus(); }
+        else {
+          resetBtn.hidden = false;
+          fb.innerHTML += " <br><strong>Notice:</strong> this exercise gave each step one case. In practice, the notes find that a stall that looks like an asking problem often lives in another step.";
+        }
+      } else {
+        fb.innerHTML = "<span class=\"v-wrong\">Not quite.</span> " + NAME[picked.value] + " may be involved, but look earlier or later in the sequence. Try again.";
+        paintStrip(picked.value, null);
+      }
+      tally();
+    });
+    nextBtn.addEventListener("click", function () {
+      cur += 1; show();
+      var f = opts.querySelector("input"); if (f) f.focus();
+    });
+    resetBtn.addEventListener("click", function () {
+      cur = 0; firstTry = 0; done = 0; show();
+      var f = opts.querySelector("input"); if (f) f.focus();
+    });
+    show();
+  })();
+
+  /* ---------- Working backwards (part 9) ---------- */
+  (function calculator() {
+    var goal = $("calc-goal");
+    if (!goal) return;
+    var avg = $("calc-avg"), close = $("calc-close"), ask = $("calc-ask"), qual = $("calc-qual"), conv = $("calc-conv");
+    var funnel = $("calc-funnel"), result = $("calc-result");
+    function num(i) { var v = parseFloat(i.value); return isFinite(v) ? v : NaN; }
+    function fmt(n) { return Math.round(n).toLocaleString("en-US"); }
+    function money(n) { return "$" + fmt(n); }
+    function update() {
+      var g = num(goal), a = num(avg), pc = num(close), pa = num(ask), pq = num(qual), nc = num(conv);
+      var bad = [g, a, pc, pa, pq, nc].some(function (v) { return !(v > 0); }) || pc > 100 || pa > 100 || pq > 100;
+      funnel.textContent = "";
+      if (bad) { result.textContent = "Enter a number above zero in every box (rates up to 100%)."; return; }
+      var commits = Math.ceil(g / a - 1e-9);
+      var asks = Math.ceil(commits / (pc / 100) - 1e-9);
+      var qualified = Math.ceil(asks / (pa / 100) - 1e-9);
+      var convs = Math.ceil(qualified / (pq / 100) - 1e-9);
+      var contacts = Math.ceil(convs * nc - 1e-9);
+      var rows = [["Outreach contacts", contacts], ["Real conversations", convs], ["Qualified prospects", qualified], ["Asks", asks], ["Commitments", commits]];
+      rows.forEach(function (r) {
+        var row = el("div", { "class": "funnel-row" });
+        row.appendChild(el("span", { "class": "funnel-label" }, r[0]));
+        var track = el("span", { "class": "funnel-track" });
+        var bar = el("span", { "class": "funnel-bar" });
+        bar.style.width = Math.max(1, 100 * r[1] / contacts).toFixed(1) + "%";
+        track.appendChild(bar);
+        row.appendChild(track);
+        row.appendChild(el("span", { "class": "funnel-num" }, fmt(r[1])));
+        funnel.appendChild(row);
+      });
+      var week = contacts / 50, day = contacts / 250;
+      result.innerHTML = "To raise <strong>" + money(g) + "</strong> at an average gift of " + money(a) + ", you need about " +
+        fmt(commits) + " commitments, " + fmt(asks) + " asks, " + fmt(qualified) + " qualified prospects, " + fmt(convs) +
+        " conversations and <strong>" + fmt(contacts) + " outreach contacts</strong> this year. That's about " +
+        fmt(week) + " contacts a week, or " + (Math.round(day * 10) / 10).toLocaleString("en-US") + " each working day.";
+    }
+    [goal, avg, close, ask, qual, conv].forEach(function (i) { i.addEventListener("input", update); });
     update();
   })();
 })();

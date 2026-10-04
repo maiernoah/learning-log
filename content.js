@@ -117,6 +117,6 @@ const ENTRIES = [
     time: "15:54",
     url: "exhibits/the-practice-of-asking/",
     tags: ["fundraising", "philosophy"],
-    summary: `An eight-part training for nonprofit executive directors, drawn from Noah's notes for <em>The Fundraising Act</em>. It argues that generosity is already present and the fundraiser's job is to clear what blocks it. It works through Mauss and the Bhagavad Gita on gifts, overflow versus guilt, the money story every fundraiser carries, asking from love, and releasing the outcome. Readers clear rocks from a stream, compare two givers by dollars and by sacrifice, diagnose a hard ask, and sort what they control from what they don't. Quizzes and spaced review cards throughout.`,
+    summary: `A ten-part training for nonprofit executive directors, drawn from Noah's notes for <em>The Fundraising Act</em>. It argues that generosity is already present and the fundraiser's job is to clear what blocks it. It works through Mauss and the Bhagavad Gita on gifts, overflow versus guilt, the money story every fundraiser carries, asking from love, releasing the outcome, the seven steps under every gift, and the daily floor that keeps a practice alive. Readers clear rocks from a stream, compare two givers by dollars and by sacrifice, diagnose a hard ask, find where stalled gifts are really stuck, and work backwards from a goal to a daily number. Quizzes and spaced review cards throughout.`,
   },
 ];
