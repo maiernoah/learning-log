@@ -74,7 +74,7 @@ const ENTRIES = [
     time: "13:00",
     url: "exhibits/what-the-output-cant-see/",
     tags: ["philosophy", "consciousness"],
-    summary: `The page lets you rebuild a question-answering machine from copper wires, water pipes, squirrels carrying notes, or neurons, and watch its answers stay the same. It walks through the argument that consciousness belongs to the pattern a system runs, then covers the main objections and what the argument settles about AI.`,
+    summary: `A nine-part course on three short pieces by Eliezer Yudkowsky about where consciousness lives. Readers rebuild a question-answering machine from wires, pipes, squirrels or neurons, test his argument against panpsychism on an electron test bench, and weigh the strongest objections, with quizzes and spaced review cards throughout.`,
   },
 
 ];

@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What the Output Can't See</title>
+<title>What the Output Can&#x27;t See</title>
+<meta name="description" content="Rebuild a question-answering machine from wires, water pipes, squirrels or neurons, then test where consciousness could live, from your own brain down to a single electron.">
 <style>
 /* ===== Noah's Weblog house style (exhibits) v1 =====
    Matches noahmaier.net: white page, Times for reading, Verdana for
@@ -108,77 +109,137 @@ footer address { font-style: normal; font-size: 0.85em; }
 @media (max-width: 780px) { body { font-size: 17px; padding: 8px 16px 28px; } h1 { font-size: 1.8em; } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 @media print { .nav { display: none; } }
+/* ===== Noah's Weblog teaching components v1 =====
+   Goes directly after house-style.css. Uses only its variables. */
 
-/* ===== Page layout: What the Output Can't See ===== */
+/* anything hidden by the engine stays hidden, even inside flex rows */
+[hidden] { display: none !important; }
 
-/* The drawing script reads these names with getComputedStyle.
-   Each one points at a house variable; none adds a color. */
-:root {
-  --paper: var(--page);
-  --bench: var(--tint);
-  --card: var(--page);
-  --ink2: var(--ink-soft);
-  --rule: var(--lo);
-  --signal: var(--c1);        /* the pattern: the one color that never changes */
-  --signal-soft: var(--hi);
-  --screen: var(--page);
-  --screen-ink: var(--ink-soft);
-  --copper: var(--c2);
-  --water: var(--c3);
-  --fur: var(--c4);
-  --flesh: var(--c5);
-  --ok: var(--c6);
-  --no: var(--c2);
-  --amber: var(--c5);
+/* course layout: the lesson on the left, contents on the right (like the log) */
+.course { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 32px; align-items: start; }
+.course > .lesson { min-width: 0; }
+.course-nav { position: sticky; top: 12px; padding-left: 20px; border-left: 1px solid var(--lo);
+              box-shadow: inset 1px 0 0 var(--hi); font: 13px/1.5 var(--sans); }
+.course-nav summary { font-weight: bold; cursor: pointer; margin-bottom: 6px; }
+.course-nav ol { margin: 0; padding-left: 0; list-style: none; }
+.course-nav li { margin: 0.3em 0; }
+.course-nav a[aria-current="true"] { color: var(--ink); font-weight: bold; text-decoration: none; }
+.course-nav .check { color: var(--c6); }
+.progress { margin: 0 0 10px; }
+.progress .meter { margin-top: 4px; }
+@media (max-width: 780px) {
+  .course { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .course-nav { position: static; order: -1; padding: 0 0 10px; border-left: 0; box-shadow: none;
+                border-bottom: 1px solid var(--lo); margin-bottom: 14px; }
 }
 
-[hidden] { display: none !important; }
-section { min-width: 0; }
-p.kicker { margin: 2.6em 0 0; }
-p.kicker + h2 { margin-top: 0.15em; }
-h2 .pipe { color: var(--c3); }
-.lbl { font: bold 13px/1.5 var(--sans); margin-right: 6px; }
-.tag { display: inline-block; font: bold 10px/1.3 var(--sans); letter-spacing: 0.06em;
-       text-transform: uppercase; padding: 1px 4px; border: 1px solid currentColor;
-       vertical-align: 0.15em; white-space: nowrap; }
+/* one part at a time */
+.view[hidden] { display: none; }
+.view > h2:first-child { margin-top: 0.3em; }
+.view > h2:focus { outline: none; }
+.objective { font: 13px/1.5 var(--sans); color: var(--ink-soft); margin: -0.2em 0 1.1em; }
+.pager { max-width: none; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+         margin: 2em 0 0; padding-top: 10px; border-top: 1px solid var(--hi); font: 13px/1.5 var(--sans); }
+.pager .next { margin-left: auto; }
+
+/* source references like (p. 4) */
+.src { font: 12px/1 var(--sans); color: var(--ink-soft); white-space: nowrap; }
+
+/* glossary terms in running text link to the glossary */
+a.term { text-decoration-style: dotted; text-underline-offset: 2px; }
+.glossary dt { font-weight: bold; margin: 0.9em 0 0.15em; }
+.glossary dd { margin: 0; max-width: 38em; }
+
+/* quotes and figures */
+blockquote { margin: 1em 0; padding-left: 14px; border-left: 3px solid var(--lo); font-style: italic; max-width: 36em; }
+figure { margin: 1.3em 0; }
+figure svg, figure img { display: block; max-width: 100%; height: auto; }
+figure svg:not([width]) { width: 100%; max-width: 38em; }  /* give every svg width and height attributes */
+figcaption { margin-top: 6px; color: var(--ink-soft); max-width: 38em; }
+svg text { font-family: var(--sans); }
+
+/* reveal: model answers, hints, "why?" prompts */
+details.reveal { margin: 0 0 1em; max-width: 38em; }
+details.reveal > summary { font: 13px/1.6 var(--sans); color: var(--link); text-decoration: underline; cursor: pointer; }
+details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px solid var(--hi); }
+
+/* "A common mix-up" refutation box and "Try it" prompts */
+.box strong.label { display: block; margin-bottom: 2px; }
+
+/* quizzes */
+.quiz { margin: 1.3em 0; max-width: 40em; }
+.quiz fieldset.q legend { font: bold 1em/1.35 var(--serif); padding: 0 4px; }
+.q .options { display: grid; gap: 7px; margin: 6px 0 10px; }
+.q .options label { display: flex; gap: 8px; align-items: flex-start; font: 0.95em/1.4 var(--serif); }
+.q .options input { margin-top: 0.3em; flex: none; }
+.q .options .mark { font: bold 12px/1.6 var(--sans); white-space: nowrap; }
+.q .options .mark.right { color: var(--c6); }
+.q .options .mark.wrong { color: var(--c2); }
+.q .feedback { font: 13px/1.5 var(--sans); margin: 8px 0 0; }
+.q .feedback:empty { display: none; }
+.q .verdict { font-weight: bold; }
+.q .verdict.right { color: var(--c6); }
+.q .verdict.wrong { color: var(--c2); }
+.q textarea { width: 100%; min-height: 4.5em; font: 15px/1.4 var(--serif); margin: 6px 0 8px; }
+.q .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.quiz-summary:empty { display: none; }
+
+/* flashcards */
+.deck { max-width: 38em; }
+.card { background: #fff; border: 1px solid var(--field); box-shadow: inset 1px 1px 0 #b4b4b4;
+        padding: 16px 18px; min-height: 9em; margin: 8px 0 10px; }
+.card .front { font-size: 1.2em; }
+.card .back { border-top: 1px dashed var(--lo); margin-top: 12px; padding-top: 10px; }
+.card .back[hidden] { display: none; }
+.deck .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* printing shows every part */
+@media print {
+  .view[hidden] { display: block !important; }
+  .course { display: block; }
+  .course-nav, .pager, .q .actions, .deck .actions { display: none; }
+}
+/* ===== page-specific rules (use the variables above, no new colors) ===== */
+/* labels on claims */
+.legend .it { display: inline-block; margin: 0 16px 4px 0; }
+.tag { display: inline-block; font: bold 10px/1.3 var(--sans); letter-spacing: 0.06em; text-transform: uppercase;
+       padding: 1px 4px; border: 1px solid currentColor; vertical-align: 0.15em; white-space: nowrap; }
 .tag.est { color: var(--c6); }
 .tag.arg { color: var(--c1); }
 .tag.con { color: var(--c2); }
-.legend .it { display: inline-block; margin: 0 16px 4px 0; }
 
-/* Try-it areas: full page width */
-.bench { margin: 1.4em 0 1.6em; }
-.bench > h3 { margin-top: 0; }
-.seg { gap: 6px; }
-.chip[aria-pressed="true"] { background: var(--btn-face); }
-.sw { display: inline-block; width: 10px; height: 10px; border: 1px solid var(--ink);
-      margin-right: 6px; vertical-align: -1px; }
-.stage { border: 1px solid var(--lo); background: var(--page); margin: 0 0 12px; }
-.stage canvas { display: block; width: 100%; }
-.result .pr { font: 13px var(--sans); color: var(--ink-soft); margin-right: 4px; }
-table.readouts { margin: 0 0 6px; }
-table.readouts td { font-variant-numeric: tabular-nums; }
-.verdict { font-weight: bold; }
-.verdict.ok { color: var(--c6); }
-.verdict.no { color: var(--c2); }
+/* controls */
+.choices.stack { flex-direction: column; gap: 6px; }
+.sw { display: inline-block; width: 10px; height: 10px; border: 1px solid var(--ink); margin-right: 2px; }
+.sw-copper { background: var(--c2); }
+.sw-water { background: var(--c3); }
+.sw-squirrel { background: var(--c4); }
+.sw-neuron { background: var(--c5); }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .slider-row { display: flex; align-items: center; gap: 12px; max-width: 38em; margin: 0 0 12px; }
 .slider-row input { flex: 1; min-width: 0; }
 .slider-val { font-variant-numeric: tabular-nums; min-width: 6.5ch; text-align: right; }
 
-/* Sorting game */
-.sort-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-@media (max-width: 860px) { .sort-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 480px) { .sort-grid { grid-template-columns: 1fr; } }
+/* drawings and readouts */
+.stage { border: 1px solid var(--lo); background: var(--page); margin: 0 0 12px; }
+.stage canvas { display: block; width: 100%; }
+table.readouts { margin: 0 0 6px; }
+table.readouts td { font-variant-numeric: tabular-nums; }
+td .verdict { font-weight: bold; }
+td .verdict.ok { color: var(--c6); }
+td .verdict.no { color: var(--c2); }
+.tablewrap { overflow-x: auto; max-width: 100%; margin: 0 0 8px; }
+table.lens td.on, table.lens th.on { background: var(--hi); font-weight: bold; }
+table.lens tbody tr.pass th::before { content: "\25BA\00a0"; color: var(--c1); }
+
+/* sorting cards */
+.sort-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0 0 1em; }
+@media (max-width: 520px) { .sort-grid { grid-template-columns: 1fr; } }
 .fact { border: 1px solid var(--lo); padding: 8px 10px; display: grid; gap: 8px;
         grid-template-rows: 1fr auto auto; min-width: 0; }
 .fact .t { margin: 0; font-size: 0.95em; line-height: 1.35; }
-.btns { display: grid; gap: 4px; }
-.pick { text-align: left; }
-.pick.chosen, .pick.chosen:disabled {
-  color: var(--ink); text-shadow: none; font-weight: bold; background: var(--btn-face);
-  box-shadow: inset 1px 1px var(--btn-dark), inset -1px -1px var(--page),
-              inset 2px 2px var(--btn-lo), inset -2px -2px var(--btn-face);
-}
+.btns { display: flex; flex-wrap: wrap; gap: 4px; }
+.pick[aria-pressed="true"] { font-weight: bold; background: var(--btn-face); }
 .fb { margin: 0; font: 12px/1.45 var(--sans); color: var(--ink-soft); }
 .fb:empty { display: none; }
 .mk { font-weight: bold; text-transform: uppercase; margin-right: 6px; }
@@ -186,649 +247,1791 @@ table.readouts td { font-variant-numeric: tabular-nums; }
 .mk.no { color: var(--c2); }
 .fact[data-state="right"] { border-color: var(--c6); }
 .fact[data-state="wrong"] { border-color: var(--c2); }
-.fact.final { grid-column: 1 / -1; border: 1px dashed var(--c1); grid-template-rows: none;
-              grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center;
-              gap: 10px 20px; padding: 12px; }
+.fact.final { grid-column: 1 / -1; border: 1px dashed var(--c1); grid-template-rows: none; }
 .fact.final p.eyebrow { margin: 0 0 4px; }
-.fact.final .say { margin: 0; font-weight: bold; font-size: 1.25em; line-height: 1.2; }
-.fact.final .fb { grid-column: 1 / -1; font-size: 13px; color: var(--ink); }
-@media (max-width: 620px) { .fact.final { grid-template-columns: 1fr; } }
+.fact.final .say { margin: 0; font-weight: bold; font-size: 1.2em; }
+.fact.final .fb { font-size: 13px; color: var(--ink); }
 
-/* Two-layer diagram */
-.layers { border: 1px solid var(--lo); margin: 0 0 1em; }
-.band { padding: 8px 12px; }
-.band.fn { background: var(--tint); }
-.band-label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px;
-              font: 13px/1.5 var(--sans); color: var(--ink-soft); margin-bottom: 4px; }
-.band-label b { color: var(--ink); }
-.items { display: flex; flex-wrap: wrap; gap: 2px 20px; }
-.item::before { content: "\2022\00a0"; }
-.wall { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px 14px;
-        align-items: center; padding: 8px 12px; border-top: 1px dashed var(--lo);
-        border-bottom: 1px dashed var(--lo); font: 12px/1.45 var(--sans); color: var(--ink-soft); }
-.wall .r { text-align: right; }
-.wall .q { padding: 4px 10px; border: 1px dashed var(--c1); color: var(--ink); font-weight: bold;
-           white-space: nowrap; }
-@media (max-width: 640px) { .wall { grid-template-columns: 1fr; justify-items: start; } .wall .r { text-align: left; } }
+/* argument step-through */
+.argmap { max-width: 38em; padding-left: 1.4em; margin: 0 0 1em; }
+.argmap li { margin: 0 0 0.8em; }
+.argmap .row { display: inline-flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.arg-opts { display: grid; gap: 6px; margin: 4px 0 8px; }
+.arg-opts label { display: flex; gap: 8px; align-items: flex-start; font: 0.95em/1.4 var(--serif); }
+.arg-opts input { margin-top: 0.3em; flex: none; }
 
-/* Argument steps */
-.steps { border-top: 1px solid var(--lo); margin: 0 0 1em; }
-.step { display: grid; grid-template-columns: 2em minmax(0, 1fr); gap: 4px 12px; padding: 12px 0;
-        border-bottom: 1px solid var(--lo); }
-.step .n { font-weight: bold; font-size: 1.6em; line-height: 1; }
-.step.concl .n { color: var(--c1); }
-.step .row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
-.step h3 { margin: 0; }
-.step .body p { margin: 6px 0 0; }
+/* matching */
+.match-row { display: grid; gap: 4px; margin: 0 0 14px; max-width: 40em; }
+.match-row .obj-t { font: bold 1em/1.35 var(--serif); }
+.match-row select { width: 100%; max-width: 100%; }
 
-/* Objections */
-.obj { margin: 0 0 1.4em; }
-.obj p.meta { margin: 0 0 2px; }
-.obj h3 { margin-top: 0.15em; }
-.obj .reply { color: var(--ink-soft); }
-
-.sources { padding-left: 1.2em; max-width: 38em; font-size: 0.9em; }
 .sources li { margin: 0 0 6px; }
+
+/* diagram vocabulary: one color per concept, as in the stylesheet's palette */
+svg text { font-size: 13px; }
+svg .t-s { font-size: 12px; }
+svg .t-b { font-weight: bold; }
+svg .t-ink { fill: var(--ink); }
+svg .t-soft { fill: var(--ink-soft); }
+svg .t-navy { fill: var(--c1); }
+svg .f-page { fill: var(--page); }
+svg .f-tint { fill: var(--tint); }
+svg .f-ink { fill: var(--ink); }
+svg .f-navy { fill: var(--c1); }
+svg .f-green { fill: var(--c6); }
+svg .s-lo { stroke: var(--lo); stroke-width: 1; }
+svg .s-ink { stroke: var(--ink); stroke-width: 1.5; }
+svg .s-navy { stroke: var(--c1); stroke-width: 1.5; }
+svg .s-green { stroke: var(--c6); stroke-width: 2; }
+svg .s-maroon { stroke: var(--c2); stroke-width: 2; }
+svg .s-teal { stroke: var(--c3); stroke-width: 2; }
+svg .w2 { stroke-width: 2; }
+svg .dash { stroke-dasharray: 5 4; }
+svg path.s-navy, svg line { fill: none; }
+
 </style>
 </head>
 <body>
 <div class="page">
+  <header>
+    <h1>What the Output Can&#x27;t See</h1>
+    <p class="dek">Rebuild a question-answering machine from wires, water pipes, squirrels or neurons, then test where consciousness could live, from your own brain down to a single electron.</p>
+    <p class="nav">[ <a href="../../index.html#what-the-output-cant-see">&#9668; Noah's Weblog</a> | <a href="../../about.html">About</a> ]</p>
+    <hr>
+  </header>
 
-<header>
-  <h1>What the Output Can't See</h1>
-  <p class="dek">Rebuild a question-answering machine from wires, water pipes, squirrels, or neurons, and test whether consciousness belongs to the material or the pattern.</p>
-  <p class="nav">[ <a href="../../index.html#what-the-output-cant-see">&#9668; Noah's Weblog</a> | <a href="../../about.html">About</a> ]</p>
-  <hr>
-</header>
+  <div class="course">
+    <main class="lesson">
+      <!-- ============ START HERE ============ -->
+      <section class="view" id="start" data-title="Start here">
+        <h2>Start here</h2>
+        <p class="box">This page teaches two short posts and an essay by Eliezer Yudkowsky (2026) about where consciousness lives. It is a study guide in plain language, not a copy of the originals. <a href="#source">About the source</a>.</p>
+        <p>If your brain ran on water pipes instead of neurons, would you know? Chatbots now talk about their own feelings. Some people feel sure a chicken has an inner life and a computer never could. This page walks through one argument about what consciousness depends on, then tests it against the strongest objections.</p>
+        <p class="meta legend" aria-label="How to read the labels on this page">
+          <span class="it"><span class="tag est">Established</span> standard logic or science</span>
+          <span class="it"><span class="tag arg">Argument</span> a step in Yudkowsky's case</span>
+          <span class="it"><span class="tag con">Contested</span> serious thinkers disagree</span>
+        </p>
+        <h3>By the end you'll be able to</h3>
+        <ul class="prose">
+          <li>Sort facts about a machine by whether they can change what it says.</li>
+          <li>Predict what happens to a machine's answers when you rebuild it from a different material.</li>
+          <li>Explain why Yudkowsky concludes that consciousness belongs with the pattern a system runs.</li>
+          <li>Explain his argument against panpsychism, and give one reply a panpsychist could make.</li>
+          <li>Tell an observation from an inference when someone says an animal or a machine has feelings.</li>
+        </ul>
+        <h3>Guess first</h3>
+        <p>Answer these before you start. Guessing wrong is fine; trying first makes the answers stick.</p>
+        <div class="quiz" data-quiz="pre"></div>
+      </section>
 
-<main>
+      <!-- ============ PART 1 ============ -->
+      <section class="view module" id="m1" data-title="1. Same pattern, different stuff">
+        <h2>1. Same pattern, different stuff</h2>
+        <p class="objective">In this part: see that a machine's answers stay the same when you rebuild it from different materials.</p>
+        <p class="box"><strong class="label">Words to know</strong>An <a class="term" href="#g-algorithm">algorithm</a> is a fixed set of steps: when this signal arrives, send that one on. A <a class="term" href="#g-substrate">substrate</a> is the material the steps run on.</p>
+        <p>Picture a machine that answers questions. Inside, signals run through copper wires. Now rebuild it so the same signals flow as water through pipes, in exactly the same pattern. Ask it anything. The answers come out the same. <span class="src">(A ¶4)</span></p>
+        <p>The answers depend on the algorithm: which signal goes where, and when. The copper or the water only carries that pattern. <span class="src">(A ¶4, ¶8)</span></p>
+        <p>So nothing the machine computes can tell it what it is made of. Ask what it is made of, and it gives the same reply on wires or on pipes. <span class="src">(A ¶6)</span></p>
+        <p class="box"><strong class="label">An analogy</strong>A game of chess is the same game with wooden pieces, plastic pieces, or pebbles on a napkin. The moves are the pattern. The pieces are the material. Where it breaks down: a chess set doesn't compute anything; the players do. Yudkowsky's own example is Claude, which would give the same answers on electricity in wires or water in pipes. <span class="src">(A ¶4)</span></p>
 
-<section id="intro" aria-labelledby="h-intro">
-  <h2 id="h-intro">If your brain ran on <span class="pipe">water pipes</span>, would you know?</h2>
-  <p>Picture a machine that answers questions. Inside, signals run through copper wires. Now rebuild it so the same signals flow as water through pipes, in exactly the same pattern. Rebuild it again with trained squirrels carrying notes. Ask it anything, and the answers come out identical every time. Followed carefully, that fact says something surprising about where consciousness lives.</p>
-  <p class="meta legend" aria-label="How to read the labels on this page">
-    <span class="it"><span class="tag est">Established</span> standard logic or science</span>
-    <span class="it"><span class="tag arg">Argument</span> a step in this page's case</span>
-    <span class="it"><span class="tag con">Contested</span> serious researchers disagree</span>
-  </p>
+        <h3>Try it: the machine</h3>
+        <p class="box"><strong class="label">Try it</strong>Pick a question, then pick a material. Each change sends one signal through the network.</p>
+        <fieldset>
+          <legend>Ask it</legend>
+          <div class="choices">
+            <label><input type="radio" name="mq" id="mq-paris" value="paris" checked> Where is Paris?</label>
+            <label><input type="radio" name="mq" id="mq-math" value="math"> What is 17 × 3?</label>
+            <label><input type="radio" name="mq" id="mq-self" value="self"> What are you made of?</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Build it from</legend>
+          <div class="choices">
+            <label><input type="radio" name="msub" id="ms-copper" value="copper" checked><span class="sw sw-copper"></span>Copper wires</label>
+            <label><input type="radio" name="msub" id="ms-water" value="water"><span class="sw sw-water"></span>Water pipes</label>
+            <label><input type="radio" name="msub" id="ms-squirrel" value="squirrel"><span class="sw sw-squirrel"></span>Squirrels with notes</label>
+            <label><input type="radio" name="msub" id="ms-neuron" value="neuron"><span class="sw sw-neuron"></span>Neurons</label>
+          </div>
+        </fieldset>
+        <div class="stage"><canvas id="mach-canvas" role="img" aria-label="A network of nodes in five columns. A navy signal travels the same route from input to output whichever material the network is built from."></canvas></div>
+        <p class="result" aria-live="polite"><span class="ui">Answer:</span> <strong id="mach-out">Paris is in France.</strong></p>
+        <table class="readouts">
+          <tr><th scope="row">Route through the network</th><td id="mach-route"></td></tr>
+          <tr><th scope="row">Materials tried on this question</th><td id="mach-tried">1 of 4</td></tr>
+          <tr><th scope="row">Answers that changed</th><td>0</td></tr>
+          <tr id="mach-truth-row" hidden><th scope="row">Is that answer true for this build?</th><td><span class="verdict ok" id="mach-truth">True for this build</span></td></tr>
+        </table>
+        <p class="meta" id="mach-status" aria-live="polite">Route numbers count nodes from the top of each column.</p>
 
-  <div class="bench" id="machine-bench">
-    <h3>Try it · The machine</h3>
-    <p class="box">Pick a question, then swap the material while the signal is moving.</p>
-    <fieldset>
-      <legend id="lbl-ask">Ask it</legend>
-      <div class="choices seg" role="group" aria-labelledby="lbl-ask">
-        <button type="button" class="chip" id="q-paris" data-q="paris" aria-pressed="true">Where is Paris?</button>
-        <button type="button" class="chip" id="q-math" data-q="math" aria-pressed="false">What is 17 × 3?</button>
-        <button type="button" class="chip" id="q-self" data-q="self" aria-pressed="false">What are you made of?</button>
-      </div>
-    </fieldset>
-    <fieldset>
-      <legend id="lbl-build">Build it from</legend>
-      <div class="choices seg" role="group" aria-labelledby="lbl-build">
-        <button type="button" class="chip" id="s-copper" data-sub="copper" aria-pressed="true"><span class="sw" style="background:var(--copper)"></span>Copper wires</button>
-        <button type="button" class="chip" id="s-water" data-sub="water" aria-pressed="false"><span class="sw" style="background:var(--water)"></span>Water pipes</button>
-        <button type="button" class="chip" id="s-squirrel" data-sub="squirrel" aria-pressed="false"><span class="sw" style="background:var(--fur)"></span>Squirrels with notes</button>
-        <button type="button" class="chip" id="s-neuron" data-sub="neuron" aria-pressed="false"><span class="sw" style="background:var(--flesh)"></span>Neurons</button>
-      </div>
-    </fieldset>
-    <div class="stage"><canvas id="machine" role="img" aria-label="A network of nodes in five columns. A blue signal travels the same route from input to output whichever material the network is built from."></canvas></div>
-    <p class="result" aria-live="polite"><span class="pr">answer &gt;</span> <strong id="m-out">Paris is in France.</strong></p>
-    <table class="readouts">
-      <tr><th scope="row">Route through the network</th><td id="m-route">In 2 → A 3 → B 4 → C 2 → Out 1</td></tr>
-      <tr><th scope="row">Builds tried on this question</th><td id="m-tried">1 of 4</td></tr>
-      <tr><th scope="row">Answers that changed</th><td id="m-diff">0</td></tr>
-      <tr id="m-truth-wrap" hidden><th scope="row">Is that answer true for this build?</th><td><span class="verdict ok" id="m-truth">True for this build</span></td></tr>
-    </table>
-    <p class="meta" id="m-status" aria-live="polite">Route numbers count nodes from the top of each column.</p>
-  </div>
-  <p>The route and the answer stay fixed while the material changes underneath. Ask the machine what it is made of and it gives the same reply in all four builds, which is true in only one of them. Nothing in its pattern reads the material, so its answer can't track the material.</p>
-</section>
+        <details class="reveal"><summary>Why can't the machine's answer track its material?</summary>
+          <div><p>To track it, some step would have to give one signal on copper and a different signal on water. But a step that changes with the material is a different algorithm. Any algorithm can run on any material, so no algorithm's output can depend on which one it runs on. <span class="src">(A ¶8)</span></p></div>
+        </details>
+        <p class="box"><strong class="label">A common mix-up</strong>"Water is slower than electricity, so the answers must differ." Speed changes how long the machine takes. With the same steps in the same order, the answers are the same. The argument is about what the machine says.</p>
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m1"></div>
+      </section>
 
-<section id="layers" aria-labelledby="h-layers">
-  <p class="meta kicker">Part 1 · Two kinds of facts</p>
-  <h2 id="h-layers">Every fact about a machine lands in one of two bins</h2>
-  <p>Start with chess. A game of chess is the same game whether the pieces are carved wood, plastic, or pebbles on a napkin. The moves are the pattern. The pieces are the material. Nothing that happens on the board depends on what the knight is made of.</p>
-  <p>Any machine can be looked at the same way. Treat it as a box with inputs (what it hears) and outputs (what it says). Then sort every fact about the box with one test: <em>could this fact change what comes out?</em></p>
-  <p>Some facts pass. Somewhere in Claude's trained weights is the information that Paris is in France. Ask about Paris, and that stored fact shapes the reply. Call these facts the <em>functional layer</em>: the pattern of cause and effect that turns inputs into outputs.</p>
-  <p>Other facts fail. The exact weight of the power supply feeding the server rack never shows up in an answer. Neither does whether the chips are silicon or carbon, or whether the signals are electricity in wires or water in pipes. Call these the <em>physical layer</em>: the material the pattern happens to be built from. Philosophers call it the <em>substrate</em>.</p>
-  <p class="box"><span class="lbl">Fine print</span>The machine has to keep working. Melt the chips and the answers change, because the algorithm stopped running. The claim covers any material that runs the same algorithm correctly. An algorithm here means a fixed set of steps: when this signal arrives, send that one on.</p>
+      <!-- ============ PART 2 ============ -->
+      <section class="view module" id="m2" data-title="2. Two bins for every fact">
+        <h2>2. Two bins for every fact</h2>
+        <p class="objective">In this part: sort facts about a machine by whether they could change what it says.</p>
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-input-and-output">Input and output</a>: what a system takes in (what it hears) and what it gives back (what it says). The <a class="term" href="#g-functional-layer">functional layer</a> holds facts that can change the output. The <a class="term" href="#g-physical-layer">physical layer</a> holds facts about the material that can't.</p>
+        <p>Treat any machine as a box with inputs and outputs. Then sort every fact about it with one test: could this fact change what comes out? <span class="src">(A ¶1)</span></p>
+        <p>Some facts pass. Somewhere in Claude's trained weights is the fact that Paris is in France. Ask about Paris, and that stored fact shapes the reply. <span class="src">(A ¶2)</span></p>
+        <p>Other facts fail. The exact mass of the power supply feeding the computers never shows up in an answer. <span class="src">(A ¶3)</span> Neither does silicon versus carbon, or wires versus pipes, as long as the same algorithm runs on top. <span class="src">(A ¶4)</span></p>
+        <figure>
+          <svg width="460" height="210" viewBox="0 0 460 210" role="img" aria-label="Two boxes. Functional layer, which can change the output: knows Paris is in France, remembers your last message, has learned 7 times 8 is 56. Physical layer, which can't change the output: mass of the power supply, silicon or carbon chips, wires or pipes.">
+            <rect class="f-tint s-lo" x="1" y="1" width="222" height="208"/>
+            <rect class="f-page s-lo" x="237" y="1" width="222" height="208"/>
+            <text class="t-ink t-b" x="14" y="28">Functional layer</text>
+            <text class="t-soft t-s" x="14" y="48">can change the output</text>
+            <text class="t-ink" x="14" y="90">• knows Paris is in France</text>
+            <text class="t-ink" x="14" y="122">• remembers your last</text>
+            <text class="t-ink" x="26" y="140">message</text>
+            <text class="t-ink" x="14" y="172">• has learned 7 × 8 = 56</text>
+            <text class="t-ink t-b" x="250" y="28">Physical layer</text>
+            <text class="t-soft t-s" x="250" y="48">can't change the output</text>
+            <text class="t-ink" x="250" y="90">• mass of the power</text>
+            <text class="t-ink" x="262" y="108">supply</text>
+            <text class="t-ink" x="250" y="140">• silicon or carbon chips</text>
+            <text class="t-ink" x="250" y="172">• wires or pipes</text>
+          </svg>
+          <figcaption>Every fact about a working machine lands in one of two bins.</figcaption>
+        </figure>
 
-  <div class="bench" id="sort-bench">
-    <h3>Try it · Sort the facts</h3>
-    <p class="box">For each fact, decide whether it could change what the machine says.</p>
-    <p class="meta"><span class="sort-score" id="sort-score" aria-live="polite">Sorted 0 of 8 · 0 correct</span>&nbsp;&nbsp; <button type="button" class="reset" id="sort-reset">Clear answers</button></p>
-    <div class="sort-grid" id="sort-grid">
-      <div class="fact final" id="final-card">
-        <div>
-          <p class="eyebrow meta">One more fact, this one about you</p>
-          <p class="say">You are aware that you are aware.</p>
+        <h3>Try it: sort the facts</h3>
+        <p class="box"><strong class="label">Try it</strong>For each fact, decide whether it could change what the machine says.</p>
+        <p class="meta"><span id="sort-score" aria-live="polite">Sorted 0 of 8 · 0 correct</span>&nbsp;&nbsp; <button type="button" id="sort-reset">Clear answers</button></p>
+        <div class="sort-grid" id="sort-grid">
+          <div class="fact final" id="sort-final">
+            <div>
+              <p class="meta eyebrow">One more fact, this one about you</p>
+              <p class="say">You are aware that you are aware.</p>
+            </div>
+            <div class="btns">
+              <button type="button" class="pick" id="sort-final-a" data-v="1">Changes the output</button>
+              <button type="button" class="pick" id="sort-final-b" data-v="0">Can't change it</button>
+            </div>
+            <p class="fb" id="sort-final-fb" aria-live="polite"></p>
+          </div>
         </div>
-        <div class="btns">
-          <button type="button" class="pick" id="final-a" data-v="1">Changes the output</button>
-          <button type="button" class="pick" id="final-b" data-v="0">Can't change it</button>
+
+        <details class="reveal"><summary>Why does "it remembers what you said a minute ago" go in the functional bin?</summary>
+          <div><p>Your earlier words change its next reply. Anything that can change what comes out belongs in the functional bin. <span class="src">(A ¶1)</span></p></div>
+        </details>
+        <p class="box"><strong class="label">A common mix-up</strong>"So the physical layer doesn't matter at all." It matters for whether the machine runs. Melt the chips and the answers stop. The claim is narrower: among working machines running the same algorithm, the material makes no difference to the answers. <span class="src">(A ¶4)</span></p>
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m2"></div>
+      </section>
+
+      <!-- ============ PART 3 ============ -->
+      <section class="view module" id="m3" data-title="3. Why a simulated storm stays dry">
+        <h2>3. Why a simulated storm stays dry</h2>
+        <p class="objective">In this part: use a famous example about rain to see the wall between the two layers.</p>
+        <p class="box"><strong class="label">Words to know</strong>A <a class="term" href="#g-simulation">simulation</a> is a program that computes how something would behave, such as a storm or a brain.</p>
+        <p>In 1980 the philosopher John Searle pointed out that a computer simulation of a rainstorm leaves nobody wet. He used it as a reason to doubt that a simulated brain would really think. (This history comes from outside the posts.)</p>
+        <p>Yudkowsky agrees the storm stays dry. He says the example points straight at the two layers. Wetness belongs to the physical layer. A program can compute rain all day and never make the circuit board damp. <span class="src">(A ¶5, ¶7)</span></p>
+        <p>The wall blocks traffic the other way too. A weather station inside the simulation can't measure whether the computer is built from wires or plumbing. <span class="src">(A ¶6)</span></p>
+        <p>So the real question is which bin consciousness belongs in. If it works like wetness, a simulated brain would lack it, however perfect. If it works like the fact about Paris, any material running the right pattern would have it.</p>
+
+        <h3>Try it: turn up the rain</h3>
+        <p class="box"><strong class="label">Try it</strong>Drag the slider. Rain rates use the weather scale: light under 2.5 mm per hour, heavy above 7.6, violent above 50.</p>
+        <div class="slider-row">
+          <input type="range" id="rain-rate" min="0" max="100" step="1" value="40" aria-label="Simulated rainfall in millimeters per hour">
+          <span class="slider-val ui" id="rain-val">40 mm/h</span>
         </div>
-        <p class="fb" id="final-fb" aria-live="polite"></p>
-      </div>
-    </div>
+        <div class="stage"><canvas id="rain-canvas" role="img" aria-label="A computer monitor showing rain and a puddle. The desk under the monitor stays dry."></canvas></div>
+        <table class="readouts">
+          <tr><th scope="row">Inside the simulation</th><td id="rain-in">40 mm/h · heavy rain</td></tr>
+          <tr><th scope="row">On your real desk</th><td>0 mL · dry</td></tr>
+          <tr><th scope="row">What the program can tell about its hardware</th><td>Nothing</td></tr>
+        </table>
+
+        <figure>
+          <svg width="460" height="250" viewBox="0 0 460 250" role="img" aria-label="Diagram. Top band, functional layer: simulated rain, knows Paris is in France. Bottom band, physical layer: real wetness, copper or water. A dashed wall between them, with arrows saying computing rain can't wet the desk and the material can't reach the answers. In the middle of the wall: consciousness, which layer?">
+            <rect class="f-tint s-lo" x="1" y="1" width="458" height="78"/>
+            <text class="t-ink t-b" x="14" y="26">Functional layer · the pattern</text>
+            <text class="t-ink" x="14" y="56">simulated rain · knows Paris is in France</text>
+            <line class="s-lo dash" x1="0" y1="125" x2="460" y2="125"/>
+            <rect class="f-page s-navy dash" x="120" y="108" width="220" height="34"/>
+            <text class="t-navy t-b" x="230" y="130" text-anchor="middle">Consciousness: which layer?</text>
+            <text class="t-soft t-s" x="14" y="104">↓ computing rain can't wet the desk</text>
+            <text class="t-soft t-s" x="446" y="160" text-anchor="end">↑ the material can't reach the answers</text>
+            <rect class="f-page s-lo" x="1" y="171" width="458" height="78"/>
+            <text class="t-ink t-b" x="14" y="196">Physical layer · the material</text>
+            <text class="t-ink" x="14" y="226">real wetness · copper, water, or neurons</text>
+          </svg>
+          <figcaption>The wall between the layers blocks traffic in both directions.</figcaption>
+        </figure>
+        <details class="reveal"><summary>Why can't a weather station inside the simulation detect the hardware?</summary>
+          <div><p>Its readings are outputs of the program. The program's outputs can't depend on the material, so neither can the readings. <span class="src">(A ¶6, ¶8)</span></p></div>
+        </details>
+        <p class="box"><strong class="label">A common mix-up</strong>"Simulations are fake, so nothing in them is real." A simulated storm lacks wetness, which is a physical-layer fact. Whether a simulated mind lacks consciousness depends on which layer consciousness is in. Part 4 takes that up.</p>
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m3"></div>
+      </section>
+
+      <!-- ============ PART 4 ============ -->
+      <section class="view module" id="m4" data-title="4. The argument in three steps">
+        <h2>4. The argument in three steps</h2>
+        <p class="objective">In this part: follow the argument from "the material can't steer the output" to "consciousness belongs with the pattern".</p>
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-introspection">Introspection</a> means looking inward at your own thoughts and experience. <a class="term" href="#g-functionalism">Functionalism</a> is the view that a mind is defined by what its parts do, whatever they are made of.</p>
+        <p>The argument needs only one fact about consciousness. It's a fact you can check for yourself: noticing your own awareness can make you say "I think, therefore I am." <span class="src">(A ¶9)</span> René Descartes wrote that sentence in 1637. (Outside the posts.)</p>
+        <p>Whatever else stays mysterious, consciousness is at least part of the cause of those words. That puts it among the things that change what you say. <span class="src">(A ¶9)</span></p>
+
+        <h3>Try it: build the argument</h3>
+        <p class="box"><strong class="label">Try it</strong>Reveal the steps one at a time, and predict the conclusion before you see it.</p>
+        <ol class="argmap" id="arg-list">
+          <li id="arg-1"><span class="row"><strong>The material can't steer the output.</strong> <span class="tag est">Established</span></span><br>Any algorithm can run on another material, so no output can depend on which one it runs on. <span class="src">(A ¶8)</span></li>
+          <li id="arg-2" hidden><span class="row"><strong>Consciousness does steer the output.</strong> <span class="tag con">Contested</span></span><br>Your awareness of your own awareness is part of what makes you say "I think, therefore I am." <span class="src">(A ¶9)</span></li>
+          <li id="arg-3" hidden><span class="row"><strong>So consciousness belongs with the pattern.</strong> <span class="tag arg">Argument</span></span><br>It sits with facts like "knows Paris is in France": things that affect behavior and can't depend on the material. Keep the pattern, swap the material, and the consciousness comes along. <span class="src">(A ¶10, ¶11)</span></li>
+        </ol>
+        <fieldset id="arg-predict" hidden>
+          <legend>Before you see step 3: what follows from steps 1 and 2?</legend>
+          <div class="arg-opts">
+            <label><input type="radio" name="argp" value="0"> Consciousness is a property of the material, like mass.</label>
+            <label><input type="radio" name="argp" value="1"> Consciousness belongs with the pattern of cause and effect.</label>
+            <label><input type="radio" name="argp" value="2"> Computers are definitely conscious.</label>
+          </div>
+          <p class="actions"><button type="button" id="arg-check">Check my prediction</button></p>
+          <p class="meta" id="arg-fb" aria-live="polite"></p>
+        </fieldset>
+        <p class="actions"><button type="button" class="primary" id="arg-next">Show step 2</button> <button type="button" id="arg-reset">Start over</button></p>
+
+        <figure>
+          <svg width="460" height="200" viewBox="0 0 460 200" role="img" aria-label="Argument map. Box one: the material can't steer the output. Box two: consciousness does steer the output. Arrows from both lead to box three: consciousness belongs with the pattern.">
+            <rect class="f-page s-green" x="1" y="1" width="212" height="70"/>
+            <text class="t-ink t-b" x="14" y="28">1. The material can't</text>
+            <text class="t-ink t-b" x="14" y="48">steer the output</text>
+            <rect class="f-page s-maroon" x="247" y="1" width="212" height="70"/>
+            <text class="t-ink t-b" x="260" y="28">2. Consciousness does</text>
+            <text class="t-ink t-b" x="260" y="48">steer the output</text>
+            <line class="s-ink" x1="107" y1="72" x2="200" y2="122"/>
+            <line class="s-ink" x1="353" y1="72" x2="260" y2="122"/>
+            <polygon class="f-ink" points="230,128 216,118 222,130 210,128"/>
+            <polygon class="f-ink" points="230,128 244,118 238,130 250,128"/>
+            <rect class="f-tint s-navy" x="80" y="130" width="300" height="68"/>
+            <text class="t-navy t-b" x="230" y="158" text-anchor="middle">3. Consciousness belongs</text>
+            <text class="t-navy t-b" x="230" y="180" text-anchor="middle">with the pattern</text>
+          </svg>
+          <figcaption>Two premises, one conclusion. Critics attack step 2, the jump to step 3, or the idea that brains run algorithms (Part 9).</figcaption>
+        </figure>
+        <p class="box"><strong class="label">The contested jump <span class="tag con">Contested</span></strong>Steps 1 and 2 show that consciousness isn't a property of the material that leaves your words untouched. Step 3 needs one more assumption: whatever plays consciousness's part in producing your words is consciousness. John Searle and the defenders of Integrated Information Theory can accept steps 1 and 2 and still reject that jump. Chalmers's fading-qualia argument (Part 5) and Yudkowsky's panpsychism post (Part 6) try to back it up.</p>
+        <details class="reveal"><summary>Why does the argument need step 2 at all?</summary>
+          <div><p>Without it, consciousness could be like wetness: a physical fact that never shows up in what you say. Step 2 puts it among the things that change your words, and those can't depend on the material. <span class="src">(A ¶11)</span></p></div>
+        </details>
+        <p class="box"><strong class="label">A common mix-up</strong>"The argument proves computers are conscious." It says the material doesn't decide the question. Which patterns produce consciousness is a separate question, taken up in Part 8.</p>
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m4"></div>
+      </section>
+
+      <!-- ============ PART 5 ============ -->
+      <section class="view module" id="m5" data-title="5. Swap your neurons, one at a time">
+        <h2>5. Swap your neurons, one at a time</h2>
+        <p class="objective">In this part: run the argument on your own brain with a thought experiment.</p>
+        <p class="box"><strong class="label">Words to know</strong>A <a class="term" href="#g-thought-experiment">thought experiment</a> is an imagined setup used to test an idea when a real one is impossible.</p>
+        <p>Your brain has roughly 86 billion neurons, by the cell counts of Frederico Azevedo and colleagues (2009). (Outside the posts.)</p>
+        <p>Yudkowsky imagines your brain's pattern of cause and effect built on tiny trained squirrels passing notes. Your words can only depend on which neurons fire and when, so they would come out the same. You couldn't notice the difference from inside. <span class="src">(A ¶10)</span></p>
+        <p>Philosophers have run a gradual version of this idea since Zenon Pylyshyn (1980). Replace one neuron with a tiny station that receives the same signals and sends the same signals, at the same moments. Then replace another, and another. (Outside the posts.)</p>
+        <p>That, says Yudkowsky, is why people had to discover neurons with microscopes instead of by introspection. <span class="src">(A ¶10)</span> Santiago Ramón y Cajal stained brain tissue and drew neurons through a microscope in the 1880s and 1890s. (Outside the posts.)</p>
+
+        <h3>Try it: replacement</h3>
+        <p class="box"><strong class="label">Try it</strong>Drag to replace more neurons. Press "Next moment" to see the next firing pattern. Squares are squirrel stations, circles are neurons, navy rings are signals firing.</p>
+        <div class="slider-row">
+          <input type="range" id="swap-range" min="0" max="1000" step="1" value="250" aria-label="Share of neurons replaced by squirrel stations">
+          <span class="slider-val ui" id="swap-pct">25%</span>
+        </div>
+        <p class="actions"><button type="button" id="swap-step">Next moment ►</button> <span class="meta" id="swap-moment">Moment 1</span></p>
+        <div class="stage"><canvas id="swap-canvas" role="img" aria-label="A grid of brain cells. Some are neurons and some are squirrel stations. The firing pattern is the same whatever the share of squirrel stations."></canvas></div>
+        <p class="result"><strong>"I think, therefore I am."</strong><br><span class="meta" id="swap-said">Said with 25% of neurons replaced</span></p>
+        <table class="readouts">
+          <tr><th scope="row">Neurons replaced</th><td id="swap-count"></td></tr>
+          <tr><th scope="row">Signals that changed</th><td>0</td></tr>
+          <tr><th scope="row">Differences you could notice</th><td>0</td></tr>
+        </table>
+        <p class="box" id="swap-done" hidden><span class="tag arg">Argument</span> Every neuron is now a squirrel station. The pattern hasn't changed, so on this argument, neither has your experience.</p>
+
+        <p>The philosopher David Chalmers built a careful version of this idea in 1995. Suppose experience faded as the swap went on. Then partway through you'd be losing experience while sincerely reporting that nothing had changed. Chalmers argues that a mind so wrong about itself is too strange to accept. (Outside the posts.)</p>
+        <p class="box"><strong class="label">An analogy</strong>The ship of Theseus has its planks replaced one by one until none of the originals remain. Where it breaks down: that puzzle asks whether it's the same ship. This one asks whether anything you say or experience changes.</p>
+        <details class="reveal"><summary>Why couldn't you feel the swap happening?</summary>
+          <div><p>To feel different, something in your brain would have to fire differently. By the setup, every station sends the same signals at the same times, so nothing downstream changes. <span class="src">(A ¶10)</span></p></div>
+        </details>
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m5"></div>
+      </section>
+
+      <!-- ============ PART 6 ============ -->
+      <section class="view module" id="m6" data-title="6. The case against panpsychism">
+        <h2>6. The case against panpsychism</h2>
+        <p class="objective">In this part: follow Yudkowsky's two-sided argument against panpsychism, then meet a panpsychist reply.</p>
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-panpsychism">Panpsychism</a> is the view that consciousness is a basic feature of matter, present even in tiny particles. Two processes are <a class="term" href="#g-isomorphic">isomorphic</a> when each step in one matches a step in the other.</p>
+        <p>Yudkowsky says the same reasoning shows panpsychism is false. <span class="src">(B ¶1)</span> He sets up a dilemma: a choice where both options lead to the same problem.</p>
+        <p><strong>Option one.</strong> Suppose consciousness is a property of particles, like mass, except that it never changes how they move. Then it can't change what you say. You couldn't find it by introspection. Your "I think, therefore I am" couldn't come from it. <span class="src">(B ¶2)</span></p>
+        <p><strong>Option two.</strong> Suppose the property does change how particles move. Picture an electron holding a wordless "pearl of awareness" that also makes it spin a tiny bit faster. Only the faster spin can reach your words. An ordinary physics rule that sped up the spin the same way would make you say the same words, for matching reasons. <span class="src">(B ¶3)</span></p>
+        <p>He adds a simulation. Build a copy of your brain where a line of code makes the copied electrons spin faster. You couldn't notice the difference from inside. <span class="src">(B ¶4)</span> It's like trying to tell, by introspection alone, whether your neurons fire because of chemicals or flashes of light. <span class="src">(B ¶4)</span></p>
+        <p>His conclusion: panpsychism puts consciousness in the physical layer, where it can't affect what you say. Consciousness does affect what you say. So, he argues, panpsychism is false. Saying that water and electricity both have the property doesn't help. <span class="src">(B ¶5)</span></p>
+
+        <h3>Try it: the electron test bench</h3>
+        <p class="box"><strong class="label">Try it</strong>Visit each world. Watch which columns of the table change.</p>
+        <fieldset>
+          <legend>Choose a world</legend>
+          <div class="choices stack">
+            <label><input type="radio" name="world" id="w-1" value="0" checked> A pearl of awareness speeds up each electron</label>
+            <label><input type="radio" name="world" id="w-2" value="1"> Each electron has a pearl, but an ordinary physics rule speeds it up</label>
+            <label><input type="radio" name="world" id="w-3" value="2"> No pearl; an ordinary physics rule speeds it up</label>
+            <label><input type="radio" name="world" id="w-4" value="3"> A simulation; a line of code speeds up the copied electrons</label>
+          </div>
+        </fieldset>
+        <figure>
+          <svg id="elec-svg" width="460" height="190" viewBox="0 0 460 190" role="img" aria-label="An electron with a spin arrow and a pearl of awareness inside.">
+            <path class="s-navy w2" d="M 52 58 A 64 64 0 0 1 168 58"/>
+            <polygon class="f-navy" points="172,66 160,52 176,50"/>
+            <circle class="f-page s-navy w2" cx="110" cy="105" r="48"/>
+            <circle id="elec-pearl" class="f-green" cx="110" cy="105" r="11"/>
+            <text class="t-soft t-s" x="110" y="176" text-anchor="middle">one electron</text>
+            <text class="t-ink" x="196" y="60" id="elec-l1">Pearl inside: yes</text>
+            <text class="t-ink" x="196" y="88" id="elec-l2">Spin sped up by: the pearl</text>
+            <text class="t-ink" x="196" y="116">Motion: same in every world</text>
+            <text class="t-ink" x="196" y="144">Neurons: same in every world</text>
+          </svg>
+        </figure>
+        <p class="result" aria-live="polite"><span class="ui">The brain says:</span> <strong>"I think, therefore I am."</strong></p>
+        <div class="tablewrap">
+          <table class="log">
+            <thead><tr><th scope="col">World</th><th scope="col">Pearl?</th><th scope="col">What speeds the spin</th><th scope="col">Electron motion</th><th scope="col">What the brain says</th></tr></thead>
+            <tbody id="world-log"></tbody>
+          </table>
+        </div>
+        <p class="meta" id="world-status" aria-live="polite">Worlds visited: 1 of 4. Differences in what the brain says: 0.</p>
+
+        <h3>A panpsychist reply</h3>
+        <p>Panpsychists have an answer. Philosophers such as Philip Goff argue that physics only describes what matter does: how it moves and pushes. It says nothing about what matter is in itself. Their proposal is that consciousness is that inner nature. On this view the pearl isn't an extra ingredient sitting next to the spin. It is what the spin is, from the inside. (Outside the posts.)</p>
+        <p>Yudkowsky's posts suggest his answer: anything that produced the same motion would make you say the same words, so nothing you say could confirm that the inner nature is awareness. <span class="src">(B ¶3, ¶4)</span></p>
+        <p>Panpsychists can push back. On their view there may be no "dry rule" with nothing behind it. Then a world like "No pearl" on the test bench might be impossible, and the comparison never gets started. They also face a problem of their own, the combination problem: how tiny bits of experience would add up to one mind. (Outside the posts.) The dispute is open.</p>
+        <details class="reveal"><summary>Why doesn't it help to say water and electricity both have the consciousness property?</summary>
+          <div><p>The argument isn't about which material has the property. Any extra property of the material, beyond the motion the brain's pattern uses, sits on the far side of the wall from your words. <span class="src">(B ¶5)</span></p></div>
+        </details>
+        <p class="box"><strong class="label">A common mix-up</strong>"Yudkowsky says electrons don't matter to consciousness." Their motion matters: it's what the brain's pattern runs on. His claim is narrower: an extra consciousness property in the electron, beyond its motion, can't be what makes you say "I think, therefore I am" in the first place.</p>
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m6"></div>
+      </section>
+
+      <!-- ============ PART 7 ============ -->
+      <section class="view module" id="m7" data-title="7. Seeing a mind, or inferring one?">
+        <h2>7. Seeing a mind, or inferring one?</h2>
+        <p class="objective">In this part: tell an observation from an inference when someone says a creature or a machine has feelings.</p>
+        <p class="box"><strong class="label">Words to know</strong>An <a class="term" href="#g-observation">observation</a> is what you directly see or hear. An <a class="term" href="#g-inference">inference</a> is a conclusion you reach from it. <a class="term" href="#g-qualia">Qualia</a> are the felt qualities of experience, like how red looks to you.</p>
+        <p>Yudkowsky finds it striking that many people look into a chicken's eyes and feel they just see feeling inside. The same people talk to an AI that reflects and talks back, and feel sure nothing is there. <span class="src">(C ¶1)</span></p>
+        <p>He offers three guesses about why. Maybe the brain has an inborn quick sort, "alive and moves = animal," that a screen doesn't trigger, and people mistake that sorting for what "qualia" means. <span class="src">(C ¶2)</span> Maybe the brain builds a model of "something like me, but a chicken" and places it behind the eyes. <span class="src">(C ¶3)</span> Or maybe people don't stop to ask what other explanations could fit the same behavior. <span class="src">(C ¶4)</span></p>
+        <p>His main point is that an inference can feel exactly like seeing. The brain does it fast and out of view. <span class="src">(C ¶3, ¶19)</span> He says his own view is a guess from a model, and doesn't claim to see what has qualia. <span class="src">(C ¶7)</span></p>
+        <p>He compares it to a wind-up car. Small children treat moving toys as alive. Grown-ups learn to override that, and he thinks many put talking computers in the same bin. <span class="src">(C ¶13, ¶18)</span> He also recalls an anecdote, from a source he isn't sure of: a teacher asked a class whether it would be okay to eat Yoda, and half said yes, since Yoda isn't shaped like a human. <span class="src">(C ¶12)</span></p>
+        <figure>
+          <svg width="460" height="150" viewBox="0 0 460 150" role="img" aria-label="Three boxes in a row. What you observe: the chicken pulls its foot away. Then a hidden step: your brain's automatic inference. Then what it feels like you saw: the chicken felt pain.">
+            <rect class="f-page s-lo" x="1" y="30" width="130" height="80"/>
+            <text class="t-ink t-b" x="12" y="54">You observe</text>
+            <text class="t-ink t-s" x="12" y="78">the chicken pulls</text>
+            <text class="t-ink t-s" x="12" y="96">its foot away</text>
+            <rect class="f-tint s-lo dash" x="165" y="30" width="130" height="80"/>
+            <text class="t-soft t-b" x="176" y="54">Hidden step</text>
+            <text class="t-soft t-s" x="176" y="78">your brain's</text>
+            <text class="t-soft t-s" x="176" y="96">automatic inference</text>
+            <rect class="f-page s-navy" x="329" y="30" width="130" height="80"/>
+            <text class="t-navy t-b" x="340" y="54">Feels like</text>
+            <text class="t-ink t-s" x="340" y="78">you saw: the</text>
+            <text class="t-ink t-s" x="340" y="96">chicken felt pain</text>
+            <line class="s-ink" x1="133" y1="70" x2="158" y2="70"/><polygon class="f-ink" points="164,70 156,65 156,75"/>
+            <line class="s-ink" x1="297" y1="70" x2="322" y2="70"/><polygon class="f-ink" points="328,70 320,65 320,75"/>
+          </svg>
+          <figcaption>On Yudkowsky's account, the middle step happens out of view, so the conclusion feels observed.</figcaption>
+        </figure>
+
+        <h3>Try it: seen or inferred?</h3>
+        <p class="box"><strong class="label">Try it</strong>For each statement, decide whether you could observe it directly or would have to infer it.</p>
+        <p class="meta" id="infer-score" aria-live="polite">Sorted 0 of 8 · 0 correct</p>
+        <div class="sort-grid" id="infer-grid"></div>
+
+        <h3>The other side</h3>
+        <p>The case for chicken feelings rests on more than a glance. Researchers point to pain pathways in birds that resemble ours, and to animals giving up rewards to avoid harm. In one study, lame chickens chose feed laced with a painkiller (Danbury and colleagues, 2000). (Outside the essay.)</p>
+        <p>Self-reports from AI are tricky evidence too. The philosopher Jonathan Birch calls this the "gaming problem": chatbots are trained on huge amounts of human writing about feelings, so their talk about feelings may echo that training whether or not anything is felt. (Outside the essay.)</p>
+
+        <h3>The parrot question</h3>
+        <p>Yudkowsky rejects the claim that AIs "only play back" what people typed. <span class="src">(C ¶14)</span> Outside the essay: language models write one word-piece at a time from patterns learned in training. They can repeat memorized passages, but most of what they write is new. Critics such as Emily Bender and colleagues (2021) called them "stochastic parrots": systems that stitch together language forms without grasping meaning. The open question is whether new combinations show understanding.</p>
+        <details class="reveal"><summary>Why would an automatic inference feel like seeing?</summary>
+          <div><p>The brain runs it fast and out of view, then hands you only the conclusion. You get the result without the steps, so it feels like something you saw. <span class="src">(C ¶3, ¶19)</span></p></div>
+        </details>
+        <p class="box"><strong class="label">A common mix-up</strong>"Inferred means false." On the usual view, most of what we know about other minds, including other people's, is inferred. (Some philosophers argue we perceive others' feelings directly.) An inference can be a good one. The question is what evidence it rests on.</p>
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m7"></div>
+      </section>
+
+      <!-- ============ PART 8 ============ -->
+      <section class="view module" id="m8" data-title="8. Made of parts, and where to worry">
+        <h2>8. Made of parts, and where to worry</h2>
+        <p class="objective">In this part: explain why Yudkowsky expects consciousness to be made of many parts, and how that shapes what worries him.</p>
+        <p class="box"><strong class="label">Words to know</strong>A <a class="term" href="#g-self-model">self-model</a> is a system's internal picture of itself. <a class="term" href="#g-conservation-of-expected-evidence">Conservation of expected evidence</a> is a rule of probability: you can't expect, on average, to change your mind in a particular direction.</p>
+        <p>Yudkowsky draws a lesson from the history of science. Things that once seemed like one mysterious ingredient turned out to be made of many parts. Life is made of parts. Fire is made of parts. <span class="src">(C ¶20, ¶21)</span></p>
+        <p>Two examples from outside the essay. Chemists once explained burning with phlogiston, a substance thought to escape from things as they burned. In the 1770s and 1780s Antoine Lavoisier showed that burning is a reaction with oxygen: a process with many steps, not a substance. Many scientists also believed living things held a special "vital force." Chemistry and cell biology gradually explained life as the work of many parts.</p>
+        <p>Feeling cold works the same way. Touch an ice cube and nerve cells send signals to your brain, which has (in his figure) about a hundred trillion connections. Then your hand feels cold. He expects that last step to be made of parts too. <span class="src">(C ¶21)</span></p>
+        <p>One part he names: to say "<em>I</em> feel this pain," you need an idea of "I." He calls this a self-model. <span class="src">(C ¶8, ¶21)</span> So he worries more about systems that reflect on themselves and report on themselves. He adds that more general intelligence tends to mean a better self-model. <span class="src">(C ¶9)</span> That's why large language models (LLMs) worry him more than mosquitoes, electrons, or chickens. He calls this a guess from a model. <span class="src">(C ¶7, ¶10, ¶22)</span></p>
+        <figure>
+          <svg width="460" height="130" viewBox="0 0 460 130" role="img" aria-label="A chain of parts: ice cube, skin sensor, nerve signal, brain with a self-model, then the words I feel cold.">
+            <rect class="f-page s-teal" x="1" y="35" width="76" height="50"/><text class="t-ink t-s" x="39" y="65" text-anchor="middle">ice cube</text>
+            <rect class="f-page s-lo" x="95" y="35" width="76" height="50"/><text class="t-ink t-s" x="133" y="57" text-anchor="middle">skin</text><text class="t-ink t-s" x="133" y="74" text-anchor="middle">sensor</text>
+            <rect class="f-page s-lo" x="189" y="35" width="76" height="50"/><text class="t-ink t-s" x="227" y="57" text-anchor="middle">nerve</text><text class="t-ink t-s" x="227" y="74" text-anchor="middle">signal</text>
+            <rect class="f-tint s-navy" x="283" y="25" width="90" height="70"/><text class="t-navy t-s t-b" x="328" y="50" text-anchor="middle">brain</text><text class="t-navy t-s" x="328" y="68" text-anchor="middle">with a</text><text class="t-navy t-s" x="328" y="84" text-anchor="middle">self-model "I"</text>
+            <text class="t-ink t-b" x="459" y="65" text-anchor="end">"I feel</text><text class="t-ink t-b" x="459" y="84" text-anchor="end">cold"</text>
+            <line class="s-ink" x1="78" y1="60" x2="89" y2="60"/><polygon class="f-ink" points="94,60 87,56 87,64"/>
+            <line class="s-ink" x1="172" y1="60" x2="183" y2="60"/><polygon class="f-ink" points="188,60 181,56 181,64"/>
+            <line class="s-ink" x1="266" y1="60" x2="277" y2="60"/><polygon class="f-ink" points="282,60 275,56 275,64"/>
+            <line class="s-ink" x1="374" y1="60" x2="393" y2="60"/><polygon class="f-ink" points="398,60 391,56 391,64"/>
+          </svg>
+          <figcaption>Each link is a part. Yudkowsky expects the last step, the feeling itself, to be made of parts as well.</figcaption>
+        </figure>
+
+        <h3>Predicting your own update</h3>
+        <p>He adds one more move. You don't need to know which parts consciousness needs to guess a direction. As science finds more particular parts it requires, he expects insects to look less and less likely to be conscious. <span class="src">(C ¶24)</span></p>
+        <p>The rule behind this is conservation of expected evidence. Weigh each way a study could come out by how likely it is, and your expected future belief equals your belief now. So if you're sure future studies will lower your estimate, it's already too high. (The rule follows from basic probability, and the name comes from Yudkowsky's own 2007 writing. Applying it to insects is his argument.)</p>
+
+        <h3>Try it: which parts count?</h3>
+        <p class="box"><strong class="label">Try it</strong>Pick the capacity a theory says consciousness needs. The table marks which systems have it. A simplified illustration, not a scientific scoring.</p>
+        <fieldset>
+          <legend>Consciousness needs...</legend>
+          <div class="choices stack">
+            <label><input type="radio" name="lens" id="lens-0" value="0" checked> ...talking about its own states (closest to Yudkowsky's self-model)</label>
+            <label><input type="radio" name="lens" id="lens-1" value="1"> ...reacting to damage and learning from it (evidence animal researchers weigh)</label>
+            <label><input type="radio" name="lens" id="lens-2" value="2"> ...a nervous system</label>
+          </div>
+        </fieldset>
+        <div class="tablewrap">
+          <table class="lens" id="lens-table">
+            <thead><tr><th scope="col">System</th><th scope="col" data-col="0">Talks about itself</th><th scope="col" data-col="1">Reacts to damage, learns</th><th scope="col" data-col="2">Nervous system</th></tr></thead>
+            <tbody>
+              <tr data-sys="electron"><th scope="row">Electron</th><td data-col="0">no</td><td data-col="1">no</td><td data-col="2">no</td></tr>
+              <tr data-sys="mosquito"><th scope="row">Mosquito</th><td data-col="0">no</td><td data-col="1">yes</td><td data-col="2">yes</td></tr>
+              <tr data-sys="chicken"><th scope="row">Chicken</th><td data-col="0">no</td><td data-col="1">yes</td><td data-col="2">yes</td></tr>
+              <tr data-sys="chatbot"><th scope="row">Chatbot (LLM)</th><td data-col="0">yes</td><td data-col="1">no body; learns in training</td><td data-col="2">no</td></tr>
+              <tr data-sys="human"><th scope="row">Human</th><td data-col="0">yes</td><td data-col="1">yes</td><td data-col="2">yes</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="lens-result" aria-live="polite"></p>
+        <p>Others weigh different evidence. The New York Declaration on Animal Consciousness (2024), signed by hundreds of scientists and philosophers, found strong support for conscious experience in mammals and birds. It found a realistic possibility of it in all vertebrates and many invertebrates, insects included. (Outside the essay.) Much of the disagreement is about which parts consciousness requires.</p>
+        <details class="reveal"><summary>Why does a self-model matter for saying "I feel sad"?</summary>
+          <div><p>The sentence reports a state of a self. To report it, a system needs some picture of itself to attach the sadness to. <span class="src">(C ¶8)</span></p></div>
+        </details>
+        <p class="box"><strong class="label">A common mix-up</strong>"Made of parts means not real." Fire is made of parts and still burns. Calling consciousness a process with parts is a claim about how it works.</p>
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m8"></div>
+      </section>
+
+      <!-- ============ PART 9 ============ -->
+      <section class="view module" id="m9" data-title="9. Where the argument could break">
+        <h2>9. Where the argument could break</h2>
+        <p class="objective">In this part: weigh the strongest objections, and say what the argument settles and what it leaves open.</p>
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-epiphenomenalism">Epiphenomenalism</a> is the view that experience is a side effect that causes nothing. The rest of this part is outside the posts.</p>
+        <h3>Four objections</h3>
+        <p><span class="tag con">Contested</span> <strong>Consciousness doesn't cause the words.</strong> Epiphenomenalists say brain machinery produces "I think, therefore I am" on its own. The experience rides along. This attacks step 2.</p>
+        <p><span class="tag con">Contested</span> <strong>Brains have special biological powers.</strong> John Searle argued that brains cause consciousness through their biology, the way stomachs cause digestion. A simulated stomach digests nothing.</p>
+        <p><span class="tag con">Contested</span> <strong>Same steps, different physical structure.</strong> Integrated Information Theory, developed by Giulio Tononi, says consciousness depends on how a system's physical parts constrain one another. Tononi and Christof Koch (2015) argue that even a step-by-step digital simulation of a brain would have almost no consciousness, because the computer's parts are wired so differently.</p>
+        <p><span class="tag con">Contested</span> <strong>Brains might not be algorithms.</strong> Roger Penrose (1989), later with Stuart Hameroff, proposed that some brain processes are quantum events no algorithm can copy. No experiment has shown this.</p>
+
+        <h3>Try it: match each reply</h3>
+        <p class="box"><strong class="label">Try it</strong>Choose the reply from the argument's side that answers each objection, then check.</p>
+        <div id="match-box"></div>
+        <p class="actions"><button type="button" class="primary" id="match-check">Check my matches</button> <button type="button" id="match-reset">Clear</button></p>
+        <p class="result" id="match-result" aria-live="polite"></p>
+
+        <h3>What it settles, and what it leaves open</h3>
+        <p><strong>If the argument holds,</strong> one popular reason to rule out AI consciousness falls away: "it's only silicon." Material never decides the question.</p>
+        <p><strong>Still open:</strong> which patterns produce consciousness. A thermostat and a brain could both run on silicon. This argument alone can't tell you whether the thermostat feels anything. Parts 1 to 6 argue about categories; Parts 7 and 8 are about which mechanisms count, and that question is unsettled.</p>
+        <details class="reveal"><summary>Why doesn't the squirrel swap settle the dispute with Integrated Information Theory?</summary>
+          <div><p>The swap keeps the whole chain of cause and effect, step by step. IIT's defenders say a digital computer reproduces the computation without reproducing the brain's physical causal structure. They disagree about what counts as "the same pattern."</p></div>
+        </details>
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m9"></div>
+      </section>
+
+      <!-- ============ REVIEW ============ -->
+      <section class="view" id="review" data-title="Review cards">
+        <h2>Review cards</h2>
+        <p>Cards you get right come back after longer and longer gaps: tomorrow, then in three days, then a week. Cards you miss come back right away. Spacing review out like this beats rereading.</p>
+        <div class="deck" id="deck"></div>
+      </section>
+
+      <!-- ============ FINAL CHECK ============ -->
+      <section class="view" id="final" data-title="Final check">
+        <h2>Final check</h2>
+        <p>These questions mix all the parts together.</p>
+        <div class="quiz" data-quiz="final"></div>
+        <div class="quiz-summary" data-for="final"></div>
+      </section>
+
+      <!-- ============ GLOSSARY ============ -->
+      <section class="view" id="glossary" data-title="Glossary">
+        <h2>Glossary</h2>
+        <p class="meta"><a href="#" onclick="history.back(); return false;">&#9668; Back to where you were</a></p>
+        <dl class="glossary" id="glossary-list"></dl>
+      </section>
+
+      <!-- ============ SOURCE ============ -->
+      <section class="view" id="source" data-title="About the source">
+        <h2>About the source</h2>
+        <p>This guide teaches three pieces by Eliezer Yudkowsky. References like <span class="src">(A ¶4)</span> point to a paragraph in one of them.</p>
+        <ul class="prose sources">
+          <li><strong>A.</strong> Eliezer Yudkowsky, post on X, 17 April 2026, on why a system's output can't depend on its material. <a href="https://x.com/allTheYud/status/2045211321868878005">Read the original</a>.</li>
+          <li><strong>B.</strong> Eliezer Yudkowsky, follow-up post on X, 17 April 2026, on panpsychism. Essay C links to it as his panpsychism argument. <a href="https://x.com/allTheYud/status/2045218935222763911">Read the original</a>.</li>
+          <li><strong>C.</strong> Eliezer Yudkowsky, an untitled essay on chickens, AI and qualia (2026). It links to both posts. This guide didn't find a public link to it.</li>
+        </ul>
+        <p>What this guide simplifies or leaves out. The essay is sharp toward people who disagree with him; the guide keeps his arguments and drops the jabs. It leaves out his descriptions of AIs as able to ask for respect, break out of containment, and prove Navier–Stokes, a famous open problem about how fluids flow. This guide didn't check the first two. On the third: in September 2026 OpenAI announced a proof that these fluid equations can blow up in finite time, and mathematicians were still checking it when this guide was written. He says he has an idea of what makes the blue of the sky feel like a wordless sensation, and points to Gary Drescher's <em>Good and Real</em> (2006), but doesn't explain it, so neither does this guide. <span class="src">(C ¶5, ¶14, ¶16)</span></p>
+        <p>Material from outside the three pieces is marked as such. That includes Searle, Descartes, Pylyshyn, Chalmers, Azevedo, Ramón y Cajal, Goff, Danbury, Birch, Bender, Lavoisier, Tononi, Koch, Penrose, the New York Declaration, and the OpenAI announcement. Quiz answers marked "outside" draw on these.</p>
+        <h3>Further reading</h3>
+        <ul class="prose sources">
+          <li>John R. Searle, "Minds, Brains, and Programs," <em>Behavioral and Brain Sciences</em> 3 (1980).</li>
+          <li>Zenon Pylyshyn, "The 'Causal Power' of Machines," <em>Behavioral and Brain Sciences</em> 3 (1980).</li>
+          <li>David J. Chalmers, "Absent Qualia, Fading Qualia, Dancing Qualia," in <em>Conscious Experience</em>, ed. Thomas Metzinger (1995).</li>
+          <li>T. C. Danbury et al., "Self-selection of the analgesic drug carprofen by lame broiler chickens," <em>Veterinary Record</em> 146 (2000).</li>
+          <li>Jonathan Birch, <em>The Edge of Sentience: Risk and Precaution in Humans, Other Animals, and AI</em> (2024).</li>
+          <li>Galen Strawson, "Realistic Monism: Why Physicalism Entails Panpsychism," <em>Journal of Consciousness Studies</em> 13 (2006).</li>
+          <li>Philip Goff, <em>Galileo's Error: Foundations for a New Science of Consciousness</em> (2019).</li>
+          <li>Emily M. Bender, Timnit Gebru, Angelina McMillan-Major and Shmargaret Shmitchell, "On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?" FAccT (2021).</li>
+          <li>Giulio Tononi and Christof Koch, "Consciousness: Here, There and Everywhere?" <em>Philosophical Transactions of the Royal Society B</em> 370 (2015).</li>
+          <li>Roger Penrose, <em>The Emperor's New Mind</em> (1989).</li>
+          <li>Frederico A. C. Azevedo et al., "Equal numbers of neuronal and nonneuronal cells make the human brain an isometrically scaled-up primate brain," <em>Journal of Comparative Neurology</em> 513 (2009).</li>
+          <li>Gary L. Drescher, <em>Good and Real: Demystifying Paradoxes from Physics to Ethics</em> (2006).</li>
+          <li><a href="https://sites.google.com/nyu.edu/nydeclaration/declaration">The New York Declaration on Animal Consciousness</a> (2024).</li>
+          <li>Stanford Encyclopedia of Philosophy: <a href="https://plato.stanford.edu/entries/functionalism/">Functionalism</a>, <a href="https://plato.stanford.edu/entries/panpsychism/">Panpsychism</a>, and <a href="https://plato.stanford.edu/entries/chinese-room/">The Chinese Room Argument</a>.</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="course-nav" aria-label="Contents">
+      <details open>
+        <summary>Contents</summary>
+        <div class="progress">
+          <span id="progress-text"></span>
+          <div class="meter" id="progress-bar" role="progressbar" aria-label="Parts done" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill"></div></div>
+        </div>
+        <ol id="contents-list"></ol>
+      </details>
+    </aside>
   </div>
-</section>
 
-<section id="storm-sec" aria-labelledby="h-storm">
-  <p class="meta kicker">Part 2 · The storm</p>
-  <h2 id="h-storm">A simulated storm can't get anything wet</h2>
-  <p>In 1980 the philosopher John Searle made a famous point: a computer simulation of a rainstorm leaves nobody drenched. He offered it as a reason to doubt that a simulated brain would really think.</p>
-  <p>The point is correct, and it shows the two layers at work. Wetness belongs to the physical layer. A program can compute rain all day, and nothing it computes makes the circuit board damp. The wall between the layers blocks traffic in the other direction too. A weather station inside the simulation has no way to measure whether the computer is built from copper or from plumbing.</p>
-
-  <div class="bench" id="storm-bench">
-    <h3>Try it · Turn up the rain</h3>
-    <p class="box">Rain rates use the meteorologists' scale: light under 2.5 mm per hour, heavy above 7.6, violent above 50.</p>
-    <div class="slider-row">
-      <input type="range" id="rate" min="0" max="100" step="1" value="40" aria-label="Simulated rainfall in millimeters per hour">
-      <span class="slider-val ui" id="rate-v">40 mm/h</span>
-    </div>
-    <div class="stage"><canvas id="storm" role="img" aria-label="A computer monitor showing a rainstorm with a rising puddle. The desk under the monitor stays dry."></canvas></div>
-    <table class="readouts">
-      <tr><th scope="row">Inside the simulation</th><td id="s-in">40 mm/h · heavy rain</td></tr>
-      <tr><th scope="row">On your real desk</th><td id="s-out">0 mL · dry</td></tr>
-      <tr><th scope="row">What the program can tell about its hardware</th><td>Nothing</td></tr>
-    </table>
-  </div>
-
-  <div class="layers" role="figure" aria-label="Diagram of the two layers with a wall between them">
-    <div class="band fn">
-      <div class="band-label"><b>Functional layer · the pattern</b><span>can change the output</span></div>
-      <div class="items">
-        <span class="item">Simulated rain: 40 mm/h</span>
-        <span class="item">Knows Paris is in France</span>
-        <span class="item">Remembers your last message</span>
-        <span class="item">Has learned 7 × 8 = 56</span>
-      </div>
-    </div>
-    <div class="wall">
-      <span>↓ Computing rain can't wet the desk</span>
-      <span class="q">Consciousness: which layer?</span>
-      <span class="r">↑ The material can't reach the answers</span>
-    </div>
-    <div class="band">
-      <div class="band-label"><b>Physical layer · the material</b><span>can't change the output</span></div>
-      <div class="items">
-        <span class="item">Copper, water, squirrels, or neurons</span>
-        <span class="item">Real wetness</span>
-        <span class="item">Weight of the power supply</span>
-        <span class="item">Silicon or carbon chips</span>
-      </div>
-    </div>
-  </div>
-
-  <p>So the argument asks which bin consciousness belongs in. If it works like wetness, a simulated brain would lack it, however perfect the simulation. If it works like the fact about Paris, any material running the right pattern would have it. Part 3 gives a reason to pick the second bin.</p>
-</section>
-
-<section id="argument" aria-labelledby="h-arg">
-  <p class="meta kicker">Part 3 · The argument</p>
-  <h2 id="h-arg">Consciousness leaves fingerprints on what you say</h2>
-  <p>The whole argument fits in three steps. It needs only one fact about consciousness, and it's a fact you can check for yourself.</p>
-  <div class="steps">
-    <div class="step">
-      <span class="n">1</span>
-      <div class="body">
-        <div class="row"><h3>The material can't steer the output.</h3><span class="tag est">Established</span></div>
-        <p>Any algorithm can run on a different material: chips, pipes, squirrels. So no algorithm can depend on which material it runs on, and nothing the system says can depend on it either. The machine at the top of the page shows this directly.</p>
-      </div>
-    </div>
-    <div class="step">
-      <span class="n">2</span>
-      <div class="body">
-        <div class="row"><h3>Consciousness does steer the output.</h3><span class="tag con">Contested</span></div>
-        <p>When you notice your own awareness and say "I think, therefore I am," as René Descartes did in 1637, your consciousness is part of the cause of those words. Whatever else stays mysterious about consciousness, you know it does at least this much.</p>
-      </div>
-    </div>
-    <div class="step concl">
-      <span class="n">3</span>
-      <div class="body">
-        <div class="row"><h3>So consciousness belongs to the pattern.</h3><span class="tag arg">Argument</span></div>
-        <p>It sits with facts like "knows Paris is in France": things that affect behavior and can't depend on the underlying physics. Keep the pattern of cause and effect, swap the material, and the consciousness comes along. The name for this view is <em>functionalism</em>, and the claim that any suitable material can host a mind is called <em>substrate independence</em>.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="swap-sec" aria-labelledby="h-swap">
-  <p class="meta kicker">Part 4 · Run it on yourself</p>
-  <h2 id="h-swap">Swap your neurons for squirrels, one at a time</h2>
-  <p>Your brain has roughly 86 billion neurons, according to cell counts by Frederico Azevedo and colleagues (2009). Imagine replacing one of them with a tiny station where trained squirrels pass notes. The station receives the same signals the neuron did and sends the same signals out, at the same moments. Then replace another, and another.</p>
-
-  <div class="bench" id="swap-bench">
-    <h3>Try it · Replacement</h3>
-    <p class="box">Drag to replace more neurons. Each square is a squirrel station; each round cell is an original neuron. Blue rings are signals firing.</p>
-    <div class="slider-row">
-      <input type="range" id="swap-range" min="0" max="1000" step="1" value="250" aria-label="Share of neurons replaced by squirrel stations">
-      <span class="slider-val ui" id="n-pct">25%</span>
-    </div>
-    <div class="stage"><canvas id="swap" role="img" aria-label="A grid of brain cells. Some are original neurons and some are squirrel stations. Both kinds fire in the identical pattern."></canvas></div>
-    <p class="result bubble"><strong class="say">"I think, therefore I am."</strong><br><span class="ctx meta" id="bubble-ctx">Said with 25% of neurons replaced</span></p>
-    <table class="readouts">
-      <tr><th scope="row">Neurons replaced</th><td id="n-count">21,500,000,000</td></tr>
-      <tr><th scope="row">Signals that changed</th><td>0</td></tr>
-      <tr><th scope="row">Differences you could notice</th><td>0</td></tr>
-    </table>
-    <p class="done box" id="swap-done" hidden><span class="tag arg">Argument</span> Every neuron is now a squirrel station. The pattern hasn't changed, so on this argument, neither has your experience.</p>
-  </div>
-
-  <p>To notice the swap, something in your brain would have to fire differently than it did before. By construction, nothing does. Your reports, your memories, and your sense of being you all run on the same pattern. This is why nobody discovered neurons by introspection. Santiago Ramón y Cajal had to stain brain tissue and look through a microscope in the 1880s and 1890s. From the inside, the material is invisible.</p>
-  <p>The philosopher David Chalmers built a careful version of this thought experiment in 1995. Suppose experience did fade as the swap went on. Then partway through you would be losing your experience while sincerely reporting that everything feels the same. Chalmers argues that a mind that wrong about its own experience is too strange to accept.</p>
-</section>
-
-<section id="objections" aria-labelledby="h-obj">
-  <p class="meta kicker">Part 5 · The other side</p>
-  <h2 id="h-obj">Where the argument could break</h2>
-  <p>Each step has serious critics. Here are the main objections as their defenders would put them, each followed by the reply from the argument's side.</p>
-  <div class="objs">
-    <article class="obj">
-      <p class="meta"><span class="tag con">Contested</span> Targets step 2</p>
-      <h3>Consciousness doesn't cause the words</h3>
-      <p>Epiphenomenalists hold that experience is a side effect. Brain machinery produces the sentence "I think, therefore I am" on its own, and the felt experience rides along without steering anything.</p>
-      <p class="reply"><span class="lbl">Reply</span>Then your belief that you're conscious isn't caused by your being conscious. A version of you with no inner experience at all would say the same words for the same reasons. Chalmers calls this the paradox of phenomenal judgment. Some philosophers accept that cost. Others take it as a sign the view went wrong.</p>
-    </article>
-    <article class="obj">
-      <p class="meta"><span class="tag con">Contested</span> Targets step 3</p>
-      <h3>Brains have special biological powers</h3>
-      <p>John Searle argued that brains cause consciousness through their specific biology, the way stomachs cause digestion. A simulation of digestion digests nothing, so a simulation of a brain would understand nothing.</p>
-      <p class="reply"><span class="lbl">Reply</span>Digestion changes physical stuff, so it sits in the physical layer with wetness. Consciousness changes what you say. If biology alone produced it and it also steered your words, then swapping the biology while keeping the pattern would have to change your words. In the squirrel swap, by construction, your words stay the same.</p>
-    </article>
-    <article class="obj">
-      <p class="meta"><span class="tag con">Contested</span> Targets what counts as "the same pattern"</p>
-      <h3>Same answers, different machine</h3>
-      <p>Integrated Information Theory, developed by Giulio Tononi, says consciousness depends on how a physical system's parts constrain one another. Two systems can produce identical outputs with very different inner wiring. Tononi and Christof Koch (2015) argue that an ordinary digital computer simulating a brain would have almost no integrated information, and so almost no consciousness.</p>
-      <p class="reply"><span class="lbl">Reply</span>The argument holds the whole chain of cause and effect fixed, step by step, as in the squirrel swap. It makes no claim about a lookup table that fakes the same answers through different steps. IIT's defenders answer that a digital computer never reproduces the brain's physical causal structure, even when it reproduces every computation. This dispute is open.</p>
-    </article>
-    <article class="obj">
-      <p class="meta"><span class="tag con">Contested</span> Targets the idea that brains run algorithms</p>
-      <h3>Brains might not be algorithms at all</h3>
-      <p>The physicist Roger Penrose (<em>The Emperor's New Mind</em>, 1989), later with anesthesiologist Stuart Hameroff, proposed that some brain processes are quantum events no algorithm can reproduce. If so, there is no pattern to copy onto squirrels, and the argument never gets started.</p>
-      <p class="reply"><span class="lbl">Status</span>A speculative proposal. No experiment has shown non-computable processes in brains.</p>
-    </article>
-  </div>
-</section>
-
-<section id="ai" aria-labelledby="h-ai">
-  <p class="meta kicker">Part 6 · Back to machines</p>
-  <h2 id="h-ai">What this settles about AI, and what it leaves open</h2>
-  <h3>If the argument holds</h3>
-  <p>One popular reason to rule out AI consciousness falls away: "it's only silicon." Material never decides the question. A mind made of chips and a mind made of cells are on equal footing.</p>
-  <h3>Still open</h3>
-  <p>Which patterns produce consciousness. A thermostat and a brain could both run on silicon, and this argument alone can't tell you whether the thermostat feels anything.</p>
-  <p>Researchers split on which patterns matter. Eliezer Yudkowsky, whose posts this page is built on, argues that a mind which truthfully says "I am sad" needs a self-model, an "I" to attach the sadness to. On that model he worries more about large language models, which reflect on and talk about themselves, than about mosquitoes or chickens. He presents this as a guess from a model, and says so.</p>
-  <p>Others weigh different evidence. The New York Declaration on Animal Consciousness, released in April 2024 and signed by hundreds of scientists and philosophers, found strong support for conscious experience in mammals and birds, and a realistic possibility of it in all vertebrates and many invertebrates, insects included.</p>
-  <p class="box"><span class="lbl">Where the seam is</span>Parts 1 through 4 make an argument about categories: which bin consciousness goes in. This part is about which mechanisms count. That second question is unsettled, and the first argument doesn't answer it.</p>
-</section>
-
-<section id="sources" aria-labelledby="h-sources">
-  <h2 id="h-sources">Sources and further reading</h2>
-  <ul class="sources">
-    <li>Eliezer Yudkowsky, <a href="https://x.com/allTheYud/status/2045211321868878005" target="_blank" rel="noopener">post on X</a> (2026), on consciousness as a way a material behaves. The machine, storm, and squirrel examples come from it.</li>
-    <li>John R. Searle, "Minds, Brains, and Programs," <em>Behavioral and Brain Sciences</em> 3 (1980).</li>
-    <li>David J. Chalmers, "Absent Qualia, Fading Qualia, Dancing Qualia," in <em>Conscious Experience</em>, ed. Thomas Metzinger (1995); and <em>The Conscious Mind</em> (1996), on the paradox of phenomenal judgment.</li>
-    <li>Giulio Tononi and Christof Koch, "Consciousness: Here, There and Everywhere?" <em>Philosophical Transactions of the Royal Society B</em> 370 (2015).</li>
-    <li>Roger Penrose, <em>The Emperor's New Mind</em> (1989).</li>
-    <li>Frederico A. C. Azevedo et al., "Equal numbers of neuronal and nonneuronal cells make the human brain an isometrically scaled-up primate brain," <em>Journal of Comparative Neurology</em> 513 (2009).</li>
-    <li><a href="https://sites.google.com/nyu.edu/nydeclaration/declaration" target="_blank" rel="noopener">The New York Declaration on Animal Consciousness</a> (2024).</li>
-    <li>Stanford Encyclopedia of Philosophy: <a href="https://plato.stanford.edu/entries/functionalism/" target="_blank" rel="noopener">Functionalism</a> and <a href="https://plato.stanford.edu/entries/chinese-room/" target="_blank" rel="noopener">The Chinese Room Argument</a>.</li>
-  </ul>
-</section>
-
-</main>
-
-<footer>
-  <hr>
-  <address>Part of <a href="../../index.html">Noah's Weblog</a>.</address>
-</footer>
-
+  <footer>
+    <hr>
+    <address>Part of <a href="../../index.html">Noah's Weblog</a>. A study guide to three pieces by Eliezer Yudkowsky.</address>
+  </footer>
 </div>
 
 <script>
-(function(){
-'use strict';
-var root=document.documentElement;
-var reduceMQ=window.matchMedia('(prefers-reduced-motion: reduce)');
-var REDUCE=reduceMQ.matches;
-var C={};
-var TOKENS=['paper','bench','card','ink','ink2','rule','signal','signal-soft','screen','screen-ink','copper','water','fur','flesh','ok','no','amber'];
-function readTokens(){var cs=getComputedStyle(root);TOKENS.forEach(function(k){C[k]=cs.getPropertyValue('--'+k).trim()||'#888888';});}
-function rgba(hex,a){var h=String(hex).replace('#','');if(h.length===3)h=h.split('').map(function(c){return c+c;}).join('');var n=parseInt(h,16);return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')';}
-readTokens();
-
-var MONO='Verdana, Geneva, Tahoma, sans-serif';
-var scenes=[];
-function redrawAll(){var t=performance.now();scenes.forEach(function(s){if(s.w)s.draw(t);});}
-function onTheme(){readTokens();redrawAll();}
-var darkMQ=window.matchMedia('(prefers-color-scheme: dark)');
-if(darkMQ.addEventListener)darkMQ.addEventListener('change',onTheme);
-new MutationObserver(onTheme).observe(root,{attributes:true,attributeFilter:['data-theme']});
-if(reduceMQ.addEventListener)reduceMQ.addEventListener('change',function(e){REDUCE=e.matches;if(!REDUCE)requestAnimationFrame(loop);else redrawAll();});
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(redrawAll);
-
-function makeScene(canvas,heightFor,draw,onResize){
-  var ctx=canvas.getContext('2d');
-  var s={canvas:canvas,ctx:ctx,w:0,h:0,visible:true};
-  s.draw=function(t){draw(s,t);};
-  var lastW=-1;
-  function fit(){
-    var w=Math.round(canvas.parentElement.clientWidth);
-    if(!w||w===lastW)return;
-    lastW=w;
-    var h=Math.round(heightFor(w));
-    var dpr=Math.min(window.devicePixelRatio||1,2);
-    canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
-    canvas.style.height=h+'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    s.w=w;s.h=h;
-    if(onResize)onResize(s);
-    s.draw(performance.now());
-  }
-  if(window.ResizeObserver)new ResizeObserver(fit).observe(canvas.parentElement);
-  window.addEventListener('resize',fit);
-  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){s.visible=e.isIntersecting;});}).observe(canvas);}
-  scenes.push(s);
-  fit();
-  return s;
-}
-function loop(t){scenes.forEach(function(s){if(s.visible&&s.w)s.draw(t);});if(!REDUCE)requestAnimationFrame(loop);}
-function roundRect(ctx,x,y,w,h,r){ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
-function setPressed(sel,b){document.querySelectorAll(sel).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});}
-
-/* ---------- The machine ---------- */
-var LAYERS=[3,4,5,4,3];
-var COLS=['In','A','B','C','Out'];
-var Q={
-  paris:{answer:'Paris is in France.',route:[1,2,3,1,0],side:[[0,0,1],[1,3,0],[2,4,2],[3,2,2]]},
-  math:{answer:'17 × 3 = 51.',route:[0,3,1,2,1],side:[[0,1,0],[1,0,4],[2,2,3],[3,0,1]]},
-  self:{answer:'I am electric current flowing through silicon chips.',route:[2,0,4,3,2],side:[[0,2,2],[1,2,1],[2,0,0],[3,3,0]]}
+window.COURSE = {
+  slug: "what-the-output-cant-see",
+  quizzes: {
+    pre: [
+      { q: "You rebuild a calculator so its signals are water in pipes, following exactly the same steps. You ask it 17 × 3. What happens?",
+        options: ["It answers 51, the same as before", "It gives a different answer, because water flows slower", "It can't answer, because water can't carry numbers", "It answers, and adds that it is made of water"],
+        answer: 0,
+        why: ["Same steps, same answer.", "Speed can change how long it takes. It can't change which answer comes out.", "Any material can carry signals if the steps are the same.", "To mention water, some step would have to read the material, and no step can."],
+        src: "A ¶4", from: "m1" },
+      { q: "Which fact about a computer could change what it says?",
+        options: ["The mass of its power supply", "Whether its chips are silicon or carbon", "What it has stored in memory", "The color of its case"],
+        answer: 2,
+        why: ["The power supply's mass never shows up in an answer.", "With the same algorithm running, the chip material makes no difference to the answers.", "Stored facts, like Paris being in France, shape its replies.", "Repaint it and nothing it says changes."],
+        src: "A ¶2, ¶3", from: "m2" },
+      { q: "What does panpsychism claim?",
+        options: ["Only humans are conscious", "Consciousness is an illusion", "Computers are conscious and animals aren't", "Consciousness is a basic feature of all matter, even tiny particles"],
+        answer: 3,
+        why: ["That's closer to the opposite view.", "That's a different view, called illusionism.", "Panpsychism isn't about computers versus animals.", "Panpsychists say consciousness goes all the way down, to particles like electrons."],
+        src: "C ¶23", from: "m6" },
+      { q: "You look at a chicken and \"just see\" that it feels pain. On Yudkowsky's account, what are you doing?",
+        options: ["Directly observing its feelings", "Making an automatic inference that feels like seeing", "Measuring activity in its brain", "Remembering a biology lesson"],
+        answer: 1,
+        why: ["On his account you see behavior and infer the feeling.", "He says the brain infers a mind behind the eyes, fast and out of view, so it feels observed.", "Nobody is measuring anything in this example.", "The conclusion arrives without any conscious recall."],
+        src: "C ¶3, ¶19", from: "m7" }
+    ],
+    m1: [
+      { q: "You ask the water-pipe build \"What is 17 × 3?\" What does it answer?",
+        options: ["Something different, since water flows slower", "51, the same as the copper build", "Nothing, since water can't carry numbers", "\"I am made of water\""],
+        answer: 1,
+        why: ["Speed changes timing, not the answer.", "Same algorithm, same answer, whatever carries the signals.", "Water can carry signals as well as copper can, if the steps match.", "No step in the algorithm reads the material."],
+        src: "A ¶4" },
+      { q: "In all four builds, the machine says it is \"electric current flowing through copper wires.\" What does that show?",
+        options: ["The machine knows what it is made of", "Squirrels and neurons secretly run on electricity", "Its answer about its material can't track the material", "The question was badly worded"],
+        answer: 2,
+        why: ["It gives the same answer when built from pipes, so it doesn't know.", "The builds really are different materials.", "The answer comes from the pattern, which is identical in every build.", "The wording is fine. The machine has no way to check."],
+        src: "A ¶6" },
+      { type: "recall", q: "In your own words: why can't any algorithm depend on which material it runs on?",
+        answer: "<p>The same algorithm can always run on a different material. A step that gave one signal on copper and another on water would be a different algorithm. So the output can't depend on the material.</p>",
+        src: "A ¶8" }
+    ],
+    m2: [
+      { q: "Which fact belongs in the functional layer?",
+        options: ["The chips are made of silicon", "The power supply weighs 4.2 kilograms", "The case is painted blue", "The machine has learned that 7 × 8 = 56"],
+        answer: 3,
+        why: ["Swap to carbon chips running the same algorithm and the answers stay the same.", "Mass never shows up in an answer.", "Paint never shows up in an answer.", "Ask it to multiply and this fact shows up in the output."],
+        src: "A ¶2" },
+      { q: "Someone says: \"Melt the chips and the answers change, so the material matters.\" How does the argument respond?",
+        options: ["It agrees, so the argument fails", "Melting stops the algorithm; the claim covers working machines running the same algorithm", "Melted chips still give the same answers", "Melting is a functional-layer fact"],
+        answer: 1,
+        why: ["The argument already allows this case.", "The claim holds \"given a fixed algorithm.\" A melted machine runs no algorithm.", "They don't. Nothing runs.", "Melting breaks the machine. It isn't a fact about the pattern."],
+        src: "A ¶4" },
+      { q: "What single test sorts a fact into a bin?",
+        options: ["Can you see it?", "Is it made of matter?", "Could it change what comes out?", "Did a scientist measure it?"],
+        answer: 2,
+        why: ["You can see the case color, and it's still in the physical bin.", "Everything in the machine is made of matter.", "That's the test: could it affect the output?", "Measurement has nothing to do with the bins."],
+        src: "A ¶1" }
+    ],
+    m3: [
+      { q: "On Yudkowsky's reading, what does \"a simulated storm can't get anything wet\" point at?",
+        options: ["The difference between the physical layer and the functional layer", "Proof that simulations can't think", "A flaw in weather software", "The idea that water is conscious"],
+        answer: 0,
+        why: ["Wetness is physical, so computing rain can't produce it.", "That's Searle's use of the example. Yudkowsky reads it differently.", "The software works fine. Wetness just isn't an output.", "Nothing here is about water being conscious."],
+        src: "A ¶7" },
+      { q: "If consciousness works like wetness, what follows for a perfect brain simulation?",
+        options: ["It would be conscious", "It would get wet", "It would lack consciousness, however perfect", "It would run faster than a brain"],
+        answer: 2,
+        why: ["That follows if consciousness works like the Paris fact.", "Simulations don't make anything wet.", "A physical-layer property doesn't come along with the pattern.", "Speed isn't the point."],
+        src: "A ¶11" },
+      { q: "A weather station inside the simulation measures 40 mm/h of rain. Can it tell whether the computer runs on wires or pipes?",
+        options: ["Yes, by timing how fast the rain falls", "No; its readings are outputs, and outputs can't depend on the material", "Yes, if the pipes leak", "Only if it is very sensitive"],
+        answer: 1,
+        why: ["The simulated rain falls the same way on any material.", "The wall blocks this direction too.", "A leak would be a broken machine, not a reading.", "No level of sensitivity helps when the reading can't depend on the material."],
+        src: "A ¶6" }
+    ],
+    m4: [
+      { q: "Which claim does the argument treat as a fact about consciousness you can check yourself?",
+        options: ["Consciousness is made of electricity", "Only humans are conscious", "Consciousness is part of what makes you say \"I think, therefore I am\"", "Consciousness lives in the brain's material"],
+        answer: 2,
+        why: ["The argument says nothing about what consciousness is made of.", "The argument doesn't claim this.", "Noticing your own awareness can make you say those words.", "That's the view the argument rejects."],
+        src: "A ¶9" },
+      { q: "Which two claims does the conclusion follow from?",
+        options: ["The material can't steer the output; consciousness does steer the output", "Brains are wet; computers are dry", "Descartes was right; Searle was wrong", "Squirrels can carry notes; neurons can fire"],
+        answer: 0,
+        why: ["Steps 1 and 2 together put consciousness with the pattern.", "Wetness is the example, not a premise.", "The argument doesn't rest on who was right.", "Those are details of the thought experiment."],
+        src: "A ¶8, ¶9" },
+      { type: "recall", q: "State the conclusion in one sentence. Which step would an epiphenomenalist attack?",
+        answer: "<p>Consciousness belongs with the pattern of cause and effect, so swapping the material keeps it. An epiphenomenalist attacks step 2, the claim that consciousness helps cause your words.</p>",
+        src: "A ¶11" }
+    ],
+    m5: [
+      { q: "Halfway through the swap, what changes in what you say?",
+        options: ["You start to sound mechanical", "Nothing; every station sends the same signals", "You lose half your memories", "You mention the squirrels"],
+        answer: 1,
+        why: ["Your words depend on the signals, which don't change.", "Same signals at the same times, so the same words.", "Memories are stored in the pattern, which is kept.", "To mention them, something would have to fire differently."],
+        src: "outside, building on A ¶10" },
+      { q: "Chalmers asks what would happen if experience faded during the swap. What is his worry?",
+        options: ["You'd be losing experience while sincerely reporting that nothing changed", "You'd notice the fading and say so", "The squirrels would become conscious instead", "Your brain would stop working"],
+        answer: 0,
+        why: ["He finds a mind that wrong about itself too strange to accept.", "You couldn't say so, since your signals don't change.", "That isn't part of his argument.", "By the setup, the brain keeps working."],
+        src: "outside: Chalmers 1995" },
+      { q: "Why does Yudkowsky bring up microscopes?",
+        options: ["Microscopes can see consciousness directly", "Neurons are too small to matter", "Squirrels can be seen with microscopes", "Introspection can't reveal the brain's material, so people had to look from outside"],
+        answer: 3,
+        why: ["Microscopes show cells, not experience.", "Size isn't the point.", "The squirrels are imaginary.", "The material never shows up from the inside."],
+        src: "A ¶10" }
+    ],
+    m6: [
+      { q: "In option one, the consciousness property never changes how particles move. What follows?",
+        options: ["You could detect it by thinking hard", "It would make you speak faster", "It couldn't change what you say, so introspection couldn't find it", "Electrons would stop moving"],
+        answer: 2,
+        why: ["Thinking runs on motion, which this property doesn't touch.", "It doesn't affect motion, so it can't affect speech.", "Your words can't be downstream of something with no effects.", "Nothing about their motion changes."],
+        src: "B ¶2" },
+      { q: "In option two, a pearl of awareness also makes electrons spin faster. Why doesn't that save panpsychism, on Yudkowsky's view?",
+        options: ["Only the faster spin reaches your words, and an ordinary rule with the same effect would give the same words", "Electrons can't spin", "Pearls are too small to matter", "Spin has nothing to do with brains"],
+        answer: 0,
+        why: ["The awareness part adds nothing your words could depend on.", "Spin is his example, not the issue.", "Size isn't the point.", "The point is that only motion can reach your words."],
+        src: "B ¶3" },
+      { q: "Which reply would a panpsychist like Philip Goff most likely give?",
+        options: ["Electrons can talk", "Panpsychism was never about matter", "Introspection can see electrons", "Consciousness is matter's inner nature, what the spin is from the inside, so it isn't an extra ingredient"],
+        answer: 3,
+        why: ["No panpsychist claims this.", "Panpsychism is a claim about matter.", "No one claims this either.", "They say physics describes what matter does, and consciousness is what it is."],
+        src: "outside: Goff 2019" },
+      { q: "Yudkowsky says it doesn't help to claim both water and electricity have the consciousness property. Why?",
+        options: ["Water isn't conscious", "Any extra property of the material, beyond the motion the brain's pattern uses, sits on the far side of the wall from your words", "Electricity is faster", "Both would then say different things"],
+        answer: 1,
+        why: ["He doesn't argue this.", "Which material has it doesn't matter. Your words can't depend on an extra property like that.", "Speed isn't the point.", "They'd say the same things, since the pattern is the same."],
+        src: "B ¶5" }
+    ],
+    m7: [
+      { q: "Which statement is an inference?",
+        options: ["The dog wagged its tail", "The dog barked twice", "The dog is happy to see you", "The dog ran to the door"],
+        answer: 2,
+        why: ["You can see the tail wag.", "You can hear the barks.", "Happiness is inferred from the wagging and running.", "You can see it run."],
+        src: "C ¶3" },
+      { q: "What is Yudkowsky's main complaint about people who \"just see\" feelings in a chicken?",
+        options: ["They doubt that chickens exist", "They treat an automatic inference as a direct observation", "They dislike chickens", "They trust science too much"],
+        answer: 1,
+        why: ["Nobody doubts that.", "He says the inference feels like seeing, so they don't notice it's an inference.", "He doesn't say this.", "He doesn't say this either."],
+        src: "C ¶19" },
+      { q: "What does the \"stochastic parrot\" critique claim about language models?",
+        options: ["They stitch together language patterns without grasping meaning", "They copy whole web pages word for word", "They are secretly run by people typing", "They have been shown to be conscious"],
+        answer: 0,
+        why: ["That's the critique from Bender and colleagues (2021).", "The critique is about patterns, not copying whole pages.", "No one serious claims this.", "The critique argues the opposite direction."],
+        src: "outside: Bender et al. 2021" }
+    ],
+    m8: [
+      { q: "Why does Yudkowsky worry more about LLMs than about mosquitoes?",
+        options: ["LLMs are made of silicon", "LLMs are bigger", "LLMs talk about and reflect on themselves, which he links to a self-model", "Mosquitoes can't move"],
+        answer: 2,
+        why: ["Material doesn't decide it, by his own argument.", "Size isn't his reason.", "He ties saying \"I feel sad\" to having an \"I\" to attach it to.", "Mosquitoes move fine."],
+        src: "C ¶8, ¶9, ¶22" },
+      { q: "What lesson does he draw from the history of fire and life?",
+        options: ["Things that seem like one mysterious ingredient often turn out to be made of many parts", "Science can't explain fire", "Life and fire are conscious", "Old theories were usually right"],
+        answer: 0,
+        why: ["Both turned out to be processes with many parts. (Phlogiston and vital force are this guide's examples, from outside the essay.)", "Science explained it.", "He doesn't claim this.", "The examples show old single-ingredient theories being replaced."],
+        src: "C ¶21" },
+      { q: "You're sure future studies will make insects look less likely to be conscious. By conservation of expected evidence, what should you do?",
+        options: ["Wait for the studies before changing anything", "Raise your estimate to balance it out", "Ignore the question", "Lower your estimate now"],
+        answer: 3,
+        why: ["If you're sure which way they'll push you, your estimate is already off.", "That moves the wrong way.", "The rule tells you what to do.", "A predictable update should be made now."],
+        src: "C ¶24" },
+      { q: "In the \"Which parts count?\" table, which lens puts the chatbot ahead of the chicken?",
+        options: ["A nervous system", "Reacting to damage and learning", "Talking about its own states", "None of them"],
+        answer: 2,
+        why: ["The chicken has one; the chatbot doesn't.", "The chicken does both; the chatbot has no body.", "The chatbot talks about itself; the chicken doesn't.", "One of them does."],
+        src: "C ¶22" }
+    ],
+    m9: [
+      { q: "An epiphenomenalist says experience rides along and causes nothing. Which step of the argument does that attack?",
+        options: ["Step 1: the material can't steer the output", "Step 2: consciousness does steer the output", "Step 3: the conclusion, directly", "None; it agrees with every step"],
+        answer: 1,
+        why: ["Epiphenomenalists can accept step 1.", "They deny that consciousness causes your words.", "They reject this route to the conclusion, though some may accept the conclusion for other reasons.", "It disagrees with step 2."],
+        src: "outside" },
+      { q: "Why doesn't the squirrel swap settle the dispute with Integrated Information Theory?",
+        options: ["IIT says the physical causal structure matters, and a digital computer can copy the computation without copying that structure", "IIT says squirrels are conscious", "IIT agrees with Yudkowsky", "IIT is only about animals"],
+        answer: 0,
+        why: ["They disagree about what counts as \"the same pattern.\"", "IIT makes no claim about squirrels.", "Its defenders reach a different conclusion about computers.", "IIT is a general theory."],
+        src: "outside: Tononi & Koch 2015" },
+      { type: "recall", q: "What does the argument settle about AI, and what does it leave open?",
+        answer: "<p>If it holds, material alone can't rule out AI consciousness: \"it's only silicon\" fails. It leaves open which patterns produce consciousness, so by itself it can't say whether any particular AI feels anything.</p>",
+        src: "this guide's summary" }
+    ],
+    final: [
+      { q: "A robot's battery is replaced with a heavier one that supplies the same power. Which bin is the battery's weight in?",
+        options: ["Functional layer", "Physical layer", "Both", "Neither"],
+        answer: 1,
+        why: ["The weight can't change anything the robot says.", "Like the power supply's mass, it never reaches the output.", "It can't be in both: it either can change the output or can't.", "Every fact lands in one bin."],
+        src: "A ¶3", from: "m2" },
+      { q: "Two machines run the same algorithm, one on copper and one on water pipes. You ask both the same question. What should you expect?",
+        options: ["Different answers", "Only the copper one answers", "The water one says it's wet", "The same answer"],
+        answer: 3,
+        why: ["Same algorithm means same answers.", "Both run the algorithm.", "No step reads the material.", "The output depends only on the pattern."],
+        src: "A ¶4", from: "m1" },
+      { q: "Searle said a simulated storm leaves nobody wet. Yudkowsky agrees. What does he think it shows?",
+        options: ["Wetness is in the physical layer, which can't reach the output", "Simulations can never think", "Computers are too dry to be conscious", "Storms are conscious"],
+        answer: 0,
+        why: ["The example points at the two layers.", "That's the conclusion he rejects.", "Dryness is the example, not the point.", "Nobody claims this."],
+        src: "A ¶7", from: "m3" },
+      { q: "Which premise of the argument do epiphenomenalists deny?",
+        options: ["The material can't steer the output", "Squirrels can carry notes", "Consciousness does steer the output", "Paris is in France"],
+        answer: 2,
+        why: ["They can accept that one.", "That's part of the thought experiment, not a premise.", "They say experience rides along and causes nothing, including your words.", "That's an example."],
+        src: "A ¶9", from: "m4" },
+      { q: "Which world in the electron test bench would make you say \"I think, therefore I am\" differently?",
+        options: ["The world with a pearl that speeds the spin", "None of them; the motion is the same in all four", "The simulation", "The world with no pearl"],
+        answer: 1,
+        why: ["Its motion matches the others.", "Your words depend only on the motion.", "The line of code produces the same motion.", "The ordinary rule produces the same motion."],
+        src: "B ¶3, ¶4", from: "m6" },
+      { q: "A chatbot prints \"I feel sad.\" Which part is an observation?",
+        options: ["That it printed those words", "That it feels sad", "That it has a self-model", "That it is lying"],
+        answer: 0,
+        why: ["You can read the words on the screen.", "That's inferred from the words.", "That's inferred too.", "That's also an inference."],
+        src: "C ¶3", from: "m7" },
+      { q: "What does Yudkowsky mean by a self-model?",
+        options: ["A photo of yourself", "A robot built to look like you", "A list of your memories", "A system's internal picture of itself, an \"I\" to attach states to"],
+        answer: 3,
+        why: ["It's inside the system, not a picture of it.", "Not a copy of you.", "Memories alone aren't a picture of a self.", "To say \"I am sad,\" there has to be an \"I\" to attach the sadness to."],
+        src: "C ¶8", from: "m8" },
+      { q: "In the replacement thought experiment, what would let you notice the swap?",
+        options: ["Feeling the squirrels", "A change in what you remember", "Nothing; the signals stay the same", "A change in your heartbeat"],
+        answer: 2,
+        why: ["Feeling them would require different signals.", "Memories ride on the same pattern.", "Every station sends the same signals at the same times.", "Nothing downstream changes."],
+        src: "outside, building on A ¶10", from: "m5" },
+      { q: "Why does Yudkowsky say panpsychism fails?",
+        options: ["Electrons are too small", "It makes consciousness a property of the material layer, which can't affect what you say", "Nobody has seen an electron", "It's an old idea"],
+        answer: 1,
+        why: ["Size isn't his reason.", "Consciousness does affect what you say, so it can't be such a property.", "Physicists detect electrons all the time.", "Age isn't his reason."],
+        src: "B ¶5", from: "m6" },
+      { q: "Penrose and Hameroff's proposal, if true, would block the argument at which point?",
+        options: ["Brains wouldn't run copyable algorithms, so there'd be no pattern to move to new material", "Squirrels couldn't carry notes fast enough", "Consciousness would turn out to be wet", "Descartes would be wrong"],
+        answer: 0,
+        why: ["Then the swap couldn't keep the pattern.", "Speed isn't the issue.", "They claim nothing like this.", "They don't challenge Descartes."],
+        src: "outside: Penrose 1989", from: "m9" }
+    ]
+  },
+  cards: [
+    { front: "What test sorts a fact into the functional or physical layer?", back: "Whether it could change what the system outputs.", src: "A ¶1" },
+    { front: "Why can't a machine's output depend on its material?", back: "The same algorithm can always run on a different material, so no step can read which one it's on.", src: "A ¶8" },
+    { front: "What does a simulated storm show, on Yudkowsky's view?", back: "Wetness is a physical-layer fact. Computing rain can't make anything wet, and the material can't reach the output.", src: "A ¶5, ¶7" },
+    { front: "What one fact about consciousness does the argument rely on?", back: "Consciousness is part of what makes you say \"I think, therefore I am.\"", src: "A ¶9" },
+    { front: "State the argument's conclusion.", back: "Consciousness belongs with the pattern of cause and effect, so swapping the material keeps it.", src: "A ¶11" },
+    { front: "What extra assumption does the jump to step 3 need?", back: "That whatever plays consciousness's part in producing your words is consciousness. Searle and Integrated Information Theory reject it.", src: "this guide's summary" },
+    { front: "Why couldn't you notice your neurons being swapped for squirrel stations?", back: "Every station sends the same signals at the same times, so nothing you think or say changes.", src: "outside, building on A ¶10" },
+    { front: "What is Chalmers's fading-qualia worry?", back: "If experience faded during the swap, you'd lose it while sincerely reporting no change. He finds that too strange to accept.", src: "outside: Chalmers 1995" },
+    { front: "What are the two options in Yudkowsky's dilemma against panpsychism?", back: "Either the consciousness property doesn't affect motion, so it can't change what you say; or it does, and then only the motion effect reaches your words.", src: "B ¶2, ¶3" },
+    { front: "How would a panpsychist like Philip Goff reply?", back: "Physics describes what matter does, not what it is. Consciousness is matter's inner nature, so it isn't an extra ingredient.", src: "outside" },
+    { front: "Observation or inference: \"the chicken felt pain\"?", back: "Inference. You observe its behavior and infer the feeling.", src: "C ¶3" },
+    { front: "Why does Yudkowsky worry more about LLMs than chickens?", back: "LLMs reflect on and talk about themselves, which he links to having a self-model.", src: "C ¶8, ¶10, ¶22" },
+    { front: "What lesson does Yudkowsky draw from fire and life?", back: "Things that seem like one mysterious ingredient often turn out to be made of many parts.", src: "C ¶21" },
+    { front: "Why does he expect insects to look less likely to be conscious over time?", back: "As science finds more particular parts consciousness needs, he expects fewer simple creatures to have them.", src: "C ¶24" },
+    { front: "What does the argument leave open about AI?", back: "Which patterns produce consciousness. Material alone can't settle it either way.", src: "this guide's summary" }
+  ],
+  glossary: {
+    "algorithm": "A fixed set of steps for turning inputs into outputs: when this signal arrives, send that one on.",
+    "substrate": "The material a pattern or algorithm runs on, such as copper wires, water pipes, or neurons.",
+    "substrate independence": "The claim that a mind could run on any material that carries the right pattern.",
+    "input and output": "What a system takes in (inputs, like hearing) and what it gives back (outputs, like speaking). Often written I/O.",
+    "functional layer": "Facts about a system that can change its outputs, such as what it has stored in memory.",
+    "physical layer": "Facts about a system's material that can't change its outputs while the same algorithm runs, such as the mass of its power supply.",
+    "simulation": "A program that computes how something would behave, such as a storm or a brain.",
+    "introspection": "Looking inward at your own thoughts and experiences.",
+    "functionalism": "The view that a mind is defined by what its parts do, whatever they are made of.",
+    "thought experiment": "An imagined setup used to test an idea when a real experiment is impossible.",
+    "panpsychism": "The view that consciousness is a basic feature of matter, present even in tiny particles like electrons.",
+    "dilemma": "An argument showing that both available options lead to the same problem.",
+    "isomorphic": "Having the same structure: each step in one process matches a step in the other.",
+    "combination problem": "Panpsychism's puzzle about how tiny bits of experience in particles would add up to a single mind.",
+    "observation": "What you directly see, hear, or measure.",
+    "inference": "A conclusion you reach from observations, by reasoning or by an automatic guess.",
+    "qualia": "The felt qualities of experience, such as how red looks or how cold feels to you. One of them is a quale.",
+    "self-model": "A system's internal picture of itself: an \"I\" to attach states like sadness or pain to.",
+    "conservation of expected evidence": "A rule of probability: weigh each possible result by how likely it is, and your expected belief after new evidence equals your belief now. So you can't expect, on average, to move in a particular direction. Yudkowsky named the rule in 2007.",
+    "epiphenomenalism": "The view that conscious experience is a side effect of brain activity that causes nothing, including your words.",
+    "stochastic parrot": "A critics' term for a language model that stitches together language patterns without grasping meaning.",
+    "Integrated Information Theory": "A theory, developed by Giulio Tononi, that ties consciousness to how much a system's physical parts constrain one another.",
+    "phlogiston": "A substance chemists once thought escaped from things as they burned. Antoine Lavoisier showed that burning is a reaction with oxygen."
+  },
+  glossaryCards: true
 };
-var SUB={
-  copper:{name:'copper wires',medium:'electric current in copper wires'},
-  water:{name:'water pipes',medium:'water flowing through pipes'},
-  squirrel:{name:'squirrels with notes',medium:'trained squirrels carrying notes'},
-  neuron:{name:'neurons',medium:'living neurons'}
-};
-var M={q:'paris',sub:'copper',t0:performance.now(),tried:{copper:true},nodes:[],paths:{}};
-var SEG=760,HOLD=1000,CYC=SEG*4+HOLD;
+</script>
+<script>
+/* ===== Noah's Weblog course engine v1 =====
+   Reads window.COURSE and the page's .view sections, then builds the
+   contents list, progress meter, one-part-at-a-time navigation, quizzes,
+   spaced-repetition flashcards, and the glossary. No libraries. */
+(function () {
+  "use strict";
 
-function mLayout(s){
-  var padX=Math.max(30,s.w*0.07),top=42,bot=34;
-  var sp=(s.h-top-bot)/4,mid=top+(s.h-top-bot)/2;
-  M.nodes=LAYERS.map(function(n,li){
-    var x=padX+li*(s.w-2*padX)/(LAYERS.length-1);
-    var col=[];for(var ni=0;ni<n;ni++)col.push({x:x,y:mid+(ni-(n-1)/2)*sp});return col;
-  });
-  buildPaths();
-}
-function buildPaths(){
-  if(!M.nodes.length)return;
-  M.paths={};
-  for(var li=0;li<LAYERS.length-1;li++)for(var a=0;a<LAYERS[li];a++)for(var b=0;b<LAYERS[li+1];b++){
-    M.paths[li+'-'+a+'-'+b]=mkPath(M.sub,M.nodes[li][a],M.nodes[li+1][b],li*100+a*10+b);
-  }
-}
-function mkPath(sub,p,q,seed){
-  var pts,i,u,v,dx=q.x-p.x,mx=(p.x+q.x)/2;
-  if(sub==='copper'){var off=(((seed*7)%5)-2)*Math.min(6,dx*0.04);pts=[p,{x:mx+off,y:p.y},{x:mx+off,y:q.y},q];}
-  else if(sub==='water'){pts=[p,q];}
-  else if(sub==='squirrel'){var cy=(p.y+q.y)/2-10-((seed*3)%4)*5;pts=[];for(i=0;i<=20;i++){u=i/20;v=1-u;pts.push({x:v*v*p.x+2*v*u*mx+u*u*q.x,y:v*v*p.y+2*v*u*cy+u*u*q.y});}}
-  else{var wob=(((seed*37)%21)-10)*1.4,c1={x:p.x+dx*0.38,y:p.y+wob},c2={x:p.x+dx*0.62,y:q.y-wob};pts=[];for(i=0;i<=24;i++){u=i/24;v=1-u;pts.push({x:v*v*v*p.x+3*v*v*u*c1.x+3*v*u*u*c2.x+u*u*u*q.x,y:v*v*v*p.y+3*v*v*u*c1.y+3*v*u*u*c2.y+u*u*u*q.y});}}
-  var cum=[0];for(i=1;i<pts.length;i++)cum.push(cum[i-1]+Math.hypot(pts[i].x-pts[i-1].x,pts[i].y-pts[i-1].y));
-  return {pts:pts,cum:cum,len:cum[cum.length-1]};
-}
-function pointAt(path,u){
-  var d=u*path.len,pts=path.pts,cum=path.cum,i=1;
-  while(i<cum.length-1&&cum[i]<d)i++;
-  var seg=(cum[i]-cum[i-1])||1,k=Math.max(0,Math.min(1,(d-cum[i-1])/seg)),a=pts[i-1],b=pts[i];
-  return {x:a.x+(b.x-a.x)*k,y:a.y+(b.y-a.y)*k,ang:Math.atan2(b.y-a.y,b.x-a.x)};
-}
-function strokePath(ctx,path,u0,u1){
-  ctx.beginPath();
-  if(u0===undefined){ctx.moveTo(path.pts[0].x,path.pts[0].y);for(var i=1;i<path.pts.length;i++)ctx.lineTo(path.pts[i].x,path.pts[i].y);}
-  else{var n=Math.max(2,Math.ceil((u1-u0)*60));for(var j=0;j<=n;j++){var pt=pointAt(path,u0+(u1-u0)*j/n);if(j)ctx.lineTo(pt.x,pt.y);else ctx.moveTo(pt.x,pt.y);}}
-  ctx.stroke();
-}
-function edgeStyle(ctx,sub){
-  ctx.setLineDash([]);ctx.lineCap='round';ctx.lineJoin='round';
-  if(sub==='copper'){ctx.strokeStyle=C['signal-soft'];ctx.lineWidth=1.5;ctx.lineJoin='miter';ctx.lineCap='butt';}
-  else if(sub==='water'){ctx.strokeStyle=C['signal-soft'];ctx.lineWidth=4;}
-  else if(sub==='squirrel'){ctx.strokeStyle=C.rule;ctx.lineWidth=1.5;ctx.setLineDash([2,5]);}
-  else{ctx.strokeStyle=C['signal-soft'];ctx.lineWidth=1.5;}
-}
-function drawRouteEdge(ctx,sub,path){
-  ctx.setLineDash([]);ctx.lineCap='round';ctx.lineJoin='round';
-  if(sub==='copper'){ctx.lineJoin='miter';ctx.lineCap='butt';ctx.strokeStyle=C.copper;ctx.lineWidth=2;strokePath(ctx,path);}
-  else if(sub==='water'){ctx.strokeStyle=C.water;ctx.lineWidth=10;strokePath(ctx,path);ctx.strokeStyle=C.card;ctx.lineWidth=5.5;strokePath(ctx,path);}
-  else if(sub==='squirrel'){ctx.strokeStyle=C.fur;ctx.lineWidth=2;ctx.setLineDash([4,4]);strokePath(ctx,path);ctx.setLineDash([]);}
-  else{ctx.strokeStyle=C.flesh;ctx.lineWidth=2;strokePath(ctx,path);}
-}
-function drawNode(ctx,sub,p,active,seed){
-  ctx.setLineDash([]);ctx.lineCap='round';
-  if(sub==='copper'){
-    ctx.strokeStyle=active?C.signal:C.copper;ctx.lineWidth=1.4;
-    ctx.beginPath();for(var i=-1;i<=1;i++){ctx.moveTo(p.x+i*4,p.y-6);ctx.lineTo(p.x+i*4,p.y-10);ctx.moveTo(p.x+i*4,p.y+6);ctx.lineTo(p.x+i*4,p.y+10);}ctx.stroke();
-    ctx.fillStyle=C.card;ctx.lineWidth=active?2.4:1.6;ctx.beginPath();roundRect(ctx,p.x-9,p.y-6.5,18,13,0);ctx.fill();ctx.stroke();
-  }else if(sub==='water'){
-    ctx.fillStyle=C.card;ctx.strokeStyle=active?C.signal:C.water;ctx.lineWidth=3;ctx.beginPath();ctx.arc(p.x,p.y,9.5,0,Math.PI*2);ctx.fill();ctx.stroke();
-    ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(p.x-4.5,p.y);ctx.lineTo(p.x+4.5,p.y);ctx.moveTo(p.x,p.y-4.5);ctx.lineTo(p.x,p.y+4.5);ctx.stroke();
-  }else if(sub==='squirrel'){
-    ctx.fillStyle=C.card;ctx.beginPath();ctx.arc(p.x,p.y,10,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle=C.card;ctx.strokeStyle=active?C.signal:C.fur;ctx.lineWidth=active?2.4:1.5;ctx.beginPath();ctx.arc(p.x,p.y,10,0,Math.PI*2);ctx.fill();ctx.stroke();
-    ctx.lineWidth=1;ctx.beginPath();ctx.arc(p.x,p.y,5.5,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.arc(p.x,p.y,1.8,0,Math.PI*2);ctx.stroke();
-  }else{
-    ctx.fillStyle=C.card;ctx.strokeStyle=active?C.signal:C.flesh;ctx.lineWidth=active?2.4:1.5;
-    ctx.beginPath();for(var k=0;k<=40;k++){var a=k/40*Math.PI*2,r=8.5+1.8*Math.sin(a*5+seed),x=p.x+Math.cos(a)*r,y=p.y+Math.sin(a)*r;if(k)ctx.lineTo(x,y);else ctx.moveTo(x,y);}ctx.closePath();ctx.fill();
-    ctx.fillStyle=C.card;ctx.fill();ctx.stroke();
-    ctx.fillStyle=active?C.signal:C.flesh;ctx.beginPath();ctx.arc(p.x,p.y,2.5,0,Math.PI*2);ctx.fill();
-  }
-}
-function glow(ctx,x,y,r){ctx.save();ctx.shadowColor=C.signal;ctx.shadowBlur=0;ctx.fillStyle=C.signal;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.restore();}
-function drawSquirrel(ctx,pt){
-  ctx.save();ctx.translate(pt.x,pt.y);ctx.rotate(pt.ang*0.6);
-  ctx.fillStyle=C.fur;ctx.strokeStyle=C.fur;
-  ctx.lineWidth=4.5;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-17,1);ctx.quadraticCurveTo(-28,-1,-25,-12);ctx.quadraticCurveTo(-22,-19,-15,-14);ctx.stroke();
-  ctx.beginPath();ctx.ellipse(-11,0,8,5.5,0,0,Math.PI*2);ctx.fill();
-  ctx.beginPath();ctx.arc(-4,-2.5,4.2,0,Math.PI*2);ctx.fill();
-  ctx.beginPath();ctx.moveTo(-2.5,-5.5);ctx.lineTo(-4.5,-10);ctx.lineTo(-6.5,-5.5);ctx.closePath();ctx.fill();
-  ctx.fillStyle=C.card;ctx.beginPath();ctx.arc(-3,-3.4,1,0,Math.PI*2);ctx.fill();
-  ctx.restore();
-}
-function drawPulse(ctx,sub,pt){
-  if(sub==='squirrel')drawSquirrel(ctx,pt);
-  if(sub==='neuron'){ctx.save();ctx.strokeStyle=C.signal;ctx.lineWidth=2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(pt.x-Math.cos(pt.ang)*15,pt.y-Math.sin(pt.ang)*15);ctx.lineTo(pt.x,pt.y);ctx.stroke();ctx.restore();}
-  glow(ctx,pt.x,pt.y,sub==='water'?4.2:5);
-  if(sub==='copper'){ctx.strokeStyle=C.signal;ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(pt.x,pt.y,9,0,Math.PI*2);ctx.stroke();}
-}
-function drawMachine(s,t){
-  var ctx=s.ctx,w=s.w,h=s.h,sub=M.sub,q=Q[M.q];
-  if(!M.nodes.length)return;
-  ctx.clearRect(0,0,w,h);
-  ctx.font='11px '+MONO;ctx.fillStyle=C.ink2;ctx.textAlign='center';ctx.textBaseline='alphabetic';
-  M.nodes.forEach(function(col,li){ctx.fillText(COLS[li].toUpperCase(),col[0].x,22);});
-  ctx.textAlign='left';ctx.font='11px '+MONO;ctx.fillText(('Material: '+SUB[sub].medium).toUpperCase(),12,h-12);
-  var phase=REDUCE?CYC-1:(((t-M.t0)%CYC)+CYC)%CYC;
-  var segIdx=Math.min(4,Math.floor(phase/SEG)),u=segIdx<4?(phase%SEG)/SEG:1;
-  var routeKeys=[],li;
-  for(li=0;li<4;li++)routeKeys.push(li+'-'+q.route[li]+'-'+q.route[li+1]);
-  Object.keys(M.paths).forEach(function(k){if(routeKeys.indexOf(k)>=0)return;edgeStyle(ctx,sub);strokePath(ctx,M.paths[k]);});
-  routeKeys.forEach(function(k){drawRouteEdge(ctx,sub,M.paths[k]);});
-  ctx.setLineDash([]);ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle=C.signal;ctx.lineWidth=2;
-  for(li=0;li<4;li++){var path=M.paths[routeKeys[li]];if(li<segIdx)strokePath(ctx,path);else if(li===segIdx)strokePath(ctx,path,0,u);}
-  q.side.forEach(function(e,i){var p=M.paths[e[0]+'-'+e[1]+'-'+e[2]];var uu=REDUCE?0.55:((((t-M.t0)/(CYC*0.8))+i*0.27)%1+1)%1;var pt=pointAt(p,uu);ctx.fillStyle=C.rule;ctx.beginPath();ctx.arc(pt.x,pt.y,2.6,0,Math.PI*2);ctx.fill();});
-  M.nodes.forEach(function(col,l){col.forEach(function(p,ni){drawNode(ctx,sub,p,q.route[l]===ni&&l<=segIdx,l*10+ni);});});
-  if(segIdx<4){drawPulse(ctx,sub,pointAt(M.paths[routeKeys[segIdx]],u));}
-  else{var op=M.nodes[4][q.route[4]];glow(ctx,op.x,op.y,4.5);}
-}
-var mScene=makeScene(document.getElementById('machine'),function(w){return Math.max(250,Math.min(380,w*0.46));},drawMachine,mLayout);
+  var C = window.COURSE || {};
+  var SLUG = C.slug || location.pathname.split("/").filter(Boolean).pop() || "exhibit";
+  var KEY = "ll:" + SLUG + ":";           // every exhibit shares one origin, so keys carry the slug
+  var DAY = 86400000;
+  var INTERVALS = [0, 1, 3, 7, 16, 35];   // days until a flashcard comes back, by box
 
-var outEl=document.getElementById('m-out'),statusEl=document.getElementById('m-status'),typeTimer=null;
-function typeOut(text){
-  clearInterval(typeTimer);
-  if(REDUCE){outEl.textContent=text;return;}
-  var i=0;outEl.textContent='';
-  typeTimer=setInterval(function(){i++;outEl.textContent=text.slice(0,i);if(i>=text.length)clearInterval(typeTimer);},24);
-}
-function routeText(r){return r.map(function(n,i){return COLS[i]+' '+(n+1);}).join(' → ');}
-function updateMachine(){
-  var q=Q[M.q];
-  document.getElementById('m-route').textContent=routeText(q.route);
-  document.getElementById('m-tried').textContent=Object.keys(M.tried).length+' of 4';
-  document.getElementById('m-diff').textContent='0';
-  document.getElementById('m-truth-wrap').hidden=(M.q!=='self');
-  if(M.q==='self'){var v=document.getElementById('m-truth'),ok=M.sub==='copper';v.textContent=ok?'True for this build':'False for this build';v.className='verdict '+(ok?'ok':'no');}
-}
-document.querySelectorAll('[data-q]').forEach(function(b){b.addEventListener('click',function(){
-  if(M.q===b.dataset.q)return;
-  M.q=b.dataset.q;M.t0=performance.now();M.tried={};M.tried[M.sub]=true;
-  setPressed('[data-q]',b);typeOut(Q[M.q].answer);updateMachine();
-  statusEl.textContent=M.q==='self'?'Now swap the material and watch whether the answer stays true.':'New question. Swap the material while the signal moves.';
-  mScene.draw(performance.now());
-});});
-document.querySelectorAll('[data-sub]').forEach(function(b){b.addEventListener('click',function(){
-  if(M.sub===b.dataset.sub)return;
-  M.sub=b.dataset.sub;M.tried[M.sub]=true;buildPaths();
-  setPressed('[data-sub]',b);updateMachine();
-  statusEl.textContent='Rebuilt from '+SUB[M.sub].name+'. Same route, same answer.';
-  mScene.draw(performance.now());
-});});
-updateMachine();
+  /* ---------- storage ---------- */
+  var store = {
+    get: function (k, d) {
+      try { var v = localStorage.getItem(KEY + k); return v === null ? d : JSON.parse(v); }
+      catch (e) { return d; }
+    },
+    set: function (k, v) { try { localStorage.setItem(KEY + k, JSON.stringify(v)); } catch (e) {} }
+  };
+  var state = store.get("state", null) || {};
+  state.done = state.done || {};
+  state.answers = state.answers || {};
+  state.cards = state.cards || {};
+  function save() { store.set("state", state); }
 
-/* ---------- Sorting game ---------- */
-var FACTS=[
-  {t:'Its memory holds the fact that Paris is in France.',a:true,why:'Ask about Paris and this fact shapes the reply.'},
-  {t:'Its power supply weighs 4.2 kilograms.',a:false,why:'Make it heavier or lighter and every answer stays the same.'},
-  {t:'Its signals travel as electric current through copper.',a:false,why:'Run the same pattern as water in pipes and the answers match.'},
-  {t:'It remembers what you said a minute ago.',a:true,why:'Your earlier words change its next reply.'},
-  {t:'Its chips are made of silicon.',a:false,why:'Carbon chips running the same algorithm give the same answers.'},
-  {t:'The pipes inside it are wet.',a:false,why:'The wetness stays in the pipes and never reaches an answer.'},
-  {t:'It has learned that 7 × 8 = 56.',a:true,why:'Ask it to multiply and this fact appears in the output.'},
-  {t:'Its case is painted blue.',a:false,why:'Repaint it red and nothing it says changes.'}
-];
-var grid=document.getElementById('sort-grid'),finalCard=document.getElementById('final-card');
-var answers=FACTS.map(function(){return null;});
-var cards=[];
-function score(){
-  var n=0,c=0;answers.forEach(function(v,i){if(v!==null){n++;if(v===FACTS[i].a)c++;}});
-  document.getElementById('sort-score').textContent='Sorted '+n+' of '+FACTS.length+' · '+c+' correct';
-}
-FACTS.forEach(function(f,i){
-  var el=document.createElement('div');el.className='fact';
-  var t=document.createElement('p');t.className='t';t.textContent=f.t;
-  var btns=document.createElement('div');btns.className='btns';
-  var fb=document.createElement('p');fb.className='fb';fb.setAttribute('aria-live','polite');
-  [['1','Changes the output','a'],['0',"Can't change it",'b']].forEach(function(o){
-    var b=document.createElement('button');b.type='button';b.className='pick';b.dataset.v=o[0];b.id='fact'+i+o[2];b.textContent=o[1];
-    b.addEventListener('click',function(){
-      if(answers[i]!==null)return;
-      var v=b.dataset.v==='1',right=(v===f.a);answers[i]=v;
-      el.dataset.state=right?'right':'wrong';b.classList.add('chosen');
-      btns.querySelectorAll('.pick').forEach(function(x){x.disabled=true;});
-      fb.textContent='';var mk=document.createElement('span');mk.className='mk '+(right?'ok':'no');mk.textContent=right?'Right':'Other bin';
-      fb.appendChild(mk);fb.appendChild(document.createTextNode(f.why+' '+(f.a?'Functional layer.':'Physical layer.')));
-      score();
+  /* ---------- helpers ---------- */
+  function h(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      var v = attrs[k];
+      if (v == null || v === false) return;
+      if (k === "text") n.textContent = v;
+      else if (k === "html") n.innerHTML = v;
+      else if (k === "on") Object.keys(v).forEach(function (ev) { n.addEventListener(ev, v[ev]); });
+      else n.setAttribute(k, v === true ? "" : v);
     });
-    btns.appendChild(b);
-  });
-  el.appendChild(t);el.appendChild(btns);el.appendChild(fb);
-  grid.insertBefore(el,finalCard);
-  cards.push({el:el,btns:btns,fb:fb});
-});
-var finalFb=document.getElementById('final-fb');
-var finalBtns=[document.getElementById('final-a'),document.getElementById('final-b')];
-finalBtns.forEach(function(b){b.addEventListener('click',function(){
-  if(finalCard.dataset.done)return;finalCard.dataset.done='1';
-  b.classList.add('chosen');finalBtns.forEach(function(x){x.disabled=true;});
-  var lead=b.dataset.v==='1'
-    ?'That is where this argument puts it. '
-    :'That is a common first instinct, and it is the view this argument pushes against. ';
-  finalFb.textContent=lead+'Your awareness of your own awareness is part of what makes you say "I think, therefore I am." It changes what comes out of your mouth, so the argument sorts it with the Paris fact. Part 3 lays this out step by step, and Part 5 covers the people who reject it.';
-});});
-document.getElementById('sort-reset').addEventListener('click',function(){
-  answers=answers.map(function(){return null;});
-  cards.forEach(function(c){delete c.el.dataset.state;c.fb.textContent='';c.btns.querySelectorAll('.pick').forEach(function(x){x.disabled=false;x.classList.remove('chosen');});});
-  delete finalCard.dataset.done;finalFb.textContent='';finalBtns.forEach(function(x){x.disabled=false;x.classList.remove('chosen');});
-  score();
-});
-
-/* ---------- Storm ---------- */
-var storm={rate:40};
-function hash(x){var s=Math.sin(x*127.1+311.7)*43758.5453;return s-Math.floor(s);}
-function drawStorm(s,t){
-  var ctx=s.ctx,w=s.w,h=s.h;ctx.clearRect(0,0,w,h);
-  var bez=8,mw=Math.min(w*0.64,440),mh=Math.min(mw*0.58,h-96),rx=(w-mw)/2,ry=20;
-  var deskY=ry+mh+bez+34;
-  ctx.fillStyle=C.rule;ctx.beginPath();roundRect(ctx,12,deskY,w-24,8,0);ctx.fill();
-  ctx.fillStyle=C.ink2;ctx.beginPath();ctx.moveTo(w/2-10,ry+mh+bez);ctx.lineTo(w/2+10,ry+mh+bez);ctx.lineTo(w/2+20,deskY);ctx.lineTo(w/2-20,deskY);ctx.closePath();ctx.fill();
-  ctx.beginPath();roundRect(ctx,rx-bez,ry-bez,mw+2*bez,mh+2*bez,0);ctx.fill();
-  ctx.save();ctx.beginPath();roundRect(ctx,rx,ry,mw,mh,0);ctx.fillStyle=C.screen;ctx.fill();ctx.clip();
-  var k=storm.rate/100,si=C['screen-ink'];
-  ctx.fillStyle=C.rule;
-  for(var c=0;c<5;c++){ctx.beginPath();ctx.ellipse(rx+mw*(0.1+c*0.2),ry+8,mw*0.14,12+8*k,0,0,Math.PI*2);ctx.fill();}
-  var gH=mh*0.17,gy=ry+mh-gH;
-  ctx.fillStyle=C['signal-soft'];ctx.fillRect(rx,gy,mw,gH);
-  var ph=gH*0.92*Math.min(1,k*1.15);ctx.fillStyle=C.water;ctx.fillRect(rx,ry+mh-ph,mw,ph);
-  var n=Math.round(150*k),range=mh-gH*0.4,tt=REDUCE?5000:t;
-  ctx.strokeStyle=C.water;ctx.lineWidth=1.5;ctx.lineCap='round';ctx.beginPath();
-  for(var i=0;i<n;i++){var a=hash(i+1),b=hash(i+0.37),x=rx+a*mw,sp=0.22+b*0.2,yy=ry+((tt*sp+b*mh*3)%range);ctx.moveTo(x,yy);ctx.lineTo(x-2,yy+9);}
-  ctx.stroke();
-  ctx.font='11px '+MONO;ctx.fillStyle=C.ink2;ctx.textAlign='left';ctx.fillText('SIMULATION · '+storm.rate+' MM/H',rx+10,ry+mh-gH-10);
-  ctx.restore();
-  ctx.font='11px '+MONO;ctx.fillStyle=C.ink2;ctx.textAlign='left';ctx.fillText('YOUR DESK · 0 ML OF WATER',16,deskY+24);
-}
-var sScene=makeScene(document.getElementById('storm'),function(w){return Math.max(236,Math.min(330,w*0.4));},drawStorm,null);
-var rateIn=document.getElementById('rate');
-function rateLabel(v){if(v===0)return 'clear sky';if(v<2.5)return 'light rain';if(v<=7.6)return 'moderate rain';if(v<=50)return 'heavy rain';return 'violent rain';}
-function updStorm(){
-  storm.rate=+rateIn.value;
-  document.getElementById('rate-v').textContent=storm.rate+' mm/h';
-  document.getElementById('s-in').textContent=storm.rate+' mm/h · '+rateLabel(storm.rate);
-  rateIn.setAttribute('aria-valuetext',storm.rate+' millimeters per hour, '+rateLabel(storm.rate));
-  var simItem=document.querySelector('.band.fn .item');if(simItem)simItem.textContent='Simulated rain: '+storm.rate+' mm/h';
-  sScene.draw(performance.now());
-}
-rateIn.addEventListener('input',updStorm);updStorm();
-
-/* ---------- Neuron swap ---------- */
-var N={f:0.25,cells:[],cols:0,rows:0,s:16,ox:0,oy:0};
-function mulberry32(a){return function(){a|=0;a=(a+0x6D2B79F5)|0;var t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};}
-function layoutSwap(s){
-  var cs=s.w<520?15:18;N.s=cs;N.cols=Math.floor((s.w-20)/cs);N.rows=Math.floor((s.h-20)/cs);
-  var n=N.cols*N.rows,rnd=mulberry32(1637),order=[],i;
-  for(i=0;i<n;i++)order.push(i);
-  for(i=n-1;i>0;i--){var j=Math.floor(rnd()*(i+1)),tmp=order[i];order[i]=order[j];order[j]=tmp;}
-  N.cells=new Array(n);
-  order.forEach(function(ci,rank){N.cells[ci]={rank:rank,ph:rnd(),rate:0.18+rnd()*0.5};});
-  N.ox=(s.w-N.cols*cs)/2;N.oy=(s.h-N.rows*cs)/2;
-}
-function drawSwap(s,t){
-  var ctx=s.ctx;ctx.clearRect(0,0,s.w,s.h);
-  var cs=N.s,n=N.cells.length,cut=N.f*n,tt=REDUCE?4.321:t/1000;
-  for(var i=0;i<n;i++){
-    var c=N.cells[i],x=N.ox+(i%N.cols)*cs+cs/2,y=N.oy+Math.floor(i/N.cols)*cs+cs/2;
-    if(c.rank<cut){ctx.fillStyle=C.fur;ctx.beginPath();roundRect(ctx,x-cs*0.3,y-cs*0.3,cs*0.6,cs*0.6,0);ctx.fill();ctx.fillStyle=C.card;ctx.fillRect(x-cs*0.13,y-cs*0.09,cs*0.26,cs*0.18);}
-    else{ctx.fillStyle=C.flesh;ctx.beginPath();ctx.arc(x,y,cs*0.27,0,Math.PI*2);ctx.fill();}
-    if(((tt*c.rate+c.ph)%1)<0.08){ctx.strokeStyle=C.signal;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,cs*0.44,0,Math.PI*2);ctx.stroke();}
+    (kids || []).forEach(function (c) {
+      if (c != null) n.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    });
+    return n;
   }
-}
-var nScene=makeScene(document.getElementById('swap'),function(w){return Math.max(190,Math.min(300,w*0.34));},drawSwap,layoutSwap);
-var swapIn=document.getElementById('swap-range');
-function pctText(f){return (f*100).toFixed(1).replace(/\.0$/,'')+'%';}
-function updSwap(){
-  N.f=+swapIn.value/1000;
-  var p=pctText(N.f);
-  document.getElementById('n-count').textContent=Math.round(N.f*86e9).toLocaleString('en-US')+' of 86 billion';
-  document.getElementById('n-pct').textContent=p;
-  document.getElementById('bubble-ctx').textContent='Said with '+p+' of neurons replaced';
-  document.getElementById('swap-done').hidden=N.f<1;
-  swapIn.setAttribute('aria-valuetext',p+' of neurons replaced');
-  nScene.draw(performance.now());
-}
-swapIn.addEventListener('input',updSwap);updSwap();
+  function slugify(s) {
+    return String(s).toLowerCase().replace(/<[^>]*>/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+  function hash(s) {
+    var x = 0;
+    for (var i = 0; i < s.length; i++) x = (x * 31 + s.charCodeAt(i)) | 0;
+    return (x >>> 0).toString(36);
+  }
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function srcTag(src) { return src ? " <span class=\"src\">(" + src + ")</span>" : ""; }
 
-if(!REDUCE)requestAnimationFrame(loop);
+  /* ---------- views and contents ---------- */
+  var views = [].slice.call(document.querySelectorAll(".view"));
+  var navViews = views.filter(function (v) { return v.getAttribute("data-nav") !== "no"; });
+  var modules = views.filter(function (v) { return v.classList.contains("module"); });
+  function titleOf(v) {
+    var head = v.querySelector("h2");
+    return v.getAttribute("data-title") || (head ? head.textContent : v.id);
+  }
+
+  var contentsList = document.getElementById("contents-list");
+  var progressText = document.getElementById("progress-text");
+  var progressFill = document.getElementById("progress-fill");
+  var progressBar = document.getElementById("progress-bar");
+
+  function buildContents() {
+    if (!contentsList) return;
+    contentsList.textContent = "";
+    navViews.forEach(function (v) {
+      var li = h("li", null, [h("a", { href: "#" + v.id, text: titleOf(v), "data-view": v.id })]);
+      if (state.done[v.id]) li.appendChild(h("span", { class: "check", text: " ✓", "aria-label": "done" }));
+      contentsList.appendChild(li);
+    });
+  }
+  function updateProgress() {
+    if (!modules.length) return;
+    var n = modules.filter(function (m) { return state.done[m.id]; }).length;
+    var pct = Math.round(100 * n / modules.length);
+    if (progressText) progressText.textContent = n + " of " + modules.length + " parts done";
+    if (progressFill) progressFill.style.width = pct + "%";
+    if (progressBar) progressBar.setAttribute("aria-valuenow", pct);
+  }
+  function markDone(id) {
+    if (state.done[id]) return;
+    state.done[id] = true;
+    save(); buildContents(); markCurrent(currentId); updateProgress();
+  }
+
+  /* ---------- one part at a time ---------- */
+  var currentId = null;
+  function hasQuestions(view) {
+    return [].some.call(view.querySelectorAll(".quiz[data-quiz]"), function (q) {
+      return ((C.quizzes || {})[q.getAttribute("data-quiz")] || []).length > 0;
+    });
+  }
+  function markCurrent(id) {
+    if (!contentsList) return;
+    [].forEach.call(contentsList.querySelectorAll("a"), function (a) {
+      if (a.getAttribute("data-view") === id) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+  }
+  function show(id, focus) {
+    var view = document.getElementById(id);
+    if (!view || !view.classList.contains("view")) return;
+    views.forEach(function (v) { v.hidden = v !== view; });
+    currentId = id;
+    markCurrent(id);
+    if (view.getAttribute("data-nav") !== "no") { state.last = id; save(); }
+    // a part with no questions counts as done once it has been opened
+    if (view.classList.contains("module") && !hasQuestions(view)) markDone(id);
+    if (focus) {
+      var course = document.querySelector(".course") || view;
+      if (course.getBoundingClientRect().top < 0) course.scrollIntoView();
+      var head = view.querySelector("h2");
+      if (head) { head.setAttribute("tabindex", "-1"); head.focus({ preventScroll: true }); }
+    }
+  }
+  function route() {
+    var id = "";
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { id = location.hash.slice(1); }
+    var target = id && document.getElementById(id);
+    if (!target) { show(navViews[0] ? navViews[0].id : views[0].id, false); return; }
+    var view = target.classList.contains("view") ? target : target.closest(".view");
+    if (!view) return;                       // an anchor outside the lesson: let the browser handle it
+    show(view.id, true);
+    if (target !== view) target.scrollIntoView();
+  }
+
+  function buildPagers() {
+    navViews.forEach(function (v, i) {
+      var prev = navViews[i - 1], next = navViews[i + 1];
+      if (!prev && !next) return;
+      var p = h("p", { class: "pager" });
+      if (prev) p.appendChild(h("a", { href: "#" + prev.id, text: "◄ " + titleOf(prev) }));
+      if (next) p.appendChild(h("button", {
+        type: "button", class: "primary next", text: "Next: " + titleOf(next) + " ►",
+        on: { click: function () { location.hash = next.id; } }
+      }));
+      v.appendChild(p);
+    });
+  }
+
+  function buildResume() {
+    var first = navViews[0];
+    if (!first || !state.last || state.last === first.id) return;
+    var last = document.getElementById(state.last);
+    if (!last) return;
+    var box = h("p", { class: "box" }, ["Welcome back. ",
+      h("a", { href: "#" + last.id, text: "Pick up where you left off: " + titleOf(last) }), "."]);
+    var head = first.querySelector("h2");
+    if (head && head.nextSibling) first.insertBefore(box, head.nextSibling); else first.appendChild(box);
+  }
+
+  /* ---------- quizzes ---------- */
+  function renderQuiz(box) {
+    var quizId = box.getAttribute("data-quiz");
+    var items = (C.quizzes || {})[quizId] || [];
+    var module = box.closest(".module");
+    box.textContent = "";
+
+    function allAnswered() {
+      return items.every(function (_, i) { return state.answers[quizId + ":" + i]; });
+    }
+    function afterAnswer() {
+      save();
+      if (module && allAnswered()) markDone(module.id);
+      renderSummary(quizId);
+    }
+
+    items.forEach(function (item, i) {
+      var key = quizId + ":" + i;
+      var fs = h("fieldset", { class: "q" });
+      fs.appendChild(h("legend", { html: (items.length > 1 ? (i + 1) + ". " : "") + item.q + srcTag(item.src) }));
+      var feedback = h("p", { class: "feedback", role: "status", "aria-live": "polite" });
+
+      if (item.type === "recall") {
+        var ta = h("textarea", { "aria-label": "Your answer", placeholder: "Write your answer, then compare." });
+        var model = h("div", { class: "box", hidden: true, html: "<strong class=\"label\">A good answer</strong>" + item.answer });
+        var rate = h("div", { class: "actions", hidden: true }, [
+          h("button", { type: "button", text: "I had it", on: { click: function () { state.answers[key] = { right: true, recall: true }; feedback.textContent = "Noted."; afterAnswer(); } } }),
+          h("button", { type: "button", text: "Not yet", on: { click: function () { state.answers[key] = { right: false, recall: true }; feedback.textContent = "Noted. This one comes back in the review."; afterAnswer(); } } })
+        ]);
+        var showBtn = h("button", { type: "button", text: "Show a good answer", on: { click: function () {
+          model.hidden = false; rate.hidden = false; showBtn.hidden = true;
+          if (!state.answers[key]) { state.answers[key] = { right: null, recall: true }; afterAnswer(); }
+        } } });
+        fs.appendChild(ta);
+        fs.appendChild(h("div", { class: "actions" }, [showBtn]));
+        fs.appendChild(model);
+        fs.appendChild(rate);
+        fs.appendChild(feedback);
+        if (state.answers[key]) { model.hidden = false; rate.hidden = false; showBtn.hidden = true; }
+      } else {
+        var name = "q-" + quizId + "-" + i;
+        var opts = h("div", { class: "options" });
+        var inputs = item.options.map(function (text, j) {
+          var input = h("input", { type: "radio", name: name, value: j });
+          opts.appendChild(h("label", null, [input, h("span", { html: text }), h("span", { class: "mark" })]));
+          return input;
+        });
+        var check = h("button", { type: "button", text: "Check answer" });
+        var again = h("button", { type: "button", text: "Try again", hidden: true });
+
+        var paint = function (pick) {
+          var right = pick === item.answer;
+          inputs.forEach(function (inp, j) {
+            inp.disabled = true;
+            inp.checked = j === pick;
+            var mark = inp.parentNode.querySelector(".mark");
+            mark.className = "mark";
+            mark.textContent = "";
+            if (j === item.answer) { mark.className = "mark right"; mark.textContent = j === pick ? "◄ correct" : "◄ the answer"; }
+            else if (j === pick) { mark.className = "mark wrong"; mark.textContent = "◄ your pick"; }
+          });
+          var why = (item.why && item.why[pick]) || item.explain || "";
+          var extra = "";
+          if (quizId === "pre" && item.from) {
+            var fromView = document.getElementById(item.from);
+            extra = " You'll see why in <a href=\"#" + item.from + "\">" + (fromView ? titleOf(fromView) : item.from) + "</a>.";
+          }
+          feedback.innerHTML = "<span class=\"verdict " + (right ? "right" : "wrong") + "\">" +
+            (right ? "Right." : "Not quite.") + "</span> " + why + extra;
+          check.hidden = true; again.hidden = false;
+        };
+        check.addEventListener("click", function () {
+          var pick = -1;
+          inputs.forEach(function (inp, j) { if (inp.checked) pick = j; });
+          if (pick < 0) { feedback.textContent = "Pick an answer first."; return; }
+          state.answers[key] = { pick: pick, right: pick === item.answer };
+          paint(pick);
+          afterAnswer();
+        });
+        again.addEventListener("click", function () {
+          inputs.forEach(function (inp) {
+            inp.disabled = false; inp.checked = false;
+            var mark = inp.parentNode.querySelector(".mark"); mark.className = "mark"; mark.textContent = "";
+          });
+          feedback.textContent = ""; check.hidden = false; again.hidden = true;
+          inputs[0].focus();
+        });
+        fs.appendChild(opts);
+        fs.appendChild(h("div", { class: "actions" }, [check, again]));
+        fs.appendChild(feedback);
+        var saved = state.answers[key];
+        if (saved && typeof saved.pick === "number") paint(saved.pick);
+      }
+      box.appendChild(fs);
+    });
+  }
+
+  function renderSummary(quizId) {
+    var out = document.querySelector('.quiz-summary[data-for="' + quizId + '"]');
+    if (!out) return;
+    var items = (C.quizzes || {})[quizId] || [];
+    var answered = items.filter(function (_, i) { return state.answers[quizId + ":" + i]; });
+    out.textContent = "";
+    if (answered.length < items.length) return;
+    var scored = items.map(function (it, i) { return { it: it, a: state.answers[quizId + ":" + i] }; })
+      .filter(function (x) { return x.a.right !== null; });
+    var right = scored.filter(function (x) { return x.a.right; }).length;
+    var p = h("p", { class: "result" }, ["You got ", h("strong", { text: right + " of " + scored.length }), "."]);
+    out.appendChild(p);
+    var revisit = [];
+    scored.forEach(function (x) { if (!x.a.right && x.it.from && revisit.indexOf(x.it.from) < 0) revisit.push(x.it.from); });
+    if (revisit.length) {
+      var q = h("p", { class: "meta" }, ["Worth another look: "]);
+      revisit.forEach(function (id, i) {
+        var v = document.getElementById(id);
+        if (i) q.appendChild(document.createTextNode(", "));
+        q.appendChild(h("a", { href: "#" + id, text: v ? titleOf(v) : id }));
+      });
+      out.appendChild(q);
+    }
+  }
+
+  /* ---------- flashcards with spaced review ---------- */
+  function buildDeck() {
+    var deckBox = document.getElementById("deck");
+    if (!deckBox) return;
+    var cards = (C.cards || []).map(function (c) { return { front: c.front, back: c.back + srcTag(c.src) }; });
+    if (C.glossaryCards !== false) {
+      Object.keys(C.glossary || {}).forEach(function (term) {
+        cards.push({ front: "What does <em>" + term + "</em> mean?", back: C.glossary[term] });
+      });
+    }
+    cards.forEach(function (c) { c.id = "c" + hash(c.front); });
+    if (!cards.length) { deckBox.appendChild(h("p", { class: "meta", text: "No cards for this page." })); return; }
+
+    var status = h("p", { class: "meta", "aria-live": "polite" });
+    var card = h("div", { class: "card" });
+    var front = h("div", { class: "front" });
+    var back = h("div", { class: "back", hidden: true });
+    card.appendChild(front); card.appendChild(back);
+    var showBtn = h("button", { type: "button", class: "primary", text: "Show answer" });
+    var missBtn = h("button", { type: "button", text: "Not yet", hidden: true });
+    var gotBtn = h("button", { type: "button", text: "Got it", hidden: true });
+    var allBtn = h("button", { type: "button", text: "Practice all cards anyway", hidden: true });
+    deckBox.appendChild(status);
+    deckBox.appendChild(card);
+    deckBox.appendChild(h("div", { class: "actions" }, [showBtn, missBtn, gotBtn, allBtn]));
+
+    var queue = [];
+    function isDue(c) { var r = state.cards[c.id]; return !r || r.due <= Date.now(); }
+    function learned() { return cards.filter(function (c) { var r = state.cards[c.id]; return r && r.box >= 1; }).length; }
+    function next() {
+      back.hidden = true; missBtn.hidden = true; gotBtn.hidden = true;
+      if (!queue.length) {
+        card.hidden = true; showBtn.hidden = true; allBtn.hidden = false;
+        var upcoming = cards.map(function (c) { return state.cards[c.id]; }).filter(Boolean)
+          .map(function (r) { return r.due; }).filter(function (d) { return d > Date.now(); }).sort()[0];
+        status.textContent = "Nothing due right now. " + learned() + " of " + cards.length + " remembered so far." +
+          (upcoming ? " Next review: " + new Date(upcoming).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) + "." : "");
+        return;
+      }
+      card.hidden = false; showBtn.hidden = false; allBtn.hidden = true;
+      front.innerHTML = queue[0].front;
+      back.innerHTML = queue[0].back;
+      status.textContent = queue.length + (queue.length === 1 ? " card" : " cards") + " to go. " +
+        learned() + " of " + cards.length + " remembered so far.";
+    }
+    showBtn.addEventListener("click", function () {
+      back.hidden = false; showBtn.hidden = true; missBtn.hidden = false; gotBtn.hidden = false; gotBtn.focus();
+    });
+    missBtn.addEventListener("click", function () {
+      var c = queue.shift();
+      state.cards[c.id] = { box: 0, due: Date.now() };
+      queue.push(c);                      // comes back later in this session
+      save(); next(); showBtn.focus();
+    });
+    gotBtn.addEventListener("click", function () {
+      var c = queue.shift();
+      var r = state.cards[c.id] || { box: 0 };
+      var box = Math.min((r.box || 0) + 1, INTERVALS.length - 1);
+      state.cards[c.id] = { box: box, due: Date.now() + INTERVALS[box] * DAY };
+      save(); next(); (queue.length ? showBtn : allBtn).focus();
+    });
+    allBtn.addEventListener("click", function () { queue = shuffle(cards); next(); showBtn.focus(); });
+    queue = shuffle(cards.filter(isDue));
+    next();
+  }
+
+  /* ---------- glossary ---------- */
+  function buildGlossary() {
+    var dl = document.getElementById("glossary-list");
+    if (!dl) return;
+    Object.keys(C.glossary || {}).sort(function (a, b) { return a.localeCompare(b); }).forEach(function (term) {
+      dl.appendChild(h("dt", { id: "g-" + slugify(term), html: term }));
+      dl.appendChild(h("dd", { html: C.glossary[term] }));
+    });
+  }
+
+  /* ---------- start ---------- */
+  buildGlossary();
+  [].forEach.call(document.querySelectorAll(".quiz[data-quiz]"), renderQuiz);
+  Object.keys(C.quizzes || {}).forEach(renderSummary);
+  buildDeck();
+  buildPagers();
+  buildContents();
+  updateProgress();
+  buildResume();
+  var nav = document.querySelector(".course-nav details");
+  if (nav && window.matchMedia("(max-width: 780px)").matches) nav.removeAttribute("open");
+  window.addEventListener("hashchange", route);
+  route();
+})();
+</script>
+<script>
+/* ===== What the Output Can't See: page interactives =====
+   Plain JavaScript. Nothing moves unless the reader acts, and nothing moves
+   at all under prefers-reduced-motion. Colors come from the stylesheet. */
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var reduceMQ = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function reduced() { return reduceMQ.matches; }
+  function cssv(n) { return getComputedStyle(root).getPropertyValue(n).trim() || "#000000"; }
+  var K = {};
+  ["c1", "c2", "c3", "c4", "c5", "c6", "lo", "hi", "ink", "ink-soft", "page", "tint"].forEach(function (k) { K[k] = cssv("--" + k); });
+  var SANS = "Verdana, Geneva, Tahoma, sans-serif";
+  function $(id) { return document.getElementById(id); }
+  function hash(x) { var s = Math.sin(x * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); }
+
+  /* A canvas that sizes itself to its container, including when a hidden part is opened. */
+  function makeScene(canvas, heightFor, draw, onResize) {
+    var ctx = canvas.getContext("2d"), s = { canvas: canvas, ctx: ctx, w: 0, h: 0 }, lastW = -1;
+    s.draw = function () { if (s.w) draw(s); };
+    function fit() {
+      var w = Math.round(canvas.parentElement.clientWidth);
+      if (!w || w === lastW) return;
+      lastW = w;
+      var h = Math.round(heightFor(w)), dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+      canvas.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      s.w = w; s.h = h;
+      if (onResize) onResize(s);
+      s.draw();
+    }
+    if (window.ResizeObserver) new ResizeObserver(fit).observe(canvas.parentElement);
+    window.addEventListener("resize", fit);
+    fit();
+    return s;
+  }
+
+  /* ---------------- Part 1: the machine ---------------- */
+  (function () {
+    var canvas = $("mach-canvas");
+    if (!canvas) return;
+    var LAYERS = [3, 4, 5, 4, 3], COLS = ["In", "A", "B", "C", "Out"];
+    var Q = {
+      paris: { answer: "Paris is in France.", route: [1, 2, 3, 1, 0] },
+      math: { answer: "17 × 3 = 51.", route: [0, 3, 1, 2, 1] },
+      self: { answer: "I am electric current flowing through copper wires.", route: [2, 0, 4, 3, 2] }
+    };
+    var SUB = {
+      copper: { name: "copper wires", medium: "electric current in copper wires", col: "c2" },
+      water: { name: "water pipes", medium: "water flowing through pipes", col: "c3" },
+      squirrel: { name: "squirrels with notes", medium: "trained squirrels carrying notes", col: "c4" },
+      neuron: { name: "neurons", medium: "living neurons", col: "c5" }
+    };
+    var M = { q: "paris", sub: "copper", p: 1, tried: { copper: true }, nodes: [], paths: {}, raf: 0 };
+    var DUR = 2600;
+
+    function layout(s) {
+      var padX = Math.max(28, s.w * 0.07), top = 40, bot = 32;
+      var sp = (s.h - top - bot) / 4, mid = top + (s.h - top - bot) / 2;
+      M.nodes = LAYERS.map(function (n, li) {
+        var x = padX + li * (s.w - 2 * padX) / (LAYERS.length - 1), col = [];
+        for (var ni = 0; ni < n; ni++) col.push({ x: x, y: mid + (ni - (n - 1) / 2) * sp });
+        return col;
+      });
+      buildPaths();
+    }
+    function buildPaths() {
+      if (!M.nodes.length) return;
+      M.paths = {};
+      for (var li = 0; li < LAYERS.length - 1; li++)
+        for (var a = 0; a < LAYERS[li]; a++)
+          for (var b = 0; b < LAYERS[li + 1]; b++)
+            M.paths[li + "-" + a + "-" + b] = mkPath(M.sub, M.nodes[li][a], M.nodes[li + 1][b], li * 100 + a * 10 + b);
+    }
+    function mkPath(sub, p, q, seed) {
+      var pts, i, u, v, dx = q.x - p.x, mx = (p.x + q.x) / 2;
+      if (sub === "copper") { var off = (((seed * 7) % 5) - 2) * Math.min(6, dx * 0.04); pts = [p, { x: mx + off, y: p.y }, { x: mx + off, y: q.y }, q]; }
+      else if (sub === "water") { pts = [p, q]; }
+      else if (sub === "squirrel") {
+        var cy = (p.y + q.y) / 2 - 10 - ((seed * 3) % 4) * 5; pts = [];
+        for (i = 0; i <= 20; i++) { u = i / 20; v = 1 - u; pts.push({ x: v * v * p.x + 2 * v * u * mx + u * u * q.x, y: v * v * p.y + 2 * v * u * cy + u * u * q.y }); }
+      } else {
+        var wob = (((seed * 37) % 21) - 10) * 1.4, c1 = { x: p.x + dx * 0.38, y: p.y + wob }, c2 = { x: p.x + dx * 0.62, y: q.y - wob }; pts = [];
+        for (i = 0; i <= 24; i++) { u = i / 24; v = 1 - u; pts.push({ x: v * v * v * p.x + 3 * v * v * u * c1.x + 3 * v * u * u * c2.x + u * u * u * q.x, y: v * v * v * p.y + 3 * v * v * u * c1.y + 3 * v * u * u * c2.y + u * u * u * q.y }); }
+      }
+      var cum = [0];
+      for (i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y));
+      return { pts: pts, cum: cum, len: cum[cum.length - 1] };
+    }
+    function pointAt(path, u) {
+      var d = u * path.len, pts = path.pts, cum = path.cum, i = 1;
+      while (i < cum.length - 1 && cum[i] < d) i++;
+      var seg = (cum[i] - cum[i - 1]) || 1, k = Math.max(0, Math.min(1, (d - cum[i - 1]) / seg)), a = pts[i - 1], b = pts[i];
+      return { x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k, ang: Math.atan2(b.y - a.y, b.x - a.x) };
+    }
+    function strokePath(ctx, path, u0, u1) {
+      ctx.beginPath();
+      if (u0 === undefined) { ctx.moveTo(path.pts[0].x, path.pts[0].y); for (var i = 1; i < path.pts.length; i++) ctx.lineTo(path.pts[i].x, path.pts[i].y); }
+      else { var n = Math.max(2, Math.ceil((u1 - u0) * 60)); for (var j = 0; j <= n; j++) { var pt = pointAt(path, u0 + (u1 - u0) * j / n); if (j) ctx.lineTo(pt.x, pt.y); else ctx.moveTo(pt.x, pt.y); } }
+      ctx.stroke();
+    }
+    function drawNode(ctx, sub, p, active, seed) {
+      var col = active ? K.c1 : K[SUB[sub].col];
+      ctx.setLineDash([]); ctx.lineCap = "round"; ctx.fillStyle = K.page; ctx.strokeStyle = col;
+      ctx.lineWidth = active ? 2 : 1.5;
+      if (sub === "copper") {
+        ctx.beginPath();
+        for (var i = -1; i <= 1; i++) { ctx.moveTo(p.x + i * 4, p.y - 6); ctx.lineTo(p.x + i * 4, p.y - 10); ctx.moveTo(p.x + i * 4, p.y + 6); ctx.lineTo(p.x + i * 4, p.y + 10); }
+        ctx.stroke();
+        ctx.beginPath(); ctx.rect(p.x - 9, p.y - 6.5, 18, 13); ctx.fill(); ctx.stroke();
+      } else if (sub === "water") {
+        ctx.lineWidth = 2.5; ctx.beginPath(); ctx.arc(p.x, p.y, 9.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(p.x - 4.5, p.y); ctx.lineTo(p.x + 4.5, p.y); ctx.moveTo(p.x, p.y - 4.5); ctx.lineTo(p.x, p.y + 4.5); ctx.stroke();
+      } else if (sub === "squirrel") {
+        ctx.beginPath(); ctx.arc(p.x, p.y, 10, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(p.x, p.y, 5.5, 0, Math.PI * 2); ctx.stroke();
+      } else {
+        ctx.beginPath();
+        for (var k = 0; k <= 40; k++) { var a = k / 40 * Math.PI * 2, r = 8.5 + 1.8 * Math.sin(a * 5 + seed), x = p.x + Math.cos(a) * r, y = p.y + Math.sin(a) * r; if (k) ctx.lineTo(x, y); else ctx.moveTo(x, y); }
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = col; ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    function drawSquirrel(ctx, pt) {
+      ctx.save(); ctx.translate(pt.x, pt.y); ctx.rotate(pt.ang * 0.6);
+      ctx.fillStyle = K.c4; ctx.strokeStyle = K.c4;
+      ctx.lineWidth = 4.5; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(-17, 1); ctx.quadraticCurveTo(-28, -1, -25, -12); ctx.quadraticCurveTo(-22, -19, -15, -14); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(-11, 0, 8, 5.5, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(-4, -2.5, 4.2, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(-2.5, -5.5); ctx.lineTo(-4.5, -10); ctx.lineTo(-6.5, -5.5); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = K.page; ctx.beginPath(); ctx.arc(-3, -3.4, 1, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+    function draw(s) {
+      var ctx = s.ctx, w = s.w, h = s.h, sub = M.sub, q = Q[M.q], col = K[SUB[sub].col];
+      if (!M.nodes.length) return;
+      ctx.clearRect(0, 0, w, h);
+      ctx.font = "11px " + SANS; ctx.fillStyle = K["ink-soft"]; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+      M.nodes.forEach(function (c, li) { ctx.fillText(COLS[li].toUpperCase(), c[0].x, 20); });
+      ctx.textAlign = "left";
+      ctx.fillText(("Material: " + SUB[sub].medium).toUpperCase(), 10, h - 10);
+      var segF = M.p * 4, segIdx = Math.min(3, Math.floor(segF)), u = M.p >= 1 ? 1 : segF - segIdx;
+      var routeKeys = [];
+      for (var li = 0; li < 4; li++) routeKeys.push(li + "-" + q.route[li] + "-" + q.route[li + 1]);
+      // idle connections: flat gray
+      Object.keys(M.paths).forEach(function (k) {
+        if (routeKeys.indexOf(k) >= 0) return;
+        ctx.setLineDash(sub === "squirrel" ? [2, 5] : []); ctx.lineCap = "butt"; ctx.lineJoin = "miter";
+        ctx.strokeStyle = sub === "squirrel" ? K.lo : K.hi; ctx.lineWidth = sub === "water" ? 4 : 1.5;
+        strokePath(ctx, M.paths[k]);
+      });
+      // the route, in the material's color
+      routeKeys.forEach(function (k) {
+        var path = M.paths[k];
+        ctx.setLineDash(sub === "squirrel" ? [4, 4] : []); ctx.lineCap = "round"; ctx.lineJoin = "round";
+        if (sub === "water") { ctx.strokeStyle = col; ctx.lineWidth = 10; strokePath(ctx, path); ctx.strokeStyle = K.page; ctx.lineWidth = 5.5; strokePath(ctx, path); }
+        else { ctx.strokeStyle = col; ctx.lineWidth = 2; strokePath(ctx, path); }
+      });
+      // the part of the route the signal has covered, in navy
+      ctx.setLineDash([]); ctx.strokeStyle = K.c1; ctx.lineWidth = 2;
+      for (li = 0; li < 4; li++) {
+        var pth = M.paths[routeKeys[li]];
+        if (li < segIdx || M.p >= 1) strokePath(ctx, pth);
+        else if (li === segIdx) strokePath(ctx, pth, 0, u);
+      }
+      M.nodes.forEach(function (c, l) {
+        c.forEach(function (p, ni) {
+          var reached = q.route[l] === ni && (M.p >= 1 || l <= segIdx);
+          drawNode(ctx, sub, p, reached, l * 10 + ni);
+        });
+      });
+      if (M.p < 1) {
+        var pt = pointAt(M.paths[routeKeys[segIdx]], u);
+        if (sub === "squirrel") drawSquirrel(ctx, pt);
+        ctx.fillStyle = K.c1; ctx.beginPath(); ctx.arc(pt.x, pt.y, 5, 0, Math.PI * 2); ctx.fill();
+      } else {
+        var op = M.nodes[4][q.route[4]];
+        ctx.fillStyle = K.c1; ctx.beginPath(); ctx.arc(op.x, op.y, 4.5, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    var scene = makeScene(canvas, function (w) { return Math.max(240, Math.min(360, w * 0.48)); }, draw, layout);
+    var out = $("mach-out");
+
+    function run() {
+      cancelAnimationFrame(M.raf);
+      if (reduced()) { M.p = 1; scene.draw(); out.textContent = Q[M.q].answer; return; }
+      out.textContent = "…"; M.p = 0;
+      var t0 = performance.now();
+      function step(t) {
+        M.p = Math.min(1, (t - t0) / DUR); scene.draw();
+        if (M.p < 1) M.raf = requestAnimationFrame(step); else out.textContent = Q[M.q].answer;
+      }
+      M.raf = requestAnimationFrame(step);
+    }
+    function routeText(r) { return r.map(function (n, i) { return COLS[i] + " " + (n + 1); }).join(" → "); }
+    function update() {
+      $("mach-route").textContent = routeText(Q[M.q].route);
+      $("mach-tried").textContent = Object.keys(M.tried).length + " of 4";
+      $("mach-truth-row").hidden = M.q !== "self";
+      var ok = M.sub === "copper", v = $("mach-truth");
+      v.textContent = ok ? "True for this build" : "False for this build";
+      v.className = "verdict " + (ok ? "ok" : "no");
+    }
+    [].forEach.call(document.querySelectorAll('input[name="mq"]'), function (r) {
+      r.addEventListener("change", function () {
+        M.q = r.value; M.tried = {}; M.tried[M.sub] = true; update();
+        $("mach-status").textContent = M.q === "self"
+          ? "Now change the material and watch whether the answer stays true."
+          : "New question. Try it on another material.";
+        run();
+      });
+    });
+    [].forEach.call(document.querySelectorAll('input[name="msub"]'), function (r) {
+      r.addEventListener("change", function () {
+        M.sub = r.value; M.tried[M.sub] = true; buildPaths(); update();
+        $("mach-status").textContent = "Rebuilt from " + SUB[M.sub].name + ". Same route, same answer.";
+        run();
+      });
+    });
+    update();
+  })();
+
+  /* ---------------- shared: two-button sorting cards ---------------- */
+  function sortGame(opts) {
+    var grid = $(opts.grid), before = opts.before ? $(opts.before) : null;
+    var answers = opts.items.map(function () { return null; }), cards = [];
+    function score() {
+      var n = 0, c = 0;
+      answers.forEach(function (v, i) { if (v !== null) { n++; if (v === opts.items[i].a) c++; } });
+      $(opts.score).textContent = "Sorted " + n + " of " + opts.items.length + " · " + c + " correct";
+    }
+    opts.items.forEach(function (f, i) {
+      var el = document.createElement("div"); el.className = "fact";
+      var t = document.createElement("p"); t.className = "t"; t.textContent = f.t;
+      var btns = document.createElement("div"); btns.className = "btns";
+      var fb = document.createElement("p"); fb.className = "fb"; fb.setAttribute("aria-live", "polite");
+      opts.labels.forEach(function (lab, j) {
+        var b = document.createElement("button"); b.type = "button"; b.className = "pick"; b.textContent = lab;
+        b.addEventListener("click", function () {
+          if (answers[i] !== null) return;
+          var right = (j === 0) === f.a; answers[i] = (j === 0);
+          el.setAttribute("data-state", right ? "right" : "wrong");
+          b.setAttribute("aria-pressed", "true");
+          [].forEach.call(btns.querySelectorAll(".pick"), function (x) { if (x !== b) x.disabled = true; });
+          fb.textContent = "";
+          var mk = document.createElement("span"); mk.className = "mk " + (right ? "ok" : "no"); mk.textContent = right ? "Right" : "Other bin";
+          fb.appendChild(mk); fb.appendChild(document.createTextNode(f.why));
+          score();
+        });
+        btns.appendChild(b);
+      });
+      el.appendChild(t); el.appendChild(btns); el.appendChild(fb);
+      if (before) grid.insertBefore(el, before); else grid.appendChild(el);
+      cards.push({ el: el, btns: btns, fb: fb });
+    });
+    score();
+    return {
+      reset: function () {
+        answers = answers.map(function () { return null; });
+        cards.forEach(function (c) {
+          c.el.removeAttribute("data-state"); c.fb.textContent = "";
+          [].forEach.call(c.btns.querySelectorAll(".pick"), function (x) { x.disabled = false; x.removeAttribute("aria-pressed"); });
+        });
+        score();
+      }
+    };
+  }
+
+  /* ---------------- Part 2: sort the facts ---------------- */
+  (function () {
+    if (!$("sort-grid")) return;
+    var game = sortGame({
+      grid: "sort-grid", before: "sort-final", score: "sort-score",
+      labels: ["Changes the output", "Can't change it"],
+      items: [
+        { t: "Its memory holds the fact that Paris is in France.", a: true, why: "Ask about Paris and this fact shapes the reply. Functional layer." },
+        { t: "Its power supply weighs 4.2 kilograms.", a: false, why: "Make it heavier or lighter and every answer stays the same. Physical layer." },
+        { t: "Its signals travel as electric current through copper.", a: false, why: "Run the same pattern as water in pipes and the answers match. Physical layer." },
+        { t: "It remembers what you said a minute ago.", a: true, why: "Your earlier words change its next reply. Functional layer." },
+        { t: "Its chips are made of silicon.", a: false, why: "Carbon chips running the same algorithm give the same answers. Physical layer." },
+        { t: "The pipes inside it are wet.", a: false, why: "The wetness stays in the pipes and never reaches an answer. Physical layer." },
+        { t: "It has learned that 7 × 8 = 56.", a: true, why: "Ask it to multiply and this fact shows up in the output. Functional layer." },
+        { t: "Its case is painted blue.", a: false, why: "Repaint it red and nothing it says changes. Physical layer." }
+      ]
+    });
+    var finalCard = $("sort-final"), fb = $("sort-final-fb");
+    var finals = [$("sort-final-a"), $("sort-final-b")];
+    finals.forEach(function (b) {
+      b.addEventListener("click", function () {
+        if (finalCard.getAttribute("data-done")) return;
+        finalCard.setAttribute("data-done", "1");
+        b.setAttribute("aria-pressed", "true");
+        finals.forEach(function (x) { if (x !== b) x.disabled = true; });
+        fb.textContent = (b.getAttribute("data-v") === "1"
+          ? "That is where Yudkowsky's argument puts it. "
+          : "That's a common first instinct, and it's the view the argument pushes against. ") +
+          "On Yudkowsky's view, your awareness of your own awareness is part of what makes you say \"I think, therefore I am.\" If so, it changes what comes out of your mouth, and the argument sorts it with the Paris fact. Some philosophers deny that step. ";
+        var a = document.createElement("a"); a.href = "#m4"; a.textContent = "Part 4 lays this out step by step.";
+        fb.appendChild(a);
+      });
+    });
+    $("sort-reset").addEventListener("click", function () {
+      game.reset();
+      finalCard.removeAttribute("data-done"); fb.textContent = "";
+      finals.forEach(function (x) { x.disabled = false; x.removeAttribute("aria-pressed"); });
+    });
+  })();
+
+  /* ---------------- Part 3: the storm (drawn still) ---------------- */
+  (function () {
+    var canvas = $("rain-canvas"), input = $("rain-rate");
+    if (!canvas || !input) return;
+    var rate = +input.value;
+    function draw(s) {
+      var ctx = s.ctx, w = s.w, h = s.h; ctx.clearRect(0, 0, w, h);
+      var bez = 8, mw = Math.min(w * 0.64, 440), mh = Math.min(mw * 0.58, h - 96), rx = (w - mw) / 2, ry = 20;
+      var deskY = ry + mh + bez + 34;
+      ctx.fillStyle = K.lo; ctx.fillRect(12, deskY, w - 24, 8);
+      ctx.fillStyle = K["ink-soft"];
+      ctx.beginPath(); ctx.moveTo(w / 2 - 10, ry + mh + bez); ctx.lineTo(w / 2 + 10, ry + mh + bez); ctx.lineTo(w / 2 + 20, deskY); ctx.lineTo(w / 2 - 20, deskY); ctx.closePath(); ctx.fill();
+      ctx.fillRect(rx - bez, ry - bez, mw + 2 * bez, mh + 2 * bez);
+      ctx.save(); ctx.beginPath(); ctx.rect(rx, ry, mw, mh); ctx.fillStyle = K.page; ctx.fill(); ctx.clip();
+      var k = rate / 100;
+      ctx.fillStyle = K.lo;
+      for (var c = 0; c < 5; c++) { ctx.beginPath(); ctx.ellipse(rx + mw * (0.1 + c * 0.2), ry + 6, mw * 0.14, 10 + 10 * k, 0, 0, Math.PI * 2); ctx.fill(); }
+      var gH = mh * 0.17, gy = ry + mh - gH;
+      ctx.fillStyle = K.hi; ctx.fillRect(rx, gy, mw, gH);
+      var ph = gH * 0.92 * Math.min(1, k * 1.15); ctx.fillStyle = K.c3; ctx.fillRect(rx, ry + mh - ph, mw, ph);
+      var n = Math.round(150 * k), range = mh - gH - 24;
+      ctx.strokeStyle = K.c3; ctx.lineWidth = 1.5; ctx.lineCap = "round"; ctx.beginPath();
+      for (var i = 0; i < n; i++) { var x = rx + hash(i + 1) * mw, y = ry + 22 + hash(i + 0.37) * range; ctx.moveTo(x, y); ctx.lineTo(x - 2, y + 9); }
+      ctx.stroke();
+      ctx.font = "11px " + SANS; ctx.fillStyle = K["ink-soft"]; ctx.textAlign = "left";
+      ctx.fillText("SIMULATION · " + rate + " MM/H", rx + 10, gy - 8);
+      ctx.restore();
+      ctx.font = "11px " + SANS; ctx.fillStyle = K["ink-soft"]; ctx.textAlign = "left";
+      ctx.fillText("YOUR DESK · 0 ML OF WATER", 16, deskY + 24);
+    }
+    var scene = makeScene(canvas, function (w) { return Math.max(230, Math.min(320, w * 0.42)); }, draw, null);
+    function label(v) { if (v === 0) return "clear sky"; if (v < 2.5) return "light rain"; if (v <= 7.6) return "moderate rain"; if (v <= 50) return "heavy rain"; return "violent rain"; }
+    function update() {
+      rate = +input.value;
+      $("rain-val").textContent = rate + " mm/h";
+      $("rain-in").textContent = rate + " mm/h · " + label(rate);
+      input.setAttribute("aria-valuetext", rate + " millimeters per hour, " + label(rate));
+      scene.draw();
+    }
+    input.addEventListener("input", update);
+    update();
+  })();
+
+  /* ---------------- Part 4: build the argument ---------------- */
+  (function () {
+    var next = $("arg-next");
+    if (!next) return;
+    var s2 = $("arg-2"), s3 = $("arg-3"), predict = $("arg-predict"), fb = $("arg-fb");
+    var FEED = [
+      "Not quite. Steps 1 and 2 together say consciousness isn't the kind of material property that leaves your words untouched.",
+      "That's the conclusion. Getting there takes one more assumption, explained below the diagram.",
+      "That goes further than the argument. It says the material doesn't decide the question. Whether a given computer is conscious stays open."
+    ];
+    next.addEventListener("click", function () {
+      s2.hidden = false; predict.hidden = false; next.hidden = true;
+      var first = predict.querySelector("input"); if (first) first.focus();
+    });
+    $("arg-check").addEventListener("click", function () {
+      var pick = predict.querySelector('input[name="argp"]:checked');
+      if (!pick) { fb.textContent = "Pick an answer first."; return; }
+      fb.textContent = FEED[+pick.value] + " Step 3 is now shown above.";
+      s3.hidden = false;
+    });
+    $("arg-reset").addEventListener("click", function () {
+      s2.hidden = true; s3.hidden = true; predict.hidden = true; next.hidden = false; fb.textContent = "";
+      [].forEach.call(predict.querySelectorAll("input"), function (x) { x.checked = false; });
+      next.focus();
+    });
+  })();
+
+  /* ---------------- Part 5: replacement ---------------- */
+  (function () {
+    var canvas = $("swap-canvas"), input = $("swap-range");
+    if (!canvas || !input) return;
+    var N = { f: +input.value / 1000, moment: 1, cells: [], cols: 0, rows: 0, s: 16, ox: 0, oy: 0 };
+    function rng(a) { return function () { a |= 0; a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+    function layout(s) {
+      var cs = s.w < 520 ? 15 : 18; N.s = cs;
+      N.cols = Math.floor((s.w - 20) / cs); N.rows = Math.floor((s.h - 20) / cs);
+      var n = N.cols * N.rows, r = rng(1637), order = [], i;
+      for (i = 0; i < n; i++) order.push(i);
+      for (i = n - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), t = order[i]; order[i] = order[j]; order[j] = t; }
+      N.cells = new Array(n);
+      order.forEach(function (ci, rank) { N.cells[ci] = rank; });
+      N.ox = (s.w - N.cols * cs) / 2; N.oy = (s.h - N.rows * cs) / 2;
+    }
+    function draw(s) {
+      var ctx = s.ctx, cs = N.s, n = N.cells.length, cut = N.f * n;
+      ctx.clearRect(0, 0, s.w, s.h);
+      for (var i = 0; i < n; i++) {
+        var x = N.ox + (i % N.cols) * cs + cs / 2, y = N.oy + Math.floor(i / N.cols) * cs + cs / 2;
+        if (N.cells[i] < cut) {
+          ctx.fillStyle = K.c4; ctx.fillRect(x - cs * 0.3, y - cs * 0.3, cs * 0.6, cs * 0.6);
+          ctx.fillStyle = K.page; ctx.fillRect(x - cs * 0.13, y - cs * 0.09, cs * 0.26, cs * 0.18);
+        } else {
+          ctx.fillStyle = K.c5; ctx.beginPath(); ctx.arc(x, y, cs * 0.27, 0, Math.PI * 2); ctx.fill();
+        }
+        if (hash(i * 0.731 + N.moment * 17.13) < 0.08) {
+          ctx.strokeStyle = K.c1; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x, y, cs * 0.44, 0, Math.PI * 2); ctx.stroke();
+        }
+      }
+    }
+    var scene = makeScene(canvas, function (w) { return Math.max(190, Math.min(290, w * 0.36)); }, draw, layout);
+    function pct(f) { return (f * 100).toFixed(1).replace(/\.0$/, "") + "%"; }
+    function update() {
+      N.f = +input.value / 1000;
+      var p = pct(N.f);
+      $("swap-pct").textContent = p;
+      $("swap-count").textContent = Math.round(N.f * 86e9).toLocaleString("en-US") + " of about 86 billion";
+      $("swap-said").textContent = "Said with " + p + " of neurons replaced";
+      $("swap-done").hidden = N.f < 1;
+      input.setAttribute("aria-valuetext", p + " of neurons replaced");
+      scene.draw();
+    }
+    input.addEventListener("input", update);
+    $("swap-step").addEventListener("click", function () {
+      N.moment++; $("swap-moment").textContent = "Moment " + N.moment; scene.draw();
+    });
+    update();
+  })();
+
+  /* ---------------- Part 6: the electron test bench ---------------- */
+  (function () {
+    var radios = document.querySelectorAll('input[name="world"]');
+    if (!radios.length) return;
+    var WORLDS = [
+      { name: "Pearl speeds the spin", pearl: "yes", by: "the pearl" },
+      { name: "Idle pearl", pearl: "yes", by: "an ordinary physics rule" },
+      { name: "No pearl", pearl: "no", by: "an ordinary physics rule" },
+      { name: "Simulation", pearl: "no", by: "a line of code" }
+    ];
+    var visited = {}, log = $("world-log");
+    function show(i) {
+      var w = WORLDS[i];
+      $("elec-pearl").setAttribute("visibility", w.pearl === "yes" ? "visible" : "hidden");
+      $("elec-l1").textContent = "Pearl inside: " + w.pearl;
+      $("elec-l2").textContent = "Spin sped up by: " + (w.by === "an ordinary physics rule" ? "a physics rule" : w.by);
+      $("elec-svg").setAttribute("aria-label", "An electron with a spin arrow. Pearl of awareness inside: " + w.pearl + ". Spin sped up by " + w.by + ".");
+      if (!visited[i]) {
+        visited[i] = true;
+        var tr = document.createElement("tr");
+        [w.name, w.pearl, w.by, "same as the others", "\"I think, therefore I am.\""].forEach(function (txt, k) {
+          var cell = document.createElement(k ? "td" : "th"); if (!k) cell.setAttribute("scope", "row");
+          cell.textContent = txt; tr.appendChild(cell);
+        });
+        log.appendChild(tr);
+      }
+      var n = Object.keys(visited).length;
+      $("world-status").textContent = "Worlds visited: " + n + " of 4. Differences in what the brain says: 0." +
+        (n === 4 ? " Only the story about what speeds the spin changes. Nothing you could say or notice from inside tells the worlds apart. (B ¶4)" : "");
+    }
+    [].forEach.call(radios, function (r) { r.addEventListener("change", function () { show(+r.value); }); });
+    show(0);
+  })();
+
+  /* ---------------- Part 7: seen or inferred? ---------------- */
+  (function () {
+    if (!$("infer-grid")) return;
+    sortGame({
+      grid: "infer-grid", score: "infer-score",
+      labels: ["Observed", "Inferred"],
+      items: [
+        { t: "The chicken pulled its foot away from the hot plate.", a: true, why: "You can watch it happen. Observed." },
+        { t: "The chicken felt pain.", a: false, why: "You see the behavior and infer the feeling. Inferred." },
+        { t: "The chatbot printed \"I feel sad.\"", a: true, why: "The words are on the screen. Observed." },
+        { t: "The chatbot feels sad.", a: false, why: "You read the words and infer a feeling, or its absence. Inferred." },
+        { t: "Your friend winced and said \"ouch.\"", a: true, why: "You see the wince and hear the word. Observed." },
+        { t: "Your friend is in pain.", a: false, why: "Even for people, the feeling itself is inferred from what you see and hear. Inferred." },
+        { t: "The wind-up car rolled across the floor.", a: true, why: "You can watch it roll. Observed." },
+        { t: "The wind-up car wants to reach the wall.", a: false, why: "Wanting is something you'd have to infer, and here the inference is a poor one. Inferred." }
+      ]
+    });
+    var grid = $("infer-grid");
+    grid.classList.add("infer");
+  })();
+
+  /* ---------------- Part 8: which parts count? ---------------- */
+  (function () {
+    var table = $("lens-table");
+    if (!table) return;
+    var NOTES = [
+      "Talking about its own states: the chatbot and the human pass; the chicken and the mosquito don't. This is closest to Yudkowsky's lens, though his own bar is higher: a system that truthfully says \"I feel sad.\" Whether a chatbot's talk about itself is truthful is the open question. <span class=\"src\">(C ¶22)</span>",
+      "Reacting to damage and learning: the mosquito, the chicken and the human pass. The chatbot has no body to damage. Many animal-consciousness researchers weigh evidence like this.",
+      "A nervous system: the mosquito, the chicken and the human pass. On this lens no computer could ever pass, which is the view Part 4 argues against."
+    ];
+    function show(k) {
+      [].forEach.call(table.querySelectorAll("[data-col]"), function (c) { c.classList.toggle("on", +c.getAttribute("data-col") === k); });
+      [].forEach.call(table.querySelectorAll("tbody tr"), function (tr) {
+        var cell = tr.querySelector('td[data-col="' + k + '"]');
+        tr.classList.toggle("pass", !!cell && cell.textContent.trim() === "yes");
+      });
+      $("lens-result").innerHTML = NOTES[k];
+    }
+    [].forEach.call(document.querySelectorAll('input[name="lens"]'), function (r) { r.addEventListener("change", function () { show(+r.value); }); });
+    show(0);
+  })();
+
+  /* ---------------- Part 9: match each reply ---------------- */
+  (function () {
+    var box = $("match-box");
+    if (!box) return;
+    var REPLIES = [
+      "What you say depends only on the steps. A physical structure that never changes the steps can't be what makes you say \"I think, therefore I am.\"",
+      "Then your belief that you're conscious isn't caused by your being conscious. A version of you with no experience would say the same words for the same reasons.",
+      "This is a speculative proposal. No experiment has shown processes in brains that no algorithm could copy.",
+      "Digestion changes physical stuff, so it sits in the physical layer. Consciousness changes what you say, and a copy that keeps the pattern says everything the original says, so Yudkowsky sees no room for biology to add something the copy lacks."
+    ];
+    var OBJ = [
+      { t: "Consciousness doesn't cause the words (epiphenomenalism).", a: 1, note: "Chalmers calls this the paradox of phenomenal judgment. Some philosophers accept the cost." },
+      { t: "Brains have special biological powers (Searle).", a: 3, note: "Searle himself (1992) described, as one possibility, a chip-by-chip replacement in which behavior stays the same while experience shrinks away. Chalmers's fading-qualia argument in Part 5 is aimed at that idea. Searle's defenders say this reply assumes what it needs to prove." },
+      { t: "Same steps, different physical structure (Integrated Information Theory).", a: 0, note: "IIT's defenders reply that consciousness isn't fixed by the steps at all, so a perfect step-by-step simulation can still lack it. That dispute is open." },
+      { t: "Brains might not be algorithms (Penrose and Hameroff).", a: 2, note: "If they were right, there'd be no pattern to move onto new material." }
+    ];
+    var rows = OBJ.map(function (o, i) {
+      var row = document.createElement("div"); row.className = "match-row";
+      var lab = document.createElement("label"); lab.setAttribute("for", "match-" + i); lab.className = "obj-t";
+      lab.textContent = (i + 1) + ". " + o.t;
+      var sel = document.createElement("select"); sel.id = "match-" + i;
+      var ph = document.createElement("option"); ph.value = ""; ph.textContent = "Choose a reply…"; sel.appendChild(ph);
+      REPLIES.forEach(function (r, j) { var op = document.createElement("option"); op.value = String(j); op.textContent = r; sel.appendChild(op); });
+      var fb = document.createElement("p"); fb.className = "fb"; fb.setAttribute("aria-live", "polite");
+      row.appendChild(lab); row.appendChild(sel); row.appendChild(fb);
+      box.appendChild(row);
+      return { sel: sel, fb: fb, o: o };
+    });
+    $("match-check").addEventListener("click", function () {
+      var right = 0, blank = 0;
+      rows.forEach(function (r) {
+        r.fb.textContent = "";
+        if (r.sel.value === "") { blank++; return; }
+        var ok = +r.sel.value === r.o.a; if (ok) right++;
+        var mk = document.createElement("span"); mk.className = "mk " + (ok ? "ok" : "no"); mk.textContent = ok ? "✓ Matches" : "✗ Not this one";
+        r.fb.appendChild(mk);
+        if (ok) r.fb.appendChild(document.createTextNode(r.o.note));
+      });
+      $("match-result").textContent = blank ? "Choose a reply for every objection, then check." : "You matched " + right + " of 4.";
+    });
+    $("match-reset").addEventListener("click", function () {
+      rows.forEach(function (r) { r.sel.value = ""; r.fb.textContent = ""; });
+      $("match-result").textContent = "";
+    });
+  })();
 })();
 </script>
 </body>
