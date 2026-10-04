@@ -2,7 +2,7 @@
 
 A log of things I'm learning. Most entries link to an exhibit: a small interactive page built to work through one idea.
 
-Live site: https://maiernoah.github.io/learning-log/
+Live site: https://noahmaier.net/
 
 ## What's in here
 
@@ -55,7 +55,17 @@ Choose Code, then Download ZIP, unzip it, and double-click `index.html`. Exhibit
 
 ## Custom domain
 
-Buy the domain from any registrar, then add it under the repository's Settings, Pages, Custom domain. GitHub's guide covers the DNS records to set at the registrar: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site
+The site is served at noahmaier.net, registered at Namecheap. The `CNAME` file in this repository holds the domain name; deleting it turns the custom domain off. The DNS records at Namecheap (Advanced DNS) are:
+
+| Type | Host | Value |
+|---|---|---|
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| CNAME | www | maiernoah.github.io. |
+
+GitHub's guide to custom domains: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site
 
 ## Change the name or look
 
