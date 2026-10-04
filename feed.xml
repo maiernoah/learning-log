@@ -6,7 +6,17 @@
   <description>Webpages, notes, and videos to help me learn complicated things.</description>
   <language>en-us</language>
   <atom:link href="https://noahmaier.net/feed.xml" rel="self" type="application/rss+xml"/>
-  <lastBuildDate>Sun, 04 Oct 2026 21:54:00 GMT</lastBuildDate>
+  <lastBuildDate>Sun, 04 Oct 2026 23:49:00 GMT</lastBuildDate>
+  <item>
+    <title>Cameron Berg's Look Inside the Machine</title>
+    <link>https://noahmaier.net/exhibits/cameron-berg-inside-the-machine/</link>
+    <guid isPermaLink="false">https://noahmaier.net/#cameron-berg-inside-the-machine</guid>
+    <pubDate>Sun, 04 Oct 2026 23:49:00 GMT</pubDate>
+    <category>artificial intelligence</category>
+    <category>consciousness</category>
+    <category>cameron berg</category>
+    <description><![CDATA[<p>A nine-part course on six papers by Cameron Berg and his collaborators (2024 to 2026) about what happens inside AI models that act like minds: self-other overlap and deception, models reporting experience under self-reference, Dark Triad feature steering, hidden coalitions among agents, the pain axis, and Berg's theory that learning requires feeling. Readers find a pain direction and turn the steering dial, run the burglar test, cut a network of agents, try the button experiments, separate surprise from valence, and sort measurements from interpretations. Quizzes and spaced review cards throughout.</p><p><a href="https://noahmaier.net/exhibits/cameron-berg-inside-the-machine/">Open the interactive page</a></p>]]></description>
+  </item>
   <item>
     <title>The Practice of Asking</title>
     <link>https://noahmaier.net/exhibits/the-practice-of-asking/</link>
