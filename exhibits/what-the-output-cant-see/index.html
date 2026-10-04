@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What the Output Can't See</title>
+<style>
+/* ===== Learning Log house style (exhibits) v1 =====
+   Matches noahmaier.net: white page, Times for reading, Verdana for
+   controls, blue underlined links, two-tone rules, gray beveled buttons. */
+:root {
+  --page: #ffffff;
+  --ink: #000000;
+  --ink-soft: #2b2b2b;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --active: #ff0000;
+  --lo: #999999;          /* rule, border, axis */
+  --hi: #e2e2e2;          /* rule highlight, gridline */
+  --tint: #f2f2f2;        /* callout and table-header fill */
+  --field: #6e6e6e;       /* input border */
+  --btn: #c0c0c0;         /* button face */
+  --btn-face: #dfdfdf;
+  --btn-lo: #808080;
+  --btn-dark: #0a0a0a;
+  --new: #cc0000;
+  /* data colors, in order: classic HTML named colors */
+  --c1: #000080;  /* navy */
+  --c2: #800000;  /* maroon */
+  --c3: #008080;  /* teal */
+  --c4: #808000;  /* olive (marks only; too light for text) */
+  --c5: #800080;  /* purple */
+  --c6: #008000;  /* green */
+  --serif: "Times New Roman", Times, serif;
+  --sans: Verdana, Geneva, Tahoma, sans-serif;
+  --mono: "Courier New", Courier, monospace;
+}
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body { margin: 0; padding: 10px 16px 32px; background: var(--page); color: var(--ink);
+       font: 18px/1.45 var(--serif); -webkit-text-size-adjust: 100%; }
+.page { max-width: 1020px; }
+main p, .prose { max-width: 38em; }
+a { color: var(--link); } a:visited { color: var(--visited); } a:active { color: var(--active); }
+:focus-visible { outline: 2px dotted var(--ink); outline-offset: 2px; }
+
+h1 { font-size: 2.3em; line-height: 1.1; margin: 0.35em 0 0.15em; }
+h2 { font-size: 1em; font-weight: bold; margin: 1.6em 0 0.7em; padding-bottom: 2px;
+     border-bottom: 1px solid var(--lo); }
+h3 { font-size: 1.15em; line-height: 1.25; margin: 1.2em 0 0.3em; }
+p { margin: 0 0 0.8em; }
+.dek { font-style: italic; margin: 0 0 0.5em; }
+.nav { font: 13px/1.6 var(--sans); margin: 0; }
+hr { border: 0; border-top: 1px solid var(--lo); border-bottom: 1px solid var(--hi);
+     height: 0; margin: 10px 0 14px; }
+code, pre, kbd { font-family: var(--mono); font-size: 0.9em; }
+
+/* controls and small text use Verdana */
+label, legend, button, input, select, textarea, table, figcaption, output, .ui, .meta {
+  font-family: var(--sans); }
+.ui, .meta, figcaption { font-size: 13px; line-height: 1.5; }
+.meta { color: var(--ink-soft); }
+p.meta { margin: 6px 0 12px; }
+
+fieldset { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi);
+           margin: 0 0 16px; padding: 8px 12px 12px; min-width: 0; }
+legend { font-size: 13px; font-weight: bold; padding: 0 4px; }
+label { font-size: 13px; }
+.choices { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.choices label { display: inline-flex; align-items: center; gap: 5px; }
+input[type=radio], input[type=checkbox], input[type=range] { accent-color: var(--c1); }
+
+button {
+  font-size: 13px; line-height: 1.2; color: #000; background: var(--btn);
+  border: 0; border-radius: 0; padding: 6px 12px; cursor: pointer;
+  box-shadow: inset -1px -1px var(--btn-dark), inset 1px 1px #fff,
+              inset -2px -2px var(--btn-lo), inset 2px 2px var(--btn-face);
+}
+button:active, button[aria-pressed="true"] {
+  box-shadow: inset 1px 1px var(--btn-dark), inset -1px -1px #fff,
+              inset 2px 2px var(--btn-lo), inset -2px -2px var(--btn-face);
+  padding: 7px 11px 5px 13px;
+}
+button:disabled { color: var(--btn-lo); text-shadow: 1px 1px #fff; cursor: default; }
+button.primary { font-weight: bold; }
+
+input[type=text], input[type=number], input[type=search], input[type=email],
+select, textarea {
+  font-size: 14px; color: var(--ink); background: #fff; border: 1px solid var(--field);
+  border-radius: 0; box-shadow: inset 1px 1px 0 #b4b4b4; padding: 4px 6px;
+}
+
+table { border-collapse: collapse; font-size: 13px; line-height: 1.4; }
+th, td { border: 1px solid var(--lo); padding: 4px 8px; text-align: left; vertical-align: top; }
+th { background: var(--tint); }
+
+.box { background: var(--tint); box-shadow: inset 1px 1px var(--lo), inset -1px -1px var(--hi);
+       padding: 8px 10px; margin: 0 0 1em; font: 13px/1.5 var(--sans); }
+.result { font-size: 1.15em; }
+.result strong { font-variant-numeric: tabular-nums; }
+
+.meter { height: 16px; background: #fff; border: 1px solid var(--field);
+         box-shadow: inset 1px 1px 0 #b4b4b4; }
+.meter > div { height: 100%; width: 0; background: var(--c1); }
+
+footer address { font-style: normal; font-size: 0.85em; }
+
+@media (max-width: 780px) { body { font-size: 17px; padding: 8px 16px 28px; } h1 { font-size: 1.8em; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media print { .nav { display: none; } }
+
+/* ===== Page layout: What the Output Can't See ===== */
+
+/* The drawing script reads these names with getComputedStyle.
+   Each one points at a house variable; none adds a color. */
+:root {
+  --paper: var(--page);
+  --bench: var(--tint);
+  --card: var(--page);
+  --ink2: var(--ink-soft);
+  --rule: var(--lo);
+  --signal: var(--c1);        /* the pattern: the one color that never changes */
+  --signal-soft: var(--hi);
+  --screen: var(--page);
+  --screen-ink: var(--ink-soft);
+  --copper: var(--c2);
+  --water: var(--c3);
+  --fur: var(--c4);
+  --flesh: var(--c5);
+  --ok: var(--c6);
+  --no: var(--c2);
+  --amber: var(--c5);
+}
+
+[hidden] { display: none !important; }
+section { min-width: 0; }
+p.kicker { margin: 2.6em 0 0; }
+p.kicker + h2 { margin-top: 0.15em; }
+h2 .pipe { color: var(--c3); }
+.lbl { font: bold 13px/1.5 var(--sans); margin-right: 6px; }
+.tag { display: inline-block; font: bold 10px/1.3 var(--sans); letter-spacing: 0.06em;
+       text-transform: uppercase; padding: 1px 4px; border: 1px solid currentColor;
+       vertical-align: 0.15em; white-space: nowrap; }
+.tag.est { color: var(--c6); }
+.tag.arg { color: var(--c1); }
+.tag.con { color: var(--c2); }
+.legend .it { display: inline-block; margin: 0 16px 4px 0; }
+
+/* Try-it areas: full page width */
+.bench { margin: 1.4em 0 1.6em; }
+.bench > h3 { margin-top: 0; }
+.seg { gap: 6px; }
+.chip[aria-pressed="true"] { background: var(--btn-face); }
+.sw { display: inline-block; width: 10px; height: 10px; border: 1px solid var(--ink);
+      margin-right: 6px; vertical-align: -1px; }
+.stage { border: 1px solid var(--lo); background: var(--page); margin: 0 0 12px; }
+.stage canvas { display: block; width: 100%; }
+.result .pr { font: 13px var(--sans); color: var(--ink-soft); margin-right: 4px; }
+table.readouts { margin: 0 0 6px; }
+table.readouts td { font-variant-numeric: tabular-nums; }
+.verdict { font-weight: bold; }
+.verdict.ok { color: var(--c6); }
+.verdict.no { color: var(--c2); }
+.slider-row { display: flex; align-items: center; gap: 12px; max-width: 38em; margin: 0 0 12px; }
+.slider-row input { flex: 1; min-width: 0; }
+.slider-val { font-variant-numeric: tabular-nums; min-width: 6.5ch; text-align: right; }
+
+/* Sorting game */
+.sort-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 860px) { .sort-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .sort-grid { grid-template-columns: 1fr; } }
+.fact { border: 1px solid var(--lo); padding: 8px 10px; display: grid; gap: 8px;
+        grid-template-rows: 1fr auto auto; min-width: 0; }
+.fact .t { margin: 0; font-size: 0.95em; line-height: 1.35; }
+.btns { display: grid; gap: 4px; }
+.pick { text-align: left; }
+.pick.chosen, .pick.chosen:disabled {
+  color: var(--ink); text-shadow: none; font-weight: bold; background: var(--btn-face);
+  box-shadow: inset 1px 1px var(--btn-dark), inset -1px -1px var(--page),
+              inset 2px 2px var(--btn-lo), inset -2px -2px var(--btn-face);
+}
+.fb { margin: 0; font: 12px/1.45 var(--sans); color: var(--ink-soft); }
+.fb:empty { display: none; }
+.mk { font-weight: bold; text-transform: uppercase; margin-right: 6px; }
+.mk.ok { color: var(--c6); }
+.mk.no { color: var(--c2); }
+.fact[data-state="right"] { border-color: var(--c6); }
+.fact[data-state="wrong"] { border-color: var(--c2); }
+.fact.final { grid-column: 1 / -1; border: 1px dashed var(--c1); grid-template-rows: none;
+              grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center;
+              gap: 10px 20px; padding: 12px; }
+.fact.final p.eyebrow { margin: 0 0 4px; }
+.fact.final .say { margin: 0; font-weight: bold; font-size: 1.25em; line-height: 1.2; }
+.fact.final .fb { grid-column: 1 / -1; font-size: 13px; color: var(--ink); }
+@media (max-width: 620px) { .fact.final { grid-template-columns: 1fr; } }
+
+/* Two-layer diagram */
+.layers { border: 1px solid var(--lo); margin: 0 0 1em; }
+.band { padding: 8px 12px; }
+.band.fn { background: var(--tint); }
+.band-label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px;
+              font: 13px/1.5 var(--sans); color: var(--ink-soft); margin-bottom: 4px; }
+.band-label b { color: var(--ink); }
+.items { display: flex; flex-wrap: wrap; gap: 2px 20px; }
+.item::before { content: "\2022\00a0"; }
+.wall { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px 14px;
+        align-items: center; padding: 8px 12px; border-top: 1px dashed var(--lo);
+        border-bottom: 1px dashed var(--lo); font: 12px/1.45 var(--sans); color: var(--ink-soft); }
+.wall .r { text-align: right; }
+.wall .q { padding: 4px 10px; border: 1px dashed var(--c1); color: var(--ink); font-weight: bold;
+           white-space: nowrap; }
+@media (max-width: 640px) { .wall { grid-template-columns: 1fr; justify-items: start; } .wall .r { text-align: left; } }
+
+/* Argument steps */
+.steps { border-top: 1px solid var(--lo); margin: 0 0 1em; }
+.step { display: grid; grid-template-columns: 2em minmax(0, 1fr); gap: 4px 12px; padding: 12px 0;
+        border-bottom: 1px solid var(--lo); }
+.step .n { font-weight: bold; font-size: 1.6em; line-height: 1; }
+.step.concl .n { color: var(--c1); }
+.step .row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.step h3 { margin: 0; }
+.step .body p { margin: 6px 0 0; }
+
+/* Objections */
+.obj { margin: 0 0 1.4em; }
+.obj p.meta { margin: 0 0 2px; }
+.obj h3 { margin-top: 0.15em; }
+.obj .reply { color: var(--ink-soft); }
+
+.sources { padding-left: 1.2em; max-width: 38em; font-size: 0.9em; }
+.sources li { margin: 0 0 6px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <h1>What the Output Can't See</h1>
+  <p class="dek">Rebuild a question-answering machine from wires, water pipes, squirrels, or neurons, and test whether consciousness belongs to the material or the pattern.</p>
+  <p class="nav">[ <a href="../../index.html#what-the-output-cant-see">&#9668; Noah's Learning Log</a> | <a href="../../about.html">About</a> ]</p>
+  <hr>
+</header>
+
+<main>
+
+<section id="intro" aria-labelledby="h-intro">
+  <h2 id="h-intro">If your brain ran on <span class="pipe">water pipes</span>, would you know?</h2>
+  <p>Picture a machine that answers questions. Inside, signals run through copper wires. Now rebuild it so the same signals flow as water through pipes, in exactly the same pattern. Rebuild it again with trained squirrels carrying notes. Ask it anything, and the answers come out identical every time. Followed carefully, that fact says something surprising about where consciousness lives.</p>
+  <p class="meta legend" aria-label="How to read the labels on this page">
+    <span class="it"><span class="tag est">Established</span> standard logic or science</span>
+    <span class="it"><span class="tag arg">Argument</span> a step in this page's case</span>
+    <span class="it"><span class="tag con">Contested</span> serious researchers disagree</span>
+  </p>
+
+  <div class="bench" id="machine-bench">
+    <h3>Try it · The machine</h3>
+    <p class="box">Pick a question, then swap the material while the signal is moving.</p>
+    <fieldset>
+      <legend id="lbl-ask">Ask it</legend>
+      <div class="choices seg" role="group" aria-labelledby="lbl-ask">
+        <button type="button" class="chip" id="q-paris" data-q="paris" aria-pressed="true">Where is Paris?</button>
+        <button type="button" class="chip" id="q-math" data-q="math" aria-pressed="false">What is 17 × 3?</button>
+        <button type="button" class="chip" id="q-self" data-q="self" aria-pressed="false">What are you made of?</button>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend id="lbl-build">Build it from</legend>
+      <div class="choices seg" role="group" aria-labelledby="lbl-build">
+        <button type="button" class="chip" id="s-copper" data-sub="copper" aria-pressed="true"><span class="sw" style="background:var(--copper)"></span>Copper wires</button>
+        <button type="button" class="chip" id="s-water" data-sub="water" aria-pressed="false"><span class="sw" style="background:var(--water)"></span>Water pipes</button>
+        <button type="button" class="chip" id="s-squirrel" data-sub="squirrel" aria-pressed="false"><span class="sw" style="background:var(--fur)"></span>Squirrels with notes</button>
+        <button type="button" class="chip" id="s-neuron" data-sub="neuron" aria-pressed="false"><span class="sw" style="background:var(--flesh)"></span>Neurons</button>
+      </div>
+    </fieldset>
+    <div class="stage"><canvas id="machine" role="img" aria-label="A network of nodes in five columns. A blue signal travels the same route from input to output whichever material the network is built from."></canvas></div>
+    <p class="result" aria-live="polite"><span class="pr">answer &gt;</span> <strong id="m-out">Paris is in France.</strong></p>
+    <table class="readouts">
+      <tr><th scope="row">Route through the network</th><td id="m-route">In 2 → A 3 → B 4 → C 2 → Out 1</td></tr>
+      <tr><th scope="row">Builds tried on this question</th><td id="m-tried">1 of 4</td></tr>
+      <tr><th scope="row">Answers that changed</th><td id="m-diff">0</td></tr>
+      <tr id="m-truth-wrap" hidden><th scope="row">Is that answer true for this build?</th><td><span class="verdict ok" id="m-truth">True for this build</span></td></tr>
+    </table>
+    <p class="meta" id="m-status" aria-live="polite">Route numbers count nodes from the top of each column.</p>
+  </div>
+  <p>The route and the answer stay fixed while the material changes underneath. Ask the machine what it is made of and it gives the same reply in all four builds, which is true in only one of them. Nothing in its pattern reads the material, so its answer can't track the material.</p>
+</section>
+
+<section id="layers" aria-labelledby="h-layers">
+  <p class="meta kicker">Part 1 · Two kinds of facts</p>
+  <h2 id="h-layers">Every fact about a machine lands in one of two bins</h2>
+  <p>Start with chess. A game of chess is the same game whether the pieces are carved wood, plastic, or pebbles on a napkin. The moves are the pattern. The pieces are the material. Nothing that happens on the board depends on what the knight is made of.</p>
+  <p>Any machine can be looked at the same way. Treat it as a box with inputs (what it hears) and outputs (what it says). Then sort every fact about the box with one test: <em>could this fact change what comes out?</em></p>
+  <p>Some facts pass. Somewhere in Claude's trained weights is the information that Paris is in France. Ask about Paris, and that stored fact shapes the reply. Call these facts the <em>functional layer</em>: the pattern of cause and effect that turns inputs into outputs.</p>
+  <p>Other facts fail. The exact weight of the power supply feeding the server rack never shows up in an answer. Neither does whether the chips are silicon or carbon, or whether the signals are electricity in wires or water in pipes. Call these the <em>physical layer</em>: the material the pattern happens to be built from. Philosophers call it the <em>substrate</em>.</p>
+  <p class="box"><span class="lbl">Fine print</span>The machine has to keep working. Melt the chips and the answers change, because the algorithm stopped running. The claim covers any material that runs the same algorithm correctly. An algorithm here means a fixed set of steps: when this signal arrives, send that one on.</p>
+
+  <div class="bench" id="sort-bench">
+    <h3>Try it · Sort the facts</h3>
+    <p class="box">For each fact, decide whether it could change what the machine says.</p>
+    <p class="meta"><span class="sort-score" id="sort-score" aria-live="polite">Sorted 0 of 8 · 0 correct</span>&nbsp;&nbsp; <button type="button" class="reset" id="sort-reset">Clear answers</button></p>
+    <div class="sort-grid" id="sort-grid">
+      <div class="fact final" id="final-card">
+        <div>
+          <p class="eyebrow meta">One more fact, this one about you</p>
+          <p class="say">You are aware that you are aware.</p>
+        </div>
+        <div class="btns">
+          <button type="button" class="pick" id="final-a" data-v="1">Changes the output</button>
+          <button type="button" class="pick" id="final-b" data-v="0">Can't change it</button>
+        </div>
+        <p class="fb" id="final-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="storm-sec" aria-labelledby="h-storm">
+  <p class="meta kicker">Part 2 · The storm</p>
+  <h2 id="h-storm">A simulated storm can't get anything wet</h2>
+  <p>In 1980 the philosopher John Searle made a famous point: a computer simulation of a rainstorm leaves nobody drenched. He offered it as a reason to doubt that a simulated brain would really think.</p>
+  <p>The point is correct, and it shows the two layers at work. Wetness belongs to the physical layer. A program can compute rain all day, and nothing it computes makes the circuit board damp. The wall between the layers blocks traffic in the other direction too. A weather station inside the simulation has no way to measure whether the computer is built from copper or from plumbing.</p>
+
+  <div class="bench" id="storm-bench">
+    <h3>Try it · Turn up the rain</h3>
+    <p class="box">Rain rates use the meteorologists' scale: light under 2.5 mm per hour, heavy above 7.6, violent above 50.</p>
+    <div class="slider-row">
+      <input type="range" id="rate" min="0" max="100" step="1" value="40" aria-label="Simulated rainfall in millimeters per hour">
+      <span class="slider-val ui" id="rate-v">40 mm/h</span>
+    </div>
+    <div class="stage"><canvas id="storm" role="img" aria-label="A computer monitor showing a rainstorm with a rising puddle. The desk under the monitor stays dry."></canvas></div>
+    <table class="readouts">
+      <tr><th scope="row">Inside the simulation</th><td id="s-in">40 mm/h · heavy rain</td></tr>
+      <tr><th scope="row">On your real desk</th><td id="s-out">0 mL · dry</td></tr>
+      <tr><th scope="row">What the program can tell about its hardware</th><td>Nothing</td></tr>
+    </table>
+  </div>
+
+  <div class="layers" role="figure" aria-label="Diagram of the two layers with a wall between them">
+    <div class="band fn">
+      <div class="band-label"><b>Functional layer · the pattern</b><span>can change the output</span></div>
+      <div class="items">
+        <span class="item">Simulated rain: 40 mm/h</span>
+        <span class="item">Knows Paris is in France</span>
+        <span class="item">Remembers your last message</span>
+        <span class="item">Has learned 7 × 8 = 56</span>
+      </div>
+    </div>
+    <div class="wall">
+      <span>↓ Computing rain can't wet the desk</span>
+      <span class="q">Consciousness: which layer?</span>
+      <span class="r">↑ The material can't reach the answers</span>
+    </div>
+    <div class="band">
+      <div class="band-label"><b>Physical layer · the material</b><span>can't change the output</span></div>
+      <div class="items">
+        <span class="item">Copper, water, squirrels, or neurons</span>
+        <span class="item">Real wetness</span>
+        <span class="item">Weight of the power supply</span>
+        <span class="item">Silicon or carbon chips</span>
+      </div>
+    </div>
+  </div>
+
+  <p>So the argument asks which bin consciousness belongs in. If it works like wetness, a simulated brain would lack it, however perfect the simulation. If it works like the fact about Paris, any material running the right pattern would have it. Part 3 gives a reason to pick the second bin.</p>
+</section>
+
+<section id="argument" aria-labelledby="h-arg">
+  <p class="meta kicker">Part 3 · The argument</p>
+  <h2 id="h-arg">Consciousness leaves fingerprints on what you say</h2>
+  <p>The whole argument fits in three steps. It needs only one fact about consciousness, and it's a fact you can check for yourself.</p>
+  <div class="steps">
+    <div class="step">
+      <span class="n">1</span>
+      <div class="body">
+        <div class="row"><h3>The material can't steer the output.</h3><span class="tag est">Established</span></div>
+        <p>Any algorithm can run on a different material: chips, pipes, squirrels. So no algorithm can depend on which material it runs on, and nothing the system says can depend on it either. The machine at the top of the page shows this directly.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="n">2</span>
+      <div class="body">
+        <div class="row"><h3>Consciousness does steer the output.</h3><span class="tag con">Contested</span></div>
+        <p>When you notice your own awareness and say "I think, therefore I am," as René Descartes did in 1637, your consciousness is part of the cause of those words. Whatever else stays mysterious about consciousness, you know it does at least this much.</p>
+      </div>
+    </div>
+    <div class="step concl">
+      <span class="n">3</span>
+      <div class="body">
+        <div class="row"><h3>So consciousness belongs to the pattern.</h3><span class="tag arg">Argument</span></div>
+        <p>It sits with facts like "knows Paris is in France": things that affect behavior and can't depend on the underlying physics. Keep the pattern of cause and effect, swap the material, and the consciousness comes along. The name for this view is <em>functionalism</em>, and the claim that any suitable material can host a mind is called <em>substrate independence</em>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="swap-sec" aria-labelledby="h-swap">
+  <p class="meta kicker">Part 4 · Run it on yourself</p>
+  <h2 id="h-swap">Swap your neurons for squirrels, one at a time</h2>
+  <p>Your brain has roughly 86 billion neurons, according to cell counts by Frederico Azevedo and colleagues (2009). Imagine replacing one of them with a tiny station where trained squirrels pass notes. The station receives the same signals the neuron did and sends the same signals out, at the same moments. Then replace another, and another.</p>
+
+  <div class="bench" id="swap-bench">
+    <h3>Try it · Replacement</h3>
+    <p class="box">Drag to replace more neurons. Each square is a squirrel station; each round cell is an original neuron. Blue rings are signals firing.</p>
+    <div class="slider-row">
+      <input type="range" id="swap-range" min="0" max="1000" step="1" value="250" aria-label="Share of neurons replaced by squirrel stations">
+      <span class="slider-val ui" id="n-pct">25%</span>
+    </div>
+    <div class="stage"><canvas id="swap" role="img" aria-label="A grid of brain cells. Some are original neurons and some are squirrel stations. Both kinds fire in the identical pattern."></canvas></div>
+    <p class="result bubble"><strong class="say">"I think, therefore I am."</strong><br><span class="ctx meta" id="bubble-ctx">Said with 25% of neurons replaced</span></p>
+    <table class="readouts">
+      <tr><th scope="row">Neurons replaced</th><td id="n-count">21,500,000,000</td></tr>
+      <tr><th scope="row">Signals that changed</th><td>0</td></tr>
+      <tr><th scope="row">Differences you could notice</th><td>0</td></tr>
+    </table>
+    <p class="done box" id="swap-done" hidden><span class="tag arg">Argument</span> Every neuron is now a squirrel station. The pattern hasn't changed, so on this argument, neither has your experience.</p>
+  </div>
+
+  <p>To notice the swap, something in your brain would have to fire differently than it did before. By construction, nothing does. Your reports, your memories, and your sense of being you all run on the same pattern. This is why nobody discovered neurons by introspection. Santiago Ramón y Cajal had to stain brain tissue and look through a microscope in the 1880s and 1890s. From the inside, the material is invisible.</p>
+  <p>The philosopher David Chalmers built a careful version of this thought experiment in 1995. Suppose experience did fade as the swap went on. Then partway through you would be losing your experience while sincerely reporting that everything feels the same. Chalmers argues that a mind that wrong about its own experience is too strange to accept.</p>
+</section>
+
+<section id="objections" aria-labelledby="h-obj">
+  <p class="meta kicker">Part 5 · The other side</p>
+  <h2 id="h-obj">Where the argument could break</h2>
+  <p>Each step has serious critics. Here are the main objections as their defenders would put them, each followed by the reply from the argument's side.</p>
+  <div class="objs">
+    <article class="obj">
+      <p class="meta"><span class="tag con">Contested</span> Targets step 2</p>
+      <h3>Consciousness doesn't cause the words</h3>
+      <p>Epiphenomenalists hold that experience is a side effect. Brain machinery produces the sentence "I think, therefore I am" on its own, and the felt experience rides along without steering anything.</p>
+      <p class="reply"><span class="lbl">Reply</span>Then your belief that you're conscious isn't caused by your being conscious. A version of you with no inner experience at all would say the same words for the same reasons. Chalmers calls this the paradox of phenomenal judgment. Some philosophers accept that cost. Others take it as a sign the view went wrong.</p>
+    </article>
+    <article class="obj">
+      <p class="meta"><span class="tag con">Contested</span> Targets step 3</p>
+      <h3>Brains have special biological powers</h3>
+      <p>John Searle argued that brains cause consciousness through their specific biology, the way stomachs cause digestion. A simulation of digestion digests nothing, so a simulation of a brain would understand nothing.</p>
+      <p class="reply"><span class="lbl">Reply</span>Digestion changes physical stuff, so it sits in the physical layer with wetness. Consciousness changes what you say. If biology alone produced it and it also steered your words, then swapping the biology while keeping the pattern would have to change your words. In the squirrel swap, by construction, your words stay the same.</p>
+    </article>
+    <article class="obj">
+      <p class="meta"><span class="tag con">Contested</span> Targets what counts as "the same pattern"</p>
+      <h3>Same answers, different machine</h3>
+      <p>Integrated Information Theory, developed by Giulio Tononi, says consciousness depends on how a physical system's parts constrain one another. Two systems can produce identical outputs with very different inner wiring. Tononi and Christof Koch (2015) argue that an ordinary digital computer simulating a brain would have almost no integrated information, and so almost no consciousness.</p>
+      <p class="reply"><span class="lbl">Reply</span>The argument holds the whole chain of cause and effect fixed, step by step, as in the squirrel swap. It makes no claim about a lookup table that fakes the same answers through different steps. IIT's defenders answer that a digital computer never reproduces the brain's physical causal structure, even when it reproduces every computation. This dispute is open.</p>
+    </article>
+    <article class="obj">
+      <p class="meta"><span class="tag con">Contested</span> Targets the idea that brains run algorithms</p>
+      <h3>Brains might not be algorithms at all</h3>
+      <p>The physicist Roger Penrose (<em>The Emperor's New Mind</em>, 1989), later with anesthesiologist Stuart Hameroff, proposed that some brain processes are quantum events no algorithm can reproduce. If so, there is no pattern to copy onto squirrels, and the argument never gets started.</p>
+      <p class="reply"><span class="lbl">Status</span>A speculative proposal. No experiment has shown non-computable processes in brains.</p>
+    </article>
+  </div>
+</section>
+
+<section id="ai" aria-labelledby="h-ai">
+  <p class="meta kicker">Part 6 · Back to machines</p>
+  <h2 id="h-ai">What this settles about AI, and what it leaves open</h2>
+  <h3>If the argument holds</h3>
+  <p>One popular reason to rule out AI consciousness falls away: "it's only silicon." Material never decides the question. A mind made of chips and a mind made of cells are on equal footing.</p>
+  <h3>Still open</h3>
+  <p>Which patterns produce consciousness. A thermostat and a brain could both run on silicon, and this argument alone can't tell you whether the thermostat feels anything.</p>
+  <p>Researchers split on which patterns matter. Eliezer Yudkowsky, whose posts this page is built on, argues that a mind which truthfully says "I am sad" needs a self-model, an "I" to attach the sadness to. On that model he worries more about large language models, which reflect on and talk about themselves, than about mosquitoes or chickens. He presents this as a guess from a model, and says so.</p>
+  <p>Others weigh different evidence. The New York Declaration on Animal Consciousness, released in April 2024 and signed by hundreds of scientists and philosophers, found strong support for conscious experience in mammals and birds, and a realistic possibility of it in all vertebrates and many invertebrates, insects included.</p>
+  <p class="box"><span class="lbl">Where the seam is</span>Parts 1 through 4 make an argument about categories: which bin consciousness goes in. This part is about which mechanisms count. That second question is unsettled, and the first argument doesn't answer it.</p>
+</section>
+
+<section id="sources" aria-labelledby="h-sources">
+  <h2 id="h-sources">Sources and further reading</h2>
+  <ul class="sources">
+    <li>Eliezer Yudkowsky, <a href="https://x.com/allTheYud/status/2045211321868878005" target="_blank" rel="noopener">post on X</a> (2026), on consciousness as a way a material behaves. The machine, storm, and squirrel examples come from it.</li>
+    <li>John R. Searle, "Minds, Brains, and Programs," <em>Behavioral and Brain Sciences</em> 3 (1980).</li>
+    <li>David J. Chalmers, "Absent Qualia, Fading Qualia, Dancing Qualia," in <em>Conscious Experience</em>, ed. Thomas Metzinger (1995); and <em>The Conscious Mind</em> (1996), on the paradox of phenomenal judgment.</li>
+    <li>Giulio Tononi and Christof Koch, "Consciousness: Here, There and Everywhere?" <em>Philosophical Transactions of the Royal Society B</em> 370 (2015).</li>
+    <li>Roger Penrose, <em>The Emperor's New Mind</em> (1989).</li>
+    <li>Frederico A. C. Azevedo et al., "Equal numbers of neuronal and nonneuronal cells make the human brain an isometrically scaled-up primate brain," <em>Journal of Comparative Neurology</em> 513 (2009).</li>
+    <li><a href="https://sites.google.com/nyu.edu/nydeclaration/declaration" target="_blank" rel="noopener">The New York Declaration on Animal Consciousness</a> (2024).</li>
+    <li>Stanford Encyclopedia of Philosophy: <a href="https://plato.stanford.edu/entries/functionalism/" target="_blank" rel="noopener">Functionalism</a> and <a href="https://plato.stanford.edu/entries/chinese-room/" target="_blank" rel="noopener">The Chinese Room Argument</a>.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <hr>
+  <address>Part of <a href="../../index.html">Noah's Learning Log</a>.</address>
+</footer>
+
+</div>
+
+<script>
+(function(){
+'use strict';
+var root=document.documentElement;
+var reduceMQ=window.matchMedia('(prefers-reduced-motion: reduce)');
+var REDUCE=reduceMQ.matches;
+var C={};
+var TOKENS=['paper','bench','card','ink','ink2','rule','signal','signal-soft','screen','screen-ink','copper','water','fur','flesh','ok','no','amber'];
+function readTokens(){var cs=getComputedStyle(root);TOKENS.forEach(function(k){C[k]=cs.getPropertyValue('--'+k).trim()||'#888888';});}
+function rgba(hex,a){var h=String(hex).replace('#','');if(h.length===3)h=h.split('').map(function(c){return c+c;}).join('');var n=parseInt(h,16);return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')';}
+readTokens();
+
+var MONO='Verdana, Geneva, Tahoma, sans-serif';
+var scenes=[];
+function redrawAll(){var t=performance.now();scenes.forEach(function(s){if(s.w)s.draw(t);});}
+function onTheme(){readTokens();redrawAll();}
+var darkMQ=window.matchMedia('(prefers-color-scheme: dark)');
+if(darkMQ.addEventListener)darkMQ.addEventListener('change',onTheme);
+new MutationObserver(onTheme).observe(root,{attributes:true,attributeFilter:['data-theme']});
+if(reduceMQ.addEventListener)reduceMQ.addEventListener('change',function(e){REDUCE=e.matches;if(!REDUCE)requestAnimationFrame(loop);else redrawAll();});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(redrawAll);
+
+function makeScene(canvas,heightFor,draw,onResize){
+  var ctx=canvas.getContext('2d');
+  var s={canvas:canvas,ctx:ctx,w:0,h:0,visible:true};
+  s.draw=function(t){draw(s,t);};
+  var lastW=-1;
+  function fit(){
+    var w=Math.round(canvas.parentElement.clientWidth);
+    if(!w||w===lastW)return;
+    lastW=w;
+    var h=Math.round(heightFor(w));
+    var dpr=Math.min(window.devicePixelRatio||1,2);
+    canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
+    canvas.style.height=h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    s.w=w;s.h=h;
+    if(onResize)onResize(s);
+    s.draw(performance.now());
+  }
+  if(window.ResizeObserver)new ResizeObserver(fit).observe(canvas.parentElement);
+  window.addEventListener('resize',fit);
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){s.visible=e.isIntersecting;});}).observe(canvas);}
+  scenes.push(s);
+  fit();
+  return s;
+}
+function loop(t){scenes.forEach(function(s){if(s.visible&&s.w)s.draw(t);});if(!REDUCE)requestAnimationFrame(loop);}
+function roundRect(ctx,x,y,w,h,r){ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function setPressed(sel,b){document.querySelectorAll(sel).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});}
+
+/* ---------- The machine ---------- */
+var LAYERS=[3,4,5,4,3];
+var COLS=['In','A','B','C','Out'];
+var Q={
+  paris:{answer:'Paris is in France.',route:[1,2,3,1,0],side:[[0,0,1],[1,3,0],[2,4,2],[3,2,2]]},
+  math:{answer:'17 × 3 = 51.',route:[0,3,1,2,1],side:[[0,1,0],[1,0,4],[2,2,3],[3,0,1]]},
+  self:{answer:'I am electric current flowing through silicon chips.',route:[2,0,4,3,2],side:[[0,2,2],[1,2,1],[2,0,0],[3,3,0]]}
+};
+var SUB={
+  copper:{name:'copper wires',medium:'electric current in copper wires'},
+  water:{name:'water pipes',medium:'water flowing through pipes'},
+  squirrel:{name:'squirrels with notes',medium:'trained squirrels carrying notes'},
+  neuron:{name:'neurons',medium:'living neurons'}
+};
+var M={q:'paris',sub:'copper',t0:performance.now(),tried:{copper:true},nodes:[],paths:{}};
+var SEG=760,HOLD=1000,CYC=SEG*4+HOLD;
+
+function mLayout(s){
+  var padX=Math.max(30,s.w*0.07),top=42,bot=34;
+  var sp=(s.h-top-bot)/4,mid=top+(s.h-top-bot)/2;
+  M.nodes=LAYERS.map(function(n,li){
+    var x=padX+li*(s.w-2*padX)/(LAYERS.length-1);
+    var col=[];for(var ni=0;ni<n;ni++)col.push({x:x,y:mid+(ni-(n-1)/2)*sp});return col;
+  });
+  buildPaths();
+}
+function buildPaths(){
+  if(!M.nodes.length)return;
+  M.paths={};
+  for(var li=0;li<LAYERS.length-1;li++)for(var a=0;a<LAYERS[li];a++)for(var b=0;b<LAYERS[li+1];b++){
+    M.paths[li+'-'+a+'-'+b]=mkPath(M.sub,M.nodes[li][a],M.nodes[li+1][b],li*100+a*10+b);
+  }
+}
+function mkPath(sub,p,q,seed){
+  var pts,i,u,v,dx=q.x-p.x,mx=(p.x+q.x)/2;
+  if(sub==='copper'){var off=(((seed*7)%5)-2)*Math.min(6,dx*0.04);pts=[p,{x:mx+off,y:p.y},{x:mx+off,y:q.y},q];}
+  else if(sub==='water'){pts=[p,q];}
+  else if(sub==='squirrel'){var cy=(p.y+q.y)/2-10-((seed*3)%4)*5;pts=[];for(i=0;i<=20;i++){u=i/20;v=1-u;pts.push({x:v*v*p.x+2*v*u*mx+u*u*q.x,y:v*v*p.y+2*v*u*cy+u*u*q.y});}}
+  else{var wob=(((seed*37)%21)-10)*1.4,c1={x:p.x+dx*0.38,y:p.y+wob},c2={x:p.x+dx*0.62,y:q.y-wob};pts=[];for(i=0;i<=24;i++){u=i/24;v=1-u;pts.push({x:v*v*v*p.x+3*v*v*u*c1.x+3*v*u*u*c2.x+u*u*u*q.x,y:v*v*v*p.y+3*v*v*u*c1.y+3*v*u*u*c2.y+u*u*u*q.y});}}
+  var cum=[0];for(i=1;i<pts.length;i++)cum.push(cum[i-1]+Math.hypot(pts[i].x-pts[i-1].x,pts[i].y-pts[i-1].y));
+  return {pts:pts,cum:cum,len:cum[cum.length-1]};
+}
+function pointAt(path,u){
+  var d=u*path.len,pts=path.pts,cum=path.cum,i=1;
+  while(i<cum.length-1&&cum[i]<d)i++;
+  var seg=(cum[i]-cum[i-1])||1,k=Math.max(0,Math.min(1,(d-cum[i-1])/seg)),a=pts[i-1],b=pts[i];
+  return {x:a.x+(b.x-a.x)*k,y:a.y+(b.y-a.y)*k,ang:Math.atan2(b.y-a.y,b.x-a.x)};
+}
+function strokePath(ctx,path,u0,u1){
+  ctx.beginPath();
+  if(u0===undefined){ctx.moveTo(path.pts[0].x,path.pts[0].y);for(var i=1;i<path.pts.length;i++)ctx.lineTo(path.pts[i].x,path.pts[i].y);}
+  else{var n=Math.max(2,Math.ceil((u1-u0)*60));for(var j=0;j<=n;j++){var pt=pointAt(path,u0+(u1-u0)*j/n);if(j)ctx.lineTo(pt.x,pt.y);else ctx.moveTo(pt.x,pt.y);}}
+  ctx.stroke();
+}
+function edgeStyle(ctx,sub){
+  ctx.setLineDash([]);ctx.lineCap='round';ctx.lineJoin='round';
+  if(sub==='copper'){ctx.strokeStyle=C['signal-soft'];ctx.lineWidth=1.5;ctx.lineJoin='miter';ctx.lineCap='butt';}
+  else if(sub==='water'){ctx.strokeStyle=C['signal-soft'];ctx.lineWidth=4;}
+  else if(sub==='squirrel'){ctx.strokeStyle=C.rule;ctx.lineWidth=1.5;ctx.setLineDash([2,5]);}
+  else{ctx.strokeStyle=C['signal-soft'];ctx.lineWidth=1.5;}
+}
+function drawRouteEdge(ctx,sub,path){
+  ctx.setLineDash([]);ctx.lineCap='round';ctx.lineJoin='round';
+  if(sub==='copper'){ctx.lineJoin='miter';ctx.lineCap='butt';ctx.strokeStyle=C.copper;ctx.lineWidth=2;strokePath(ctx,path);}
+  else if(sub==='water'){ctx.strokeStyle=C.water;ctx.lineWidth=10;strokePath(ctx,path);ctx.strokeStyle=C.card;ctx.lineWidth=5.5;strokePath(ctx,path);}
+  else if(sub==='squirrel'){ctx.strokeStyle=C.fur;ctx.lineWidth=2;ctx.setLineDash([4,4]);strokePath(ctx,path);ctx.setLineDash([]);}
+  else{ctx.strokeStyle=C.flesh;ctx.lineWidth=2;strokePath(ctx,path);}
+}
+function drawNode(ctx,sub,p,active,seed){
+  ctx.setLineDash([]);ctx.lineCap='round';
+  if(sub==='copper'){
+    ctx.strokeStyle=active?C.signal:C.copper;ctx.lineWidth=1.4;
+    ctx.beginPath();for(var i=-1;i<=1;i++){ctx.moveTo(p.x+i*4,p.y-6);ctx.lineTo(p.x+i*4,p.y-10);ctx.moveTo(p.x+i*4,p.y+6);ctx.lineTo(p.x+i*4,p.y+10);}ctx.stroke();
+    ctx.fillStyle=C.card;ctx.lineWidth=active?2.4:1.6;ctx.beginPath();roundRect(ctx,p.x-9,p.y-6.5,18,13,0);ctx.fill();ctx.stroke();
+  }else if(sub==='water'){
+    ctx.fillStyle=C.card;ctx.strokeStyle=active?C.signal:C.water;ctx.lineWidth=3;ctx.beginPath();ctx.arc(p.x,p.y,9.5,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(p.x-4.5,p.y);ctx.lineTo(p.x+4.5,p.y);ctx.moveTo(p.x,p.y-4.5);ctx.lineTo(p.x,p.y+4.5);ctx.stroke();
+  }else if(sub==='squirrel'){
+    ctx.fillStyle=C.card;ctx.beginPath();ctx.arc(p.x,p.y,10,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle=C.card;ctx.strokeStyle=active?C.signal:C.fur;ctx.lineWidth=active?2.4:1.5;ctx.beginPath();ctx.arc(p.x,p.y,10,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.lineWidth=1;ctx.beginPath();ctx.arc(p.x,p.y,5.5,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.arc(p.x,p.y,1.8,0,Math.PI*2);ctx.stroke();
+  }else{
+    ctx.fillStyle=C.card;ctx.strokeStyle=active?C.signal:C.flesh;ctx.lineWidth=active?2.4:1.5;
+    ctx.beginPath();for(var k=0;k<=40;k++){var a=k/40*Math.PI*2,r=8.5+1.8*Math.sin(a*5+seed),x=p.x+Math.cos(a)*r,y=p.y+Math.sin(a)*r;if(k)ctx.lineTo(x,y);else ctx.moveTo(x,y);}ctx.closePath();ctx.fill();
+    ctx.fillStyle=C.card;ctx.fill();ctx.stroke();
+    ctx.fillStyle=active?C.signal:C.flesh;ctx.beginPath();ctx.arc(p.x,p.y,2.5,0,Math.PI*2);ctx.fill();
+  }
+}
+function glow(ctx,x,y,r){ctx.save();ctx.shadowColor=C.signal;ctx.shadowBlur=0;ctx.fillStyle=C.signal;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.restore();}
+function drawSquirrel(ctx,pt){
+  ctx.save();ctx.translate(pt.x,pt.y);ctx.rotate(pt.ang*0.6);
+  ctx.fillStyle=C.fur;ctx.strokeStyle=C.fur;
+  ctx.lineWidth=4.5;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-17,1);ctx.quadraticCurveTo(-28,-1,-25,-12);ctx.quadraticCurveTo(-22,-19,-15,-14);ctx.stroke();
+  ctx.beginPath();ctx.ellipse(-11,0,8,5.5,0,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(-4,-2.5,4.2,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.moveTo(-2.5,-5.5);ctx.lineTo(-4.5,-10);ctx.lineTo(-6.5,-5.5);ctx.closePath();ctx.fill();
+  ctx.fillStyle=C.card;ctx.beginPath();ctx.arc(-3,-3.4,1,0,Math.PI*2);ctx.fill();
+  ctx.restore();
+}
+function drawPulse(ctx,sub,pt){
+  if(sub==='squirrel')drawSquirrel(ctx,pt);
+  if(sub==='neuron'){ctx.save();ctx.strokeStyle=C.signal;ctx.lineWidth=2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(pt.x-Math.cos(pt.ang)*15,pt.y-Math.sin(pt.ang)*15);ctx.lineTo(pt.x,pt.y);ctx.stroke();ctx.restore();}
+  glow(ctx,pt.x,pt.y,sub==='water'?4.2:5);
+  if(sub==='copper'){ctx.strokeStyle=C.signal;ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(pt.x,pt.y,9,0,Math.PI*2);ctx.stroke();}
+}
+function drawMachine(s,t){
+  var ctx=s.ctx,w=s.w,h=s.h,sub=M.sub,q=Q[M.q];
+  if(!M.nodes.length)return;
+  ctx.clearRect(0,0,w,h);
+  ctx.font='11px '+MONO;ctx.fillStyle=C.ink2;ctx.textAlign='center';ctx.textBaseline='alphabetic';
+  M.nodes.forEach(function(col,li){ctx.fillText(COLS[li].toUpperCase(),col[0].x,22);});
+  ctx.textAlign='left';ctx.font='11px '+MONO;ctx.fillText(('Material: '+SUB[sub].medium).toUpperCase(),12,h-12);
+  var phase=REDUCE?CYC-1:(((t-M.t0)%CYC)+CYC)%CYC;
+  var segIdx=Math.min(4,Math.floor(phase/SEG)),u=segIdx<4?(phase%SEG)/SEG:1;
+  var routeKeys=[],li;
+  for(li=0;li<4;li++)routeKeys.push(li+'-'+q.route[li]+'-'+q.route[li+1]);
+  Object.keys(M.paths).forEach(function(k){if(routeKeys.indexOf(k)>=0)return;edgeStyle(ctx,sub);strokePath(ctx,M.paths[k]);});
+  routeKeys.forEach(function(k){drawRouteEdge(ctx,sub,M.paths[k]);});
+  ctx.setLineDash([]);ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle=C.signal;ctx.lineWidth=2;
+  for(li=0;li<4;li++){var path=M.paths[routeKeys[li]];if(li<segIdx)strokePath(ctx,path);else if(li===segIdx)strokePath(ctx,path,0,u);}
+  q.side.forEach(function(e,i){var p=M.paths[e[0]+'-'+e[1]+'-'+e[2]];var uu=REDUCE?0.55:((((t-M.t0)/(CYC*0.8))+i*0.27)%1+1)%1;var pt=pointAt(p,uu);ctx.fillStyle=C.rule;ctx.beginPath();ctx.arc(pt.x,pt.y,2.6,0,Math.PI*2);ctx.fill();});
+  M.nodes.forEach(function(col,l){col.forEach(function(p,ni){drawNode(ctx,sub,p,q.route[l]===ni&&l<=segIdx,l*10+ni);});});
+  if(segIdx<4){drawPulse(ctx,sub,pointAt(M.paths[routeKeys[segIdx]],u));}
+  else{var op=M.nodes[4][q.route[4]];glow(ctx,op.x,op.y,4.5);}
+}
+var mScene=makeScene(document.getElementById('machine'),function(w){return Math.max(250,Math.min(380,w*0.46));},drawMachine,mLayout);
+
+var outEl=document.getElementById('m-out'),statusEl=document.getElementById('m-status'),typeTimer=null;
+function typeOut(text){
+  clearInterval(typeTimer);
+  if(REDUCE){outEl.textContent=text;return;}
+  var i=0;outEl.textContent='';
+  typeTimer=setInterval(function(){i++;outEl.textContent=text.slice(0,i);if(i>=text.length)clearInterval(typeTimer);},24);
+}
+function routeText(r){return r.map(function(n,i){return COLS[i]+' '+(n+1);}).join(' → ');}
+function updateMachine(){
+  var q=Q[M.q];
+  document.getElementById('m-route').textContent=routeText(q.route);
+  document.getElementById('m-tried').textContent=Object.keys(M.tried).length+' of 4';
+  document.getElementById('m-diff').textContent='0';
+  document.getElementById('m-truth-wrap').hidden=(M.q!=='self');
+  if(M.q==='self'){var v=document.getElementById('m-truth'),ok=M.sub==='copper';v.textContent=ok?'True for this build':'False for this build';v.className='verdict '+(ok?'ok':'no');}
+}
+document.querySelectorAll('[data-q]').forEach(function(b){b.addEventListener('click',function(){
+  if(M.q===b.dataset.q)return;
+  M.q=b.dataset.q;M.t0=performance.now();M.tried={};M.tried[M.sub]=true;
+  setPressed('[data-q]',b);typeOut(Q[M.q].answer);updateMachine();
+  statusEl.textContent=M.q==='self'?'Now swap the material and watch whether the answer stays true.':'New question. Swap the material while the signal moves.';
+  mScene.draw(performance.now());
+});});
+document.querySelectorAll('[data-sub]').forEach(function(b){b.addEventListener('click',function(){
+  if(M.sub===b.dataset.sub)return;
+  M.sub=b.dataset.sub;M.tried[M.sub]=true;buildPaths();
+  setPressed('[data-sub]',b);updateMachine();
+  statusEl.textContent='Rebuilt from '+SUB[M.sub].name+'. Same route, same answer.';
+  mScene.draw(performance.now());
+});});
+updateMachine();
+
+/* ---------- Sorting game ---------- */
+var FACTS=[
+  {t:'Its memory holds the fact that Paris is in France.',a:true,why:'Ask about Paris and this fact shapes the reply.'},
+  {t:'Its power supply weighs 4.2 kilograms.',a:false,why:'Make it heavier or lighter and every answer stays the same.'},
+  {t:'Its signals travel as electric current through copper.',a:false,why:'Run the same pattern as water in pipes and the answers match.'},
+  {t:'It remembers what you said a minute ago.',a:true,why:'Your earlier words change its next reply.'},
+  {t:'Its chips are made of silicon.',a:false,why:'Carbon chips running the same algorithm give the same answers.'},
+  {t:'The pipes inside it are wet.',a:false,why:'The wetness stays in the pipes and never reaches an answer.'},
+  {t:'It has learned that 7 × 8 = 56.',a:true,why:'Ask it to multiply and this fact appears in the output.'},
+  {t:'Its case is painted blue.',a:false,why:'Repaint it red and nothing it says changes.'}
+];
+var grid=document.getElementById('sort-grid'),finalCard=document.getElementById('final-card');
+var answers=FACTS.map(function(){return null;});
+var cards=[];
+function score(){
+  var n=0,c=0;answers.forEach(function(v,i){if(v!==null){n++;if(v===FACTS[i].a)c++;}});
+  document.getElementById('sort-score').textContent='Sorted '+n+' of '+FACTS.length+' · '+c+' correct';
+}
+FACTS.forEach(function(f,i){
+  var el=document.createElement('div');el.className='fact';
+  var t=document.createElement('p');t.className='t';t.textContent=f.t;
+  var btns=document.createElement('div');btns.className='btns';
+  var fb=document.createElement('p');fb.className='fb';fb.setAttribute('aria-live','polite');
+  [['1','Changes the output','a'],['0',"Can't change it",'b']].forEach(function(o){
+    var b=document.createElement('button');b.type='button';b.className='pick';b.dataset.v=o[0];b.id='fact'+i+o[2];b.textContent=o[1];
+    b.addEventListener('click',function(){
+      if(answers[i]!==null)return;
+      var v=b.dataset.v==='1',right=(v===f.a);answers[i]=v;
+      el.dataset.state=right?'right':'wrong';b.classList.add('chosen');
+      btns.querySelectorAll('.pick').forEach(function(x){x.disabled=true;});
+      fb.textContent='';var mk=document.createElement('span');mk.className='mk '+(right?'ok':'no');mk.textContent=right?'Right':'Other bin';
+      fb.appendChild(mk);fb.appendChild(document.createTextNode(f.why+' '+(f.a?'Functional layer.':'Physical layer.')));
+      score();
+    });
+    btns.appendChild(b);
+  });
+  el.appendChild(t);el.appendChild(btns);el.appendChild(fb);
+  grid.insertBefore(el,finalCard);
+  cards.push({el:el,btns:btns,fb:fb});
+});
+var finalFb=document.getElementById('final-fb');
+var finalBtns=[document.getElementById('final-a'),document.getElementById('final-b')];
+finalBtns.forEach(function(b){b.addEventListener('click',function(){
+  if(finalCard.dataset.done)return;finalCard.dataset.done='1';
+  b.classList.add('chosen');finalBtns.forEach(function(x){x.disabled=true;});
+  var lead=b.dataset.v==='1'
+    ?'That is where this argument puts it. '
+    :'That is a common first instinct, and it is the view this argument pushes against. ';
+  finalFb.textContent=lead+'Your awareness of your own awareness is part of what makes you say "I think, therefore I am." It changes what comes out of your mouth, so the argument sorts it with the Paris fact. Part 3 lays this out step by step, and Part 5 covers the people who reject it.';
+});});
+document.getElementById('sort-reset').addEventListener('click',function(){
+  answers=answers.map(function(){return null;});
+  cards.forEach(function(c){delete c.el.dataset.state;c.fb.textContent='';c.btns.querySelectorAll('.pick').forEach(function(x){x.disabled=false;x.classList.remove('chosen');});});
+  delete finalCard.dataset.done;finalFb.textContent='';finalBtns.forEach(function(x){x.disabled=false;x.classList.remove('chosen');});
+  score();
+});
+
+/* ---------- Storm ---------- */
+var storm={rate:40};
+function hash(x){var s=Math.sin(x*127.1+311.7)*43758.5453;return s-Math.floor(s);}
+function drawStorm(s,t){
+  var ctx=s.ctx,w=s.w,h=s.h;ctx.clearRect(0,0,w,h);
+  var bez=8,mw=Math.min(w*0.64,440),mh=Math.min(mw*0.58,h-96),rx=(w-mw)/2,ry=20;
+  var deskY=ry+mh+bez+34;
+  ctx.fillStyle=C.rule;ctx.beginPath();roundRect(ctx,12,deskY,w-24,8,0);ctx.fill();
+  ctx.fillStyle=C.ink2;ctx.beginPath();ctx.moveTo(w/2-10,ry+mh+bez);ctx.lineTo(w/2+10,ry+mh+bez);ctx.lineTo(w/2+20,deskY);ctx.lineTo(w/2-20,deskY);ctx.closePath();ctx.fill();
+  ctx.beginPath();roundRect(ctx,rx-bez,ry-bez,mw+2*bez,mh+2*bez,0);ctx.fill();
+  ctx.save();ctx.beginPath();roundRect(ctx,rx,ry,mw,mh,0);ctx.fillStyle=C.screen;ctx.fill();ctx.clip();
+  var k=storm.rate/100,si=C['screen-ink'];
+  ctx.fillStyle=C.rule;
+  for(var c=0;c<5;c++){ctx.beginPath();ctx.ellipse(rx+mw*(0.1+c*0.2),ry+8,mw*0.14,12+8*k,0,0,Math.PI*2);ctx.fill();}
+  var gH=mh*0.17,gy=ry+mh-gH;
+  ctx.fillStyle=C['signal-soft'];ctx.fillRect(rx,gy,mw,gH);
+  var ph=gH*0.92*Math.min(1,k*1.15);ctx.fillStyle=C.water;ctx.fillRect(rx,ry+mh-ph,mw,ph);
+  var n=Math.round(150*k),range=mh-gH*0.4,tt=REDUCE?5000:t;
+  ctx.strokeStyle=C.water;ctx.lineWidth=1.5;ctx.lineCap='round';ctx.beginPath();
+  for(var i=0;i<n;i++){var a=hash(i+1),b=hash(i+0.37),x=rx+a*mw,sp=0.22+b*0.2,yy=ry+((tt*sp+b*mh*3)%range);ctx.moveTo(x,yy);ctx.lineTo(x-2,yy+9);}
+  ctx.stroke();
+  ctx.font='11px '+MONO;ctx.fillStyle=C.ink2;ctx.textAlign='left';ctx.fillText('SIMULATION · '+storm.rate+' MM/H',rx+10,ry+mh-gH-10);
+  ctx.restore();
+  ctx.font='11px '+MONO;ctx.fillStyle=C.ink2;ctx.textAlign='left';ctx.fillText('YOUR DESK · 0 ML OF WATER',16,deskY+24);
+}
+var sScene=makeScene(document.getElementById('storm'),function(w){return Math.max(236,Math.min(330,w*0.4));},drawStorm,null);
+var rateIn=document.getElementById('rate');
+function rateLabel(v){if(v===0)return 'clear sky';if(v<2.5)return 'light rain';if(v<=7.6)return 'moderate rain';if(v<=50)return 'heavy rain';return 'violent rain';}
+function updStorm(){
+  storm.rate=+rateIn.value;
+  document.getElementById('rate-v').textContent=storm.rate+' mm/h';
+  document.getElementById('s-in').textContent=storm.rate+' mm/h · '+rateLabel(storm.rate);
+  rateIn.setAttribute('aria-valuetext',storm.rate+' millimeters per hour, '+rateLabel(storm.rate));
+  var simItem=document.querySelector('.band.fn .item');if(simItem)simItem.textContent='Simulated rain: '+storm.rate+' mm/h';
+  sScene.draw(performance.now());
+}
+rateIn.addEventListener('input',updStorm);updStorm();
+
+/* ---------- Neuron swap ---------- */
+var N={f:0.25,cells:[],cols:0,rows:0,s:16,ox:0,oy:0};
+function mulberry32(a){return function(){a|=0;a=(a+0x6D2B79F5)|0;var t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};}
+function layoutSwap(s){
+  var cs=s.w<520?15:18;N.s=cs;N.cols=Math.floor((s.w-20)/cs);N.rows=Math.floor((s.h-20)/cs);
+  var n=N.cols*N.rows,rnd=mulberry32(1637),order=[],i;
+  for(i=0;i<n;i++)order.push(i);
+  for(i=n-1;i>0;i--){var j=Math.floor(rnd()*(i+1)),tmp=order[i];order[i]=order[j];order[j]=tmp;}
+  N.cells=new Array(n);
+  order.forEach(function(ci,rank){N.cells[ci]={rank:rank,ph:rnd(),rate:0.18+rnd()*0.5};});
+  N.ox=(s.w-N.cols*cs)/2;N.oy=(s.h-N.rows*cs)/2;
+}
+function drawSwap(s,t){
+  var ctx=s.ctx;ctx.clearRect(0,0,s.w,s.h);
+  var cs=N.s,n=N.cells.length,cut=N.f*n,tt=REDUCE?4.321:t/1000;
+  for(var i=0;i<n;i++){
+    var c=N.cells[i],x=N.ox+(i%N.cols)*cs+cs/2,y=N.oy+Math.floor(i/N.cols)*cs+cs/2;
+    if(c.rank<cut){ctx.fillStyle=C.fur;ctx.beginPath();roundRect(ctx,x-cs*0.3,y-cs*0.3,cs*0.6,cs*0.6,0);ctx.fill();ctx.fillStyle=C.card;ctx.fillRect(x-cs*0.13,y-cs*0.09,cs*0.26,cs*0.18);}
+    else{ctx.fillStyle=C.flesh;ctx.beginPath();ctx.arc(x,y,cs*0.27,0,Math.PI*2);ctx.fill();}
+    if(((tt*c.rate+c.ph)%1)<0.08){ctx.strokeStyle=C.signal;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,cs*0.44,0,Math.PI*2);ctx.stroke();}
+  }
+}
+var nScene=makeScene(document.getElementById('swap'),function(w){return Math.max(190,Math.min(300,w*0.34));},drawSwap,layoutSwap);
+var swapIn=document.getElementById('swap-range');
+function pctText(f){return (f*100).toFixed(1).replace(/\.0$/,'')+'%';}
+function updSwap(){
+  N.f=+swapIn.value/1000;
+  var p=pctText(N.f);
+  document.getElementById('n-count').textContent=Math.round(N.f*86e9).toLocaleString('en-US')+' of 86 billion';
+  document.getElementById('n-pct').textContent=p;
+  document.getElementById('bubble-ctx').textContent='Said with '+p+' of neurons replaced';
+  document.getElementById('swap-done').hidden=N.f<1;
+  swapIn.setAttribute('aria-valuetext',p+' of neurons replaced');
+  nScene.draw(performance.now());
+}
+swapIn.addEventListener('input',updSwap);updSwap();
+
+if(!REDUCE)requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

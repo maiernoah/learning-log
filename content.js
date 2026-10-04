@@ -67,4 +67,14 @@ const ENTRIES = [
               throughout.`,
   },
 
+  {
+    slug: "what-the-output-cant-see",
+    title: "What the Output Can't See",
+    date: "2026-10-04",
+    time: "13:00",
+    url: "exhibits/what-the-output-cant-see/",
+    tags: ["philosophy", "consciousness"],
+    summary: `The page lets you rebuild a question-answering machine from copper wires, water pipes, squirrels carrying notes, or neurons, and watch its answers stay the same. It walks through the argument that consciousness belongs to the pattern a system runs, then covers the main objections and what the argument settles about AI.`,
+  },
+
 ];
