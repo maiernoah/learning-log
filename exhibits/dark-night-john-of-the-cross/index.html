@@ -1,0 +1,2265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Dark Night of John of the Cross</title>
+<meta name="description" content="Sort the four nights on John&#x27;s map, test his three signs on sample cases, and see why he calls God&#x27;s light a darkness.">
+<style>
+/* ===== Noah's Weblog house style (exhibits) v2 =====
+   Matches noahmaier.net: white page, Times for reading, Verdana for
+   controls, blue underlined links, two-tone rules, gray beveled buttons. */
+:root {
+  --page: #ffffff;
+  --ink: #000000;
+  --ink-soft: #2b2b2b;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --active: #ff0000;
+  --lo: #999999;          /* rule, border, axis */
+  --hi: #e2e2e2;          /* rule highlight, gridline */
+  --tint: #f2f2f2;        /* callout and table-header fill */
+  --field: #6e6e6e;       /* input border */
+  --btn: #c0c0c0;         /* button face */
+  --btn-face: #dfdfdf;
+  --btn-lo: #808080;
+  --btn-dark: #0a0a0a;
+  --new: #cc0000;
+  /* data colors, in order: classic HTML named colors */
+  --c1: #000080;  /* navy */
+  --c2: #800000;  /* maroon */
+  --c3: #008080;  /* teal */
+  --c4: #808000;  /* olive (marks only; too light for text) */
+  --c5: #800080;  /* purple */
+  --c6: #008000;  /* green */
+  --serif: "Times New Roman", Times, serif;
+  --sans: Verdana, Geneva, Tahoma, sans-serif;
+  --mono: "Courier New", Courier, monospace;
+  --measure: 42.75rem;    /* one column width (684px): text, boxes, questions, tables, figures */
+}
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body { margin: 0; padding: 10px 16px 32px; background: var(--page); color: var(--ink);
+       font: 18px/1.45 var(--serif); -webkit-text-size-adjust: 100%; }
+.page { max-width: 1020px; }
+/* Text, boxes, questions, tables and figures share one column width, so their left and
+   right edges line up. Add class="wide" only to something that genuinely needs more room. */
+main p, main ul, main ol, main dl, main blockquote, main table, main fieldset, main figure,
+main details, main .box, main h2, main h3, main .view > *, .prose { max-width: var(--measure); }
+.wide { max-width: none !important; }
+a { color: var(--link); } a:visited { color: var(--visited); } a:active { color: var(--active); }
+:focus-visible { outline: 2px dotted var(--ink); outline-offset: 2px; }
+
+h1 { font-size: 2.3em; line-height: 1.1; margin: 0.35em 0 0.15em; }
+h2 { font-size: 1em; font-weight: bold; margin: 1.6em 0 0.7em; padding-bottom: 2px;
+     border-bottom: 1px solid var(--lo); }
+h3 { font-size: 1.15em; line-height: 1.25; margin: 1.2em 0 0.3em; }
+p { margin: 0 0 0.8em; }
+.dek { font-style: italic; margin: 0 0 0.5em; }
+.nav { font: 13px/1.6 var(--sans); margin: 0; }
+hr { border: 0; border-top: 1px solid var(--lo); border-bottom: 1px solid var(--hi);
+     height: 0; margin: 10px 0 14px; }
+code, pre, kbd { font-family: var(--mono); font-size: 0.9em; }
+
+/* controls and small text use Verdana */
+label, legend, button, input, select, textarea, table, figcaption, output, .ui, .meta {
+  font-family: var(--sans); }
+.ui, .meta, figcaption { font-size: 13px; line-height: 1.5; }
+.meta { color: var(--ink-soft); }
+p.meta { margin: 6px 0 12px; }
+
+fieldset { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi);
+           margin: 0 0 16px; padding: 10px 12px 12px; min-width: 0; }
+/* The legend sits inside the box as its first line, so long legends wrap cleanly
+   instead of breaking through the border. */
+legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; font-size: 13px; font-weight: bold; }
+legend + * { clear: both; }
+label { font-size: 13px; }
+.choices { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.choices label { display: inline-flex; align-items: center; gap: 5px; }
+input[type=radio], input[type=checkbox], input[type=range] { accent-color: var(--c1); }
+
+button {
+  font-size: 13px; line-height: 1.2; color: #000; background: var(--btn);
+  border: 0; border-radius: 0; padding: 6px 12px; cursor: pointer;
+  box-shadow: inset -1px -1px var(--btn-dark), inset 1px 1px #fff,
+              inset -2px -2px var(--btn-lo), inset 2px 2px var(--btn-face);
+}
+button:active, button[aria-pressed="true"] {
+  box-shadow: inset 1px 1px var(--btn-dark), inset -1px -1px #fff,
+              inset 2px 2px var(--btn-lo), inset -2px -2px var(--btn-face);
+  padding: 7px 11px 5px 13px;
+}
+button:disabled { color: var(--btn-lo); text-shadow: 1px 1px #fff; cursor: default; }
+button.primary { font-weight: bold; }
+
+input[type=text], input[type=number], input[type=search], input[type=email],
+select, textarea {
+  font-size: 14px; color: var(--ink); background: #fff; border: 1px solid var(--field);
+  border-radius: 0; box-shadow: inset 1px 1px 0 #b4b4b4; padding: 4px 6px;
+}
+
+table { border-collapse: collapse; font-size: 13px; line-height: 1.4; }
+main table { width: 100%; }
+th, td { border: 1px solid var(--lo); padding: 4px 8px; text-align: left; vertical-align: top; }
+th { background: var(--tint); }
+
+.box { background: var(--tint); box-shadow: inset 1px 1px var(--lo), inset -1px -1px var(--hi);
+       padding: 8px 10px; margin: 0 0 1em; font: 13px/1.5 var(--sans); }
+.result { font-size: 1.15em; }
+.result strong { font-variant-numeric: tabular-nums; }
+
+.meter { height: 16px; background: #fff; border: 1px solid var(--field);
+         box-shadow: inset 1px 1px 0 #b4b4b4; }
+.meter > div { height: 100%; width: 0; background: var(--c1); }
+
+footer address { font-style: normal; font-size: 0.85em; }
+
+@media (max-width: 780px) { body { font-size: 17px; padding: 8px 16px 28px; } h1 { font-size: 1.8em; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media print { .nav { display: none; } }
+/* ===== Noah's Weblog teaching components v2 =====
+   Goes directly after house-style.css. Uses only its variables. */
+
+/* anything hidden by the engine stays hidden, even inside flex rows */
+[hidden] { display: none !important; }
+
+/* course layout: the lesson on the left, contents on the right (like the log) */
+.course { display: grid; grid-template-columns: minmax(0, var(--measure)) 230px; justify-content: space-between;
+          gap: 32px; align-items: start; }
+.course > .lesson { min-width: 0; }
+.course-nav { position: sticky; top: 12px; padding-left: 20px; border-left: 1px solid var(--lo);
+              box-shadow: inset 1px 0 0 var(--hi); font: 13px/1.5 var(--sans); }
+.course-nav summary { font-weight: bold; cursor: pointer; margin-bottom: 6px; }
+.course-nav ol { margin: 0; padding-left: 0; list-style: none; }
+.course-nav li { margin: 0.3em 0; }
+.course-nav a[aria-current="true"] { color: var(--ink); font-weight: bold; text-decoration: none; }
+.course-nav .check { color: var(--c6); }
+.progress { margin: 0 0 10px; }
+.progress .meter { margin-top: 4px; }
+@media (max-width: 780px) {
+  .course { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .course-nav { position: static; order: -1; padding: 0 0 10px; border-left: 0; box-shadow: none;
+                border-bottom: 1px solid var(--lo); margin-bottom: 14px; }
+}
+
+/* one part at a time */
+.view[hidden] { display: none; }
+.view > h2:first-child { margin-top: 0.3em; }
+.view > h2:focus { outline: none; }
+.objective { font: 13px/1.5 var(--sans); color: var(--ink-soft); margin: -0.2em 0 1.1em; }
+.pager { max-width: none; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+         margin: 2em 0 0; padding-top: 10px; border-top: 1px solid var(--hi); font: 13px/1.5 var(--sans); }
+.pager .next { margin-left: auto; }
+
+/* source references like (p. 4) */
+.src { font: 12px/1 var(--sans); color: var(--ink-soft); white-space: nowrap; }
+
+/* glossary terms in running text link to the glossary */
+a.term { text-decoration-style: dotted; text-underline-offset: 2px; }
+.glossary dt { font-weight: bold; margin: 0.9em 0 0.15em; }
+.glossary dd { margin: 0; }
+
+/* quotes and figures */
+blockquote { margin: 1em 0; padding-left: 14px; border-left: 3px solid var(--lo); font-style: italic; }
+figure { margin: 1.3em 0; }
+figure svg, figure img { display: block; max-width: 100%; height: auto; }
+figure svg:not([width]) { width: 100%; }  /* give every svg width and height attributes */
+figcaption { margin-top: 6px; color: var(--ink-soft); }
+svg text { font-family: var(--sans); }
+
+/* reveal: model answers, hints, "why?" prompts */
+details.reveal { margin: 0 0 1em; }
+details.reveal > summary { font: 13px/1.6 var(--sans); color: var(--link); text-decoration: underline; cursor: pointer; }
+details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px solid var(--hi); }
+
+/* "A common mix-up" refutation box and "Try it" prompts */
+.box strong.label { display: block; margin-bottom: 2px; }
+
+/* quizzes */
+.quiz { margin: 1.3em 0; }
+.quiz fieldset.q legend { font: bold 1em/1.35 var(--serif); }
+.q .options { display: grid; gap: 7px; margin: 6px 0 10px; }
+.q .options label { display: flex; gap: 8px; align-items: flex-start; font: 0.95em/1.4 var(--serif); }
+.q .options input { margin-top: 0.3em; flex: none; }
+.q .options .mark { font: bold 12px/1.6 var(--sans); white-space: nowrap; }
+.q .options .mark.right { color: var(--c6); }
+.q .options .mark.wrong { color: var(--c2); }
+.q .feedback { font: 13px/1.5 var(--sans); margin: 8px 0 0; }
+.q .feedback:empty { display: none; }
+.q .verdict { font-weight: bold; }
+.q .verdict.right { color: var(--c6); }
+.q .verdict.wrong { color: var(--c2); }
+.q textarea { width: 100%; min-height: 4.5em; font: 15px/1.4 var(--serif); margin: 6px 0 8px; }
+.q .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.quiz-summary:empty { display: none; }
+
+/* flashcards */
+
+.card { background: #fff; border: 1px solid var(--field); box-shadow: inset 1px 1px 0 #b4b4b4;
+        padding: 16px 18px; min-height: 9em; margin: 8px 0 10px; }
+.card .front { font-size: 1.2em; }
+.card .back { border-top: 1px dashed var(--lo); margin-top: 12px; padding-top: 10px; }
+.card .back[hidden] { display: none; }
+.deck .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* printing shows every part */
+@media print {
+  .view[hidden] { display: block !important; }
+  .course { display: block; }
+  .course-nav, .pager, .q .actions, .deck .actions { display: none; }
+}
+/* ===== page-specific rules (use the variables above, no new colors) ===== */
+/* figures */
+.tl-dusk { fill: var(--lo); }
+.tl-mid { fill: var(--c1); }
+.tl-dawn { fill: var(--hi); }
+.tl-ink { fill: var(--ink); }
+.tl-light { fill: var(--page); }
+.tl-axis { stroke: var(--ink-soft); stroke-width: 1.5; }
+.tl-arrow { fill: var(--ink-soft); }
+.mt-hill { fill: var(--tint); stroke: var(--lo); stroke-width: 1.5; }
+.mt-top { fill: var(--hi); stroke: var(--lo); }
+.mt-ink { fill: var(--ink); }
+.mt-blue { fill: var(--c1); }
+.mt-path { stroke: var(--c1); stroke-width: 3; }
+.mt-side { fill: none; stroke: var(--ink-soft); stroke-width: 2; stroke-dasharray: 5 4; }
+.mt-stop { stroke: var(--c2); stroke-width: 3; }
+.mt-lead { stroke: var(--ink-soft); stroke-width: 1; }
+.ex-box { fill: var(--tint); stroke: var(--lo); }
+.ex-box2 { fill: var(--page); stroke: var(--c3); stroke-width: 2; }
+.ex-ink { fill: var(--ink); }
+.ex-arrow { stroke: var(--c3); stroke-width: 2.5; }
+.ex-head { fill: var(--c3); }
+.st-steps { fill: var(--tint); stroke: var(--lo); stroke-width: 1.5; }
+.st-room { fill: var(--c1); }
+.st-ink { fill: var(--ink); }
+.st-light { fill: var(--page); }
+.fv-box { fill: var(--tint); stroke: var(--lo); }
+.fv-v1 { fill: var(--c1); }
+.fv-v2 { fill: var(--c6); }
+.fv-v3 { fill: var(--c2); }
+.fv-ink { fill: var(--ink); }
+.fv-light { fill: var(--page); }
+.fv-line { stroke: var(--ink-soft); stroke-width: 1.5; }
+.fv-head { fill: var(--ink-soft); }
+table caption { text-align: left; caption-side: top; padding-bottom: 4px; }
+main table { margin: 0 0 1.2em; }
+
+/* shared bits for the interactives */
+.tryit .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.tryit .result { margin: 10px 0 0; }
+.tryit .fb { font: 13px/1.5 var(--sans); margin: 6px 0 0; }
+.tryit .fb:empty { display: none; }
+.tryit .ok { color: var(--c6); font-weight: bold; }
+.tryit .no { color: var(--c2); font-weight: bold; }
+
+/* signature sort: lay the four nights out as a 2 x 2 map, active left, passive right */
+[data-sort="nightmap"] .dnd-bins { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+[data-sort="nightmap"] .dnd-bin:nth-child(odd) { border-top: 6px solid var(--c1); }
+[data-sort="nightmap"] .dnd-bin:nth-child(even) { border-top: 6px solid var(--c2); }
+@media (max-width: 520px) { [data-sort="nightmap"] .dnd-bins { grid-template-columns: minmax(0, 1fr); } }
+main table th:first-child { width: 4.5em; }
+th.nm-act { border-top: 6px solid var(--c1); }
+th.nm-pas { border-top: 6px solid var(--c2); }
+
+/* director's desk */
+.dd-case { margin-bottom: 14px; }
+.dd-case > legend { font: bold 1em/1.35 var(--serif); }
+.dd-quote { font-style: italic; margin: 2px 0 8px; }
+.dd-group { display: grid; gap: 4px; margin: 4px 0 8px; }
+.dd-group label { display: flex; gap: 6px; align-items: flex-start; }
+.dd-group input { margin-top: 0.2em; flex: none; }
+.dd-sub { font: bold 12px/1.5 var(--sans); margin: 6px 0 0; }
+
+/* sunbeam */
+.sb-room { fill: var(--ink-soft); }
+.sb-wall { fill: var(--btn-lo); }
+.sb-window { fill: var(--hi); }
+.sb-beam { fill: var(--page); }
+.sb-dust { fill: var(--page); }
+.sb-hand { fill: var(--btn-lo); }
+.sb-lit { fill: var(--hi); }
+.sb-label { fill: var(--page); }
+.sb-controls { display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center; }
+.sb-controls input[type=range] { flex: 1 1 10em; min-width: 8em; }
+
+/* log in the fire */
+.lf-wood { fill: var(--c4); }
+.lf-black { fill: var(--ink); }
+.lf-hot { fill: var(--c5); }
+.lf-fire { fill: var(--c2); }
+.lf-drop { fill: var(--c3); }
+.lf-smoke { fill: var(--lo); }
+.lf-crack { stroke: var(--c2); stroke-width: 3; }
+.lf-ground { stroke: var(--lo); stroke-width: 2; }
+.lf-ink { fill: var(--ink); }
+.lf-steps { font: 13px/1.5 var(--sans); margin: 6px 0 0; }
+.lf-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px 20px; margin-top: 8px; }
+.lf-panel h4 { font: bold 13px/1.4 var(--sans); margin: 0 0 2px; }
+.lf-panel p { margin: 0; }
+@media (max-width: 600px) { .lf-panel { grid-template-columns: minmax(0, 1fr); } }
+
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>The Dark Night of John of the Cross</h1>
+    <p class="dek">Sort the four nights on John&#x27;s map, test his three signs on sample cases, and see why he calls God&#x27;s light a darkness.</p>
+    <p class="nav">[ <a href="../../index.html#dark-night-john-of-the-cross">&#9668; Noah's Weblog</a> | <a href="../../about.html">About</a> ]</p>
+    <hr>
+  </header>
+
+  <div class="course">
+    <main class="lesson">
+
+      <!-- ============ START HERE ============ -->
+      <section class="view" id="start" data-title="Start here">
+        <h2>Start here</h2>
+        <p class="box">This page teaches <em>The Ascent of Mount Carmel</em> and <em>The Dark Night</em> by John of the Cross (written about 1578 to 1585), in the English translation by Kieran Kavanaugh and Otilio Rodriguez (1991). It is a plain-language study guide. The original is linked in <a href="#source">About the source</a>.</p>
+        <p>People say "dark night of the soul" about any rough stretch of life. The phrase comes from a Spanish friar who escaped from a prison cell in 1578 and then wrote a love poem about slipping out at night. He spent years explaining what the poem meant. The result is a map of how a person grows from loving God for the good feelings to loving God for God. It is strange and demanding, and readers have used it for over four hundred years.</p>
+        <h3>By the end you'll be able to</h3>
+        <ul class="prose">
+          <li>Explain why John calls the road to God a "night," and name its three parts.</li>
+          <li>Place an experience on John's map of four nights: sense or spirit, active or passive.</li>
+          <li>Apply John's three signs to decide whether someone should stop meditating, and say what each sign rules out.</li>
+          <li>Explain how faith can be certain and still dark, using one of John's images.</li>
+          <li>Use John's log in the fire to explain why the deepest night hurts and what it is for.</li>
+        </ul>
+        <h3>Guess first</h3>
+        <p>Answer these before you start. Guessing wrong is fine; trying first makes the answers stick.</p>
+        <div class="quiz" data-quiz="pre"></div>
+      </section>
+
+      <!-- ============ PART 1 ============ -->
+      <section class="view module" id="m1" data-title="1. Why a night?">
+        <h2>1. Why a night?</h2>
+        <p class="objective">In this part: see where the dark night comes from, why John calls the road to God a night, and how he splits it into four.</p>
+
+        <h3>Words to know</h3>
+        <ul class="prose">
+          <li><a class="term" href="#g-union-with-god">Union with God</a>: John's goal. A person's will comes to want exactly what God wants, out of love.</li>
+          <li><a class="term" href="#g-purgation">Purgation</a>: a cleaning out. John uses it as another name for each night.</li>
+          <li><a class="term" href="#g-active-night">Active</a> and <a class="term" href="#g-passive-night">passive</a>: what you do yourself, and what God does in you while you receive it.</li>
+        </ul>
+
+        <h3>A poem after a prison</h3>
+        <p>In December 1577, John of the Cross, a <a class="term" href="#g-carmelite">Carmelite</a> friar, was seized by opponents of the reform he was helping Teresa of Ávila lead. They jailed him in a monastery in Toledo, and after two months moved him to a room about six feet by ten. After nine months, on a summer night, he pushed open the lock and climbed down from a window on strips of old bedcovers. <span class="src">(Kavanaugh's introduction)</span></p>
+        <p>Soon after, he wrote an eight-stanza poem, <em>The Dark Night</em>. On its surface it is a love poem. A woman slips out of her sleeping house at night to meet her lover. John read it as the story of a soul going out to God. Here is the first stanza in Spanish, with this guide's own English.</p>
+        <blockquote lang="es">En una noche oscura,<br>con ansias, en amores inflamada,<br>¡oh dichosa ventura!,<br>salí sin ser notada,<br>estando ya mi casa sosegada.</blockquote>
+        <blockquote>On a dark night,<br>burning with love's longings,<br>oh, lucky chance!<br>I slipped out unnoticed,<br>my house at last asleep.</blockquote>
+        <p>He then wrote two prose books to explain the poem. <em>The Ascent of Mount Carmel</em> mostly covers what a person can do. <em>The Dark Night</em> covers what God does. He never finished either one. <span class="src">(Kavanaugh's introductions)</span></p>
+
+        <h3>Three reasons for the word "night"</h3>
+        <p>John gives three reasons to call the road to God a night. <span class="src">(Ascent 1.2.1)</span></p>
+        <ul class="prose">
+          <li>The starting point. You give up your cravings for worldly things, and that feels like the senses going dark.</li>
+          <li>The road. The road is <a class="term" href="#g-faith">faith</a>, and faith is dark to the mind.</li>
+          <li>The goal. God himself is beyond the soul's sight while it lives here.</li>
+        </ul>
+        <p>He adds that these are really one night in three parts, like a real night. Giving up cravings is twilight, when things fade from view. Faith is midnight, the darkest part. God is the hour just before dawn. <span class="src">(Ascent 1.2.5)</span></p>
+
+        <figure>
+          <svg width="480" height="170" viewBox="0 0 480 170" role="img" aria-label="One night in three parts: twilight is giving up cravings, midnight is faith, and the hour before dawn is God.">
+            <rect class="tl-dusk" x="0" y="10" width="160" height="120"></rect>
+            <rect class="tl-mid" x="160" y="10" width="160" height="120"></rect>
+            <rect class="tl-dawn" x="320" y="10" width="160" height="120"></rect>
+            <text x="80" y="48" text-anchor="middle" font-size="17" font-weight="bold" class="tl-ink">Twilight</text>
+            <text x="80" y="76" text-anchor="middle" font-size="13" class="tl-ink">start:</text>
+            <text x="80" y="94" text-anchor="middle" font-size="13" class="tl-ink">giving up</text>
+            <text x="80" y="112" text-anchor="middle" font-size="13" class="tl-ink">cravings</text>
+            <text x="240" y="48" text-anchor="middle" font-size="17" font-weight="bold" class="tl-light">Midnight</text>
+            <text x="240" y="76" text-anchor="middle" font-size="13" class="tl-light">road:</text>
+            <text x="240" y="94" text-anchor="middle" font-size="13" class="tl-light">faith</text>
+            <text x="240" y="112" text-anchor="middle" font-size="13" class="tl-light">(darkest)</text>
+            <text x="400" y="48" text-anchor="middle" font-size="17" font-weight="bold" class="tl-ink">Before dawn</text>
+            <text x="400" y="76" text-anchor="middle" font-size="13" class="tl-ink">goal:</text>
+            <text x="400" y="94" text-anchor="middle" font-size="13" class="tl-ink">God</text>
+            <text x="400" y="112" text-anchor="middle" font-size="13" class="tl-ink">(light is near)</text>
+            <line x1="4" y1="156" x2="466" y2="156" class="tl-axis"></line>
+            <polygon points="476,156 464,150 464,162" class="tl-arrow"></polygon>
+            <text x="4" y="148" font-size="13" class="tl-ink">one night, three parts</text>
+          </svg>
+          <figcaption>John's one night in three parts, following Ascent 1.2.5.</figcaption>
+        </figure>
+
+        <h3>Two nights, two ways</h3>
+        <p>John also splits the night another way. The night of <a class="term" href="#g-night-of-sense">sense</a> works on the body's senses and the pleasures they bring. The night of <a class="term" href="#g-night-of-spirit">spirit</a> works on the mind, memory, and will. <span class="src">(Ascent 1.1.2; 2.6.1)</span></p>
+        <p>Each night happens in two ways. In the active way, you do what you can. In the passive way, God does the work and you receive it. <span class="src">(Ascent 1.1.2; 1.13.1)</span> That makes four nights. The <em>Ascent</em> mostly covers the two active ones, and the <em>Dark Night</em> covers the two passive ones. <span class="src">(Kavanaugh's introduction to the Night)</span></p>
+        <p>The night of sense comes to <a class="term" href="#g-beginner">beginners</a>, and John says it is common. The night of spirit comes later, to <a class="term" href="#g-proficient">proficients</a>, and he says only a few go through it. <span class="src">(Night 1.8.1)</span></p>
+        <p>This course follows a traveler through all four, in the rough order a person meets them: active sense, passive sense, then the active and passive nights of spirit. The nights overlap in practice, since God's work and the person's run side by side. <span class="src">(Kavanaugh's introduction to the Night)</span> The order mixes the two books, so the references jump between them.</p>
+
+        <h3>Example</h3>
+        <p><strong>An everyday analogy.</strong> Think of learning to swim. First you practice strokes on your own. That is the active part. Then your teacher takes you into deep water, and you have to let the water hold you. That is the passive part. The analogy breaks down because a teacher works from outside you, and John's God works from inside.</p>
+        <p><strong>John's own example.</strong> Some people, he says, act like small children who kick and cry to walk by themselves when their mother wants to carry them. They make no headway, or if they do, it is at a child's pace. <span class="src">(Ascent prologue 3)</span></p>
+
+        <h3>The map</h3>
+        <table>
+          <caption class="meta">John's four nights</caption>
+          <tr><th></th><th class="nm-act">Active: what you do</th><th class="nm-pas">Passive: what God does</th></tr>
+          <tr><th>Sense</th>
+            <td>Let go of sense pleasures that aren't for God, out of love for Christ. For beginners. <em>Ascent</em>, Book 1. <span class="src">(Ascent 1.13.3–4)</span></td>
+            <td>God dries up the sweetness of prayer. Most beginners enter it. <em>Dark Night</em>, Book 1. <span class="src">(Night 1.8.3–4)</span></td></tr>
+          <tr><th>Spirit</th>
+            <td>Lean on faith, hope, and love instead of ideas, images, and visions. For those starting contemplation. <em>Ascent</em>, Books 2 and 3. <span class="src">(Ascent 2.6.1–8)</span></td>
+            <td>God's light floods the deepest self and feels like darkness. Only a few proficients. <em>Dark Night</em>, Book 2. <span class="src">(Night 2.5.2; 1.8.1)</span></td></tr>
+        </table>
+
+        <h3>Try it: sort the map</h3>
+        <p>Put each card in the night it belongs to. As in the table, navy-topped boxes are active nights and maroon-topped boxes are passive.</p>
+        <div data-sort="nightmap"></div>
+
+        <details class="reveal">
+          <summary>Why does John need passive nights at all? Isn't trying hard enough?</summary>
+          <div>
+            <p>John says that however hard beginners work at giving things up, they can't finish the job. God has to complete it in them, passively, through the night. <span class="src">(Night 1.7.5)</span> Effort still matters. People who resist God's leading, he says, go slower and suffer more. <span class="src">(Ascent prologue 3)</span></p>
+          </div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>People often use "dark night" to mean any sad stretch of life. In the <em>Dark Night</em>, John defines the night as God's own light flowing into a person, which he calls contemplation. <span class="src">(Night 2.5.1)</span> It feels dark because the person isn't ready for so much light. He says it darkens only in order to give light. <span class="src">(Night 2.9.1)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m1"></div>
+      </section>
+
+      <!-- ============ PART 2 ============ -->
+      <section class="view module" id="m2" data-title="2. Sense: your part">
+        <h2>2. The night of sense: your part</h2>
+        <p class="objective">In this part: learn what John asks you to give up in the active night of sense, and why he aims at the craving and leaves the thing alone.</p>
+
+        <h3>Words to know</h3>
+        <ul class="prose">
+          <li><a class="term" href="#g-appetite">Appetite</a>: John's word for a craving that isn't ordered toward God.</li>
+          <li><a class="term" href="#g-attachment">Attachment</a>: a desire the will clings to, often out of habit.</li>
+          <li><a class="term" href="#g-mortification">Mortification</a>: putting a craving to death by refusing to feed it.</li>
+        </ul>
+
+        <h3>The craving goes dark</h3>
+        <p>The first night works on the senses. John calls it a deprivation, but of one thing only: the pleasure your appetites chase. <span class="src">(Ascent 1.3.1)</span> The world you see and hear stays where it is. <span class="src">(Ascent 1.3.4)</span></p>
+        <p>He is clear about this. King David was rich, John says, yet called himself poor, because his will wasn't fixed on riches. Things can't get inside the soul and harm it. The will set on them does the damage. <span class="src">(Ascent 1.3.4)</span></p>
+        <p>Why does it matter? Love makes you like what you love, John says. If you cling to a creature, you shrink to its size. <span class="src">(Ascent 1.4.3)</span> Cravings also do two kinds of harm. They crowd out God's Spirit, and they wear a person out, torment, darken, dirty, and weaken them. <span class="src">(Ascent 1.6.1)</span> He compares cravings to restless children always whining for something new. <span class="src">(Ascent 1.6.6)</span></p>
+        <p>Not every desire counts. Natural desires, like hunger, are little or no obstacle if you don't consent to them beyond the first stirring. <span class="src">(Ascent 1.11.2)</span> Small slips you don't notice don't block the way either. <span class="src">(Ascent 1.11.3)</span> What blocks it is a voluntary habit: a small attachment you know about and never mean to give up. His examples include talking too much, and clinging to a certain book or to the way your food is cooked. <span class="src">(Ascent 1.11.4)</span></p>
+        <p>His advice is short. First, want to live as Christ lived, and study his life to learn how. Second, for love of Christ, let go of any sense pleasure that isn't for God's honor. If you can't avoid a pleasure, it is enough not to want it. <span class="src">(Ascent 1.13.3–4)</span> Then come his famous counsels: lean toward the harder thing, the less pleasant thing, toward wanting nothing. He asks for good order and good sense in practicing them, and promises that people who do will find delight in them. <span class="src">(Ascent 1.13.6–7)</span></p>
+        <p>His verses at the foot of the mountain sum it up. In Spanish, "Para venir a gustarlo todo, / no quieras tener gusto en nada." In this guide's English, "To come to enjoy it all, / seek enjoyment in nothing." <span class="src">(Ascent 1.13.11)</span></p>
+        <p>One thing makes this possible. John says nobody beats the senses' cravings by denial alone. A stronger love, for Christ, has to burn hotter than the love of pleasure. That is the poem's "burning with love's longings." <span class="src">(Ascent 1.14.2)</span></p>
+
+        <h3>Example</h3>
+        <p><strong>An everyday analogy.</strong> Someone breaking a phone habit doesn't have to throw the phone in a lake. The trouble is the pull, the reach for it every few minutes. The analogy breaks down because John's goal is larger than self-control. He wants room in the soul for God.</p>
+        <p><strong>John's own example.</strong> A bird tied by a thin thread is held as surely as one tied by a cord. The thread is easier to break, but until it breaks, the bird can't fly. It takes only one flap of the wings. <span class="src">(Ascent 1.11.4)</span></p>
+
+        <figure>
+          <svg width="460" height="340" viewBox="0 0 460 340" role="img" aria-label="Simplified drawing of John's Mount Carmel: a narrow middle path marked nothing leads to the summit, union with God; two side roads, goods of heaven and goods of earth, stop short of the top at red bars.">
+            <polygon points="10,300 230,40 450,300" class="mt-hill"></polygon>
+            <rect x="160" y="22" width="140" height="36" class="mt-top"></rect>
+            <text x="230" y="46" text-anchor="middle" font-size="14" font-weight="bold" class="mt-ink">summit: union</text>
+            <line x1="230" y1="300" x2="230" y2="58" class="mt-path"></line>
+            <text x="238" y="286" font-size="13" class="mt-blue">nothing</text>
+            <text x="238" y="254" font-size="13" class="mt-blue">nothing</text>
+            <text x="238" y="222" font-size="13" class="mt-blue">nothing</text>
+            <text x="238" y="190" font-size="13" class="mt-blue">nothing</text>
+            <text x="238" y="158" font-size="13" class="mt-blue">nothing</text>
+            <text x="238" y="126" font-size="13" class="mt-blue">nothing</text>
+            <text x="238" y="94" font-size="13" class="mt-blue">nothing</text>
+            <polyline points="120,300 142,245 128,205 156,170" class="mt-side"></polyline>
+            <line x1="146" y1="170" x2="166" y2="170" class="mt-stop"></line>
+            <polyline points="340,300 318,245 332,205 304,170" class="mt-side"></polyline>
+            <line x1="294" y1="170" x2="314" y2="170" class="mt-stop"></line>
+            <text x="75" y="322" text-anchor="middle" font-size="13" class="mt-ink">goods of heaven</text>
+            <text x="385" y="322" text-anchor="middle" font-size="13" class="mt-ink">goods of earth</text>
+            <line x1="100" y1="310" x2="118" y2="302" class="mt-lead"></line>
+            <line x1="360" y1="310" x2="342" y2="302" class="mt-lead"></line>
+            <text x="230" y="322" text-anchor="middle" font-size="12" class="mt-ink">foot: verses</text>
+            <text x="230" y="337" text-anchor="middle" font-size="12" class="mt-ink">on how to climb</text>
+          </svg>
+          <figcaption>Redrawn and simplified from John's sketch of the mount. On his drawing the middle path repeats the word <em>nada</em>, "nothing," seven times. The side roads chase good things and stop short of the top (red bars). <span class="src">(Ascent 1.13.10–11 and Kavanaugh's note)</span></figcaption>
+        </figure>
+
+        <h3>Try it: thread or not?</h3>
+        <p>Sort each case: is it the kind of tie John says keeps the bird on the ground?</p>
+        <div data-sort="thread"></div>
+
+        <details class="reveal">
+          <summary>Why must even a small attachment go? Couldn't you keep just one?</summary>
+          <div>
+            <p>In union, John says, your will and God's will become one. Holding on, knowingly, to something God doesn't want keeps the two apart. <span class="src">(Ascent 1.11.2–3)</span> He gives a picture: a log can't turn into fire if even one degree of heat is missing. <span class="src">(Ascent 1.11.6)</span></p>
+          </div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>Some readers think John hates the world. He does say that creatures are nothing compared with God. <span class="src">(Ascent 1.4.3)</span> The harm he describes, though, comes from the will's grip on them. A person can own things and stay free, he says, as long as the will isn't set on them. <span class="src">(Ascent 1.3.4)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m2"></div>
+      </section>
+
+      <!-- ============ PART 3 ============ -->
+      <section class="view module" id="m3" data-title="3. Sense: God's part">
+        <h2>3. The night of sense: God's part</h2>
+        <p class="objective">In this part: see why John says God takes the sweetness out of a beginner's prayer, and what the dryness does.</p>
+
+        <h3>Words to know</h3>
+        <ul class="prose">
+          <li><a class="term" href="#g-dryness">Dryness</a>: the loss of pleasure and feeling in prayer and holy things. The translation also calls it aridity.</li>
+          <li><a class="term" href="#g-capital-vices">Capital vices</a>: the seven classic roots of sin: pride, greed, lust, anger, gluttony, envy, and sloth.</li>
+          <li><a class="term" href="#g-spiritual-gluttony">Spiritual gluttony</a>: craving good feelings in prayer the way a glutton craves food.</li>
+        </ul>
+
+        <h3>The sweet start</h3>
+        <p>At first, John says, God treats someone newly and seriously devoted to him the way a mother treats a baby. She warms it, feeds it sweet milk, and carries it in her arms. Prayer feels wonderful. Long hours of prayer are a pleasure, and fasting feels like joy. <span class="src">(Night 1.1.2–3)</span></p>
+        <p>The trouble is the motive. Beginners pray largely for the good feeling, so their faults show up even in holy things. John sorts these faults by the seven capital vices. <span class="src">(Night 1.1.3)</span></p>
+
+        <table>
+          <caption class="meta">Some beginners' faults, and what the night grows in their place</caption>
+          <tr><th>Vice</th><th>The beginner's fault</th><th>What the night grows</th></tr>
+          <tr><td>Pride</td><td>Wants to teach more than learn; judges others as less devout <span class="src">(Night 1.2.1)</span></td><td>Humility: thinks others are better <span class="src">(Night 1.12.7)</span></td></tr>
+          <tr><td>Greed</td><td>Collects rosaries, books, and advice, never satisfied <span class="src">(Night 1.3.1)</span></td><td>Moderation and detachment <span class="src">(Night 1.13.1)</span></td></tr>
+          <tr><td>Gluttony</td><td>Chases sweet feelings; does harsh penances without permission <span class="src">(Night 1.6.1)</span></td><td>Peace once the cravings quiet down <span class="src">(Night 1.13.3)</span></td></tr>
+          <tr><td>Anger</td><td>Gets cranky when the sweetness fades; wants to be a saint in a day <span class="src">(Night 1.5.1, 3)</span></td><td>Gentleness toward God, self, and others <span class="src">(Night 1.13.7)</span></td></tr>
+          <tr><td>Envy</td><td>Is sad when others seem holier <span class="src">(Night 1.7.1)</span></td><td>A holy envy that wants to imitate them <span class="src">(Night 1.13.8)</span></td></tr>
+        </table>
+
+        <h3>The weaning</h3>
+        <p>Then the mother weans the child. She rubs something bitter on the breast and sets the child down to walk. God does the same. Just when prayer feels brightest, he darkens it. Meditation stops working, and holy things taste dry and even bitter. <span class="src">(Night 1.1.2; 1.8.3)</span> John says most beginners enter this night, and not long after they start. <span class="src">(Night 1.8.4)</span></p>
+        <p>The beginners' own efforts can't finish the cleaning. However hard they practice giving things up, John says, they won't succeed fully until God does it in them through this night. <span class="src">(Night 1.7.5)</span></p>
+        <p>What is God doing? John says God is moving his gifts from the senses to the spirit. The senses can't take in this new food, so they are left empty and dry. Meanwhile the spirit is quietly fed and grows stronger. <span class="src">(Night 1.9.4)</span></p>
+        <p>The night bears fruit. The first and chief fruit is self-knowledge. Without the sweet feelings, a person sees how weak they really are. <span class="src">(Night 1.12.2)</span> From that comes humility, and then love of neighbor, because people stop comparing. <span class="src">(Night 1.12.7–8)</span></p>
+
+        <figure>
+          <svg width="460" height="160" viewBox="0 0 460 160" role="img" aria-label="Diagram: God moves his gifts from the senses, which are left dry, to the spirit, which is quietly fed and grows stronger.">
+            <rect x="4" y="20" width="150" height="120" class="ex-box"></rect>
+            <text x="79" y="54" text-anchor="middle" font-size="17" font-weight="bold" class="ex-ink">Senses</text>
+            <text x="79" y="84" text-anchor="middle" font-size="14" class="ex-ink">dry and</text>
+            <text x="79" y="102" text-anchor="middle" font-size="14" class="ex-ink">empty; taste</text>
+            <text x="79" y="120" text-anchor="middle" font-size="14" class="ex-ink">nothing</text>
+            <rect x="306" y="20" width="150" height="120" class="ex-box2"></rect>
+            <text x="381" y="54" text-anchor="middle" font-size="17" font-weight="bold" class="ex-ink">Spirit</text>
+            <text x="381" y="84" text-anchor="middle" font-size="14" class="ex-ink">quietly fed;</text>
+            <text x="381" y="102" text-anchor="middle" font-size="14" class="ex-ink">grows</text>
+            <text x="381" y="120" text-anchor="middle" font-size="14" class="ex-ink">stronger</text>
+            <line x1="160" y1="80" x2="290" y2="80" class="ex-arrow"></line>
+            <polygon points="300,80 288,73 288,87" class="ex-head"></polygon>
+            <text x="230" y="66" text-anchor="middle" font-size="14" class="ex-ink">God moves</text>
+            <text x="230" y="102" text-anchor="middle" font-size="14" class="ex-ink">his gifts</text>
+          </svg>
+          <figcaption>Why prayer feels dry while something grows: the exchange John describes in Night 1.9.4.</figcaption>
+        </figure>
+
+        <h3>Example</h3>
+        <p><strong>An everyday analogy.</strong> Training wheels make a bike easy and fun. Take them off and riding suddenly feels hard and wobbly, just as you are about to ride for real. The analogy breaks down because a new rider can feel the progress, and John says that in this night you usually can't.</p>
+        <p><strong>John's own example.</strong> In the desert, the Israelites had manna from heaven, which held every flavor. Still they cried for the meat and onions of Egypt, because their taste was used to them. Beginners miss the old sweetness the same way. <span class="src">(Night 1.9.5)</span></p>
+
+        <details class="reveal">
+          <summary>Why would a loving God take away the good feelings?</summary>
+          <div>
+            <p>Because the feelings had become the motive. Beginners loved prayer partly for its sweetness, which is partly love of self. Taking the sweetness away lets them love God for God, and see themselves as they are. <span class="src">(Night 1.8.3; 1.12.2)</span></p>
+          </div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>Many people in this night assume dry prayer means God has left or they have done something wrong. John says that fear is what hurts them most. <span class="src">(Night 1.10.1)</span> He tells them to take comfort and keep going, because God is leading them by a new road. <span class="src">(Night 1.10.2–3)</span> Dryness can have other causes too. That is why John gives signs to tell them apart, the subject of the next part.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m3"></div>
+      </section>
+
+      <!-- ============ PART 4 ============ -->
+      <section class="view module" id="m4" data-title="4. The three signs">
+        <h2>4. The three signs</h2>
+        <p class="objective">In this part: learn how John tells when it's time to stop meditating, and what each of his signs rules out.</p>
+
+        <h3>Words to know</h3>
+        <ul class="prose">
+          <li><a class="term" href="#g-meditation">Meditation</a>: prayer that works step by step with images and reasons, like picturing a Gospel scene and thinking about it.</li>
+          <li><a class="term" href="#g-contemplation">Contemplation</a>: God's quiet, loving gift of himself, received without images or step-by-step thought.</li>
+          <li><a class="term" href="#g-loving-attentiveness">Loving attentiveness</a>: staying quietly with God in love, without working at thoughts.</li>
+        </ul>
+
+        <h3>Stairs to a room</h3>
+        <p>For John, meditation is good and right for beginners. You imagine a scene, such as Christ on the cross, and reason about it. It feeds love through the senses. <span class="src">(Ascent 2.12.3, 5)</span></p>
+        <p>Still, it is a means to an end. John compares it to a staircase. Each step helps you climb, but none of them is the room at the top. If you never leave the steps behind, you never arrive. <span class="src">(Ascent 2.12.5)</span> Many acts of meditation build a habit of loving knowledge of God. Once you have it, prayer is like drinking water already stored up, with no need to haul it in. <span class="src">(Ascent 2.14.2)</span></p>
+
+        <figure>
+          <svg width="460" height="200" viewBox="0 0 460 200" role="img" aria-label="A staircase with steps labeled images, ideas, and reasoning leads up to a level room labeled rest in God.">
+            <polygon points="4,190 94,190 94,150 184,150 184,110 274,110 274,70 456,70 456,190" class="st-steps"></polygon>
+            <text x="49" y="180" text-anchor="middle" font-size="14" class="st-ink">images</text>
+            <text x="139" y="140" text-anchor="middle" font-size="14" class="st-ink">ideas</text>
+            <text x="229" y="100" text-anchor="middle" font-size="14" class="st-ink">reasoning</text>
+            <rect x="284" y="14" width="172" height="56" class="st-room"></rect>
+            <text x="370" y="38" text-anchor="middle" font-size="14" font-weight="bold" class="st-light">the room:</text>
+            <text x="370" y="58" text-anchor="middle" font-size="14" font-weight="bold" class="st-light">rest in God</text>
+          </svg>
+          <figcaption>John's staircase: the steps of meditation help you climb, but you have to leave them behind to enter the room at the top (Ascent 2.12.5).</figcaption>
+        </figure>
+
+        <h3>John's three signs</h3>
+        <p>So when should you stop? Too soon and you slide back. Too late and you get in the way. John gives three signs. <span class="src">(Ascent 2.13.1)</span></p>
+        <ol class="prose">
+          <li>You can't meditate or get anything out of it, the way you used to. <span class="src">(Ascent 2.13.2)</span></li>
+          <li>You have no wish to fix your imagination on other things either. Your mind still wanders, but you don't want it to. <span class="src">(Ascent 2.13.3)</span></li>
+          <li>You like to stay alone with God in a quiet, loving awareness, without particular thoughts. John calls this the surest sign. <span class="src">(Ascent 2.13.4)</span></li>
+        </ol>
+        <p>All three must be there together, because each one guards against a fake. <span class="src">(Ascent 2.13.5)</span> The first sign alone could come from carelessness. In that case you would want to think about other things, so the second sign would be missing. The first two together could come from <a class="term" href="#g-melancholia">melancholia</a>, a bodily condition that dulls the mind. Then the peaceful, loving awareness of the third sign would be missing. <span class="src">(Ascent 2.13.6)</span></p>
+        <p>In the <em>Dark Night</em>, John gives a second list for the passive night of sense. First, you find no comfort in God, and none in anything else. Second, you keep turning to God with a painful worry that you aren't serving him. Third, you can't meditate however hard you try, and this lasts. <span class="src">(Night 1.9.2–3, 8)</span> The worry rules out <a class="term" href="#g-lukewarmness">lukewarmness</a>, since lukewarm people don't care. It also rules out a purely bodily cause, which brings no such desire to serve God. The lasting helps too, since bodily moods come and go. <span class="src">(Night 1.9.2–3, 9)</span> John adds that melancholia often goes along with this dryness without spoiling its good work. <span class="src">(Night 1.9.3)</span></p>
+        <p>What should a person in this state do? Stop forcing meditation. Rest in a loving, peaceful attentiveness to God, even if it feels like doing nothing. <span class="src">(Night 1.10.4)</span> John compares it to sitting for a portrait. If the model keeps moving to help, the painter can't finish. <span class="src">(Night 1.10.5)</span> At first the new state comes and goes, he adds. On some days a person still needs to meditate gently to get there. <span class="src">(Ascent 2.15.1–2)</span></p>
+
+        <h3>Example</h3>
+        <p><strong>An everyday analogy.</strong> When you learned to read, you sounded out every letter. Now that you can read, sounding out each letter would only slow you down. The skill you built is still there, working faster. The analogy breaks down because reading stays your own activity, while John says contemplation is received from God.</p>
+        <p><strong>John's own example.</strong> Going back to meditation after the new state has begun is like peeling a fruit that is already peeled. You look for the rind, find none, and miss the fruit in your hand. <span class="src">(Ascent 2.14.3–4)</span></p>
+
+        <h3>Try it: the director's desk</h3>
+        <p>You are a spiritual director, someone people talk to about their prayer. For each of the four people, tick the signs you see, pick what John would advise, and press Check.</p>
+        <div id="signsdesk"></div>
+
+        <p class="box"><strong class="label">A note from outside the book</strong>John's "melancholia" comes from sixteenth-century medicine, which blamed a whole range of emotional troubles on an excess of black bile. <span class="src">(Kavanaugh's note to Night 1.4.3)</span> John says that when melancholia is the whole cause, the dryness isn't the dark night. <span class="src">(Night 1.9.3)</span> Today, feeling low, numb, or hopeless for weeks can be depression, a real illness that doctors treat. If that sounds like you, tell a trusted adult or a doctor.</p>
+
+        <details class="reveal">
+          <summary>Why does John insist on all three signs at once?</summary>
+          <div>
+            <p>Each sign rules out a different false alarm. Not being able to meditate could just be carelessness; the second sign rules that out. Not meditating and not wanting other things could be melancholia, which can feel like a pleasant daze; the third sign, a peaceful and loving awareness of God, rules that out. <span class="src">(Ascent 2.13.6)</span></p>
+          </div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>Some people think contemplation is a technique for emptying the mind. John describes it as a gift: a hidden, peaceful, loving flow of God into the soul. The person only has to stop getting in its way. <span class="src">(Night 1.10.4–6)</span> He warns that a pleasant, drowsy daze, with no loving awareness of God in it, can be mistaken for it. <span class="src">(Ascent 2.13.6)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m4"></div>
+      </section>
+
+      <!-- ============ PART 5 ============ -->
+      <section class="view module" id="m5" data-title="5. Faith, the midnight">
+        <h2>5. Faith, the midnight</h2>
+        <p class="objective">In this part: see why John calls faith dark even though he says it is certain, and what it asks of the mind.</p>
+
+        <h3>Words to know</h3>
+        <ul class="prose">
+          <li><a class="term" href="#g-faith">Faith</a>: for John, firmly believing what God has revealed, which the mind can't see.</li>
+          <li><a class="term" href="#g-faculties">Faculties</a>: the soul's three powers: intellect (understanding), memory, and will.</li>
+          <li><a class="term" href="#g-theological-virtues">Theological virtues</a>: faith, hope, and charity (love), which John says unite a person with God.</li>
+        </ul>
+
+        <h3>Too much light</h3>
+        <p>The night of spirit has an active side too, and its tool is faith. John calls faith the "secret ladder" of the poem's second stanza, because its rungs are hidden from the senses and the mind. <span class="src">(Ascent 2.1.1)</span> If the night of sense is twilight, faith is midnight. It is darker because it blinds reason itself. <span class="src">(Ascent 2.2.1–2)</span></p>
+        <p>Faith is certain and yet dark, John says. It is dark because its light is too strong. When the sun shines, every other light seems to vanish, and staring at the sun blinds you. Faith overwhelms the mind's own light in the same way. <span class="src">(Ascent 2.3.1)</span></p>
+        <p>Try telling someone born blind what white or yellow looks like. However much you explain, they grasp only the words. Faith tells us of things we have never seen, and nothing we know is like them. <span class="src">(Ascent 2.3.2–3)</span> Yet this darkness guides. John points to the cloud in Exodus that was dark and still lit up the night for Israel. <span class="src">(Ascent 2.3.4–5)</span></p>
+        <p>So in this night you stop leaning on what you understand, feel, or imagine about God, and lean on faith. John's picture: a traveler who can still see a little won't let the guide lead, and so leads the guide astray. <span class="src">(Ascent 2.4.3)</span> For the same reason he says to set aside even visions and other unusual experiences, and go by faith. <span class="src">(Ascent 2.11.2, 8)</span> Nothing the mind can picture is like God, and faith alone is the fitting means. <span class="src">(Ascent 2.8.4; 2.9.1)</span></p>
+        <p>Faith has two partners. Each theological virtue empties one faculty. Faith darkens the intellect. Hope empties the memory, since you only hope for what you don't yet have. Charity strips the will of every love that isn't God. <span class="src">(Ascent 2.6.1–4)</span></p>
+        <p>Where does this lead? John's picture is a window in the sun. A smudged window shows only a little light. Clean it, and it shines so brightly it seems to be the sunbeam itself, though it is still glass. How much it shines depends on the window, since the sun is always shining. In the same way, a soul made pure by love shares in God's life while staying a creature. <span class="src">(Ascent 2.5.6–7)</span></p>
+
+        <figure>
+          <svg width="460" height="200" viewBox="0 0 460 200" role="img" aria-label="Diagram: faith darkens the intellect, hope empties the memory, and charity strips the will of loves that are not God.">
+            <rect x="4" y="12" width="116" height="46" class="fv-box"></rect>
+            <text x="62" y="41" text-anchor="middle" font-size="15" class="fv-ink">Intellect</text>
+            <rect x="4" y="77" width="116" height="46" class="fv-box"></rect>
+            <text x="62" y="106" text-anchor="middle" font-size="15" class="fv-ink">Memory</text>
+            <rect x="4" y="142" width="116" height="46" class="fv-box"></rect>
+            <text x="62" y="171" text-anchor="middle" font-size="15" class="fv-ink">Will</text>
+            <rect x="340" y="12" width="116" height="46" class="fv-v1"></rect>
+            <text x="398" y="41" text-anchor="middle" font-size="15" font-weight="bold" class="fv-light">Faith</text>
+            <rect x="340" y="77" width="116" height="46" class="fv-v2"></rect>
+            <text x="398" y="106" text-anchor="middle" font-size="15" font-weight="bold" class="fv-light">Hope</text>
+            <rect x="340" y="142" width="116" height="46" class="fv-v3"></rect>
+            <text x="398" y="171" text-anchor="middle" font-size="15" font-weight="bold" class="fv-light">Charity</text>
+            <line x1="334" y1="44" x2="132" y2="44" class="fv-line"></line>
+            <line x1="334" y1="109" x2="132" y2="109" class="fv-line"></line>
+            <line x1="334" y1="174" x2="132" y2="174" class="fv-line"></line>
+            <polygon points="124,44 136,38 136,50" class="fv-head"></polygon>
+            <polygon points="124,109 136,103 136,115" class="fv-head"></polygon>
+            <polygon points="124,174 136,168 136,180" class="fv-head"></polygon>
+            <text x="230" y="36" text-anchor="middle" font-size="13" class="fv-ink">brings darkness</text>
+            <text x="230" y="101" text-anchor="middle" font-size="13" class="fv-ink">brings emptiness</text>
+            <text x="230" y="166" text-anchor="middle" font-size="13" class="fv-ink">strips other loves</text>
+          </svg>
+          <figcaption>Each theological virtue empties one faculty of what isn't God, which readies it for union (Ascent 2.6.1–2; Night 2.21.11).</figcaption>
+        </figure>
+
+        <h3>Example</h3>
+        <p><strong>An everyday analogy.</strong> Point a phone camera at the sun and the photo comes out white. With too much light, you see nothing. Faith is dark for John in that way, from too much light. The analogy breaks down because a camera gets nothing from the glare, while John says faith gives the soul light in its darkness. <span class="src">(Ascent 2.3.4)</span></p>
+        <p><strong>John's own example.</strong> The sunbeam in the try-it below is his, used in both books. <span class="src">(Ascent 2.14.9; Night 2.8.3)</span></p>
+
+        <h3>Try it: the sunbeam</h3>
+        <p>Move the slider to add or remove dust in a sunbeam crossing a dark room. Then put a hand in the beam.</p>
+        <div id="sunbeam"></div>
+        <p>John uses exactly this picture. The purer and simpler God's light is, the darker it seems, because there is nothing in it for the mind to catch on. <span class="src">(Ascent 2.14.8–10)</span> When something comes up to be judged, such as a fault, the person suddenly sees it clearly, like the hand in the beam. <span class="src">(Night 2.8.4)</span></p>
+
+        <details class="reveal">
+          <summary>How can faith be certain if it is dark?</summary>
+          <div>
+            <p>John says faith gives the mind certainty without clarity. <span class="src">(Ascent 2.6.2)</span> Certainty is a firm yes. Clarity would mean seeing for yourself. If you could see it, he says, it wouldn't be faith.</p>
+          </div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>Some read "dark faith" as "unsure faith." John means firm faith in something too bright for the mind, the way the sun is too bright for the eyes. <span class="src">(Ascent 2.3.1; 2.6.2)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m5"></div>
+      </section>
+
+      <!-- ============ PART 6 ============ -->
+      <section class="view module" id="m6" data-title="6. Spirit: the log in the fire">
+        <h2>6. The night of spirit: the log in the fire</h2>
+        <p class="objective">In this part: follow John's account of the deepest night, why it hurts, and what he says it is for.</p>
+
+        <h3>Words to know</h3>
+        <ul class="prose">
+          <li><a class="term" href="#g-ray-of-darkness">Ray of darkness</a>: an old phrase John borrows from the writer Dionysius for contemplation, a light so bright it blinds.</li>
+          <li><a class="term" href="#g-proficient">Proficient</a>: someone past the beginner stage, already praying in quiet contemplation.</li>
+        </ul>
+
+        <h3>Pulling up roots</h3>
+        <p>After the night of sense, John says, a person may spend years as a proficient. Prayer is freer and more peaceful. Yet the deepest roots of selfishness are still there. The first night cut off branches; this one pulls up roots. <span class="src">(Night 2.1.1; 2.2.1)</span></p>
+        <p>Then comes the night of spirit. John defines it as an inflow of God that cleans out a person's ignorance and faults, and he identifies it with contemplation. <span class="src">(Night 2.5.1)</span> Why would God's light feel dark? He gives two reasons. It is too high for the soul, the way the sun blinds an owl. And the soul is impure, so the light hurts, like bright light on sore eyes. <span class="src">(Night 2.5.2–3, 5)</span></p>
+        <p>The pain is real. The mind goes dark, the will goes dry, and the memory feels empty. <span class="src">(Night 2.3.3)</span> Worst of all, the person feels that God has rejected them. They know they love God and would give their life for him, yet they can't believe God loves them. <span class="src">(Night 2.6.2; 2.7.7)</span> Comfort and advice don't help, John admits. <span class="src">(Night 2.7.3)</span> It usually lasts some years, with breaks of light and peace. <span class="src">(Night 2.7.4)</span></p>
+        <p>John's main picture is a log in a fire. The fire first drives out the water. Then it blackens the wood, which smokes and smells. Finally it turns the wood into fire, glowing and giving heat as the fire does. <span class="src">(Night 2.10.1)</span> The soul is the same. The light first shows up all its ugliness, so it feels worse than before. John says it is no worse; it only sees itself clearly. <span class="src">(Night 2.10.2)</span></p>
+        <p>The second stanza opens "a oscuras y segura": in darkness, and safe. John says the soul is safe because it usually goes wrong through its own cravings, tastes, and reasonings, and those are now quiet. God leads it by the hand like a blind person, to a place it doesn't know. <span class="src">(Night 2.16.2–3, 7)</span> To reach a new land, he adds, you have to take roads you don't know. <span class="src">(Night 2.16.8)</span></p>
+        <p>Finally, John dresses the soul in the poem's "disguise" of three colors: a white tunic of faith, a green coat of hope, and a red robe of love. <span class="src">(Night 2.21.3–10)</span> The darkness, he insists, is for the sake of light. It humbles in order to raise up, and empties in order to fill. <span class="src">(Night 2.9.1)</span></p>
+
+        <h3>Example</h3>
+        <p><strong>An everyday analogy.</strong> Cleaning a deep cut stings more than the cut did, and the sting comes from the dirt in it. A good nurse cleans it anyway. The analogy breaks down because a cut heals back to how it was, while John says the soul ends up changed, burning like the fire.</p>
+        <p><strong>John's own example.</strong> The log in the fire, which you can step through below. <span class="src">(Night 2.10.1–9)</span></p>
+
+        <h3>Try it: the log in the fire</h3>
+        <p>Step through what fire does to a log, and what John says the night does to the soul.</p>
+        <div id="logfire"></div>
+
+        <details class="reveal">
+          <summary>If this is God's love, why does it hurt?</summary>
+          <div>
+            <p>John's answer: the pain comes from the soul's own weakness and impurity, the way wet wood hisses and smokes. The fire itself is good. Once the moisture is gone, the burning stops hurting, and joy remains. <span class="src">(Night 2.10.4–5)</span> He even says God's hand only touches the soul. It feels heavy because the soul is so weak. <span class="src">(Night 2.5.7)</span></p>
+          </div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>Some readers take the night of spirit as a punishment. John says God's aim in it is to grant favors. <span class="src">(Night 2.5.7)</span> The person feels rejected because the light shows their faults so clearly, even though they are no worse than before. <span class="src">(Night 2.5.5; 2.10.2)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m6"></div>
+      </section>
+
+
+      <!-- ============ REVIEW ============ -->
+      <section class="view" id="review" data-title="Review cards">
+        <h2>Review cards</h2>
+        <p>Cards you get right come back after longer and longer gaps: tomorrow, then in three days, then a week. Cards you miss come back right away. Spacing review out like this beats rereading.</p>
+        <div class="deck" id="deck"></div>
+      </section>
+
+      <!-- ============ FINAL CHECK ============ -->
+      <section class="view" id="final" data-title="Final check">
+        <h2>Final check</h2>
+        <p>These questions mix all the parts together.</p>
+        <div class="quiz" data-quiz="final"></div>
+        <div class="quiz-summary" data-for="final"></div>
+      </section>
+
+      <!-- ============ GLOSSARY ============ -->
+      <section class="view" id="glossary" data-title="Glossary">
+        <h2>Glossary</h2>
+        <p class="meta"><a href="#" onclick="history.back(); return false;">&#9668; Back to where you were</a></p>
+        <dl class="glossary" id="glossary-list"></dl>
+      </section>
+
+      <!-- ============ SOURCE ============ -->
+      <section class="view" id="source" data-title="About the source">
+        <h2>About the source</h2>
+        <p>John of the Cross, <em>The Ascent of Mount Carmel</em> (written 1581 to 1585) and <em>The Dark Night</em> (poem 1578 or 1579; commentary 1584 to 1585). In <em>The Collected Works of St. John of the Cross</em>, revised edition, translated by Kieran Kavanaugh and Otilio Rodriguez, with introductions by Kieran Kavanaugh. Washington, DC: ICS Publications, 1991. <a href="https://www.icspublications.org/products/the-collected-works-of-st-john-of-the-cross">Read the original</a>.</p>
+        <p class="meta">References like <span class="src">(Ascent 2.13.4)</span> mean book 2, chapter 13, paragraph 4 of <em>The Ascent of Mount Carmel</em>. <span class="src">(Night 1.9.2)</span> means book 1, chapter 9, paragraph 2 of <em>The Dark Night</em>. These numbers are used in most modern editions, so you can find the passage in other translations too. "Kavanaugh's introduction" points to the editor's introductions and notes in the same volume.</p>
+        <h3>What this guide simplifies or leaves out</h3>
+        <ul class="prose">
+          <li>It covers only these two works, and only their main line. It skips Book 3 of the <em>Ascent</em>, on purifying the memory and will, and gives one sentence to the long middle of Book 2, on visions, voices, and other unusual experiences.</li>
+          <li>It leaves out most of the second half of <em>The Dark Night</em>, Book 2 (chapters 11 to 25), including love's growing fire and the ten-step "ladder of love." It uses only the chapters on "in darkness, and safe" and the three-colored disguise.</li>
+          <li>John himself uses two outlines that don't fully match: the night in three parts, and the four nights of sense and spirit, active and passive. Kavanaugh's notes point this out. This guide shows the three parts first, then uses the four nights as the map for the rest of the course.</li>
+          <li>The order of parts follows a traveler through the four nights, so it moves back and forth between the two books.</li>
+          <li>John wrote as a Catholic friar, mainly for the friars and nuns of his reformed Carmelite order, and he reads the Bible freely to illustrate his points. This guide reports his view as his. It doesn't argue for or against it.</li>
+          <li>The Spanish lines and their English versions are this guide's own renderings of John's poem and verses. Everything else is paraphrase.</li>
+          <li>The life story in Part 1 comes from Kavanaugh's introduction. The drawing of the mountain is redrawn and simplified from John's sketch; its side-road labels, "goods of earth" and "goods of heaven," follow the sketch itself.</li>
+          <li>The note on depression in Part 4 comes from outside the book. John's own term is melancholia.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <aside class="course-nav" aria-label="Contents">
+      <details open>
+        <summary>Contents</summary>
+        <div class="progress">
+          <span id="progress-text"></span>
+          <div class="meter" id="progress-bar" role="progressbar" aria-label="Parts done" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill"></div></div>
+        </div>
+        <ol id="contents-list"></ol>
+      </details>
+    </aside>
+  </div>
+
+  <footer>
+    <hr>
+    <address>Part of <a href="../../index.html">Noah's Weblog</a>. A study guide to John of the Cross's <em>Ascent of Mount Carmel</em> and <em>Dark Night</em>.</address>
+  </footer>
+</div>
+
+<script>
+window.COURSE = {
+  slug: "dark-night-john-of-the-cross",
+  quizzes: {
+    pre: [
+      { q: "In John's teaching, what does the night of sense mainly take away?",
+        options: ["The craving for pleasure in things", "The things you own and use every day", "The use of your five senses", "Time spent with friends and family"],
+        answer: 0,
+        why: ["The night darkens the craving, the appetite, and leaves the world where it is.",
+              "John places the harm in the will's grip on things.",
+              "The senses keep working. What goes dark is the pleasure they chase.",
+              "John never asks for this. The night works on cravings."],
+        src: "Ascent 1.3.4", from: "m2" },
+      { q: "Someone who used to love praying now finds it dry and can't concentrate. What would John say first?",
+        options: ["Confess, because dryness comes from sin.", "Take a break from prayer for a while.", "Check which of several causes it is.", "Meditate harder until the feeling returns."],
+        answer: 2,
+        why: ["John lists sin as one possible cause, but only one.",
+              "John never advises giving up prayer.",
+              "John says dryness can come from sin, carelessness, illness, or God's work, and gives signs to tell which.",
+              "If God is leading them on, John says forcing meditation gets in the way."],
+        src: "Night 1.9.1", from: "m4" },
+      { q: "Why does John call faith dark?",
+        options: ["It is too bright for the mind to see.", "It is a guess that might be wrong.", "It deals with sad and painful things.", "It is secret knowledge kept for a few."],
+        answer: 0,
+        why: ["Like the sun, faith's light overwhelms the mind.",
+              "John says faith is certain. It is dark because it is beyond seeing.",
+              "John's darkness is about the mind's sight. Mood plays no part in it.",
+              "John means ordinary Christian faith, open to all believers."],
+        src: "Ascent 2.3.1", from: "m5" }
+    ],
+
+    m1: [
+      { q: "John says the whole night has three parts, like a real night. Which part is faith?",
+        options: ["Twilight", "Midnight", "The hour before dawn"],
+        answer: 1, fixed: true,
+        why: ["Twilight is the first part: giving up cravings.",
+              "Faith is midnight, the darkest part, because it blinds reason itself.",
+              "The hour before dawn stands for God, the goal."],
+        src: "Ascent 1.2.5" },
+      { q: "Which night does John say only a few people go through?",
+        options: ["The active night of sense", "The passive night of spirit", "The passive night of sense", "All four nights, about equally"],
+        answer: 1,
+        why: ["The active night of sense is the beginner's own work, open to anyone.",
+              "He says the night of spirit is for few; the night of sense is common.",
+              "John says most beginners enter the passive night of sense.",
+              "John clearly separates the common night from the rare one."],
+        src: "Night 1.8.1" },
+      { type: "recall",
+        q: "In your own words, what is the difference between an active night and a passive night?",
+        answer: "<p>In an active night, you do what you can yourself, like choosing to give up a pleasure for love of Christ or relying on faith instead of images. In a passive night, God does the work and you receive it, like the dryness that comes to beginners or the painful light of the night of spirit. John says the active work can't finish the job without the passive.</p>",
+        src: "Ascent 1.13.1; Night 1.7.5" }
+    ],
+
+    m2: [
+      { q: "According to John, what makes the night of sense a \"night\"?",
+        options: ["Losing the things you own", "Keeping your eyes and ears shut", "Staying away from other people", "Leaving your cravings unfed"],
+        answer: 3,
+        why: ["John says David was rich and still poor in spirit. Owning isn't the issue.",
+              "The senses still work. John says perceptions don't hinder the soul if it doesn't crave them.",
+              "John's night works on cravings. Company is fine.",
+              "The darkness is the craving going unfed, like an eye with no light."],
+        src: "Ascent 1.3.1, 4" },
+      { q: "Which of these blocks union with God, in John's view?",
+        options: ["Feeling hungry before dinner", "A small habit you keep on purpose", "A craving you notice and refuse", "A slip you didn't notice at the time"],
+        answer: 1,
+        why: ["Natural desires are no obstacle unless you consent to them.",
+              "A voluntary, habitual attachment holds you like a thread holds a bird.",
+              "Refusing a craving makes you stronger, John says.",
+              "John says unnoticed slips aren't what blocks the way."],
+        src: "Ascent 1.11.2–4" },
+      { q: "Why does John say you can't win the night of sense by denial alone?",
+        options: ["Because the senses themselves are evil", "Because a stronger love has to win", "Because only monks and nuns can manage it", "Because God forbids any effort of our own"],
+        answer: 1,
+        why: ["John doesn't call the senses evil; he targets cravings.",
+              "The soul needs to burn with love for Christ to overcome the pull of pleasure.",
+              "He writes for friars and nuns, but his reason here is about love.",
+              "John gives counsels for effort in this very night."],
+        src: "Ascent 1.14.2" }
+    ],
+
+    m3: [
+      { q: "In John's picture, what is God doing when a beginner's prayer turns dry?",
+        options: ["Punishing them for their faults", "Weaning them, like a growing child", "Testing whether they will quit for good", "Nothing at all; dryness is just chance"],
+        answer: 1,
+        why: ["John presents the dryness as a cure and a gift.",
+              "The mother withholds the sweet milk so the child learns to walk and eat solid food.",
+              "John does say God tries beginners this way, but the aim is growth. He never pictures it as a trap to make them quit.",
+              "John says God is at work in this night, moving his gifts from sense to spirit."],
+        src: "Night 1.1.2; 1.8.3" },
+      { q: "A beginner keeps swapping fancy rosaries and devotional books, never satisfied. Which vice does John file this under?",
+        options: ["Pride", "Anger", "Envy", "Greed"],
+        answer: 3,
+        why: ["Pride shows up as judging others and wanting to teach.",
+              "Anger shows up as crankiness when the sweetness fades.",
+              "Envy is sadness at others' progress.",
+              "John calls it spiritual avarice: possessiveness about holy objects."],
+        src: "Night 1.3.1" },
+      { q: "What does John call the first and chief benefit of the night of sense?",
+        options: ["Knowing yourself", "Seeing visions", "A name for holiness", "Better bodily health"],
+        answer: 0,
+        why: ["Without the sweetness, a person sees their own weakness, and humility follows.",
+              "John warns against relying on visions.",
+              "That would feed the very pride the night removes.",
+              "John says nothing like this."],
+        src: "Night 1.12.2" }
+    ],
+
+    m4: [
+      { q: "Jake can't meditate anymore and gets nothing from it. During prayer he happily daydreams about the weekend. What would John say?",
+        options: ["He has reached contemplation.", "He likely has melancholia.", "He should keep meditating.", "He should give up on prayer."],
+        answer: 2,
+        why: ["One sign isn't enough; John requires all three.",
+              "Melancholia would leave him not wanting other things either. Jake wants the weekend.",
+              "Wanting to think about other things means the second sign is missing, which points to carelessness.",
+              "John never advises that."],
+        src: "Ascent 2.13.6" },
+      { q: "Which of the three signs does John call the surest?",
+        options: ["Being unable to meditate", "No wish to think of other things", "A quiet, loving awareness of God", "A steady feeling of sadness"],
+        answer: 2,
+        why: ["This sign alone could come from carelessness.",
+              "This one, with the first, could still come from melancholia.",
+              "It is the positive sign of what God is giving.",
+              "Sadness isn't one of John's signs."],
+        src: "Ascent 2.13.4" },
+      { q: "In the Dark Night version of the signs, what does the painful worry about not serving God rule out?",
+        options: ["Spiritual pride", "Lukewarmness", "Contemplation", "Recent sin"],
+        answer: 1,
+        why: ["The signs don't test for pride; John handles pride as one of the beginners' faults.",
+              "Lukewarm people don't worry about serving God.",
+              "The signs exist to confirm contemplation.",
+              "The first sign handles this: with new sins, a person would still crave other pleasures."],
+        src: "Night 1.9.3" },
+      { type: "recall",
+        q: "Explain John's staircase picture of meditation in your own words.",
+        answer: "<p>Meditation is like a staircase. Each step (images, ideas, reasoning) helps you climb toward God, but none of the steps is the room at the top. If you stay on the steps forever, you never arrive. When the signs appear, it is time to leave the steps and rest in the room, in loving attentiveness.</p>",
+        src: "Ascent 2.12.5" }
+    ],
+
+    m5: [
+      { q: "Which virtue does John say empties the memory?",
+        options: ["Faith", "Charity", "Hope", "Humility"],
+        answer: 2,
+        why: ["Faith works on the intellect.",
+              "Charity works on the will.",
+              "You only hope for what you don't have, so hope leaves the memory empty of possessions.",
+              "Humility isn't one of the three theological virtues."],
+        src: "Ascent 2.6.3" },
+      { q: "In John's window picture, what decides how brightly the window shines?",
+        options: ["How clean the glass is", "How strong the sun is that day", "How large the window is", "How long you stare at it"],
+        answer: 0,
+        why: ["The sun always shines; the window's smudges decide how much light it shows.",
+              "John says the illumination depends on the window; the sun always shines.",
+              "Size plays no part in his picture.",
+              "John's point is about purity. Staring changes nothing."],
+        src: "Ascent 2.5.6" },
+      { q: "In the sunbeam, why does the purest light look darkest?",
+        options: ["Pure light is weaker than dusty light", "Nothing in it catches the eye", "Dust makes the light purer", "The room swallows the light"],
+        answer: 1,
+        why: ["The pure beam is just as strong; it is only invisible.",
+              "Light is seen by what it strikes. With nothing to strike, the beam is invisible, and John says pure contemplation is like that.",
+              "John says the dusty beam is less pure, though easier to see.",
+              "The room plays no part in his point."],
+        src: "Ascent 2.14.9; Night 2.8.3" }
+    ],
+
+    m6: [
+      { q: "According to John, why does God's light feel like darkness in the night of spirit?",
+        options: ["God has left, and the soul is alone", "The devil blocks it, and the soul is weak", "It is too high, and the soul is impure", "It is imagined, and the soul is tired"],
+        answer: 2,
+        why: ["John says the light is present and strong; that's the problem.",
+              "John doesn't blame the devil here.",
+              "Those are his two reasons.",
+              "John treats the experience as real."],
+        src: "Night 2.5.2" },
+      { q: "In the log image, why does the wood turn black before it glows?",
+        options: ["The fire is harmful to the wood", "The fire drives out what resists it", "The log is the wrong kind of wood", "It happens to some logs by chance"],
+        answer: 1,
+        why: ["The same fire that blackens is what finally turns the log to fire.",
+              "The fire brings out the moisture and darkness before making the wood like itself.",
+              "Any wood behaves this way in John's picture.",
+              "John presents the stages as a necessary order."],
+        src: "Night 2.10.1–3" },
+      { q: "John says the soul walks \"in darkness, and safe.\" Why safe?",
+        options: ["Its own misleading cravings are quiet", "Nothing bad happens to anyone in the dark", "It can now see more than it did before", "It is hidden even from God's own sight"],
+        answer: 0,
+        why: ["With its own errors quieted, God guides it like a blind person by the hand.",
+              "John's point is specific to this night and God's leading in it.",
+              "It feels it sees less than before.",
+              "John says it is close to God, hidden from harm."],
+        src: "Night 2.16.2–3, 7" },
+      { type: "recall",
+        q: "Explain one lesson John draws from the log in the fire.",
+        answer: "<p>Any of these works: The same fire that will transform the log first prepares it, so the light that will unite the soul with God is what purifies it first. The pain comes from the wood's moisture, the soul's own impurity, and stops when that is gone. The soul sometimes gets a break, like iron pulled from the forge to check progress. The fire then works deeper, so the night can return more inwardly.</p>",
+        src: "Night 2.10.3–7" }
+    ],
+
+    final: [
+      { q: "Which of John's two books mostly covers what God does in the soul?",
+        options: ["The Ascent of Mount Carmel", "Both books, about equally", "The Dark Night", "Neither of the two books"],
+        answer: 2,
+        why: ["The Ascent mostly covers the active nights, what a person does.",
+              "John divides the work between the books, roughly active and passive.",
+              "The Dark Night covers the passive nights of sense and spirit.",
+              "The Dark Night is exactly about God's work."],
+        src: "Kavanaugh's introduction to the Night", from: "m1" },
+      { q: "Sam deliberately picks the harder chore, as practice in wanting less. Where does this go on John's map?",
+        options: ["Passive night of sense", "Active night of sense", "Active night of spirit", "Passive night of spirit"],
+        answer: 1,
+        why: ["Passive means God does it. Sam is choosing.",
+              "It is Sam's own effort, aimed at sense pleasures.",
+              "The night of spirit works on the mind, memory, and will.",
+              "Nothing here is God's direct work in the deep spirit."],
+        src: "Ascent 1.13.6", from: "m1" },
+      { q: "Lena owns a good guitar and plays it, but could give it up without fuss. By John's standard, is the guitar the problem?",
+        options: ["Yes, because owning it blocks God", "Yes, because music is a sense pleasure", "No, because her will isn't gripping it", "No, because a guitar is a holy object"],
+        answer: 2,
+        why: ["John says owning things doesn't harm the soul by itself.",
+              "John's target is the craving for pleasure.",
+              "Things can't get into the soul; the will set on them does the damage, and Lena's will is free.",
+              "Holiness of the object isn't John's test; the will's grip is."],
+        src: "Ascent 1.3.4", from: "m2" },
+      { q: "A beginner judges friends as less devout and always wants to teach. Which vice is this, on John's list?",
+        options: ["Pride", "Greed", "Gluttony", "Sloth"],
+        answer: 0,
+        why: ["John's spiritual pride: wanting to instruct, condemning others.",
+              "Greed is collecting objects and advice.",
+              "Gluttony is chasing sweet feelings.",
+              "Sloth is quitting when prayer stops being sweet."],
+        src: "Night 1.2.1", from: "m3" },
+      { q: "Someone can't meditate and has no wish to think of anything else, but at prayer only drifts in a pleasant daze with no awareness of God. What does John's test point to?",
+        options: ["Contemplation", "Carelessness", "Melancholia", "A vision"],
+        answer: 2,
+        why: ["The third sign, a peaceful loving awareness, is missing.",
+              "Carelessness would show as wanting other things.",
+              "The first two signs without the third may come from melancholia. If that is the whole cause, John says it isn't the night.",
+              "Nothing here is a vision."],
+        src: "Ascent 2.13.6", from: "m4" },
+      { q: "What should a person in the passive night of sense do in prayer, according to John?",
+        options: ["Meditate harder to bring back the feeling", "Stop praying until the dryness passes", "Rest quietly in loving attention", "Look for visions to guide the way"],
+        answer: 2,
+        why: ["John says this disturbs God's work, like a model who keeps moving.",
+              "John urges them to persevere in prayer.",
+              "Even if it feels like doing nothing.",
+              "John warns against relying on visions."],
+        src: "Night 1.10.4–5", from: "m4" },
+      { q: "Why does John call faith \"midnight\"?",
+        options: ["It usually comes late in life", "It darkens the mind's own light", "It marks the end of the road", "It is the most frightening part"],
+        answer: 1,
+        why: ["John's three parts aren't about age.",
+              "The night of sense still leaves reason working; faith darkens reason itself.",
+              "The end is God, the hour before dawn.",
+              "His point is about the mind's sight. Fear isn't the measure."],
+        src: "Ascent 2.2.1–2", from: "m5" },
+      { q: "In John's scheme, what does charity do to the will?",
+        options: ["Fills it with warm feelings", "Makes it rule the intellect", "Empties it of other loves", "Hands it over to memory"],
+        answer: 2,
+        why: ["John says charity empties the will. Feelings aren't the point.",
+              "John doesn't rank the faculties this way here.",
+              "Charity strips the will of every love that isn't God and centers it on him.",
+              "Hope is the virtue that works on memory."],
+        src: "Ascent 2.6.4", from: "m5" },
+      { q: "In the night of spirit, why does the soul feel worse than before?",
+        options: ["It has fallen into new and worse sins", "It sees its old faults clearly", "God has stopped loving it as before", "It has quietly given up on prayer"],
+        answer: 1,
+        why: ["John doesn't say this.",
+              "Like blackened wood in the fire, it sees what was always there. John says it is no worse.",
+              "John says God's aim here is to grant favors.",
+              "John says prayer becomes hard here, yet the soul keeps loving God."],
+        src: "Night 2.10.2", from: "m6" },
+      { q: "What do the three colors of the soul's disguise stand for?",
+        options: ["Faith, hope, and love", "Purity, growth, and suffering", "Peace, nature, and courage", "God, the world, and the flesh"],
+        answer: 0,
+        why: ["A white tunic of faith, a green coat of hope, a red robe of charity.",
+              "These sound plausible but aren't John's meanings.",
+              "Not John's meanings.",
+              "These are close to John's three enemies (devil, world, flesh), which the colors protect against."],
+        src: "Night 2.21.3–10", from: "m6" }
+    ]
+  },
+
+  sorts: {
+    nightmap: {
+      bins: [
+        { id: "as", label: "Active night of sense", hint: "what you do about sense pleasures" },
+        { id: "ps", label: "Passive night of sense", hint: "what God does to sense pleasures" },
+        { id: "asp", label: "Active night of spirit", hint: "what you do with mind, memory, will" },
+        { id: "psp", label: "Passive night of spirit", hint: "what God does in mind, memory, will" }
+      ],
+      items: [
+        { text: "Choosing the harder chore, as practice in wanting less", bin: "as",
+          why: "Active night of sense: your own choice, following John's counsel to lean toward the harder thing. (Ascent 1.13.6)" },
+        { text: "Letting the urge to grab your phone pass, for love of Christ", bin: "as",
+          why: "Active night of sense: giving up a sense pleasure by choice, for Christ. (Ascent 1.13.4)" },
+        { text: "Prayer turns dry on its own, and meditation stops working", bin: "ps",
+          why: "Passive night of sense: it happens to you, and it takes away the senses' sweetness. God is weaning a beginner. (Night 1.8.3)" },
+        { text: "A beginner's pride fading as prayer stops feeling sweet", bin: "ps",
+          why: "Passive night of sense: losing the sweetness brings self-knowledge and humility, the first fruits of this night. (Night 1.12.2, 7)" },
+        { text: "Setting aside a mental picture of God", bin: "asp",
+          why: "Active night of spirit: a choice about the mind, relying on faith instead of an image. (Ascent 2.12.3–5)" },
+        { text: "Not relying on a vision, and walking by faith instead", bin: "asp",
+          why: "Active night of spirit: John says to set visions aside and go by faith, and here you choose to. (Ascent 2.11.2, 8)" },
+        { text: "Feeling rejected by God after years of calm prayer", bin: "psp",
+          why: "Passive night of spirit: the deepest night, which God works in proficients. (Night 2.1.1; 2.6.2)" },
+        { text: "Hidden faults driven out like water from a log in a fire", bin: "psp",
+          why: "Passive night of spirit: this is John's log in the fire. (Night 2.10.1–2)" }
+      ]
+    },
+    thread: {
+      bins: [
+        { id: "tie", label: "Ties the bird down", hint: "a voluntary attachment John says must go" },
+        { id: "not", label: "Not what John means", hint: "natural, unnoticed, resisted, or not clung to" }
+      ],
+      items: [
+        { text: "Feeling hungry before lunch", bin: "not",
+          why: "A natural desire. John says these are no hindrance unless you consent to them. (Ascent 1.11.2)" },
+        { text: "A habit of talking too much that you never try to change", bin: "tie",
+          why: "This is John's own example of a habit that stops progress. (Ascent 1.11.4)" },
+        { text: "Owning a good bike you could easily give up", bin: "not",
+          why: "Things themselves can't harm the soul; the will set on them does. (Ascent 1.3.4)" },
+        { text: "A craving for cake that you notice and refuse", bin: "not",
+          why: "A first stirring you don't consent to. Resisting it makes you stronger, John says. (Ascent 1.12.6)" },
+        { text: "Insisting your food be made just your way, always", bin: "tie",
+          why: "On John's list: a small attachment to the way food is prepared. (Ascent 1.11.4)" },
+        { text: "A friendship you keep indulging, though it crowds out prayer", bin: "tie",
+          why: "John warns of people who lost their progress through a small attachment to conversation and friendship that looked good. (Ascent 1.11.5)" }
+      ]
+    }
+  },
+  orders: {},
+
+  cards: [
+    { front: "Why does John call the road to God a night?", back: "Three reasons: the starting point (giving up cravings), the road (faith), and the goal (God) are all dark to the soul in this life.", src: "Ascent 1.2.1" },
+    { front: "What are John's four nights?", back: "The night of sense and the night of spirit, each in an active way (what you do) and a passive way (what God does).", src: "Ascent 1.1.2; 1.13.1" },
+    { front: "In the night of sense, what goes dark: things, or the craving for them?", back: "The craving. Things can't harm the soul; the will set on them does.", src: "Ascent 1.3.4" },
+    { front: "What is John's bird-on-a-thread image about?", back: "A small attachment kept on purpose holds you back as surely as a big one, the way a thread holds a bird as surely as a cord.", src: "Ascent 1.11.4" },
+    { front: "What does John say makes it possible to give up sense pleasures?", back: "A stronger love: the soul has to burn with love for Christ to overcome the pull of pleasure.", src: "Ascent 1.14.2" },
+    { front: "How does John picture God's work in the passive night of sense?", back: "A mother weaning her child: she stops the sweet milk and sets the child down to walk.", src: "Night 1.1.2; 1.8.3" },
+    { front: "What is the first fruit of the night of sense?", back: "Self-knowledge, which leads to humility and love of neighbor.", src: "Night 1.12.2, 7–8" },
+    { front: "What are the three signs in the Ascent for leaving meditation?", back: "You can't meditate or get anything from it; you have no wish to think about other things; you like to stay in a quiet, loving awareness of God.", src: "Ascent 2.13.2–4" },
+    { front: "What does each of the later signs rule out?", back: "The second rules out carelessness. The third rules out melancholia, a bodily cause. All three must be present together.", src: "Ascent 2.13.6" },
+    { front: "What should someone in the night of sense do in prayer?", back: "Stop forcing meditation and rest in a loving, peaceful attentiveness to God, even if it feels idle.", src: "Night 1.10.4" },
+    { front: "Why is faith dark for John?", back: "Its light is too strong for the mind, like the sun for the eyes. It gives certainty without clarity.", src: "Ascent 2.3.1; 2.6.2" },
+    { front: "Which virtue goes with which faculty?", back: "Faith with the intellect, hope with the memory, charity with the will.", src: "Ascent 2.6.1–2" },
+    { front: "What does John's window picture show?", back: "A clean window shines like the sunbeam yet stays glass. How much it shines depends on how clean it is.", src: "Ascent 2.5.6–7" },
+    { front: "Why does the night of spirit hurt, according to John?", back: "God's light is too high for the soul, and the soul is impure. The pain comes from the soul's own weakness.", src: "Night 2.5.2; 2.10.4" },
+    { front: "What does the log in the fire show?", back: "The same fire first dries and blackens the wood, then turns it into fire. The light that purifies the soul is the light that transforms it.", src: "Night 2.10.1–3" },
+    { front: "Why is the soul \"safe\" in this darkness?", back: "Its own cravings and reasonings, which usually lead it astray, are quiet, and God leads it like a blind person by the hand.", src: "Night 2.16.2–3, 7" }
+  ],
+
+  glossary: {
+    "active night": "A night of purification in which a person does what they can, such as giving up a pleasure for love of Christ or relying on faith instead of images.",
+    "appetite": "John's word for a craving or desire that isn't rightly ordered toward God. Natural impulses you don't consent to don't count.",
+    "attachment": "A desire the will clings to. John uses it about the same as appetite or affection; the ones that hold you back are voluntary and habitual.",
+    "beginner": "In John's scheme, someone in the early stage of prayer who meditates and is moved mostly by the sweetness they feel.",
+    "capital vices": "The seven classic roots of sin: pride, greed (avarice), lust, anger, gluttony, envy, and sloth. John uses them to sort beginners' faults.",
+    "Carmelite": "A member of the Order of Carmel, a Catholic religious order of friars and nuns. John and Teresa of Ávila led a reform of it.",
+    "contemplation": "God's quiet, loving gift of himself to the soul, received without images or step-by-step thought. John identifies the dark night with it.",
+    "dryness": "Loss of pleasure and feeling in prayer and holy things. The translation also calls it aridity.",
+    "faculties": "The soul's three powers in John's scheme: intellect (understanding), memory, and will.",
+    "faith": "For John, firmly believing what God has revealed. It gives certainty without clarity, so it is dark to the mind.",
+    "loving attentiveness": "Staying quietly with God in love, without working at thoughts or images.",
+    "lukewarmness": "Not caring much about God. John says lukewarm people feel no worry about serving him, which sets them apart from people in the night.",
+    "meditation": "Prayer that works step by step with images and reasoning, such as picturing a Gospel scene and thinking about it.",
+    "melancholia": "In sixteenth-century medicine, a range of emotional troubles blamed on an excess of black bile. John says it often goes along with the night's dryness, but when it is the whole cause, the dryness isn't the night.",
+    "mortification": "Putting a craving to death by refusing to feed it.",
+    "nada": "Spanish for \"nothing.\" John's drawing of Mount Carmel writes it seven times along the straight path to the top.",
+    "night of sense": "The purification of the senses and their pleasures. It comes to beginners and is common.",
+    "night of spirit": "The purification of the mind, memory, and will. It comes later, to proficients, and John says it is rare.",
+    "passive night": "A night of purification that God works in a person while they receive it.",
+    "proficient": "In John's scheme, someone past the beginner stage, already praying in contemplation.",
+    "purgation": "A cleaning out. John uses it as another word for each night.",
+    "ray of darkness": "A phrase John takes from the writer Dionysius for contemplation: a light so bright it blinds the mind.",
+    "spiritual gluttony": "Craving sweet feelings in prayer and holy things the way a glutton craves food.",
+    "theological virtues": "Faith, hope, and charity (love). John says these alone unite a person with God in this life.",
+    "union with God": "John's goal: the soul's will so matched to God's will, through love, that the two are one."
+  },
+  glossaryCards: true
+};
+</script>
+<script>
+/* ===== Noah's Weblog drag and drop v1 =====
+   Real drag and drop for two activities, usable every way people try:
+     WeblogDnD.order(container, { items: [...in the correct order...] })
+     WeblogDnD.sort(container,  { bins: [{id, label, hint}], items: [{text, bin, why}] })
+   Mouse: drag the whole item. Touch: drag by the handle (the rest scrolls).
+   Tap or click: select an item, then tap where it goes.
+   Keyboard: Space picks up, arrow keys move, Space drops.
+   Self-contained: injects its own styles and needs nothing else. */
+(function () {
+  "use strict";
+  if (window.WeblogDnD) return;
+
+  var CSS = [
+    ".dnd-help{font:13px/1.5 Verdana,Geneva,Tahoma,sans-serif;color:var(--ink-soft,#2b2b2b);margin:0 0 8px}",
+    ".dnd-status{font:13px/1.5 Verdana,Geneva,Tahoma,sans-serif;margin:8px 0}",
+    ".dnd-status:empty{display:none}",
+    ".dnd-actions{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}",
+    ".dnd-item,.dnd-card{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1px solid var(--field,#6e6e6e);",
+    "  padding:8px 10px;cursor:grab;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}",
+    ".dnd-item:focus-visible,.dnd-card:focus-visible{outline:2px dotted var(--ink,#000);outline-offset:2px}",
+    ".dnd-handle{flex:none;display:inline-flex;align-items:center;justify-content:center;width:28px;min-height:28px;margin:-4px 0 -4px -4px;",
+    "  font:18px/1 Verdana,Geneva,sans-serif;color:var(--btn-lo,#808080);cursor:grab;touch-action:none}",
+    ".dnd-text{flex:1;min-width:0}",
+    ".dnd-mark{flex:none;font:bold 12px/1.6 Verdana,Geneva,sans-serif;white-space:nowrap}",
+    ".dnd-dragging{opacity:.35;border-style:dashed}",
+    ".dnd-ghost{position:fixed;z-index:2147483646;pointer-events:none;margin:0;opacity:.95;cursor:grabbing;",
+    "  box-shadow:3px 3px 0 var(--btn-lo,#808080)}",
+    ".dnd-grabbed,.dnd-card[aria-pressed=true]{outline:2px dotted var(--ink,#000);outline-offset:2px;background:var(--tint,#f2f2f2)}",
+    ".dnd-ok{border-left:4px solid var(--c6,#008000)}.dnd-ok .dnd-mark{color:var(--c6,#008000)}",
+    ".dnd-no{border-left:4px solid var(--c2,#800000)}.dnd-no .dnd-mark{color:var(--c2,#800000)}",
+    ".dnd-list{list-style:none;margin:0;padding:0;counter-reset:dnd}",
+    ".dnd-list .dnd-item{margin:0 0 6px}",
+    ".dnd-list .dnd-item::before{counter-increment:dnd;content:counter(dnd) \".\";flex:none;min-width:1.6em;font:bold 13px/1.6 Verdana,Geneva,sans-serif}",
+    ".dnd-tray{border:1px dashed var(--lo,#999);padding:10px;margin:0 0 12px;display:grid;gap:8px;min-height:56px}",
+    ".dnd-tray-label{font:bold 13px/1.4 Verdana,Geneva,sans-serif;margin:0}",
+    ".dnd-bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}",
+    ".dnd-bin{border:2px solid var(--lo,#999);background:#fff;padding:8px 10px 10px;min-height:120px;display:flex;flex-direction:column;gap:6px}",
+    ".dnd-bin.dnd-over{border-color:var(--c1,#000080);background:var(--tint,#f2f2f2)}",
+    ".dnd-bin-head{font:bold 14px/1.3 Verdana,Geneva,sans-serif;margin:0}",
+    ".dnd-bin-hint{font:12px/1.4 Verdana,Geneva,sans-serif;color:var(--ink-soft,#2b2b2b);margin:0}",
+    ".dnd-bin-here{align-self:flex-start}",
+    ".dnd-card .dnd-fb{display:block;font:12px/1.45 Verdana,Geneva,sans-serif;margin-top:4px}",
+    ".dnd-card .dnd-fb:empty{display:none}",
+    ".dnd-card .dnd-body{flex:1;min-width:0}",
+    "[hidden]{display:none!important}",
+    "@media (prefers-reduced-motion:reduce){.dnd-ghost{transition:none}}"
+  ].join("\n");
+
+  function injectStyles() {
+    if (document.getElementById("weblog-dnd-css")) return;
+    var s = document.createElement("style");
+    s.id = "weblog-dnd-css";
+    s.textContent = CSS;
+    document.head.appendChild(s);
+  }
+
+  function el(tag, cls, html) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+  function shuffled(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function plain(html) { var d = document.createElement("div"); d.innerHTML = html; return (d.textContent || "").trim(); }
+
+  /* ---------- pointer dragging shared by both activities ---------- */
+  // Calls hooks.start(), hooks.move(x, y), hooks.drop(x, y). Mouse drags from anywhere on the
+  // item; touch and pen drag only from the handle so the rest of the page still scrolls.
+  function draggable(item, handle, hooks) {
+    var st = null;
+    // listen on window while a drag is possible: the item itself moves in the DOM mid-drag,
+    // which would drop element-level pointer capture
+    function onMove(e) {
+      if (!st || e.pointerId !== st.id) return;
+      if (!st.dragging) {
+        if (Math.abs(e.clientX - st.x) + Math.abs(e.clientY - st.y) < (st.touch ? 3 : 6)) return;
+        st.dragging = true;
+        var r = item.getBoundingClientRect();
+        st.dx = st.x - r.left; st.dy = st.y - r.top;
+        st.ghost = item.cloneNode(true);
+        st.ghost.classList.add("dnd-ghost");
+        st.ghost.removeAttribute("id");
+        st.ghost.setAttribute("aria-hidden", "true");
+        st.ghost.style.width = r.width + "px";
+        document.body.appendChild(st.ghost);
+        item.classList.add("dnd-dragging");
+        hooks.start();
+      }
+      e.preventDefault();
+      st.lx = e.clientX; st.ly = e.clientY;
+      st.ghost.style.left = (e.clientX - st.dx) + "px";
+      st.ghost.style.top = (e.clientY - st.dy) + "px";
+      hooks.move(e.clientX, e.clientY);
+      autoScroll(e.clientY);
+    }
+    function onUp(e) { finish(e, false); }
+    function onCancel(e) { finish(e, true); }
+    function finish(e, cancelled) {
+      if (!st || e.pointerId !== st.id) return;
+      var was = st;
+      st = null;
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onCancel);
+      stopScroll();
+      if (!was.dragging) return;
+      was.ghost.remove();
+      item.classList.remove("dnd-dragging");
+      item._dndJustDragged = true;
+      setTimeout(function () { item._dndJustDragged = false; }, 0);
+      hooks.drop(cancelled ? null : was.lx, cancelled ? null : was.ly);
+    }
+    item.addEventListener("pointerdown", function (e) {
+      if (e.button !== 0 || st) return;
+      if (e.target.closest("a, button, input, select, textarea")) return;
+      var onHandle = handle && handle.contains(e.target);
+      if (e.pointerType !== "mouse" && !onHandle) return;
+      st = { id: e.pointerId, x: e.clientX, y: e.clientY, dragging: false, touch: e.pointerType !== "mouse" };
+      if (onHandle || e.pointerType === "mouse") e.preventDefault();   // no text selection or touch scroll
+      window.addEventListener("pointermove", onMove, { passive: false });
+      window.addEventListener("pointerup", onUp);
+      window.addEventListener("pointercancel", onCancel);
+    });
+  }
+
+  var scrollTimer = null, scrollSpeed = 0;
+  function autoScroll(y) {
+    var edge = 60;
+    scrollSpeed = y < edge ? -Math.ceil((edge - y) / 4) : y > innerHeight - edge ? Math.ceil((y - innerHeight + edge) / 4) : 0;
+    if (scrollSpeed && !scrollTimer) {
+      scrollTimer = setInterval(function () { if (scrollSpeed) window.scrollBy(0, scrollSpeed); }, 16);
+    } else if (!scrollSpeed) stopScroll();
+  }
+  function stopScroll() { clearInterval(scrollTimer); scrollTimer = null; scrollSpeed = 0; }
+
+  /* ---------- put in order ---------- */
+  function order(container, opts) {
+    injectStyles();
+    var items = opts.items || [];
+    container.textContent = "";
+    container.appendChild(el("p", "dnd-help", opts.help ||
+      "Drag the items into order. On a phone, drag by the ≡ handle. " +
+      "Keyboard: Space picks an item up, arrow keys move it, Space drops it."));
+    var list = el("ol", "dnd-list");
+    list.setAttribute("aria-label", opts.label || "Items to put in order");
+    var status = el("p", "dnd-status");
+    status.setAttribute("aria-live", "polite");
+    var check = el("button", "primary", "Check the order"); check.type = "button";
+    var again = el("button", "", "Shuffle and start over"); again.type = "button";
+    var actions = el("div", "dnd-actions"); actions.appendChild(check); actions.appendChild(again);
+    container.appendChild(list); container.appendChild(actions); container.appendChild(status);
+
+    function rows() { return [].slice.call(list.children); }
+    function clearMarks() {
+      rows().forEach(function (li) { li.classList.remove("dnd-ok", "dnd-no"); li.querySelector(".dnd-mark").textContent = ""; });
+      if (status.getAttribute("data-kind") === "result") { status.textContent = ""; status.removeAttribute("data-kind"); }
+    }
+    function say(msg) { status.removeAttribute("data-kind"); status.textContent = msg; }
+    function position(li) { return rows().indexOf(li) + 1; }
+
+    function build() {
+      list.textContent = "";
+      var idx = items.map(function (_, i) { return i; });
+      var mixed = shuffled(idx);
+      for (var tries = 0; items.length > 1 && tries < 20 && mixed.every(function (v, i) { return v === i; }); tries++) mixed = shuffled(idx);
+      mixed.forEach(function (i) {
+        var li = el("li", "dnd-item");
+        li.tabIndex = 0;
+        li.setAttribute("data-i", i);
+        var handle = el("span", "dnd-handle", "≡"); handle.setAttribute("aria-hidden", "true");
+        li.appendChild(handle);
+        li.appendChild(el("span", "dnd-text", items[i]));
+        li.appendChild(el("span", "dnd-mark"));
+        draggable(li, handle, {
+          start: clearMarks,
+          move: function (x, y) {
+            var before = null;
+            rows().some(function (other) {
+              if (other === li) return false;
+              var r = other.getBoundingClientRect();
+              if (y < r.top + r.height / 2) { before = other; return true; }
+              return false;
+            });
+            if (before !== li.nextSibling) list.insertBefore(li, before);
+          },
+          drop: function () { say("Moved to position " + position(li) + "."); li.focus({ preventScroll: true }); }
+        });
+        li.addEventListener("keydown", function (e) {
+          var grabbed = li.classList.contains("dnd-grabbed");
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            li.classList.toggle("dnd-grabbed");
+            clearMarks();
+            say(grabbed ? "Dropped at position " + position(li) + "." :
+              "Picked up. Position " + position(li) + " of " + items.length + ". Arrow keys move it; Space drops it.");
+          } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+            e.preventDefault();
+            var sib = e.key === "ArrowUp" ? li.previousElementSibling : li.nextElementSibling;
+            if (!sib) return;
+            if (grabbed) {
+              li._dndMoving = true;            // moving a focused element can fire blur; keep it grabbed
+              list.insertBefore(li, e.key === "ArrowUp" ? sib : sib.nextSibling);
+              li.focus({ preventScroll: false });
+              setTimeout(function () { li._dndMoving = false; }, 0);
+              say("Position " + position(li) + " of " + items.length + ".");
+            } else sib.focus();
+          } else if (e.key === "Escape" && grabbed) {
+            li.classList.remove("dnd-grabbed"); say("Dropped at position " + position(li) + ".");
+          }
+        });
+        li.addEventListener("blur", function () { if (!li._dndMoving) li.classList.remove("dnd-grabbed"); });
+        list.appendChild(li);
+      });
+      say("");
+    }
+
+    check.addEventListener("click", function () {
+      var good = 0;
+      rows().forEach(function (li, pos) {
+        var ok = +li.getAttribute("data-i") === pos;
+        if (ok) good++;
+        li.classList.toggle("dnd-ok", ok);
+        li.classList.toggle("dnd-no", !ok);
+        li.querySelector(".dnd-mark").textContent = ok ? "✓" : "✗ belongs at " + (+li.getAttribute("data-i") + 1);
+      });
+      status.setAttribute("data-kind", "result");
+      status.innerHTML = good === items.length
+        ? "<strong>All " + items.length + " in the right order.</strong> " + (opts.explain || "")
+        : "<strong>" + good + " of " + items.length + " in the right place.</strong> Move the marked ones and check again.";
+      if (opts.onCheck) opts.onCheck(good, items.length);
+    });
+    again.addEventListener("click", build);
+    build();
+    return { reset: build };
+  }
+
+  /* ---------- sort into bins ---------- */
+  function sort(container, opts) {
+    injectStyles();
+    var bins = opts.bins || [], items = opts.items || [];
+    var saved = (opts.load && opts.load()) || {};
+    container.textContent = "";
+    container.appendChild(el("p", "dnd-help", opts.help ||
+      "Drag a card into a box. On a phone, drag by the ≡ handle, or tap a card and then its box. " +
+      "Keyboard: Space selects a card, then Tab to “Move here”."));
+    var trayLabel = el("p", "dnd-tray-label");
+    var tray = el("div", "dnd-tray");
+    tray.setAttribute("aria-label", "Cards to sort");
+    var binWrap = el("div", "dnd-bins");
+    var status = el("p", "dnd-status");
+    status.setAttribute("aria-live", "polite");
+    var reset = el("button", "", "Start over"); reset.type = "button";
+    var actions = el("div", "dnd-actions"); actions.appendChild(reset);
+    container.appendChild(trayLabel); container.appendChild(tray); container.appendChild(binWrap);
+    container.appendChild(status); container.appendChild(actions);
+
+    var selected = null, cards = [], binEls = {};
+    bins.forEach(function (b) {
+      var box = el("div", "dnd-bin");
+      box.setAttribute("role", "group");
+      box.setAttribute("aria-label", plain(b.label));
+      box.appendChild(el("p", "dnd-bin-head", b.label));
+      if (b.hint) box.appendChild(el("p", "dnd-bin-hint", b.hint));
+      var here = el("button", "dnd-bin-here", "Move here"); here.type = "button"; here.hidden = true;
+      here.setAttribute("aria-label", "Move the selected card to " + plain(b.label));
+      here.addEventListener("click", function () { if (selected) place(selected, b.id, true); });
+      box.addEventListener("click", function (e) {
+        if (selected && !e.target.closest(".dnd-card") && e.target !== here) place(selected, b.id, true);
+      });
+      box.appendChild(here);
+      binWrap.appendChild(box);
+      binEls[b.id] = { box: box, here: here };
+    });
+
+    function select(card) {
+      if (selected === card) card = null;
+      cards.forEach(function (c) { c.el.setAttribute("aria-pressed", c === card ? "true" : "false"); });
+      selected = card;
+      Object.keys(binEls).forEach(function (id) { binEls[id].here.hidden = !card; });
+      if (card) status.textContent = "Selected: “" + plain(card.text) + "”. Now choose a box.";
+    }
+    function binAt(x, y) {
+      var hit = null;
+      Object.keys(binEls).forEach(function (id) {
+        var r = binEls[id].box.getBoundingClientRect();
+        if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) hit = id;
+      });
+      return hit;
+    }
+    function tally() {
+      var placed = cards.filter(function (c) { return c.bin; });
+      var right = placed.filter(function (c) { return c.bin === c.answer; }).length;
+      trayLabel.textContent = placed.length === cards.length ? "All cards sorted." : "Cards to sort (" + (cards.length - placed.length) + " left)";
+      tray.hidden = placed.length === cards.length;
+      var msg = "Sorted " + placed.length + " of " + cards.length + ". " + right + " in the right box.";
+      if (placed.length === cards.length) msg += right === cards.length ? " All correct." : " Drag the marked cards to the other box to fix them.";
+      status.textContent = msg;
+      if (opts.onChange) opts.onChange(placed.length, right, cards.length);
+    }
+    function place(card, binId, announce) {
+      card.bin = binId;
+      binEls[binId].box.appendChild(card.el);
+      var ok = binId === card.answer;
+      card.el.classList.toggle("dnd-ok", ok);
+      card.el.classList.toggle("dnd-no", !ok);
+      card.mark.textContent = ok ? "✓" : "✗";
+      card.fb.innerHTML = "<strong>" + (ok ? "Right." : "Not quite.") + "</strong> " + (card.why || "");
+      saved[card.key] = binId;
+      if (opts.save) opts.save(saved);
+      select(null);
+      tally();
+      if (announce) status.textContent = (ok ? "Right. " : "Not quite. ") + plain(card.why || "") + " " + status.textContent;
+    }
+    function unplace(card) {
+      card.bin = null;
+      card.el.classList.remove("dnd-ok", "dnd-no");
+      card.mark.textContent = ""; card.fb.textContent = "";
+      tray.appendChild(card.el);
+    }
+
+    shuffled(items.map(function (_, i) { return i; })).forEach(function (i) {
+      var it = items[i];
+      var c = { text: it.text, answer: it.bin, why: it.why, key: "i" + i, bin: null };
+      c.el = el("div", "dnd-card");
+      c.el.tabIndex = 0;
+      c.el.setAttribute("role", "button");
+      c.el.setAttribute("aria-pressed", "false");
+      var handle = el("span", "dnd-handle", "≡"); handle.setAttribute("aria-hidden", "true");
+      var body = el("span", "dnd-body");
+      body.appendChild(el("span", "dnd-text", it.text));
+      c.fb = el("span", "dnd-fb");
+      body.appendChild(c.fb);
+      c.mark = el("span", "dnd-mark");
+      c.el.appendChild(handle); c.el.appendChild(body); c.el.appendChild(c.mark);
+      draggable(c.el, handle, {
+        start: function () { select(null); },
+        move: function (x, y) {
+          var hit = binAt(x, y);
+          Object.keys(binEls).forEach(function (id) { binEls[id].box.classList.toggle("dnd-over", id === hit); });
+        },
+        drop: function (x, y) {
+          Object.keys(binEls).forEach(function (id) { binEls[id].box.classList.remove("dnd-over"); });
+          var hit = x == null ? null : binAt(x, y);
+          if (hit) place(c, hit, true);
+        }
+      });
+      c.el.addEventListener("click", function (e) {
+        if (c.el._dndJustDragged) return;
+        e.stopPropagation();
+        select(c);
+      });
+      c.el.addEventListener("keydown", function (e) {
+        if (e.key === " " || e.key === "Enter") { e.preventDefault(); select(c); }
+        else if (e.key === "Escape") select(null);
+      });
+      cards.push(c);
+      tray.appendChild(c.el);
+      if (saved[c.key] && binEls[saved[c.key]]) place(c, saved[c.key], false);
+    });
+
+    reset.addEventListener("click", function () {
+      saved = {};
+      if (opts.save) opts.save(saved);
+      shuffled(cards).forEach(unplace);
+      select(null);
+      tally();
+    });
+    tally();
+    return { reset: function () { reset.click(); } };
+  }
+
+  window.WeblogDnD = { order: order, sort: sort, version: 1 };
+})();
+</script>
+<script>
+/* ===== Noah's Weblog course engine v1 =====
+   Reads window.COURSE and the page's .view sections, then builds the
+   contents list, progress meter, one-part-at-a-time navigation, quizzes,
+   spaced-repetition flashcards, and the glossary. No libraries. */
+(function () {
+  "use strict";
+
+  var C = window.COURSE || {};
+  var SLUG = C.slug || location.pathname.split("/").filter(Boolean).pop() || "exhibit";
+  var KEY = "ll:" + SLUG + ":";           // every exhibit shares one origin, so keys carry the slug
+  var DAY = 86400000;
+  var INTERVALS = [0, 1, 3, 7, 16, 35];   // days until a flashcard comes back, by box
+
+  /* ---------- storage ---------- */
+  var store = {
+    get: function (k, d) {
+      try { var v = localStorage.getItem(KEY + k); return v === null ? d : JSON.parse(v); }
+      catch (e) { return d; }
+    },
+    set: function (k, v) { try { localStorage.setItem(KEY + k, JSON.stringify(v)); } catch (e) {} }
+  };
+  var state = store.get("state", null) || {};
+  state.done = state.done || {};
+  state.answers = state.answers || {};
+  state.cards = state.cards || {};
+  function save() { store.set("state", state); }
+
+  /* ---------- helpers ---------- */
+  function h(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      var v = attrs[k];
+      if (v == null || v === false) return;
+      if (k === "text") n.textContent = v;
+      else if (k === "html") n.innerHTML = v;
+      else if (k === "on") Object.keys(v).forEach(function (ev) { n.addEventListener(ev, v[ev]); });
+      else n.setAttribute(k, v === true ? "" : v);
+    });
+    (kids || []).forEach(function (c) {
+      if (c != null) n.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    });
+    return n;
+  }
+  function slugify(s) {
+    return String(s).toLowerCase().replace(/<[^>]*>/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+  function hash(s) {
+    var x = 0;
+    for (var i = 0; i < s.length; i++) x = (x * 31 + s.charCodeAt(i)) | 0;
+    return (x >>> 0).toString(36);
+  }
+  function seededShuffle(a, seed) {
+    var x = parseInt(hash(String(seed)), 36) || 1;
+    function rand() {                          // mulberry32
+      x = (x + 0x6D2B79F5) | 0;
+      var t = Math.imul(x ^ (x >>> 15), 1 | x);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(rand() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function srcTag(src) { return src ? " <span class=\"src\">(" + src + ")</span>" : ""; }
+
+  /* ---------- views and contents ---------- */
+  var views = [].slice.call(document.querySelectorAll(".view"));
+  var navViews = views.filter(function (v) { return v.getAttribute("data-nav") !== "no"; });
+  var modules = views.filter(function (v) { return v.classList.contains("module"); });
+  function titleOf(v) {
+    var head = v.querySelector("h2");
+    return v.getAttribute("data-title") || (head ? head.textContent : v.id);
+  }
+
+  var contentsList = document.getElementById("contents-list");
+  var progressText = document.getElementById("progress-text");
+  var progressFill = document.getElementById("progress-fill");
+  var progressBar = document.getElementById("progress-bar");
+
+  function buildContents() {
+    if (!contentsList) return;
+    contentsList.textContent = "";
+    navViews.forEach(function (v) {
+      var li = h("li", null, [h("a", { href: "#" + v.id, text: titleOf(v), "data-view": v.id })]);
+      if (state.done[v.id]) li.appendChild(h("span", { class: "check", text: " ✓", "aria-label": "done" }));
+      contentsList.appendChild(li);
+    });
+  }
+  function updateProgress() {
+    if (!modules.length) return;
+    var n = modules.filter(function (m) { return state.done[m.id]; }).length;
+    var pct = Math.round(100 * n / modules.length);
+    if (progressText) progressText.textContent = n + " of " + modules.length + " parts done";
+    if (progressFill) progressFill.style.width = pct + "%";
+    if (progressBar) progressBar.setAttribute("aria-valuenow", pct);
+  }
+  function markDone(id) {
+    if (state.done[id]) return;
+    state.done[id] = true;
+    save(); buildContents(); markCurrent(currentId); updateProgress();
+  }
+
+  /* ---------- one part at a time ---------- */
+  var currentId = null;
+  function hasQuestions(view) {
+    return [].some.call(view.querySelectorAll(".quiz[data-quiz]"), function (q) {
+      return ((C.quizzes || {})[q.getAttribute("data-quiz")] || []).length > 0;
+    });
+  }
+  function markCurrent(id) {
+    if (!contentsList) return;
+    [].forEach.call(contentsList.querySelectorAll("a"), function (a) {
+      if (a.getAttribute("data-view") === id) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+  }
+  function show(id, focus) {
+    var view = document.getElementById(id);
+    if (!view || !view.classList.contains("view")) return;
+    views.forEach(function (v) { v.hidden = v !== view; });
+    currentId = id;
+    markCurrent(id);
+    if (view.getAttribute("data-nav") !== "no") { state.last = id; save(); }
+    // a part with no questions counts as done once it has been opened
+    if (view.classList.contains("module") && !hasQuestions(view)) markDone(id);
+    if (focus) {
+      var course = document.querySelector(".course") || view;
+      if (course.getBoundingClientRect().top < 0) course.scrollIntoView();
+      var head = view.querySelector("h2");
+      if (head) { head.setAttribute("tabindex", "-1"); head.focus({ preventScroll: true }); }
+    }
+  }
+  function route() {
+    var id = "";
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { id = location.hash.slice(1); }
+    var target = id && document.getElementById(id);
+    if (!target) { show(navViews[0] ? navViews[0].id : views[0].id, false); return; }
+    var view = target.classList.contains("view") ? target : target.closest(".view");
+    if (!view) return;                       // an anchor outside the lesson: let the browser handle it
+    show(view.id, true);
+    if (target !== view) target.scrollIntoView();
+  }
+
+  function buildPagers() {
+    navViews.forEach(function (v, i) {
+      var prev = navViews[i - 1], next = navViews[i + 1];
+      if (!prev && !next) return;
+      var p = h("p", { class: "pager" });
+      if (prev) p.appendChild(h("a", { href: "#" + prev.id, text: "◄ " + titleOf(prev) }));
+      if (next) p.appendChild(h("button", {
+        type: "button", class: "primary next", text: "Next: " + titleOf(next) + " ►",
+        on: { click: function () { location.hash = next.id; } }
+      }));
+      v.appendChild(p);
+    });
+  }
+
+  function buildResume() {
+    var first = navViews[0];
+    if (!first || !state.last || state.last === first.id) return;
+    var last = document.getElementById(state.last);
+    if (!last) return;
+    var box = h("p", { class: "box" }, ["Welcome back. ",
+      h("a", { href: "#" + last.id, text: "Pick up where you left off: " + titleOf(last) }), "."]);
+    var head = first.querySelector("h2");
+    if (head && head.nextSibling) first.insertBefore(box, head.nextSibling); else first.appendChild(box);
+  }
+
+  /* ---------- quizzes ---------- */
+  function renderQuiz(box) {
+    var quizId = box.getAttribute("data-quiz");
+    var items = (C.quizzes || {})[quizId] || [];
+    var module = box.closest(".module");
+    box.textContent = "";
+
+    function allAnswered() {
+      return items.every(function (_, i) { return state.answers[quizId + ":" + i]; });
+    }
+    function afterAnswer() {
+      save();
+      if (module && allAnswered()) markDone(module.id);
+      renderSummary(quizId);
+    }
+
+    items.forEach(function (item, i) {
+      var key = quizId + ":" + i;
+      var fs = h("fieldset", { class: "q" });
+      fs.appendChild(h("legend", { html: (items.length > 1 ? (i + 1) + ". " : "") + item.q + srcTag(item.src) }));
+      var feedback = h("p", { class: "feedback", role: "status", "aria-live": "polite" });
+
+      if (item.type === "recall") {
+        var ta = h("textarea", { "aria-label": "Your answer", placeholder: "Write your answer, then compare." });
+        var model = h("div", { class: "box", hidden: true, html: "<strong class=\"label\">A good answer</strong>" + item.answer });
+        var rate = h("div", { class: "actions", hidden: true }, [
+          h("button", { type: "button", text: "I had it", on: { click: function () { state.answers[key] = { right: true, recall: true }; feedback.textContent = "Noted."; afterAnswer(); } } }),
+          h("button", { type: "button", text: "Not yet", on: { click: function () { state.answers[key] = { right: false, recall: true }; feedback.textContent = "Noted. This one comes back in the review."; afterAnswer(); } } })
+        ]);
+        var showBtn = h("button", { type: "button", text: "Show a good answer", on: { click: function () {
+          model.hidden = false; rate.hidden = false; showBtn.hidden = true;
+          if (!state.answers[key]) { state.answers[key] = { right: null, recall: true }; afterAnswer(); }
+        } } });
+        fs.appendChild(ta);
+        fs.appendChild(h("div", { class: "actions" }, [showBtn]));
+        fs.appendChild(model);
+        fs.appendChild(rate);
+        fs.appendChild(feedback);
+        if (state.answers[key]) { model.hidden = false; rate.hidden = false; showBtn.hidden = true; }
+      } else {
+        var name = "q-" + quizId + "-" + i;
+        var opts = h("div", { class: "options" });
+        // Options appear in a shuffled order (stable for each question) so the right answer
+        // isn't always in the same place. Set fixed: true for options with a natural order.
+        var shown = item.options.map(function (_, j) { return j; });
+        if (!item.fixed) shown = seededShuffle(shown, quizId + ":" + i + ":" + item.q);
+        var inputs = [];                       // indexed by the option's original position
+        shown.forEach(function (j) {
+          var input = h("input", { type: "radio", name: name, value: j });
+          opts.appendChild(h("label", null, [input, h("span", { html: item.options[j] }), h("span", { class: "mark" })]));
+          inputs[j] = input;
+        });
+        var check = h("button", { type: "button", text: "Check answer" });
+        var again = h("button", { type: "button", text: "Try again", hidden: true });
+
+        var paint = function (pick) {
+          var right = pick === item.answer;
+          inputs.forEach(function (inp, j) {
+            inp.disabled = true;
+            inp.checked = j === pick;
+            var mark = inp.parentNode.querySelector(".mark");
+            mark.className = "mark";
+            mark.textContent = "";
+            if (j === item.answer) { mark.className = "mark right"; mark.textContent = j === pick ? "◄ correct" : "◄ the answer"; }
+            else if (j === pick) { mark.className = "mark wrong"; mark.textContent = "◄ your pick"; }
+          });
+          var why = (item.why && item.why[pick]) || item.explain || "";
+          var extra = "";
+          if (quizId === "pre" && item.from) {
+            var fromView = document.getElementById(item.from);
+            extra = " You'll see why in <a href=\"#" + item.from + "\">" + (fromView ? titleOf(fromView) : item.from) + "</a>.";
+          }
+          feedback.innerHTML = "<span class=\"verdict " + (right ? "right" : "wrong") + "\">" +
+            (right ? "Right." : "Not quite.") + "</span> " + why + extra;
+          check.hidden = true; again.hidden = false;
+        };
+        check.addEventListener("click", function () {
+          var pick = -1;
+          inputs.forEach(function (inp, j) { if (inp.checked) pick = j; });
+          if (pick < 0) { feedback.textContent = "Pick an answer first."; return; }
+          state.answers[key] = { pick: pick, right: pick === item.answer };
+          paint(pick);
+          afterAnswer();
+        });
+        again.addEventListener("click", function () {
+          inputs.forEach(function (inp) {
+            inp.disabled = false; inp.checked = false;
+            var mark = inp.parentNode.querySelector(".mark"); mark.className = "mark"; mark.textContent = "";
+          });
+          feedback.textContent = ""; check.hidden = false; again.hidden = true;
+          inputs[shown[0]].focus();
+        });
+        fs.appendChild(opts);
+        fs.appendChild(h("div", { class: "actions" }, [check, again]));
+        fs.appendChild(feedback);
+        var saved = state.answers[key];
+        if (saved && typeof saved.pick === "number") paint(saved.pick);
+      }
+      box.appendChild(fs);
+    });
+  }
+
+  function renderSummary(quizId) {
+    var out = document.querySelector('.quiz-summary[data-for="' + quizId + '"]');
+    if (!out) return;
+    var items = (C.quizzes || {})[quizId] || [];
+    var answered = items.filter(function (_, i) { return state.answers[quizId + ":" + i]; });
+    out.textContent = "";
+    if (answered.length < items.length) return;
+    var scored = items.map(function (it, i) { return { it: it, a: state.answers[quizId + ":" + i] }; })
+      .filter(function (x) { return x.a.right !== null; });
+    var right = scored.filter(function (x) { return x.a.right; }).length;
+    var p = h("p", { class: "result" }, ["You got ", h("strong", { text: right + " of " + scored.length }), "."]);
+    out.appendChild(p);
+    var revisit = [];
+    scored.forEach(function (x) { if (!x.a.right && x.it.from && revisit.indexOf(x.it.from) < 0) revisit.push(x.it.from); });
+    if (revisit.length) {
+      var q = h("p", { class: "meta" }, ["Worth another look: "]);
+      revisit.forEach(function (id, i) {
+        var v = document.getElementById(id);
+        if (i) q.appendChild(document.createTextNode(", "));
+        q.appendChild(h("a", { href: "#" + id, text: v ? titleOf(v) : id }));
+      });
+      out.appendChild(q);
+    }
+  }
+
+  /* ---------- flashcards with spaced review ---------- */
+  function buildDeck() {
+    var deckBox = document.getElementById("deck");
+    if (!deckBox) return;
+    var cards = (C.cards || []).map(function (c) { return { front: c.front, back: c.back + srcTag(c.src) }; });
+    if (C.glossaryCards !== false) {
+      Object.keys(C.glossary || {}).forEach(function (term) {
+        cards.push({ front: "What does <em>" + term + "</em> mean?", back: C.glossary[term] });
+      });
+    }
+    cards.forEach(function (c) { c.id = "c" + hash(c.front); });
+    if (!cards.length) { deckBox.appendChild(h("p", { class: "meta", text: "No cards for this page." })); return; }
+
+    var status = h("p", { class: "meta", "aria-live": "polite" });
+    var card = h("div", { class: "card" });
+    var front = h("div", { class: "front" });
+    var back = h("div", { class: "back", hidden: true });
+    card.appendChild(front); card.appendChild(back);
+    var showBtn = h("button", { type: "button", class: "primary", text: "Show answer" });
+    var missBtn = h("button", { type: "button", text: "Not yet", hidden: true });
+    var gotBtn = h("button", { type: "button", text: "Got it", hidden: true });
+    var allBtn = h("button", { type: "button", text: "Practice all cards anyway", hidden: true });
+    deckBox.appendChild(status);
+    deckBox.appendChild(card);
+    deckBox.appendChild(h("div", { class: "actions" }, [showBtn, missBtn, gotBtn, allBtn]));
+
+    var queue = [];
+    function isDue(c) { var r = state.cards[c.id]; return !r || r.due <= Date.now(); }
+    function learned() { return cards.filter(function (c) { var r = state.cards[c.id]; return r && r.box >= 1; }).length; }
+    function next() {
+      back.hidden = true; missBtn.hidden = true; gotBtn.hidden = true;
+      if (!queue.length) {
+        card.hidden = true; showBtn.hidden = true; allBtn.hidden = false;
+        var upcoming = cards.map(function (c) { return state.cards[c.id]; }).filter(Boolean)
+          .map(function (r) { return r.due; }).filter(function (d) { return d > Date.now(); }).sort()[0];
+        status.textContent = "Nothing due right now. " + learned() + " of " + cards.length + " remembered so far." +
+          (upcoming ? " Next review: " + new Date(upcoming).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) + "." : "");
+        return;
+      }
+      card.hidden = false; showBtn.hidden = false; allBtn.hidden = true;
+      front.innerHTML = queue[0].front;
+      back.innerHTML = queue[0].back;
+      status.textContent = queue.length + (queue.length === 1 ? " card" : " cards") + " to go. " +
+        learned() + " of " + cards.length + " remembered so far.";
+    }
+    showBtn.addEventListener("click", function () {
+      back.hidden = false; showBtn.hidden = true; missBtn.hidden = false; gotBtn.hidden = false; gotBtn.focus();
+    });
+    missBtn.addEventListener("click", function () {
+      var c = queue.shift();
+      state.cards[c.id] = { box: 0, due: Date.now() };
+      queue.push(c);                      // comes back later in this session
+      save(); next(); showBtn.focus();
+    });
+    gotBtn.addEventListener("click", function () {
+      var c = queue.shift();
+      var r = state.cards[c.id] || { box: 0 };
+      var box = Math.min((r.box || 0) + 1, INTERVALS.length - 1);
+      state.cards[c.id] = { box: box, due: Date.now() + INTERVALS[box] * DAY };
+      save(); next(); (queue.length ? showBtn : allBtn).focus();
+    });
+    allBtn.addEventListener("click", function () { queue = shuffle(cards); next(); showBtn.focus(); });
+    queue = shuffle(cards.filter(isDue));
+    next();
+  }
+
+  /* ---------- glossary ---------- */
+  function buildGlossary() {
+    var dl = document.getElementById("glossary-list");
+    if (!dl) return;
+    Object.keys(C.glossary || {}).sort(function (a, b) { return a.localeCompare(b); }).forEach(function (term) {
+      dl.appendChild(h("dt", { id: "g-" + slugify(term), html: term }));
+      dl.appendChild(h("dd", { html: C.glossary[term] }));
+    });
+  }
+
+  /* ---------- drag-and-drop activities (assets/dnd.js) ---------- */
+  function buildActivities() {
+    if (!window.WeblogDnD) return;
+    state.sorts = state.sorts || {};
+    [].forEach.call(document.querySelectorAll("[data-sort]"), function (box) {
+      var id = box.getAttribute("data-sort"), cfg = (C.sorts || {})[id];
+      if (!cfg) return;
+      window.WeblogDnD.sort(box, {
+        bins: cfg.bins, items: cfg.items, help: cfg.help,
+        load: function () { return state.sorts[id] || {}; },
+        save: function (placed) { state.sorts[id] = placed; save(); }
+      });
+    });
+    [].forEach.call(document.querySelectorAll("[data-order]"), function (box) {
+      var id = box.getAttribute("data-order"), cfg = (C.orders || {})[id];
+      if (!cfg) return;
+      window.WeblogDnD.order(box, { items: cfg.items, explain: cfg.explain, help: cfg.help, label: cfg.label });
+    });
+  }
+
+  /* ---------- start ---------- */
+  buildGlossary();
+  buildActivities();
+  [].forEach.call(document.querySelectorAll(".quiz[data-quiz]"), renderQuiz);
+  Object.keys(C.quizzes || {}).forEach(renderSummary);
+  buildDeck();
+  buildPagers();
+  buildContents();
+  updateProgress();
+  buildResume();
+  var nav = document.querySelector(".course-nav details");
+  if (nav && window.matchMedia("(max-width: 780px)").matches) nav.removeAttribute("open");
+  window.addEventListener("hashchange", route);
+  route();
+})();
+</script>
+<!-- page-specific interactive scripts go after the engine -->
+<script>
+(function () {
+  "use strict";
+
+  function el(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      var v = attrs[k];
+      if (v == null || v === false) return;
+      if (k === "text") n.textContent = v;
+      else if (k === "html") n.innerHTML = v;
+      else if (k === "on") Object.keys(v).forEach(function (ev) { n.addEventListener(ev, v[ev]); });
+      else n.setAttribute(k, v === true ? "" : v);
+    });
+    (kids || []).forEach(function (c) {
+      if (c != null) n.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    });
+    return n;
+  }
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function svgEl(tag, attrs) {
+    var n = document.createElementNS(SVGNS, tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    return n;
+  }
+  function src(s) { return ' <span class="src">(' + s + ')</span>'; }
+
+  /* ============ 1. The director's desk ============ */
+  (function () {
+    var root = document.getElementById("signsdesk");
+    if (!root) return;
+    var SIGNS = [
+      "1. Can't meditate or get anything from it",
+      "2. No wish to think about other things",
+      "3. Likes to stay in quiet, loving awareness of God"
+    ];
+    var VERDICTS = [
+      "Keep meditating: it still works.",
+      "Probably carelessness: don't drop meditation.",
+      "Maybe melancholia, a bodily cause, alone: not the night.",
+      "Time to stop meditating and rest in loving attention."
+    ];
+    var CASES = [
+      { name: "Sofia", quote: "When I picture a Gospel scene and think it through, I still come away moved and grateful.",
+        signs: [false, false, false], verdict: 0,
+        fb: "The first sign is missing: meditation still works for her. John says not to drop it while you can still meditate and get something from it." + src("Ascent 2.13.2") },
+      { name: "Ben", quote: "Meditation does nothing for me lately. Honestly, during prayer I'd rather think about the game or check my phone.",
+        signs: [true, false, false], verdict: 1,
+        fb: "He wants to think about other things, so the second sign fails. John says the first sign alone may come from carelessness." + src("Ascent 2.13.6") },
+      { name: "Carmen", quote: "I can't meditate, and I don't want to think about anything else. At prayer I drift into a pleasant, foggy daze, like half-sleep. I can't honestly say God is in it at all.",
+        signs: [true, true, false], verdict: 2,
+        fb: "The daze feels pleasant, but there is no loving awareness of God in it, so the third sign is missing. John warns that melancholia can produce the first two signs and a pleasant kind of stupor." + src("Ascent 2.13.6") + " See the note below this activity, too." },
+      { name: "Daniel", quote: "I can't meditate like I used to, and I don't want to think about anything else. When I sit quietly I want to stay there with God, in a peace so faint I almost miss it.",
+        signs: [true, true, true], verdict: 3,
+        fb: "All three signs, together. John adds that at first this loving awareness is so delicate it's easy to miss." + src("Ascent 2.13.7") + " His advice: stay with it, without forcing thoughts." + src("Night 1.10.4") }
+    ];
+    // one person at a time: answers are kept per person while the reader moves between them
+    var idx = 0;
+    var answers = CASES.map(function () { return { ticked: [false, false, false], pick: -1, fb: "" }; });
+    var legend = el("legend");
+    var quote = el("p", { class: "dd-quote" });
+    var boxes = SIGNS.map(function (s, i) { return el("input", { type: "checkbox", value: i }); });
+    var radios = VERDICTS.map(function (v, i) { return el("input", { type: "radio", name: "dd-verdict", value: i }); });
+    var fb = el("p", { class: "fb", "aria-live": "polite" });
+    var back = el("button", { type: "button", text: "Previous person" });
+    var next = el("button", { type: "button", text: "Next person" });
+    var tally = el("p", { class: "meta", "aria-live": "polite" });
+
+    function store() {
+      var a = answers[idx];
+      a.ticked = boxes.map(function (b) { return b.checked; });
+      a.pick = -1;
+      radios.forEach(function (r, i) { if (r.checked) a.pick = i; });
+    }
+    function render() {
+      var c = CASES[idx], a = answers[idx];
+      legend.textContent = "Person " + (idx + 1) + " of " + CASES.length + ": " + c.name;
+      quote.textContent = "\u201C" + c.quote + "\u201D";
+      boxes.forEach(function (b, i) { b.checked = a.ticked[i]; });
+      radios.forEach(function (r, i) { r.checked = a.pick === i; });
+      fb.innerHTML = a.fb;
+      back.disabled = idx === 0;
+      next.disabled = idx === CASES.length - 1;
+      var done = answers.filter(function (x) { return x.right != null; });
+      var right = done.filter(function (x) { return x.right; }).length;
+      tally.textContent = done.length ? "Checked " + done.length + " of " + CASES.length + " people; " + right + " fully right." : "";
+    }
+    function check() {
+      store();
+      var c = CASES[idx], a = answers[idx];
+      if (a.pick < 0) { fb.textContent = "Pick what John would advise first."; return; }
+      var signsOk = a.ticked.every(function (t, i) { return t === c.signs[i]; });
+      var verdictOk = a.pick === c.verdict;
+      var seen = c.signs.map(function (s, i) { return s ? (i + 1) : null; }).filter(Boolean);
+      var msg = "";
+      if (signsOk && verdictOk) msg = '<span class="ok">✓ Right on both counts.</span> ';
+      else {
+        if (!signsOk) msg += '<span class="no">✗ Signs:</span> John would see ' + (seen.length ? "sign" + (seen.length > 1 ? "s " : " ") + seen.join(" and ") : "none of the signs") + ". ";
+        else msg += '<span class="ok">✓ Signs right.</span> ';
+        if (!verdictOk) msg += '<span class="no">✗ Advice:</span> ' + VERDICTS[c.verdict] + " ";
+        else msg += '<span class="ok">✓ Advice right.</span> ';
+      }
+      a.right = signsOk && verdictOk;
+      a.fb = msg + c.fb;
+      render();
+    }
+    back.addEventListener("click", function () { store(); if (idx > 0) { idx--; render(); } });
+    next.addEventListener("click", function () { store(); if (idx < CASES.length - 1) { idx++; render(); } });
+
+    root.appendChild(el("fieldset", { class: "tryit dd-case" }, [
+      legend,
+      quote,
+      el("p", { class: "dd-sub", text: "Signs you see" }),
+      el("div", { class: "dd-group" }, boxes.map(function (b, i) { return el("label", null, [b, SIGNS[i]]); })),
+      el("p", { class: "dd-sub", text: "What would John advise?" }),
+      el("div", { class: "dd-group" }, radios.map(function (r, i) { return el("label", null, [r, VERDICTS[i]]); })),
+      el("div", { class: "actions" }, [el("button", { type: "button", class: "primary", text: "Check", on: { click: check } }), back, next]),
+      fb,
+      tally
+    ]));
+    render();
+  })();
+
+  /* ============ 2. The sunbeam ============ */
+  (function () {
+    var root = document.getElementById("sunbeam");
+    if (!root) return;
+    var W = 560, H = 250, N = 140;
+    var svg = svgEl("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H, role: "img" });
+    svg.appendChild(svgEl("rect", { x: 0, y: 0, width: W, height: H, class: "sb-room" }));
+    svg.appendChild(svgEl("rect", { x: 0, y: 0, width: 22, height: H, class: "sb-wall" }));
+    svg.appendChild(svgEl("rect", { x: 22, y: 40, width: 14, height: 70, class: "sb-window" }));
+    var lbl = svgEl("text", { x: 44, y: 30, "font-size": 17, class: "sb-label" });
+    lbl.textContent = "window";
+    svg.appendChild(lbl);
+    var beam = svgEl("polygon", { points: "36,40 36,110 390,250 530,250", class: "sb-beam" });
+    svg.appendChild(beam);
+    // dust specks, placed with a fixed pseudo-random sequence so the picture is stable
+    var seed = 7;
+    function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+    var specks = [];
+    for (var i = 0; i < N; i++) {
+      var t = 0.04 + 0.94 * rnd(), s = 0.08 + 0.84 * rnd();
+      var ux = 36 + t * (530 - 36), uy = 40 + t * (250 - 40);
+      var lx = 36 + t * (390 - 36), ly = 110 + t * (250 - 110);
+      var c = svgEl("circle", { cx: (ux + s * (lx - ux)).toFixed(1), cy: (uy + s * (ly - uy)).toFixed(1), r: 1.6, class: "sb-dust" });
+      specks.push(c);
+      svg.appendChild(c);
+    }
+    var hand = svgEl("rect", { x: 300, y: 0, width: 26, height: 236, class: "sb-hand" });
+    var lit = svgEl("polygon", { points: "300,151 326,162 326,224 300,214", class: "sb-lit" });
+    svg.appendChild(hand);
+    svg.appendChild(lit);
+    var handLabel = svgEl("text", { x: 334, y: 30, "font-size": 17, class: "sb-label" });
+    handLabel.textContent = "your hand";
+    svg.appendChild(handLabel);
+
+    var range = el("input", { type: "range", min: 0, max: 100, step: 5, value: 70, id: "sb-dust" });
+    var level = el("output", { for: "sb-dust" });
+    var handBox = el("input", { type: "checkbox", id: "sb-hand" });
+    var result = el("p", { class: "result", "aria-live": "polite" });
+
+    function words(d) {
+      if (d === 0) return "No dust. The beam is invisible, and the room looks dark, even though pure light is crossing it.";
+      if (d <= 30) return "A little dust. You can barely make out the beam.";
+      if (d <= 65) return "Some dust. The beam shows clearly now.";
+      return "Lots of dust. The beam looks bright and solid, yet this is the least pure light on the slider.";
+    }
+    function draw() {
+      var d = +range.value;
+      level.textContent = d === 0 ? "none" : d + "%";
+      beam.setAttribute("opacity", (0.5 * d / 100).toFixed(3));
+      var show = Math.round(N * d / 100);
+      specks.forEach(function (c, i) { c.setAttribute("visibility", i < show ? "visible" : "hidden"); });
+      var h = handBox.checked;
+      hand.setAttribute("visibility", h ? "visible" : "hidden");
+      lit.setAttribute("visibility", h ? "visible" : "hidden");
+      handLabel.setAttribute("visibility", h ? "visible" : "hidden");
+      var text = words(d);
+      if (h) text += d === 0 ? " Your hand is in the beam, and it lights up at once: the light was there all along." : " Your hand is in the beam, and the light shows up on it at once.";
+      result.textContent = text;
+      svg.setAttribute("aria-label", "A sunbeam crossing a dark room. " + text);
+    }
+    range.addEventListener("input", draw);
+    handBox.addEventListener("change", draw);
+
+    root.appendChild(el("fieldset", { class: "tryit" }, [
+      el("legend", { text: "The sunbeam" }),
+      el("figure", null, [svg]),
+      el("div", { class: "sb-controls" }, [
+        el("label", { for: "sb-dust", text: "Dust in the air" }), range, level,
+        el("label", null, [handBox, " Put a hand in the beam"])
+      ]),
+      result
+    ]));
+    draw();
+  })();
+
+  /* ============ 3. The log in the fire ============ */
+  (function () {
+    var root = document.getElementById("logfire");
+    if (!root) return;
+    var STEPS = [
+      { title: "A damp log",
+        fire: "A damp log, about to go into the fire.",
+        night: "A soul that loves God, with old habits rooted deep where it can't see them." + src("Night 2.2.1") },
+      { title: "Drying",
+        fire: "The fire drives the water out. The log steams and hisses.",
+        night: "God's light starts working on those hidden habits, and the soul feels the strain." + src("Night 2.10.1–2") },
+      { title: "Blackening",
+        fire: "The wood turns black and ugly, and gives off smoke and a bad smell.",
+        night: "The soul sees its faults so clearly that it feels worse than ever, even rejected by God. John says it is no worse than before." + src("Night 2.10.2") },
+      { title: "Heating through",
+        fire: "The fire works inward. You could pull the log out now and then to see how far the burning has gone.",
+        night: "Breaks of peace come, and the soul sees the good being done. Then the night returns, deeper and more inward." + src("Night 2.10.6–7") },
+      { title: "Becoming fire",
+        fire: "The log glows. It is hot and gives heat, bright and gives light, like the fire itself.",
+        night: "Changed by love, the soul understands and loves with God's own light and love." + src("Night 2.4.2; 2.10.1") }
+    ];
+    var W = 520, H = 210;
+    var svg = svgEl("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H, role: "img" });
+    svg.appendChild(svgEl("line", { x1: 40, y1: 196, x2: 480, y2: 196, class: "lf-ground" }));
+    var flamesSmall = svgEl("g", {});
+    [[150, 0], [210, 1], [270, 0], [330, 1], [390, 0]].forEach(function (f) {
+      flamesSmall.appendChild(svgEl("polygon", { points: (f[0] - 16) + ",194 " + f[0] + "," + (f[1] ? 160 : 168) + " " + (f[0] + 16) + ",194", class: "lf-fire" }));
+    });
+    var flamesBig = svgEl("g", {});
+    [[130, 70], [175, 50], [220, 64], [265, 44], [310, 60], [355, 48], [400, 66]].forEach(function (f) {
+      flamesBig.appendChild(svgEl("polygon", { points: (f[0] - 26) + ",196 " + (f[0] - 6) + "," + (f[1] + 30) + " " + f[0] + "," + f[1] + " " + (f[0] + 8) + "," + (f[1] + 34) + " " + (f[0] + 26) + ",196", class: "lf-fire" }));
+    });
+    var log = svgEl("rect", { x: 110, y: 120, width: 300, height: 56 });
+    var logEnd = svgEl("ellipse", { cx: 410, cy: 148, rx: 14, ry: 28 });
+    var drops = svgEl("g", {});
+    [[160, 104], [200, 92], [250, 108], [300, 96], [350, 106], [390, 90], [230, 80]].forEach(function (p) {
+      drops.appendChild(svgEl("circle", { cx: p[0], cy: p[1], r: 4, class: "lf-drop" }));
+    });
+    var smoke = svgEl("g", {});
+    [[170, 96, 12], [200, 74, 16], [240, 52, 20], [300, 90, 13], [330, 66, 17], [370, 44, 21]].forEach(function (p) {
+      smoke.appendChild(svgEl("circle", { cx: p[0], cy: p[1], r: p[2], class: "lf-smoke" }));
+    });
+    var cracks = svgEl("g", {});
+    [[140, 132, 190, 140], [210, 158, 270, 150], [290, 134, 350, 142], [360, 160, 400, 152]].forEach(function (p) {
+      cracks.appendChild(svgEl("line", { x1: p[0], y1: p[1], x2: p[2], y2: p[3], class: "lf-crack" }));
+    });
+    [flamesBig, log, logEnd, cracks, flamesSmall, drops, smoke].forEach(function (n) { svg.appendChild(n); });
+    var stageLabel = svgEl("text", { x: 20, y: 28, "font-size": 20, "font-weight": "bold", class: "lf-ink" });
+    svg.appendChild(stageLabel);
+
+    var idx = 0;
+    var stepText = el("p", { class: "lf-steps", "aria-live": "polite" });
+    var fireP = el("p");
+    var nightP = el("p");
+    var back = el("button", { type: "button", text: "◄ Back" });
+    var next = el("button", { type: "button", class: "primary", text: "Next ►" });
+
+    function show(n, el2) { el2.setAttribute("visibility", n ? "visible" : "hidden"); }
+    function draw() {
+      var s = STEPS[idx];
+      var cls = ["lf-wood", "lf-wood", "lf-black", "lf-hot", "lf-fire"][idx];
+      log.setAttribute("class", cls);
+      logEnd.setAttribute("class", cls);
+      show(idx === 1, drops);
+      show(idx === 1 || idx === 2, flamesSmall);
+      show(idx === 2, smoke);
+      show(idx === 3, cracks);
+      show(idx >= 3, flamesBig);
+      stepText.innerHTML = "<strong>Step " + (idx + 1) + " of " + STEPS.length + ": " + s.title + "</strong>";
+      stageLabel.textContent = (idx + 1) + ". " + s.title;
+      fireP.innerHTML = s.fire;
+      nightP.innerHTML = s.night;
+      svg.setAttribute("aria-label", "A log in a fire, step " + (idx + 1) + ": " + s.title + ". " + s.fire);
+      back.disabled = idx === 0;
+      next.disabled = idx === STEPS.length - 1;
+    }
+    back.addEventListener("click", function () { if (idx > 0) { idx--; draw(); } });
+    next.addEventListener("click", function () { if (idx < STEPS.length - 1) { idx++; draw(); } });
+
+    root.appendChild(el("fieldset", { class: "tryit" }, [
+      el("legend", { text: "The log in the fire" }),
+      el("figure", null, [svg, el("figcaption", { html: "John's comparison of the night of spirit to fire working on a log." + src("Night 2.10.1–9") })]),
+      stepText,
+      el("div", { class: "lf-panel" }, [
+        el("div", null, [el("h4", { text: "What the fire does" }), fireP]),
+        el("div", null, [el("h4", { text: "What John says the night does" }), nightP])
+      ]),
+      el("div", { class: "actions" }, [back, next])
+    ]));
+    draw();
+  })();
+})();
+</script>
+</body>
+</html>

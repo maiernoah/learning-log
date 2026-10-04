@@ -96,4 +96,14 @@ const ENTRIES = [
     tags: ["music", "johann sebastian bach"],
     summary: `A nine-part course on Peter Williams's <em>Bach: The Goldberg Variations</em> (2001), covering his Introduction and the chapters on the work's shape and its movements. The page plays the 32-note bass under different surfaces, maps the thirty variations into Bach's groups of three, lets you build a canon at any interval, and sorts performance choices by Williams's two "shapes" of the work. Quizzes and spaced flashcards throughout.`,
   },
+
+  {
+    slug: "dark-night-john-of-the-cross",
+    title: "The Dark Night of John of the Cross",
+    date: "2026-10-04",
+    time: "15:17",
+    url: "exhibits/dark-night-john-of-the-cross/",
+    tags: ["theology", "john of the cross"],
+    summary: `A six-part course on John of the Cross's <em>Ascent of Mount Carmel</em> and <em>Dark Night</em>, in the Kavanaugh and Rodriguez translation. Readers drag experiences onto John's map of the four nights, test his three signs for leaving meditation on sample cases, watch a sunbeam look darker as it gets purer, and step through his log in the fire. Quizzes and spaced review cards throughout.`,
+  },
 ];
