@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- If you rename the site in content.js, change this title and description too.
+     Link previews (texts, Slack, social) read these two lines, not content.js. -->
+<title>Noah's Learning Log</title>
+<meta name="description" content="Notes and interactive pages from whatever I'm studying.">
+<link rel="stylesheet" href="log.css">
+<script>
+  // Records script errors so the log can say which line of content.js broke.
+  window.__logErrors = [];
+  window.addEventListener("error", function (e) { window.__logErrors.push(e); });
+</script>
+<script src="content.js" defer></script>
+<script src="log.js" defer></script>
+</head>
+<body data-page="log">
+<div class="page">
+  <header id="masthead"></header>
+  <div class="layout">
+    <main id="log" tabindex="-1">
+      <noscript>
+        <p>This log builds its list of entries with JavaScript, which is turned off in
+        your browser. Turn it on to see the entries.</p>
+      </noscript>
+    </main>
+    <aside id="sidebar" aria-label="Sidebar"></aside>
+  </div>
+  <footer id="colophon"></footer>
+</div>
+</body>
+</html>

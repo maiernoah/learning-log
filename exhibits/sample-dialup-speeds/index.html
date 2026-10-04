@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How long a page took over dial-up</title>
+<meta name="description" content="Pick a modem speed and a page size, then watch the page arrive at period speed.">
+<style>
+  :root {
+    --bg: #eef1f5;
+    --surface: #ffffff;
+    --ink: #1a1e24;
+    --muted: #59636f;
+    --line: #d6dce4;
+    --accent: #1d5ec8;
+    --accent-ink: #ffffff;
+    --track: #dfe5ee;
+    --screen: #c0c0c0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #13161b;
+      --surface: #1b2027;
+      --ink: #e6e9ee;
+      --muted: #9aa4b1;
+      --line: #2b323c;
+      --accent: #7ca5ff;
+      --accent-ink: #0b1222;
+      --track: #2a313b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 28px 18px 80px; }
+  h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 0.4em; letter-spacing: -0.01em; }
+  .note {
+    font-size: 0.9rem; color: var(--muted);
+    border-left: 3px solid var(--accent); padding: 2px 0 2px 12px; margin: 0 0 22px;
+  }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: 18px; margin: 0 0 16px;
+  }
+  fieldset { border: 0; margin: 0 0 18px; padding: 0; min-width: 0; }
+  legend, .label { font-weight: 600; margin: 0 0 8px; padding: 0; display: block; }
+  .speeds { display: flex; flex-wrap: wrap; gap: 8px; }
+  .speeds label {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; cursor: pointer;
+    font-size: 0.95rem;
+  }
+  .speeds input { accent-color: var(--accent); margin: 0; }
+  .speeds label:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+  .size-row { display: flex; align-items: center; gap: 12px; }
+  input[type=range] { flex: 1; accent-color: var(--accent); }
+  .size-out { font-variant-numeric: tabular-nums; min-width: 6.5em; text-align: right; font-weight: 600; }
+  .presets { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  button {
+    font: inherit; font-size: 0.9rem; cursor: pointer; border-radius: 8px;
+    border: 1px solid var(--line); background: transparent; color: var(--ink); padding: 5px 10px;
+  }
+  button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; padding: 8px 16px; font-size: 1rem; }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .answer { font-size: 1.15rem; margin: 0; }
+  .answer strong { font-variant-numeric: tabular-nums; }
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 12px; }
+  .controls label { font-size: 0.95rem; display: inline-flex; gap: 6px; align-items: center; }
+  .bar { height: 10px; background: var(--track); border-radius: 999px; overflow: hidden; }
+  .bar > div { height: 100%; width: 0; background: var(--accent); }
+  .progress-text { font-size: 0.9rem; color: var(--muted); margin: 6px 0 12px; font-variant-numeric: tabular-nums; }
+  .screen {
+    background: var(--screen); color: #000; border-radius: 4px; min-height: 230px;
+    padding: 12px 14px; font: 17px/1.4 "Times New Roman", Times, serif; white-space: pre-wrap;
+    border: 1px solid var(--line); overflow-wrap: anywhere;
+  }
+  .fine { font-size: 0.85rem; color: var(--muted); margin: 14px 0 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>How long a page took to load over dial-up</h1>
+  <p class="note">Placeholder exhibit. It shows how an interactive page sits in the log's
+  <code>exhibits</code> folder. Replace it with your own.</p>
+
+  <section class="card" aria-labelledby="setup">
+    <h2 id="setup" class="label" style="font-size:1rem">Set it up</h2>
+    <fieldset>
+      <legend>Connection</legend>
+      <div class="speeds" id="speeds"></div>
+    </fieldset>
+
+    <span class="label" id="size-label">Page size</span>
+    <div class="size-row">
+      <input type="range" id="size" min="0" max="1000" step="1" aria-labelledby="size-label" aria-describedby="size-out">
+      <output class="size-out" id="size-out" for="size"></output>
+    </div>
+    <div class="presets" id="presets"></div>
+  </section>
+
+  <section class="card" aria-live="polite">
+    <p class="answer" id="answer"></p>
+  </section>
+
+  <section class="card" aria-labelledby="watch">
+    <h2 id="watch" class="label" style="font-size:1rem">Watch it arrive</h2>
+    <div class="controls">
+      <button class="primary" id="go" type="button">Load the page</button>
+      <label><input type="checkbox" id="fast"> 10&times; speed</label>
+    </div>
+    <div class="bar" role="progressbar" aria-labelledby="watch" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div id="fill"></div></div>
+    <p class="progress-text" id="progress">Not started.</p>
+    <div class="screen" id="screen" aria-hidden="true"></div>
+  </section>
+
+  <p class="fine">Time = page size in bits &divide; line rate. 1 KB = 1,000 bytes.
+  The rates are nominal line rates. Real throughput varied with line quality,
+  protocol overhead, and modem compression.</p>
+</main>
+
+<script>
+(function () {
+  var SPEEDS = [
+    { id: "14k", label: "14.4k modem", bps: 14400 },
+    { id: "28k", label: "28.8k modem", bps: 28800 },
+    { id: "56k", label: "56k modem", bps: 56000 },
+    { id: "isdn", label: "128k ISDN", bps: 128000 },
+    { id: "bb", label: "100 Mbit/s broadband", bps: 100000000 }
+  ];
+  var MIN_KB = 5, MAX_KB = 5000;
+  var PAGE_TEXT =
+    "Welcome to my home page!\n\n" +
+    "This page is under construction. Please be patient.\n\n" +
+    "About me\n" +
+    "I like science fiction, chess, and taking things apart.\n\n" +
+    "Cool links\n" +
+    "  * The WWW Virtual Library\n" +
+    "  * Pictures from the Hubble Space Telescope\n" +
+    "  * My friend's page (also under construction)\n\n" +
+    "You are visitor number 000417.\n" +
+    "Last updated: March 3, 1996\n" +
+    "Sign my guestbook!";
+
+  var speeds = document.getElementById("speeds");
+  var size = document.getElementById("size");
+  var sizeOut = document.getElementById("size-out");
+  var presets = document.getElementById("presets");
+  var answer = document.getElementById("answer");
+  var go = document.getElementById("go");
+  var fast = document.getElementById("fast");
+  var bar = document.getElementById("bar");
+  var fill = document.getElementById("fill");
+  var progress = document.getElementById("progress");
+  var screen = document.getElementById("screen");
+
+  var state = { speed: SPEEDS[1], kb: 50 };
+  var run = null;
+
+  SPEEDS.forEach(function (s) {
+    var label = document.createElement("label");
+    var input = document.createElement("input");
+    input.type = "radio"; input.name = "speed"; input.value = s.id;
+    input.checked = s === state.speed;
+    input.addEventListener("change", function () { state.speed = s; stop(); update(); });
+    label.appendChild(input);
+    label.appendChild(document.createTextNode(s.label));
+    speeds.appendChild(label);
+  });
+
+  function sliderToKb(v) {
+    var t = v / 1000;
+    var kb = Math.pow(10, Math.log10(MIN_KB) + t * (Math.log10(MAX_KB) - Math.log10(MIN_KB)));
+    return niceKb(kb);
+  }
+  function kbToSlider(kb) {
+    return Math.round(1000 * (Math.log10(kb) - Math.log10(MIN_KB)) / (Math.log10(MAX_KB) - Math.log10(MIN_KB)));
+  }
+  function niceKb(kb) {
+    if (kb < 20) return Math.round(kb);
+    if (kb < 200) return Math.round(kb / 5) * 5;
+    if (kb < 1000) return Math.round(kb / 10) * 10;
+    return Math.round(kb / 100) * 100;
+  }
+  function fmtKb(kb) {
+    return kb >= 1000 ? (kb / 1000).toLocaleString("en-US", { maximumFractionDigits: 1 }) + " MB"
+                      : kb.toLocaleString("en-US") + " KB";
+  }
+  function fmtTime(sec) {
+    if (sec < 0.001) return "under a millisecond";
+    if (sec < 1) return Math.round(sec * 1000) + " milliseconds";
+    if (sec < 60) return sec.toFixed(1) + " seconds";
+    var m = Math.floor(sec / 60), s = Math.round(sec % 60);
+    if (s === 60) { m += 1; s = 0; }
+    if (m < 60) return m + (m === 1 ? " minute" : " minutes") + (s ? " " + s + " seconds" : "");
+    var hr = Math.floor(m / 60), mm = m % 60;
+    return hr + (hr === 1 ? " hour" : " hours") + (mm ? " " + mm + " minutes" : "");
+  }
+  function seconds() { return (state.kb * 1000 * 8) / state.speed.bps; }
+
+  function thisPageKb() {
+    var html = "<!doctype html>\n" + document.documentElement.outerHTML;
+    return Math.max(1, Math.round(new TextEncoder().encode(html).length / 1000));
+  }
+
+  [
+    { label: "20 KB", kb: 20 },
+    { label: "100 KB", kb: 100 },
+    { label: "1 MB", kb: 1000 },
+    { label: "This page", kb: null }
+  ].forEach(function (p) {
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = p.label;
+    b.addEventListener("click", function () {
+      state.kb = p.kb || thisPageKb();
+      size.value = kbToSlider(Math.min(MAX_KB, Math.max(MIN_KB, state.kb)));
+      stop(); update();
+    });
+    presets.appendChild(b);
+  });
+
+  size.addEventListener("input", function () { state.kb = sliderToKb(+size.value); stop(); update(); });
+
+  function update() {
+    sizeOut.textContent = fmtKb(state.kb);
+    size.setAttribute("aria-valuetext", fmtKb(state.kb));
+    answer.innerHTML = "";
+    answer.appendChild(document.createTextNode("At " + state.speed.bps.toLocaleString("en-US") +
+      " bits per second, a " + fmtKb(state.kb) + " page takes "));
+    var strong = document.createElement("strong");
+    strong.textContent = fmtTime(seconds());
+    answer.appendChild(strong);
+    answer.appendChild(document.createTextNode("."));
+  }
+
+  function draw(frac, elapsed) {
+    var pct = Math.min(100, frac * 100);
+    fill.style.width = pct + "%";
+    bar.setAttribute("aria-valuenow", Math.round(pct));
+    var loadedKb = frac >= 1 ? state.kb : Math.floor(state.kb * frac);
+    progress.textContent = fmtKb(loadedKb) + " of " + fmtKb(state.kb) + " received, " +
+      elapsed.toFixed(1) + " s" + (frac >= 1 ? ". Done." : "");
+    screen.textContent = PAGE_TEXT.slice(0, Math.floor(PAGE_TEXT.length * frac));
+  }
+
+  function stop() {
+    if (run) cancelAnimationFrame(run.raf);
+    run = null;
+    go.textContent = "Load the page";
+    draw(0, 0);
+    progress.textContent = "Not started.";
+  }
+
+  go.addEventListener("click", function () {
+    if (run) { stop(); return; }
+    var total = seconds();
+    var factor = fast.checked ? 10 : 1;
+    var started = performance.now();
+    go.textContent = "Stop";
+    run = { raf: 0 };
+    (function tick(now) {
+      if (!run) return;
+      var simulated = ((now - started) / 1000) * factor;
+      var frac = total === 0 ? 1 : Math.min(1, simulated / total);
+      draw(frac, Math.min(simulated, total));
+      if (frac < 1) run.raf = requestAnimationFrame(tick);
+      else { run = null; go.textContent = "Load again"; }
+    })(started);
+  });
+
+  size.value = kbToSlider(state.kb);
+  update();
+  draw(0, 0);
+  progress.textContent = "Not started.";
+})();
+</script>
+
+<!-- Adds the "Back to the log" button. Copy this line into your own exhibits. -->
+<script src="../../return.js"></script>
+</body>
+</html>

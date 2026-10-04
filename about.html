@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About | Noah's Learning Log</title>
+<meta name="description" content="What this log is and how it's made.">
+<link rel="stylesheet" href="log.css">
+<script>
+  window.__logErrors = [];
+  window.addEventListener("error", function (e) { window.__logErrors.push(e); });
+</script>
+<script src="content.js" defer></script>
+<script src="log.js" defer></script>
+</head>
+<body data-page="about">
+<div class="page">
+  <header id="masthead"></header>
+  <div class="layout">
+    <main id="log" class="prose">
+      <!-- Edit the paragraphs below in plain HTML. Each <p> ... </p> is a paragraph. -->
+      <h2 class="day">About this log</h2>
+
+      <p>This is where I keep what I'm learning. Most entries link to an exhibit:
+      a small interactive page I built to work through one idea. The note under
+      each entry says what the page is and what it taught me.</p>
+
+      <p>The newest entries are at the top of the <a href="index.html">front page</a>.
+      Topics and Archives in the sidebar lead to older ones, and Find at the
+      top searches titles, notes, and topics.</p>
+
+      <h2>How it's made</h2>
+
+      <p>The exhibits were built with Claude. The log itself is plain HTML, one
+      stylesheet, and a little JavaScript. It sets no cookies and runs no trackers.</p>
+    </main>
+    <aside id="sidebar" aria-label="Sidebar"></aside>
+  </div>
+  <footer id="colophon"></footer>
+</div>
+</body>
+</html>

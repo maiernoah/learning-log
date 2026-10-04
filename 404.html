@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 Not Found</title>
+<style>
+  body { margin: 0; padding: 10px 16px; background: #ffffff; color: #000;
+         font: 18px/1.45 "Times New Roman", Times, serif; }
+  h1 { font-size: 2em; margin: 0.4em 0 0.3em; }
+  a { color: #0000ee; } a:visited { color: #551a8b; }
+</style>
+</head>
+<body>
+<h1>Not Found</h1>
+<p>The requested URL <code id="path">you asked for</code> was not found on this server.</p>
+<p>The page may have moved. The <a id="home" href="/">front page of the log</a> lists everything that's here.</p>
+<script>
+  document.getElementById("path").textContent = location.pathname;
+  // On a GitHub project site (name.github.io/repo/), the log lives one folder down.
+  // With a custom domain it lives at "/", and this does nothing.
+  if (/\.github\.io$/.test(location.hostname)) {
+    var first = location.pathname.split("/")[1];
+    if (first) document.getElementById("home").href = "/" + first + "/";
+  }
+</script>
+</body>
+</html>
