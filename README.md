@@ -13,6 +13,9 @@ about.html           about page; edit its paragraphs directly
 log.css              colors and fonts
 log.js               builds the page from content.js (leave alone)
 video.js             click-to-play YouTube player (leave alone)
+feed.xml             the RSS feed, rebuilt automatically from content.js (don't edit)
+tools/build-feed.js  builds feed.xml (leave alone)
+.github/workflows/   runs build-feed.js on GitHub after each change (leave alone)
 return.js            "Back to the log" button for exhibits (leave alone)
 404.html             "Not Found" page
 .nojekyll            tells GitHub Pages to serve the files as they are
@@ -62,6 +65,14 @@ Inside an exhibit, a video is one line of HTML (the exhibit needs the `video.js`
 
 If `content.js` breaks, the front page shows a yellow box naming the line with the mistake. A missing comma, quote, or backtick is the usual cause.
 
+## RSS feed
+
+The feed lives at `noahmaier.net/feed.xml`, and the sidebar's Subscribe box links to it. Feed readers also find it from the front page's address.
+
+It updates itself. When `content.js` changes, GitHub runs `tools/build-feed.js`, commits the new `feed.xml` as "github-actions[bot]", and republishes the site, all within a couple of minutes. You can watch it under the repository's Actions tab. If `content.js` has a mistake, that run fails and GitHub emails you; fixing `content.js` fixes the feed.
+
+The feed holds the 30 newest entries. Its links start with `url` at the top of `content.js`.
+
 ## Check an artifact before publishing it
 
 - This repository and the site are public. The repository also keeps every past version of every file, so deleting a file later doesn't remove it from history. Anything private belongs somewhere else.
@@ -101,5 +112,4 @@ The site is plain files, so it runs unchanged on Netlify or Neocities. Neocities
 ## Known limits
 
 - The list of entries is built with JavaScript. Visitors with JavaScript off see a notice instead.
-- There's no RSS feed. Adding one means adding a small build step that regenerates the feed with each new entry.
 - The Archives list grows by one line per month.

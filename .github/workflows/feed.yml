@@ -1,0 +1,44 @@
+# Rebuilds feed.xml (the RSS feed) whenever content.js changes, and commits it.
+# Nothing to do by hand: edit content.js as usual and the feed follows a minute later.
+name: Update RSS feed
+
+on:
+  push:
+    branches: [main]
+    paths: [content.js, CNAME, tools/build-feed.js]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # to commit feed.xml
+  pages: write      # to ask GitHub Pages to republish afterwards
+
+concurrency:
+  group: feed
+  cancel-in-progress: false
+
+jobs:
+  feed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build feed.xml from content.js
+        run: node tools/build-feed.js
+      - name: Commit feed.xml if it changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain -- feed.xml)" ]; then
+            echo "feed.xml is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add feed.xml
+          git commit -m "Update feed.xml"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          # A push made by this workflow may not start a Pages build on its own, so request one.
+          gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" || echo "Pages build request failed; the next push will publish the feed."

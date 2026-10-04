@@ -9,7 +9,7 @@
   var PAGE = document.body.getAttribute("data-page") || "log";
   var ON_LOG = PAGE === "log";
   var HOME = IS_FILE ? "index.html" : "./";
-  var RESERVED = ["all", "topics", "archives", "topics-box", "archives-box", "find", "about-box", "elsewhere", "log"];
+  var RESERVED = ["all", "topics", "archives", "topics-box", "archives-box", "find", "about-box", "elsewhere", "subscribe", "log"];
   var DAY_MS = 86400000;
 
   /* ---------- load content.js safely ---------- */
@@ -561,6 +561,14 @@
     });
     side.appendChild(panel("archives-box", "Archives",
       months.length ? [monthList] : [h("p", { text: "Nothing archived yet." })]));
+
+    var feedAt = String(site.url || "").replace(/^https?:\/\//, "").replace(/\/*$/, "/") + "feed.xml";
+    side.appendChild(panel("subscribe", "Subscribe", [
+      h("p", null, [h("a", { href: "feed.xml", type: "application/rss+xml", text: "RSS feed" }),
+        " of new entries."]),
+      h("p", { class: "note", text: "Paste " + (site.url ? feedAt : "the feed's address") +
+        " into a feed reader to see new entries as they're posted." })
+    ]));
 
     var links = (site.links || []).filter(function (l) { return l && l.url && l.label; });
     if (links.length) {
