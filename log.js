@@ -103,6 +103,11 @@
       .map(function (t) { return String(t).trim().toLowerCase(); })
       .filter(Boolean);
     var summary = e.summary ? String(e.summary).trim() : "";
+    var video = e.video ? String(e.video).trim() : "";
+    if (video && window.WeblogVideo && !window.WeblogVideo.idFrom(video)) {
+      problems.push(where + ": video “" + video + "” isn't a YouTube link. Paste the address from YouTube's Share button.");
+      video = "";
+    }
 
     return {
       slug: e.slug,
@@ -112,8 +117,10 @@
       url: e.url ? String(e.url).trim() : "",
       tags: tags,
       summary: summary,
+      video: video,
+      length: e.length ? String(e.length).trim() : "",
       order: i,
-      haystack: (e.title + " " + stripHtml(summary) + " " + tags.join(" ")).toLowerCase()
+      haystack: (e.title + " " + stripHtml(summary) + " " + tags.join(" ") + (video ? " video" : "")).toLowerCase()
     };
   }
 
@@ -368,8 +375,19 @@
     } else {
       head.appendChild(document.createTextNode(e.title));
     }
+    if (e.video) {
+      head.appendChild(document.createTextNode(" "));
+      head.appendChild(h("span", { class: "host", text: "(video" + (e.length ? ", " + e.length : "") + ")" }));
+    }
     if (isNew(e)) head.appendChild(h("span", { class: "new", text: "NEW!" }));
     art.appendChild(head);
+
+    if (e.video && window.WeblogVideo) {
+      var fig = h("figure", { class: "yt", "data-youtube": e.video, "data-title": e.title });
+      if (e.length) fig.setAttribute("data-length", e.length);
+      window.WeblogVideo.mount(fig);
+      art.appendChild(fig);
+    }
 
     if (e.summary) {
       var body = /<p[\s>]/i.test(e.summary) ? e.summary : "<p>" + e.summary + "</p>";
@@ -487,6 +505,7 @@
       groups[k].forEach(function (e) {
         var li = h("li");
         li.appendChild(e.url ? h("a", { href: href(e.url), text: e.title }) : h("a", { href: "#" + e.slug, text: e.title }));
+        if (e.video) li.appendChild(h("span", { class: "when", text: " (video" + (e.length ? ", " + e.length : "") + ")" }));
         li.appendChild(h("span", { class: "when", text: " " + fmtDay(e.when) }));
         ul.appendChild(li);
       });

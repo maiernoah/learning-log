@@ -12,6 +12,7 @@ index.html           front page (the log)
 about.html           about page; edit its paragraphs directly
 log.css              colors and fonts
 log.js               builds the page from content.js (leave alone)
+video.js             click-to-play YouTube player (leave alone)
 return.js            "Back to the log" button for exhibits (leave alone)
 404.html             "Not Found" page
 .nojekyll            tells GitHub Pages to serve the files as they are
@@ -37,6 +38,27 @@ Two other kinds of entry:
 
 - Text only: leave out the `url` line. The title shows as plain text.
 - A page hosted somewhere else: put the full `https://` address in `url`. The log shows the site's name next to the title. A claude.ai artifact link only works for visitors after the artifact is shared.
+
+## Add a video
+
+Videos live on YouTube, never in this repository. GitHub blocks files over 100 MB and caps the whole site at 1 GB.
+
+1. Upload the video to YouTube with visibility set to Unlisted. Unlisted videos can be shown on the site but don't appear in YouTube search or on your channel.
+2. Press Share under the video and copy the link (it looks like `https://youtu.be/...`).
+3. In `content.js`, add an entry with two extra lines:
+   ```js
+   video: "https://youtu.be/...",
+   length: "12:30",
+   ```
+   Leave out `url` if the video has no page of its own, or keep it to link the title to an exhibit.
+
+The log shows a still frame with a Play button and marks the title "(video, 12:30)". Nothing loads from YouTube until a visitor presses Play, and then it uses YouTube's privacy-enhanced player (youtube-nocookie.com). If the link isn't a YouTube address, the yellow box says which entry.
+
+Inside an exhibit, a video is one line of HTML (the exhibit needs the `video.js` code pasted in, which pages made with the exhibit skill already have):
+
+```html
+<figure class="yt" data-youtube="https://youtu.be/..." data-title="What it shows" data-length="12:30"></figure>
+```
 
 If `content.js` breaks, the front page shows a yellow box naming the line with the mistake. A missing comma, quote, or backtick is the usual cause.
 

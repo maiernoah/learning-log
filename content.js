@@ -54,6 +54,12 @@ const ENTRIES = [
     summary: `What you learned, in a sentence or three. Simple HTML like
               <em>emphasis</em> and <a href="https://example.com">links</a> works.`,
   },
+
+  ---- VIDEO: same as above, plus these two lines. Upload the video to
+  YouTube as Unlisted, press Share, and paste the link it gives you.
+  Leave out the url line for a video with no page of its own. ----------
+    video: "https://youtu.be/VIDEO_ID",
+    length: "12:30",                      // optional, shown next to the title
   ------------------------------------------------------------------------- */
 
   {
