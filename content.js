@@ -109,4 +109,14 @@ const ENTRIES = [
     tags: ["theology", "john of the cross"],
     summary: `A six-part course on John of the Cross's <em>Ascent of Mount Carmel</em> and <em>Dark Night</em>, in the Kavanaugh and Rodriguez translation. Readers drag experiences onto John's map of the four nights, test his three signs for leaving meditation on sample cases, watch a sunbeam look darker as it gets purer, and step through his log in the fire. Quizzes and spaced review cards throughout.`,
   },
+
+  {
+    slug: "the-practice-of-asking",
+    title: "The Practice of Asking",
+    date: "2026-10-04",
+    time: "15:54",
+    url: "exhibits/the-practice-of-asking/",
+    tags: ["fundraising", "philosophy"],
+    summary: `An eight-part training for nonprofit executive directors, drawn from Noah's notes for <em>The Fundraising Act</em>. It argues that generosity is already present and the fundraiser's job is to clear what blocks it. It works through Mauss and the Bhagavad Gita on gifts, overflow versus guilt, the money story every fundraiser carries, asking from love, and releasing the outcome. Readers clear rocks from a stream, compare two givers by dollars and by sacrifice, diagnose a hard ask, and sort what they control from what they don't. Quizzes and spaced review cards throughout.`,
+  },
 ];

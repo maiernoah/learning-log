@@ -1,0 +1,2480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Practice of Asking</title>
+<meta name="description" content="A training for executive directors on why people give, what you carry into every ask, and how to ask without needing the yes.">
+<style>
+/* ===== Noah's Weblog house style (exhibits) v2 =====
+   Matches noahmaier.net: white page, Times for reading, Verdana for
+   controls, blue underlined links, two-tone rules, gray beveled buttons. */
+:root {
+  --page: #ffffff;
+  --ink: #000000;
+  --ink-soft: #2b2b2b;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --active: #ff0000;
+  --lo: #999999;          /* rule, border, axis */
+  --hi: #e2e2e2;          /* rule highlight, gridline */
+  --tint: #f2f2f2;        /* callout and table-header fill */
+  --field: #6e6e6e;       /* input border */
+  --btn: #c0c0c0;         /* button face */
+  --btn-face: #dfdfdf;
+  --btn-lo: #808080;
+  --btn-dark: #0a0a0a;
+  --new: #cc0000;
+  /* data colors, in order: classic HTML named colors */
+  --c1: #000080;  /* navy */
+  --c2: #800000;  /* maroon */
+  --c3: #008080;  /* teal */
+  --c4: #808000;  /* olive (marks only; too light for text) */
+  --c5: #800080;  /* purple */
+  --c6: #008000;  /* green */
+  --serif: "Times New Roman", Times, serif;
+  --sans: Verdana, Geneva, Tahoma, sans-serif;
+  --mono: "Courier New", Courier, monospace;
+  --measure: 42.75rem;    /* one column width (684px): text, boxes, questions, tables, figures */
+}
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body { margin: 0; padding: 10px 16px 32px; background: var(--page); color: var(--ink);
+       font: 18px/1.45 var(--serif); -webkit-text-size-adjust: 100%; }
+.page { max-width: 1020px; }
+/* Text, boxes, questions, tables and figures share one column width, so their left and
+   right edges line up. Add class="wide" only to something that genuinely needs more room. */
+main p, main ul, main ol, main dl, main blockquote, main table, main fieldset, main figure,
+main details, main .box, main h2, main h3, main .view > *, .prose { max-width: var(--measure); }
+.wide { max-width: none !important; }
+a { color: var(--link); } a:visited { color: var(--visited); } a:active { color: var(--active); }
+:focus-visible { outline: 2px dotted var(--ink); outline-offset: 2px; }
+
+h1 { font-size: 2.3em; line-height: 1.1; margin: 0.35em 0 0.15em; }
+h2 { font-size: 1em; font-weight: bold; margin: 1.6em 0 0.7em; padding-bottom: 2px;
+     border-bottom: 1px solid var(--lo); }
+h3 { font-size: 1.15em; line-height: 1.25; margin: 1.2em 0 0.3em; }
+p { margin: 0 0 0.8em; }
+.dek { font-style: italic; margin: 0 0 0.5em; }
+.nav { font: 13px/1.6 var(--sans); margin: 0; }
+hr { border: 0; border-top: 1px solid var(--lo); border-bottom: 1px solid var(--hi);
+     height: 0; margin: 10px 0 14px; }
+code, pre, kbd { font-family: var(--mono); font-size: 0.9em; }
+
+/* controls and small text use Verdana */
+label, legend, button, input, select, textarea, table, figcaption, output, .ui, .meta {
+  font-family: var(--sans); }
+.ui, .meta, figcaption { font-size: 13px; line-height: 1.5; }
+.meta { color: var(--ink-soft); }
+p.meta { margin: 6px 0 12px; }
+
+fieldset { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi);
+           margin: 0 0 16px; padding: 10px 12px 12px; min-width: 0; }
+/* The legend sits inside the box as its first line, so long legends wrap cleanly
+   instead of breaking through the border. */
+legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; font-size: 13px; font-weight: bold; }
+legend + * { clear: both; }
+label { font-size: 13px; }
+.choices { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.choices label { display: inline-flex; align-items: center; gap: 5px; }
+input[type=radio], input[type=checkbox], input[type=range] { accent-color: var(--c1); }
+
+button {
+  font-size: 13px; line-height: 1.2; color: #000; background: var(--btn);
+  border: 0; border-radius: 0; padding: 6px 12px; cursor: pointer;
+  box-shadow: inset -1px -1px var(--btn-dark), inset 1px 1px #fff,
+              inset -2px -2px var(--btn-lo), inset 2px 2px var(--btn-face);
+}
+button:active, button[aria-pressed="true"] {
+  box-shadow: inset 1px 1px var(--btn-dark), inset -1px -1px #fff,
+              inset 2px 2px var(--btn-lo), inset -2px -2px var(--btn-face);
+  padding: 7px 11px 5px 13px;
+}
+button:disabled { color: var(--btn-lo); text-shadow: 1px 1px #fff; cursor: default; }
+button.primary { font-weight: bold; }
+
+input[type=text], input[type=number], input[type=search], input[type=email],
+select, textarea {
+  font-size: 14px; color: var(--ink); background: #fff; border: 1px solid var(--field);
+  border-radius: 0; box-shadow: inset 1px 1px 0 #b4b4b4; padding: 4px 6px;
+}
+
+table { border-collapse: collapse; font-size: 13px; line-height: 1.4; }
+main table { width: 100%; }
+th, td { border: 1px solid var(--lo); padding: 4px 8px; text-align: left; vertical-align: top; }
+th { background: var(--tint); }
+
+.box { background: var(--tint); box-shadow: inset 1px 1px var(--lo), inset -1px -1px var(--hi);
+       padding: 8px 10px; margin: 0 0 1em; font: 13px/1.5 var(--sans); }
+.result { font-size: 1.15em; }
+.result strong { font-variant-numeric: tabular-nums; }
+
+.meter { height: 16px; background: #fff; border: 1px solid var(--field);
+         box-shadow: inset 1px 1px 0 #b4b4b4; }
+.meter > div { height: 100%; width: 0; background: var(--c1); }
+
+footer address { font-style: normal; font-size: 0.85em; }
+
+@media (max-width: 780px) { body { font-size: 17px; padding: 8px 16px 28px; } h1 { font-size: 1.8em; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media print { .nav { display: none; } }
+/* ===== Noah's Weblog teaching components v2 =====
+   Goes directly after house-style.css. Uses only its variables. */
+
+/* anything hidden by the engine stays hidden, even inside flex rows */
+[hidden] { display: none !important; }
+
+/* course layout: the lesson on the left, contents on the right (like the log) */
+.course { display: grid; grid-template-columns: minmax(0, var(--measure)) 230px; justify-content: space-between;
+          gap: 32px; align-items: start; }
+.course > .lesson { min-width: 0; }
+.course-nav { position: sticky; top: 12px; padding-left: 20px; border-left: 1px solid var(--lo);
+              box-shadow: inset 1px 0 0 var(--hi); font: 13px/1.5 var(--sans); }
+.course-nav summary { font-weight: bold; cursor: pointer; margin-bottom: 6px; }
+.course-nav ol { margin: 0; padding-left: 0; list-style: none; }
+.course-nav li { margin: 0.3em 0; }
+.course-nav a[aria-current="true"] { color: var(--ink); font-weight: bold; text-decoration: none; }
+.course-nav .check { color: var(--c6); }
+.progress { margin: 0 0 10px; }
+.progress .meter { margin-top: 4px; }
+@media (max-width: 780px) {
+  .course { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .course-nav { position: static; order: -1; padding: 0 0 10px; border-left: 0; box-shadow: none;
+                border-bottom: 1px solid var(--lo); margin-bottom: 14px; }
+}
+
+/* one part at a time */
+.view[hidden] { display: none; }
+.view > h2:first-child { margin-top: 0.3em; }
+.view > h2:focus { outline: none; }
+.objective { font: 13px/1.5 var(--sans); color: var(--ink-soft); margin: -0.2em 0 1.1em; }
+.pager { max-width: none; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+         margin: 2em 0 0; padding-top: 10px; border-top: 1px solid var(--hi); font: 13px/1.5 var(--sans); }
+.pager .next { margin-left: auto; }
+
+/* source references like (p. 4) */
+.src { font: 12px/1 var(--sans); color: var(--ink-soft); white-space: nowrap; }
+
+/* glossary terms in running text link to the glossary */
+a.term { text-decoration-style: dotted; text-underline-offset: 2px; }
+.glossary dt { font-weight: bold; margin: 0.9em 0 0.15em; }
+.glossary dd { margin: 0; }
+
+/* quotes and figures */
+blockquote { margin: 1em 0; padding-left: 14px; border-left: 3px solid var(--lo); font-style: italic; }
+figure { margin: 1.3em 0; }
+figure svg, figure img { display: block; max-width: 100%; height: auto; }
+figure svg:not([width]) { width: 100%; }  /* give every svg width and height attributes */
+figcaption { margin-top: 6px; color: var(--ink-soft); }
+svg text { font-family: var(--sans); }
+
+/* reveal: model answers, hints, "why?" prompts */
+details.reveal { margin: 0 0 1em; }
+details.reveal > summary { font: 13px/1.6 var(--sans); color: var(--link); text-decoration: underline; cursor: pointer; }
+details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px solid var(--hi); }
+
+/* "A common mix-up" refutation box and "Try it" prompts */
+.box strong.label { display: block; margin-bottom: 2px; }
+
+/* quizzes */
+.quiz { margin: 1.3em 0; }
+.quiz fieldset.q legend { font: bold 1em/1.35 var(--serif); }
+.q .options { display: grid; gap: 7px; margin: 6px 0 10px; }
+.q .options label { display: flex; gap: 8px; align-items: flex-start; font: 0.95em/1.4 var(--serif); }
+.q .options input { margin-top: 0.3em; flex: none; }
+.q .options .mark { font: bold 12px/1.6 var(--sans); white-space: nowrap; }
+.q .options .mark.right { color: var(--c6); }
+.q .options .mark.wrong { color: var(--c2); }
+.q .feedback { font: 13px/1.5 var(--sans); margin: 8px 0 0; }
+.q .feedback:empty { display: none; }
+.q .verdict { font-weight: bold; }
+.q .verdict.right { color: var(--c6); }
+.q .verdict.wrong { color: var(--c2); }
+.q textarea { width: 100%; min-height: 4.5em; font: 15px/1.4 var(--serif); margin: 6px 0 8px; }
+.q .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.quiz-summary:empty { display: none; }
+
+/* flashcards */
+
+.card { background: #fff; border: 1px solid var(--field); box-shadow: inset 1px 1px 0 #b4b4b4;
+        padding: 16px 18px; min-height: 9em; margin: 8px 0 10px; }
+.card .front { font-size: 1.2em; }
+.card .back { border-top: 1px dashed var(--lo); margin-top: 12px; padding-top: 10px; }
+.card .back[hidden] { display: none; }
+.deck .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* printing shows every part */
+@media print {
+  .view[hidden] { display: block !important; }
+  .course { display: block; }
+  .course-nav, .pager, .q .actions, .deck .actions { display: none; }
+}
+/* ===== page-specific rules (use the variables above, no new colors) ===== */
+/* svg text */
+svg .t-lab { font-size: 14px; fill: var(--ink); }
+svg .t-strong { font-weight: bold; }
+svg .t-small { font-size: 12px; fill: var(--ink-soft); }
+svg .t-num { font-size: 12px; font-weight: bold; fill: var(--ink); }
+svg .t-cleared { fill: var(--c6); font-weight: bold; }
+svg .t-hau { font-size: 18px; font-style: italic; fill: var(--c2); }
+
+/* part 1: bridge */
+.f-donor { fill: var(--tint); stroke: var(--c1); stroke-width: 2; }
+.f-work { fill: var(--tint); stroke: var(--c3); stroke-width: 2; }
+.f-bridge { fill: none; stroke: var(--c2); stroke-width: 3; }
+.f-bridge-thin { stroke: var(--c2); stroke-width: 1; }
+
+/* part 2: clear the path */
+.w-spring { fill: var(--tint); stroke: var(--c1); stroke-width: 2; }
+.w-channel { fill: none; stroke: var(--hi); stroke-width: 20; stroke-linecap: round; }
+.w-water { fill: none; stroke: var(--c1); stroke-width: 7; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+.w-rock { fill: var(--btn); stroke: var(--btn-lo); stroke-width: 1; }
+.w-rock-cur { stroke: var(--ink); stroke-width: 2; }
+
+/* part 3: Mauss */
+.f-cycle { fill: none; stroke: var(--c1); stroke-width: 2; }
+.f-arrowhead { fill: var(--c1); }
+.f-node { fill: var(--tint); stroke: var(--lo); stroke-width: 1; }
+
+/* part 4: two givers */
+.giv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0 14px; }
+.giv-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 8px; font: 13px/1.5 var(--sans); }
+.giv-row label { min-width: 3em; }
+.giv-row input[type=range] { flex: 1 1 8em; }
+.giv-row output { font-variant-numeric: tabular-nums; }
+.g-circle { fill: var(--tint); stroke: var(--c1); stroke-width: 2; }
+.g-bar-bg { fill: var(--page); stroke: var(--field); stroke-width: 1; }
+.g-bar { fill: var(--c1); }
+
+/* part 6: wonder and curiosity */
+.f-cur { stroke: var(--c5); stroke-width: 2; }
+.f-cur-dot { fill: var(--c5); }
+.f-won { stroke: var(--c4); stroke-width: 2; }
+.f-won-thin { stroke: var(--c4); stroke-width: 1; }
+.f-won-dot { fill: var(--c4); }
+
+/* part 8: layers */
+.f-layer { fill: var(--tint); stroke: var(--lo); stroke-width: 1; }
+.f-layer-base { stroke: var(--c2); stroke-width: 2; }
+
+/* radio and checkbox lists in the custom activities */
+.pick { display: grid; gap: 8px; margin: 6px 0 10px; }
+.pick label { display: flex; gap: 8px; align-items: flex-start; font: 0.95em/1.4 var(--serif); cursor: pointer; }
+.pick input { margin-top: 0.3em; flex: none; }
+.row-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.fb { font: 13px/1.5 var(--sans); margin: 10px 0 0; }
+.fb:empty { display: none; }
+.v-right { font-weight: bold; color: var(--c6); }
+.v-wrong { font-weight: bold; color: var(--c2); }
+#ctp-desc { font-style: italic; }
+.pri-q { margin: 0 0 10px; }
+.pri-text { margin: 0 0 4px; }
+#ms-detail .box, #pri-detail .box { margin-top: 6px; }
+.pri-q .choices label { padding: 4px 6px 4px 0; font-size: 14px; }
+@media (max-width: 520px) {
+  #giv-svg .t-lab { font-size: 17px; }
+  #giv-svg .t-small { font-size: 15px; }
+  #ctp-svg .t-small { font-size: 14px; }
+}
+
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>The Practice of Asking</h1>
+    <p class="dek">A training for executive directors on why people give, what you carry into every ask, and how to ask without needing the yes.</p>
+    <p class="nav">[ <a href="../../index.html#the-practice-of-asking">&#9668; Noah's Weblog</a> | <a href="../../about.html">About</a> ]</p>
+    <hr>
+  </header>
+
+  <div class="course">
+    <main class="lesson">
+
+      <!-- ============ START HERE ============ -->
+      <section class="view" id="start" data-title="Start here">
+        <h2>Start here</h2>
+        <p class="box">This training draws on Noah Maier's working notes for a book in progress, <em>The Fundraising Act</em>, and on the writers those notes lean on. It is written for nonprofit executive directors. <a href="#source">About the source</a>.</p>
+        <p>Most fundraising training is about tactics: scripts, gift charts, databases. They help. But an executive director who dreads asking will find reasons not to use them. This training works on the dread itself. It asks what you believe giving is, what you carry about money, and who you are when you ask.</p>
+        <p>The notes state the goal in two short sentences: "That process will change you. The money is a side effect." <span class="src">(Welcome)</span></p>
+        <p>Each part ends with one practice to try during a normal week of work. The practices are where the change happens. Reading about them is the easy half.</p>
+        <h3>By the end you'll be able to</h3>
+        <ul class="prose">
+          <li>Explain what it means to call generosity a "substrate," and what a fundraiser removes instead of adds.</li>
+          <li>Compare giving from overflow with giving from guilt, and say which one lasts.</li>
+          <li>Name the money story you carry and predict where it shows up in an ask.</li>
+          <li>Diagnose a hard ask by checking the four things that have to be true first.</li>
+          <li>Separate what you control in a donor relationship from what you don't, and decide what to release.</li>
+        </ul>
+        <h3>Guess first</h3>
+        <p>Answer these before you start. Guessing wrong is fine; trying first makes the answers stick.</p>
+        <div class="quiz" data-quiz="pre"></div>
+      </section>
+
+      <!-- ============ PART 1 ============ -->
+      <section class="view module" id="m1" data-title="1. Two stories about asking">
+        <h2>1. Two stories about asking</h2>
+        <p class="objective">In this part: see how the story you tell about fundraising sets a ceiling on how well you can do it.</p>
+
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-practice">Practice</a>: something done again and again for what it builds in you, with no finish line.</p>
+
+        <p>Every profession tells a story about itself. That story decides who joins, how they act, and how high they aim. The notes call this the ceiling. <span class="src">(Generosity as Substrate)</span></p>
+        <p>The common story about fundraising is that it is a necessary evil. It is the awkward part of the job that pays for the real work. Leaders who believe this apologize for the development office. Boards treat the annual fund as an embarrassment. Talented people leave the field, and the ones who stay ask timidly. <span class="src">(Generosity as Substrate)</span></p>
+        <p>The training offers a different story. Fundraising is one of the oldest forms of human cooperation: gathering resources around a shared purpose. It is how cathedrals were built, universities endowed, hospitals founded and movements kept alive. In this story it is a necessary good. <span class="src">(Generosity as Substrate; What Fundraising Is and Isn't)</span></p>
+        <p>The notes define it plainly. Fundraising is the practice of sustained human attention directed at another person. The word <em>practice</em> matters. A practice is defined by repetition. You never complete it. It trains you, and the methods grow out of what it builds in you. <span class="src">(What Fundraising Is and Isn't)</span></p>
+        <p>The notes are just as hard on the opposite mistake. Fundraisers ask people for money; that is the job. Language so lofty that the ask disappears is its own kind of cowardice. What changes is orientation. In sales the transaction is the product. In fundraising the relationship is the product, and the gift is one expression of it. <span class="src">(What Fundraising Is and Isn't)</span></p>
+
+        <h3>An example</h3>
+        <p>An analogy: a friend tells you about a restaurant they love and says you should come along next time. Nobody calls that selling. It's an invitation into something they enjoy. The analogy has limits. A gift asks much more of the giver than a dinner does, and the fundraiser has a stake in the answer.</p>
+        <p>The notes' own example is a phrase they ban: "Sorry to bother you." It tells the donor you think the ask is an imposition. The notes treat the ask as an offer. Most people go through life wishing someone would ask them to be part of something that matters. You can be that someone. <span class="src">(What the Fundraiser Enables)</span></p>
+
+        <figure>
+          <svg width="684" height="245" viewBox="0 0 460 165" role="img" aria-label="A bridge diagram. On the left, a circle labeled what the donor cares about, marked private. On the right, a box labeled what the work needs. A bridge labeled the fundraiser connects them.">
+            <circle class="f-donor" cx="88" cy="96" r="58"/>
+            <text class="t-lab" x="88" y="90" text-anchor="middle">What the donor</text>
+            <text class="t-lab" x="88" y="108" text-anchor="middle">cares about</text>
+            <text class="t-small" x="88" y="128" text-anchor="middle">(private)</text>
+            <rect class="f-work" x="302" y="62" width="140" height="68"/>
+            <text class="t-lab" x="372" y="92" text-anchor="middle">What the work</text>
+            <text class="t-lab" x="372" y="110" text-anchor="middle">needs</text>
+            <path class="f-bridge" d="M146,96 Q224,10 302,96"/>
+            <line class="f-bridge-thin" x1="146" y1="96" x2="302" y2="96"/>
+            <text class="t-lab t-strong" x="224" y="44" text-anchor="middle">the fundraiser</text>
+            <text class="t-small" x="224" y="150" text-anchor="middle">values become action</text>
+          </svg>
+          <figcaption>Without the bridge, a donor's values stay private. With it, they become action. Drawn from the notes' manifesto, which calls the fundraiser a connector. <span class="src">(Position: Philanthropy and Fundraising)</span></figcaption>
+        </figure>
+
+        <h3>Try it</h3>
+        <p>Sort these lines an executive director might say. Which story is each one telling?</p>
+        <div data-sort="stories"></div>
+
+        <details class="reveal"><summary>Why? If the tactics are the same, why does the story matter?</summary>
+          <div><p>Because the donor reads the story under the tactics. An ED who believes asking takes something will apologize, rush, or avoid the ask, and the donor feels it. The same words, said from the invitation story, land differently. The notes put it bluntly: you can say clumsy things in a donor meeting and recover, but you can't recover from the wrong posture entering the room. <span class="src">(Coaching Call: Love and Cynicism)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"If fundraising is a relationship, I shouldn't spoil it by asking." The notes call this a trap. The donor knows why you're talking, and is often waiting for you to ask. Holding back the ask to protect the relationship withholds intimacy from it. <span class="src">(Fundraising Meta-Philosophy)</span></p>
+
+        <p class="box"><strong class="label">Practice this week</strong>Listen for the necessary-evil story in your own words. Catch one apology before an ask ("sorry to bother you," "I hate to ask") and replace it with a sentence about what you're offering.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m1"></div>
+      </section>
+
+      <!-- ============ PART 2 ============ -->
+      <section class="view module" id="m2" data-title="2. Generosity is already there">
+        <h2>2. Generosity is already there</h2>
+        <p class="objective">In this part: picture generosity as something already present, and the fundraiser's job as clearing what blocks it.</p>
+
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-substrate">Substrate</a>: the layer underneath that something else rests on or grows from.</p>
+
+        <p>The central claim of the training fits in one sentence. Generosity is the substrate: it is already present in every person, community and culture. Fundraising removes whatever stands between a person and that generosity. It doesn't manufacture it. <span class="src">(Generosity as Substrate)</span></p>
+        <p>The notes use an image. Generosity moves the way water flows downhill. Nobody pushes water. It moves when the path is clear. <span class="src">(Generosity as Substrate)</span></p>
+        <p>What blocks the path? The notes list fear, confusion and distrust. They list red tape, the sense that a gift won't matter, and the feeling that the ask is a transaction. They add the suspicion that the organization doesn't understand the donor, the memory of being asked badly before, and the drag of a busy life. Each one is specific. Each can be removed by someone paying close attention. <span class="src">(Generosity as Substrate)</span></p>
+        <p>So the notes compare the work to midwifery: the baby is coming, and your job is to help. <span class="src">(Generosity as Substrate)</span> They borrow a line from John Gardner that the fundraising writer Jerold Panas embraced: the fundraiser's job is to unlock what is already there. <span class="src">(What the Fundraiser Enables)</span></p>
+        <p>There is a practical reason persuasion fails. Wealthy donors are approached by many organizations every year. Once a donor feels pushed instead of invited, you have probably lost them for good. People remember being pushed. <span class="src">(What Fundraising Is and Isn't)</span></p>
+
+        <h3>Try it: clear the path</h3>
+        <p>Each rock is one obstruction from the notes. Pick the move that removes it, and watch how far the water gets.</p>
+        <figure>
+          <svg id="ctp-svg" width="684" height="260" viewBox="0 0 460 175" role="img" aria-label="A stream runs downhill from a spring labeled generosity, already there, to a box labeled the work. Five rocks block the stream. Water reaches as far as the first rock that has not been cleared.">
+            <text class="t-lab t-strong" x="46" y="20" text-anchor="middle">Generosity</text>
+            <circle class="w-spring" cx="46" cy="56" r="18"/>
+            <text class="t-small" x="46" y="94" text-anchor="middle">already there</text>
+            <path id="ctp-channel" class="w-channel" d="M64,62 Q226,74 386,136"/>
+            <path id="ctp-water" class="w-water" d="M64,62 Q226,74 386,136"/>
+            <rect class="f-work" x="384" y="120" width="70" height="34"/>
+            <text class="t-lab" x="419" y="142" text-anchor="middle">The work</text>
+            <g id="ctp-rocks"></g>
+          </svg>
+          <figcaption>Water reaches as far as the first rock you haven't cleared. You can't add water. You can only move what's in the way.</figcaption>
+        </figure>
+        <fieldset id="ctp-panel">
+          <legend id="ctp-legend">Rock 1 of 5</legend>
+          <p id="ctp-desc"></p>
+          <div class="pick" id="ctp-opts"></div>
+          <div class="row-actions">
+            <button type="button" class="primary" id="ctp-check">Check</button>
+            <button type="button" id="ctp-next" hidden>Next rock &#9658;</button>
+            <button type="button" id="ctp-reset" hidden>Start over</button>
+          </div>
+          <p class="fb" id="ctp-fb" role="status" aria-live="polite"></p>
+        </fieldset>
+        <p class="result" id="ctp-result" aria-live="polite"></p>
+
+        <p>The water image has a limit, and the last rock shows it. Water has no say in where it goes, and donors do. Sometimes the only thing that clears the path is a clear ask: an amount, a date, and the reason now is the moment. Unlocking still includes asking. <span class="src">(Asking; Urgency)</span></p>
+
+        <details class="reveal"><summary>Why? Pressure works on deadlines. Why doesn't it move gifts?</summary>
+          <div><p>Pressure adds force in front of an obstruction without removing it. A donor who distrusts you trusts you less after a harder pitch. A donor who feels like a wallet feels it more after another ask. Urgency can help with one rock, inertia, which is why the notes call urgency a service. They mean real urgency, built into the situation: a campaign that closes in sixty days, a match that expires. Fake deadlines are manipulation, and donors see through them. The test for any move is whether it removes a specific obstruction or just pushes against it. <span class="src">(Urgency)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"Unlock, don't persuade" means waiting for donors to offer. The notes reject this. Your job is not to wait for donors to figure out the timing. More gifts are lost to politeness than to pushiness. <span class="src">(Urgency)</span></p>
+
+        <p class="box"><strong class="label">Practice this week</strong>Pick one donor who has gone quiet. Write down the single obstruction most likely in the way. Choose one move that removes it, instead of one that pushes past it.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m2"></div>
+      </section>
+
+      <!-- ============ PART 3 ============ -->
+      <section class="view module" id="m3" data-title="3. What the traditions noticed">
+        <h2>3. What the traditions noticed</h2>
+        <p class="objective">In this part: compare what religious traditions and anthropologists say about giving, including the uncomfortable parts.</p>
+
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-d-na">Dāna</a>, <a class="term" href="#g-zakat">zakat</a> and <a class="term" href="#g-xenia">xenia</a>: Buddhist giving, Islamic required giving, and Greek hospitality. <a class="term" href="#g-reciprocity">Reciprocity</a>: giving back for what you received. <a class="term" href="#g-hau">Hau</a>: Mauss's word for the spirit of a gift.</p>
+
+        <p>The notes support the substrate claim with a pattern. Traditions that agree on little else all put generosity near the center. Christianity speaks of grace and <a class="term" href="#g-agape">agape</a> love. Buddhism teaches dāna, giving that loosens the grip of attachment. Islam makes zakat, an annual giving of wealth, one of its Five Pillars, and the word carries the sense of purifying. <span class="src">(Generosity as Substrate; Universality of Generosity)</span></p>
+        <p>Hospitality shows up too. Ancient Greek religion made xenia, care for strangers, a sacred duty, with Zeus as the protector of travelers. Any stranger might be a god in disguise. The Norse poem <em>Hávamál</em> spends long passages on the duties of host and guest. <span class="src">(Universality of Generosity)</span></p>
+        <p>The Bhagavad Gita goes further and ranks kinds of giving (chapter 17). <a class="term" href="#g-sattvic-giving">Sattvic</a> giving is done because it is right, to a worthy person, at the right time, expecting nothing back. <a class="term" href="#g-rajasic-giving">Rajasic</a> giving is done for a return, or grudgingly. <a class="term" href="#g-tamasic-giving">Tamasic</a> giving is careless or contemptuous. In the notes' reading, the highest form is the one that most fully gets past the giver's ego. <span class="src">(Universality of Generosity)</span></p>
+        <p>From the pattern, the notes conclude that generosity is structural, not a local invention. That step is an interpretation. Shared teaching shows that people everywhere have prized giving. Whether everyone is generous underneath is a further claim, and it rests on your own experience as much as on the record.</p>
+
+        <h3>The harder picture</h3>
+        <p>Anthropology adds something less comfortable. In <em>The Gift</em> (1925), Marcel Mauss studied gift exchange across many societies. He found that gifts were never quite free. They carried three obligations: to give, to receive, and to give back. Gifts built alliances and status, and they could be coercive. The <a class="term" href="#g-potlatch">potlatch</a> feasts of the Pacific Northwest, where hosts gained standing by giving wealth away, are a famous case. <span class="src">(Anthropology)</span></p>
+        <p>A review included in the notes calls this the biggest gap in the substrate argument, and suggests owning it. Gifts have always carried social weight, and that weight is how generosity has worked all along. A gala, in this reading, is a modern potlatch. <span class="src">(Anthropology)</span> The practical upshot, as this page reads it: you can work with a donor's wish to be seen without resenting it.</p>
+        <p>Mauss also wrote about the hau, a Māori idea he read as the spirit of the gift. Something of the giver travels with the thing given, and that's why a gift binds people. Lewis Hyde took up the idea in his own book, also called <em>The Gift</em> (1983). For the notes, the lesson is practical. A donor making a real gift enters a relationship, and the fundraiser is the channel it passes through. If the fundraiser is detached from the work, the gift's spirit can't pass through, and a transaction replaces the gift. <span class="src">(The Easy Ask)</span></p>
+
+        <figure>
+          <svg width="684" height="300" viewBox="0 0 460 202" role="img" aria-label="A cycle of three steps: give, receive, give back, connected by arrows. In the center: hau, something of the giver travels with the gift.">
+            <defs>
+              <marker id="mauss-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-arrowhead" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <path class="f-cycle" d="M272,36 Q352,48 342,138" marker-end="url(#mauss-arrow)"/>
+            <path class="f-cycle" d="M294,166 Q230,196 172,166" marker-end="url(#mauss-arrow)"/>
+            <path class="f-cycle" d="M118,140 Q104,50 184,34" marker-end="url(#mauss-arrow)"/>
+            <rect class="f-node" x="190" y="18" width="80" height="30"/>
+            <text class="t-lab t-strong" x="230" y="38" text-anchor="middle">Give</text>
+            <rect class="f-node" x="296" y="144" width="96" height="30"/>
+            <text class="t-lab t-strong" x="344" y="164" text-anchor="middle">Receive</text>
+            <rect class="f-node" x="62" y="144" width="104" height="30"/>
+            <text class="t-lab t-strong" x="114" y="164" text-anchor="middle">Give back</text>
+            <text class="t-lab t-hau" x="230" y="98" text-anchor="middle">hau</text>
+            <text class="t-small" x="230" y="116" text-anchor="middle">something of the giver</text>
+            <text class="t-small" x="230" y="130" text-anchor="middle">travels with the gift</text>
+          </svg>
+          <figcaption>Mauss's three obligations of the gift, with the hau at the center. A simplified sketch of his argument, as the notes summarize it. <span class="src">(Anthropology; The Easy Ask)</span></figcaption>
+        </figure>
+
+        <h3>Try it</h3>
+        <p>Sort these gifts by the Gita's three kinds. The Gita ranks them by what the giving does to the giver.</p>
+        <div data-sort="gita"></div>
+        <p>A caution, and this is the training's reading: the Gita's ranking is for your own giving and your own growth. It makes a poor tool for judging donors. Most real gifts mix motives. The notes say ego is a central motive in many large gifts and should be engaged with care. The fundraiser's work is to make the first kind easier to reach. <span class="src">(Book draft, ch. 3)</span></p>
+
+        <details class="reveal"><summary>Why? Why would the notes welcome Mauss's darker picture?</summary>
+          <div><p>Because it makes the argument honest and more useful. An ED who expects pure altruism will be disillusioned by the ego at every gala, and may start to resent donors. An ED who knows gifts have always carried status can work with it calmly, and still invite the donor toward something larger.</p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"If a donor wants recognition, the gift is less real." The notes disagree. Status has always traveled with gifts, and ego drives many large ones. What matters is whether the giving also moves the giver toward something beyond themselves. <span class="src">(Anthropology; Book draft, ch. 3)</span></p>
+
+        <p class="box"><strong class="label">Practice this week</strong>Recall the most generous thing anyone has done for you. Notice what of that person came with it. That's the hau. Your donors are hoping to pass something like it through you.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m3"></div>
+      </section>
+
+      <!-- ============ PART 4 ============ -->
+      <section class="view module" id="m4" data-title="4. Overflow, not obligation">
+        <h2>4. Overflow, not obligation</h2>
+        <p class="objective">In this part: compare giving from abundance with giving from guilt, and see why a gift's size is only one way to measure it.</p>
+
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-eudaimonia">Eudaimonia</a>: a Greek word for a flourishing life in which nothing is lacking.</p>
+
+        <p>Why do people give? The notes answer that generosity is a natural overflow. A person who feels they have enough wants that surplus to mean something. Giving from that place feels like expression. Giving from guilt feels like a tax. <span class="src">(Abundance vs Obligation)</span></p>
+        <p>The Greek idea of eudaimonia helps here. It is usually translated as happiness, but the notes use it for something fuller: a fullness of being in which nothing is lacking. Happiness, in this sense, is a way of being, more than a prize collected after an achievement. From that place, the notes say, generosity is expression more than sacrifice. <span class="src">(Abundance vs Obligation; Happiness as Wholeness)</span></p>
+        <p>That's why the notes push against guilt. Their advice is direct: stop guilt-tripping donors and help them feel abundant. Generosity follows. <span class="src">(Philosophy Calls: Philosophy of Giving)</span></p>
+        <p>A second idea sharpens this. Whatever is useful is useful for the sake of something else. A hammer serves the nail, the nail serves the house, and the house serves shelter. Somewhere the chain has to end in something valued for itself. <span class="src">(The Usefulness Problem)</span> The notes cite the Brazilian Indigenous writer Ailton Krenak, who put it bluntly in a book title: <em>Life Is Not Useful</em>. <span class="src">(Philosophy Calls: Philosophy of Giving)</span> The argument is old. Aristotle opens his <em>Nicomachean Ethics</em> with a version of it; that link is added here, not drawn from the notes.</p>
+        <p>The donor who only asks "what's my ROI?" is stuck in that chain. The notes don't dismiss the question. Answer it well. Then help the donor notice that what they cherish most was never valuable for what it produced. Fulfillment should come through the act of giving, not later as a reward delivered by an impact report. A relationship held together only by reports lasts as long as the reports keep pleasing. <span class="src">(The Usefulness Problem)</span></p>
+        <p>The same trap catches fundraisers. When impact becomes an idol, every coffee becomes a moral calculation. The guilt never ends, because there is always a better way to spend the dollar. The notes credit effective altruism with real gains, like moving money to neglected causes. They also see this trap in it at full strength. Their answer is short: you're worthy now, and so is the donor. <span class="src">(The Achievement Trap; Fundraising Meta-Philosophy)</span></p>
+        <p>Then there's the widow. In the Gospels of Mark and Luke, Jesus watches rich people put large sums into the temple treasury. A poor widow puts in two small coins, all she had to live on. He says she gave more than all of them. Her gift did little for the temple budget. It did a great deal as an act of trust. <span class="src">(Fundraising Meta-Philosophy)</span></p>
+
+        <h3>Try it: two givers</h3>
+        <p>Set what each giver has and what share they give. Compare the two ways of measuring a gift.</p>
+        <div class="giv-grid">
+          <fieldset>
+            <legend>Giver A</legend>
+            <p class="giv-row"><label for="ga-has">Has</label> <select id="ga-has"></select></p>
+            <p class="giv-row"><label for="ga-share">Gives</label> <input type="range" id="ga-share" min="0" max="9" step="1"> <output id="ga-out" for="ga-share"></output></p>
+          </fieldset>
+          <fieldset>
+            <legend>Giver B</legend>
+            <p class="giv-row"><label for="gb-has">Has</label> <select id="gb-has"></select></p>
+            <p class="giv-row"><label for="gb-share">Gives</label> <input type="range" id="gb-share" min="0" max="9" step="1"> <output id="gb-out" for="gb-share"></output></p>
+          </fieldset>
+        </div>
+        <figure>
+          <svg id="giv-svg" width="684" height="306" viewBox="0 0 460 206" role="img" aria-label="Two circles, one per giver. Circle size shows the gift in dollars. A bar under each shows the share of what the giver has.">
+            <text class="t-lab t-strong" x="115" y="16" text-anchor="middle">Giver A</text>
+            <text class="t-lab t-strong" x="345" y="16" text-anchor="middle">Giver B</text>
+            <circle id="ga-circle" class="g-circle" cx="115" cy="98" r="20"/>
+            <circle id="gb-circle" class="g-circle" cx="345" cy="98" r="20"/>
+            <text id="ga-amt" class="t-lab" x="115" y="103" text-anchor="middle"></text>
+            <text id="gb-amt" class="t-lab" x="345" y="103" text-anchor="middle"></text>
+            <rect class="g-bar-bg" x="35" y="174" width="160" height="12"/>
+            <rect id="ga-bar" class="g-bar" x="35" y="174" width="0" height="12"/>
+            <rect class="g-bar-bg" x="265" y="174" width="160" height="12"/>
+            <rect id="gb-bar" class="g-bar" x="265" y="174" width="0" height="12"/>
+            <text id="ga-pct" class="t-small" x="115" y="202" text-anchor="middle"></text>
+            <text id="gb-pct" class="t-small" x="345" y="202" text-anchor="middle"></text>
+          </svg>
+          <figcaption>Circle size shows the gift in dollars, on a log scale so both fit. The bar shows the gift as a share of everything the giver has.</figcaption>
+        </figure>
+        <p class="result" id="giv-result" aria-live="polite"></p>
+        <p>The notes take a side. A $300 gift from someone with $1,000 is the extraordinary act of generosity. A $20 million gift from someone who didn't notice it leave is transactional by comparison. A good fundraiser measures the honor of having unlocked generosity, not the dollar figure. The philosophy notes add an image: a small circle is as complete as a large one. <span class="src">(Unlocking Generosity; Philosophy Calls: Philosophy of Giving)</span></p>
+        <p>This is a claim about how to regard givers. It doesn't make the large gift unwelcome; your budget still needs it. It means the small donor is never "less than."</p>
+
+        <details class="reveal"><summary>Why? Why would a fundraiser want a gift to cost the giver something?</summary>
+          <div><p>Because the cost is where giving changes the giver. A gift nobody noticed leaving changed nothing in the person. The notes suggest you give money you can't quite afford yourself, enough to hold your breath before pressing send. You learn from the inside what a stretch gift feels like, and you stop protecting donors from the discomfort of generosity. <span class="src">(Giving Away Money)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"Talking about meaning means ignoring impact." The notes say answer the impact question, and answer it well. Their objection is to making impact the only measure, which leaves the donor with nothing valued for its own sake. <span class="src">(The Usefulness Problem; The Achievement Trap)</span></p>
+
+        <p class="box"><strong class="label">Practice this week</strong>Call one small, long-time donor with no ask. The notes' version: "You've been a five-dollar donor for so long. Can you call me? This is my cell phone number. I just want to say thank you." <span class="src">(Book draft, ch. 7)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m4"></div>
+      </section>
+
+      <!-- ============ PART 5 ============ -->
+      <section class="view module" id="m5" data-title="5. Your money story">
+        <h2>5. Your money story</h2>
+        <p class="objective">In this part: name the story about money you carry, and see how it shows up when you ask.</p>
+
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-money-story">Money story</a>: the beliefs and feelings about money you formed early in life, usually unexamined, that shape how you ask and give.</p>
+
+        <p>Much of what blocks a gift sits on the fundraiser's side of the table. The notes put it as a working rule: assume the money is infinite, and treat the constraints as psychological, yours and the donor's. It's a stance to work from, not a measurement. <span class="src">(Fundraising Meta-Philosophy)</span></p>
+        <p>Start with the competition. Many EDs picture a fixed pot of philanthropy with every other nonprofit fighting over it. The notes see a different rival. The money you're asking for is mostly sitting in an index fund, or headed for a second home or an eighth vacation. Your real competitor is inertia, the default of doing nothing. A dollar that moves from passive wealth into giving usually wasn't headed to another charity. <span class="src">(What Fundraising Is and Isn't; Fundraising Meta-Philosophy)</span></p>
+        <p>Wealthy people often don't know how rich they are, either. The notes tell of a billionaire who held up two dresses in a store and realized, for the first time, that she could buy both. Wealth grows faster than identity adjusts. Part of your job is to show someone a use of their resources worthy of who they want to be. <span class="src">(Fundraising Meta-Philosophy)</span></p>
+        <p>So why does asking still feel hard? Because every fundraiser carries a money story. The notes call these stories the operating system that runs under every ask. <span class="src">(Your Money Story)</span></p>
+        <p>The stories vary. Someone who grew up with too little may flinch at a million-dollar number, because it feels unreal. Someone who grew up comfortable may treat a gift as unremarkable, because money felt easy. Someone taught that asking is rude may feel their throat close at the moment of the ask, whatever their training. The notes observe that the United States is a culture of giving but not a culture of asking. Don't ask for seconds. Don't ask for help. <span class="src">(Your Money Story)</span></p>
+        <p>None of this resolves quickly. The notes call it a lifelong project that deepens instead of ending. But a fundraiser who hasn't started it is driving with the parking brake on. <span class="src">(Your Money Story)</span></p>
+
+        <h3>Try it: which story are you carrying?</h3>
+        <p>Check any line that sounds like you. Nothing here is saved or sent anywhere.</p>
+        <fieldset id="ms-panel">
+          <legend>Lines that sound like me</legend>
+          <div class="pick" id="ms-list"></div>
+        </fieldset>
+        <p class="result" id="ms-result" aria-live="polite"></p>
+        <div id="ms-detail"></div>
+
+        <details class="reveal"><summary>Why? Why would your childhood matter to a donor?</summary>
+          <div><p>Because the donor reads your inner condition before your words. The notes borrow from the acting teacher Sanford Meisner, who taught that an audience can always tell when a feeling is manufactured. A donor can tell when confidence is covering a flinch. <span class="src">(The Easy Ask)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"My friends will resent me if I ask." The notes list this among the common myths. Your friends know your values, and many are looking for a way to be part of something meaningful. <span class="src">(Myths About Asking)</span></p>
+
+        <p class="box"><strong class="label">Practice this week</strong>Get low-stakes reps. Ask for a discount at a place you go often. Tell a stranger what you do for a living. The notes call it training for a marathon you just learned to run, so be kind to yourself. <span class="src">(Book draft, ch. 10)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m5"></div>
+      </section>
+
+      <!-- ============ PART 6 ============ -->
+      <section class="view module" id="m6" data-title="6. Ask from love">
+        <h2>6. Ask from love</h2>
+        <p class="objective">In this part: learn what it means to ask from love, and diagnose why a particular ask feels hard.</p>
+
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-wonder">Wonder</a>: staying open inside a question without steering toward an answer.</p>
+
+        <p>The notes give one instruction before any technique: ask from love. Before a meeting, take thirty seconds. Find something true about the person that moves you. Maybe they showed up. Maybe they're carrying something hard, or trying to do something meaningful with their life. Let yourself feel warmth for them. Then open the conversation. <span class="src">(Ask From Love)</span></p>
+        <p>This sounds soft. The notes argue it's practical. When you're on someone's wavelength, you see what you would otherwise miss. You hear what they're saying instead of what you were waiting to hear. You can tell a real no from a "not yet." You know what someone needs from you because you've stopped thinking about what you need from them. <span class="src">(Ask From Love)</span></p>
+        <p>The Catholic priest and writer Henri Nouwen gave this a spiritual footing in <em>A Spirituality of Fundraising</em>. As the notes summarize him, fundraising is announcing a vision that has gripped you and inviting another person to take part in it. Asked that way, the ask is a gift to the donor. Asked from fear or need, it turns into a transaction, and the donor feels it. Don't ask begrudgingly or apologetically. <span class="src">(The Easy Ask)</span></p>
+        <p>The notes add a distinction from the coach Joe Hudson: wonder versus curiosity. Curiosity wants to close the loop. It has an answer in mind and narrows toward it. Wonder keeps the loop open, the way a child looks at a turtle for the first time. Hudson warns that wonder bent even slightly toward strategy becomes creepy. The fix is to hold your agenda loosely. You're a fundraiser and you have an agenda; pretending otherwise is dishonest. <span class="src">(Wonder vs Curiosity)</span></p>
+        <p>The notes offer a quick test. When you ask a question, do you already have a rough sense of the answer you hope to hear? Then you're in curiosity. If you have no idea, and that feels exciting, you're in wonder. <span class="src">(Wonder vs Curiosity)</span></p>
+        <p>Love has a hard edge too. If you wouldn't put your own money into the work, in an amount that would cost you something, the notes say you have no business asking anyone else. Their test: if a close friend asked you, off the clock, whether to give to your organization, what would you say? <span class="src">(The Easy Ask)</span></p>
+
+        <figure>
+          <svg width="684" height="270" viewBox="0 0 460 182" role="img" aria-label="Two diagrams. Curiosity: lines narrow from a wide question to one point, the answer you wanted. Wonder: lines open from one question to a wide edge, more of the person.">
+            <text class="t-lab t-strong" x="115" y="18" text-anchor="middle">Curiosity</text>
+            <text class="t-lab t-strong" x="345" y="18" text-anchor="middle">Wonder</text>
+            <line class="f-cur" x1="30" y1="44" x2="200" y2="44"/>
+            <line class="f-cur" x1="30" y1="44" x2="115" y2="132"/>
+            <line class="f-cur" x1="200" y1="44" x2="115" y2="132"/>
+            <circle class="f-cur-dot" cx="115" cy="132" r="5"/>
+            <text class="t-small" x="115" y="38" text-anchor="middle">your question</text>
+            <text class="t-small" x="115" y="154" text-anchor="middle">the answer you</text>
+            <text class="t-small" x="115" y="168" text-anchor="middle">already wanted</text>
+            <circle class="f-won-dot" cx="345" cy="44" r="5"/>
+            <line class="f-won" x1="345" y1="44" x2="260" y2="132"/>
+            <line class="f-won" x1="345" y1="44" x2="430" y2="132"/>
+            <line class="f-won" x1="260" y1="132" x2="430" y2="132"/>
+            <line class="f-won-thin" x1="345" y1="44" x2="302" y2="132"/>
+            <line class="f-won-thin" x1="345" y1="44" x2="388" y2="132"/>
+            <text class="t-small" x="380" y="48" text-anchor="start">your question</text>
+            <text class="t-small" x="345" y="154" text-anchor="middle">more of the person</text>
+            <text class="t-small" x="345" y="168" text-anchor="middle">than you expected</text>
+          </svg>
+          <figcaption>Same words, different inner condition. Curiosity narrows toward an answer it already has. Wonder opens toward whatever the person brings. <span class="src">(Wonder vs Curiosity)</span></figcaption>
+        </figure>
+
+        <h3>Try it: why does this ask feel hard?</h3>
+        <p>Think of one specific ask you've been putting off. Answer four questions about it.</p>
+        <fieldset id="pri-panel">
+          <legend>One hard ask, four questions</legend>
+          <div id="pri-qs"></div>
+        </fieldset>
+        <p class="result" id="pri-result" aria-live="polite"></p>
+        <div id="pri-detail"></div>
+        <p>These four come from the notes, which add a sharp line: when an ask is hard, the work is almost never to get better at asking. It's to find the missing piece upstream. <span class="src">(The Easy Ask)</span></p>
+
+        <details class="reveal"><summary>Why? Three of the four are about the donor. Why is "you love the work" on the list?</summary>
+          <div><p>Because it's the one fundraisers most often skip, since it points at them. A fundraiser without it cultivates poorly, reports dishonestly, and avoids the ask until the moment is wrong. It looks like a technique problem and gets treated as one. No script fixes it. <span class="src">(The Easy Ask)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"If the ask should feel easy, I'll wait until it does." The notes call this a permission slip for never asking. The discipline is to ask anyway, while working on whichever piece is missing. The easy ask is a direction you travel in. <span class="src">(The Easy Ask)</span></p>
+
+        <p class="box"><strong class="label">Practice this week</strong>Before each donor conversation, take the thirty seconds. Find one true thing about the person that moves you. Notice whether your questions change.</p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m6"></div>
+      </section>
+
+      <!-- ============ PART 7 ============ -->
+      <section class="view module" id="m7" data-title="7. Release the outcome">
+        <h2>7. Release the outcome</h2>
+        <p class="objective">In this part: separate what you control from what you don't, and practice wanting a gift without needing it.</p>
+
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-detachment">Detachment</a>: doing the work fully while letting go of the result. <a class="term" href="#g-neediness">Neediness</a>: acting as if you need the other person's yes.</p>
+
+        <p>You prepare. You show up fully. You make the ask. Then you release the result. The notes call this the practice of detachment. <span class="src">(The Practice of Detachment)</span></p>
+        <p>Nearly every contemplative tradition teaches a version of it. The Bhagavad Gita says you have a right to your work, but not to its fruits (chapter 2). The Christian mystic prays and leaves the rest to God. The fundraiser's version: prepare, listen, ask, release. Your worth isn't set by whether the number moved this quarter. <span class="src">(The Practice of Detachment)</span></p>
+        <p>This is hard because institutions run on outcomes: goals, deadlines, thermometers, dashboards. The notes call the pull the grasping pattern. You notice it when you email someone because they're a peg toward your goal, not because it's right. Naming it is the practice. <span class="src">(Book draft, ch. 11)</span></p>
+        <p>Detachment has a tactical side. Drawing on Oren Klaff's book <em>Pitch Anything</em>, the notes call neediness the most destructive force in a donor meeting. When a donor glances at the clock, the needy fundraiser talks faster, adds data, laughs too hard, and asks "Does that make sense?" Each move says: I need you more than you need me. <span class="src">(Eradicating Neediness)</span></p>
+        <p>The notes' first rule is to want nothing. Before you walk in, decide that you want this gift, that the work deserves it, and that you don't need it. The organization will survive without it. So will you. Asking from love and asking without need turn out to be the same move. <span class="src">(Eradicating Neediness)</span></p>
+        <p>A no is information. It is rarely about you. "I don't give to buildings" and "I'm going through a divorce" are different situations behind the same word. Many early nos mean "not yet." Panas tells of a donor who cut a hospital from his will, was courted with birthday cards for three years, and left it $3 million. The notes also set a limit: after four clear, literal asks and four nos, move on. Their suggested reply to a no is wonder: "That's helpful to know. What kinds of things are feeling meaningful to you right now?" <span class="src">(Rejection as Information)</span></p>
+        <p>Holding both sides is the skill. The notes call it total commitment to the work and total surrender of the outcome. <span class="src">(The Practice of Detachment)</span></p>
+
+        <h3>Try it</h3>
+        <p>Sort each item: is it yours to hold, or yours to release?</p>
+        <div data-sort="control"></div>
+        <p>Everything you hold gets your full effort. Everything else gets released. Notice that the ask itself is yours to hold. Only the answer is released.</p>
+
+        <details class="reveal"><summary>Why? Why would offering to leave make a drifting donor lean back in?</summary>
+          <div><p>The notes' rule is to say something like "I can see this might not be the right time. Why don't we pick this up another day?" The note gives two reasons. The offer triggers loss aversion: what was available is about to go away. And it shows you respect your own time and theirs. <span class="src">(Eradicating Neediness)</span> This page's reading: rule one comes first for a reason. The offer only reads as respect if you really don't need the meeting.</p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"Detachment means caring less." The notes mean caring fully about the person and the work while letting go of the result. Commitment and surrender are held together. <span class="src">(The Practice of Detachment)</span></p>
+
+        <p class="box"><strong class="label">Practice this week</strong>Before your next ask, say to yourself: I want this, the work deserves it, and I don't need it. Afterward, send a handwritten note thanking the donor for the conversation, whatever they said. <span class="src">(Eradicating Neediness; Book draft, ch. 7)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m7"></div>
+      </section>
+
+      <!-- ============ PART 8 ============ -->
+      <section class="view module" id="m8" data-title="8. The path that forms you">
+        <h2>8. The path that forms you</h2>
+        <p class="objective">In this part: see why the training treats fundraising as a practice that changes the person doing it, and how to test whether that idea is helping you.</p>
+
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-formation">Formation</a>: change in the person doing the work. <a class="term" href="#g-optimization">Optimization</a>: better performance from the same person.</p>
+
+        <p>The notes make two spiritual claims and keep them apart. The first is about the donor: giving is itself a path. Real giving loosens attachment and connects a person to something larger. It brings a kind of joy that buying things doesn't. The donor who gives once has made a transaction. The donor who keeps giving, and wrestles with it, is on a path, and the fundraiser's job is to support it. <span class="src">(Fundraising as Spiritual Path)</span></p>
+        <p>The second claim is about you. Done seriously, the work keeps you in contact with the parts of yourself that most need attention. You must ask for money, which surfaces your stories about worth. You must take rejection without collapsing or hardening; the traditions call that equanimity. You must set your ego aside for someone else's experience. You must sit with wealthy people whose views you may dislike, and still see them clearly. And you must handle money, one of the most charged things in human life. <span class="src">(Fundraising as Spiritual Path)</span></p>
+        <p>That's why the notes separate formation from optimization. Optimization improves performance and leaves the person the same: a better script, a faster workflow. Formation changes the person. A year of daily practice paying real attention produces someone new, and that capacity reorganizes everything else. The notes' summary: train the instrument, not the technique. You are the instrument. <span class="src">(The Instrument; Formation)</span></p>
+        <p>Formation alone isn't enough. The notes warn that formation without steady activity produces beautiful, broke fundraisers, who understand donors deeply and don't talk to enough of them. Activity without formation produces burned-out grinders who hit their numbers and hate their lives. The love is the reason the activity matters, and the activity is how the love reaches anyone. <span class="src">(Formation and Activity)</span></p>
+
+        <figure>
+          <svg width="684" height="300" viewBox="0 0 460 202" role="img" aria-label="Four stacked layers. From bottom to top: foundation, formation, who you are; structure, the seven steps, what you do; execution, daily minimums, how you do it; resilience, toughness, how you last.">
+            <rect class="f-layer" x="40" y="12" width="380" height="40"/>
+            <text class="t-lab" x="56" y="37">Resilience</text>
+            <text class="t-small" x="404" y="37" text-anchor="end">how you last</text>
+            <rect class="f-layer" x="40" y="58" width="380" height="40"/>
+            <text class="t-lab" x="56" y="83">Execution: daily minimums</text>
+            <text class="t-small" x="404" y="83" text-anchor="end">how</text>
+            <rect class="f-layer" x="40" y="104" width="380" height="40"/>
+            <text class="t-lab" x="56" y="129">Structure: the seven steps</text>
+            <text class="t-small" x="404" y="129" text-anchor="end">what</text>
+            <rect class="f-layer f-layer-base" x="40" y="150" width="380" height="40"/>
+            <text class="t-lab t-strong" x="56" y="175">Foundation: formation</text>
+            <text class="t-small" x="404" y="175" text-anchor="end">who you are</text>
+          </svg>
+          <figcaption>The notes' four layers, simplified. Formation sits underneath; structure, daily execution and resilience are built on it. <span class="src">(Formation and Activity)</span></figcaption>
+        </figure>
+
+        <h3>Try it</h3>
+        <p>Sort these improvements. Which ones make you perform better, and which ones change you?</p>
+        <div data-sort="formation"></div>
+        <p>Both boxes matter. The training's point is that formation sets the ceiling on what optimization can do.</p>
+
+        <h3>Where this argument is weakest</h3>
+        <p>The notes are candid about the risk in all this. Fundraising asks wealthy people for money. The power dynamics are real, and spiritual language can make extraction feel noble without changing it. Their test is about behavior. If the spiritual frame makes you a better listener, more honest with donors, more willing to sit with discomfort, and less attached to outcomes, it's doing its job. If it makes you feel elevated while you act from the same anxiety, it's decoration. <span class="src">(Fundraising as Spiritual Path)</span></p>
+        <p>The philosopher Byung-Chul Han names a related trap: people who exploit themselves while believing they are realizing themselves. The notes turn his warning on their own methods and ask: is this a ritual, or the performance of having a ritual? <span class="src">(Book draft, ch. 11)</span></p>
+        <p>The notes describe the result Noah hopes his coaching has in one sentence. Students don't say "he helped us raise money." They say "he changed how I think about asking." The money follows. <span class="src">(Book draft, ch. 10)</span></p>
+
+        <details class="reveal"><summary>Why? Why would fundraising change a person more than many other jobs?</summary>
+          <div><p>Because the work keeps touching worth, rejection, ego and money, the places most people avoid. The notes suggest asking anyone with five years in fundraising whether the job changed them personally, and they expect a yes. That's an observation from practice, not a study. You can test it on colleagues. <span class="src">(Fundraising as Spiritual Path)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"The spiritual frame makes the hard parts meaningful, so I don't need to change how I do them." The behavioral test exists for exactly this. The frame earns its place only if your behavior changes. <span class="src">(Fundraising as Spiritual Path)</span></p>
+
+        <p class="box"><strong class="label">Practice this week</strong>Write down why you started this work. The real reason, not the career one. Read it before your next ask. <span class="src">(Fundraising as Spiritual Path)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m8"></div>
+      </section>
+
+      <!-- ============ REVIEW ============ -->
+      <section class="view" id="review" data-title="Review cards">
+        <h2>Review cards</h2>
+        <p>Cards you get right come back after longer and longer gaps: tomorrow, then in three days, then a week. Cards you miss come back right away. Spacing review out like this beats rereading.</p>
+        <div class="deck" id="deck"></div>
+      </section>
+
+      <!-- ============ FINAL CHECK ============ -->
+      <section class="view" id="final" data-title="Final check">
+        <h2>Final check</h2>
+        <p>These questions mix all the parts together. The last one has no right answer; it's for you.</p>
+        <div class="quiz" data-quiz="final"></div>
+        <div class="quiz-summary" data-for="final"></div>
+      </section>
+
+      <!-- ============ GLOSSARY ============ -->
+      <section class="view" id="glossary" data-title="Glossary">
+        <h2>Glossary</h2>
+        <p class="meta"><a href="#" onclick="history.back(); return false;">&#9668; Back to where you were</a></p>
+        <dl class="glossary" id="glossary-list"></dl>
+      </section>
+
+      <!-- ============ SOURCE ============ -->
+      <section class="view" id="source" data-title="About the source">
+        <h2>About the source</h2>
+        <p>Noah Maier, working notes for <em>The Fundraising Act</em>, a book in progress, including a draft manuscript titled <em>The Practice of Asking: A Philosophy of Fundraising</em> (notes as of October 2026). The notes are a working draft, shared on request.</p>
+        <p>References in parentheses, like <span class="src">(Generosity as Substrate)</span>, name the note each idea comes from. "Book draft, ch. N" points to a chapter of <em>The Practice of Asking</em>.</p>
+        <h3>Outside sources the notes draw on</h3>
+        <ul class="prose">
+          <li>Marcel Mauss, <em>The Gift</em> (1925).</li>
+          <li>Lewis Hyde, <em>The Gift</em> (1983).</li>
+          <li>Henri Nouwen, <em>A Spirituality of Fundraising</em> (2010).</li>
+          <li>The Bhagavad Gita, chapter 2 (verse 47) and chapter 17 (verses 20 to 22).</li>
+          <li>The widow's offering: Mark 12:41&ndash;44 and Luke 21:1&ndash;4.</li>
+          <li>Ailton Krenak, <em>Life Is Not Useful</em> (2020).</li>
+          <li>Jerold Panas, <em>Mega Gifts</em> and <em>Asking</em>; Oren Klaff, <em>Pitch Anything</em> (2011).</li>
+          <li>Joe Hudson's coaching work at Art of Accomplishment; Sanford Meisner's acting method; Byung-Chul Han, <em>The Burnout Society</em> (2010).</li>
+        </ul>
+        <p>Added by this page, not drawn from the notes: Aristotle, <em>Nicomachean Ethics</em>, Book I, for the usefulness chain; and the distinction between quoting the notes and this page's own reading, which is marked where it appears.</p>
+        <h3>What this training simplifies or leaves out</h3>
+        <p>It leaves out the craft: prospecting, qualifying, cultivation plans, events, campaigns and stewardship systems. The notes cover those at length elsewhere. This page keeps to the philosophy underneath them.</p>
+        <p>Several claims here are the notes' arguments, not research findings. That generosity is everyone's natural state, that the money is effectively unlimited, and that fundraising forms the fundraiser are positions to test against your own experience.</p>
+        <p>The notes flag their own weak points, and so does this page. Panas interviewed only successful fundraisers and generous donors, so the traits he found may be results of success instead of causes. His donors were mostly older, white and male. The material is almost entirely American. Later anthropologists dispute Mauss's reading of the hau. The notes call themselves rough and sometimes contradictory. On whether a small gift "matters more" than a large one or is "equally complete," this training gives both versions. On the donor who asks about ROI, one draft says answer it well and another says redirect; this training follows the first. The section on Mauss draws on a reviewer's suggestions included in the notes.</p>
+      </section>
+
+    </main>
+
+    <aside class="course-nav" aria-label="Contents">
+      <details open>
+        <summary>Contents</summary>
+        <div class="progress">
+          <span id="progress-text"></span>
+          <div class="meter" id="progress-bar" role="progressbar" aria-label="Parts done" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill"></div></div>
+        </div>
+        <ol id="contents-list"></ol>
+      </details>
+    </aside>
+  </div>
+
+  <footer>
+    <hr>
+    <address>Part of <a href="../../index.html">Noah's Weblog</a>. A training drawn from Noah Maier's notes for <em>The Fundraising Act</em>.</address>
+  </footer>
+</div>
+
+<script>
+window.COURSE = {
+  slug: "the-practice-of-asking",
+  quizzes: {
+    pre: [
+      { q: "What does this training say a fundraiser mostly does?",
+        options: ["Clears what blocks generosity that's already there",
+                  "Persuades people who otherwise wouldn't give at all",
+                  "Matches donors with the most effective causes",
+                  "Manages the systems that track every gift"],
+        answer: 0,
+        why: ["That's the training's central claim: generosity is the substrate, and the job is clearing the path to it.",
+              "The training argues the opposite: the job is to unlock, and people remember being pushed.",
+              "Effectiveness matters, but the training warns against making it the only measure.",
+              "Systems help, but the notes warn against tools that replace the relationship."],
+        src: "Generosity as Substrate", from: "m2" },
+      { q: "Which is the more extraordinary act of generosity, in this training's view?",
+        options: ["$300 from someone who has $1,000",
+                  "$20 million from someone with $10 billion",
+                  "Whichever gift funds more of the program",
+                  "Whichever gift is given anonymously"],
+        answer: 0,
+        why: ["The notes say the small sacrificial gift is the extraordinary one.",
+              "The notes call a large gift that left unnoticed transactional by comparison.",
+              "Dollar size is one measure. The training asks you to notice a second one: what the gift asked of the giver.",
+              "Anonymity isn't the measure the notes use here."],
+        src: "Unlocking Generosity", from: "m4" },
+      { q: "Your biggest competitor for a major gift is most likely:",
+        options: ["The donor's index fund and inertia",
+                  "A larger nonprofit in your own field",
+                  "The donor's alma mater or church",
+                  "A government program for the same need"],
+        answer: 0,
+        why: ["The notes say you're competing with passive wealth and the default of doing nothing.",
+              "The notes call this a persistent and damaging myth. The pot isn't fixed.",
+              "Other loyalties exist, but the notes point to idle money as the real rival.",
+              "Not the rival the notes name. They point to money sitting idle."],
+        src: "What Fundraising Is and Isn't", from: "m5" },
+      { q: "A donor's attention drifts in the middle of a meeting. What does the training suggest?",
+        options: ["Offer to pick it up another day",
+                  "Speed up and get to your best data",
+                  "Ask whether it all makes sense so far",
+                  "Make the ask now before you lose them"],
+        answer: 0,
+        why: ["The notes' rule: announce your willingness to leave instead of chasing attention.",
+              "Talking faster and adding data are the classic signs of neediness.",
+              "\"Does that make sense?\" is on the notes' list of needy, approval-seeking moves.",
+              "Rushing the ask to a drifting donor is chasing, the opposite of the notes' advice."],
+        src: "Eradicating Neediness", from: "m7" }
+    ],
+
+    m1: [
+      { q: "An ED opens a donor meeting: \"I'm sorry to take your time. I know everyone is asking you for money.\" What does the training say this communicates?",
+        options: ["That the ED sees the ask as an imposition",
+                  "That the ED respects the donor's busy schedule",
+                  "That the ED is being honest about a crowded field",
+                  "That the ED has enough rapport to be casual"],
+        answer: 0,
+        why: ["Right. The notes ban \"sorry to bother you\" because it frames the ask as taking something.",
+              "Respect is good, but an apology isn't respect. It tells the donor the meeting is a burden.",
+              "It may be honest, but it puts the donor in the role of someone being taken from.",
+              "Rapport isn't the issue. The apology sets up the necessary-evil story."],
+        src: "What the Fundraiser Enables" },
+      { q: "Which definition of fundraising does this training use?",
+        options: ["Sustained human attention directed at another person",
+                  "Persuading people to fund whatever cause is most effective",
+                  "The overhead cost that pays for the program work",
+                  "Marketing aimed at the people who have money"],
+        answer: 0,
+        why: ["Right. The notes call it a practice of attention, and say everything else flows from that.",
+              "The notes reject persuasion as the core of the job.",
+              "That's the necessary-evil story the training is trying to replace.",
+              "The notes say fundraising is not marketing with a different name."],
+        src: "What Fundraising Is and Isn't" },
+      { type: "recall",
+        q: "In your own words: how do the necessary-evil story and the necessary-good story differ, and how might each change what an ED does in a meeting?",
+        answer: "<p>The necessary-evil story treats asking as taking something from the donor, so the ED apologizes, rushes, or avoids the ask. The necessary-good story treats the ask as an invitation into something meaningful, so the ED can be direct and warm, and can listen instead of defending. The donor reads the story under the words.</p>",
+        src: "Generosity as Substrate" }
+    ],
+
+    m2: [
+      { q: "A donor sighs: \"I've sat through so many nonprofit presentations this year.\" Which move clears that obstruction?",
+        options: ["Ask what she cares about, then listen without steering",
+                  "Lead with a tight five-minute pitch so you stand out from them",
+                  "Send a short video she can watch on her own time",
+                  "Bring a board member so she hears it from a peer"],
+        answer: 0,
+        why: ["Right. Her obstruction is being presented at instead of heard. Listening removes it.",
+              "A better pitch is still a pitch. She'll file you with the others.",
+              "Convenient, but it removes the one thing she's missing: being heard.",
+              "Panas found donors care more about respect for the person asking than about peer status."],
+        src: "Generosity as Substrate; Book draft, ch. 3" },
+      { q: "According to the training, where does the generosity in a major gift come from?",
+        options: ["It comes from the donor; the fundraiser clears the way",
+                  "It comes from a strong case that answers every objection",
+                  "It comes from tax benefits that peak at the end of the year",
+                  "It comes from the social pressure of the gala room"],
+        answer: 0,
+        why: ["Right. That's what \"substrate\" means here.",
+              "The training says argument doesn't create generosity. You can't math someone into caring.",
+              "The notes report that Panas's donors dismissed taxes as a main motive.",
+              "Status plays a part, as Part 3 shows, but the notes locate the generosity in the person."],
+        src: "Generosity as Substrate" },
+      { q: "A donor has meant to give for two years and still hasn't. Which move fits \"unlock, don't persuade\"?",
+        options: ["Make the ask and say why now is the moment",
+                  "Wait until she raises it, so nothing feels pushed",
+                  "Build a stronger argument for why she should care",
+                  "Tell her the organization is in real trouble"],
+        answer: 0,
+        why: ["Right. For a donor stuck in inertia, the ask itself clears the path. The notes call real urgency a service.",
+              "The notes say your job is not to wait for donors to figure out the timing.",
+              "She already cares. Her obstruction is inertia, and argument doesn't move inertia.",
+              "Desperation repels. Donors don't give to sinking ships."],
+        src: "Urgency" }
+    ],
+
+    m3: [
+      { q: "Mauss found that gifts in the societies he studied carried three obligations. Which list is his?",
+        options: ["To give, to receive, and to give back",
+                  "To ask, to give, and to be thanked",
+                  "To give, to receive, and to keep",
+                  "To give, to be seen, and to be remembered"],
+        answer: 0,
+        why: ["Right. Receiving and returning were obligations too.",
+              "Asking isn't one of Mauss's three. The obligations start with giving.",
+              "Keeping breaks the cycle. Mauss's third obligation is to give back.",
+              "Status mattered to Mauss, but these aren't his three obligations."],
+        src: "Anthropology" },
+      { q: "A donor pledges $1 million on the condition that she gets a board seat. In the Gita's terms, this gift is mostly:",
+        options: ["Rajasic", "Sattvic", "Tamasic"],
+        answer: 0,
+        why: ["Right. It's given for a return.",
+              "Sattvic giving expects nothing back. This one has a price attached.",
+              "Tamasic giving is careless or contemptuous. This gift is calculated, not careless."],
+        src: "Universality of Generosity" },
+      { q: "What does the notes' reading of the hau mean for a fundraiser?",
+        options: ["You're the channel the gift's spirit passes through",
+                  "Donors shouldn't be told who else has given before them",
+                  "Every gift has to be repaid with a gift of equal value",
+                  "A gift belongs entirely to the organization once it arrives"],
+        answer: 0,
+        why: ["Right. If the fundraiser is detached from the work, the gift's spirit can't pass through, and a transaction replaces the gift.",
+              "The hau isn't about confidentiality.",
+              "Mauss described an obligation to give back, but the notes draw a different lesson for fundraisers.",
+              "The hau says the opposite: something of the giver stays with the gift."],
+        src: "The Easy Ask" }
+    ],
+
+    m4: [
+      { q: "A donor asks, \"What's my ROI on this gift?\" What does the training suggest?",
+        options: ["Answer well, then ask what they value for itself",
+                  "Skip the numbers and tell a moving story instead",
+                  "Give your strongest numbers and leave it there",
+                  "Point them to a cause with a higher measured return"],
+        answer: 0,
+        why: ["Right. Take the question seriously, then widen the frame.",
+              "The notes say to answer the impact question, and answer it well. A story can't stand in for a straight answer.",
+              "Numbers alone keep the relationship inside the usefulness chain, where it lasts only as long as the reports please.",
+              "That's the achievement trap: making measured impact the only measure."],
+        src: "The Usefulness Problem" },
+      { q: "Which of these gifts does the training call the more extraordinary act of generosity?",
+        options: ["$300 from someone who has $1,000",
+                  "$20 million from someone who has $10 billion",
+                  "The one that funds more of the program",
+                  "The one given in response to a matching challenge"],
+        answer: 0,
+        why: ["Right. It asked far more of the giver.",
+              "Welcome and needed, but the notes call a gift that left unnoticed transactional by comparison.",
+              "That's the dollar measure. The training points to a second measure.",
+              "Matching challenges don't come into the notes' comparison."],
+        src: "Unlocking Generosity" },
+      { type: "recall",
+        q: "Explain the usefulness chain in your own words. What does it mean for how you report to donors?",
+        answer: "<p>Anything useful is useful for something else, so a chain of \"useful for\" has to end in something valued for itself. If every gift has to justify itself through reported results, the donor never gets to anything valued for its own sake, and the relationship lasts only as long as the reports please. Report results honestly and well, but also give donors experiences that matter in themselves: meeting the people, seeing the work, being thanked for who they are.</p>",
+        src: "The Usefulness Problem" }
+    ],
+
+    m5: [
+      { q: "In this training's view, who is an ED really competing with for a major gift?",
+        options: ["The donor's inertia and passive wealth",
+                  "Other nonprofits working in the same field",
+                  "The donor's current favorite charity",
+                  "Government programs for the same need"],
+        answer: 0,
+        why: ["Right. Money sitting in an index fund or headed for a second home is the real rival.",
+              "The notes call the fixed-pot picture a damaging myth.",
+              "The notes say not to attack a donor's current giving. Connect to what they already care about.",
+              "Not the rival the notes name."],
+        src: "What Fundraising Is and Isn't" },
+      { q: "An ED grew up with very little money. Where does the training predict her money story is most likely to show up?",
+        options: ["She flinches when she says a large number",
+                  "She treats a big gift as unremarkable",
+                  "She asks too often and too early in a relationship",
+                  "She thanks small donors too much"],
+        answer: 0,
+        why: ["Right. To a scarcity story, a million dollars can feel unreal.",
+              "The notes link that to growing up with money, when it felt easy.",
+              "The notes don't connect scarcity with over-asking. If anything, it shrinks asks.",
+              "Not a pattern the notes tie to any money story."],
+        src: "Your Money Story" },
+      { q: "Which person best shows \"a culture of giving but not a culture of asking\"?",
+        options: ["An ED who gives to five charities but freezes asking a friend",
+                  "A donor who gives only when a close friend asks her to",
+                  "A board member who asks others often but gives little himself",
+                  "A town where most people give less than they could afford"],
+        answer: 0,
+        why: ["Right. Giving comes easily; asking runs into a rule learned early. Don't ask for seconds, don't ask for help.",
+              "She responds to asking. The phrase is about people who can't bring themselves to ask.",
+              "He asks easily. The phrase describes the opposite problem.",
+              "That's about how much people give, not about asking."],
+        src: "Your Money Story" }
+    ],
+
+    m6: [
+      { q: "Two EDs ask a donor the same question: \"What drew you to this work?\" What makes one of them wonder and the other curiosity?",
+        options: ["Whether she already has an answer she hopes to hear",
+                  "Whether the ED's tone of voice is warm or neutral",
+                  "Whether the ED asks a follow-up question afterward",
+                  "Whether the question comes before or after small talk"],
+        answer: 0,
+        why: ["Right. It's the inner condition. A warm tone and a follow-up can both serve an agenda.",
+              "Tone can be warm and still steering toward a planned answer. The test is the agenda underneath.",
+              "Curiosity asks follow-ups too, to close the loop it already has in mind.",
+              "Timing doesn't decide it."],
+        src: "Wonder vs Curiosity" },
+      { q: "A donor has funded the program for three years and calls the staff \"the most honest team I know.\" She and the ED have dinner monthly. When a friend asks the ED whether to give, the ED says, \"Well, it depends.\" Which piece is missing?",
+        options: ["The ED's own love for the work",
+                  "The donor's belief in the mission",
+                  "Enough relationship to carry the number",
+                  "The donor's trust in the people"],
+        answer: 0,
+        why: ["Right. The friend test points at the ED. Her hedge says the conviction isn't there.",
+              "Three years of funding the program says she believes in it.",
+              "Monthly dinners are a thick relationship.",
+              "She calls the staff the most honest team she knows."],
+        src: "The Easy Ask" },
+      { q: "In Nouwen's account, as the notes use it, what turns an ask into a transaction?",
+        options: ["Asking out of fear or need",
+                  "Asking for a specific amount",
+                  "Asking within the first year",
+                  "Asking in writing, not in person"],
+        answer: 0,
+        why: ["Right. The donor feels the fear and reads the meeting as transactional.",
+              "The notes treat a specific amount as good practice.",
+              "Nouwen's concern is the asker's inner condition, not timing.",
+              "The channel isn't Nouwen's point here."],
+        src: "The Easy Ask" }
+    ],
+
+    m7: [
+      { q: "Mid-meeting, a donor checks his phone twice and glances at the clock. Which response fits the training?",
+        options: ["\"Maybe this isn't the right time. Pick it up another day?\"",
+                  "Speed up and get to your strongest data before he leaves",
+                  "Ask \"Does that make sense so far?\" to win him back",
+                  "Make the ask right now, before you lose his attention completely"],
+        answer: 0,
+        why: ["Right. Offering to leave shows you don't need the meeting.",
+              "Talking faster and adding data are signs of neediness.",
+              "The notes list this exact question as approval-seeking.",
+              "That's chasing. The notes' rule is to stop chasing attention."],
+        src: "Eradicating Neediness" },
+      { q: "A donor says, \"I don't give to capital campaigns.\" What does the training treat this as?",
+        options: ["Information about what this donor cares about",
+                  "A verdict on the quality of the ED's pitch and skill",
+                  "A final answer: stop asking this donor",
+                  "A tactic to bring the amount down"],
+        answer: 0,
+        why: ["Right. Respond with wonder: what does feel meaningful to them now?",
+              "The notes say rejection is almost never about you.",
+              "Many nos mean \"not yet.\" The notes' limit is four clear asks.",
+              "Possible, but the notes read it first as information about fit."],
+        src: "Rejection as Information" },
+      { type: "recall",
+        q: "Put the \"want nothing\" rule in your own words. Name one ask where you've been needy.",
+        answer: "<p>Want the gift, believe the work deserves it, and decide before you walk in that you don't need it: the organization and you will both survive a no. Neediness shows up as talking faster, over-explaining, laughing too hard, or asking \"does that make sense?\" when a donor seems to drift.</p>",
+        src: "Eradicating Neediness" }
+    ],
+
+    m8: [
+      { q: "What is the notes' test for whether the spiritual framing of fundraising is doing its job?",
+        options: ["Whether it makes you listen better and grasp less",
+                  "Whether donors respond well to spiritual language",
+                  "Whether it helps the work feel more meaningful",
+                  "Whether it fits a particular religious tradition"],
+        answer: 0,
+        why: ["Right. The test is behavioral: listening, honesty, sitting with discomfort, less attachment.",
+              "The framing is for you, not a pitch to donors.",
+              "Feeling elevated without changing behavior is what the notes call decoration.",
+              "The notes draw on many traditions and require none."],
+        src: "Fundraising as Spiritual Path" },
+      { q: "An ED has deep empathy for donors but talks with only four of them a month. What does the training predict?",
+        options: ["She'll understand donors well and raise too little",
+                  "Her depth of attention will make up for the low volume",
+                  "She'll burn out from too much donor contact",
+                  "She should trade empathy for a sales system"],
+        answer: 0,
+        why: ["Right. Formation without activity: beautiful, broke fundraisers.",
+              "The notes say the combination is the thing. Depth doesn't replace volume.",
+              "Burnout is the notes' warning for activity without formation.",
+              "The notes want both, not a trade."],
+        src: "Formation and Activity" },
+      { type: "recall",
+        q: "Which demand of the work is hardest for you right now: asking, rejection, setting ego aside, difficult donors, or money? What would formation look like there?",
+        answer: "<p>There's no single right answer. A good answer names one demand honestly and describes a change in you, not in your tools. For example: \"Rejection. Formation would mean hearing a no as information, writing a thank-you note anyway, and calling the next donor the same day.\"</p>",
+        src: "Fundraising as Spiritual Path" }
+    ],
+
+    final: [
+      { q: "Which description of the fundraiser fits this training best?",
+        options: ["A midwife for a generosity already on its way",
+                  "A salesperson matching the right products to buyers",
+                  "An advocate who wins donors over by argument",
+                  "A steward of money the board has raised"],
+        answer: 0,
+        why: ["Right. The notes say the profession is closer to midwifery than salesmanship.",
+              "The notes grant the overlap with sales but say the relationship is the product.",
+              "The training rejects persuasion as the core of the job.",
+              "The training puts the ED and staff in the asking role, not only the board."],
+        src: "Generosity as Substrate", from: "m2" },
+      { q: "Why does the training welcome Mauss's finding that gifts carry obligation and status?",
+        options: ["Status has always moved gifts, so EDs can work with it",
+                  "It proves generosity is self-interest wearing a disguise",
+                  "It shows galas should be replaced by private asks",
+                  "It means donors should get recognition equal to the gift"],
+        answer: 0,
+        why: ["Right. Knowing this lets you work with a donor's wish to be seen without resenting it.",
+              "The notes treat status as the mechanism, not proof that generosity is fake.",
+              "The notes compare galas to potlatch to explain them, not to abolish them.",
+              "The notes say recognition should fit the person, not match the amount."],
+        src: "Anthropology", from: "m3" },
+      { q: "A board member says, \"Small donors aren't worth the ED's time.\" Which idea from the training answers this most directly?",
+        options: ["A small gift can be a complete act of generosity",
+                  "Small donors cost more to steward than they give",
+                  "Every dollar counts the same toward the budget",
+                  "Small gifts mainly matter for participation rates"],
+        answer: 0,
+        why: ["Right. The circle image: a small circle is as whole as a large one.",
+              "That argues for the board member's side.",
+              "True in arithmetic, but it misses the training's point about the giver.",
+              "A metrics argument. The training's answer is about the act itself."],
+        src: "Philosophy Calls: Philosophy of Giving; Unlocking Generosity", from: "m4" },
+      { q: "What is the training's working assumption about money?",
+        options: ["The money exists; the limits are psychological",
+                  "Money is scarce, so ask only your very top prospects",
+                  "Money follows a strong strategy document",
+                  "The money is mostly in foundations"],
+        answer: 0,
+        why: ["Right. Yours and the donor's.",
+              "That's the scarcity story the training asks you to examine.",
+              "The notes say strategy should be reduced, not produced.",
+              "Not a claim the notes make."],
+        src: "Fundraising Meta-Philosophy", from: "m5" },
+      { q: "A donor trusts the team and loves the mission, but you've met only once. The ask feels hard. What does the training suggest?",
+        options: ["Stop closing and start showing up",
+                  "Polish the pitch and try again soon",
+                  "Have a board member make the ask",
+                  "Wait for the donor to bring it up"],
+        answer: 0,
+        why: ["Right. The missing piece is the relationship. The notes also say keep asking while you build it.",
+              "The notes say the fix is almost never getting better at asking.",
+              "The notes call deferring the hard thing the \"not me\" reflex.",
+              "The notes warn against waiting for donors to set the timing."],
+        src: "The Easy Ask", from: "m6" },
+      { q: "Which of these is yours to hold, not to release?",
+        options: ["Whether you make a clear ask",
+                  "What the donor's advisor says",
+                  "Whether the donor says yes",
+                  "What the markets do this year"],
+        answer: 0,
+        why: ["Right. The ask is yours. The answer isn't.",
+              "You can inform it, but it isn't yours to decide.",
+              "The donor's decision is theirs.",
+              "The notes list markets as outside your control."],
+        src: "The Practice of Detachment", from: "m7" },
+      { q: "\"I don't want to ruin the relationship by asking.\" What does the training say?",
+        options: ["The donor is often waiting for you to ask",
+                  "Wait until the donor signals they're ready",
+                  "Let a board member ask, so you stay the friend",
+                  "Mention the need lightly and let them offer"],
+        answer: 0,
+        why: ["Right. The notes say holding back the ask withholds intimacy from the relationship.",
+              "The notes say the donor knows why you're talking. Waiting for a signal is holding back.",
+              "That's the \"not me\" reflex.",
+              "Hinting avoids the ask. The notes call a clear ask part of the relationship."],
+        src: "Fundraising Meta-Philosophy", from: "m1" },
+      { q: "According to the notes, what does formation without steady activity produce?",
+        options: ["Beautiful, broke fundraisers",
+                  "Burned-out, grinding salespeople",
+                  "Fundraisers who over-ask donors",
+                  "Organizations with no strategy"],
+        answer: 0,
+        why: ["Right. They understand donors deeply and don't talk to enough of them.",
+              "That's what activity without formation produces.",
+              "Not the notes' prediction.",
+              "Not the notes' prediction."],
+        src: "Formation and Activity", from: "m8" },
+      { q: "What do the notes suggest doing instead of guilt-tripping donors?",
+        options: ["Help them feel abundant; generosity follows",
+                  "Use urgency about the need instead of guilt",
+                  "Lead with data so the case speaks for itself",
+                  "Ask only donors who already feel obligated"],
+        answer: 0,
+        why: ["Right. Generosity is overflow from a sense of having enough.",
+              "Need-based urgency is another form of pressure. The notes reserve \"service\" for real, structural urgency.",
+              "The notes say you can't math someone into caring.",
+              "Obligation is the frame the notes want to move away from."],
+        src: "Philosophy Calls: Philosophy of Giving", from: "m4" },
+      { q: "In the Gita, which kind of giving is done because it is right, expecting nothing back?",
+        options: ["Sattvic", "Rajasic", "Tamasic"],
+        answer: 0,
+        why: ["Right. The Gita ranks it highest.",
+              "Rajasic giving is done for a return, or grudgingly.",
+              "Tamasic giving is careless or contemptuous."],
+        src: "Universality of Generosity", from: "m3" },
+      { type: "recall",
+        q: "What will you do differently in your next ask? Be specific: which donor, which practice from this training.",
+        answer: "<p>A strong answer names a real person and one concrete change. For example: \"With Maria, I'll take thirty seconds beforehand to find what moves me about her, ask without apologizing, and send a handwritten note whatever she says.\"</p>" }
+    ]
+  },
+
+  sorts: {
+    stories: {
+      bins: [ { id: "takes", label: "Asking takes something", hint: "apology, need, or avoidance" },
+              { id: "offers", label: "Asking offers something", hint: "an invitation" } ],
+      items: [
+        { text: "\"Sorry to bother you. I know everyone's asking right now.\"", bin: "takes", why: "An apology frames the ask as an imposition. The notes ban this phrase." },
+        { text: "\"We need $2 million just to keep the doors open.\"", bin: "takes", why: "Desperation. The notes: donors don't give to sinking ships." },
+        { text: "\"I'd love for you to be part of what we build next year.\"", bin: "offers", why: "An invitation into something that's going somewhere." },
+        { text: "\"Development is the price we pay to do the real work.\"", bin: "takes", why: "The necessary-evil story in one line." },
+        { text: "\"Before we talk money, what's been on your mind about this?\"", bin: "offers", why: "Attention first. The ask grows out of what you learn." },
+        { text: "\"I won't ask yet. I don't want to spoil what we've built.\"", bin: "takes", why: "It treats the ask as damage. The notes call that withholding intimacy." },
+        { text: "\"Your gift would let 40 more students finish this spring.\"", bin: "offers", why: "Specific: it shows the donor what taking part would do." },
+        { text: "\"We hate to ask, but every little bit helps.\"", bin: "takes", why: "Apology plus smallness. It asks to be rescued instead of joined." }
+      ]
+    },
+    gita: {
+      bins: [ { id: "sattvic", label: "Sattvic", hint: "right, timely, nothing expected" },
+              { id: "rajasic", label: "Rajasic", hint: "for a return, or grudging" },
+              { id: "tamasic", label: "Tamasic", hint: "careless or contemptuous" } ],
+      items: [
+        { text: "Each winter she quietly covers a neighbor's heating bill and never mentions it.", bin: "sattvic", why: "Right person, right time, given because it's right, with nothing expected back." },
+        { text: "He gives so he'll be invited to the right dinners.", bin: "rajasic", why: "Given for a return. Here the return is social." },
+        { text: "He gives, then complains for a month about being squeezed.", bin: "rajasic", why: "The Gita counts grudging gifts as rajasic." },
+        { text: "She tosses a check on the table: \"Now leave me alone.\"", bin: "tamasic", why: "Given with contempt for the receiver." },
+        { text: "He gives to whoever called last, without asking what it funds.", bin: "tamasic", why: "Careless: no attention to whether the gift fits the need." },
+        { text: "She pledges $1 million in exchange for a board seat.", bin: "rajasic", why: "A gift with a price attached." },
+        { text: "A family gives a teacher what she needs, right when she needs it, with no strings.", bin: "sattvic", why: "Right person, right time, nothing expected." }
+      ]
+    },
+    control: {
+      bins: [ { id: "hold", label: "Yours to hold", hint: "give it everything" },
+              { id: "release", label: "Yours to release", hint: "let it go" } ],
+      items: [
+        { text: "How well you prepare for the meeting", bin: "hold", why: "Fully yours." },
+        { text: "Whether you make a clear, specific ask", bin: "hold", why: "The ask is yours. Its answer isn't." },
+        { text: "How fast you send a thank-you", bin: "hold", why: "The notes push acknowledging a gift within 24 hours." },
+        { text: "Whether you follow up after a no", bin: "hold", why: "Persistence is yours. The notes call it attention." },
+        { text: "What the donor's financial advisor recommends", bin: "release", why: "You can inform it, but it isn't yours to decide." },
+        { text: "The donor's family dynamics", bin: "release", why: "Real and important, and not yours to run." },
+        { text: "Tax law and the markets", bin: "release", why: "The notes list both as outside your control." },
+        { text: "Whether the donor says yes", bin: "release", why: "The donor's inner decision is theirs." }
+      ]
+    },
+    formation: {
+      bins: [ { id: "opt", label: "Optimization", hint: "better performance, same person" },
+              { id: "form", label: "Formation", hint: "changes the person" } ],
+      items: [
+        { text: "A sharper script for the ask", bin: "opt", why: "Useful, and you're the same person delivering it." },
+        { text: "A new pipeline view in the database", bin: "opt", why: "A better tool. It doesn't change who's using it." },
+        { text: "Testing email subject lines for open rates", bin: "opt", why: "Performance tuning." },
+        { text: "A tighter ten-slide pitch deck", bin: "opt", why: "Better material, same presenter." },
+        { text: "Learning to hear a no without collapsing or hardening", bin: "form", why: "The notes call this equanimity. It changes you." },
+        { text: "Thirty seconds of real warmth before every meeting", bin: "form", why: "A practice that changes how you show up, not what you say." },
+        { text: "Feeling your anger at the field fully, so it stops leaking into emails", bin: "form", why: "The notes say the only way past cynicism is through it. That's a change in you, not in your copy." },
+        { text: "A year of daily practice paying attention to people", bin: "form", why: "The notes' central example of formation." }
+      ]
+    }
+  },
+
+  orders: {},
+
+  cards: [
+    { front: "What blocks the path between a person and their generosity? Name three things.", back: "Any three of: fear, confusion, distrust, red tape, the sense a gift won't matter, a transactional feel, feeling misunderstood, being asked badly before, the drag of a busy life.", src: "Generosity as Substrate" },
+    { front: "How does this training define fundraising?", back: "The practice of sustained human attention directed at another person.", src: "What Fundraising Is and Isn't" },
+    { front: "What three obligations did Mauss find in gift exchange?", back: "To give, to receive, and to give back.", src: "Anthropology" },
+    { front: "What is the usefulness problem?", back: "Useful things are useful for something else. If every gift must prove its return, the chain never reaches anything valued for itself.", src: "The Usefulness Problem" },
+    { front: "What does the circle image say about small gifts?", back: "A small circle is as complete as a large one. A small gift given fully is a whole act of generosity.", src: "Philosophy Calls: Philosophy of Giving" },
+    { front: "Who is an ED really competing with for a major gift?", back: "Inertia and passive wealth: the index fund, the second home. Other nonprofits are rarely the real rival.", src: "What Fundraising Is and Isn't" },
+    { front: "What four things have to be true for an ask to feel easy?", back: "The donor believes in the mission, trusts the people, the relationship can carry the number, and you love the work.", src: "The Easy Ask" },
+    { front: "What's the quick test for wonder versus curiosity?", back: "If you already have the answer you hope to hear, it's curiosity. If you don't, and that feels exciting, it's wonder.", src: "Wonder vs Curiosity" },
+    { front: "What is the \"want nothing\" rule?", back: "Want the gift, believe the work deserves it, and decide you don't need it.", src: "Eradicating Neediness" },
+    { front: "What does a donor's no usually mean, according to the training?", back: "Information about fit, and often \"not yet.\" After four clear asks and four nos, move on.", src: "Rejection as Information" },
+    { front: "What do formation without activity, and activity without formation, each produce?", back: "Beautiful, broke fundraisers; and burned-out grinders who hit their numbers and hate their lives.", src: "Formation and Activity" },
+    { front: "What is the behavioral test for calling fundraising a spiritual path?", back: "Whether it makes you listen better, tell donors the truth, sit with discomfort, and grasp less. If not, it's decoration.", src: "Fundraising as Spiritual Path" }
+  ],
+
+  glossary: {
+    "substrate": "The layer underneath that something else rests on or grows from. The training uses it to say generosity is already present in people before anyone asks.",
+    "practice": "Something done again and again for what it builds in you, with no finish line. The training calls fundraising a practice, in contrast to a task you complete.",
+    "eudaimonia": "A Greek word usually translated as happiness or flourishing. For the philosophers the notes draw on, it meant a whole life with nothing lacking, more than a passing good mood.",
+    "agape": "A Greek word Christians use for self-giving love: love that gives without first asking what it will get.",
+    "dāna": "Generosity, or the practice of giving, in Buddhism. It is taught as a way to loosen attachment.",
+    "zakat": "Required annual giving of a share of one's wealth, one of the Five Pillars of Islam. The word is linked to purification and growth.",
+    "xenia": "The ancient Greek duty of hospitality to strangers and guests, protected by Zeus.",
+    "sattvic giving": "In the Bhagavad Gita, giving done because it is right, to a worthy person at the right time, expecting nothing back. The Gita ranks it highest.",
+    "rajasic giving": "In the Bhagavad Gita, giving done for a return or a reward, or given grudgingly.",
+    "tamasic giving": "In the Bhagavad Gita, giving done carelessly, at the wrong time or place, to the wrong person, or with contempt.",
+    "reciprocity": "Giving back for what you received. Marcel Mauss found it was one of three obligations that come with a gift.",
+    "hau": "A Māori word Marcel Mauss used for the spirit of a gift: something of the giver that travels with it. Later anthropologists dispute his reading.",
+    "potlatch": "A ceremonial feast among Indigenous peoples of the Pacific Northwest coast, where hosts gain standing by giving wealth away.",
+    "money story": "The beliefs and feelings about money a person formed early in life, usually unexamined, that shape how they ask and give.",
+    "wonder": "In Joe Hudson's sense, staying open inside a question without steering toward an answer. Curiosity, by contrast, wants to close the question.",
+    "neediness": "Acting as if you need the other person's yes. In a donor meeting it shows up as talking faster, over-explaining and seeking approval.",
+    "detachment": "Doing the work fully while letting go of the result. Caring about the person and the cause without tying your worth to the outcome.",
+    "formation": "Change in the person doing the work. The training's word for what a long practice does to you.",
+    "optimization": "Improving performance while leaving the person the same: a better script, a faster process."
+  },
+  glossaryCards: true
+};
+</script>
+<script>
+/* ===== Noah's Weblog drag and drop v1 =====
+   Real drag and drop for two activities, usable every way people try:
+     WeblogDnD.order(container, { items: [...in the correct order...] })
+     WeblogDnD.sort(container,  { bins: [{id, label, hint}], items: [{text, bin, why}] })
+   Mouse: drag the whole item. Touch: drag by the handle (the rest scrolls).
+   Tap or click: select an item, then tap where it goes.
+   Keyboard: Space picks up, arrow keys move, Space drops.
+   Self-contained: injects its own styles and needs nothing else. */
+(function () {
+  "use strict";
+  if (window.WeblogDnD) return;
+
+  var CSS = [
+    ".dnd-help{font:13px/1.5 Verdana,Geneva,Tahoma,sans-serif;color:var(--ink-soft,#2b2b2b);margin:0 0 8px}",
+    ".dnd-status{font:13px/1.5 Verdana,Geneva,Tahoma,sans-serif;margin:8px 0}",
+    ".dnd-status:empty{display:none}",
+    ".dnd-actions{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}",
+    ".dnd-item,.dnd-card{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1px solid var(--field,#6e6e6e);",
+    "  padding:8px 10px;cursor:grab;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}",
+    ".dnd-item:focus-visible,.dnd-card:focus-visible{outline:2px dotted var(--ink,#000);outline-offset:2px}",
+    ".dnd-handle{flex:none;display:inline-flex;align-items:center;justify-content:center;width:28px;min-height:28px;margin:-4px 0 -4px -4px;",
+    "  font:18px/1 Verdana,Geneva,sans-serif;color:var(--btn-lo,#808080);cursor:grab;touch-action:none}",
+    ".dnd-text{flex:1;min-width:0}",
+    ".dnd-mark{flex:none;font:bold 12px/1.6 Verdana,Geneva,sans-serif;white-space:nowrap}",
+    ".dnd-dragging{opacity:.35;border-style:dashed}",
+    ".dnd-ghost{position:fixed;z-index:2147483646;pointer-events:none;margin:0;opacity:.95;cursor:grabbing;",
+    "  box-shadow:3px 3px 0 var(--btn-lo,#808080)}",
+    ".dnd-grabbed,.dnd-card[aria-pressed=true]{outline:2px dotted var(--ink,#000);outline-offset:2px;background:var(--tint,#f2f2f2)}",
+    ".dnd-ok{border-left:4px solid var(--c6,#008000)}.dnd-ok .dnd-mark{color:var(--c6,#008000)}",
+    ".dnd-no{border-left:4px solid var(--c2,#800000)}.dnd-no .dnd-mark{color:var(--c2,#800000)}",
+    ".dnd-list{list-style:none;margin:0;padding:0;counter-reset:dnd}",
+    ".dnd-list .dnd-item{margin:0 0 6px}",
+    ".dnd-list .dnd-item::before{counter-increment:dnd;content:counter(dnd) \".\";flex:none;min-width:1.6em;font:bold 13px/1.6 Verdana,Geneva,sans-serif}",
+    ".dnd-tray{border:1px dashed var(--lo,#999);padding:10px;margin:0 0 12px;display:grid;gap:8px;min-height:56px}",
+    ".dnd-tray-label{font:bold 13px/1.4 Verdana,Geneva,sans-serif;margin:0}",
+    ".dnd-bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}",
+    ".dnd-bin{border:2px solid var(--lo,#999);background:#fff;padding:8px 10px 10px;min-height:120px;display:flex;flex-direction:column;gap:6px}",
+    ".dnd-bin.dnd-over{border-color:var(--c1,#000080);background:var(--tint,#f2f2f2)}",
+    ".dnd-bin-head{font:bold 14px/1.3 Verdana,Geneva,sans-serif;margin:0}",
+    ".dnd-bin-hint{font:12px/1.4 Verdana,Geneva,sans-serif;color:var(--ink-soft,#2b2b2b);margin:0}",
+    ".dnd-bin-here{align-self:flex-start}",
+    ".dnd-card .dnd-fb{display:block;font:12px/1.45 Verdana,Geneva,sans-serif;margin-top:4px}",
+    ".dnd-card .dnd-fb:empty{display:none}",
+    ".dnd-card .dnd-body{flex:1;min-width:0}",
+    "[hidden]{display:none!important}",
+    "@media (prefers-reduced-motion:reduce){.dnd-ghost{transition:none}}"
+  ].join("\n");
+
+  function injectStyles() {
+    if (document.getElementById("weblog-dnd-css")) return;
+    var s = document.createElement("style");
+    s.id = "weblog-dnd-css";
+    s.textContent = CSS;
+    document.head.appendChild(s);
+  }
+
+  function el(tag, cls, html) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+  function shuffled(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function plain(html) { var d = document.createElement("div"); d.innerHTML = html; return (d.textContent || "").trim(); }
+
+  /* ---------- pointer dragging shared by both activities ---------- */
+  // Calls hooks.start(), hooks.move(x, y), hooks.drop(x, y). Mouse drags from anywhere on the
+  // item; touch and pen drag only from the handle so the rest of the page still scrolls.
+  function draggable(item, handle, hooks) {
+    var st = null;
+    // listen on window while a drag is possible: the item itself moves in the DOM mid-drag,
+    // which would drop element-level pointer capture
+    function onMove(e) {
+      if (!st || e.pointerId !== st.id) return;
+      if (!st.dragging) {
+        if (Math.abs(e.clientX - st.x) + Math.abs(e.clientY - st.y) < (st.touch ? 3 : 6)) return;
+        st.dragging = true;
+        var r = item.getBoundingClientRect();
+        st.dx = st.x - r.left; st.dy = st.y - r.top;
+        st.ghost = item.cloneNode(true);
+        st.ghost.classList.add("dnd-ghost");
+        st.ghost.removeAttribute("id");
+        st.ghost.setAttribute("aria-hidden", "true");
+        st.ghost.style.width = r.width + "px";
+        document.body.appendChild(st.ghost);
+        item.classList.add("dnd-dragging");
+        hooks.start();
+      }
+      e.preventDefault();
+      st.lx = e.clientX; st.ly = e.clientY;
+      st.ghost.style.left = (e.clientX - st.dx) + "px";
+      st.ghost.style.top = (e.clientY - st.dy) + "px";
+      hooks.move(e.clientX, e.clientY);
+      autoScroll(e.clientY);
+    }
+    function onUp(e) { finish(e, false); }
+    function onCancel(e) { finish(e, true); }
+    function finish(e, cancelled) {
+      if (!st || e.pointerId !== st.id) return;
+      var was = st;
+      st = null;
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onCancel);
+      stopScroll();
+      if (!was.dragging) return;
+      was.ghost.remove();
+      item.classList.remove("dnd-dragging");
+      item._dndJustDragged = true;
+      setTimeout(function () { item._dndJustDragged = false; }, 0);
+      hooks.drop(cancelled ? null : was.lx, cancelled ? null : was.ly);
+    }
+    item.addEventListener("pointerdown", function (e) {
+      if (e.button !== 0 || st) return;
+      if (e.target.closest("a, button, input, select, textarea")) return;
+      var onHandle = handle && handle.contains(e.target);
+      if (e.pointerType !== "mouse" && !onHandle) return;
+      st = { id: e.pointerId, x: e.clientX, y: e.clientY, dragging: false, touch: e.pointerType !== "mouse" };
+      if (onHandle || e.pointerType === "mouse") e.preventDefault();   // no text selection or touch scroll
+      window.addEventListener("pointermove", onMove, { passive: false });
+      window.addEventListener("pointerup", onUp);
+      window.addEventListener("pointercancel", onCancel);
+    });
+  }
+
+  var scrollTimer = null, scrollSpeed = 0;
+  function autoScroll(y) {
+    var edge = 60;
+    scrollSpeed = y < edge ? -Math.ceil((edge - y) / 4) : y > innerHeight - edge ? Math.ceil((y - innerHeight + edge) / 4) : 0;
+    if (scrollSpeed && !scrollTimer) {
+      scrollTimer = setInterval(function () { if (scrollSpeed) window.scrollBy(0, scrollSpeed); }, 16);
+    } else if (!scrollSpeed) stopScroll();
+  }
+  function stopScroll() { clearInterval(scrollTimer); scrollTimer = null; scrollSpeed = 0; }
+
+  /* ---------- put in order ---------- */
+  function order(container, opts) {
+    injectStyles();
+    var items = opts.items || [];
+    container.textContent = "";
+    container.appendChild(el("p", "dnd-help", opts.help ||
+      "Drag the items into order. On a phone, drag by the ≡ handle. " +
+      "Keyboard: Space picks an item up, arrow keys move it, Space drops it."));
+    var list = el("ol", "dnd-list");
+    list.setAttribute("aria-label", opts.label || "Items to put in order");
+    var status = el("p", "dnd-status");
+    status.setAttribute("aria-live", "polite");
+    var check = el("button", "primary", "Check the order"); check.type = "button";
+    var again = el("button", "", "Shuffle and start over"); again.type = "button";
+    var actions = el("div", "dnd-actions"); actions.appendChild(check); actions.appendChild(again);
+    container.appendChild(list); container.appendChild(actions); container.appendChild(status);
+
+    function rows() { return [].slice.call(list.children); }
+    function clearMarks() {
+      rows().forEach(function (li) { li.classList.remove("dnd-ok", "dnd-no"); li.querySelector(".dnd-mark").textContent = ""; });
+      if (status.getAttribute("data-kind") === "result") { status.textContent = ""; status.removeAttribute("data-kind"); }
+    }
+    function say(msg) { status.removeAttribute("data-kind"); status.textContent = msg; }
+    function position(li) { return rows().indexOf(li) + 1; }
+
+    function build() {
+      list.textContent = "";
+      var idx = items.map(function (_, i) { return i; });
+      var mixed = shuffled(idx);
+      for (var tries = 0; items.length > 1 && tries < 20 && mixed.every(function (v, i) { return v === i; }); tries++) mixed = shuffled(idx);
+      mixed.forEach(function (i) {
+        var li = el("li", "dnd-item");
+        li.tabIndex = 0;
+        li.setAttribute("data-i", i);
+        var handle = el("span", "dnd-handle", "≡"); handle.setAttribute("aria-hidden", "true");
+        li.appendChild(handle);
+        li.appendChild(el("span", "dnd-text", items[i]));
+        li.appendChild(el("span", "dnd-mark"));
+        draggable(li, handle, {
+          start: clearMarks,
+          move: function (x, y) {
+            var before = null;
+            rows().some(function (other) {
+              if (other === li) return false;
+              var r = other.getBoundingClientRect();
+              if (y < r.top + r.height / 2) { before = other; return true; }
+              return false;
+            });
+            if (before !== li.nextSibling) list.insertBefore(li, before);
+          },
+          drop: function () { say("Moved to position " + position(li) + "."); li.focus({ preventScroll: true }); }
+        });
+        li.addEventListener("keydown", function (e) {
+          var grabbed = li.classList.contains("dnd-grabbed");
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            li.classList.toggle("dnd-grabbed");
+            clearMarks();
+            say(grabbed ? "Dropped at position " + position(li) + "." :
+              "Picked up. Position " + position(li) + " of " + items.length + ". Arrow keys move it; Space drops it.");
+          } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+            e.preventDefault();
+            var sib = e.key === "ArrowUp" ? li.previousElementSibling : li.nextElementSibling;
+            if (!sib) return;
+            if (grabbed) {
+              li._dndMoving = true;            // moving a focused element can fire blur; keep it grabbed
+              list.insertBefore(li, e.key === "ArrowUp" ? sib : sib.nextSibling);
+              li.focus({ preventScroll: false });
+              setTimeout(function () { li._dndMoving = false; }, 0);
+              say("Position " + position(li) + " of " + items.length + ".");
+            } else sib.focus();
+          } else if (e.key === "Escape" && grabbed) {
+            li.classList.remove("dnd-grabbed"); say("Dropped at position " + position(li) + ".");
+          }
+        });
+        li.addEventListener("blur", function () { if (!li._dndMoving) li.classList.remove("dnd-grabbed"); });
+        list.appendChild(li);
+      });
+      say("");
+    }
+
+    check.addEventListener("click", function () {
+      var good = 0;
+      rows().forEach(function (li, pos) {
+        var ok = +li.getAttribute("data-i") === pos;
+        if (ok) good++;
+        li.classList.toggle("dnd-ok", ok);
+        li.classList.toggle("dnd-no", !ok);
+        li.querySelector(".dnd-mark").textContent = ok ? "✓" : "✗ belongs at " + (+li.getAttribute("data-i") + 1);
+      });
+      status.setAttribute("data-kind", "result");
+      status.innerHTML = good === items.length
+        ? "<strong>All " + items.length + " in the right order.</strong> " + (opts.explain || "")
+        : "<strong>" + good + " of " + items.length + " in the right place.</strong> Move the marked ones and check again.";
+      if (opts.onCheck) opts.onCheck(good, items.length);
+    });
+    again.addEventListener("click", build);
+    build();
+    return { reset: build };
+  }
+
+  /* ---------- sort into bins ---------- */
+  function sort(container, opts) {
+    injectStyles();
+    var bins = opts.bins || [], items = opts.items || [];
+    var saved = (opts.load && opts.load()) || {};
+    container.textContent = "";
+    container.appendChild(el("p", "dnd-help", opts.help ||
+      "Drag a card into a box. On a phone, drag by the ≡ handle, or tap a card and then its box. " +
+      "Keyboard: Space selects a card, then Tab to “Move here”."));
+    var trayLabel = el("p", "dnd-tray-label");
+    var tray = el("div", "dnd-tray");
+    tray.setAttribute("aria-label", "Cards to sort");
+    var binWrap = el("div", "dnd-bins");
+    var status = el("p", "dnd-status");
+    status.setAttribute("aria-live", "polite");
+    var reset = el("button", "", "Start over"); reset.type = "button";
+    var actions = el("div", "dnd-actions"); actions.appendChild(reset);
+    container.appendChild(trayLabel); container.appendChild(tray); container.appendChild(binWrap);
+    container.appendChild(status); container.appendChild(actions);
+
+    var selected = null, cards = [], binEls = {};
+    bins.forEach(function (b) {
+      var box = el("div", "dnd-bin");
+      box.setAttribute("role", "group");
+      box.setAttribute("aria-label", plain(b.label));
+      box.appendChild(el("p", "dnd-bin-head", b.label));
+      if (b.hint) box.appendChild(el("p", "dnd-bin-hint", b.hint));
+      var here = el("button", "dnd-bin-here", "Move here"); here.type = "button"; here.hidden = true;
+      here.setAttribute("aria-label", "Move the selected card to " + plain(b.label));
+      here.addEventListener("click", function () { if (selected) place(selected, b.id, true); });
+      box.addEventListener("click", function (e) {
+        if (selected && !e.target.closest(".dnd-card") && e.target !== here) place(selected, b.id, true);
+      });
+      box.appendChild(here);
+      binWrap.appendChild(box);
+      binEls[b.id] = { box: box, here: here };
+    });
+
+    function select(card) {
+      if (selected === card) card = null;
+      cards.forEach(function (c) { c.el.setAttribute("aria-pressed", c === card ? "true" : "false"); });
+      selected = card;
+      Object.keys(binEls).forEach(function (id) { binEls[id].here.hidden = !card; });
+      if (card) status.textContent = "Selected: “" + plain(card.text) + "”. Now choose a box.";
+    }
+    function binAt(x, y) {
+      var hit = null;
+      Object.keys(binEls).forEach(function (id) {
+        var r = binEls[id].box.getBoundingClientRect();
+        if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) hit = id;
+      });
+      return hit;
+    }
+    function tally() {
+      var placed = cards.filter(function (c) { return c.bin; });
+      var right = placed.filter(function (c) { return c.bin === c.answer; }).length;
+      trayLabel.textContent = placed.length === cards.length ? "All cards sorted." : "Cards to sort (" + (cards.length - placed.length) + " left)";
+      tray.hidden = placed.length === cards.length;
+      var msg = "Sorted " + placed.length + " of " + cards.length + ". " + right + " in the right box.";
+      if (placed.length === cards.length) msg += right === cards.length ? " All correct." : " Drag the marked cards to the other box to fix them.";
+      status.textContent = msg;
+      if (opts.onChange) opts.onChange(placed.length, right, cards.length);
+    }
+    function place(card, binId, announce) {
+      card.bin = binId;
+      binEls[binId].box.appendChild(card.el);
+      var ok = binId === card.answer;
+      card.el.classList.toggle("dnd-ok", ok);
+      card.el.classList.toggle("dnd-no", !ok);
+      card.mark.textContent = ok ? "✓" : "✗";
+      card.fb.innerHTML = "<strong>" + (ok ? "Right." : "Not quite.") + "</strong> " + (card.why || "");
+      saved[card.key] = binId;
+      if (opts.save) opts.save(saved);
+      select(null);
+      tally();
+      if (announce) status.textContent = (ok ? "Right. " : "Not quite. ") + plain(card.why || "") + " " + status.textContent;
+    }
+    function unplace(card) {
+      card.bin = null;
+      card.el.classList.remove("dnd-ok", "dnd-no");
+      card.mark.textContent = ""; card.fb.textContent = "";
+      tray.appendChild(card.el);
+    }
+
+    shuffled(items.map(function (_, i) { return i; })).forEach(function (i) {
+      var it = items[i];
+      var c = { text: it.text, answer: it.bin, why: it.why, key: "i" + i, bin: null };
+      c.el = el("div", "dnd-card");
+      c.el.tabIndex = 0;
+      c.el.setAttribute("role", "button");
+      c.el.setAttribute("aria-pressed", "false");
+      var handle = el("span", "dnd-handle", "≡"); handle.setAttribute("aria-hidden", "true");
+      var body = el("span", "dnd-body");
+      body.appendChild(el("span", "dnd-text", it.text));
+      c.fb = el("span", "dnd-fb");
+      body.appendChild(c.fb);
+      c.mark = el("span", "dnd-mark");
+      c.el.appendChild(handle); c.el.appendChild(body); c.el.appendChild(c.mark);
+      draggable(c.el, handle, {
+        start: function () { select(null); },
+        move: function (x, y) {
+          var hit = binAt(x, y);
+          Object.keys(binEls).forEach(function (id) { binEls[id].box.classList.toggle("dnd-over", id === hit); });
+        },
+        drop: function (x, y) {
+          Object.keys(binEls).forEach(function (id) { binEls[id].box.classList.remove("dnd-over"); });
+          var hit = x == null ? null : binAt(x, y);
+          if (hit) place(c, hit, true);
+        }
+      });
+      c.el.addEventListener("click", function (e) {
+        if (c.el._dndJustDragged) return;
+        e.stopPropagation();
+        select(c);
+      });
+      c.el.addEventListener("keydown", function (e) {
+        if (e.key === " " || e.key === "Enter") { e.preventDefault(); select(c); }
+        else if (e.key === "Escape") select(null);
+      });
+      cards.push(c);
+      tray.appendChild(c.el);
+      if (saved[c.key] && binEls[saved[c.key]]) place(c, saved[c.key], false);
+    });
+
+    reset.addEventListener("click", function () {
+      saved = {};
+      if (opts.save) opts.save(saved);
+      shuffled(cards).forEach(unplace);
+      select(null);
+      tally();
+    });
+    tally();
+    return { reset: function () { reset.click(); } };
+  }
+
+  window.WeblogDnD = { order: order, sort: sort, version: 1 };
+})();
+</script>
+<script>
+/* ===== Noah's Weblog course engine v1 =====
+   Reads window.COURSE and the page's .view sections, then builds the
+   contents list, progress meter, one-part-at-a-time navigation, quizzes,
+   spaced-repetition flashcards, and the glossary. No libraries. */
+(function () {
+  "use strict";
+
+  var C = window.COURSE || {};
+  var SLUG = C.slug || location.pathname.split("/").filter(Boolean).pop() || "exhibit";
+  var KEY = "ll:" + SLUG + ":";           // every exhibit shares one origin, so keys carry the slug
+  var DAY = 86400000;
+  var INTERVALS = [0, 1, 3, 7, 16, 35];   // days until a flashcard comes back, by box
+
+  /* ---------- storage ---------- */
+  var store = {
+    get: function (k, d) {
+      try { var v = localStorage.getItem(KEY + k); return v === null ? d : JSON.parse(v); }
+      catch (e) { return d; }
+    },
+    set: function (k, v) { try { localStorage.setItem(KEY + k, JSON.stringify(v)); } catch (e) {} }
+  };
+  var state = store.get("state", null) || {};
+  state.done = state.done || {};
+  state.answers = state.answers || {};
+  state.cards = state.cards || {};
+  function save() { store.set("state", state); }
+
+  /* ---------- helpers ---------- */
+  function h(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      var v = attrs[k];
+      if (v == null || v === false) return;
+      if (k === "text") n.textContent = v;
+      else if (k === "html") n.innerHTML = v;
+      else if (k === "on") Object.keys(v).forEach(function (ev) { n.addEventListener(ev, v[ev]); });
+      else n.setAttribute(k, v === true ? "" : v);
+    });
+    (kids || []).forEach(function (c) {
+      if (c != null) n.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    });
+    return n;
+  }
+  function slugify(s) {
+    return String(s).toLowerCase().replace(/<[^>]*>/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+  function hash(s) {
+    var x = 0;
+    for (var i = 0; i < s.length; i++) x = (x * 31 + s.charCodeAt(i)) | 0;
+    return (x >>> 0).toString(36);
+  }
+  function seededShuffle(a, seed) {
+    var x = parseInt(hash(String(seed)), 36) || 1;
+    function rand() {                          // mulberry32
+      x = (x + 0x6D2B79F5) | 0;
+      var t = Math.imul(x ^ (x >>> 15), 1 | x);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(rand() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function srcTag(src) { return src ? " <span class=\"src\">(" + src + ")</span>" : ""; }
+
+  /* ---------- views and contents ---------- */
+  var views = [].slice.call(document.querySelectorAll(".view"));
+  var navViews = views.filter(function (v) { return v.getAttribute("data-nav") !== "no"; });
+  var modules = views.filter(function (v) { return v.classList.contains("module"); });
+  function titleOf(v) {
+    var head = v.querySelector("h2");
+    return v.getAttribute("data-title") || (head ? head.textContent : v.id);
+  }
+
+  var contentsList = document.getElementById("contents-list");
+  var progressText = document.getElementById("progress-text");
+  var progressFill = document.getElementById("progress-fill");
+  var progressBar = document.getElementById("progress-bar");
+
+  function buildContents() {
+    if (!contentsList) return;
+    contentsList.textContent = "";
+    navViews.forEach(function (v) {
+      var li = h("li", null, [h("a", { href: "#" + v.id, text: titleOf(v), "data-view": v.id })]);
+      if (state.done[v.id]) li.appendChild(h("span", { class: "check", text: " ✓", "aria-label": "done" }));
+      contentsList.appendChild(li);
+    });
+  }
+  function updateProgress() {
+    if (!modules.length) return;
+    var n = modules.filter(function (m) { return state.done[m.id]; }).length;
+    var pct = Math.round(100 * n / modules.length);
+    if (progressText) progressText.textContent = n + " of " + modules.length + " parts done";
+    if (progressFill) progressFill.style.width = pct + "%";
+    if (progressBar) progressBar.setAttribute("aria-valuenow", pct);
+  }
+  function markDone(id) {
+    if (state.done[id]) return;
+    state.done[id] = true;
+    save(); buildContents(); markCurrent(currentId); updateProgress();
+  }
+
+  /* ---------- one part at a time ---------- */
+  var currentId = null;
+  function hasQuestions(view) {
+    return [].some.call(view.querySelectorAll(".quiz[data-quiz]"), function (q) {
+      return ((C.quizzes || {})[q.getAttribute("data-quiz")] || []).length > 0;
+    });
+  }
+  function markCurrent(id) {
+    if (!contentsList) return;
+    [].forEach.call(contentsList.querySelectorAll("a"), function (a) {
+      if (a.getAttribute("data-view") === id) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+  }
+  function show(id, focus) {
+    var view = document.getElementById(id);
+    if (!view || !view.classList.contains("view")) return;
+    views.forEach(function (v) { v.hidden = v !== view; });
+    currentId = id;
+    markCurrent(id);
+    if (view.getAttribute("data-nav") !== "no") { state.last = id; save(); }
+    // a part with no questions counts as done once it has been opened
+    if (view.classList.contains("module") && !hasQuestions(view)) markDone(id);
+    if (focus) {
+      var course = document.querySelector(".course") || view;
+      if (course.getBoundingClientRect().top < 0) course.scrollIntoView();
+      var head = view.querySelector("h2");
+      if (head) { head.setAttribute("tabindex", "-1"); head.focus({ preventScroll: true }); }
+    }
+  }
+  function route() {
+    var id = "";
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { id = location.hash.slice(1); }
+    var target = id && document.getElementById(id);
+    if (!target) { show(navViews[0] ? navViews[0].id : views[0].id, false); return; }
+    var view = target.classList.contains("view") ? target : target.closest(".view");
+    if (!view) return;                       // an anchor outside the lesson: let the browser handle it
+    show(view.id, true);
+    if (target !== view) target.scrollIntoView();
+  }
+
+  function buildPagers() {
+    navViews.forEach(function (v, i) {
+      var prev = navViews[i - 1], next = navViews[i + 1];
+      if (!prev && !next) return;
+      var p = h("p", { class: "pager" });
+      if (prev) p.appendChild(h("a", { href: "#" + prev.id, text: "◄ " + titleOf(prev) }));
+      if (next) p.appendChild(h("button", {
+        type: "button", class: "primary next", text: "Next: " + titleOf(next) + " ►",
+        on: { click: function () { location.hash = next.id; } }
+      }));
+      v.appendChild(p);
+    });
+  }
+
+  function buildResume() {
+    var first = navViews[0];
+    if (!first || !state.last || state.last === first.id) return;
+    var last = document.getElementById(state.last);
+    if (!last) return;
+    var box = h("p", { class: "box" }, ["Welcome back. ",
+      h("a", { href: "#" + last.id, text: "Pick up where you left off: " + titleOf(last) }), "."]);
+    var head = first.querySelector("h2");
+    if (head && head.nextSibling) first.insertBefore(box, head.nextSibling); else first.appendChild(box);
+  }
+
+  /* ---------- quizzes ---------- */
+  function renderQuiz(box) {
+    var quizId = box.getAttribute("data-quiz");
+    var items = (C.quizzes || {})[quizId] || [];
+    var module = box.closest(".module");
+    box.textContent = "";
+
+    function allAnswered() {
+      return items.every(function (_, i) { return state.answers[quizId + ":" + i]; });
+    }
+    function afterAnswer() {
+      save();
+      if (module && allAnswered()) markDone(module.id);
+      renderSummary(quizId);
+    }
+
+    items.forEach(function (item, i) {
+      var key = quizId + ":" + i;
+      var fs = h("fieldset", { class: "q" });
+      fs.appendChild(h("legend", { html: (items.length > 1 ? (i + 1) + ". " : "") + item.q + srcTag(item.src) }));
+      var feedback = h("p", { class: "feedback", role: "status", "aria-live": "polite" });
+
+      if (item.type === "recall") {
+        var ta = h("textarea", { "aria-label": "Your answer", placeholder: "Write your answer, then compare." });
+        var model = h("div", { class: "box", hidden: true, html: "<strong class=\"label\">A good answer</strong>" + item.answer });
+        var rate = h("div", { class: "actions", hidden: true }, [
+          h("button", { type: "button", text: "I had it", on: { click: function () { state.answers[key] = { right: true, recall: true }; feedback.textContent = "Noted."; afterAnswer(); } } }),
+          h("button", { type: "button", text: "Not yet", on: { click: function () { state.answers[key] = { right: false, recall: true }; feedback.textContent = "Noted. This one comes back in the review."; afterAnswer(); } } })
+        ]);
+        var showBtn = h("button", { type: "button", text: "Show a good answer", on: { click: function () {
+          model.hidden = false; rate.hidden = false; showBtn.hidden = true;
+          if (!state.answers[key]) { state.answers[key] = { right: null, recall: true }; afterAnswer(); }
+        } } });
+        fs.appendChild(ta);
+        fs.appendChild(h("div", { class: "actions" }, [showBtn]));
+        fs.appendChild(model);
+        fs.appendChild(rate);
+        fs.appendChild(feedback);
+        if (state.answers[key]) { model.hidden = false; rate.hidden = false; showBtn.hidden = true; }
+      } else {
+        var name = "q-" + quizId + "-" + i;
+        var opts = h("div", { class: "options" });
+        // Options appear in a shuffled order (stable for each question) so the right answer
+        // isn't always in the same place. Set fixed: true for options with a natural order.
+        var shown = item.options.map(function (_, j) { return j; });
+        if (!item.fixed) shown = seededShuffle(shown, quizId + ":" + i + ":" + item.q);
+        var inputs = [];                       // indexed by the option's original position
+        shown.forEach(function (j) {
+          var input = h("input", { type: "radio", name: name, value: j });
+          opts.appendChild(h("label", null, [input, h("span", { html: item.options[j] }), h("span", { class: "mark" })]));
+          inputs[j] = input;
+        });
+        var check = h("button", { type: "button", text: "Check answer" });
+        var again = h("button", { type: "button", text: "Try again", hidden: true });
+
+        var paint = function (pick) {
+          var right = pick === item.answer;
+          inputs.forEach(function (inp, j) {
+            inp.disabled = true;
+            inp.checked = j === pick;
+            var mark = inp.parentNode.querySelector(".mark");
+            mark.className = "mark";
+            mark.textContent = "";
+            if (j === item.answer) { mark.className = "mark right"; mark.textContent = j === pick ? "◄ correct" : "◄ the answer"; }
+            else if (j === pick) { mark.className = "mark wrong"; mark.textContent = "◄ your pick"; }
+          });
+          var why = (item.why && item.why[pick]) || item.explain || "";
+          var extra = "";
+          if (quizId === "pre" && item.from) {
+            var fromView = document.getElementById(item.from);
+            extra = " You'll see why in <a href=\"#" + item.from + "\">" + (fromView ? titleOf(fromView) : item.from) + "</a>.";
+          }
+          feedback.innerHTML = "<span class=\"verdict " + (right ? "right" : "wrong") + "\">" +
+            (right ? "Right." : "Not quite.") + "</span> " + why + extra;
+          check.hidden = true; again.hidden = false;
+        };
+        check.addEventListener("click", function () {
+          var pick = -1;
+          inputs.forEach(function (inp, j) { if (inp.checked) pick = j; });
+          if (pick < 0) { feedback.textContent = "Pick an answer first."; return; }
+          state.answers[key] = { pick: pick, right: pick === item.answer };
+          paint(pick);
+          afterAnswer();
+        });
+        again.addEventListener("click", function () {
+          inputs.forEach(function (inp) {
+            inp.disabled = false; inp.checked = false;
+            var mark = inp.parentNode.querySelector(".mark"); mark.className = "mark"; mark.textContent = "";
+          });
+          feedback.textContent = ""; check.hidden = false; again.hidden = true;
+          inputs[shown[0]].focus();
+        });
+        fs.appendChild(opts);
+        fs.appendChild(h("div", { class: "actions" }, [check, again]));
+        fs.appendChild(feedback);
+        var saved = state.answers[key];
+        if (saved && typeof saved.pick === "number") paint(saved.pick);
+      }
+      box.appendChild(fs);
+    });
+  }
+
+  function renderSummary(quizId) {
+    var out = document.querySelector('.quiz-summary[data-for="' + quizId + '"]');
+    if (!out) return;
+    var items = (C.quizzes || {})[quizId] || [];
+    var answered = items.filter(function (_, i) { return state.answers[quizId + ":" + i]; });
+    out.textContent = "";
+    if (answered.length < items.length) return;
+    var scored = items.map(function (it, i) { return { it: it, a: state.answers[quizId + ":" + i] }; })
+      .filter(function (x) { return x.a.right !== null; });
+    var right = scored.filter(function (x) { return x.a.right; }).length;
+    var p = h("p", { class: "result" }, ["You got ", h("strong", { text: right + " of " + scored.length }), "."]);
+    out.appendChild(p);
+    var revisit = [];
+    scored.forEach(function (x) { if (!x.a.right && x.it.from && revisit.indexOf(x.it.from) < 0) revisit.push(x.it.from); });
+    if (revisit.length) {
+      var q = h("p", { class: "meta" }, ["Worth another look: "]);
+      revisit.forEach(function (id, i) {
+        var v = document.getElementById(id);
+        if (i) q.appendChild(document.createTextNode(", "));
+        q.appendChild(h("a", { href: "#" + id, text: v ? titleOf(v) : id }));
+      });
+      out.appendChild(q);
+    }
+  }
+
+  /* ---------- flashcards with spaced review ---------- */
+  function buildDeck() {
+    var deckBox = document.getElementById("deck");
+    if (!deckBox) return;
+    var cards = (C.cards || []).map(function (c) { return { front: c.front, back: c.back + srcTag(c.src) }; });
+    if (C.glossaryCards !== false) {
+      Object.keys(C.glossary || {}).forEach(function (term) {
+        cards.push({ front: "What does <em>" + term + "</em> mean?", back: C.glossary[term] });
+      });
+    }
+    cards.forEach(function (c) { c.id = "c" + hash(c.front); });
+    if (!cards.length) { deckBox.appendChild(h("p", { class: "meta", text: "No cards for this page." })); return; }
+
+    var status = h("p", { class: "meta", "aria-live": "polite" });
+    var card = h("div", { class: "card" });
+    var front = h("div", { class: "front" });
+    var back = h("div", { class: "back", hidden: true });
+    card.appendChild(front); card.appendChild(back);
+    var showBtn = h("button", { type: "button", class: "primary", text: "Show answer" });
+    var missBtn = h("button", { type: "button", text: "Not yet", hidden: true });
+    var gotBtn = h("button", { type: "button", text: "Got it", hidden: true });
+    var allBtn = h("button", { type: "button", text: "Practice all cards anyway", hidden: true });
+    deckBox.appendChild(status);
+    deckBox.appendChild(card);
+    deckBox.appendChild(h("div", { class: "actions" }, [showBtn, missBtn, gotBtn, allBtn]));
+
+    var queue = [];
+    function isDue(c) { var r = state.cards[c.id]; return !r || r.due <= Date.now(); }
+    function learned() { return cards.filter(function (c) { var r = state.cards[c.id]; return r && r.box >= 1; }).length; }
+    function next() {
+      back.hidden = true; missBtn.hidden = true; gotBtn.hidden = true;
+      if (!queue.length) {
+        card.hidden = true; showBtn.hidden = true; allBtn.hidden = false;
+        var upcoming = cards.map(function (c) { return state.cards[c.id]; }).filter(Boolean)
+          .map(function (r) { return r.due; }).filter(function (d) { return d > Date.now(); }).sort()[0];
+        status.textContent = "Nothing due right now. " + learned() + " of " + cards.length + " remembered so far." +
+          (upcoming ? " Next review: " + new Date(upcoming).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) + "." : "");
+        return;
+      }
+      card.hidden = false; showBtn.hidden = false; allBtn.hidden = true;
+      front.innerHTML = queue[0].front;
+      back.innerHTML = queue[0].back;
+      status.textContent = queue.length + (queue.length === 1 ? " card" : " cards") + " to go. " +
+        learned() + " of " + cards.length + " remembered so far.";
+    }
+    showBtn.addEventListener("click", function () {
+      back.hidden = false; showBtn.hidden = true; missBtn.hidden = false; gotBtn.hidden = false; gotBtn.focus();
+    });
+    missBtn.addEventListener("click", function () {
+      var c = queue.shift();
+      state.cards[c.id] = { box: 0, due: Date.now() };
+      queue.push(c);                      // comes back later in this session
+      save(); next(); showBtn.focus();
+    });
+    gotBtn.addEventListener("click", function () {
+      var c = queue.shift();
+      var r = state.cards[c.id] || { box: 0 };
+      var box = Math.min((r.box || 0) + 1, INTERVALS.length - 1);
+      state.cards[c.id] = { box: box, due: Date.now() + INTERVALS[box] * DAY };
+      save(); next(); (queue.length ? showBtn : allBtn).focus();
+    });
+    allBtn.addEventListener("click", function () { queue = shuffle(cards); next(); showBtn.focus(); });
+    queue = shuffle(cards.filter(isDue));
+    next();
+  }
+
+  /* ---------- glossary ---------- */
+  function buildGlossary() {
+    var dl = document.getElementById("glossary-list");
+    if (!dl) return;
+    Object.keys(C.glossary || {}).sort(function (a, b) { return a.localeCompare(b); }).forEach(function (term) {
+      dl.appendChild(h("dt", { id: "g-" + slugify(term), html: term }));
+      dl.appendChild(h("dd", { html: C.glossary[term] }));
+    });
+  }
+
+  /* ---------- drag-and-drop activities (assets/dnd.js) ---------- */
+  function buildActivities() {
+    if (!window.WeblogDnD) return;
+    state.sorts = state.sorts || {};
+    [].forEach.call(document.querySelectorAll("[data-sort]"), function (box) {
+      var id = box.getAttribute("data-sort"), cfg = (C.sorts || {})[id];
+      if (!cfg) return;
+      window.WeblogDnD.sort(box, {
+        bins: cfg.bins, items: cfg.items, help: cfg.help,
+        load: function () { return state.sorts[id] || {}; },
+        save: function (placed) { state.sorts[id] = placed; save(); }
+      });
+    });
+    [].forEach.call(document.querySelectorAll("[data-order]"), function (box) {
+      var id = box.getAttribute("data-order"), cfg = (C.orders || {})[id];
+      if (!cfg) return;
+      window.WeblogDnD.order(box, { items: cfg.items, explain: cfg.explain, help: cfg.help, label: cfg.label });
+    });
+  }
+
+  /* ---------- start ---------- */
+  buildGlossary();
+  buildActivities();
+  [].forEach.call(document.querySelectorAll(".quiz[data-quiz]"), renderQuiz);
+  Object.keys(C.quizzes || {}).forEach(renderSummary);
+  buildDeck();
+  buildPagers();
+  buildContents();
+  updateProgress();
+  buildResume();
+  var nav = document.querySelector(".course-nav details");
+  if (nav && window.matchMedia("(max-width: 780px)").matches) nav.removeAttribute("open");
+  window.addEventListener("hashchange", route);
+  route();
+})();
+</script>
+<!-- page-specific interactive scripts go after the engine -->
+<script>
+/* ===== The Practice of Asking: page interactives ===== */
+(function () {
+  "use strict";
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function $(id) { return document.getElementById(id); }
+  function el(tag, attrs, text) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(SVGNS, tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  /* ---------- 1. Clear the path (part 2, signature) ---------- */
+  (function clearThePath() {
+    var svg = $("ctp-svg");
+    if (!svg) return;
+    var ROCKS = [
+      { label: "Distrust", title: "Distrust",
+        desc: "She has never met anyone who works for you, and she isn't sure they can be trusted.",
+        opts: [
+          { t: "Invite her to spend a morning with the team and see the work", k: "clear",
+            why: "Trust in people is built by meeting people. The notes' rule: if the donor doesn't trust the people, stop pitching and start arranging encounters." },
+          { t: "Make the case again, this time with your strongest outcome data", k: "push",
+            why: "Better data answers a question about the program. Her doubt is about the people, and a harder pitch can read as defensive." },
+          { t: "Send the audited financials and the latest annual report", k: "other",
+            why: "Documents answer questions about money. Her doubt is about people she has never met, and paper can't stand in for meeting them." }
+        ] },
+      { label: "Won't matter", title: "The sense a gift won't matter",
+        desc: "He's sure his $5,000 would be a rounding error in your budget.",
+        opts: [
+          { t: "Tell him every gift counts, and thank him warmly for it", k: "other",
+            why: "Kind, but general. He needs to see what his gift in particular would do." },
+          { t: "Explain how badly the organization needs the money this year", k: "push",
+            why: "That's need-based framing. The notes say organizations that lead with need lose; donors give to dreams and opportunities." },
+          { t: "Show him one thing his gift will make happen, and when", k: "clear",
+            why: "Concrete results remove the doubt. The notes ask you to say when results will show, so the donor can picture them." }
+        ] },
+      { label: "Unheard", title: "Being asked badly before",
+        desc: "The last three nonprofits she met spent the whole hour on their slides. None asked about her.",
+        opts: [
+          { t: "Open with your tightest pitch so she sees you're more organized", k: "push",
+            why: "A better pitch is still a pitch. She'll file you with the other three." },
+          { t: "Ask what she cares about right now, and listen without steering", k: "clear",
+            why: "Her obstruction is not being heard. The notes call the fundraiser the person in the room who listens." },
+          { t: "Send a short video she can watch whenever it suits her", k: "other",
+            why: "Convenient for both of you, and it removes the one thing she's missing: being heard." }
+        ] },
+      { label: "Transactional", title: "The ask feels like a transaction",
+        desc: "Every contact from your organization so far has been a request for money.",
+        opts: [
+          { t: "Give him a few months of silence so the asks can fade", k: "other",
+            why: "Silence leaves the pattern in place. The notes' fix is contact with no ask in it, the small touches between asks." },
+          { t: "Call with no ask at all: a thank-you, an article, an introduction", k: "clear",
+            why: "The notes call these touches between asks the quiet instruments that keep a relationship alive." },
+          { t: "Make the ask now, before the relationship cools any further", k: "push",
+            why: "Another ask confirms the pattern he already resents." }
+        ] },
+      { label: "Inertia", title: "The drag of a busy life",
+        desc: "She has meant to give for two years. Her life is full, and nothing has given her a reason to act now.",
+        opts: [
+          { t: "Tell her the doors may close if she doesn't act soon", k: "push",
+            why: "Desperation repels, and fake urgency is manipulation. The notes: donors don't give to sinking ships." },
+          { t: "Wait for her to raise it, so the gift feels natural to her", k: "other",
+            why: "The notes say your job is not to wait for donors to figure out the timing. More gifts are lost to politeness than to pushiness." },
+          { t: "Make the ask, and tell her why now is the moment", k: "clear",
+            why: "The notes call real urgency a service. Wealthy people drown in options; someone who says \u201cthis is the moment, here is why\u201d cuts through. For this rock, the ask is what clears the path." }
+        ] }
+    ];
+
+    var water = $("ctp-water"), channel = $("ctp-channel"), rocksG = $("ctp-rocks");
+    var legend = $("ctp-legend"), desc = $("ctp-desc"), opts = $("ctp-opts");
+    var checkBtn = $("ctp-check"), nextBtn = $("ctp-next"), resetBtn = $("ctp-reset");
+    var fb = $("ctp-fb"), result = $("ctp-result");
+    var L = channel.getTotalLength();
+    var stops = ROCKS.map(function (_, i) { return L * (i + 1) / (ROCKS.length + 1); });
+    var cleared = 0, current = 0, solved = false;
+    var rockNodes = [];
+
+    // draw rocks along the stream, labels alternating above and below
+    ROCKS.forEach(function (r, i) {
+      var p = channel.getPointAtLength(stops[i]);
+      var g = svgEl("g", { "class": "w-rock-g" });
+      var s = 11;
+      var shape = svgEl("polygon", {
+        "class": "w-rock",
+        points: [[-s, 2], [-s + 3, -s + 2], [2, -s], [s, -s + 4], [s + 1, 4], [s - 4, s - 1], [-s + 4, s]].map(function (q) {
+          return (p.x + q[0]).toFixed(1) + "," + (p.y + q[1]).toFixed(1);
+        }).join(" ")
+      });
+      var num = svgEl("text", { "class": "t-num", x: p.x, y: p.y + 4, "text-anchor": "middle" }, String(i + 1));
+      var above = i % 2 === 0;
+      var lab = svgEl("text", { "class": "t-small", x: p.x, y: above ? p.y - 19 : p.y + 30, "text-anchor": "middle" }, r.label);
+      g.appendChild(shape); g.appendChild(num); g.appendChild(lab);
+      rocksG.appendChild(g);
+      rockNodes.push({ shape: shape, num: num, lab: lab, text: r.label });
+    });
+
+    water.style.strokeDasharray = L + " " + L;
+
+    function drawWater() {
+      var reach = cleared >= ROCKS.length ? L : stops[cleared] - 12;
+      water.style.strokeDashoffset = String(L - reach);
+      rockNodes.forEach(function (n, i) {
+        var gone = i < cleared;
+        n.shape.style.display = gone ? "none" : "";
+        n.num.style.display = gone ? "none" : "";
+        n.lab.textContent = gone ? "\u2713 " + n.text : n.text;
+        n.lab.setAttribute("class", gone ? "t-small t-cleared" : "t-small");
+        n.shape.setAttribute("class", "w-rock" + (i === current && !gone ? " w-rock-cur" : ""));
+      });
+      if (cleared >= ROCKS.length) {
+        result.innerHTML = "Path cleared: <strong>5 of 5</strong>. The water reaches the work. You never added any water; you only moved what was in the way.";
+      } else {
+        result.innerHTML = "Path cleared: <strong>" + cleared + " of " + ROCKS.length + "</strong>. The water stops at rock " + (cleared + 1) + ".";
+      }
+    }
+
+    function showRock() {
+      var r = ROCKS[current];
+      legend.textContent = "Rock " + (current + 1) + " of " + ROCKS.length + ": " + r.title;
+      desc.textContent = r.desc;
+      opts.textContent = "";
+      r.opts.forEach(function (o, j) {
+        var id = "ctp-o" + current + "-" + j;
+        var input = el("input", { type: "radio", name: "ctp-pick", id: id, value: String(j) });
+        var label = el("label", { "for": id });
+        label.appendChild(input);
+        label.appendChild(el("span", null, o.t));
+        opts.appendChild(label);
+      });
+      fb.textContent = "";
+      solved = false;
+      checkBtn.hidden = false; nextBtn.hidden = true;
+      resetBtn.hidden = true;
+      drawWater();
+    }
+
+    checkBtn.addEventListener("click", function () {
+      var picked = opts.querySelector("input:checked");
+      if (!picked) { fb.textContent = "Pick a move first."; return; }
+      var o = ROCKS[current].opts[+picked.value];
+      if (o.k === "clear") {
+        fb.innerHTML = "<span class=\"v-right\">That clears it.</span> " + o.why;
+        cleared = current + 1;
+        solved = true;
+        [].forEach.call(opts.querySelectorAll("input"), function (inp) { inp.disabled = true; });
+        checkBtn.hidden = true;
+        if (current < ROCKS.length - 1) { nextBtn.hidden = false; nextBtn.focus(); }
+        else { resetBtn.hidden = false; }
+      } else if (o.k === "push") {
+        fb.innerHTML = "<span class=\"v-wrong\">That pushes.</span> " + o.why + " Pushing doesn't move the rock. Try another move.";
+      } else {
+        fb.innerHTML = "<span class=\"v-wrong\">Not quite.</span> " + o.why + " Try another move.";
+      }
+      drawWater();
+    });
+    nextBtn.addEventListener("click", function () {
+      if (!solved) return;
+      current += 1;
+      showRock();
+      var first = opts.querySelector("input");
+      if (first) first.focus();
+    });
+    resetBtn.addEventListener("click", function () {
+      cleared = 0; current = 0;
+      showRock();
+      var first = opts.querySelector("input");
+      if (first) first.focus();
+    });
+    showRock();
+  })();
+
+  /* ---------- 2. Two givers (part 4) ---------- */
+  (function twoGivers() {
+    if (!$("giv-svg")) return;
+    var HAS = [1e3, 1e4, 1e5, 1e6, 1e8, 1e10];
+    var HAS_LABEL = ["$1,000", "$10,000", "$100,000", "$1 million", "$100 million", "$10 billion"];
+    var SHARE = [0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 30, 50];   // percent
+    var G = {
+      a: { has: $("ga-has"), share: $("ga-share"), out: $("ga-out"), circle: $("ga-circle"), amt: $("ga-amt"), bar: $("ga-bar"), pct: $("ga-pct") },
+      b: { has: $("gb-has"), share: $("gb-share"), out: $("gb-out"), circle: $("gb-circle"), amt: $("gb-amt"), bar: $("gb-bar"), pct: $("gb-pct") }
+    };
+    ["a", "b"].forEach(function (k) {
+      HAS_LABEL.forEach(function (lab, i) { G[k].has.appendChild(el("option", { value: String(i) }, lab)); });
+    });
+    G.a.has.value = "0"; G.a.share.value = "8";   // $1,000, 30%
+    G.b.has.value = "5"; G.b.share.value = "1";   // $10 billion, 0.2%
+
+    function money(x) {
+      if (x >= 1e9) return "$" + trim(x / 1e9) + " billion";
+      if (x >= 1e6) return "$" + trim(x / 1e6) + " million";
+      return "$" + Math.round(x).toLocaleString("en-US");
+    }
+    function short(x) {
+      if (x >= 1e9) return "$" + trim(x / 1e9) + "B";
+      if (x >= 1e6) return "$" + trim(x / 1e6) + "M";
+      if (x >= 1e4) return "$" + trim(x / 1e3) + "K";
+      return "$" + Math.round(x).toLocaleString("en-US");
+    }
+    function trim(v) { return (Math.round(v * 10) / 10).toLocaleString("en-US"); }
+    function pctText(p) { return (p < 1 ? p.toFixed(1) : String(p)) + "%"; }
+    function ratio(x) {
+      if (x >= 100) return Math.round(x).toLocaleString("en-US");
+      return (Math.round(x * 10) / 10).toLocaleString("en-US");
+    }
+
+    function read(k) {
+      var has = HAS[+G[k].has.value], share = SHARE[+G[k].share.value];
+      return { has: has, share: share, gift: has * share / 100 };
+    }
+    function draw(k, v) {
+      var r = 5 + 6.4 * Math.log10(Math.max(v.gift, 1));
+      G[k].circle.setAttribute("r", r.toFixed(1));
+      G[k].amt.textContent = short(v.gift);
+      G[k].amt.setAttribute("y", r > 28 ? 103 : (98 - r - 7).toFixed(0));
+      G[k].bar.setAttribute("width", (160 * v.share / 100).toFixed(1));
+      G[k].pct.textContent = pctText(v.share) + " of what they have";
+      G[k].out.textContent = pctText(v.share) + " = " + money(v.gift);
+      G[k].share.setAttribute("aria-valuetext", pctText(v.share) + " of " + HAS_LABEL[+G[k].has.value] + ", which is " + money(v.gift));
+    }
+    function update() {
+      var a = read("a"), b = read("b");
+      draw("a", a); draw("b", b);
+      var s = "Giver A gives <strong>" + money(a.gift) + "</strong>, " + pctText(a.share) + " of what A has. " +
+              "Giver B gives <strong>" + money(b.gift) + "</strong>, " + pctText(b.share) + " of what B has. ";
+      var bigger = a.gift === b.gift ? "" : (a.gift > b.gift ? "A" : "B");
+      var deeper = a.share === b.share ? "" : (a.share > b.share ? "A" : "B");
+      if (bigger) s += bigger + "'s gift is " + ratio(Math.max(a.gift, b.gift) / Math.min(a.gift, b.gift)) + " times larger in dollars. ";
+      else s += "The gifts are the same in dollars. ";
+      if (deeper) s += deeper + "'s gift is " + ratio(Math.max(a.share, b.share) / Math.min(a.share, b.share)) + " times larger as a share of what they have.";
+      else s += "They give the same share of what they have.";
+      if (bigger && deeper && bigger !== deeper) s += " Each gift is larger by a different measure.";
+      $("giv-result").innerHTML = s;
+    }
+    ["a", "b"].forEach(function (k) {
+      G[k].has.addEventListener("change", update);
+      G[k].share.addEventListener("input", update);
+    });
+    update();
+  })();
+
+  /* ---------- 3. Money story inventory (part 5) ---------- */
+  (function moneyStory() {
+    var list = $("ms-list");
+    if (!list) return;
+    var STORIES = {
+      scarcity: { name: "the scarcity story",
+        room: "A large number can feel unreal, so you may flinch when you say it. (Your Money Story)",
+        start: "The notes suggest giving away money you can't quite afford, so you learn from the inside what a stretch gift feels like. (Giving Away Money)" },
+      ease: { name: "the guilt-or-ease story",
+        room: "If money felt easy growing up, you may play down what a gift means to the giver. The notes say a fundraiser raised with money has a guilt story to face. (Your Money Story; Fundraising as Spiritual Path)",
+        start: "The notes' first steps for any money story: notice your limiting beliefs, write them down, and talk them through with someone you trust. (Your Money Story)" },
+      ask: { name: "the don't-ask rule",
+        room: "A childhood rule against asking can close your throat at the moment of the ask, whatever your training. (Your Money Story)",
+        start: "Low-stakes reps: ask for a discount where you shop, tell a stranger what you do. (Book draft, ch. 10)" },
+      worth: { name: "the worth story",
+        room: "If a yes means you're enough, a no feels like a verdict, and neediness leaks into the room. (Fundraising as Spiritual Path; Eradicating Neediness)",
+        start: "Before each meeting: I want this, the work deserves it, and I don't need it. The notes put it plainly: you're worthy now. (Eradicating Neediness; Fundraising Meta-Philosophy)" }
+    };
+    var LINES = [
+      { t: "A seven-figure number feels unreal when I say it out loud.", s: "scarcity" },
+      { t: "Asking for things felt rude in the family I grew up in.", s: "ask" },
+      { t: "When a donor says no, I replay it for days.", s: "worth" },
+      { t: "When a wealthy donor gives, I assume it was easy for them.", s: "ease" },
+      { t: "Money was tight growing up, and part of me still braces for it.", s: "scarcity" },
+      { t: "I'd rather write ten grant reports than make one ask in person.", s: "ask" },
+      { t: "Part of me feels guilty about how much I, or my family, have.", s: "ease" },
+      { t: "I need the next meeting to go well to feel okay about my week.", s: "worth" }
+    ];
+    LINES.forEach(function (line, i) {
+      var id = "ms-" + i;
+      var input = el("input", { type: "checkbox", id: id, value: line.s });
+      var label = el("label", { "for": id });
+      label.appendChild(input);
+      label.appendChild(el("span", null, line.t));
+      list.appendChild(label);
+      input.addEventListener("change", update);
+    });
+    var result = $("ms-result"), detail = $("ms-detail");
+    function update() {
+      var checked = [].slice.call(list.querySelectorAll("input:checked"));
+      detail.textContent = "";
+      if (!checked.length) {
+        result.textContent = "Check the lines that fit. Your reading appears here.";
+        return;
+      }
+      var count = {};
+      checked.forEach(function (c) { count[c.value] = (count[c.value] || 0) + 1; });
+      var keys = Object.keys(count).sort(function (x, y) { return count[y] - count[x]; });
+      var top = keys.filter(function (k) { return count[k] === count[keys[0]]; });
+      var names = top.map(function (k) { return STORIES[k].name; });
+      var lead = "You checked <strong>" + checked.length + "</strong> " + (checked.length === 1 ? "line" : "lines") + ". ";
+      if (top.length === 1) lead += "The strongest signal is " + names[0] + ".";
+      else lead += "They point equally to " + names.slice(0, -1).join(", ") + " and " + names[names.length - 1] + ".";
+      result.innerHTML = lead;
+      keys.forEach(function (k) {
+        var st = STORIES[k];
+        var box = el("div", { "class": "box" });
+        box.appendChild(el("strong", { "class": "label" }, st.name.charAt(0).toUpperCase() + st.name.slice(1)));
+        box.appendChild(el("span", null, "In the room: " + st.room + " "));
+        box.appendChild(el("br"));
+        box.appendChild(el("span", null, "A place to start: " + st.start));
+        detail.appendChild(box);
+      });
+    }
+    update();
+  })();
+
+  /* ---------- 4. Four priors diagnostic (part 6) ---------- */
+  (function fourPriors() {
+    var wrap = $("pri-qs");
+    if (!wrap) return;
+    var Q = [
+      { id: "mission", q: "Does this donor believe in the mission?",
+        name: "the donor's belief in the mission",
+        move: "Start where they are. Find what they already care about and connect it to your work, without arguing them out of their current giving. If the dots don't connect, move on. (Fundraising Meta-Philosophy)" },
+      { id: "trust", q: "Does this donor trust the people running it?",
+        name: "the donor's trust in the people",
+        move: "Stop pitching and start arranging encounters with the people doing the work. (The Easy Ask)" },
+      { id: "rel", q: "Is the relationship thick enough to carry a real number?",
+        name: "a relationship that can carry the number",
+        move: "Stop closing and start showing up. (The Easy Ask)" },
+      { id: "love", q: "Do you love the work? Would you tell a close friend, off the clock, to give?",
+        name: "your own love for the work",
+        move: "Get clearer about why. Find your way back to conviction, or ask whether you belong at this organization. The notes cite Parker Palmer: work done against your grain eventually breaks you. (The Easy Ask)" }
+    ];
+    var ANS = [["yes", "Yes"], ["unsure", "Not sure"], ["no", "No"]];
+    Q.forEach(function (item, i) {
+      var block = el("div", { "class": "pri-q" });
+      var pid = "pri-l" + i;
+      block.appendChild(el("p", { id: pid, "class": "pri-text" }, (i + 1) + ". " + item.q));
+      var row = el("div", { "class": "choices", role: "radiogroup", "aria-labelledby": pid });
+      ANS.forEach(function (a) {
+        var id = "pri-" + item.id + "-" + a[0];
+        var input = el("input", { type: "radio", name: "pri-" + item.id, id: id, value: a[0] });
+        var label = el("label", { "for": id });
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(a[1]));
+        row.appendChild(label);
+        input.addEventListener("change", update);
+      });
+      block.appendChild(row);
+      wrap.appendChild(block);
+    });
+    var result = $("pri-result"), detail = $("pri-detail");
+    function update() {
+      var vals = Q.map(function (item) {
+        var c = wrap.querySelector("input[name=\"pri-" + item.id + "\"]:checked");
+        return c ? c.value : null;
+      });
+      var answered = vals.filter(Boolean).length;
+      detail.textContent = "";
+      if (answered < Q.length) {
+        result.textContent = "Answer all four to see a reading (" + answered + " of 4 so far).";
+        return;
+      }
+      var missing = Q.filter(function (_, i) { return vals[i] !== "yes"; });
+      if (!missing.length) {
+        result.innerHTML = "All four are in place. What's left is the discipline: <strong>make the ask</strong>.";
+        detail.appendChild(el("p", null, "If it still feels hard, the notes suggest the hardness may be your money story talking (Part 5), and that you ask anyway. (The Easy Ask)"));
+        return;
+      }
+      result.innerHTML = "Start with <strong>" + missing[0].name + "</strong>" +
+        (missing.length > 1 ? ", then " + missing.slice(1).map(function (m) { return m.name; }).join(", ") + "." : ".");
+      missing.forEach(function (m) {
+        var box = el("div", { "class": "box" });
+        box.appendChild(el("strong", { "class": "label" }, "Missing: " + m.name));
+        box.appendChild(el("span", null, m.move));
+        detail.appendChild(box);
+      });
+    }
+    update();
+  })();
+})();
+</script>
+</body>
+</html>
