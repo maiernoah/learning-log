@@ -23,8 +23,11 @@ const SITE = {
   email: "",
 
   // Short HTML shown in the sidebar "About" box.
-  blurb: `A running log of things I'm learning. Most entries link to an
-          exhibit: a small interactive page built to work through one idea.`,
+  blurb: `Noah Maier shepherds a small referral-only fundraising practice for
+          private family offices and non-profit executive directors. Areas of
+          work include religion, consciousness research, artificial
+          intelligence, and US politics. Noah lives in rural Colorado with his
+          partner.`,
 
   // How many entries the front page shows before "Show all".
   frontPageCount: 10,

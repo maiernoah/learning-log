@@ -9,7 +9,7 @@
   var PAGE = document.body.getAttribute("data-page") || "log";
   var ON_LOG = PAGE === "log";
   var HOME = IS_FILE ? "index.html" : "./";
-  var RESERVED = ["all", "topics", "archives", "find", "about-box", "elsewhere", "log"];
+  var RESERVED = ["all", "topics", "archives", "topics-box", "archives-box", "find", "about-box", "elsewhere", "log"];
   var DAY_MS = 86400000;
 
   /* ---------- load content.js safely ---------- */
@@ -197,8 +197,8 @@
     var items = [
       ["Home", HOME, ON_LOG],
       ["About", "about.html", PAGE === "about"],
-      ["Topics", "#topics", false],
-      ["Archives", "#archives", false]
+      ["Topics", logLink("topics"), false],
+      ["Archives", logLink("archives"), false]
     ];
     var nav = h("nav", { class: "nav", "aria-label": "Site" }, ["[ "]);
     items.forEach(function (it, i) {
@@ -206,6 +206,7 @@
       nav.appendChild(h("a", { href: it[1], text: it[0], "aria-current": it[2] ? "page" : null }));
     });
     nav.appendChild(document.createTextNode(" ]"));
+    navLinks = [].slice.call(nav.querySelectorAll("a"));
     id.appendChild(nav);
     mast.appendChild(h("hr", { class: "bevel" }));
   }
@@ -287,6 +288,7 @@
     if (hash.indexOf("tag=") === 0) return { kind: "tag", value: hash.slice(4).toLowerCase() };
     if (hash.indexOf("month=") === 0) return { kind: "month", value: hash.slice(6) };
     if (hash === "all") return { kind: "all" };
+    if (hash === "topics" || hash === "archives") return { kind: hash };
     if (bySlug[hash] && bySlug[hash].rank >= site.frontPageCount) return { kind: "all" };
     return { kind: "front" };
   }
@@ -297,7 +299,7 @@
   }
 
   function isLogHash(hash) {
-    return hash === "" || hash === "all" || hash.indexOf("tag=") === 0 ||
+    return hash === "" || hash === "all" || hash === "topics" || hash === "archives" || hash.indexOf("tag=") === 0 ||
       hash.indexOf("month=") === 0 || hash.indexOf("find=") === 0 || !!bySlug[hash];
   }
 
@@ -322,6 +324,12 @@
   function statusLine(view, count) {
     if (view.kind === "front") return null;
     var p = h("p", { class: "status" });
+    if (view.kind === "topics" || view.kind === "archives") {
+      p.appendChild(document.createTextNode(view.kind === "topics"
+        ? "Every topic on the log, with its entries. " : "Every month on the log, with its entries. "));
+      p.appendChild(h("a", { href: "#", text: "Back to the front page" }));
+      return p;
+    }
     if (view.kind === "find") {
       p.appendChild(document.createTextNode(
         (count ? plural(count, "entry") + " matching " : "No entries match ")));
@@ -400,6 +408,16 @@
     }
 
     var view = currentView();
+    if (view.kind === "topics" || view.kind === "archives") {
+      var st = statusLine(view, 0);
+      if (st) main.appendChild(st);
+      renderIndex(main, view.kind);
+      document.title = (view.kind === "topics" ? "Topics" : "Archives") + " | " + site.title;
+      var fnote = document.getElementById("find-note");
+      if (fnote) fnote.textContent = "";
+      markCurrent(view);
+      return;
+    }
     var list = select(view);
     var status = statusLine(view, list.length);
     if (status) main.appendChild(status);
@@ -445,6 +463,37 @@
     markCurrent(view);
   }
 
+  /* Topics and Archives pages: every group with the entries in it */
+  function renderIndex(main, kind) {
+    var groups = {};
+    entries.forEach(function (e) {
+      var keys = kind === "topics" ? e.tags : [monthKey(e.when)];
+      keys.forEach(function (k) { (groups[k] = groups[k] || []).push(e); });
+    });
+    var keys = Object.keys(groups).sort();
+    if (kind === "archives") keys.reverse();
+    if (!keys.length) {
+      main.appendChild(h("p", { class: "empty", text: kind === "topics" ? "No topics yet." : "Nothing archived yet." }));
+      return;
+    }
+    keys.forEach(function (k) {
+      var label = kind === "topics" ? k : fmtMonth(k);
+      var hash = kind === "topics" ? "tag=" + encodeURIComponent(k) : "month=" + k;
+      main.appendChild(h("h2", { class: "day" }, [
+        h("a", { href: "#" + hash, text: label }),
+        h("span", { class: "count", text: " (" + groups[k].length + ")" })
+      ]));
+      var ul = h("ul", { class: "index-list" });
+      groups[k].forEach(function (e) {
+        var li = h("li");
+        li.appendChild(e.url ? h("a", { href: href(e.url), text: e.title }) : h("a", { href: "#" + e.slug, text: e.title }));
+        li.appendChild(h("span", { class: "when", text: " " + fmtDay(e.when) }));
+        ul.appendChild(li);
+      });
+      main.appendChild(ul);
+    });
+  }
+
   /* ---------- sidebar ---------- */
 
   function panel(id, title, kids) {
@@ -461,7 +510,6 @@
 
     var about = [];
     if (site.blurb) about.push(h("p", { html: site.blurb }));
-    about.push(h("p", null, [h("a", { href: "about.html", text: "More about this log" })]));
     side.appendChild(panel("about-box", "About", about));
 
     var tagCounts = {};
@@ -476,7 +524,7 @@
         h("span", { class: "count", text: " (" + tagCounts[t] + ")" })
       ]));
     });
-    side.appendChild(panel("topics", "Topics",
+    side.appendChild(panel("topics-box", "Topics",
       tags.length ? [tagList] : [h("p", { text: "No topics yet." })]));
 
     var monthCounts = {};
@@ -492,7 +540,7 @@
         h("span", { class: "count", text: " (" + monthCounts[m] + ")" })
       ]));
     });
-    side.appendChild(panel("archives", "Archives",
+    side.appendChild(panel("archives-box", "Archives",
       months.length ? [monthList] : [h("p", { text: "Nothing archived yet." })]));
 
     var links = (site.links || []).filter(function (l) { return l && l.url && l.label; });
@@ -505,7 +553,14 @@
     }
   }
 
+  var navLinks = [];
   function markCurrent(view) {
+    navLinks.forEach(function (a) {
+      var t = a.textContent;
+      var on = (t === "Topics" && view.kind === "topics") || (t === "Archives" && view.kind === "archives") ||
+               (t === "Home" && ON_LOG && view.kind !== "topics" && view.kind !== "archives");
+      if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+    });
     var nodes = document.querySelectorAll("#sidebar li[data-tag], #sidebar li[data-month]");
     Array.prototype.forEach.call(nodes, function (li) {
       var on = (view.kind === "tag" && li.getAttribute("data-tag") === view.value) ||

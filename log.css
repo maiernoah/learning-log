@@ -172,6 +172,12 @@ hr.bevel {
 
 .more { font: 13px/1.5 var(--sans); margin: 1.5em 0 0; }
 
+/* Topics and Archives pages */
+.index-list { margin: 0 0 1.4em; padding-left: 1.3em; }
+.index-list li { margin: 0.3em 0; }
+.index-list .when { font: 12px/1.5 var(--sans); color: var(--ink-soft); }
+.day .count { font-weight: normal; }
+
 /* search matches */
 mark { background: #ffff66; color: inherit; padding: 0 1px; }
 
