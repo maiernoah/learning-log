@@ -227,10 +227,53 @@
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
       var q = findBox.value.trim();
-      if (!ON_LOG && q) location.href = HOME + "#find=" + encodeURIComponent(q);
+      if (!ON_LOG) {
+        if (q) location.href = HOME + "#find=" + encodeURIComponent(q);
+        return;
+      }
+      // Enter on the log: close the on-screen keyboard and bring the results into view.
+      findBox.blur();
+      var main = document.getElementById("log");
+      if (main) {
+        var top = main.getBoundingClientRect().top;
+        if (top < 0 || top > window.innerHeight * 0.6) main.scrollIntoView();
+      }
     });
     if (ON_LOG) findBox.addEventListener("input", renderLog);
     return form;
+  }
+
+  function clearSearch(ev) {
+    if (ev) ev.preventDefault();
+    findBox.value = "";
+    if (decodeHash().indexOf("find=") === 0) {
+      history.replaceState(null, "", location.pathname + location.search);
+    }
+    renderLog();
+    findBox.focus();
+  }
+
+  // Wraps each search word found in the entry's visible text in <mark>.
+  function highlight(root, words) {
+    var parts = words.filter(Boolean).map(function (w) {
+      return w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    });
+    if (!parts.length) return;
+    var re = new RegExp("(" + parts.join("|") + ")", "gi");
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (node) {
+      var text = node.nodeValue;
+      re.lastIndex = 0;
+      if (!re.test(text)) return;
+      var frag = document.createDocumentFragment();
+      text.split(re).forEach(function (piece, i) {
+        if (!piece) return;
+        frag.appendChild(i % 2 ? h("mark", { text: piece }) : document.createTextNode(piece));
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
   }
 
   /* ---------- the log ---------- */
@@ -277,8 +320,18 @@
   }
 
   function statusLine(view, count) {
-    if (view.kind === "front" || view.kind === "find") return null;
+    if (view.kind === "front") return null;
     var p = h("p", { class: "status" });
+    if (view.kind === "find") {
+      p.appendChild(document.createTextNode(
+        (count ? plural(count, "entry") + " matching " : "No entries match ")));
+      p.appendChild(h("b", { text: "“" + view.value + "”" }));
+      p.appendChild(document.createTextNode(". "));
+      var clear = h("a", { href: "#", text: "Clear search" });
+      clear.addEventListener("click", clearSearch);
+      p.appendChild(clear);
+      return p;
+    }
     if (view.kind === "tag") {
       p.appendChild(document.createTextNode(plural(count, "entry") + " tagged "));
       p.appendChild(h("b", { text: view.value }));
@@ -353,13 +406,11 @@
 
     if (!entries.length) {
       main.appendChild(h("p", { class: "empty", text: "No entries yet. Add one in content.js." }));
-    } else if (!list.length) {
-      var msg = view.kind === "find"
-        ? "Nothing matches “" + view.value + "”."
-        : "No entries here.";
-      main.appendChild(h("p", { class: "empty", text: msg }));
+    } else if (!list.length && view.kind !== "find") {
+      main.appendChild(h("p", { class: "empty", text: "No entries here." }));
     }
 
+    var words = view.kind === "find" ? view.value.split(/\s+/) : [];
     var lastDay = "";
     list.forEach(function (e) {
       var key = dayKey(e.when);
@@ -367,7 +418,13 @@
         main.appendChild(h("h2", { class: "day", text: fmtDay(e.when) }));
         lastDay = key;
       }
-      main.appendChild(renderEntry(e));
+      var art = renderEntry(e);
+      if (words.length) {
+        highlight(art.querySelector("h3"), words);
+        var sum = art.querySelector(".summary");
+        if (sum) highlight(sum, words);
+      }
+      main.appendChild(art);
     });
 
     if (view.kind === "front" && entries.length > site.frontPageCount) {

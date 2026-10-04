@@ -172,6 +172,9 @@ hr.bevel {
 
 .more { font: 13px/1.5 var(--sans); margin: 1.5em 0 0; }
 
+/* search matches */
+mark { background: #ffff66; color: inherit; padding: 0 1px; }
+
 .empty { font-style: italic; }
 
 .problems {
