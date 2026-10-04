@@ -59,35 +59,12 @@ const ENTRIES = [
     date: "2026-10-04",
     time: "12:18",
     url: "exhibits/harts-beauty-of-the-infinite/",
-    tags: ["theology", "philosophy"],
+    tags: ["theology", "philosophy", "david bentley hart"],
     summary: `A ten-module course on David Bentley Hart's <em>The Beauty of the
               Infinite</em> (2003) and his case that persuasion can be peaceful,
               with Nietzsche, Levinas, Derrida, and his other critics given their
               best lines. Quizzes, hands-on activities, and spaced flashcards
               throughout.`,
-  },
-
-  {
-    slug: "sample-dialup-speeds",
-    title: "Sample exhibit: how long a page took over dial-up",
-    date: "2026-10-04",
-    time: "07:03",
-    url: "exhibits/sample-dialup-speeds/",
-    tags: ["sample", "internet history"],
-    summary: `A placeholder that shows how an exhibit plugs into the log. Pick a
-              modem speed and a page size, then watch the page arrive at period
-              speed. Delete this entry and its folder once you add your own.`,
-  },
-
-  {
-    slug: "log-opened",
-    title: "Log opened",
-    date: "2026-10-04",
-    time: "06:58",
-    // No url: this is a text-only entry, so the title isn't a link.
-    tags: ["meta"],
-    summary: `Started this log to keep the interactive pages I build while
-              learning, with a note on what each one taught me.`,
   },
 
 ];

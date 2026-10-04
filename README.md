@@ -16,8 +16,8 @@ return.js            "Back to the log" button for exhibits (leave alone)
 404.html             "Not Found" page
 .nojekyll            tells GitHub Pages to serve the files as they are
 exhibits/
-  sample-dialup-speeds/
-    index.html       a placeholder interactive page
+  <slug>/
+    index.html       one folder per interactive page
 ```
 
 Every change committed to the `main` branch republishes the site automatically after a short wait.
@@ -37,8 +37,6 @@ Two other kinds of entry:
 
 - Text only: leave out the `url` line. The title shows as plain text.
 - A page hosted somewhere else: put the full `https://` address in `url`. The log shows the site's name next to the title. A claude.ai artifact link only works for visitors after the artifact is shared.
-
-To remove the sample, delete its block in `content.js` and the `exhibits/sample-dialup-speeds` folder.
 
 If `content.js` breaks, the front page shows a yellow box naming the line with the mistake. A missing comma, quote, or backtick is the usual cause.
 
