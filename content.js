@@ -19,7 +19,7 @@ const SITE = {
   author: "Noah",
 
   // The site's address. The RSS feed (feed.xml) builds its links from it.
-  url: "http://noahmaier.net/",
+  url: "https://noahmaier.net/",
 
   // Optional. Leave as "" to keep your email off the site (recommended:
   // public email addresses get scraped by spammers).
