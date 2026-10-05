@@ -6,7 +6,17 @@
   <description>Webpages, notes, and videos to help me learn complicated things.</description>
   <language>en-us</language>
   <atom:link href="https://noahmaier.net/feed.xml" rel="self" type="application/rss+xml"/>
-  <lastBuildDate>Sun, 04 Oct 2026 23:49:00 GMT</lastBuildDate>
+  <lastBuildDate>Mon, 05 Oct 2026 11:34:00 GMT</lastBuildDate>
+  <item>
+    <title>Anil Seth's Being You</title>
+    <link>https://noahmaier.net/exhibits/anil-seth-being-you/</link>
+    <guid isPermaLink="false">https://noahmaier.net/#anil-seth-being-you</guid>
+    <pubDate>Mon, 05 Oct 2026 11:34:00 GMT</pubDate>
+    <category>neuroscience</category>
+    <category>consciousness</category>
+    <category>anil seth</category>
+    <description><![CDATA[<p>A ten-part course on Anil Seth's <em>Being You: A New Science of Consciousness</em> (2021) and his case that perception and the self are the brain's best guesses, rooted in keeping the body alive. Readers turn a hallucination dial until a face appears in the clouds, update a Bayesian guess as a gorilla walks closer, race a reactive thermostat against a predictive one, build a readiness potential out of pure noise, and zip a brain's echo to see why complexity alone can't measure consciousness. Quizzes and spaced review cards throughout.</p><p><a href="https://noahmaier.net/exhibits/anil-seth-being-you/">Open the interactive page</a></p>]]></description>
+  </item>
   <item>
     <title>Cameron Berg's Look Inside the Machine</title>
     <link>https://noahmaier.net/exhibits/cameron-berg-inside-the-machine/</link>
