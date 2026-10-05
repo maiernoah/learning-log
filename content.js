@@ -139,4 +139,14 @@ const ENTRIES = [
     tags: ["neuroscience", "consciousness", "anil seth"],
     summary: `A ten-part course on Anil Seth's <em>Being You: A New Science of Consciousness</em> (2021) and his case that perception and the self are the brain's best guesses, rooted in keeping the body alive. Readers turn a hallucination dial until a face appears in the clouds, update a Bayesian guess as a gorilla walks closer, race a reactive thermostat against a predictive one, build a readiness potential out of pure noise, and zip a brain's echo to see why complexity alone can't measure consciousness. Quizzes and spaced review cards throughout.`,
   },
+
+  {
+    slug: "chalmers-hard-problem",
+    title: "Chalmers and the Hard Problem",
+    date: "2026-10-05",
+    time: "05:34",
+    url: "exhibits/chalmers-hard-problem/",
+    tags: ["philosophy", "consciousness", "david chalmers"],
+    summary: `A nine-part course on David Chalmers' view of consciousness, drawn from <em>The Conscious Mind</em> (1996) and <em>The Character of Consciousness</em> (2010). Readers run an explanation machine on a gene, on life, and on seeing red to find where the hard problem appears, sort which facts come for free once the physics is fixed, rebuild the zombie argument, trace their own path through Chalmers' six positions from type A to type F, run a binocular-rivalry experiment, swap a brain's neurons for chips one at a time, and test which differences make a difference. Quizzes and spaced review cards throughout.`,
+  },
 ];
