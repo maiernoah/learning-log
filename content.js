@@ -129,4 +129,14 @@ const ENTRIES = [
     tags: ["artificial intelligence", "consciousness", "cameron berg"],
     summary: `A nine-part course on six papers by Cameron Berg and his collaborators (2024 to 2026) about what happens inside AI models that act like minds: self-other overlap and deception, models reporting experience under self-reference, Dark Triad feature steering, hidden coalitions among agents, the pain axis, and Berg's theory that learning requires feeling. Readers find a pain direction and turn the steering dial, run the burglar test, cut a network of agents, try the button experiments, separate surprise from valence, and sort measurements from interpretations. Quizzes and spaced review cards throughout.`,
   },
+
+  {
+    slug: "anil-seth-being-you",
+    title: "Anil Seth's Being You",
+    date: "2026-10-05",
+    time: "05:34",
+    url: "exhibits/anil-seth-being-you/",
+    tags: ["neuroscience", "consciousness", "anil seth"],
+    summary: `A ten-part course on Anil Seth's <em>Being You: A New Science of Consciousness</em> (2021) and his case that perception and the self are the brain's best guesses, rooted in keeping the body alive. Readers turn a hallucination dial until a face appears in the clouds, update a Bayesian guess as a gorilla walks closer, race a reactive thermostat against a predictive one, build a readiness potential out of pure noise, and zip a brain's echo to see why complexity alone can't measure consciousness. Quizzes and spaced review cards throughout.`,
+  },
 ];
