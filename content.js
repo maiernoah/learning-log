@@ -149,4 +149,14 @@ const ENTRIES = [
     tags: ["philosophy", "consciousness", "david chalmers"],
     summary: `A nine-part course on David Chalmers' view of consciousness, drawn from <em>The Conscious Mind</em> (1996) and <em>The Character of Consciousness</em> (2010). Readers run an explanation machine on a gene, on life, and on seeing red to find where the hard problem appears, sort which facts come for free once the physics is fixed, rebuild the zombie argument, trace their own path through Chalmers' six positions from type A to type F, run a binocular-rivalry experiment, swap a brain's neurons for chips one at a time, and test which differences make a difference. Quizzes and spaced review cards throughout.`,
   },
+
+  {
+    slug: "hofstadters-strange-loop",
+    title: "Hofstadter's Strange Loop",
+    date: "2026-10-05",
+    time: "05:40",
+    url: "exhibits/hofstadters-strange-loop/",
+    tags: ["philosophy", "consciousness", "douglas hofstadter"],
+    summary: `A nine-part course on Douglas Hofstadter's <em>I Am a Strange Loop</em> (2007), drawing on <em>The Mind's I</em>, <em>Surfaces and Essences</em>, and his essay "Analogy as the Core of Cognition." Readers run a computer made of dominoes to see how "641 is prime" can explain a domino that never falls. They aim a simulated camera at its own screen, encode formulas as Gödel numbers, build Quine's self-describing sentence, step around the loop that makes an "I," and test teleporter puzzles. Quizzes and spaced review cards throughout.`,
+  },
 ];
