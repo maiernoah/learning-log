@@ -169,4 +169,14 @@ const ENTRIES = [
     tags: ["philosophy", "consciousness", "daniel dennett"],
     summary: `A ten-part course on Daniel C. Dennett's <em>Consciousness Explained</em> (1991), the book that argues there is no inner screen or watcher in the head, yet takes experience seriously as something to explain. Readers run the color phi experiment, probe the brain's drafts at different moments, move the line between Orwellian and Stalinesque stories, tap the cutaneous rabbit, evolve learners in a Baldwin-effect simulation, find their own blind spot, and pick out their own boat on a shared radar screen. Quizzes and spaced review cards throughout.`,
   },
+
+  {
+    slug: "kati-devaney-attention-to-cessation",
+    title: "Kati Devaney's Path from Attention to Cessation",
+    date: "2026-10-05",
+    time: "12:40",
+    url: "exhibits/kati-devaney-attention-to-cessation/",
+    tags: ["neuroscience", "meditation", "kati devaney"],
+    summary: `A ten-part course through nine papers by neuroscientist Kati (Kathryn J.) Devaney and colleagues, 2016 to 2026, in the order they were published. It moves from mapping vision in a single brain, to the seesaw between the brain's attention and default mode networks, to what long-term meditators' brains show during tasks and at rest. From there it covers how that seesaw tracks steady walking, what silent retreats may do to the language network, and the first measurements of meditative cessation and jhana. Readers set network correlations, average simulated brains, compute stride variability, and sort claims by how strong their evidence is.`,
+  },
 ];
