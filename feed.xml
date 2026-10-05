@@ -6,7 +6,17 @@
   <description>Webpages, notes, and videos to help me learn complicated things.</description>
   <language>en-us</language>
   <atom:link href="https://noahmaier.net/feed.xml" rel="self" type="application/rss+xml"/>
-  <lastBuildDate>Mon, 05 Oct 2026 11:40:00 GMT</lastBuildDate>
+  <lastBuildDate>Mon, 05 Oct 2026 18:40:00 GMT</lastBuildDate>
+  <item>
+    <title>Kati Devaney's Path from Attention to Cessation</title>
+    <link>https://noahmaier.net/exhibits/kati-devaney-attention-to-cessation/</link>
+    <guid isPermaLink="false">https://noahmaier.net/#kati-devaney-attention-to-cessation</guid>
+    <pubDate>Mon, 05 Oct 2026 18:40:00 GMT</pubDate>
+    <category>neuroscience</category>
+    <category>meditation</category>
+    <category>kati devaney</category>
+    <description><![CDATA[<p>A ten-part course through nine papers by neuroscientist Kati (Kathryn J.) Devaney and colleagues, 2016 to 2026, in the order they were published. It moves from mapping vision in a single brain, to the seesaw between the brain's attention and default mode networks, to what long-term meditators' brains show during tasks and at rest. From there it covers how that seesaw tracks steady walking, what silent retreats may do to the language network, and the first measurements of meditative cessation and jhana. Readers set network correlations, average simulated brains, compute stride variability, and sort claims by how strong their evidence is.</p><p><a href="https://noahmaier.net/exhibits/kati-devaney-attention-to-cessation/">Open the interactive page</a></p>]]></description>
+  </item>
   <item>
     <title>Hofstadter's Strange Loop</title>
     <link>https://noahmaier.net/exhibits/hofstadters-strange-loop/</link>
