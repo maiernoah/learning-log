@@ -159,4 +159,14 @@ const ENTRIES = [
     tags: ["philosophy", "consciousness", "douglas hofstadter"],
     summary: `A nine-part course on Douglas Hofstadter's <em>I Am a Strange Loop</em> (2007), drawing on <em>The Mind's I</em>, <em>Surfaces and Essences</em>, and his essay "Analogy as the Core of Cognition." Readers run a computer made of dominoes to see how "641 is prime" can explain a domino that never falls. They aim a simulated camera at its own screen, encode formulas as Gödel numbers, build Quine's self-describing sentence, step around the loop that makes an "I," and test teleporter puzzles. Quizzes and spaced review cards throughout.`,
   },
+
+  {
+    slug: "dennett-consciousness-explained",
+    title: "Dennett's Consciousness Explained",
+    date: "2026-10-05",
+    time: "05:35",
+    url: "exhibits/dennett-consciousness-explained/",
+    tags: ["philosophy", "consciousness", "daniel dennett"],
+    summary: `A ten-part course on Daniel C. Dennett's <em>Consciousness Explained</em> (1991), the book that argues there is no inner screen or watcher in the head, yet takes experience seriously as something to explain. Readers run the color phi experiment, probe the brain's drafts at different moments, move the line between Orwellian and Stalinesque stories, tap the cutaneous rabbit, evolve learners in a Baldwin-effect simulation, find their own blind spot, and pick out their own boat on a shared radar screen. Quizzes and spaced review cards throughout.`,
+  },
 ];
