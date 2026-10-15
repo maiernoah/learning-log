@@ -6,7 +6,17 @@
   <description>Webpages, notes, and videos to help me learn complicated things.</description>
   <language>en-us</language>
   <atom:link href="https://noahmaier.net/feed.xml" rel="self" type="application/rss+xml"/>
-  <lastBuildDate>Thu, 15 Oct 2026 19:08:00 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 15 Oct 2026 20:12:00 GMT</lastBuildDate>
+  <item>
+    <title>Mind Like Water</title>
+    <link>https://noahmaier.net/exhibits/mind-like-water/</link>
+    <guid isPermaLink="false">https://noahmaier.net/#mind-like-water</guid>
+    <pubDate>Thu, 15 Oct 2026 20:12:00 GMT</pubDate>
+    <category>productivity</category>
+    <category>meditation</category>
+    <category>david allen</category>
+    <description><![CDATA[<p>An eight-part course that reads David Allen's <em>Getting Things Done</em> and <em>Ready for Anything</em>, plus five recorded conversations with Allen, as a householder's practice of presence rather than a productivity hack. Readers clear a rippling pond by running eight worries through Allen's two questions, sort items into his buckets, order the weekly review, climb from one chemistry assignment to purpose, filter next actions by context and energy, and set a sitting practice beside Allen's own words on what he does and does not teach. Quizzes and spaced review cards throughout.</p><p><a href="https://noahmaier.net/exhibits/mind-like-water/">Open the interactive page</a></p>]]></description>
+  </item>
   <item>
     <title>Cornell's The Power of Focusing</title>
     <link>https://noahmaier.net/exhibits/cornell-power-of-focusing/</link>
