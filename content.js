@@ -179,4 +179,14 @@ const ENTRIES = [
     tags: ["neuroscience", "meditation", "kati devaney"],
     summary: `A ten-part course through nine papers by neuroscientist Kati (Kathryn J.) Devaney and colleagues, 2016 to 2026, in the order they were published. It moves from mapping vision in a single brain, to the seesaw between the brain's attention and default mode networks, to what long-term meditators' brains show during tasks and at rest. From there it covers how that seesaw tracks steady walking, what silent retreats may do to the language network, and the first measurements of meditative cessation and jhana. Readers set network correlations, average simulated brains, compute stride variability, and sort claims by how strong their evidence is.`,
   },
+
+  {
+    slug: "cornell-power-of-focusing",
+    title: "Cornell's The Power of Focusing",
+    date: "2026-10-15",
+    time: "13:08",
+    url: "exhibits/cornell-power-of-focusing/",
+    tags: ["psychology", "ann weiser cornell"],
+    summary: `A ten-part course on Ann Weiser Cornell's <em>The Power of Focusing</em> (1996), her practical manual for listening to vague feelings in the body until they shift. Readers sort therapy-tape lines the way Gendlin's researchers did, step through Ted's first session as his clenched stomach lets go, rewrite "I am sad" into "part of me is sad," offer words to a felt sense until one fits, find the edge in a client's halting speech, and practice being a listener who doesn't fix. A guided sixteen-step session with a stopping-time clock is built in for trying it yourself. Quizzes and spaced review cards throughout.`,
+  },
 ];

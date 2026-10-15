@@ -1,0 +1,2516 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cornell&#x27;s The Power of Focusing</title>
+<meta name="description" content="Learn to notice a vague feeling in your body, keep it company, and let it tell you something new.">
+<style>
+/* ===== Noah's Weblog house style (exhibits) v2 =====
+   Matches noahmaier.net: white page, Times for reading, Verdana for
+   controls, blue underlined links, two-tone rules, gray beveled buttons. */
+:root {
+  --page: #ffffff;
+  --ink: #000000;
+  --ink-soft: #2b2b2b;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --active: #ff0000;
+  --lo: #999999;          /* rule, border, axis */
+  --hi: #e2e2e2;          /* rule highlight, gridline */
+  --tint: #f2f2f2;        /* callout and table-header fill */
+  --field: #6e6e6e;       /* input border */
+  --btn: #c0c0c0;         /* button face */
+  --btn-face: #dfdfdf;
+  --btn-lo: #808080;
+  --btn-dark: #0a0a0a;
+  --new: #cc0000;
+  /* data colors, in order: classic HTML named colors */
+  --c1: #000080;  /* navy */
+  --c2: #800000;  /* maroon */
+  --c3: #008080;  /* teal */
+  --c4: #808000;  /* olive (marks only; too light for text) */
+  --c5: #800080;  /* purple */
+  --c6: #008000;  /* green */
+  --serif: "Times New Roman", Times, serif;
+  --sans: Verdana, Geneva, Tahoma, sans-serif;
+  --mono: "Courier New", Courier, monospace;
+  --measure: 42.75rem;    /* one column width (684px): text, boxes, questions, tables, figures */
+}
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body { margin: 0; padding: 10px 16px 32px; background: var(--page); color: var(--ink);
+       font: 18px/1.45 var(--serif); -webkit-text-size-adjust: 100%; }
+.page { max-width: 1020px; }
+/* Text, boxes, questions, tables and figures share one column width, so their left and
+   right edges line up. Add class="wide" only to something that genuinely needs more room. */
+main p, main ul, main ol, main dl, main blockquote, main table, main fieldset, main figure,
+main details, main .box, main h2, main h3, main .view > *, .prose { max-width: var(--measure); }
+.wide { max-width: none !important; }
+a { color: var(--link); } a:visited { color: var(--visited); } a:active { color: var(--active); }
+:focus-visible { outline: 2px dotted var(--ink); outline-offset: 2px; }
+
+h1 { font-size: 2.3em; line-height: 1.1; margin: 0.35em 0 0.15em; }
+h2 { font-size: 1em; font-weight: bold; margin: 1.6em 0 0.7em; padding-bottom: 2px;
+     border-bottom: 1px solid var(--lo); }
+h3 { font-size: 1.15em; line-height: 1.25; margin: 1.2em 0 0.3em; }
+p { margin: 0 0 0.8em; }
+.dek { font-style: italic; margin: 0 0 0.5em; }
+.nav { font: 13px/1.6 var(--sans); margin: 0; }
+hr { border: 0; border-top: 1px solid var(--lo); border-bottom: 1px solid var(--hi);
+     height: 0; margin: 10px 0 14px; }
+code, pre, kbd { font-family: var(--mono); font-size: 0.9em; }
+
+/* controls and small text use Verdana */
+label, legend, button, input, select, textarea, table, figcaption, output, .ui, .meta {
+  font-family: var(--sans); }
+.ui, .meta, figcaption { font-size: 13px; line-height: 1.5; }
+.meta { color: var(--ink-soft); }
+p.meta { margin: 6px 0 12px; }
+
+fieldset { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi);
+           margin: 0 0 16px; padding: 10px 12px 12px; min-width: 0; }
+/* The legend sits inside the box as its first line, so long legends wrap cleanly
+   instead of breaking through the border. */
+legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; font-size: 13px; font-weight: bold; }
+legend + * { clear: both; }
+label { font-size: 13px; }
+.choices { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.choices label { display: inline-flex; align-items: center; gap: 5px; }
+input[type=radio], input[type=checkbox], input[type=range] { accent-color: var(--c1); }
+
+button {
+  font-size: 13px; line-height: 1.2; color: #000; background: var(--btn);
+  border: 0; border-radius: 0; padding: 6px 12px; cursor: pointer;
+  box-shadow: inset -1px -1px var(--btn-dark), inset 1px 1px #fff,
+              inset -2px -2px var(--btn-lo), inset 2px 2px var(--btn-face);
+}
+button:active, button[aria-pressed="true"] {
+  box-shadow: inset 1px 1px var(--btn-dark), inset -1px -1px #fff,
+              inset 2px 2px var(--btn-lo), inset -2px -2px var(--btn-face);
+  padding: 7px 11px 5px 13px;
+}
+button:disabled { color: var(--btn-lo); text-shadow: 1px 1px #fff; cursor: default; }
+button.primary { font-weight: bold; }
+
+input[type=text], input[type=number], input[type=search], input[type=email],
+select, textarea {
+  font-size: 14px; color: var(--ink); background: #fff; border: 1px solid var(--field);
+  border-radius: 0; box-shadow: inset 1px 1px 0 #b4b4b4; padding: 4px 6px;
+}
+
+table { border-collapse: collapse; font-size: 13px; line-height: 1.4; }
+main table { width: 100%; }
+th, td { border: 1px solid var(--lo); padding: 4px 8px; text-align: left; vertical-align: top; }
+th { background: var(--tint); }
+
+.box { background: var(--tint); box-shadow: inset 1px 1px var(--lo), inset -1px -1px var(--hi);
+       padding: 8px 10px; margin: 0 0 1em; font: 13px/1.5 var(--sans); }
+.result { font-size: 1.15em; }
+.result strong { font-variant-numeric: tabular-nums; }
+
+.meter { height: 16px; background: #fff; border: 1px solid var(--field);
+         box-shadow: inset 1px 1px 0 #b4b4b4; }
+.meter > div { height: 100%; width: 0; background: var(--c1); }
+
+footer address { font-style: normal; font-size: 0.85em; }
+
+@media (max-width: 780px) { body { font-size: 17px; padding: 8px 16px 28px; } h1 { font-size: 1.8em; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media print { .nav { display: none; } }
+/* ===== Noah's Weblog teaching components v2 =====
+   Goes directly after house-style.css. Uses only its variables. */
+
+/* anything hidden by the engine stays hidden, even inside flex rows */
+[hidden] { display: none !important; }
+
+/* course layout: the lesson on the left, contents on the right (like the log) */
+.course { display: grid; grid-template-columns: minmax(0, var(--measure)) 230px; justify-content: space-between;
+          gap: 32px; align-items: start; }
+.course > .lesson { min-width: 0; }
+.course-nav { position: sticky; top: 12px; padding-left: 20px; border-left: 1px solid var(--lo);
+              box-shadow: inset 1px 0 0 var(--hi); font: 13px/1.5 var(--sans); }
+.course-nav summary { font-weight: bold; cursor: pointer; margin-bottom: 6px; }
+.course-nav ol { margin: 0; padding-left: 0; list-style: none; }
+.course-nav li { margin: 0.3em 0; }
+.course-nav a[aria-current="true"] { color: var(--ink); font-weight: bold; text-decoration: none; }
+.course-nav .check { color: var(--c6); }
+.progress { margin: 0 0 10px; }
+.progress .meter { margin-top: 4px; }
+@media (max-width: 780px) {
+  .course { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .course-nav { position: static; order: -1; padding: 0 0 10px; border-left: 0; box-shadow: none;
+                border-bottom: 1px solid var(--lo); margin-bottom: 14px; }
+}
+
+/* one part at a time */
+.view[hidden] { display: none; }
+.view > h2:first-child { margin-top: 0.3em; }
+.view > h2:focus { outline: none; }
+.objective { font: 13px/1.5 var(--sans); color: var(--ink-soft); margin: -0.2em 0 1.1em; }
+.pager { max-width: none; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+         margin: 2em 0 0; padding-top: 10px; border-top: 1px solid var(--hi); font: 13px/1.5 var(--sans); }
+.pager .next { margin-left: auto; }
+
+/* source references like (p. 4) */
+.src { font: 12px/1 var(--sans); color: var(--ink-soft); white-space: nowrap; }
+
+/* glossary terms in running text link to the glossary */
+a.term { text-decoration-style: dotted; text-underline-offset: 2px; }
+.glossary dt { font-weight: bold; margin: 0.9em 0 0.15em; }
+.glossary dd { margin: 0; }
+
+/* quotes and figures */
+blockquote { margin: 1em 0; padding-left: 14px; border-left: 3px solid var(--lo); font-style: italic; }
+figure { margin: 1.3em 0; }
+figure svg, figure img { display: block; max-width: 100%; height: auto; }
+figure svg:not([width]) { width: 100%; }  /* give every svg width and height attributes */
+figcaption { margin-top: 6px; color: var(--ink-soft); }
+svg text { font-family: var(--sans); }
+
+/* reveal: model answers, hints, "why?" prompts */
+details.reveal { margin: 0 0 1em; }
+details.reveal > summary { font: 13px/1.6 var(--sans); color: var(--link); text-decoration: underline; cursor: pointer; }
+details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px solid var(--hi); }
+
+/* "A common mix-up" refutation box and "Try it" prompts */
+.box strong.label { display: block; margin-bottom: 2px; }
+
+/* quizzes */
+.quiz { margin: 1.3em 0; }
+.quiz fieldset.q legend { font: bold 1em/1.35 var(--serif); }
+.q .options { display: grid; gap: 7px; margin: 6px 0 10px; }
+.q .options label { display: flex; gap: 8px; align-items: flex-start; font: 0.95em/1.4 var(--serif); }
+.q .options input { margin-top: 0.3em; flex: none; }
+.q .options .mark { font: bold 12px/1.6 var(--sans); white-space: nowrap; }
+.q .options .mark.right { color: var(--c6); }
+.q .options .mark.wrong { color: var(--c2); }
+.q .feedback { font: 13px/1.5 var(--sans); margin: 8px 0 0; }
+.q .feedback:empty { display: none; }
+.q .verdict { font-weight: bold; }
+.q .verdict.right { color: var(--c6); }
+.q .verdict.wrong { color: var(--c2); }
+.q textarea { width: 100%; min-height: 4.5em; font: 15px/1.4 var(--serif); margin: 6px 0 8px; }
+.q .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.quiz-summary:empty { display: none; }
+
+/* flashcards */
+
+.card { background: #fff; border: 1px solid var(--field); box-shadow: inset 1px 1px 0 #b4b4b4;
+        padding: 16px 18px; min-height: 9em; margin: 8px 0 10px; }
+.card .front { font-size: 1.2em; }
+.card .back { border-top: 1px dashed var(--lo); margin-top: 12px; padding-top: 10px; }
+.card .back[hidden] { display: none; }
+.deck .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* printing shows every part */
+@media print {
+  .view[hidden] { display: block !important; }
+  .course { display: block; }
+  .course-nav, .pager, .q .actions, .deck .actions { display: none; }
+}
+/* ===== page-specific rules (use the variables above, no new colors) ===== */
+/* diagram text and strokes */
+svg .t-lab { font: bold 12px var(--sans); fill: var(--ink-soft); letter-spacing: 0.04em; }
+svg .t-h { font: bold 16px var(--sans); fill: var(--ink); }
+svg .t-s { font: 14px var(--sans); fill: var(--ink); }
+svg .mid { text-anchor: middle; }
+svg .end { text-anchor: end; }
+svg .k1 { fill: var(--c1); } svg .k2 { fill: var(--c2); } svg .k3 { fill: var(--c3); }
+svg .k5 { fill: var(--c5); } svg .k6 { fill: var(--c6); }
+svg .bx { fill: #fff; stroke-width: 1px; }
+svg .ln { fill: none; stroke-width: 1.5px; }
+svg .thick { stroke-width: 2px; }
+svg .s0 { stroke: var(--lo); } svg .s1 { stroke: var(--c1); } svg .s2 { stroke: var(--c2); }
+svg .s3 { stroke: var(--c3); } svg .s5 { stroke: var(--c5); } svg .s6 { stroke: var(--c6); }
+svg .f1 { fill: var(--c1); } svg .f2 { fill: var(--c2); } svg .f3 { fill: var(--c3); } svg .f5 { fill: var(--c5); }
+svg .f-water { fill: var(--hi); }
+svg .f6 { fill: var(--c6); }
+svg .dot { fill: #fff; stroke: var(--c6); stroke-width: 2px; }
+svg .bank { fill: var(--tint); stroke: var(--lo); stroke-width: 1px; }
+svg .zone { fill: none; stroke: var(--hi); stroke-width: 1px; stroke-dasharray: 3 3; }
+svg .zone.on { fill: var(--tint); stroke: var(--c1); stroke-dasharray: none; }
+
+/* Ted's session */
+.ted-grid { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px; align-items: start; }
+.ted-grid svg { display: block; max-width: 100%; height: auto; }
+.ted-title { font-weight: bold; margin: 0 0 0.3em; }
+@media (max-width: 560px) {
+  .ted-grid { grid-template-columns: minmax(0, 1fr); }
+  .ted-grid svg { width: 190px; margin: 0 auto; }
+}
+
+/* rewriter */
+#rw .choices button { text-align: left; }
+#rw input[type=text] { width: 100%; margin-top: 4px; }
+#rw-out:empty { display: none; }
+#rw-out { margin-top: 10px; font-size: 1em; }
+#rw-out p { margin: 0 0 0.4em; }
+
+/* offer a word */
+.ow-log { margin: 8px 0; padding-left: 1.4em; font: 13px/1.5 var(--sans); }
+.ow-log li { margin: 0 0 4px; }
+.ow-log:empty { display: none; }
+.ow-kind { font-weight: bold; }
+.ow-yes .ow-kind { color: var(--c6); }
+.ow-part .ow-kind { color: var(--c3); }
+.ow-no .ow-kind { color: var(--c2); }
+#ow-result:empty { display: none; }
+
+/* guided session */
+.gs-card { border: 1px solid var(--lo); background: #fff; padding: 12px 14px; margin: 0 0 10px; min-height: 11em; }
+.gs-phrase { font-size: 1.3em; line-height: 1.25; margin: 0.2em 0 0.5em; }
+#gs select { margin-left: 6px; }
+
+/* find the edge */
+.edge-bits { display: grid; gap: 6px; margin: 0 0 10px; }
+.edge-bit { text-align: left; font: 16px/1.4 var(--serif); padding: 8px 12px; display: block; width: 100%; }
+.edge-bit[aria-pressed="true"] { background: var(--tint); outline: 2px solid var(--c1); outline-offset: -2px; }
+.edge-bit .edge-fb { display: block; font: 12px/1.45 var(--sans); margin-top: 4px; }
+.edge-bit .edge-fb:empty { display: none; }
+.edge-bit.ok .edge-fb { color: var(--c6); }
+.edge-bit.no .edge-fb { color: var(--c2); }
+#edge-out:empty { display: none; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>Cornell&#x27;s The Power of Focusing</h1>
+    <p class="dek">Learn to notice a vague feeling in your body, keep it company, and let it tell you something new.</p>
+    <p class="nav">[ <a href="../../index.html#cornell-power-of-focusing">&#9668; Noah's Weblog</a> | <a href="../../about.html">About</a> ]</p>
+    <hr>
+  </header>
+
+  <div class="course">
+    <main class="lesson">
+
+      <!-- ============ START HERE ============ -->
+      <section class="view" id="start" data-title="Start here">
+        <h2>Start here</h2>
+        <p class="box">This page teaches <em>The Power of Focusing: A Practical Guide to Emotional Self-Healing</em> by Ann Weiser Cornell (1996). It is a study guide written in plain language, not a copy of the book. <a href="#source">About the source</a>.</p>
+        <p>Whenever Jenny had to speak up for herself, her throat felt like it was choking. Job interviews and class presentations were nearly impossible. She had tried for years to get rid of the feeling. <span class="src">(p. 1)</span></p>
+        <p>In her first lesson, Cornell asked her to check the word "choking." Jenny found it was more like a hand squeezing. She said hello to it instead of fighting it, and it stopped hurting. Then she sat with it as she would sit with a friend. It seemed to tell her that it cared about her and was trying to keep her from making mistakes. The squeezing went away. <span class="src">(pp. 1–2)</span></p>
+        <p>Most of us have a feeling like Jenny's: a tight throat before speaking in class, a knot in the stomach before a hard conversation. We treat it as a nuisance. This book teaches the opposite move.</p>
+        <p>The skill is called <a class="term" href="#g-focusing">Focusing</a>. Cornell describes it as noticing how you feel, and then having "a conversation with your feelings in which you do most of the listening." <span class="src">(pp. 2–3)</span> It grew out of research on why therapy works for some people and not others. Cornell taught it for years in workshops, and this book is her step-by-step manual.</p>
+        <p class="box"><strong class="label">A note before you start</strong>This guide explains a self-help method. It is not therapy, and the publisher's note in the book advises seeking a professional when expert help is needed. If a feeling is too big to handle alone, talk to an adult you trust.</p>
+        <h3>By the end you'll be able to</h3>
+        <ul class="prose">
+          <li>Explain what researchers heard on therapy tapes that let them predict who would get better.</li>
+          <li>Describe a <a class="term" href="#g-felt-sense">felt sense</a> and tell it apart from a thought or a plain emotion.</li>
+          <li>Walk through the steps of a Focusing session, from sensing into your body to saying "I'll be back."</li>
+          <li>Pick a helpful next move when Focusing gets stuck: a blank, a harsh inner voice, too many feelings at once.</li>
+          <li>Listen to a friend the Focusing way: say back what you hear instead of fixing.</li>
+        </ul>
+        <h3>Guess first</h3>
+        <p>Answer these before you start. Guessing wrong is fine; trying first makes the answers stick.</p>
+        <div class="quiz" data-quiz="pre"></div>
+      </section>
+
+      <!-- ============ PART 1 ============ -->
+      <section class="view module" id="m1" data-title="1. What the therapy tapes revealed">
+        <h2>1. What the therapy tapes revealed</h2>
+        <p class="objective">In this part: the research question behind Focusing, and the surprising answer.</p>
+
+        <h3>Words to know</h3>
+        <p><a class="term" href="#g-psychotherapy">Psychotherapy</a> (therapy for short) is talking with a trained professional to work through emotional problems. A <a class="term" href="#g-felt-sense">felt sense</a> is a feeling in your body that is <em>about</em> something in your life, like a jittery stomach before a speech. You'll meet it fully in part 2.</p>
+
+        <h3>The question</h3>
+        <p>In the early 1960s, Eugene Gendlin, a professor at the University of Chicago, asked a plain question: why does therapy help some people but not others? <span class="src">(p. 3)</span></p>
+        <p>He and his colleagues recorded hundreds of therapy sessions. They taped whole courses of therapy, first session to last, with many different therapists and clients. <span class="src">(p. 3)</span></p>
+        <p>Then they sorted the tapes. The therapist, the client, and psychological tests each judged whether the therapy had worked. A case was used only if all three agreed. That left two piles: success and failure. <span class="src">(p. 4)</span></p>
+
+        <h3>The first surprise: it wasn't the therapists</h3>
+        <p>Common sense said the successful therapists must be warmer, more genuine, or more brilliant. They weren't. The researchers found no significant difference in how the therapists behaved in the two piles. <span class="src">(p. 4)</span></p>
+
+        <h3>The second surprise: you could hear it early</h3>
+        <p>The difference was in the clients. And it showed up in the first or second session. By listening to those early tapes, the researchers could predict whether the therapy would end up working. <span class="src">(p. 4)</span></p>
+        <p>So the successful clients weren't learning something from therapy. They walked in already doing it. <span class="src">(p. 4)</span></p>
+
+        <h3>What they heard</h3>
+        <p>At some point, successful clients slowed down. They became less smooth. They groped for words to describe something they were feeling right then: "It's... uh... it's not exactly anger... hmm." Often they pointed to their bodies: "It's right here in my chest." <span class="src">(pp. 4–5)</span></p>
+        <p>Unsuccessful clients stayed articulate the whole time. They explained, analyzed, and even cried about their problems. But they stayed "up in their heads" and never touched that vague, hard-to-describe feeling inside. <span class="src">(p. 5)</span></p>
+
+        <figure>
+          <svg width="440" height="250" viewBox="0 0 440 250" role="img" aria-label="Two kinds of talk on the tapes. Clear, fast, explaining talk led to therapy that was less likely to help. Slow, groping talk about a feeling in the body led to therapy that was more likely to help.">
+            <rect x="1" y="1" width="438" height="114" class="bx s2"/>
+            <text x="14" y="26" class="t-h k2">Up in the head</text>
+            <text x="14" y="50" class="t-s">"It's because my boss always does this,</text>
+            <text x="14" y="68" class="t-s">and I've figured out why. It's my father."</text>
+            <path d="M14 94 h22" class="ln s2"/><path d="M36 89 L44 94 L36 99 Z" class="f2"/>
+            <text x="52" y="99" class="t-h k2">therapy less likely to help</text>
+            <rect x="1" y="134" width="438" height="114" class="bx s1"/>
+            <text x="14" y="159" class="t-h k1">Touching a felt sense</text>
+            <text x="14" y="183" class="t-s">"It's... hmm... right here in my chest.</text>
+            <text x="14" y="201" class="t-s">It's not exactly anger. It's more..."</text>
+            <path d="M14 227 h22" class="ln s1"/><path d="M36 222 L44 227 L36 232 Z" class="f1"/>
+            <text x="52" y="232" class="t-h k1">therapy more likely to help</text>
+          </svg>
+          <figcaption>What the researchers listened for, in made-up examples. The difference could be heard in the first or second session <span class="src">(pp. 4–5)</span>.</figcaption>
+        </figure>
+
+        <h3>Try it: be the researcher</h3>
+        <p>Here are short things clients might say. Sort each one: is the speaker up in the head, or touching a felt sense? The lines are made up for practice.</p>
+        <div data-sort="tapes"></div>
+
+        <h3>From discovery to skill</h3>
+        <p>Gendlin didn't want to sit back and watch some clients improve while others stayed stuck. He found a way to teach the skill, and he called it <a class="term" href="#g-focusing">Focusing</a>. His 1978 book <em>Focusing</em> sold hundreds of thousands of copies. <span class="src">(p. 5)</span></p>
+        <p>People soon used it outside therapy too: as self-help, for decisions, and for creative work. <span class="src">(p. 5)</span> Cornell lists other uses: getting unstuck in therapy, knowing what you feel and want, handling overwhelming emotions, releasing habits and self-criticism, and making decisions with your whole self. <span class="src">(pp. 6–8)</span></p>
+        <p>Cornell stresses that Focusing was <em>discovered</em>, not invented. It's a natural ability everyone is born with. Hurts in childhood and a culture that distrusts feelings make many of us lose it, so we have to relearn it. <span class="src">(p. 5)</span></p>
+
+        <details class="reveal"><summary>Why does it matter that the difference showed up in the first sessions?</summary>
+          <div><p>If the successful clients were already doing it on day one, then therapy wasn't teaching it. It was a skill some people brought with them. And a skill that people bring can, in principle, be taught to everyone else. That's what Gendlin set out to do. <span class="src">(pp. 4–5)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"The people who got better were the ones who talked about their feelings most clearly." The book says nearly the opposite. Clear, fluent talk, even about emotions, went with failure. Success went with slowing down and struggling to put a fresh body feeling into words. <span class="src">(pp. 4–5)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m1"></div>
+      </section>
+
+      <!-- ============ PART 2 ============ -->
+      <section class="view module" id="m2" data-title="2. The felt sense">
+        <h2>2. The felt sense</h2>
+        <p class="objective">In this part: what a felt sense is, where to look for one, and a full session from start to finish.</p>
+
+        <h3>Words to know</h3>
+        <p>A <a class="term" href="#g-felt-sense">felt sense</a> is a body sensation that has meaning. It's "about" something in your life. A jittery stomach as you stand up to speak, or a tight chest before a hard phone call, are both felt senses. <span class="src">(p. 3)</span></p>
+
+        <h3>What we usually do instead</h3>
+        <p>When a feeling like that shows up, most of us try to get rid of it. We curse it ("Why now?"), put ourselves down ("A better person wouldn't freeze up"), breathe it away, or reach for a drink. <span class="src">(p. 3)</span></p>
+        <p>What doesn't occur to us is to listen to it. Cornell's claim is that when you do, the feeling is much more likely to relax and let you move on clearly. <span class="src">(p. 3)</span></p>
+
+        <h3>Why the body?</h3>
+        <p>Cornell argues that the body knows things the mind alone doesn't: how we're living, what we need, which people bring out our best, what has hurt us. <span class="src">(p. 8)</span></p>
+        <p>Her reason is about time. The mind lives mostly in the past and the future, remembering and worrying. But change can only happen in the present, and the body is always in the present. <span class="src">(p. 9)</span></p>
+        <p>So Focusing is a way to "listen to the whispers of your body before it has to shout." <span class="src">(p. 9)</span></p>
+
+        <h3>Where to look</h3>
+        <p>Felt senses can form anywhere in the body. But they are usually clearer in the middle: throat, chest, stomach, and belly. That's where a session starts looking. <span class="src">(pp. 12, 29)</span></p>
+        <p>What you find might be an emotion ("sad"), a sensation ("tight," "jittery"), or an image ("a knot," "a rock"). It can be vague or strong. It can even feel good. <span class="src">(pp. 29, 64)</span></p>
+        <p>One of Cornell's tips: <em>anything can be something</em>. Even "nothing" has a quality, like "a gray nothing" or "a tired nothing." <span class="src">(p. 29)</span></p>
+
+        <h3>Not just "getting into your feelings"</h3>
+        <p>Focusing includes emotions, but it isn't the same as having them. If you feel sad, the Focusing move is to sense <em>where</em> in your body the sad is, and what it's like there. <span class="src">(p. 30)</span></p>
+        <p>It also isn't meditation. You don't need a special posture or to sit still, and you don't aim for deep relaxation. You need to stay aware of what your body feels. <span class="src">(pp. 26, 28)</span></p>
+
+        <h3>Try it: follow Ted's first session</h3>
+        <p>Ted's wife kept asking how he felt, and he drew a blank. Step through his session to see each move, and watch what happens in his stomach. This is a preview; parts 3 to 6 teach each move properly. <span class="src">(pp. 11–14)</span></p>
+        <fieldset id="ted">
+          <legend>Ted's session, one step at a time</legend>
+          <div class="ted-grid">
+            <svg id="ted-svg" width="220" height="300" viewBox="0 0 220 300" role="img" aria-label="Outline of a body with the throat, chest, stomach and belly marked. The stomach shows how tight Ted's stomach feels at this step.">
+              <circle cx="110" cy="40" r="28" class="bx s0"/>
+              <rect x="98" y="68" width="24" height="18" class="bx s0"/>
+              <path d="M50 92 Q110 78 170 92 L162 272 L58 272 Z" class="bx s0"/>
+              <ellipse id="ted-throat" cx="110" cy="77" rx="16" ry="8" class="zone"/>
+              <ellipse id="ted-chest" cx="110" cy="128" rx="40" ry="22" class="zone"/>
+              <ellipse id="ted-stomach" cx="110" cy="190" rx="34" ry="22" class="zone"/>
+              <ellipse id="ted-belly" cx="110" cy="245" rx="36" ry="20" class="zone"/>
+              <g id="ted-knot"></g>
+              <text x="110" y="293" class="t-s mid" id="ted-cap">stomach</text>
+            </svg>
+            <div>
+              <p class="meta" id="ted-count">Step 1 of 8</p>
+              <p class="ted-title" id="ted-title"></p>
+              <p id="ted-text"></p>
+              <p class="box" id="ted-lesson"></p>
+            </div>
+          </div>
+          <p class="result" id="ted-result" role="status" aria-live="polite"></p>
+          <div class="actions">
+            <button type="button" id="ted-back">◄ Back</button>
+            <button type="button" class="primary" id="ted-next">Next step ►</button>
+          </div>
+        </fieldset>
+
+        <details class="reveal"><summary>Why did Ted think he felt nothing at first?</summary>
+          <div><p>His stomach had been clenched for so long that clenched felt "normal." He wasn't feeling nothing; he was feeling something he'd stopped noticing. A gentle open question, "What wants my awareness now?", let it come forward. <span class="src">(p. 12)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"A felt sense has to be strong and clearly unpleasant to count." Cornell says the opposite. Felt senses are often subtle, often hard to describe, and sometimes pleasant, like warmth or openness. Waiting for something dramatic is one of the main reasons beginners think they feel "nothing." <span class="src">(pp. 63–65)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m2"></div>
+      </section>
+
+      <!-- ============ PART 3 ============ -->
+      <section class="view module" id="m3" data-title="3. Sitting next to the lake">
+        <h2>3. Sitting next to the lake</h2>
+        <p class="objective">In this part: the inner climate that lets feelings change, and why you sit <em>with</em> a feeling instead of <em>in</em> it.</p>
+
+        <h3>Words to know</h3>
+        <p><a class="term" href="#g-dis-identification">Dis-identification</a> means stepping back slightly from a feeling, so it is <em>part</em> of you, not <em>all</em> of you. "I am sad" becomes "Part of me is sad." <span class="src">(pp. 17, 97)</span></p>
+
+        <h3>The shy animal</h3>
+        <p>Cornell opens with a picture. You stand at the edge of a forest, and a shy animal peeks out. If you want it to trust you, you don't run at it shouting. You stay still, patient, and interested. <span class="src">(p. 15)</span></p>
+        <p>A felt sense is like that animal. It may need to find out you're safe before it shows you anything. <span class="src">(p. 15)</span></p>
+        <p>Cornell often talks about felt senses as if they were people, and apologizes for it. Her point is practical: they respond to how you treat them, much as a person would. <span class="src">(p. 19)</span></p>
+
+        <h3>Let it be as it is</h3>
+        <p>When we notice a feeling, we tend to do one of four things <span class="src">(pp. 15–16)</span>. We judge it ("I shouldn't feel this"). We reason with it ("There's no reason to be scared"). We talk ourselves out of it ("Others have it worse"). Or we analyze it ("Why do I always feel this way?").</p>
+        <p>Cornell says none of these help you change. You stay in the same place and often feel worse. <span class="src">(p. 16)</span></p>
+        <p>Her central claim is that feelings change when they are allowed to be as they are. She quotes Gendlin: "What is split off, not felt, remains the same. When it is felt, it changes." <span class="src">(p. 16)</span></p>
+        <p>Many people fear that allowing a feeling will make it bigger. Cornell reports the reverse: feelings grow louder when they're <em>not</em> allowed, and settle down when they are. She says she has seen this hundreds of times and "never seen it fail." That's her teaching experience, stated with great confidence, not a measured result. <span class="src">(p. 16)</span></p>
+
+        <h3>With it, not in it</h3>
+        <p>Think of your emotions as a big lake. You can plunge in, or you can sit beside it. Focusing works best from the bank. <span class="src">(p. 17)</span></p>
+        <p>From inside the feeling, you can't sense it as a whole, just as a fish can't easily know water. Gendlin liked to say that if you want to know how the soup smells, don't stick your head in it. <span class="src">(p. 17)</span></p>
+        <p>There's a second reason. If you <em>are</em> the feeling, nobody is left to listen to its story. Being beside it makes you its listener. <span class="src">(p. 17)</span></p>
+
+        <figure>
+          <svg width="440" height="230" viewBox="0 0 440 230" role="img" aria-label="Two pictures of a lake of feeling. On the left, a person is in the lake up to the neck: overwhelmed and unable to listen. On the right, a person sits on the bank beside the lake: close to the feeling and able to listen.">
+            <text x="0" y="18" class="t-h k2">In it</text>
+            <rect x="0" y="62" width="205" height="90" class="f-water"/>
+            <path d="M0 62 q20 -9 41 0 t41 0 t41 0 t41 0 t41 0" class="ln s1"/>
+            <circle cx="102" cy="54" r="13" class="bx s0"/>
+            <text x="0" y="178" class="t-s">"I am sad."</text>
+            <text x="0" y="198" class="t-s">Overwhelmed; no one</text>
+            <text x="0" y="216" class="t-s">left to listen.</text>
+            <text x="235" y="18" class="t-h k6">Next to it</text>
+            <rect x="300" y="62" width="140" height="90" class="f-water"/>
+            <path d="M300 62 q17.5 -9 35 0 t35 0 t35 0 t35 0" class="ln s1"/>
+            <rect x="235" y="96" width="65" height="56" class="bank"/>
+            <circle cx="268" cy="62" r="12" class="bx s0"/>
+            <line x1="268" y1="74" x2="268" y2="96" class="ln s0"/>
+            <line x1="268" y1="96" x2="288" y2="96" class="ln s0"/>
+            <line x1="288" y1="96" x2="294" y2="114" class="ln s0"/>
+            <text x="235" y="178" class="t-s">"Part of me is sad."</text>
+            <text x="235" y="198" class="t-s">Close, and able</text>
+            <text x="235" y="216" class="t-s">to listen.</text>
+          </svg>
+          <figcaption>Cornell's lake picture, drawn simply. Focusing works best from the bank <span class="src">(p. 17)</span>.</figcaption>
+        </figure>
+
+        <h3>Try it: from "I am" to "part of me"</h3>
+        <p>Cornell's practical tip: when you catch yourself saying "I am sad," change it. Try "Part of me is sad," or "I'm aware of something in me that feels sad." <span class="src">(p. 17)</span></p>
+        <p>Type a sentence that starts with "I am," "I'm," or "I feel," or pick an example.</p>
+        <fieldset id="rw">
+          <legend>Rewrite a feeling sentence</legend>
+          <p class="choices" id="rw-examples"></p>
+          <p><label for="rw-in">Your sentence</label><br><input type="text" id="rw-in" value="I am so angry at my brother." autocomplete="off"></p>
+          <div class="actions"><button type="button" class="primary" id="rw-go">Rewrite it</button></div>
+          <div class="result" id="rw-out" role="status" aria-live="polite"></div>
+        </fieldset>
+        <p>Say each version slowly to yourself and notice any difference in your body. Cornell's point is that the feeling stays just as real, but now there's room around it. <span class="src">(pp. 17, 97)</span></p>
+
+        <h3>Being a good listener to yourself</h3>
+        <p>Remember being truly listened to, and how it helped you understand yourself? Now remember getting criticism or advice when you wanted to be heard. Cornell's point: advice isn't listening. <span class="src">(p. 17)</span></p>
+        <p>Focusing is giving yourself the first kind. She names four qualities of good listening <span class="src">(p. 18)</span>:</p>
+        <ul class="prose">
+          <li><strong>A welcoming presence:</strong> interest in whatever you find, assuming it has a good reason to be as it is.</li>
+          <li><strong>Holding the space:</strong> keeping your attention there, as if saying "I'm here and I'm staying."</li>
+          <li><strong>Hearing the essence:</strong> listening for what is longing to be heard.</li>
+          <li><strong>Staying in present time:</strong> coming back to how your body feels now, even when the topic is past or future.</li>
+        </ul>
+
+        <details class="reveal"><summary>Why would naming a feeling as "part of me" make it easier to bear, not weaker?</summary>
+          <div><p>Cornell says dis-identification lets you feel something just as strongly, but from a slightly different spot. You become its witness instead of being swamped. A feeling that is part of you can be kept company; a feeling that is all of you can't. <span class="src">(pp. 17, 97)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"To change a strong feeling, you have to dive in and feel it as intensely as possible." Cornell says many people believe this, and call themselves "resistant" when they hold back. Focusing isn't about maximum intensity. It's about a relationship with the feeling, which works best from beside it. <span class="src">(pp. 16–17, 36)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m3"></div>
+      </section>
+
+      <!-- ============ PART 4 ============ -->
+      <section class="view module" id="m4" data-title="4. Saying hello">
+        <h2>4. Saying hello</h2>
+        <p class="objective">In this part: the simplest and most important move in Focusing, and what to do when you can't be friendly.</p>
+
+        <h3>Words to know</h3>
+        <p>The <a class="term" href="#g-feeling-about-the-feeling">feeling about the feeling</a> is a reaction to a feeling that gets in the way of accepting it: angry about your fear, afraid of your sadness, impatient with a stuck place. <span class="src">(p. 20)</span></p>
+
+        <h3>Every relationship begins with hello</h3>
+        <p>When you notice a feeling, say to it inside: "Hello. I know you're there." It sounds almost silly. Cornell insists it's one of the most powerful moves there is. <span class="src">(p. 18)</span></p>
+        <p>We usually ignore our felt senses, fight them, or argue with them. She compares this to treating them like unwelcome party guests, talked about but never spoken to. <span class="src">(pp. 18–19)</span></p>
+        <p>Her examples: Rebecca felt a constriction in her chest getting tighter and tighter. She said hello to it, and it eased quite a bit. <span class="src">(p. 19)</span></p>
+        <p>Catherine had a tightness in her shoulders for weeks. In a workshop she grew frustrated that it "wouldn't talk." Then she realized she'd shamed it, fought it, and tried to fix it, but never said hello. Once she did, it began to release. <span class="src">(p. 19)</span></p>
+
+        <h3>When you can't feel friendly</h3>
+        <p>Sometimes you just don't like the feeling. That's fine. Move your hello to the part of you that doesn't feel friendly. <span class="src">(p. 20)</span></p>
+        <p>Tom felt an old fear in his belly. When he tried to be friendly to it, angry impatience rose up: "I'm so sick of always getting scared!" So he said hello to the impatience instead. <span class="src">(p. 20)</span></p>
+        <p>Cornell warns that pushing past a feeling about the feeling won't work; the session will stall right there. Often it relaxes and lets you return to the first feeling. Sometimes the whole session is about it, and that can touch something central in your life. <span class="src">(p. 20)</span></p>
+
+        <h3>All the voices, and not knowing</h3>
+        <p>Mixed feelings are natural. Part of you wants closeness; part of you is scared of it. You don't have to pick one. Each can be heard, and something new can come from hearing them all. <span class="src">(pp. 20–21)</span></p>
+        <p>Cornell also asks for an attitude of <a class="term" href="#g-not-knowing">not knowing</a>. If you think "I already know why I'm afraid," you've stopped listening. Her test: as long as a felt sense still wants your attention, there's something about it you don't know yet. <span class="src">(p. 21)</span></p>
+        <p>Our culture rewards fast, clear answers. Focusing values knowledge that starts vague and takes time. Cornell compares it to a treasure hunter who is most excited by the chests not yet opened. <span class="src">(pp. 21–22)</span></p>
+        <p>Finally, you follow; you don't steer. You can't make a felt sense tell you anything or change, any more than you can force the shy animal to be your friend. <span class="src">(p. 22)</span></p>
+        <p>Every session is different. One may feel like skimming the surface, the next like deep-sea diving. Cornell's reassurance: if you trust it, the felt sense will only bring you what you can deal with. <span class="src">(p. 23)</span></p>
+
+        <h3>Try it: what keeps a feeling stuck?</h3>
+        <p>Sort these responses to a hard feeling. Which ones, by the book's account, keep it the same, and which let it change?</p>
+        <div data-sort="stuck"></div>
+
+        <details class="reveal"><summary>Why would saying hello make a tightening feeling ease?</summary>
+          <div><p>Cornell admits she's speaking of felt senses as if they were people. Her explanation: they're there to communicate, and they want to be heard. Rebecca's chest may have been tightening out of a kind of panic about being ignored. Once it was acknowledged, it could relax a little. <span class="src">(p. 19)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"If I can't feel kind toward a feeling, I'm doing Focusing wrong and should stop." No. The unfriendly reaction simply becomes the next thing to greet. Cornell calls this the feeling about the feeling, and says it often leads somewhere important. <span class="src">(p. 20)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m4"></div>
+      </section>
+
+      <!-- ============ PART 5 ============ -->
+      <section class="view module" id="m5" data-title="5. Finding it and naming it">
+        <h2>5. Finding it and naming it</h2>
+        <p class="objective">In this part: the first six steps of a session, and the move you'll repeat all the way through, checking back.</p>
+
+        <h3>Words to know</h3>
+        <p><a class="term" href="#g-checking-back">Checking back</a> means offering a word, image, or sentence back to the felt sense to see if it fits. <span class="src">(p. 32)</span> <a class="term" href="#g-proprioception">Proprioception</a> is your sense of where your body parts are without looking. <span class="src">(p. 27)</span></p>
+
+        <h3>Getting ready</h3>
+        <p>At first, find a quiet time and place. Half an hour is ideal, but even ten minutes is worth it. Sit rather than lie down, so you don't fall asleep. Keep a sweater nearby, and maybe a notebook. <span class="src">(pp. 25–26)</span></p>
+        <p>Once you know how, you can focus with your eyes open, on a walk, or while doing the dishes. <span class="src">(p. 25)</span></p>
+        <p>Cornell gives each step a short phrase you can say to yourself. She stresses that the steps are suggestions, not rules. You may skip stages or add new ones, and a session can end at any stage. The early steps do help the later ones go well. <span class="src">(pp. 25, 43)</span> Here are the first six.</p>
+
+        <h3>1. "Which way today?"</h3>
+        <p>Decide whether to work on something you choose, like a decision, a habit, or a reaction to someone, or to wait and see what comes. If chores keep nagging you, jot them down so you can let them go for now. <span class="src">(pp. 26–27)</span></p>
+
+        <h3>2. "I'm sensing into my body."</h3>
+        <p>Get comfortable. Notice where you touch the chair, then your feet, hands, and shoulders. Then bring your attention to the middle: throat, chest, stomach, belly. Check your throat the way you'd check for a sore throat. <span class="src">(p. 27)</span></p>
+        <p>If that's hard, close your eyes and lift your arm; notice you know where it is. That's proprioception. Or start at your toes and work your way upward. If you get so relaxed you drift off, open your eyes or stretch, then come back. <span class="src">(pp. 27–28)</span></p>
+
+        <h3>3. "What wants my awareness now?"</h3>
+        <p>Or, if you chose an issue: "How am I about that issue?" Then wait and notice anything. <span class="src">(p. 28)</span></p>
+        <p>Cornell says the biggest barrier here is wondering whether you "really" have a felt sense. Her advice is to forget the term and just look for "something." Your body may also bring up a different issue than the one you picked. Either path is fine. <span class="src">(p. 29)</span></p>
+
+        <h3>4. "I'm saying hello to what's here."</h3>
+        <p>Greet it, then notice how it responds. It might ease, settle "like a bird on a branch," or get clearer. Don't rush, and come close enough for a real hello rather than shouting across a canyon. <span class="src">(p. 30)</span></p>
+
+        <h3>5. "I'm finding the best way to describe it."</h3>
+        <p>Find a word, phrase, image, sound, or gesture for how it feels right now. Cornell compares this to tasting a new gum flavor: "It's not exactly cinnamon... not quite mint... I know!" <span class="src">(pp. 30–31)</span></p>
+        <p>When a description fits, you may feel the sense get stronger, feel a little relief, or feel a full release. Don't strain for the word, though. Loving the felt sense matters more than understanding it. <span class="src">(pp. 31–32)</span></p>
+        <p>It's easy to get lost hunting for words and lose touch with the feeling. When that happens, bring your attention back inside and repeat the last description that felt close. <span class="src">(p. 32)</span></p>
+
+        <h3>6. "I'm checking back with my body."</h3>
+        <p>Offer the word back to the feeling: "Squeezing? Is that right?" Cornell says one of three things happens, and each moves you forward <span class="src">(pp. 32–33)</span>:</p>
+        <ul class="prose">
+          <li><strong>Yes:</strong> a sense of rightness, and it's easier to stay with.</li>
+          <li><strong>Partly, but there's more:</strong> "squeezing... and also scared." Offer the new word too.</li>
+          <li><strong>Not right:</strong> that's useful too, because "not right" points toward what is.</li>
+        </ul>
+        <p>Keep checking all session long. Feelings change, and a word can go out of date. Something you called "fear" may have turned into excitement. <span class="src">(p. 37)</span></p>
+
+        <figure>
+          <svg width="440" height="250" viewBox="0 0 440 250" role="img" aria-label="The checking loop. A felt sense in the body gives rise to a word. The word is offered back to the felt sense. The body answers in one of three ways: yes, that's it; partly, there's more; or not right, so what is?">
+            <rect x="1" y="30" width="150" height="62" class="bx s1"/>
+            <text x="76" y="57" class="t-h mid k1">Felt sense</text>
+            <text x="76" y="77" class="t-s mid">in the body</text>
+            <rect x="289" y="30" width="150" height="62" class="bx s5"/>
+            <text x="364" y="57" class="t-h mid k5">A word</text>
+            <text x="364" y="77" class="t-s mid">"squeezing?"</text>
+            <path d="M153 46 L280 46" class="ln s5"/><path d="M280 41 L288 46 L280 51 Z" class="f5"/>
+            <text x="220" y="22" class="t-s mid">something comes</text>
+            <path d="M288 76 L161 76" class="ln s1"/><path d="M161 71 L153 76 L161 81 Z" class="f1"/>
+            <text x="220" y="112" class="t-s mid">offer it back: "is that right?"</text>
+            <text x="1" y="146" class="t-lab">THE BODY ANSWERS</text>
+            <rect x="1" y="156" width="138" height="84" class="bx s6"/>
+            <text x="70" y="192" class="t-h mid k6">Yes</text><text x="70" y="214" class="t-s mid">that's it</text>
+            <rect x="151" y="156" width="138" height="84" class="bx s3"/>
+            <text x="220" y="192" class="t-h mid k3">Partly</text><text x="220" y="214" class="t-s mid">there's more</text>
+            <rect x="301" y="156" width="138" height="84" class="bx s2"/>
+            <text x="370" y="192" class="t-h mid k2">Not right</text><text x="370" y="214" class="t-s mid">so what is?</text>
+          </svg>
+          <figcaption>Checking back. You repeat this loop all through a session, not just once <span class="src">(pp. 32–33)</span>.</figcaption>
+        </figure>
+
+        <h3>Try it: offer words to a felt sense</h3>
+        <p>This is a toy, not a real felt sense. Imagine a "something" in your throat. Offer words one at a time and read how it answers. In real Focusing, your own body answers, and the answer can be anything.</p>
+        <fieldset id="ow">
+          <legend>There's something in your throat. Offer it a word.</legend>
+          <p class="choices" id="ow-words"></p>
+          <ol class="ow-log" id="ow-log" aria-live="polite"></ol>
+          <p class="result" id="ow-result" role="status"></p>
+          <div class="actions"><button type="button" id="ow-reset">Start over</button></div>
+        </fieldset>
+
+        <h3>Try it: put the first six steps in order</h3>
+        <div data-order="first6"></div>
+
+        <p>Cornell is blunt here. Many readers of self-help books read the exercises and never do them. She asks you to stop and actually try these six steps before reading on. <span class="src">(p. 33)</span> You can use steps 1 to 6 of the <a href="#gs">guided session in part 6</a>.</p>
+
+        <details class="reveal"><summary>Why is "not right" a useful answer instead of a failure?</summary>
+          <div><p>Feeling that a word doesn't fit is your body telling you something. The sense of "no, it's more..." steers you toward a better word. In the book's example, "not squeezing... it's more like constriction!" <span class="src">(p. 33)</span></p></div>
+        </details>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m5"></div>
+      </section>
+
+      <!-- ============ PART 6 ============ -->
+      <section class="view module" id="m6" data-title="6. Keeping it company">
+        <h2>6. Keeping it company</h2>
+        <p class="objective">In this part: the rest of the conversation, from sitting with a felt sense to ending a session well.</p>
+
+        <h3>Words to know</h3>
+        <p><a class="term" href="#g-interested-curiosity">Interested curiosity</a> is the attitude you bring: open wonder about what's there, with no agenda. <span class="src">(p. 36)</span></p>
+
+        <p>So far you've met the felt sense and learned its name. Now you sit down and hear its story. <span class="src">(p. 35)</span></p>
+
+        <h3>"Is it OK to just be with this right now?"</h3>
+        <p>Before anything else, check that it's OK to simply keep it company. You're not in a hurry and not pushing your own agenda. <span class="src">(p. 35)</span></p>
+
+        <h3>"I'm sitting with it, with interested curiosity."</h3>
+        <p>Cornell likes the word <em>sitting</em>. Standing says "I only have a minute." Sitting says this conversation can take its time. And you sit <em>with</em> it, not in it. <span class="src">(p. 36)</span></p>
+        <p>What comes next may be small. "Squeezed" might become "squeezed and resentful." You don't need to know yet what it resents. Stay with what you do know. <span class="src">(p. 36)</span></p>
+        <p>She loves the word curiosity because it's hard to imagine "judgmental curiosity." <span class="src">(p. 36)</span></p>
+
+        <h3>"I'm sensing how it feels from its point of view."</h3>
+        <p>This is a subtle shift. Cornell's student Jeanne said her throat felt "uncomfortable." That's how it felt <em>to Jeanne</em>. When asked how it felt from <em>its</em> side, she said, "Oh! It feels scared." <span class="src">(pp. 37–38)</span></p>
+        <p>You can sense this the way you sense a friend's mood when they aren't talking. <span class="src">(p. 38)</span></p>
+
+        <h3>"I'm asking..."</h3>
+        <p>Questions can help, but don't expect a literal reply. Cornell once thought her inner place should "open up a little mouth" and answer. When it didn't, she felt hopeless. Then she saw that the question's real job is to help you hold a friendly, curious attitude, so you sense more. <span class="src">(pp. 38–39)</span></p>
+        <p>She offers four questions that most often help <span class="src">(pp. 39–40)</span>:</p>
+        <ul class="prose">
+          <li><strong>Does it have an emotional quality?</strong> A scared tightness? An angry one?</li>
+          <li><strong>What gets it so ___?</strong> Use its own word: "What gets you so jumpy?"</li>
+          <li><strong>What does it need?</strong> Not first, because that's like trying to fix the feeling before hearing it.</li>
+          <li><strong>How would "all OK" feel?</strong> Let your body show you now how it would feel if this were resolved.</li>
+        </ul>
+        <p>A test for the answer: you haven't really heard the felt sense until you hear something you didn't already know. <span class="src">(p. 39)</span></p>
+        <p>Other questions can work too, like "What do you want me to know?" And sometimes no question is needed at all. Questions are there to help the felt sense, not to satisfy your curiosity. <span class="src">(p. 41)</span></p>
+
+        <h3>Try it: the order to try the questions</h3>
+        <p>These are tools to pick from, not a checklist. Still, when you do use them, Cornell suggests an order. Put her four questions in that order.</p>
+        <div data-order="questions"></div>
+
+        <h3>Two traps</h3>
+        <p><strong>Asking too soon.</strong> The most common reason a question gets no answer is that it came before hello, a fitting description, and simply being with it. <span class="src">(p. 40)</span></p>
+        <p><strong>Asking "why."</strong> "Why" belongs to the logical mind, which will happily take over. It also sounds like criticism. Turn it into "what": "Why are you angry?" becomes "What gets you so angry?" <span class="src">(p. 41)</span></p>
+        <p>If you hear yourself say "I think," "probably," or "it must be," that answer likely came from your head. Check it with your body. Body answers come slower. <span class="src">(p. 41)</span></p>
+
+        <h3>Ending well</h3>
+        <p>Ask the felt sense whether it's OK to stop in a minute or two, or whether there's something more it needs you to know first. That's not the same as asking if the problem is solved. Change comes in steps. <span class="src">(p. 42)</span></p>
+        <p>At the start, tell your body how much time you have. Cornell says it has an amazing capacity for timing itself. There's usually a natural resting point every five to ten minutes. <span class="src">(pp. 42–43)</span></p>
+        <p>Leave time to stop. Barbara McGavin's rule of thumb: about one to two minutes of stopping for every ten minutes of Focusing. <span class="src">(pp. 42–43)</span></p>
+        <p>Tell it "I'll be back," and keep that promise. You can "mark the place" with an image or phrase, like a bookmark. Then thank your body. <span class="src">(pp. 43–44)</span></p>
+        <p>Cornell's measure of success is generous: if you stayed with something you felt in your body, you succeeded, even if nothing else happened. <span class="src">(p. 44)</span></p>
+
+        <h3>Try it: a guided practice session</h3>
+        <p>When you're ready, use this to try a session. Read a step, close your eyes, and open them when you're ready for the next. Skip any step that doesn't fit, and stop whenever your body says it's enough. The step phrases are Cornell's own, from her summary list; the instructions and tips are condensed. <span class="src">(p. 44)</span></p>
+        <fieldset id="gs">
+          <legend>Guided session</legend>
+          <p><label for="gs-len">How long do you have?</label>
+            <select id="gs-len"><option value="10">10 minutes</option><option value="20" selected>20 minutes</option><option value="30">30 minutes</option><option value="45">45 minutes</option></select></p>
+          <p class="meta" id="gs-plan" role="status"></p>
+          <div class="gs-card">
+            <p class="meta" id="gs-count"></p>
+            <p class="gs-phrase" id="gs-phrase"></p>
+            <p id="gs-do"></p>
+            <p class="meta" id="gs-tip"></p>
+          </div>
+          <div class="actions">
+            <button type="button" id="gs-back">◄ Back</button>
+            <button type="button" class="primary" id="gs-next">Next step ►</button>
+            <button type="button" id="gs-clock" aria-pressed="false">Start the clock</button>
+          </div>
+          <p class="meta" id="gs-time" aria-live="off"></p>
+        </fieldset>
+
+        <details class="reveal"><summary>Why ask "What does it need?" late, not early?</summary>
+          <div><p>Asked first, it's an attempt to make the feeling go away before you've heard what it's saying. Cornell puts it after the emotional-quality and "what gets it so..." questions for that reason. <span class="src">(p. 40)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"The session failed because the problem isn't solved." Cornell says the problem may not be resolved, and certainly not the way your logical mind expected, yet it can still be a good time to stop. Change comes a step at a time. <span class="src">(p. 42)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m6"></div>
+      </section>
+
+      <!-- ============ PART 7 ============ -->
+      <section class="view module" id="m7" data-title="7. Gifts and uses">
+        <h2>7. Gifts and uses</h2>
+        <p class="objective">In this part: what change feels like when it comes, and how people use Focusing on real problems.</p>
+
+        <h3>Words to know</h3>
+        <p>A <a class="term" href="#g-felt-shift">felt shift</a> is Gendlin's name for the good feeling that comes when something changes inside. An <a class="term" href="#g-action-block">action block</a> is anything you want to do but don't. <span class="src">(pp. 7, 45)</span></p>
+
+        <h3>The felt shift</h3>
+        <p>Gendlin calls it the felt shift. Ted's stomach letting go in part 2 was one. Cornell describes it as your whole body-and-mind rearranging around a new understanding. <span class="src">(p. 45)</span></p>
+        <p>Unlike some methods, you don't have to take it on faith that something changed. Your body tells you right away, by feeling good in a special way. You don't even need to understand what happened. <span class="src">(pp. 45, 48)</span></p>
+        <p>It can feel like fresh air in a closed room, energy moving, relief, an "aha!" Often there's clarity, peace, and a warm, spacious well-being. <span class="src">(p. 45)</span></p>
+        <p>Her advice is to receive it. We tend to treat problems like patients in a waiting room: when one eases, we call "Next!" Instead, take time to feel it, and bring it with you when you stop. <span class="src">(pp. 45–46)</span></p>
+
+        <h3>If you don't feel better</h3>
+        <p>That probably doesn't mean Focusing failed. You're building a relationship, and that takes time. Big life issues can take many sessions over weeks or months. <span class="src">(p. 46)</span></p>
+        <p>Small shifts count. Cornell asks you to be a gardener who is glad when a green shoot appears, long before it flowers, and to protect it from the critical voice that says it isn't enough. <span class="src">(pp. 46, 48–49)</span></p>
+        <p>After a big, transforming session, she says to "ground" it. Imagine old situations and notice how you feel now. Write in a journal, make art, or tell a friend who will listen without advice. <span class="src">(pp. 46–47)</span></p>
+
+        <h3>Change in steps: Cornell's writer's block</h3>
+        <p>Cornell's own story shows how slow and surprising this can be. For years she struggled to write. In her first session on it, not writing felt like hiding. Next time, it felt like ducking, as if something would get her if she raised her head. <span class="src">(p. 57)</span></p>
+        <p>Then came an image of a shooting range, and the word "sniping." It brought back her father's sarcastic voice: "Who do you think you are?" Writing got easier after that, but not easy. <span class="src">(pp. 57–58)</span></p>
+        <p>Years later, she found a tight band in her chest that felt like a stubborn teenager saying "You can't make me!" She admired it and listened instead of fighting it. The next day, to her surprise, that same energy pulled her toward the computer. <span class="src">(pp. 58–59)</span></p>
+        <figure>
+          <svg width="440" height="250" viewBox="0 0 440 250" role="img" aria-label="Cornell's writer's block as a series of small steps over several years: hiding, then ducking, then being sniped at, then hearing a sarcastic voice, then a stubborn teenage part, then writing freely.">
+            <line x1="16" y1="24" x2="16" y2="224" class="ln s6 thick"/>
+            <circle cx="16" cy="24" r="5" class="dot"/><text x="36" y="29" class="t-s">hiding</text><circle cx="16" cy="64" r="5" class="dot"/><text x="36" y="69" class="t-s">ducking</text><circle cx="16" cy="104" r="5" class="dot"/><text x="36" y="109" class="t-s">being sniped at</text><circle cx="16" cy="144" r="5" class="dot"/><text x="36" y="149" class="t-s">a sarcastic voice</text><circle cx="16" cy="184" r="5" class="dot"/><text x="36" y="189" class="t-s">a stubborn teenager</text><circle cx="16" cy="224" r="7" class="f6"/><text x="36" y="229" class="t-h k6">writing freely</text>
+            <text x="439" y="24" class="t-s end">first sessions</text>
+            <text x="439" y="229" class="t-s end">several years later</text>
+          </svg>
+          <figcaption>Change in steps: the felt senses in Cornell's own writer's-block sessions, from first to last <span class="src">(pp. 57–59)</span>.</figcaption>
+        </figure>
+
+        <h3>Uses, through the book's stories</h3>
+        <p>Chapter Seven tells how people used Focusing on particular problems. These are Cornell's case stories, not controlled studies. <span class="src">(p. 51)</span></p>
+        <table>
+          <thead><tr><th scope="col">Use</th><th scope="col">Story</th><th scope="col">The key move</th></tr></thead>
+          <tbody>
+            <tr><td>Overwhelming feelings</td><td>Mary, after a breakup, felt tears like ocean waves <span class="src">(pp. 51–52)</span></td><td>Saying hello put the tears "next to" her, like a lake she didn't have to enter.</td></tr>
+            <tr><td>A habit or addiction</td><td>Angela and sweets <span class="src">(pp. 53–54)</span></td><td>Sensing from the point of view of the part that wants to binge. It believed it was protecting her.</td></tr>
+            <tr><td>A decision</td><td>Matt: stay in Chicago or move to Seattle? <span class="src">(pp. 54–55)</span></td><td>Feeling one option at a time: "going nowhere" versus "moving forward." Plus research, over a month.</td></tr>
+            <tr><td>A physical symptom</td><td>Kay's constant sneezing <span class="src">(pp. 55–57)</span></td><td>Asking which area of her life it connected to. The insight felt true, but the sneezing was back the next day.</td></tr>
+            <tr><td>An action block</td><td>Cornell's writer's block <span class="src">(pp. 57–59)</span></td><td>Listening to the part that didn't want to write. Its energy came over to her side, unplanned, the day after one session.</td></tr>
+            <tr><td>A relationship puzzle</td><td>Jan feels "weird" that her friend wants her old job <span class="src">(pp. 59–60)</span></td><td>Checking words until the right one came: "not being believed."</td></tr>
+            <tr><td>The <a class="term" href="#g-inner-critic">inner Critic</a> (part 8)</td><td>Darrell: "It's too late for school" <span class="src">(pp. 60–62)</span></td><td>Asking what the Critic fears, then what it wants.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Turning fear into want</h3>
+        <p>Any fear can be asked what it wants. "I'm afraid I'll be too tired" can become "I want to have energy." "I'm afraid people won't like my work" can become "I want my work to be appreciated." Both may be true, but the second points forward. Then ask your body to show you how it would feel to have that want fulfilled. <span class="src">(p. 62)</span></p>
+
+        <h3>Try it: action block or addiction?</h3>
+        <p>Cornell gives two fill-in sentences. An action block is "I want to ___, but I don't." An addiction runs in reverse: "I want to stop ___, but I don't." <span class="src">(p. 7)</span> Sort these.</p>
+        <div data-sort="blocks"></div>
+        <p>Sorting is just the start. The Focusing move is the same for both. Invite a felt sense of the part of you that wants the habit, or the part that doesn't want to act. Usually that part has had no voice, because you've been busy condemning it or excusing it. Listen from its point of view. <span class="src">(pp. 54, 59)</span></p>
+        <p>Two more questions can help: "Is there something hidden under this?" and "Is there something that wants to live?" <span class="src">(p. 54)</span> And be ready for surprises. One woman with a ten-year block against sports found she actually hated sports. She joined a dance class instead, and the block was gone. <span class="src">(p. 59)</span></p>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"Focusing cures physical illness." The book doesn't claim that. Cornell tells stories where body symptoms eased, but she says that quite often the insight is true and the symptom doesn't change. Kay's sneezing came right back the next day. <span class="src">(pp. 47–48, 57)</span></p>
+
+        <details class="reveal"><summary>Why feel each option separately when making a decision?</summary>
+          <div><p>A pros-and-cons list uses only logic, and Matt finished his as unsure as ever. Feeling one option at a time gives each its own felt sense to compare, so the whole of you weighs in. Cornell adds that big decisions usually take several sessions plus practical research. Focusing may even say a choice is right but the timing isn't. <span class="src">(pp. 8, 54–55)</span></p></div>
+        </details>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m7"></div>
+      </section>
+
+      <!-- ============ PART 8 ============ -->
+      <section class="view module" id="m8" data-title="8. When it gets stuck">
+        <h2>8. When it gets stuck</h2>
+        <p class="objective">In this part: the common sticking points, and Cornell's move for each.</p>
+
+        <h3>Words to know</h3>
+        <p>The <a class="term" href="#g-inner-critic">inner Critic</a> is the harsh inner voice that attacks you. The <a class="term" href="#g-doubter">Doubter</a> is the voice that says your experience isn't real. <a class="term" href="#g-clearing-a-space">Clearing a space</a> is a way to set many feelings aside, one by one. <span class="src">(pp. 65, 70–71)</span></p>
+
+        <p>Cornell says that if Focusing has been easy for you, you're unusual. Most people hit sticky spots, because it runs against how our culture trains us. <span class="src">(p. 63)</span></p>
+
+        <table>
+          <thead><tr><th scope="col">The problem</th><th scope="col">Cornell's suggestion</th></tr></thead>
+          <tbody>
+            <tr><td>"I feel nothing."</td><td>Check for something positive, something subtle, or something hard to describe. Give possible felt senses the benefit of the doubt. <span class="src">(pp. 63–65)</span></td></tr>
+            <tr><td>"Too many things at once."</td><td>Clear a space: greet each thing and imagine setting it somewhere safe nearby, then ask "What else?" <span class="src">(pp. 65–66)</span></td></tr>
+            <tr><td>"I'm feeling good. Does that count?"</td><td>Yes. Greet it, describe it, savor it. Ask: "Is there something you want to show me?" <span class="src">(pp. 66–67)</span></td></tr>
+            <tr><td>"I see pictures."</td><td>Notice whether the image is in your body or in front of your eyes. Show a visual image to your body and ask how it feels. <span class="src">(pp. 67–68)</span></td></tr>
+            <tr><td>"It needs something I can't give."</td><td>Hearing a need isn't a promise. Say "I hear you" and keep listening. <span class="src">(pp. 68–69)</span></td></tr>
+            <tr><td>"I feel bad about myself."</td><td>Name it: "That's my Critic." Say hello, then ask what it's afraid of. <span class="src">(pp. 70–71)</span></td></tr>
+            <tr><td>"I'm just making this up."</td><td>That's the Doubter. Don't argue; check with your body. <span class="src">(pp. 71–72)</span></td></tr>
+            <tr><td>"My head answers my questions."</td><td>Thank your head and ask the body again. <span class="src">(p. 72)</span></td></tr>
+            <tr><td>"I'm impatient with it."</td><td>Notice the impatience and greet it, or focus on it. One woman found she was treating her felt senses the way her father had treated her tears. <span class="src">(pp. 72–73)</span></td></tr>
+            <tr><td>"Two feelings at once."</td><td>Say hello to each. Ask: stay with both, or is one calling me more? <span class="src">(pp. 73–74)</span></td></tr>
+            <tr><td>"One good feeling, one bad."</td><td>Don't choose. Stay in the good feeling and sense the other from there, as Bryan did with warmth and a tight stomach. <span class="src">(p. 67)</span></td></tr>
+            <tr><td>"I'm afraid of what I'll find."</td><td>Turn toward the fear itself and keep it company. <span class="src">(p. 73)</span></td></tr>
+            <tr><td>"My mind keeps wandering."</td><td>Speak aloud, write, draw, walk, or focus with a friend. <span class="src">(pp. 74–76)</span></td></tr>
+          </tbody>
+        </table>
+
+        <h3>"I feel nothing"</h3>
+        <p>When Cornell was learning, she felt a total blank, and was ashamed, depressed, and anxious about it. Then she noticed: that's a lot of feeling! She just hadn't counted it. <span class="src">(p. 63)</span></p>
+        <p>Felt senses can be subtle. She compares it to someone used to loud music who is set down in a quiet forest. At first it seems nothing is happening. With time, the forest becomes fascinating. <span class="src">(p. 64)</span></p>
+        <p>One man said he felt nothing. Asked for detail, he had noticed a shaky throat, a possible tight stomach, and an open feeling in his chest, and dismissed each one. <span class="src">(pp. 64–65)</span></p>
+        <p>And if it's there but hard to describe, congratulate yourself. That's exactly what went with success in Gendlin's research. <span class="src">(p. 65)</span></p>
+
+        <h3>Too many things: clearing a space</h3>
+        <p>Greet each thing without going into it. Imagine it finding a safe place outside you, on a shelf or a pillow, where you can find it later. Then ask "What else?" <span class="src">(pp. 65–66)</span></p>
+        <p>Watch for a <a class="term" href="#g-background-feeling">background feeling</a> too, like "always tired." It's like wallpaper you've stopped seeing. <span class="src">(p. 66)</span></p>
+        <p>You can invite feelings to step aside, but you can't force them. If one clings, ask what it needs so it can wait. <span class="src">(p. 66)</span></p>
+
+        <h3>Wanting and doing are different</h3>
+        <p>Cornell imagines Focusing and feeling that the answer is to fly to Tahiti today. Arguing with that would stop the process. So she listens. It turns out she needs to relax without obligations, and the urge to fly away fades. <span class="src">(p. 69)</span></p>
+        <p>But the other side matters too. If your body keeps pointing to the same action and you never take it, you'll stay stuck. Ask for a small step that feels possible. A lonely man first only phoned about a dance, then peeked in the door, then stayed for one song. <span class="src">(pp. 69–70)</span></p>
+
+        <h3>Three voices that get in the way</h3>
+        <p><strong>The Critic</strong> attacks: "You'll fail like always." Pushing it away brings only short relief. Cornell treats it as an unhealed part that is always afraid of something. Ask what it fears and what it wants, and just hear the answers. <span class="src">(pp. 70–71)</span></p>
+        <p><strong>The Doubter</strong> says you're making it up. It can raise doubts but never settle them. Your body can: check whether what came feels right. Where it came from doesn't matter. <span class="src">(pp. 71–72)</span></p>
+        <p><strong>The head</strong> rushes in with quick, familiar answers to questions meant for the body. Thank it, and ask again more slowly. <span class="src">(p. 72)</span></p>
+
+        <h3>Try it: who is talking?</h3>
+        <p>Sort these inner remarks by which voice is speaking.</p>
+        <div data-sort="voices"></div>
+
+        <details class="reveal"><summary>Why does the Doubter lose its power when you check with your body?</summary>
+          <div><p>The Doubter only knows how to doubt; it has no way to confirm anything. Focusing does have one: bring the words back to the felt sense and notice if they feel right. That swaps an argument you can't win for a check you can actually do. <span class="src">(p. 71)</span></p></div>
+        </details>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"Focusing needs a vivid imagination." Cornell says some people get images easily and some never do, and it has nothing to do with Focusing ability. Images are welcome but not required. <span class="src">(p. 68)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m8"></div>
+      </section>
+
+      <!-- ============ PART 9 ============ -->
+      <section class="view module" id="m9" data-title="9. Focusing with a friend">
+        <h2>9. Focusing with a friend</h2>
+        <p class="objective">In this part: how two people take turns, and how to listen without fixing.</p>
+
+        <h3>Words to know</h3>
+        <p>In a <a class="term" href="#g-focusing-partnership">Focusing partnership</a>, two friends split the time and swap roles. The <a class="term" href="#g-focuser">Focuser</a> does the Focusing, out loud. The <a class="term" href="#g-listener">listener</a> keeps them company. <span class="src">(p. 77)</span></p>
+
+        <h3>An equal exchange</h3>
+        <p>A partnership isn't like therapy, where one person is paid and the other gets attention. Each person gets equal time in each role. <span class="src">(p. 77)</span></p>
+        <p>As Focuser, you say at least some of what you feel aloud. That usually helps you concentrate. But if speaking would interrupt you, stay quiet. Your job is your process, not entertaining the listener. <span class="src">(pp. 77–78)</span></p>
+
+        <h3>You are not the expert</h3>
+        <p>Before starting, the listener senses into their own body. If they notice felt senses of their own, they greet them and let them know their turn will come. <span class="src">(p. 78)</span></p>
+        <p>The listener's first job is to be present, with no agenda for the other person. You don't need them to change or to have a "good" session. <span class="src">(p. 78)</span></p>
+        <p>Cornell calls this the hardest and most important thing to remember: you are not the expert, the healer, or the fixer. The Focuser is responsible for the session, and for their own life. <span class="src">(pp. 78–79)</span></p>
+        <p class="box"><strong class="label">A note from this guide, not the book</strong>"Not fixing" is about Focusing practice. If a friend tells you they are in danger or might hurt themselves, getting help from a trusted adult isn't fixing. Do it.</p>
+
+        <h3>Practical listening: say it back</h3>
+        <p>The listener's second job is to say back some of what they hear. "I feel sad." "You're sad." It may feel like being a parrot. Cornell says to wait until it's your turn to focus. Then you'll know how good it feels. <span class="src">(p. 79)</span></p>
+        <p>The real key belongs to the Focuser. Take the listener's words back down into your body and check them. Don't just say "Yes, that's what I said" to be polite. Maybe "tightness" is really "squeezing." <span class="src">(pp. 79–80)</span></p>
+
+        <figure>
+          <svg width="440" height="250" viewBox="0 0 440 250" role="img" aria-label="The listening loop. The Focuser says: tight in my throat. The listener says back: tightness, there in your throat. The Focuser checks the words inside, and says: more like squeezing.">
+            <rect x="1" y="1" width="190" height="78" class="bx s1"/>
+            <text x="96" y="27" class="t-h mid k1">Focuser</text>
+            <text x="96" y="50" class="t-s mid">"Tight in</text>
+            <text x="96" y="68" class="t-s mid">my throat."</text>
+            <rect x="249" y="1" width="190" height="78" class="bx s3"/>
+            <text x="344" y="27" class="t-h mid k3">Listener</text>
+            <text x="344" y="50" class="t-s mid">"Tightness, there</text>
+            <text x="344" y="68" class="t-s mid">in your throat."</text>
+            <path d="M193 40 L240 40" class="ln s1"/><path d="M240 35 L248 40 L240 45 Z" class="f1"/>
+            <text x="220" y="30" class="t-s mid">says</text>
+            <path d="M344 81 L344 126 L96 126 L96 152" class="ln s3"/><path d="M91 152 L96 160 L101 152 Z" class="f3"/>
+            <text x="352" y="108" class="t-s">says it back</text>
+            <rect x="1" y="164" width="438" height="76" class="bx s6"/>
+            <text x="14" y="192" class="t-h k6">The Focuser checks inside:</text>
+            <text x="14" y="218" class="t-s">"Hmm, it's more like squeezing."</text>
+          </svg>
+          <figcaption>The listener's words become something the Focuser checks against the felt sense <span class="src">(pp. 79–80)</span>.</figcaption>
+        </figure>
+
+        <h3>What to say back</h3>
+        <p>You don't repeat everything. Listen for <span class="src">(pp. 80–81)</span>:</p>
+        <ul class="prose">
+          <li><strong>Feelings:</strong> body words like "tight" and emotion words like "scared."</li>
+          <li><strong>Present time:</strong> what they feel now, not last week.</li>
+          <li><strong>The last thing:</strong> after a long stretch, the last thing said is usually most helpful.</li>
+          <li><strong>Anything said twice:</strong> repetition means they want to hear it back.</li>
+        </ul>
+        <p>Two small changes help even more <span class="src">(pp. 81–82)</span>. First, turn "I am sad" into "Part of you is sad," which gives the feeling some room. Second, turn "I don't know what this is" into "You're feeling <em>something</em>," which points to the body. Cornell's line: "I don't know" is in the head, but "I feel something" is in the body.</p>
+
+        <h3>Guiding, lightly</h3>
+        <p>Sometimes a partner needs a gentle suggestion, like "Maybe notice how your body feels right now." You may suggest steps in the <em>process</em>, never what to do in their <em>life</em>. Offer one, then go back to listening, and be glad if they say no. <span class="src">(pp. 82–83)</span></p>
+        <p>If you use only one suggestion, Cornell says, make it "Take some time to say hello to that." <span class="src">(p. 84)</span></p>
+        <p>Another useful one is coming back to the body. When your partner feels lost, or drifts into thoughts, images, or a flood of emotion, you might suggest that they notice how their body feels right now. <span class="src">(pp. 84–85)</span></p>
+        <p>And if they can't accept a feeling, suggest they say hello to the part that can't. <span class="src">(p. 86)</span></p>
+        <p>The listener also doesn't ask questions directly. Instead they suggest a question the Focuser can ask inside: "You might ask it, 'What gets it so sad?'" Direct questions pull the Focuser out of their inner process. <span class="src">(pp. 86–87)</span></p>
+
+        <h3>Try it: listener practice</h3>
+        <p>Each line is something a Focuser says. Pick the best reply a Focusing listener could give.</p>
+        <div class="quiz" data-quiz="drill9"></div>
+
+        <p class="box"><strong class="label">A common mix-up</strong>"A good listener gives good advice." In a Focusing partnership, advice and analysis get in the way and wear you out. Cornell says it's more relaxing and more helpful to remember that the Focuser is in charge, and your job is to be present and say back. <span class="src">(pp. 78–79)</span></p>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m9"></div>
+      </section>
+
+      <!-- ============ PART 10 ============ -->
+      <section class="view module" id="m10" data-title="10. In therapy, from both chairs">
+        <h2>10. In therapy, from both chairs</h2>
+        <p class="objective">In this part: how therapists can invite Focusing, and how clients can ask for it.</p>
+        <p class="meta">Not a therapist? The ideas below show part 1's research from the other chair. If you'd rather skip ahead, <a href="#for-clients">the section for clients</a> is near the end.</p>
+
+        <h3>Words to know</h3>
+        <p>The <a class="term" href="#g-the-edge">edge</a> of experience is Gendlin's term for those moments of groping for words for something felt right now. An <a class="term" href="#g-attunement">attunement</a> is a short spoken guide into body awareness at the start of a session. <span class="src">(pp. 93, 97)</span></p>
+
+        <h3>For therapists: "easy" and "tough" clients</h3>
+        <p>Every therapist has clients who move and clients who seem stuck. Cornell suggests stuck clients are often out of touch with the source of change. They are either analyzing in their heads or caught in repetitive emotion. <span class="src">(pp. 89–90)</span></p>
+        <p>Her claim: thoughts and emotions can come with change, but the source of change is the body as sensed in the present moment. <span class="src">(p. 90)</span></p>
+        <p>She suggests building a bridge in three steps <span class="src">(pp. 90–91)</span>:</p>
+        <ul class="prose">
+          <li><strong>Own perspective:</strong> after a story about others, ask "And how was that for you?"</li>
+          <li><strong>Present time:</strong> "Are you feeling that right now?"</li>
+          <li><strong>The body:</strong> "Where in your body do you feel that?"</li>
+        </ul>
+        <p>Some phrases may sound odd in an office. One therapist found "say hello to it" awkward; "You might want to acknowledge that" works too. <span class="src">(p. 92)</span></p>
+
+        <h3>Listening for the edge</h3>
+        <p>This is the research from part 1, put to work. When a client slows down and gropes for words, that's the edge. Clients often rush past it toward something clearer. The therapist can help them stay. <span class="src">(p. 93)</span></p>
+        <p>Cornell's clue: words like "think" and "guess," and pop-psychology labels like "denial" or "resistant," usually come from the head. Halting, groping description usually comes from a felt sense. Reflect the second kind (say it back, as in part 9), not the first. <span class="src">(pp. 93–94)</span></p>
+
+        <h3>Try it: find the edge</h3>
+        <p>Here's a made-up client speaking. Click each piece that comes from a felt sense, then check.</p>
+        <fieldset id="edge">
+          <legend>Which pieces come from a felt sense?</legend>
+          <div class="edge-bits" id="edge-bits"></div>
+          <div class="actions"><button type="button" class="primary" id="edge-check">Check</button><button type="button" id="edge-reset">Clear</button></div>
+          <div class="result" id="edge-out" role="status" aria-live="polite"></div>
+        </fieldset>
+
+        <h3>Appreciating "No"</h3>
+        <p>When a client says "No, that's not quite right," Cornell says not to read it as resistance. It means the client is in touch with something more than the words caught, and trusts you enough to keep sensing. <span class="src">(pp. 94–95)</span></p>
+        <p>Because a therapist's words carry extra weight, she suggests inviting clients to check the therapist's words, too, against their body. <span class="src">(p. 94)</span></p>
+
+        <h3>Too little feeling, or too much</h3>
+        <p><strong>Too little:</strong> try feeling a <em>difference</em>. Is the blank in your throat different from the blank in your chest? Or look for something positive, like open or peaceful. <span class="src">(pp. 95–96)</span></p>
+        <p><strong>Too much:</strong> use dis-identification. "I'm so terrified!" becomes "There's a part of you that's so terrified." The feeling stays just as strong, but there's a witness now. <span class="src">(pp. 96–97)</span></p>
+
+        <h3>More tools</h3>
+        <p>An attunement guides the client's attention from hands and feet into the middle of the body, then asks "What's here now?" Speak slowly. <span class="src">(pp. 97–98)</span></p>
+        <p>Clearing a space asks "What's in the way of feeling really wonderful about your life?" Each thing is set down. To choose one, imagine a magnet in the middle of your body and notice which pulls most. <span class="src">(p. 98)</span></p>
+        <p>Therapists can also help clients be gentle with themselves, and build a caring relationship with a shy or tender felt sense, without needing to picture it as an "inner child." <span class="src">(pp. 99–100)</span></p>
+        <p>Inner awareness should finally lead to new action. When a client feels it's time, the therapist can help them sense a commitment in the body and let concrete steps come. <span class="src">(pp. 100–101)</span></p>
+        <p>The therapist's own felt senses matter too. Staying aware of your body can sharpen intuition and help you notice your own reactions. Cornell's closing line for therapists is that clients can grow only as much as you do. <span class="src">(pp. 102–103)</span></p>
+
+        <h3 id="for-clients">For clients: training your therapist</h3>
+        <p>The last chapter speaks to people in therapy. You can ask for what Focusing needs, even if your therapist has never heard of it <span class="src">(pp. 105–107)</span>:</p>
+        <ul class="prose">
+          <li>Start some sessions by quietly sensing in your body.</li>
+          <li>Ask for times of quiet while you find words.</li>
+          <li>Treat confusion as a signal to slow down and sense.</li>
+          <li>Feel free to say "No, that's not quite right." You, not the therapist, are responsible for your life.</li>
+        </ul>
+        <p>Between sessions, when strong feelings come at awkward times, say hello and acknowledge there's a good reason for them. If you can't stay with them right now, make an inner appointment, and keep it. <span class="src">(pp. 107–108)</span></p>
+        <p>She lists signs of healing: feeling things when they happen instead of days later, trusting your own view, holding mixed feelings, and being able to feel happy without waiting for disaster. <span class="src">(pp. 108–109)</span></p>
+        <p>Cornell expects progress to go "two steps forward, one step back." Old patterns may come back strongly right before they let go. Over time, she says, Focusing helps you become your own primary support. <span class="src">(pp. 108–109)</span></p>
+
+        <details class="reveal"><summary>Why would "You think this is denial" be a less helpful reply than "You're feeling something vague"?</summary>
+          <div><p>Reflecting the head's label keeps the client analyzing. Reflecting the vague, felt part invites them to stay at the edge, where the book says change happens. <span class="src">(p. 94)</span></p></div>
+        </details>
+
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m10"></div>
+      </section>
+
+      <!-- ============ REVIEW ============ -->
+      <section class="view" id="review" data-title="Review cards">
+        <h2>Review cards</h2>
+        <p>Cards you get right come back after longer and longer gaps: tomorrow, then in three days, then a week. Cards you miss come back right away. Spacing review out like this beats rereading.</p>
+        <div class="deck" id="deck"></div>
+      </section>
+
+      <!-- ============ FINAL CHECK ============ -->
+      <section class="view" id="final" data-title="Final check">
+        <h2>Final check</h2>
+        <p>These questions mix all the parts together.</p>
+        <div class="quiz" data-quiz="final"></div>
+        <div class="quiz-summary" data-for="final"></div>
+      </section>
+
+      <!-- ============ GLOSSARY ============ -->
+      <section class="view" id="glossary" data-title="Glossary">
+        <h2>Glossary</h2>
+        <p class="meta"><a href="#" onclick="history.back(); return false;">&#9668; Back to where you were</a></p>
+        <dl class="glossary" id="glossary-list"></dl>
+      </section>
+
+      <!-- ============ SOURCE ============ -->
+      <section class="view" id="source" data-title="About the source">
+        <h2>About the source</h2>
+        <p>Ann Weiser Cornell, <em>The Power of Focusing: A Practical Guide to Emotional Self-Healing</em>. Oakland, CA: New Harbinger Publications, 1996. ISBN 978-1-57224-044-5. <a href="https://www.newharbinger.com/9781572240445/the-power-of-focusing/">The book at New Harbinger</a>.</p>
+        <p>Cornell first met Focusing at Eugene Gendlin's Chicago meetings in 1972. She found it hard to learn, and learned it with the help of friends. She later taught alongside Gendlin, and wrote this book as her teaching manual after fifteen years of workshops. <span class="src">(pp. vii–viii)</span></p>
+        <h3>What this guide simplifies or leaves out</h3>
+        <ul class="prose">
+          <li><strong>The research is told briefly.</strong> The book describes Gendlin's therapy-tape studies in a few pages, with no numbers or citations. This guide repeats that account and adds nothing to it. From outside the book: the researchers rated clients' talk with a scale later called the Experiencing Scale. The book lists a professional paper on that topic (Hendricks, 1986) in its resources.</li>
+          <li><strong>Strong claims are the author's.</strong> Lines like "I've never seen it fail" come from Cornell's teaching experience, not from controlled tests. The guide marks them as her claims.</li>
+          <li><strong>Stories are case reports.</strong> The healing stories in Chapters Six and Seven are anecdotes. Cornell herself notes that physical symptoms often don't change.</li>
+          <li><strong>The step phrases are Cornell's.</strong> The sixteen short phrases in the guided session and the ordering activity are quoted from her summary list (p. 44). The instructions and tips around them are condensed. Other short quotations are marked and cited.</li>
+          <li><strong>Chapters Ten and Eleven are condensed.</strong> The therapist chapter has many more sample dialogues than shown here.</li>
+          <li><strong>Left out:</strong> the book's resource list of organizations and readings.</li>
+        </ul>
+        <p>The client lines in parts 1 and 10, the Focuser lines in the part 9 practice, and the word-offering toy in part 5 were written for this guide. They are modeled closely on the book's own examples (pp. 33, 80–84, 93–94), but reworded.</p>
+        <p class="meta">Page numbers in this guide, like <span class="src">(p. 4)</span>, point to the original.</p>
+      </section>
+
+    </main>
+
+    <aside class="course-nav" aria-label="Contents">
+      <details open>
+        <summary>Contents</summary>
+        <div class="progress">
+          <span id="progress-text"></span>
+          <div class="meter" id="progress-bar" role="progressbar" aria-label="Parts done" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill"></div></div>
+        </div>
+        <ol id="contents-list"></ol>
+      </details>
+    </aside>
+  </div>
+
+  <footer>
+    <hr>
+    <address>Part of <a href="../../index.html">Noah's Weblog</a>. A study guide to Ann Weiser Cornell&#x27;s <em>The Power of Focusing</em>.</address>
+  </footer>
+</div>
+
+<script>
+window.COURSE = {
+  slug: "cornell-power-of-focusing",
+  quizzes: {
+    pre: [
+      { q: "Researchers listened to tapes of many therapy sessions. What best predicted that therapy would work?",
+        options: ["How warm and caring the therapist was", "Clients pausing to search for words for a feeling", "How clearly clients explained their problems", "How many sessions the client went to overall"],
+        answer: 1,
+        why: ["The researchers found no significant difference in therapist behavior between the two groups.", "Successful clients slowed down and searched for words for something they felt right then.", "Clear explaining went with clients who stayed “up in their heads,” and their therapy didn't work.", "The difference was audible in the first or second session, long before the total was known."],
+        src: "pp. 4–5", from: "m1" },
+      { q: "You notice a knot in your stomach before a big test. What would the book suggest first?",
+        options: ["Take a few deep breaths until the knot goes away", "Remind yourself that there's no reason to be nervous", "Notice the knot and say an inner hello to it", "Figure out which past event first caused the feeling"],
+        answer: 2,
+        why: ["Breathing a feeling away is one of the common ways of getting rid of it; the book suggests listening first.", "Reasoning with a feeling is one of the responses Cornell says keeps it the same.", "Acknowledging the feeling is the first move, and often brings relief by itself.", "Analyzing why is another response the book says doesn't help a feeling change."],
+        src: "pp. 3, 16, 18", from: "m4" },
+      { q: "A friend tells you about a problem. In a Focusing partnership, what's the listener's main job?",
+        options: ["Offer advice based on your own similar experience", "Ask questions to find the real cause of the problem", "Be present and say back some of what you hear", "Reassure them that things will turn out fine"],
+        answer: 2,
+        why: ["Advice isn't listening. In a partnership you're not the fixer.", "Direct questions pull the Focuser out of their inner process. Listeners suggest questions instead.", "Present, no agenda, and reflecting back their words.", "Reassurance is a way of trying to fix the feeling instead of keeping it company."],
+        src: "pp. 78–79", from: "m9" }
+    ],
+    m1: [
+      { q: "How did the researchers decide which therapy cases counted as “successful”?",
+        options: ["The therapist alone rated whether the client improved", "Therapist, client, and tests all had to agree", "Clients who finished all their sessions counted", "Independent judges listened to the final sessions"],
+        answer: 1,
+        why: ["The therapist's view was only one of three.", "A case was used only when the therapist, the client, and psychological tests all agreed.", "The book doesn't use finishing sessions as the measure.", "The tapes were compared after sorting; the sorting used the three-way agreement."],
+        src: "pp. 3–4" },
+      { q: "A client speaks fluently and in detail about why they feel bad, and even cries, but never slows down. What would the research predict?",
+        options: ["The therapy is very likely to succeed", "The therapy is less likely to succeed", "It depends on how skilled the therapist is", "Nothing can be predicted from early sessions"],
+        answer: 1,
+        why: ["Fluent explaining, even with tears, went with the unsuccessful group.", "They stay “up in their heads” and never touch a felt sense.", "Therapist behavior didn't differ between the groups.", "The whole surprise was that early sessions did predict the outcome."],
+        src: "p. 5" },
+      { q: "Why does Cornell call Focusing a skill that was “discovered, not invented”?",
+        options: ["Gendlin found it in an older therapy manual", "Some people were already doing it naturally", "It was first noticed in children's speech", "It appears in many ancient religious texts"],
+        answer: 1,
+        why: ["The book says nothing about finding it in a manual.", "It came from noticing what successful clients already did. Cornell calls it everyone's birthright.", "The book mentions being born with the ability, but the discovery came from therapy tapes.", "The book makes no such claim."],
+        src: "p. 5" },
+      { type: "recall", q: "In two or three sentences, explain what the researchers heard on the tapes and why it surprised them.",
+        answer: "<p>They expected the difference to be in the therapists, but therapist behavior was about the same. The difference was in the clients, and it could be heard in the first sessions: successful clients slowed down and groped for words for something they felt in their bodies right then, while unsuccessful ones stayed fluent and analytical.</p>",
+        src: "pp. 4–5" }
+    ],
+    m2: [
+      { q: "Which of these is the best example of a felt sense?",
+        options: ["Knowing the date of your next exam", "A jittery stomach as you stand up to speak", "Deciding that your plan is a good idea", "Remembering a fact your teacher said"],
+        answer: 1,
+        why: ["That's a fact you know, not a body feeling.", "A body sensation that is about something in your life.", "That's a judgment made in your head.", "That's a memory of information, not something felt in the body."],
+        src: "p. 3" },
+      { q: "Where does a Focusing session usually start looking for a felt sense?",
+        options: ["The head and the forehead", "The hands and the feet", "The middle, from throat to belly", "Wherever any pain is strongest"],
+        answer: 2,
+        why: ["The book points to the middle of the body, not the head.", "You notice hands and feet while settling in, but felt senses are clearer in the middle.", "Felt senses can form anywhere but are usually clearer in this middle area.", "Pain can be a felt sense, but the default is to start in the middle area."],
+        src: "pp. 27, 29" },
+      { q: "Ted felt “nothing” when he first sensed inside. What was actually happening?",
+        options: ["He had no feelings to find that day", "His stomach was clenched so long it felt normal", "He was too relaxed to notice his body", "He was looking in the wrong part of his body"],
+        answer: 1,
+        why: ["He did find something once he asked an open question.", "Clenched had become his normal, so he didn't notice it.", "Over-relaxing is a separate tip in the book, not what happened to Ted.", "He was sensing his throat, chest, and stomach, which is right."],
+        src: "p. 12" }
+    ],
+    m3: [
+      { q: "According to Cornell, what happens to a feeling when you allow it to be as it is?",
+        options: ["It tends to grow bigger and harder to control", "It tends to settle down and change", "It tends to stay the same until it's analyzed", "It tends to fade only once you ignore it"],
+        answer: 1,
+        why: ["That's the common fear. Cornell reports the reverse.", "“When it is felt, it changes.”", "Gendlin's line, which Cornell quotes, says it's split-off feelings that stay the same.", "Ignoring a feeling is splitting it off, which keeps it the same."],
+        src: "p. 16" },
+      { q: "Why does Focusing work best when you “sit next to” a feeling rather than plunge into it?",
+        options: ["Because strong feelings are dangerous to feel", "Because from beside it you can listen", "Because it's easier to ignore it from there", "Because sitting helps you breathe more deeply"],
+        answer: 1,
+        why: ["The book doesn't call feelings dangerous; it says you can't relate to something you're drowning in.", "If you are the feeling, there's no one left to hear its story.", "Sitting next to it is the opposite of ignoring it.", "The lake picture is about relationship, not breathing."],
+        src: "p. 17" },
+      { q: "Which rewrite of “I am sad” follows Cornell's tip?",
+        options: ["“I shouldn't be this sad”", "“Part of me is sad”", "“I'm not really that sad”", "“Why am I always so sad?”"],
+        answer: 1,
+        why: ["That's judging the feeling.", "Now it's part of you, not all of you.", "That's talking yourself out of the feeling.", "That's analyzing, and “why” belongs to the head."],
+        src: "p. 17" }
+    ],
+    m4: [
+      { q: "Tom tries to be friendly to his fear but feels angry impatience instead. What does the book suggest?",
+        options: ["Push past the anger and go back to the fear", "Say hello to the angry, impatient feeling", "Stop the session and try again another day", "Tell the fear that it has no reason to exist"],
+        answer: 1,
+        why: ["Cornell warns that pushing past a feeling about the feeling makes the session stall.", "The unfriendly reaction becomes the new thing to greet.", "Nothing is wrong; this is a normal part of Focusing.", "Reasoning a feeling away is one of the responses that keeps it stuck."],
+        src: "p. 20" },
+      { q: "You think, “I already know why I'm afraid.” What does the book say about this?",
+        options: ["Good: knowing the cause means you're close to done", "There's likely something about it you don't know yet", "Write the cause down so you can set the issue aside", "Explain the cause to the fear so that it can relax"],
+        answer: 1,
+        why: ["Cornell says assuming you know blocks you from finding out.", "As long as the felt sense still wants attention, there's more to learn. That's the attitude of not knowing.", "She suggests setting what you know aside so you can keep sensing, not setting the issue aside.", "Explaining is reasoning with the feeling, which keeps it stuck."],
+        src: "p. 21" },
+      { q: "What did Catherine realize when her shoulder tightness “wouldn't talk”?",
+        options: ["She had never actually said hello to it", "She was asking the wrong kind of question", "Her tightness was only a physical problem", "She needed a partner to guide her through"],
+        answer: 0,
+        why: ["She'd called it bad and tried to fix it, but never greeted it.", "The issue came before questions: she skipped the hello.", "Once she said hello, it released and gave its message.", "She found the answer on a card by herself."],
+        src: "p. 19" }
+    ],
+    m5: [
+      { q: "You offer the word “squeezing” to a feeling. It's partly right, but something's missing. What next?",
+        options: ["Keep “squeezing” since it's close enough", "Sense for what more is there and offer that too", "Drop the word and start over from the beginning", "Ask the feeling why it won't accept the word"],
+        answer: 1,
+        why: ["Close is good, but “partly, there's more” is a signal to keep sensing.", "In the book's example, “scared” comes next: squeezing and scared.", "Partly right is progress; you build on it.", "“Why” questions invite the head to take over."],
+        src: "p. 33" },
+      { q: "What does Cornell call the biggest barrier to finding a felt sense?",
+        options: ["Not having enough quiet time to practice", "Wondering if you're doing it right", "Sitting in the wrong posture", "Having too many feelings to choose from"],
+        answer: 1,
+        why: ["Time helps, but she names something else as the biggest barrier.", "Her advice is to forget the term and just look for “something.”", "She says you don't need any particular position.", "That's a separate problem, handled by clearing a space."],
+        src: "p. 29" },
+      { q: "You're describing a felt sense but can't find the right word. What does Cornell advise?",
+        options: ["Push harder until the exact word comes", "Use any word so you can move on", "Gently wonder, and don't strain for it", "Skip ahead to asking it questions"],
+        answer: 2,
+        why: ["She says you can't force a description, and straining doesn't help.", "Any word should still be checked back with the body.", "Loving the felt sense matters more than understanding it, and understanding comes in its own time.", "Questions work best after the felt sense has been described and kept company."],
+        src: "p. 32" }
+    ],
+    m6: [
+      { q: "Which question would Cornell suggest instead of “Why are you angry?”",
+        options: ["“What gets you so angry?”", "“Shouldn't you calm down now?”", "“Who made you this angry?”", "“When did you first get angry?”"],
+        answer: 0,
+        why: ["“What” keeps it in the body; “why” invites the head.", "That's pressure to change, not curiosity.", "That points to blame and the outside world.", "That turns toward analyzing the past."],
+        src: "p. 41" },
+      { q: "Jeanne said her throat felt “uncomfortable.” After she sensed it from its point of view, what did she find?",
+        options: ["It felt scared", "It felt sore", "It felt calm", "It felt nothing"],
+        answer: 0,
+        why: ["“Uncomfortable” was how it felt to her; “scared” was how it felt itself.", "That would still be her view from outside.", "Nothing in the story suggests calm.", "She did find something new."],
+        src: "pp. 37–38" },
+      { q: "You have a 30-minute session. About when should you begin stopping?",
+        options: ["Around minute 20", "Around minute 25", "Around minute 29", "Right at minute 30"],
+        answer: 1, fixed: true,
+        why: ["That leaves about ten minutes, more than the rule of thumb calls for.", "The book's example: a thirty-minute session needs about five minutes to stop.", "One minute is short for a thirty-minute session.", "Starting to stop at the very end leaves no time to end gently."],
+        src: "pp. 42–43" },
+      { type: "recall", q: "Why does Cornell say a question to a felt sense isn't meant to get a literal answer?",
+        answer: "<p>The felt sense won't “open a little mouth” and talk. The question is a way to hold a friendly, curious attitude and direct your attention, so that you sense more of what's there.</p>",
+        src: "pp. 38–39" }
+    ],
+    m7: [
+      { q: "What is a “felt shift”?",
+        options: ["The first moment you notice a felt sense", "A good feeling as something inside changes", "Moving attention from one feeling to the next", "A change in which body part you focus on"],
+        answer: 1,
+        why: ["That's finding the felt sense, not the shift.", "Gendlin's term for the release and relief of inner change.", "Moving on to the next problem is exactly what Cornell warns against.", "The shift is about inner change, not about location."],
+        src: "p. 45" },
+      { q: "Matt couldn't decide whether to move to Seattle. How did Focusing help?",
+        options: ["It replaced research with a single gut decision", "He felt each option separately and compared them", "It showed him the logical pros and cons more clearly", "His friend in Seattle guided his Focusing for him"],
+        answer: 1,
+        why: ["He focused several times and also researched jobs for about a month.", "Staying felt like “going nowhere”; moving felt like “moving forward.”", "He had already made pros-and-cons lists, and they left him unsure.", "He focused on his own."],
+        src: "pp. 54–55" },
+      { q: "Darrell's inner Critic says “It's too late.” What does the book suggest asking it?",
+        options: ["What it's afraid of, and then what it wants", "Why it keeps saying such hurtful things", "To be quiet until the session is over", "For proof that its warning is actually true"],
+        answer: 0,
+        why: ["The Critic is always afraid of something; hear the fear, then ask what it wants.", "“Why” is the head's question and sounds like blame.", "Pushing it away gives only short-lived relief.", "Arguing with the Critic doesn't change it."],
+        src: "pp. 61–62, 71" }
+    ],
+    m8: [
+      { q: "A man said he felt “nothing,” but had noticed a shaky throat and an open chest, and dismissed both. What's Cornell's advice?",
+        options: ["Wait for a stronger feeling before counting it", "Give possible felt senses the benefit of the doubt", "Try a different technique such as meditation", "Accept that some people simply can't focus"],
+        answer: 1,
+        why: ["That's what he did, and it's why he ended up with “nothing.”", "If they might be there, assume they are.", "The book offers Focusing moves, not a switch to another method.", "Cornell herself felt a blank at first and learned."],
+        src: "pp. 64–65" },
+      { q: "During Focusing you see a lion pacing in a cage, in front of your eyes. What does the book suggest?",
+        options: ["Ignore it, since images distract from the body", "Ask how your body feels as you see the image", "Watch where the image goes, like a movie", "Draw the lion first and come back to Focusing later"],
+        answer: 1,
+        why: ["Cornell says not to discard the image.", "Tony did this and found a tightness in his chest.", "Watching an inner movie is the pitfall she warns about.", "Drawing can help, but the key move is to connect the image to a body feeling."],
+        src: "pp. 67–68" },
+      { q: "Your felt sense seems to want you to fly to Tahiti today. What's the Focusing response?",
+        options: ["Explain to it why that's impossible", "Book the trip, since your body knows best", "Acknowledge it and listen for more", "Ignore it and return to the original issue"],
+        answer: 2,
+        why: ["Arguing with your body stops the process.", "Hearing what a feeling wants isn't a promise to act.", "In Cornell's example, the real need turned out to be time to relax.", "Ignoring it is another way of not listening."],
+        src: "p. 69" }
+    ],
+    drill9: [
+      { q: "Focuser: “I'm worried I won't get this project done, and so much depends on it.”",
+        options: ["“You're feeling worried right now.”", "“Have you tried breaking it into smaller pieces?”", "“Why do you think you're so worried?”", "“I'm sure it will turn out fine.”"],
+        answer: 0,
+        why: ["Say back the feeling, in present time.", "That's advice about their life. You're not the fixer.", "A direct “why” question pulls them into their head and out of their process.", "Reassurance tries to fix the feeling instead of keeping it company."],
+        src: "p. 80" },
+      { q: "Focuser: “I don't know what to call this feeling in my throat.”",
+        options: ["“You're feeling something in your throat.”", "“It's probably anxiety about the exam.”", "“Take a guess. Is it sadness or anger?”", "“Let's figure out what it's called.”"],
+        answer: 0,
+        why: ["“Something” points to what they do feel. “I don't know” is in the head.", "That's your interpretation, not theirs.", "Pushing for a label rushes the felt sense.", "Hunting for a name pulls them into their head. Stay with what they feel."],
+        src: "p. 82" },
+      { q: "Focuser: “I am so sad that my grandpa is gone.”",
+        options: ["“Part of you is so sad that he's gone.”", "“Loss is part of life for everyone.”", "“What do you miss about him most?”", "“You should talk to a counselor.”"],
+        answer: 0,
+        why: ["“Part of you” helps them be with the sadness without drowning in it.", "That's a lesson, not listening.", "A direct question pulls them out. You could suggest they ask it inside.", "That's advice about their life."],
+        src: "p. 81" },
+      { q: "Focuser: “I keep trying to work out how to make this nervous feeling go away.”",
+        options: ["“See if it's OK to just say hello to it.”", "“Maybe try some deep breathing.”", "“What do you think is causing it?”", "“You need to calm down a bit first.”"],
+        answer: 0,
+        why: ["Like the book's example: a reminder to stop fixing and just be with it.", "That's a way to get rid of the feeling.", "That invites more thinking, not sensing.", "That's pressure to fix the feeling, the opposite of keeping it company."],
+        src: "p. 84" }
+    ],
+    m9: [
+      { q: "The listener says back “tightness in your throat.” What should the Focuser do with those words?",
+        options: ["Agree politely so the session keeps moving", "Check them against the feeling to see if they fit", "Correct the listener's exact wording out loud", "Ignore them and keep talking about the topic"],
+        answer: 1,
+        why: ["Cornell says this is no place for politeness.", "Maybe it's really “squeezing.”", "The point is to check inside, not to correct the listener.", "The listener's words are a tool for the Focuser."],
+        src: "pp. 79–80" },
+      { q: "Which suggestion is a listener allowed to make?",
+        options: ["“You might sense how your body feels right now.”", "“You might break up with him, honestly.”", "“You might find a new job next month.”", "“You might apologize to your sister.”"],
+        answer: 0,
+        why: ["Suggestions about the Focusing process are fine.", "That's a suggestion about their life, which is off limits.", "Also about their life.", "Also about their life."],
+        src: "p. 82" },
+      { q: "Why does the listener suggest questions rather than ask them?",
+        options: ["Direct questions pull the Focuser out of their inner process", "Listeners aren't trained well enough to ask good questions", "Questions take too long in a short partnership session", "The Focuser should never hear any questions at all"],
+        answer: 0,
+        why: ["Suggestions keep them inside; direct questions bring them out of themselves.", "Cornell says any suggested question can help, even an imperfect one.", "Time isn't the reason given.", "The Focuser does ask questions, inwardly."],
+        src: "pp. 86–87" }
+    ],
+    m10: [
+      { q: "A client says: “I suppose it's a defense mechanism. There's... a sort of fog inside. Not fog exactly. I guess I'm avoiding.” Which reply best helps Focusing?",
+        options: ["“You think it's a defense mechanism.”", "“A sort of fog, but not fog exactly.”", "“What are you avoiding, do you think?”", "“Avoidance is normal at this stage.”"],
+        answer: 1,
+        why: ["Reflecting the head's label keeps the client analyzing.", "Reflect the edge, the part that's being felt.", "That follows the jargon back into the head.", "That's interpretation, and it skips the felt part."],
+        src: "pp. 93–94" },
+      { q: "A client says “No, that's not quite right” to the therapist's reflection. How does Cornell read this?",
+        options: ["As resistance the therapist should explore", "As a sign the client is sensing something more", "As a sign the therapist should stop reflecting", "As a problem in the therapy relationship"],
+        answer: 1,
+        why: ["She says reading it as resistance misses the point.", "It shows contact with something the words haven't caught yet.", "Reflecting is still useful; the “no” means it's working.", "She says this “no” isn't about the therapist in a negative way."],
+        src: "pp. 94–95" },
+      { q: "A client feels “blank” in throat, chest, and stomach. What's one technique the book offers?",
+        options: ["Ask them to try harder to feel an emotion", "Ask if the blank in one place differs from another", "Tell them which emotion they are probably feeling", "Move on to talking about their week instead"],
+        answer: 1,
+        why: ["Trying harder adds pressure, which felt senses don't like.", "A difference is the easiest thing to feel.", "The therapist can offer a guess, but the client must check it.", "That leaves the felt level behind."],
+        src: "pp. 95–96" },
+      { type: "recall", q: "Name two things a client could ask their therapist for, according to the last chapter.",
+        answer: "<p>Any two of: starting some sessions by quietly sensing in the body; times of quiet to find words; a reminder to slow down and sense when confused; freedom to say “No, that's not quite right” to the therapist's words.</p>",
+        src: "pp. 105–107" }
+    ],
+    final: [
+      { q: "What did the therapy-tape research find about the therapists in successful and unsuccessful cases?",
+        options: ["Successful therapists were more empathic", "There was no significant difference", "Successful therapists talked less overall", "Successful therapists used Focusing"],
+        answer: 1,
+        why: ["That was the common-sense guess, and it was wrong.", "The difference was in the clients.", "The book doesn't report that.", "Focusing didn't exist yet; it came from this research."],
+        src: "p. 4", from: "m1" },
+      { q: "Which is NOT one of the things Cornell says keeps a feeling stuck?",
+        options: ["Judging it", "Analyzing why", "Saying hello", "Reasoning with it"],
+        answer: 2,
+        why: ["Judging is on her list of unhelpful responses.", "Analyzing is on the list.", "Saying hello is the move that lets a feeling change.", "Reasoning is on the list."],
+        src: "pp. 16, 18", from: "m3" },
+      { q: "Rebecca's chest was getting tighter and tighter. What eased it?",
+        options: ["Breathing deeply into her chest", "Saying hello to the constriction", "Reminding herself she was safe", "Moving her attention to her feet"],
+        answer: 1,
+        why: ["Breathing a feeling away isn't the Focusing move here.", "Acknowledging it let it relax.", "That's reasoning with the feeling.", "Moving away isn't acknowledging."],
+        src: "p. 19", from: "m4" },
+      { q: "Which order matches the start of a session?",
+        options: ["Sense into body → invite something → say hello → describe it", "Say hello → sense into body → describe it → invite something", "Describe it → sense into body → invite something → say hello", "Invite something → describe it → sense into body → say hello"],
+        answer: 0,
+        why: ["You can't greet something before it comes, or describe it before greeting it.", "You need to find something before you can say hello.", "There's nothing to describe until you've sensed in and found something.", "You first bring awareness into the body, then invite."],
+        src: "pp. 27–30", from: "m5" },
+      { q: "Which is a sign that an answer came from your head rather than your felt sense?",
+        options: ["It came slowly and surprised you", "It starts with “I think” or “probably”", "It brought a little relief in your body", "It felt right when you checked it"],
+        answer: 1,
+        why: ["Slow and surprising is typical of body answers.", "Quick, familiar, “I think” answers usually come from the head.", "Relief is a sign of a body answer.", "That's the body confirming."],
+        src: "pp. 41, 72", from: "m6" },
+      { q: "You end a session but the issue isn't resolved. What does Cornell say?",
+        options: ["The session failed and should be repeated soon", "It can still be a fine time to stop for now", "Keep going until the issue feels fully solved", "It means you probably skipped saying hello"],
+        answer: 1,
+        why: ["She counts staying with a felt sense as success.", "Change comes in steps. Ask if it's OK to stop, say “I'll be back,” and keep the promise.", "Big issues can take many sessions.", "Not necessarily; unresolved is normal."],
+        src: "pp. 42, 46", from: "m6" },
+      { q: "“I want to start exercising, but I don't.” In the book's terms, this is...",
+        options: ["An action block", "An addiction", "A feeling about the feeling", "A background feeling"],
+        answer: 0,
+        why: ["“I want to ___, but I don't.”", "An addiction runs the other way: “I want to stop ___.”", "That's a reaction to a feeling.", "That's a constant feeling like “always tired.”"],
+        src: "p. 7", from: "m7" },
+      { q: "After a powerful session, what does Cornell recommend?",
+        options: ["Get back to your day so the change can settle", "Ground it: notice how old situations feel now", "Start right away on the next problem on your list", "Analyze what caused the shift to make it repeatable"],
+        answer: 1,
+        why: ["She says opening your eyes and carrying on makes it harder for the change to take hold.", "Let the change settle into your body; journal, make art, or tell a friend.", "That's the “Next!” habit she warns against.", "She says you don't need to understand it; protect and receive it."],
+        src: "pp. 45–47", from: "m7" },
+      { q: "“You're making all this up. None of it is real.” Which voice is this, and what's the move?",
+        options: ["The Critic; ask what it's afraid of", "The Doubter; check with your body", "Your head; ask the question again", "A felt sense; say hello and describe it"],
+        answer: 1,
+        why: ["The Critic attacks your worth, not whether your experience is real.", "The Doubter can't settle doubts, but your body can.", "The head gives quick answers; this voice questions realness.", "This is a voice about the process, not a body feeling."],
+        src: "pp. 71–72", from: "m8" },
+      { q: "What is the hardest and most important thing for a Focusing listener to remember?",
+        options: ["To remember every word the Focuser says", "That they are not the expert or the fixer", "To keep the session moving along briskly", "To ask the right question at the right time"],
+        answer: 1,
+        why: ["Usually the last thing said is enough.", "The Focuser is responsible for the session and their life.", "Focusing needs time, not speed.", "Listeners suggest questions sparingly; they don't steer."],
+        src: "pp. 78–79", from: "m9" },
+      { q: "In the book, what does Cornell say is the source of change?",
+        options: ["Clear thinking about your problems", "Strong emotional release", "The body as sensed in the present", "Advice from a trusted expert"],
+        answer: 2,
+        why: ["Thoughts can come with change but aren't its source.", "Emotions can come with change but aren't its source.", "That's why therapists invite present body awareness.", "Cornell stresses the partnership model over the expert model."],
+        src: "p. 90", from: "m10" }
+    ]
+  },
+  sorts: {
+    tapes: {
+      bins: [ { id: "head", label: "Up in the head", hint: "clear, fast, explaining" },
+              { id: "felt", label: "Touching a felt sense", hint: "slow, groping, in the body" } ],
+      items: [
+        { text: "“It's... hmm... right here in my chest. Not exactly anger.”", bin: "felt", why: "Slow, groping, pointing at the body, and checking a word." },
+        { text: "“I've analyzed it. It all goes back to my parents' divorce.”", bin: "head", why: "A finished explanation. Nothing is being felt right now." },
+        { text: "“There's a sort of heavy... no, sticky feeling in my stomach.”", bin: "felt", why: "Searching for the right word for something felt now." },
+        { text: "“My sister always does this, and then my mom takes her side.”", bin: "head", why: "A story about other people, told smoothly." },
+        { text: "“I keep crying about it, but I know exactly why I'm upset.”", bin: "head", why: "Tears aren't the test. The book says even crying clients stayed in their heads if they never touched something unclear." },
+        { text: "“I don't know how to say this. Something in my throat...”", bin: "felt", why: "Hard to describe, and located in the body." },
+        { text: "“It's a classic fear of failure. I read about it.”", bin: "head", why: "A label from outside, not a fresh feeling." },
+        { text: "“Hmm. It's... like a wall. No. Something softer than that.”", bin: "felt", why: "Checking a word against the feeling and finding it doesn't quite fit." }
+      ]
+    },
+    stuck: {
+      bins: [ { id: "same", label: "Keeps it the same", hint: "fighting or fixing" },
+              { id: "change", label: "Lets it change", hint: "allowing and listening" } ],
+      items: [
+        { text: "“I shouldn't feel this way.”", bin: "same", why: "Judging the feeling." },
+        { text: "“There's no reason to be scared.”", bin: "same", why: "Being “reasonable” with it." },
+        { text: "“Others have it much worse than me.”", bin: "same", why: "Talking yourself out of it." },
+        { text: "“Why do I always feel like this?”", bin: "same", why: "Analyzing it." },
+        { text: "“Hello. I know you're there.”", bin: "change", why: "Acknowledging it, the first step of a relationship." },
+        { text: "“Part of me feels scared.”", bin: "change", why: "Dis-identifying, so you can be with it." },
+        { text: "“Yes, that's how I feel right now.”", bin: "change", why: "Letting it be as it is." },
+        { text: "“I'm curious what you want me to know.”", bin: "change", why: "Interested curiosity." }
+      ]
+    },
+    blocks: {
+      bins: [ { id: "block", label: "Action block", hint: "I want to ___, but I don't" },
+              { id: "addiction", label: "Addiction", hint: "I want to stop ___, but I don't" } ],
+      items: [
+        { text: "I keep putting off my history essay.", bin: "block", why: "You want to write it, but you don't." },
+        { text: "I scroll my phone for hours every night.", bin: "addiction", why: "You want to stop, but you don't." },
+        { text: "I mean to clean my room, but never do.", bin: "block", why: "Cornell's example: never getting your desk organized." },
+        { text: "I eat sweets even when I'm not hungry.", bin: "addiction", why: "Like Angela: a repeated behavior you want to stop." },
+        { text: "I want to try out for the team, but don't.", bin: "block", why: "Wanting to act, and not acting." },
+        { text: "I bite my nails whenever I'm stressed.", bin: "addiction", why: "A habit you want to stop and keep doing." }
+      ]
+    },
+    voices: {
+      bins: [ { id: "critic", label: "The Critic", hint: "attacks you" },
+              { id: "doubter", label: "The Doubter", hint: "says it isn't real" },
+              { id: "head", label: "The head", hint: "quick, known answers" } ],
+      items: [
+        { text: "“You'll fail at this like everything else.”", bin: "critic", why: "A shaming attack on you." },
+        { text: "“What a stupid way to feel.”", bin: "critic", why: "Judging you for your feeling." },
+        { text: "“You're so inarticulate.”", bin: "critic", why: "One of the book's own Critic lines." },
+        { text: "“You're just making this up.”", bin: "doubter", why: "Questioning whether your experience is real." },
+        { text: "“That wasn't real. It was just how you're sitting.”", bin: "doubter", why: "Denying that what you felt was real." },
+        { text: "“It's too bad this doesn't work for me.” (right after a great session)", bin: "doubter", why: "Said after a remarkable session: the Doubter wiping it out." },
+        { text: "“It's obviously stress from work.” (instantly)", bin: "head", why: "Quick, familiar, and nothing new." },
+        { text: "“It must be because I didn't sleep.” (instantly)", bin: "head", why: "A quick explanation; “must be” is a sign of the logical mind." },
+        { text: "“I think it's about my dad, probably.”", bin: "head", why: "“I think” and “probably” come from the head." }
+      ]
+    }
+  },
+  orders: {
+    first6: {
+      label: "The first six steps, in order",
+      items: ["“Which way today?”", "“I'm sensing into my body.”", "“What wants my awareness now?”", "“I'm saying hello to what's here.”", "“I'm finding the best way to describe it.”", "“I'm checking back with my body.”"],
+      explain: "You choose a direction, bring attention into the body, invite something, greet it, describe it, and check the description. Checking back then continues all session. (pp. 26–33)"
+    },
+    questions: {
+      label: "Questions to a felt sense, first to last",
+      items: ["Does it have an emotional quality?", "What gets it so ___?", "What does it need?", "How would “all OK” feel?"],
+      explain: "Emotion first, then its own word in “What gets it so...?”. Needs come later so you hear the feeling before trying to ease it. “All OK” is for when something still feels unfinished. (pp. 39–40)"
+    }
+  },
+  cards: [
+    { front: "Why did Gendlin's team study therapy tapes?", back: "To find out why therapy helps some people but not others.", src: "p. 3" },
+    { front: "What did successful therapy clients do that others didn't?", back: "Slowed down and groped for words for something they felt in their body right then.", src: "pp. 4–5" },
+    { front: "How early could the researchers predict success?", back: "From the first or second session.", src: "p. 4" },
+    { front: "What does Gendlin say happens to a feeling that is split off, not felt?", back: "It remains the same. When it is felt, it changes.", src: "p. 16" },
+    { front: "What's Cornell's lake picture about?", back: "You can plunge into a feeling or sit beside it. Focusing works best from beside it, where you can listen.", src: "p. 17" },
+    { front: "What are the four qualities of good listening?", back: "A welcoming presence, holding the space, hearing the essence, staying in present time.", src: "p. 18" },
+    { front: "What should you do when you can't feel friendly toward a feeling?", back: "Say hello to the unfriendly reaction itself: the feeling about the feeling.", src: "p. 20" },
+    { front: "What are the three possible results of checking a word back with your body?", back: "Yes, it fits; partly, there's more; or not right, which points toward what is.", src: "pp. 32–33" },
+    { front: "What does Cornell say about Jeanne's “uncomfortable” throat?", back: "That was how it felt to her. From its own point of view, it felt scared.", src: "pp. 37–38" },
+    { front: "What should you ask instead of “Why are you angry?”", back: "“What gets you so angry?”", src: "p. 41" },
+    { front: "How much time should you leave for stopping?", back: "About one to two minutes per ten minutes of Focusing.", src: "pp. 42–43" },
+    { front: "How does Cornell suggest handling the inner Critic?", back: "Name it, say hello, ask what it's afraid of, then ask what it wants. Just hear the answers.", src: "pp. 70–71" },
+    { front: "What does a listener say back when the Focuser says “I don't know what this is”?", back: "“You're feeling something.” “I don't know” is in the head; “something” is in the body.", src: "p. 82" },
+    { front: "What's the single most helpful guiding suggestion?", back: "“Take some time to say hello to that.”", src: "p. 84" },
+    { front: "What two small things can a client ask their therapist for?", back: "For example: times of quiet to find words, and freedom to say “No, that's not quite right.”", src: "pp. 106–107" }
+  ],
+  glossary: {
+    "Focusing": "A way of paying gentle, accepting attention to a feeling in your body and letting it tell you more. Gendlin named it after studying why therapy works for some people. (pp. 2–5)",
+    "felt sense": "A body sensation that has meaning, because it is about something in your life, like a jittery stomach before a speech. Often vague at first. (pp. 3, 29)",
+    "felt shift": "Gendlin's term for the good feeling when something changes inside: relief, release, fresh energy, an “aha.” (p. 45)",
+    "psychotherapy": "Talking with a trained professional to work through emotional problems. Often shortened to therapy. (p. 3)",
+    "dis-identification": "Stepping back slightly from a feeling so it is part of you rather than all of you, as in “part of me is sad.” (pp. 17, 97)",
+    "feeling about the feeling": "A reaction to a feeling that blocks acceptance, such as being angry about your fear. It becomes the next thing to greet. (p. 20)",
+    "not knowing": "The attitude of approaching a felt sense without assuming you already know what it's about. (p. 21)",
+    "checking back": "Offering a word, image, or sentence back to the felt sense to sense whether it fits. Done all through a session. (pp. 32–33)",
+    "proprioception": "Your sense of where your body parts are without looking. Cornell uses it to help people bring awareness into the body. (p. 27)",
+    "interested curiosity": "Open, friendly wonder about what's there, with no agenda. Cornell's word for the attitude you sit with. (p. 36)",
+    "action block": "Something you want to do but don't: “I want to ___, but I don't.” Procrastination is the all-purpose one. (p. 7)",
+    "inner Critic": "The harsh inner voice that attacks you with shaming accusations. Cornell says it is always afraid of something. (pp. 70–71)",
+    "Doubter": "The inner voice that says your experience isn't real or that nothing is happening. (p. 71)",
+    "clearing a space": "Acknowledging each concern in turn and imagining setting it somewhere safe, until you feel more spacious inside. (pp. 65–66)",
+    "background feeling": "A feeling so constant you stop noticing it, like “always tired.” Cornell compares it to wallpaper. (p. 66)",
+    "body-felt image": "An image felt inside the body, like “a rock in my stomach,” as opposed to a picture seen in front of the eyes. (p. 67)",
+    "Focusing partnership": "Two friends who split their time equally and take turns as Focuser and listener. (p. 77)",
+    "Focuser": "The person doing the Focusing, speaking aloud some of what they sense. (p. 77)",
+    "listener": "The Focuser's companion, who stays present and says back some of what they hear. (pp. 77–79)",
+    "the edge": "Gendlin's term for moments of groping for words to describe something felt right now. (p. 93)",
+    "attunement": "A short spoken guide that leads attention from hands and feet into the middle of the body, then invites “What's here now?” (pp. 97–98)",
+    "mini-Focusing": "A little bit of Focusing in the middle of daily life, when a feeling from a session comes back. (p. 14)"
+  },
+  glossaryCards: true
+};
+</script>
+<script>
+/* ===== Noah's Weblog drag and drop v1 =====
+   Real drag and drop for two activities, usable every way people try:
+     WeblogDnD.order(container, { items: [...in the correct order...] })
+     WeblogDnD.sort(container,  { bins: [{id, label, hint}], items: [{text, bin, why}] })
+   Mouse: drag the whole item. Touch: drag by the handle (the rest scrolls).
+   Tap or click: select an item, then tap where it goes.
+   Keyboard: Space picks up, arrow keys move, Space drops.
+   Self-contained: injects its own styles and needs nothing else. */
+(function () {
+  "use strict";
+  if (window.WeblogDnD) return;
+
+  var CSS = [
+    ".dnd-help{font:13px/1.5 Verdana,Geneva,Tahoma,sans-serif;color:var(--ink-soft,#2b2b2b);margin:0 0 8px}",
+    ".dnd-status{font:13px/1.5 Verdana,Geneva,Tahoma,sans-serif;margin:8px 0}",
+    ".dnd-status:empty{display:none}",
+    ".dnd-actions{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}",
+    ".dnd-item,.dnd-card{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1px solid var(--field,#6e6e6e);",
+    "  padding:8px 10px;cursor:grab;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}",
+    ".dnd-item:focus-visible,.dnd-card:focus-visible{outline:2px dotted var(--ink,#000);outline-offset:2px}",
+    ".dnd-handle{flex:none;display:inline-flex;align-items:center;justify-content:center;width:28px;min-height:28px;margin:-4px 0 -4px -4px;",
+    "  font:18px/1 Verdana,Geneva,sans-serif;color:var(--btn-lo,#808080);cursor:grab;touch-action:none}",
+    ".dnd-text{flex:1;min-width:0}",
+    ".dnd-mark{flex:none;font:bold 12px/1.6 Verdana,Geneva,sans-serif;white-space:nowrap}",
+    ".dnd-dragging{opacity:.35;border-style:dashed}",
+    ".dnd-ghost{position:fixed;z-index:2147483646;pointer-events:none;margin:0;opacity:.95;cursor:grabbing;",
+    "  box-shadow:3px 3px 0 var(--btn-lo,#808080)}",
+    ".dnd-grabbed,.dnd-card[aria-pressed=true]{outline:2px dotted var(--ink,#000);outline-offset:2px;background:var(--tint,#f2f2f2)}",
+    ".dnd-ok{border-left:4px solid var(--c6,#008000)}.dnd-ok .dnd-mark{color:var(--c6,#008000)}",
+    ".dnd-no{border-left:4px solid var(--c2,#800000)}.dnd-no .dnd-mark{color:var(--c2,#800000)}",
+    ".dnd-list{list-style:none;margin:0;padding:0;counter-reset:dnd}",
+    ".dnd-list .dnd-item{margin:0 0 6px}",
+    ".dnd-list .dnd-item::before{counter-increment:dnd;content:counter(dnd) \".\";flex:none;min-width:1.6em;font:bold 13px/1.6 Verdana,Geneva,sans-serif}",
+    ".dnd-tray{border:1px dashed var(--lo,#999);padding:10px;margin:0 0 12px;display:grid;gap:8px;min-height:56px}",
+    ".dnd-tray-label{font:bold 13px/1.4 Verdana,Geneva,sans-serif;margin:0}",
+    ".dnd-bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}",
+    ".dnd-bin{border:2px solid var(--lo,#999);background:#fff;padding:8px 10px 10px;min-height:120px;display:flex;flex-direction:column;gap:6px}",
+    ".dnd-bin.dnd-over{border-color:var(--c1,#000080);background:var(--tint,#f2f2f2)}",
+    ".dnd-bin-head{font:bold 14px/1.3 Verdana,Geneva,sans-serif;margin:0}",
+    ".dnd-bin-hint{font:12px/1.4 Verdana,Geneva,sans-serif;color:var(--ink-soft,#2b2b2b);margin:0}",
+    ".dnd-bin-here{align-self:flex-start}",
+    ".dnd-card .dnd-fb{display:block;font:12px/1.45 Verdana,Geneva,sans-serif;margin-top:4px}",
+    ".dnd-card .dnd-fb:empty{display:none}",
+    ".dnd-card .dnd-body{flex:1;min-width:0}",
+    "[hidden]{display:none!important}",
+    "@media (prefers-reduced-motion:reduce){.dnd-ghost{transition:none}}"
+  ].join("\n");
+
+  function injectStyles() {
+    if (document.getElementById("weblog-dnd-css")) return;
+    var s = document.createElement("style");
+    s.id = "weblog-dnd-css";
+    s.textContent = CSS;
+    document.head.appendChild(s);
+  }
+
+  function el(tag, cls, html) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+  function shuffled(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function plain(html) { var d = document.createElement("div"); d.innerHTML = html; return (d.textContent || "").trim(); }
+
+  /* ---------- pointer dragging shared by both activities ---------- */
+  // Calls hooks.start(), hooks.move(x, y), hooks.drop(x, y). Mouse drags from anywhere on the
+  // item; touch and pen drag only from the handle so the rest of the page still scrolls.
+  function draggable(item, handle, hooks) {
+    var st = null;
+    // listen on window while a drag is possible: the item itself moves in the DOM mid-drag,
+    // which would drop element-level pointer capture
+    function onMove(e) {
+      if (!st || e.pointerId !== st.id) return;
+      if (!st.dragging) {
+        if (Math.abs(e.clientX - st.x) + Math.abs(e.clientY - st.y) < (st.touch ? 3 : 6)) return;
+        st.dragging = true;
+        var r = item.getBoundingClientRect();
+        st.dx = st.x - r.left; st.dy = st.y - r.top;
+        st.ghost = item.cloneNode(true);
+        st.ghost.classList.add("dnd-ghost");
+        st.ghost.removeAttribute("id");
+        st.ghost.setAttribute("aria-hidden", "true");
+        st.ghost.style.width = r.width + "px";
+        document.body.appendChild(st.ghost);
+        item.classList.add("dnd-dragging");
+        hooks.start();
+      }
+      e.preventDefault();
+      st.lx = e.clientX; st.ly = e.clientY;
+      st.ghost.style.left = (e.clientX - st.dx) + "px";
+      st.ghost.style.top = (e.clientY - st.dy) + "px";
+      hooks.move(e.clientX, e.clientY);
+      autoScroll(e.clientY);
+    }
+    function onUp(e) { finish(e, false); }
+    function onCancel(e) { finish(e, true); }
+    function finish(e, cancelled) {
+      if (!st || e.pointerId !== st.id) return;
+      var was = st;
+      st = null;
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onCancel);
+      stopScroll();
+      if (!was.dragging) return;
+      was.ghost.remove();
+      item.classList.remove("dnd-dragging");
+      item._dndJustDragged = true;
+      setTimeout(function () { item._dndJustDragged = false; }, 0);
+      hooks.drop(cancelled ? null : was.lx, cancelled ? null : was.ly);
+    }
+    item.addEventListener("pointerdown", function (e) {
+      if (e.button !== 0 || st) return;
+      if (e.target.closest("a, button, input, select, textarea")) return;
+      var onHandle = handle && handle.contains(e.target);
+      if (e.pointerType !== "mouse" && !onHandle) return;
+      st = { id: e.pointerId, x: e.clientX, y: e.clientY, dragging: false, touch: e.pointerType !== "mouse" };
+      if (onHandle || e.pointerType === "mouse") e.preventDefault();   // no text selection or touch scroll
+      window.addEventListener("pointermove", onMove, { passive: false });
+      window.addEventListener("pointerup", onUp);
+      window.addEventListener("pointercancel", onCancel);
+    });
+  }
+
+  var scrollTimer = null, scrollSpeed = 0;
+  function autoScroll(y) {
+    var edge = 60;
+    scrollSpeed = y < edge ? -Math.ceil((edge - y) / 4) : y > innerHeight - edge ? Math.ceil((y - innerHeight + edge) / 4) : 0;
+    if (scrollSpeed && !scrollTimer) {
+      scrollTimer = setInterval(function () { if (scrollSpeed) window.scrollBy(0, scrollSpeed); }, 16);
+    } else if (!scrollSpeed) stopScroll();
+  }
+  function stopScroll() { clearInterval(scrollTimer); scrollTimer = null; scrollSpeed = 0; }
+
+  /* ---------- put in order ---------- */
+  function order(container, opts) {
+    injectStyles();
+    var items = opts.items || [];
+    container.textContent = "";
+    container.appendChild(el("p", "dnd-help", opts.help ||
+      "Drag the items into order. On a phone, drag by the ≡ handle. " +
+      "Keyboard: Space picks an item up, arrow keys move it, Space drops it."));
+    var list = el("ol", "dnd-list");
+    list.setAttribute("aria-label", opts.label || "Items to put in order");
+    var status = el("p", "dnd-status");
+    status.setAttribute("aria-live", "polite");
+    var check = el("button", "primary", "Check the order"); check.type = "button";
+    var again = el("button", "", "Shuffle and start over"); again.type = "button";
+    var actions = el("div", "dnd-actions"); actions.appendChild(check); actions.appendChild(again);
+    container.appendChild(list); container.appendChild(actions); container.appendChild(status);
+
+    function rows() { return [].slice.call(list.children); }
+    function clearMarks() {
+      rows().forEach(function (li) { li.classList.remove("dnd-ok", "dnd-no"); li.querySelector(".dnd-mark").textContent = ""; });
+      if (status.getAttribute("data-kind") === "result") { status.textContent = ""; status.removeAttribute("data-kind"); }
+    }
+    function say(msg) { status.removeAttribute("data-kind"); status.textContent = msg; }
+    function position(li) { return rows().indexOf(li) + 1; }
+
+    function build() {
+      list.textContent = "";
+      var idx = items.map(function (_, i) { return i; });
+      var mixed = shuffled(idx);
+      for (var tries = 0; items.length > 1 && tries < 20 && mixed.every(function (v, i) { return v === i; }); tries++) mixed = shuffled(idx);
+      mixed.forEach(function (i) {
+        var li = el("li", "dnd-item");
+        li.tabIndex = 0;
+        li.setAttribute("data-i", i);
+        var handle = el("span", "dnd-handle", "≡"); handle.setAttribute("aria-hidden", "true");
+        li.appendChild(handle);
+        li.appendChild(el("span", "dnd-text", items[i]));
+        li.appendChild(el("span", "dnd-mark"));
+        draggable(li, handle, {
+          start: clearMarks,
+          move: function (x, y) {
+            var before = null;
+            rows().some(function (other) {
+              if (other === li) return false;
+              var r = other.getBoundingClientRect();
+              if (y < r.top + r.height / 2) { before = other; return true; }
+              return false;
+            });
+            if (before !== li.nextSibling) list.insertBefore(li, before);
+          },
+          drop: function () { say("Moved to position " + position(li) + "."); li.focus({ preventScroll: true }); }
+        });
+        li.addEventListener("keydown", function (e) {
+          var grabbed = li.classList.contains("dnd-grabbed");
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            li.classList.toggle("dnd-grabbed");
+            clearMarks();
+            say(grabbed ? "Dropped at position " + position(li) + "." :
+              "Picked up. Position " + position(li) + " of " + items.length + ". Arrow keys move it; Space drops it.");
+          } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+            e.preventDefault();
+            var sib = e.key === "ArrowUp" ? li.previousElementSibling : li.nextElementSibling;
+            if (!sib) return;
+            if (grabbed) {
+              li._dndMoving = true;            // moving a focused element can fire blur; keep it grabbed
+              list.insertBefore(li, e.key === "ArrowUp" ? sib : sib.nextSibling);
+              li.focus({ preventScroll: false });
+              setTimeout(function () { li._dndMoving = false; }, 0);
+              say("Position " + position(li) + " of " + items.length + ".");
+            } else sib.focus();
+          } else if (e.key === "Escape" && grabbed) {
+            li.classList.remove("dnd-grabbed"); say("Dropped at position " + position(li) + ".");
+          }
+        });
+        li.addEventListener("blur", function () { if (!li._dndMoving) li.classList.remove("dnd-grabbed"); });
+        list.appendChild(li);
+      });
+      say("");
+    }
+
+    check.addEventListener("click", function () {
+      var good = 0;
+      rows().forEach(function (li, pos) {
+        var ok = +li.getAttribute("data-i") === pos;
+        if (ok) good++;
+        li.classList.toggle("dnd-ok", ok);
+        li.classList.toggle("dnd-no", !ok);
+        li.querySelector(".dnd-mark").textContent = ok ? "✓" : "✗ belongs at " + (+li.getAttribute("data-i") + 1);
+      });
+      status.setAttribute("data-kind", "result");
+      status.innerHTML = good === items.length
+        ? "<strong>All " + items.length + " in the right order.</strong> " + (opts.explain || "")
+        : "<strong>" + good + " of " + items.length + " in the right place.</strong> Move the marked ones and check again.";
+      if (opts.onCheck) opts.onCheck(good, items.length);
+    });
+    again.addEventListener("click", build);
+    build();
+    return { reset: build };
+  }
+
+  /* ---------- sort into bins ---------- */
+  function sort(container, opts) {
+    injectStyles();
+    var bins = opts.bins || [], items = opts.items || [];
+    var saved = (opts.load && opts.load()) || {};
+    container.textContent = "";
+    container.appendChild(el("p", "dnd-help", opts.help ||
+      "Drag a card into a box. On a phone, drag by the ≡ handle, or tap a card and then its box. " +
+      "Keyboard: Space selects a card, then Tab to “Move here”."));
+    var trayLabel = el("p", "dnd-tray-label");
+    var tray = el("div", "dnd-tray");
+    tray.setAttribute("aria-label", "Cards to sort");
+    var binWrap = el("div", "dnd-bins");
+    var status = el("p", "dnd-status");
+    status.setAttribute("aria-live", "polite");
+    var reset = el("button", "", "Start over"); reset.type = "button";
+    var actions = el("div", "dnd-actions"); actions.appendChild(reset);
+    container.appendChild(trayLabel); container.appendChild(tray); container.appendChild(binWrap);
+    container.appendChild(status); container.appendChild(actions);
+
+    var selected = null, cards = [], binEls = {};
+    bins.forEach(function (b) {
+      var box = el("div", "dnd-bin");
+      box.setAttribute("role", "group");
+      box.setAttribute("aria-label", plain(b.label));
+      box.appendChild(el("p", "dnd-bin-head", b.label));
+      if (b.hint) box.appendChild(el("p", "dnd-bin-hint", b.hint));
+      var here = el("button", "dnd-bin-here", "Move here"); here.type = "button"; here.hidden = true;
+      here.setAttribute("aria-label", "Move the selected card to " + plain(b.label));
+      here.addEventListener("click", function () { if (selected) place(selected, b.id, true); });
+      box.addEventListener("click", function (e) {
+        if (selected && !e.target.closest(".dnd-card") && e.target !== here) place(selected, b.id, true);
+      });
+      box.appendChild(here);
+      binWrap.appendChild(box);
+      binEls[b.id] = { box: box, here: here };
+    });
+
+    function select(card) {
+      if (selected === card) card = null;
+      cards.forEach(function (c) { c.el.setAttribute("aria-pressed", c === card ? "true" : "false"); });
+      selected = card;
+      Object.keys(binEls).forEach(function (id) { binEls[id].here.hidden = !card; });
+      if (card) status.textContent = "Selected: “" + plain(card.text) + "”. Now choose a box.";
+    }
+    function binAt(x, y) {
+      var hit = null;
+      Object.keys(binEls).forEach(function (id) {
+        var r = binEls[id].box.getBoundingClientRect();
+        if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) hit = id;
+      });
+      return hit;
+    }
+    function tally() {
+      var placed = cards.filter(function (c) { return c.bin; });
+      var right = placed.filter(function (c) { return c.bin === c.answer; }).length;
+      trayLabel.textContent = placed.length === cards.length ? "All cards sorted." : "Cards to sort (" + (cards.length - placed.length) + " left)";
+      tray.hidden = placed.length === cards.length;
+      var msg = "Sorted " + placed.length + " of " + cards.length + ". " + right + " in the right box.";
+      if (placed.length === cards.length) msg += right === cards.length ? " All correct." : " Drag the marked cards to the other box to fix them.";
+      status.textContent = msg;
+      if (opts.onChange) opts.onChange(placed.length, right, cards.length);
+    }
+    function place(card, binId, announce) {
+      card.bin = binId;
+      binEls[binId].box.appendChild(card.el);
+      var ok = binId === card.answer;
+      card.el.classList.toggle("dnd-ok", ok);
+      card.el.classList.toggle("dnd-no", !ok);
+      card.mark.textContent = ok ? "✓" : "✗";
+      card.fb.innerHTML = "<strong>" + (ok ? "Right." : "Not quite.") + "</strong> " + (card.why || "");
+      saved[card.key] = binId;
+      if (opts.save) opts.save(saved);
+      select(null);
+      tally();
+      if (announce) status.textContent = (ok ? "Right. " : "Not quite. ") + plain(card.why || "") + " " + status.textContent;
+    }
+    function unplace(card) {
+      card.bin = null;
+      card.el.classList.remove("dnd-ok", "dnd-no");
+      card.mark.textContent = ""; card.fb.textContent = "";
+      tray.appendChild(card.el);
+    }
+
+    shuffled(items.map(function (_, i) { return i; })).forEach(function (i) {
+      var it = items[i];
+      var c = { text: it.text, answer: it.bin, why: it.why, key: "i" + i, bin: null };
+      c.el = el("div", "dnd-card");
+      c.el.tabIndex = 0;
+      c.el.setAttribute("role", "button");
+      c.el.setAttribute("aria-pressed", "false");
+      var handle = el("span", "dnd-handle", "≡"); handle.setAttribute("aria-hidden", "true");
+      var body = el("span", "dnd-body");
+      body.appendChild(el("span", "dnd-text", it.text));
+      c.fb = el("span", "dnd-fb");
+      body.appendChild(c.fb);
+      c.mark = el("span", "dnd-mark");
+      c.el.appendChild(handle); c.el.appendChild(body); c.el.appendChild(c.mark);
+      draggable(c.el, handle, {
+        start: function () { select(null); },
+        move: function (x, y) {
+          var hit = binAt(x, y);
+          Object.keys(binEls).forEach(function (id) { binEls[id].box.classList.toggle("dnd-over", id === hit); });
+        },
+        drop: function (x, y) {
+          Object.keys(binEls).forEach(function (id) { binEls[id].box.classList.remove("dnd-over"); });
+          var hit = x == null ? null : binAt(x, y);
+          if (hit) place(c, hit, true);
+        }
+      });
+      c.el.addEventListener("click", function (e) {
+        if (c.el._dndJustDragged) return;
+        e.stopPropagation();
+        select(c);
+      });
+      c.el.addEventListener("keydown", function (e) {
+        if (e.key === " " || e.key === "Enter") { e.preventDefault(); select(c); }
+        else if (e.key === "Escape") select(null);
+      });
+      cards.push(c);
+      tray.appendChild(c.el);
+      if (saved[c.key] && binEls[saved[c.key]]) place(c, saved[c.key], false);
+    });
+
+    reset.addEventListener("click", function () {
+      saved = {};
+      if (opts.save) opts.save(saved);
+      shuffled(cards).forEach(unplace);
+      select(null);
+      tally();
+    });
+    tally();
+    return { reset: function () { reset.click(); } };
+  }
+
+  window.WeblogDnD = { order: order, sort: sort, version: 1 };
+})();
+</script>
+<script>
+/* ===== Noah's Weblog course engine v1 =====
+   Reads window.COURSE and the page's .view sections, then builds the
+   contents list, progress meter, one-part-at-a-time navigation, quizzes,
+   spaced-repetition flashcards, and the glossary. No libraries. */
+(function () {
+  "use strict";
+
+  var C = window.COURSE || {};
+  var SLUG = C.slug || location.pathname.split("/").filter(Boolean).pop() || "exhibit";
+  var KEY = "ll:" + SLUG + ":";           // every exhibit shares one origin, so keys carry the slug
+  var DAY = 86400000;
+  var INTERVALS = [0, 1, 3, 7, 16, 35];   // days until a flashcard comes back, by box
+
+  /* ---------- storage ---------- */
+  var store = {
+    get: function (k, d) {
+      try { var v = localStorage.getItem(KEY + k); return v === null ? d : JSON.parse(v); }
+      catch (e) { return d; }
+    },
+    set: function (k, v) { try { localStorage.setItem(KEY + k, JSON.stringify(v)); } catch (e) {} }
+  };
+  var state = store.get("state", null) || {};
+  state.done = state.done || {};
+  state.answers = state.answers || {};
+  state.cards = state.cards || {};
+  function save() { store.set("state", state); }
+
+  /* ---------- helpers ---------- */
+  function h(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      var v = attrs[k];
+      if (v == null || v === false) return;
+      if (k === "text") n.textContent = v;
+      else if (k === "html") n.innerHTML = v;
+      else if (k === "on") Object.keys(v).forEach(function (ev) { n.addEventListener(ev, v[ev]); });
+      else n.setAttribute(k, v === true ? "" : v);
+    });
+    (kids || []).forEach(function (c) {
+      if (c != null) n.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    });
+    return n;
+  }
+  function slugify(s) {
+    return String(s).toLowerCase().replace(/<[^>]*>/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+  function hash(s) {
+    var x = 0;
+    for (var i = 0; i < s.length; i++) x = (x * 31 + s.charCodeAt(i)) | 0;
+    return (x >>> 0).toString(36);
+  }
+  function seededShuffle(a, seed) {
+    var x = parseInt(hash(String(seed)), 36) || 1;
+    function rand() {                          // mulberry32
+      x = (x + 0x6D2B79F5) | 0;
+      var t = Math.imul(x ^ (x >>> 15), 1 | x);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(rand() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function srcTag(src) { return src ? " <span class=\"src\">(" + src + ")</span>" : ""; }
+
+  /* ---------- views and contents ---------- */
+  var views = [].slice.call(document.querySelectorAll(".view"));
+  var navViews = views.filter(function (v) { return v.getAttribute("data-nav") !== "no"; });
+  var modules = views.filter(function (v) { return v.classList.contains("module"); });
+  function titleOf(v) {
+    var head = v.querySelector("h2");
+    return v.getAttribute("data-title") || (head ? head.textContent : v.id);
+  }
+
+  var contentsList = document.getElementById("contents-list");
+  var progressText = document.getElementById("progress-text");
+  var progressFill = document.getElementById("progress-fill");
+  var progressBar = document.getElementById("progress-bar");
+
+  function buildContents() {
+    if (!contentsList) return;
+    contentsList.textContent = "";
+    navViews.forEach(function (v) {
+      var li = h("li", null, [h("a", { href: "#" + v.id, text: titleOf(v), "data-view": v.id })]);
+      if (state.done[v.id]) li.appendChild(h("span", { class: "check", text: " ✓", "aria-label": "done" }));
+      contentsList.appendChild(li);
+    });
+  }
+  function updateProgress() {
+    if (!modules.length) return;
+    var n = modules.filter(function (m) { return state.done[m.id]; }).length;
+    var pct = Math.round(100 * n / modules.length);
+    if (progressText) progressText.textContent = n + " of " + modules.length + " parts done";
+    if (progressFill) progressFill.style.width = pct + "%";
+    if (progressBar) progressBar.setAttribute("aria-valuenow", pct);
+  }
+  function markDone(id) {
+    if (state.done[id]) return;
+    state.done[id] = true;
+    save(); buildContents(); markCurrent(currentId); updateProgress();
+  }
+
+  /* ---------- one part at a time ---------- */
+  var currentId = null;
+  function hasQuestions(view) {
+    return [].some.call(view.querySelectorAll(".quiz[data-quiz]"), function (q) {
+      return ((C.quizzes || {})[q.getAttribute("data-quiz")] || []).length > 0;
+    });
+  }
+  function markCurrent(id) {
+    if (!contentsList) return;
+    [].forEach.call(contentsList.querySelectorAll("a"), function (a) {
+      if (a.getAttribute("data-view") === id) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+  }
+  function show(id, focus) {
+    var view = document.getElementById(id);
+    if (!view || !view.classList.contains("view")) return;
+    views.forEach(function (v) { v.hidden = v !== view; });
+    currentId = id;
+    markCurrent(id);
+    if (view.getAttribute("data-nav") !== "no") { state.last = id; save(); }
+    // a part with no questions counts as done once it has been opened
+    if (view.classList.contains("module") && !hasQuestions(view)) markDone(id);
+    if (focus) {
+      var course = document.querySelector(".course") || view;
+      if (course.getBoundingClientRect().top < 0) course.scrollIntoView();
+      var head = view.querySelector("h2");
+      if (head) { head.setAttribute("tabindex", "-1"); head.focus({ preventScroll: true }); }
+    }
+  }
+  function route() {
+    var id = "";
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { id = location.hash.slice(1); }
+    var target = id && document.getElementById(id);
+    if (!target) { show(navViews[0] ? navViews[0].id : views[0].id, false); return; }
+    var view = target.classList.contains("view") ? target : target.closest(".view");
+    if (!view) return;                       // an anchor outside the lesson: let the browser handle it
+    show(view.id, true);
+    if (target !== view) target.scrollIntoView();
+  }
+
+  function buildPagers() {
+    navViews.forEach(function (v, i) {
+      var prev = navViews[i - 1], next = navViews[i + 1];
+      if (!prev && !next) return;
+      var p = h("p", { class: "pager" });
+      if (prev) p.appendChild(h("a", { href: "#" + prev.id, text: "◄ " + titleOf(prev) }));
+      if (next) p.appendChild(h("button", {
+        type: "button", class: "primary next", text: "Next: " + titleOf(next) + " ►",
+        on: { click: function () { location.hash = next.id; } }
+      }));
+      v.appendChild(p);
+    });
+  }
+
+  function buildResume() {
+    var first = navViews[0];
+    if (!first || !state.last || state.last === first.id) return;
+    var last = document.getElementById(state.last);
+    if (!last) return;
+    var box = h("p", { class: "box" }, ["Welcome back. ",
+      h("a", { href: "#" + last.id, text: "Pick up where you left off: " + titleOf(last) }), "."]);
+    var head = first.querySelector("h2");
+    if (head && head.nextSibling) first.insertBefore(box, head.nextSibling); else first.appendChild(box);
+  }
+
+  /* ---------- quizzes ---------- */
+  function renderQuiz(box) {
+    var quizId = box.getAttribute("data-quiz");
+    var items = (C.quizzes || {})[quizId] || [];
+    var module = box.closest(".module");
+    box.textContent = "";
+
+    function allAnswered() {
+      return items.every(function (_, i) { return state.answers[quizId + ":" + i]; });
+    }
+    function afterAnswer() {
+      save();
+      if (module && allAnswered()) markDone(module.id);
+      renderSummary(quizId);
+    }
+
+    items.forEach(function (item, i) {
+      var key = quizId + ":" + i;
+      var fs = h("fieldset", { class: "q" });
+      fs.appendChild(h("legend", { html: (items.length > 1 ? (i + 1) + ". " : "") + item.q + srcTag(item.src) }));
+      var feedback = h("p", { class: "feedback", role: "status", "aria-live": "polite" });
+
+      if (item.type === "recall") {
+        var ta = h("textarea", { "aria-label": "Your answer", placeholder: "Write your answer, then compare." });
+        var model = h("div", { class: "box", hidden: true, html: "<strong class=\"label\">A good answer</strong>" + item.answer });
+        var rate = h("div", { class: "actions", hidden: true }, [
+          h("button", { type: "button", text: "I had it", on: { click: function () { state.answers[key] = { right: true, recall: true }; feedback.textContent = "Noted."; afterAnswer(); } } }),
+          h("button", { type: "button", text: "Not yet", on: { click: function () { state.answers[key] = { right: false, recall: true }; feedback.textContent = "Noted. This one comes back in the review."; afterAnswer(); } } })
+        ]);
+        var showBtn = h("button", { type: "button", text: "Show a good answer", on: { click: function () {
+          model.hidden = false; rate.hidden = false; showBtn.hidden = true;
+          if (!state.answers[key]) { state.answers[key] = { right: null, recall: true }; afterAnswer(); }
+        } } });
+        fs.appendChild(ta);
+        fs.appendChild(h("div", { class: "actions" }, [showBtn]));
+        fs.appendChild(model);
+        fs.appendChild(rate);
+        fs.appendChild(feedback);
+        if (state.answers[key]) { model.hidden = false; rate.hidden = false; showBtn.hidden = true; }
+      } else {
+        var name = "q-" + quizId + "-" + i;
+        var opts = h("div", { class: "options" });
+        // Options appear in a shuffled order (stable for each question) so the right answer
+        // isn't always in the same place. Set fixed: true for options with a natural order.
+        var shown = item.options.map(function (_, j) { return j; });
+        if (!item.fixed) shown = seededShuffle(shown, quizId + ":" + i + ":" + item.q);
+        var inputs = [];                       // indexed by the option's original position
+        shown.forEach(function (j) {
+          var input = h("input", { type: "radio", name: name, value: j });
+          opts.appendChild(h("label", null, [input, h("span", { html: item.options[j] }), h("span", { class: "mark" })]));
+          inputs[j] = input;
+        });
+        var check = h("button", { type: "button", text: "Check answer" });
+        var again = h("button", { type: "button", text: "Try again", hidden: true });
+
+        var paint = function (pick) {
+          var right = pick === item.answer;
+          inputs.forEach(function (inp, j) {
+            inp.disabled = true;
+            inp.checked = j === pick;
+            var mark = inp.parentNode.querySelector(".mark");
+            mark.className = "mark";
+            mark.textContent = "";
+            if (j === item.answer) { mark.className = "mark right"; mark.textContent = j === pick ? "◄ correct" : "◄ the answer"; }
+            else if (j === pick) { mark.className = "mark wrong"; mark.textContent = "◄ your pick"; }
+          });
+          var why = (item.why && item.why[pick]) || item.explain || "";
+          var extra = "";
+          if (quizId === "pre" && item.from) {
+            var fromView = document.getElementById(item.from);
+            extra = " You'll see why in <a href=\"#" + item.from + "\">" + (fromView ? titleOf(fromView) : item.from) + "</a>.";
+          }
+          feedback.innerHTML = "<span class=\"verdict " + (right ? "right" : "wrong") + "\">" +
+            (right ? "Right." : "Not quite.") + "</span> " + why + extra;
+          check.hidden = true; again.hidden = false;
+        };
+        check.addEventListener("click", function () {
+          var pick = -1;
+          inputs.forEach(function (inp, j) { if (inp.checked) pick = j; });
+          if (pick < 0) { feedback.textContent = "Pick an answer first."; return; }
+          state.answers[key] = { pick: pick, right: pick === item.answer };
+          paint(pick);
+          afterAnswer();
+        });
+        again.addEventListener("click", function () {
+          inputs.forEach(function (inp) {
+            inp.disabled = false; inp.checked = false;
+            var mark = inp.parentNode.querySelector(".mark"); mark.className = "mark"; mark.textContent = "";
+          });
+          feedback.textContent = ""; check.hidden = false; again.hidden = true;
+          inputs[shown[0]].focus();
+        });
+        fs.appendChild(opts);
+        fs.appendChild(h("div", { class: "actions" }, [check, again]));
+        fs.appendChild(feedback);
+        var saved = state.answers[key];
+        if (saved && typeof saved.pick === "number") paint(saved.pick);
+      }
+      box.appendChild(fs);
+    });
+  }
+
+  function renderSummary(quizId) {
+    var out = document.querySelector('.quiz-summary[data-for="' + quizId + '"]');
+    if (!out) return;
+    var items = (C.quizzes || {})[quizId] || [];
+    var answered = items.filter(function (_, i) { return state.answers[quizId + ":" + i]; });
+    out.textContent = "";
+    if (answered.length < items.length) return;
+    var scored = items.map(function (it, i) { return { it: it, a: state.answers[quizId + ":" + i] }; })
+      .filter(function (x) { return x.a.right !== null; });
+    var right = scored.filter(function (x) { return x.a.right; }).length;
+    var p = h("p", { class: "result" }, ["You got ", h("strong", { text: right + " of " + scored.length }), "."]);
+    out.appendChild(p);
+    var revisit = [];
+    scored.forEach(function (x) { if (!x.a.right && x.it.from && revisit.indexOf(x.it.from) < 0) revisit.push(x.it.from); });
+    if (revisit.length) {
+      var q = h("p", { class: "meta" }, ["Worth another look: "]);
+      revisit.forEach(function (id, i) {
+        var v = document.getElementById(id);
+        if (i) q.appendChild(document.createTextNode(", "));
+        q.appendChild(h("a", { href: "#" + id, text: v ? titleOf(v) : id }));
+      });
+      out.appendChild(q);
+    }
+  }
+
+  /* ---------- flashcards with spaced review ---------- */
+  function buildDeck() {
+    var deckBox = document.getElementById("deck");
+    if (!deckBox) return;
+    var cards = (C.cards || []).map(function (c) { return { front: c.front, back: c.back + srcTag(c.src) }; });
+    if (C.glossaryCards !== false) {
+      Object.keys(C.glossary || {}).forEach(function (term) {
+        cards.push({ front: "What does <em>" + term + "</em> mean?", back: C.glossary[term] });
+      });
+    }
+    cards.forEach(function (c) { c.id = "c" + hash(c.front); });
+    if (!cards.length) { deckBox.appendChild(h("p", { class: "meta", text: "No cards for this page." })); return; }
+
+    var status = h("p", { class: "meta", "aria-live": "polite" });
+    var card = h("div", { class: "card" });
+    var front = h("div", { class: "front" });
+    var back = h("div", { class: "back", hidden: true });
+    card.appendChild(front); card.appendChild(back);
+    var showBtn = h("button", { type: "button", class: "primary", text: "Show answer" });
+    var missBtn = h("button", { type: "button", text: "Not yet", hidden: true });
+    var gotBtn = h("button", { type: "button", text: "Got it", hidden: true });
+    var allBtn = h("button", { type: "button", text: "Practice all cards anyway", hidden: true });
+    deckBox.appendChild(status);
+    deckBox.appendChild(card);
+    deckBox.appendChild(h("div", { class: "actions" }, [showBtn, missBtn, gotBtn, allBtn]));
+
+    var queue = [];
+    function isDue(c) { var r = state.cards[c.id]; return !r || r.due <= Date.now(); }
+    function learned() { return cards.filter(function (c) { var r = state.cards[c.id]; return r && r.box >= 1; }).length; }
+    function next() {
+      back.hidden = true; missBtn.hidden = true; gotBtn.hidden = true;
+      if (!queue.length) {
+        card.hidden = true; showBtn.hidden = true; allBtn.hidden = false;
+        var upcoming = cards.map(function (c) { return state.cards[c.id]; }).filter(Boolean)
+          .map(function (r) { return r.due; }).filter(function (d) { return d > Date.now(); }).sort()[0];
+        status.textContent = "Nothing due right now. " + learned() + " of " + cards.length + " remembered so far." +
+          (upcoming ? " Next review: " + new Date(upcoming).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) + "." : "");
+        return;
+      }
+      card.hidden = false; showBtn.hidden = false; allBtn.hidden = true;
+      front.innerHTML = queue[0].front;
+      back.innerHTML = queue[0].back;
+      status.textContent = queue.length + (queue.length === 1 ? " card" : " cards") + " to go. " +
+        learned() + " of " + cards.length + " remembered so far.";
+    }
+    showBtn.addEventListener("click", function () {
+      back.hidden = false; showBtn.hidden = true; missBtn.hidden = false; gotBtn.hidden = false; gotBtn.focus();
+    });
+    missBtn.addEventListener("click", function () {
+      var c = queue.shift();
+      state.cards[c.id] = { box: 0, due: Date.now() };
+      queue.push(c);                      // comes back later in this session
+      save(); next(); showBtn.focus();
+    });
+    gotBtn.addEventListener("click", function () {
+      var c = queue.shift();
+      var r = state.cards[c.id] || { box: 0 };
+      var box = Math.min((r.box || 0) + 1, INTERVALS.length - 1);
+      state.cards[c.id] = { box: box, due: Date.now() + INTERVALS[box] * DAY };
+      save(); next(); (queue.length ? showBtn : allBtn).focus();
+    });
+    allBtn.addEventListener("click", function () { queue = shuffle(cards); next(); showBtn.focus(); });
+    queue = shuffle(cards.filter(isDue));
+    next();
+  }
+
+  /* ---------- glossary ---------- */
+  function buildGlossary() {
+    var dl = document.getElementById("glossary-list");
+    if (!dl) return;
+    Object.keys(C.glossary || {}).sort(function (a, b) { return a.localeCompare(b); }).forEach(function (term) {
+      dl.appendChild(h("dt", { id: "g-" + slugify(term), html: term }));
+      dl.appendChild(h("dd", { html: C.glossary[term] }));
+    });
+  }
+
+  /* ---------- drag-and-drop activities (assets/dnd.js) ---------- */
+  function buildActivities() {
+    if (!window.WeblogDnD) return;
+    state.sorts = state.sorts || {};
+    [].forEach.call(document.querySelectorAll("[data-sort]"), function (box) {
+      var id = box.getAttribute("data-sort"), cfg = (C.sorts || {})[id];
+      if (!cfg) return;
+      window.WeblogDnD.sort(box, {
+        bins: cfg.bins, items: cfg.items, help: cfg.help,
+        load: function () { return state.sorts[id] || {}; },
+        save: function (placed) { state.sorts[id] = placed; save(); }
+      });
+    });
+    [].forEach.call(document.querySelectorAll("[data-order]"), function (box) {
+      var id = box.getAttribute("data-order"), cfg = (C.orders || {})[id];
+      if (!cfg) return;
+      window.WeblogDnD.order(box, { items: cfg.items, explain: cfg.explain, help: cfg.help, label: cfg.label });
+    });
+  }
+
+  /* ---------- start ---------- */
+  buildGlossary();
+  buildActivities();
+  [].forEach.call(document.querySelectorAll(".quiz[data-quiz]"), renderQuiz);
+  Object.keys(C.quizzes || {}).forEach(renderSummary);
+  buildDeck();
+  buildPagers();
+  buildContents();
+  updateProgress();
+  buildResume();
+  var nav = document.querySelector(".course-nav details");
+  if (nav && window.matchMedia("(max-width: 780px)").matches) nav.removeAttribute("open");
+  window.addEventListener("hashchange", route);
+  route();
+})();
+</script>
+<!-- page-specific interactive scripts go after the engine -->
+<script>
+(function () {
+  "use strict";
+  var KEY = "ll:cornell-power-of-focusing:";
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  var SVGNS = "http://www.w3.org/2000/svg";
+
+  /* ---------- Part 2: Ted's session ---------- */
+  (function () {
+    if (!$("ted")) return;
+    // zone: where Ted's attention is; tight: 0 relaxed .. 3 tightly clenched (an illustration, not a measurement)
+    var steps = [
+      { title: "Sensing into his body", zone: "throat", tight: -1,
+        text: "Sensing inside was new to Ted. He checked his throat the way he would check for a sore throat, then moved down to his chest and stomach.",
+        lesson: "Focusing begins by bringing awareness into the middle of the body. (pp. 11–12)" },
+      { title: "“What wants my awareness now?”", zone: "stomach", tight: 3,
+        text: "At first he felt nothing and nearly quit. Then he asked the open question and waited. His stomach was tightly clenched, and probably had been for a long time.",
+        lesson: "Don't hunt for a feeling. Invite one with a gentle, open question. (p. 12)" },
+      { title: "Saying hello and naming it", zone: "stomach", tight: 3,
+        text: "He said hello to the clenched feeling and felt slight relief. It was still there, but less immovable. The word “clenched” fit well enough for now.",
+        lesson: "Acknowledge the feeling first, then describe it. (p. 12)" },
+      { title: "Sitting with it, curious", zone: "stomach", tight: 3,
+        text: "For the first time, he wondered whether the feeling had a reason to be there. He sensed it was scared. He checked “scared,” and the stomach tightened a little more: yes.",
+        lesson: "Sit with interested curiosity, and check each word with the body. Any response, even a little extra tightening, can mean a word fits. (pp. 12, 31)" },
+      { title: "A gentle question", zone: "stomach", tight: 2,
+        text: "He resisted telling it there was no reason to be scared. He let it be, then asked what got it so scared. It was scared, and scared to show it. His stomach relaxed some.",
+        lesson: "Assume every feeling has a good reason. Ask gently, and wait. (pp. 12–13)" },
+      { title: "“I can't fail.”", zone: "stomach", tight: 0,
+        text: "Asking again, he flashed on a memory of his parents, and the words “I can't fail” came. He whispered, “I hear you.” His stomach let go completely, for the first time in years.",
+        lesson: "No need to fix the problem. Really hearing the message brings the relief. The message can come as a memory, a belief, or an unmet need. (p. 13)" },
+      { title: "Ending slowly", zone: "stomach", tight: 0,
+        text: "Part of him asked, “But how does this solve the problem?” He set that aside, enjoyed the relaxed feeling, thanked his body, and said he'd be back.",
+        lesson: "End slowly and respectfully. Stay with good feelings a while. (pp. 13–14)" },
+      { title: "Later that day", zone: "stomach", tight: 0,
+        text: "On a call with an impatient client, his stomach clenched again. Afterward he stayed with it for a few minutes, saw what had triggered it, and it released. That evening he could tell his wife how he felt.",
+        lesson: "Feelings come back in daily life, a chance for “mini-Focusing.” (p. 14)" }
+    ];
+    var words = ["relaxed", "a little tight", "somewhat tight", "tightly clenched"];
+    var i = 0, knot = $("ted-knot");
+    function drawKnot(t) {
+      while (knot.firstChild) knot.removeChild(knot.firstChild);
+      if (t < 0) return;
+      if (t === 0) {
+        [16, 26].forEach(function (r) {
+          var c = document.createElementNS(SVGNS, "ellipse");
+          c.setAttribute("cx", 110); c.setAttribute("cy", 190); c.setAttribute("rx", r + 6); c.setAttribute("ry", r * 0.6);
+          c.setAttribute("class", "ln s6"); knot.appendChild(c);
+        });
+        return;
+      }
+      for (var k = 0; k < t * 2; k++) {
+        var p = document.createElementNS(SVGNS, "path");
+        var y = 178 + k * (24 / (t * 2));
+        var amp = 2 + t * 1.5;
+        p.setAttribute("d", "M84 " + y + " l6 " + (-amp) + " l6 " + (2 * amp) + " l6 " + (-2 * amp) + " l6 " + (2 * amp) + " l6 " + (-2 * amp) + " l6 " + (2 * amp) + " l6 " + (-2 * amp) + " l6 " + (2 * amp) + " l4 " + (-amp));
+        p.setAttribute("class", "ln s1 thick");
+        knot.appendChild(p);
+      }
+    }
+    function render() {
+      var s = steps[i];
+      $("ted-count").textContent = "Step " + (i + 1) + " of " + steps.length;
+      $("ted-title").textContent = s.title;
+      $("ted-text").textContent = s.text;
+      $("ted-lesson").innerHTML = "<strong class=\"label\">The move</strong>" + esc(s.lesson);
+      ["throat", "chest", "stomach", "belly"].forEach(function (z) {
+        $("ted-" + z).setAttribute("class", "zone" + (z === s.zone ? " on" : ""));
+      });
+      drawKnot(s.tight);
+      $("ted-cap").textContent = s.tight < 0 ? "attention: " + s.zone : "stomach: " + words[s.tight];
+      $("ted-result").textContent = s.tight < 0
+        ? "Ted's attention is in his " + s.zone + ". Nothing noticed yet."
+        : "Ted's stomach is " + words[s.tight] + ".";
+      $("ted-back").disabled = i === 0;
+      $("ted-next").disabled = i === steps.length - 1;
+    }
+    $("ted-back").addEventListener("click", function () { if (i > 0) { i--; render(); } });
+    $("ted-next").addEventListener("click", function () { if (i < steps.length - 1) { i++; render(); } });
+    render();
+  })();
+
+  /* ---------- Part 3: "part of me" rewriter ---------- */
+  (function () {
+    if (!$("rw")) return;
+    var examples = ["I am so angry at my brother.", "I'm scared I'll mess up the audition.", "I feel stupid for saying that.", "I am really sad that she moved away."];
+    var box = $("rw-examples");
+    examples.forEach(function (ex) {
+      var b = document.createElement("button");
+      b.type = "button"; b.textContent = ex;
+      b.addEventListener("click", function () { $("rw-in").value = ex; go(); });
+      box.appendChild(b);
+    });
+    function go() {
+      var s = $("rw-in").value.trim();
+      var out = $("rw-out");
+      var m = s.match(/^(i am|i'm|i’m|im|i feel)\s+(.+)$/i);
+      if (!m) {
+        out.innerHTML = "<p class=\"meta\">Try a sentence that starts with “I am,” “I'm,” or “I feel.”</p>";
+        return;
+      }
+      var verb = /feel/i.test(m[1]) ? "feels" : "is";
+      var rest = m[2].replace(/[.!]+$/, "");
+      out.innerHTML =
+        "<p><strong>Part of me " + verb + " " + esc(rest) + ".</strong></p>" +
+        "<p>I'm aware of something in me that feels " + esc(rest.replace(/^(so|really|very)\s+/i, "")) + ".</p>" +
+        "<p class=\"meta\">Same feeling, now with a listener beside it. Cornell: “it's part of you, not all of you.” (p. 17)</p>";
+    }
+    $("rw-go").addEventListener("click", go);
+    $("rw-in").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); go(); } });
+  })();
+
+  /* ---------- Part 5: offer a word (a toy) ---------- */
+  (function () {
+    if (!$("ow")) return;
+    var R = {
+      tight:     { kind: "no",   say: "Not right. It's more active than just tight." },
+      squeezing: { kind: "part", say: "Partly. Yes, squeezing... and there's something more." },
+      heavy:     { kind: "no",   say: "Not right. It isn't heavy at all." },
+      scared:    { kind: "part", say: "Partly. Scared is in there... and it's also something physical." },
+      angry:     { kind: "no",   say: "Not right. Not angry." },
+      calm:      { kind: "no",   say: "Not right. Definitely not calm." }
+    };
+    var COMBO = "squeezing and scared";
+    var order = ["tight", "squeezing", "heavy", "scared", "angry", "calm"];
+    var tried = {}, counts = { yes: 0, part: 0, no: 0 };
+    var wordsBox = $("ow-words"), log = $("ow-log"), result = $("ow-result");
+    var label = { yes: "Yes, that's it", part: "Partly, there's more", no: "Not right" };
+    function addLog(word, kind, say) {
+      var li = document.createElement("li");
+      li.className = "ow-" + kind;
+      li.innerHTML = "You offer <strong>“" + esc(word) + "”</strong>. <span class=\"ow-kind\">" + label[kind] + ":</span> " + esc(say.replace(/^(Not right|Partly)\. /, ""));
+      log.appendChild(li);
+    }
+    function summary(done) {
+      result.textContent = done
+        ? "It fits. Your answers: " + counts.no + " not right, " + counts.part + " partly, and 1 yes. Each kind of answer moved you closer. (pp. 32–33)"
+        : (counts.no + counts.part === 0 ? "" : "So far: " + counts.part + " partly, " + counts.no + " not right. Keep offering.");
+    }
+    function build() {
+      wordsBox.textContent = "";
+      order.forEach(function (w) {
+        var b = document.createElement("button");
+        b.type = "button"; b.textContent = w;
+        b.addEventListener("click", function () {
+          if (tried[w]) return;
+          tried[w] = true; b.disabled = true;
+          counts[R[w].kind]++;
+          addLog(w, R[w].kind, R[w].say);
+          if (tried.squeezing && tried.scared && !$("ow-combo")) {
+            var c = document.createElement("button");
+            c.type = "button"; c.id = "ow-combo"; c.className = "primary"; c.textContent = COMBO;
+            c.addEventListener("click", function () {
+              c.disabled = true; counts.yes = 1;
+              addLog(COMBO, "yes", "Yes. That's it exactly. A little relief in your throat, and it's easier to stay with.");
+              summary(true);
+            });
+            wordsBox.appendChild(c);
+          }
+          summary(false);
+        });
+        wordsBox.appendChild(b);
+      });
+    }
+    $("ow-reset").addEventListener("click", function () {
+      tried = {}; counts = { yes: 0, part: 0, no: 0 }; log.textContent = ""; result.textContent = ""; build();
+    });
+    build();
+  })();
+
+  /* ---------- Part 6: guided session ---------- */
+  (function () {
+    if (!$("gs")) return;
+    var S = [
+      { p: "Which way today?", d: "Settle in. Decide whether to work on something specific, or wait and see what comes.", t: "Nagging chores? Jot them down so you can let them go for now.", src: "p. 26" },
+      { p: "I'm sensing into my body.", d: "Notice where you touch the chair, then your feet, hands, shoulders. Bring awareness into your throat, chest, stomach, and belly.", t: "Hard to get in? Lift an arm with eyes closed and notice you know where it is.", src: "pp. 27–28" },
+      { p: "What wants my awareness now?", d: "Or: “How am I about that issue?” Ask it in the middle of your body, then wait.", t: "Look for “something,” not a perfect felt sense. Even nothing has a quality.", src: "pp. 28–29" },
+      { p: "I'm saying hello to what's here.", d: "Greet it: “Hello, I know you're there.” Notice how it responds.", t: "Don't rush. Come close enough for a real hello.", src: "p. 30" },
+      { p: "I'm finding the best way to describe it.", d: "Find a word, phrase, image, sound, or gesture for how it feels right now.", t: "Don't strain. Gently wondering beats pushing.", src: "pp. 30–32" },
+      { p: "I'm checking back with my body.", d: "Offer the description back: “Is that right?” Notice: yes, partly, or not right.", t: "Keep checking every new word all session long.", src: "pp. 32–33" },
+      { p: "Is it OK to just be with this right now?", d: "Check that it's OK simply to keep it company, with no agenda.", t: "If something objects, say hello to that part.", src: "pp. 35–36" },
+      { p: "I'm sitting with it, with interested curiosity.", d: "Sit beside it, as you'd sit with a friend. Wonder if more is there.", t: "Even a little more counts: “squeezed” becoming “squeezed and resentful.”", src: "pp. 36–37" },
+      { p: "I'm sensing how it feels from its point of view.", d: "Not how it feels to you, but how it feels itself: its mood, posture, or quality.", t: "Nothing comes? Slow down. The relationship matters more than information.", src: "pp. 37–38" },
+      { p: "I'm asking if it has an emotional quality.", d: "Try a few: a scared tightness? An angry one? Let your body say which is closer.", t: "No answer? Maybe it's too soon. Return to just being with it.", src: "pp. 39–40" },
+      { p: "I'm asking it, “What gets it so ___?”", d: "Fill in its own word: “What gets you so jumpy?”", t: "Use “what,” never “why.” Wait for something you didn't already know.", src: "pp. 39, 41" },
+      { p: "I'm asking it what it needs.", d: "“What do you need from me, or the world?” Then wait.", t: "Hearing a need isn't a promise to act on it.", src: "pp. 39–40, 68–69" },
+      { p: "How would “all OK” feel?", d: "Ask your body to show you, right now, how it would feel if this were resolved.", t: "Let the body show you, not your thoughts about it.", src: "p. 40" },
+      { p: "I'm checking if it's OK to stop soon.", d: "Ask if it's OK to stop in a minute or two, or if there's something more it needs you to know first.", t: "Not the same as asking if it's solved. Remember what came.", src: "p. 42" },
+      { p: "I'm saying, “I'll be back.”", d: "Let it know you'll return, and mean it.", t: "Mark the place with an image or phrase, like a bookmark.", src: "p. 43" },
+      { p: "I'm thanking my body and the parts that have been with me.", d: "Thank your body for what it gave. Let any good feeling come with you.", t: "If you stayed with something you felt, you succeeded.", src: "p. 44" }
+    ];
+    var i = 0, start = null, timer = null;
+    function stopAt() { var n = +$("gs-len").value; return n - Math.max(2, Math.round(n * 0.15)); }
+    function plan() {
+      var n = +$("gs-len").value;
+      $("gs-plan").textContent = "With " + n + " minutes, begin stopping at about minute " + stopAt() + ". The rule of thumb is one to two minutes of stopping per ten minutes. (pp. 42–43)";
+    }
+    function render() {
+      var s = S[i];
+      $("gs-count").textContent = "Step " + (i + 1) + " of " + S.length + (i < 6 ? " · finding it" : i < 13 ? " · keeping it company" : " · ending");
+      $("gs-phrase").textContent = "“" + s.p + "”";
+      $("gs-do").textContent = s.d;
+      $("gs-tip").innerHTML = "Tip: " + esc(s.t) + " <span class=\"src\">(" + s.src + ")</span>";
+      $("gs-back").disabled = i === 0;
+      $("gs-next").disabled = i === S.length - 1;
+    }
+    function tick() {
+      if (!start) { $("gs-time").textContent = "The clock is optional. Start it if you'd like a reminder when it's time to stop."; return; }
+      var m = Math.floor((Date.now() - start) / 60000);
+      var msg = "Time so far: " + m + (m === 1 ? " minute" : " minutes") + ".";
+      if (m >= stopAt() && i < 13) msg += " It's about time to begin stopping. You can skip to step 14 when ready.";
+      $("gs-time").textContent = msg;
+    }
+    $("gs-back").addEventListener("click", function () { if (i > 0) { i--; render(); tick(); } });
+    $("gs-next").addEventListener("click", function () { if (i < S.length - 1) { i++; render(); tick(); } });
+    $("gs-len").addEventListener("change", function () { plan(); tick(); try { localStorage.setItem(KEY + "len", $("gs-len").value); } catch (e) {} });
+    $("gs-clock").addEventListener("click", function () {
+      var b = $("gs-clock");
+      if (start) { start = null; clearInterval(timer); b.textContent = "Start the clock"; b.setAttribute("aria-pressed", "false"); }
+      else { start = Date.now(); timer = setInterval(tick, 15000); b.textContent = "Stop the clock"; b.setAttribute("aria-pressed", "true"); }
+      tick();
+    });
+    try { var saved = localStorage.getItem(KEY + "len"); if (saved) $("gs-len").value = saved; } catch (e) {}
+    plan(); render(); tick();
+  })();
+
+  /* ---------- Part 10: find the edge ---------- */
+  (function () {
+    if (!$("edge")) return;
+    var bits = [
+      { t: "“I suppose it's probably just stress.", felt: false, why: "“I suppose” and “probably”: a quick label from the head." },
+      { t: "There's something... right here in my chest.", felt: true, why: "Pointing to a body feeling that isn't named yet." },
+      { t: "It's sort of heavy... no, not heavy exactly.", felt: true, why: "Checking a word and finding it doesn't quite fit." },
+      { t: "More like... a pulling back?", felt: true, why: "Groping for a fresh description." },
+      { t: "It's hard to put into words.", felt: true, why: "Staying with something unclear, right now." },
+      { t: "I guess it's classic avoidance.”", felt: false, why: "“I guess” plus pop-psychology jargon: the head again." }
+    ];
+    var box = $("edge-bits");
+    var btns = bits.map(function (b, k) {
+      var el = document.createElement("button");
+      el.type = "button"; el.className = "edge-bit"; el.setAttribute("aria-pressed", "false");
+      el.innerHTML = "<span class=\"edge-t\">" + esc(b.t) + "</span><span class=\"edge-fb\"></span>";
+      el.addEventListener("click", function () {
+        el.setAttribute("aria-pressed", el.getAttribute("aria-pressed") === "true" ? "false" : "true");
+        el.classList.remove("ok", "no"); el.querySelector(".edge-fb").textContent = "";
+        $("edge-out").textContent = "";
+      });
+      box.appendChild(el);
+      return el;
+    });
+    $("edge-check").addEventListener("click", function () {
+      var right = 0;
+      btns.forEach(function (el, k) {
+        var picked = el.getAttribute("aria-pressed") === "true";
+        var ok = picked === bits[k].felt;
+        if (ok) right++;
+        el.classList.remove("ok", "no"); el.classList.add(ok ? "ok" : "no");
+        el.querySelector(".edge-fb").textContent = (ok ? "✓ " : "✗ ") + (bits[k].felt ? "Felt sense. " : "Head. ") + bits[k].why;
+      });
+      $("edge-out").innerHTML = "<p>You marked <strong>" + right + " of " + bits.length + "</strong> correctly. The middle four are the edge: reflect those, and the client is invited to stay there. (pp. 93–94)</p>";
+    });
+    $("edge-reset").addEventListener("click", function () {
+      btns.forEach(function (el) { el.setAttribute("aria-pressed", "false"); el.classList.remove("ok", "no"); el.querySelector(".edge-fb").textContent = ""; });
+      $("edge-out").textContent = "";
+    });
+  })();
+})();
+</script>
+</body>
+</html>
