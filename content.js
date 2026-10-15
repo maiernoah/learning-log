@@ -189,4 +189,14 @@ const ENTRIES = [
     tags: ["psychology", "ann weiser cornell"],
     summary: `A ten-part course on Ann Weiser Cornell's <em>The Power of Focusing</em> (1996), her practical manual for listening to vague feelings in the body until they shift. Readers sort therapy-tape lines the way Gendlin's researchers did, step through Ted's first session as his clenched stomach lets go, rewrite "I am sad" into "part of me is sad," offer words to a felt sense until one fits, find the edge in a client's halting speech, and practice being a listener who doesn't fix. A guided sixteen-step session with a stopping-time clock is built in for trying it yourself. Quizzes and spaced review cards throughout.`,
   },
+
+  {
+    slug: "mind-like-water",
+    title: "Mind Like Water",
+    date: "2026-10-15",
+    time: "14:12",
+    url: "exhibits/mind-like-water/",
+    tags: ["productivity", "meditation", "david allen"],
+    summary: `An eight-part course that reads David Allen's <em>Getting Things Done</em> and <em>Ready for Anything</em>, plus five recorded conversations with Allen, as a householder's practice of presence rather than a productivity hack. Readers clear a rippling pond by running eight worries through Allen's two questions, sort items into his buckets, order the weekly review, climb from one chemistry assignment to purpose, filter next actions by context and energy, and set a sitting practice beside Allen's own words on what he does and does not teach. Quizzes and spaced review cards throughout.`,
+  },
 ];
