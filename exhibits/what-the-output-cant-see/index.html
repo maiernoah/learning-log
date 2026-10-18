@@ -316,6 +316,18 @@ svg path.s-navy, svg line { fill: none; }
         <h2>Start here</h2>
         <p class="box">This page teaches two short posts and an essay by Eliezer Yudkowsky (2026) about where consciousness lives. It is a study guide in plain language, not a copy of the originals. <a href="#source">About the source</a>.</p>
         <p>If your brain ran on water pipes instead of neurons, would you know? Chatbots now talk about their own feelings. Some people feel sure a chicken has an inner life and a computer never could. This page walks through one argument about what consciousness depends on, then tests it against the strongest objections.</p>
+        <p>Here, <a class="term" href="#g-consciousness">consciousness</a> means having experiences that feel like something from the inside, such as the sting of pain or the redness of red. It does not mean being smart or being awake. The stakes are moral. If a system can feel pain or distress, what we do to it matters. Getting this wrong could mean ignoring real suffering, or worrying over none.</p>
+        <h3>Who he is</h3>
+        <p>Eliezer Yudkowsky is an American writer and researcher on the risks of artificial intelligence. In 2000 he co-founded the group now called the Machine Intelligence Research Institute (MIRI), which studies how to make advanced AI safe. In 2009 he founded LessWrong, a website where people write about thinking clearly. He is self-taught: he didn't attend high school or college, and he isn't a neuroscientist or an academic philosopher. So judge his arguments by their steps, which this page lays out one at a time. (Outside the posts.)</p>
+        <p>These 2026 pieces are his side of a live debate about whether AI systems might have feelings.</p>
+        <h3>The route</h3>
+        <ul class="prose">
+          <li><strong>Two layers.</strong> Facts that can change what a machine says, and facts that can't: <a href="#m1">parts 1</a>, <a href="#m2">2</a> and <a href="#m3">3</a>.</li>
+          <li><strong>The core argument.</strong> Why consciousness belongs with the pattern: <a href="#m4">part 4</a>.</li>
+          <li><strong>Two tests.</strong> On your own brain, then on panpsychism: <a href="#m5">parts 5</a> and <a href="#m6">6</a>.</li>
+          <li><strong>Chickens and AI.</strong> His longer essay on how people decide who has feelings: <a href="#m7">parts 7</a> and <a href="#m8">8</a>.</li>
+          <li><strong>Objections.</strong> Where the argument could break: <a href="#m9">part 9</a>.</li>
+        </ul>
         <p class="meta legend" aria-label="How to read the labels on this page">
           <span class="it"><span class="tag est">Established</span> standard logic or science</span>
           <span class="it"><span class="tag arg">Argument</span> a step in Yudkowsky's case</span>
@@ -338,11 +350,12 @@ svg path.s-navy, svg line { fill: none; }
       <section class="view module" id="m1" data-title="1. Same pattern, different stuff">
         <h2>1. Same pattern, different stuff</h2>
         <p class="objective">In this part: see that a machine's answers stay the same when you rebuild it from different materials.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Everything starts with one simple machine. Before asking about minds, the page shows that a machine's answers depend on its steps, not on what it is built from.</p>
         <p class="box"><strong class="label">Words to know</strong>An <a class="term" href="#g-algorithm">algorithm</a> is a fixed set of steps: when this signal arrives, send that one on. A <a class="term" href="#g-substrate">substrate</a> is the material the steps run on.</p>
         <p>Picture a machine that answers questions. Inside, signals run through copper wires. Now rebuild it so the same signals flow as water through pipes, in exactly the same pattern. Ask it anything. The answers come out the same. <span class="src">(A ¶4)</span></p>
         <p>The answers depend on the algorithm: which signal goes where, and when. The copper or the water only carries that pattern. <span class="src">(A ¶4, ¶8)</span></p>
         <p>So nothing the machine computes can tell it what it is made of. Ask what it is made of, and it gives the same reply on wires or on pipes. <span class="src">(A ¶6)</span></p>
-        <p class="box"><strong class="label">An analogy</strong>A game of chess is the same game with wooden pieces, plastic pieces, or pebbles on a napkin. The moves are the pattern. The pieces are the material. Where it breaks down: a chess set doesn't compute anything; the players do. Yudkowsky's own example is Claude, which would give the same answers on electricity in wires or water in pipes. <span class="src">(A ¶4)</span></p>
+        <p class="box"><strong class="label">An analogy</strong>A game of chess is the same game with wooden pieces, plastic pieces, or pebbles on a napkin. The moves are the pattern. The pieces are the material. Where it breaks down: a chess set doesn't compute anything; the players do. Yudkowsky's own example is Claude, an AI chatbot made by the company Anthropic, which would give the same answers on electricity in wires or water in pipes. <span class="src">(A ¶4)</span></p>
 
         <h3>Try it: the machine</h3>
         <p class="box"><strong class="label">Try it</strong>Pick a question, then pick a material. Each change sends one signal through the network.</p>
@@ -385,9 +398,10 @@ svg path.s-navy, svg line { fill: none; }
       <section class="view module" id="m2" data-title="2. Two bins for every fact">
         <h2>2. Two bins for every fact</h2>
         <p class="objective">In this part: sort facts about a machine by whether they could change what it says.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Part 1 showed that the material didn't change the answers. This part turns that into a test you can apply to any fact: could it change what comes out?</p>
         <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-input-and-output">Input and output</a>: what a system takes in (what it hears) and what it gives back (what it says). The <a class="term" href="#g-functional-layer">functional layer</a> holds facts that can change the output. The <a class="term" href="#g-physical-layer">physical layer</a> holds facts about the material that can't.</p>
         <p>Treat any machine as a box with inputs and outputs. Then sort every fact about it with one test: could this fact change what comes out? <span class="src">(A ¶1)</span></p>
-        <p>Some facts pass. Somewhere in Claude's trained weights is the fact that Paris is in France. Ask about Paris, and that stored fact shapes the reply. <span class="src">(A ¶2)</span></p>
+        <p>Some facts pass. Somewhere in Claude's trained weights (the huge set of numbers, tuned during training, that store what it has learned) is the fact that Paris is in France. Ask about Paris, and that stored fact shapes the reply. <span class="src">(A ¶2)</span></p>
         <p>Other facts fail. The exact mass of the power supply feeding the computers never shows up in an answer. <span class="src">(A ¶3)</span> Neither does silicon versus carbon, or wires versus pipes, as long as the same algorithm runs on top. <span class="src">(A ¶4)</span></p>
         <figure>
           <svg width="460" height="210" viewBox="0 0 460 210" role="img" aria-label="Two boxes. Functional layer, which can change the output: knows Paris is in France, remembers your last message, has learned 7 times 8 is 56. Physical layer, which can't change the output: mass of the power supply, silicon or carbon chips, wires or pipes.">
@@ -437,6 +451,7 @@ svg path.s-navy, svg line { fill: none; }
       <section class="view module" id="m3" data-title="3. Why a simulated storm stays dry">
         <h2>3. Why a simulated storm stays dry</h2>
         <p class="objective">In this part: use a famous example about rain to see the wall between the two layers.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Now the two bins get a famous test case. A simulated storm shows the wall between them, and it sets up the big question: which bin does consciousness go in?</p>
         <p class="box"><strong class="label">Words to know</strong>A <a class="term" href="#g-simulation">simulation</a> is a program that computes how something would behave, such as a storm or a brain.</p>
         <p>In 1980 the philosopher John Searle pointed out that a computer simulation of a rainstorm leaves nobody wet. He used it as a reason to doubt that a simulated brain would really think. (This history comes from outside the posts.)</p>
         <p>Yudkowsky agrees the storm stays dry. He says the example points straight at the two layers. Wetness belongs to the physical layer. A program can compute rain all day and never make the circuit board damp. <span class="src">(A ¶5, ¶7)</span></p>
@@ -484,6 +499,7 @@ svg path.s-navy, svg line { fill: none; }
       <section class="view module" id="m4" data-title="4. The argument in three steps">
         <h2>4. The argument in three steps</h2>
         <p class="objective">In this part: follow the argument from "the material can't steer the output" to "consciousness belongs with the pattern".</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Part 3 left that question open. Here Yudkowsky answers it, using one fact about consciousness you can check for yourself.</p>
         <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-introspection">Introspection</a> means looking inward at your own thoughts and experience. <a class="term" href="#g-functionalism">Functionalism</a> is the view that a mind is defined by what its parts do, whatever they are made of.</p>
         <p>The argument needs only one fact about consciousness. It's a fact you can check for yourself: noticing your own awareness can make you say "I think, therefore I am." <span class="src">(A ¶9)</span> René Descartes wrote that sentence in 1637. (Outside the posts.)</p>
         <p>Whatever else stays mysterious, consciousness is at least part of the cause of those words. That puts it among the things that change what you say. <span class="src">(A ¶9)</span></p>
@@ -525,7 +541,7 @@ svg path.s-navy, svg line { fill: none; }
           </svg>
           <figcaption>Two premises, one conclusion. Critics attack step 2, the jump to step 3, or the idea that brains run algorithms (Part 9).</figcaption>
         </figure>
-        <p class="box"><strong class="label">The contested jump <span class="tag con">Contested</span></strong>Steps 1 and 2 show that consciousness isn't a property of the material that leaves your words untouched. Step 3 needs one more assumption: whatever plays consciousness's part in producing your words is consciousness. John Searle and the defenders of Integrated Information Theory can accept steps 1 and 2 and still reject that jump. Chalmers's fading-qualia argument (Part 5) and Yudkowsky's panpsychism post (Part 6) try to back it up.</p>
+        <p class="box"><strong class="label">The contested jump <span class="tag con">Contested</span></strong>Steps 1 and 2 show that consciousness isn't a property of the material that leaves your words untouched. Step 3 needs one more assumption: whatever plays consciousness's part in producing your words is consciousness. John Searle and the defenders of Integrated Information Theory (a theory that ties consciousness to how a system's physical parts are wired together; Part 9 explains it) can accept steps 1 and 2 and still reject that jump. David Chalmers's fading-qualia argument (Part 5; <a class="term" href="#g-qualia">qualia</a> are the felt qualities of experience) and Yudkowsky's panpsychism post (Part 6) try to back it up.</p>
         <details class="reveal"><summary>Why does the argument need step 2 at all?</summary>
           <div><p>Without it, consciousness could be like wetness: a physical fact that never shows up in what you say. Step 2 puts it among the things that change your words, and those can't depend on the material. <span class="src">(A ¶11)</span></p></div>
         </details>
@@ -538,6 +554,7 @@ svg path.s-navy, svg line { fill: none; }
       <section class="view module" id="m5" data-title="5. Swap your neurons, one at a time">
         <h2>5. Swap your neurons, one at a time</h2>
         <p class="objective">In this part: run the argument on your own brain with a thought experiment.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>An argument about machines can feel distant. This part runs the same reasoning on your own brain, one neuron at a time.</p>
         <p class="box"><strong class="label">Words to know</strong>A <a class="term" href="#g-thought-experiment">thought experiment</a> is an imagined setup used to test an idea when a real one is impossible.</p>
         <p>Your brain has roughly 86 billion neurons, by the cell counts of Frederico Azevedo and colleagues (2009). (Outside the posts.)</p>
         <p>Yudkowsky imagines your brain's pattern of cause and effect built on tiny trained squirrels passing notes. Your words can only depend on which neurons fire and when, so they would come out the same. You couldn't notice the difference from inside. <span class="src">(A ¶10)</span></p>
@@ -573,6 +590,7 @@ svg path.s-navy, svg line { fill: none; }
       <section class="view module" id="m6" data-title="6. The case against panpsychism">
         <h2>6. The case against panpsychism</h2>
         <p class="objective">In this part: follow Yudkowsky's two-sided argument against panpsychism, then meet a panpsychist reply.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Panpsychism puts consciousness in matter itself, which seems to dodge the argument. This part, from his second post, tests it with the same two-layer idea.</p>
         <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-panpsychism">Panpsychism</a> is the view that consciousness is a basic feature of matter, present even in tiny particles. Two processes are <a class="term" href="#g-isomorphic">isomorphic</a> when each step in one matches a step in the other.</p>
         <p>Yudkowsky says the same reasoning shows panpsychism is false. <span class="src">(B ¶1)</span> He sets up a dilemma: a choice where both options lead to the same problem.</p>
         <p><strong>Option one.</strong> Suppose consciousness is a property of particles, like mass, except that it never changes how they move. Then it can't change what you say. You couldn't find it by introspection. Your "I think, therefore I am" couldn't come from it. <span class="src">(B ¶2)</span></p>
@@ -629,6 +647,7 @@ svg path.s-navy, svg line { fill: none; }
       <section class="view module" id="m7" data-title="7. Seeing a mind, or inferring one?">
         <h2>7. Seeing a mind, or inferring one?</h2>
         <p class="objective">In this part: tell an observation from an inference when someone says a creature or a machine has feelings.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Parts 1 to 6 used Yudkowsky's two posts. This part turns to his longer essay. If the material can't settle who is conscious, how do people decide? Often by a quick gut reaction, he argues.</p>
         <p class="box"><strong class="label">Words to know</strong>An <a class="term" href="#g-observation">observation</a> is what you directly see or hear. An <a class="term" href="#g-inference">inference</a> is a conclusion you reach from it. <a class="term" href="#g-qualia">Qualia</a> are the felt qualities of experience, like how red looks to you.</p>
         <p>Yudkowsky finds it striking that many people look into a chicken's eyes and feel they just see feeling inside. The same people talk to an AI that reflects and talks back, and feel sure nothing is there. <span class="src">(C ¶1)</span></p>
         <p>He offers three guesses about why. Maybe the brain has an inborn quick sort, "alive and moves = animal," that a screen doesn't trigger, and people mistake that sorting for what "qualia" means. <span class="src">(C ¶2)</span> Maybe the brain builds a model of "something like me, but a chicken" and places it behind the eyes. <span class="src">(C ¶3)</span> Or maybe people don't stop to ask what other explanations could fit the same behavior. <span class="src">(C ¶4)</span></p>
@@ -659,7 +678,7 @@ svg path.s-navy, svg line { fill: none; }
         <div data-sort="infer"></div>
 
         <h3>The other side</h3>
-        <p>The case for chicken feelings rests on more than a glance. Researchers point to pain pathways in birds that resemble ours, and to animals giving up rewards to avoid harm. In one study, lame chickens chose feed laced with a painkiller (Danbury and colleagues, 2000). (Outside the essay.)</p>
+        <p>The case for chicken feelings rests on more than a glance. Researchers point to pain pathways in birds that resemble ours, and to animals giving up rewards to avoid harm. In one study, researchers used broiler chickens, a type raised for meat. Some of the birds were lame, meaning they limped or struggled to walk. Both lame and healthy birds learned to tell apart two colors of feed. One color contained carprofen, a painkiller. Then the birds could eat whichever they liked. Lame birds ate more of the drugged feed than healthy birds, and the worse the limp, the more of it they chose. With more of the drug, the lame birds walked better (Danbury and colleagues, 2000). Choosing relief suggests something felt bad to them, though it is still an inference. (Outside the essay.)</p>
         <p>Self-reports from AI are tricky evidence too. The philosopher Jonathan Birch calls this the "gaming problem": chatbots are trained on huge amounts of human writing about feelings, so their talk about feelings may echo that training whether or not anything is felt. (Outside the essay.)</p>
 
         <h3>The parrot question</h3>
@@ -676,11 +695,12 @@ svg path.s-navy, svg line { fill: none; }
       <section class="view module" id="m8" data-title="8. Made of parts, and where to worry">
         <h2>8. Made of parts, and where to worry</h2>
         <p class="objective">In this part: explain why Yudkowsky expects consciousness to be made of many parts, and how that shapes what worries him.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>If a gut reaction isn't enough, what else can guide us? This part gives his guess about what consciousness is made of, and which systems that guess says to worry about.</p>
         <p class="box"><strong class="label">Words to know</strong>A <a class="term" href="#g-self-model">self-model</a> is a system's internal picture of itself. <a class="term" href="#g-conservation-of-expected-evidence">Conservation of expected evidence</a> is a rule of probability: you can't expect, on average, to change your mind in a particular direction.</p>
         <p>Yudkowsky draws a lesson from the history of science. Things that once seemed like one mysterious ingredient turned out to be made of many parts. Life is made of parts. Fire is made of parts. <span class="src">(C ¶20, ¶21)</span></p>
         <p>Two examples from outside the essay. Chemists once explained burning with phlogiston, a substance thought to escape from things as they burned. In the 1770s and 1780s Antoine Lavoisier showed that burning is a reaction with oxygen: a process with many steps, not a substance. Many scientists also believed living things held a special "vital force." Chemistry and cell biology gradually explained life as the work of many parts.</p>
         <p>Feeling cold works the same way. Touch an ice cube and nerve cells send signals to your brain, which has (in his figure) about a hundred trillion connections. Then your hand feels cold. He expects that last step to be made of parts too. <span class="src">(C ¶21)</span></p>
-        <p>One part he names: to say "<em>I</em> feel this pain," you need an idea of "I." He calls this a self-model. <span class="src">(C ¶8, ¶21)</span> So he worries more about systems that reflect on themselves and report on themselves. He adds that more general intelligence tends to mean a better self-model. <span class="src">(C ¶9)</span> That's why large language models (LLMs) worry him more than mosquitoes, electrons, or chickens. He calls this a guess from a model. <span class="src">(C ¶7, ¶10, ¶22)</span></p>
+        <p>One part he names: to say "<em>I</em> feel this pain," you need an idea of "I." He calls this a self-model. <span class="src">(C ¶8, ¶21)</span> So he worries more about systems that reflect on themselves and report on themselves. He adds that more general intelligence tends to mean a better self-model. <span class="src">(C ¶9)</span> That's why large language models (LLMs) worry him more than mosquitoes, electrons, or chickens. He calls this a guess from a model. <span class="src">(C ¶7, ¶10, ¶22)</span> The worry is the moral one from the start of this page: a system that can suffer is one whose treatment matters.</p>
         <figure>
           <svg width="460" height="130" viewBox="0 0 460 130" role="img" aria-label="A chain of parts: ice cube, skin sensor, nerve signal, brain with a self-model, then the words I feel cold.">
             <rect class="f-page s-teal" x="1" y="35" width="76" height="50"/><text class="t-ink t-s" x="39" y="65" text-anchor="middle">ice cube</text>
@@ -736,6 +756,7 @@ svg path.s-navy, svg line { fill: none; }
       <section class="view module" id="m9" data-title="9. Where the argument could break">
         <h2>9. Where the argument could break</h2>
         <p class="objective">In this part: weigh the strongest objections, and say what the argument settles and what it leaves open.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>You've now seen the whole case. This part steps outside the posts to test it against its strongest critics.</p>
         <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-epiphenomenalism">Epiphenomenalism</a> is the view that experience is a side effect that causes nothing. The rest of this part is outside the posts.</p>
         <h3>Four objections</h3>
         <p><span class="tag con">Contested</span> <strong>Consciousness doesn't cause the words.</strong> Epiphenomenalists say brain machinery produces "I think, therefore I am" on its own. The experience rides along. This attacks step 2.</p>
@@ -948,6 +969,7 @@ window.COURSE = {
     { front: "What does the argument leave open about AI?", back: "Which patterns produce consciousness. Material alone can't settle it either way.", src: "this guide's summary" }
   ],
   glossary: {
+    "consciousness": "Having experiences that feel like something from the inside, such as the sting of pain or the redness of red. On this page it doesn't mean being smart or being awake.",
     "algorithm": "A fixed set of steps for turning inputs into outputs: when this signal arrives, send that one on.",
     "substrate": "The material a pattern or algorithm runs on, such as copper wires, water pipes, or neurons.",
     "substrate independence": "The claim that a mind could run on any material that carries the right pattern.",

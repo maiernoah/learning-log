@@ -86,7 +86,7 @@ const ENTRIES = [
     time: "13:00",
     url: "exhibits/what-the-output-cant-see/",
     tags: ["philosophy", "consciousness"],
-    summary: `A nine-part course on three short pieces by Eliezer Yudkowsky about where consciousness lives. Readers rebuild a question-answering machine from wires, pipes, squirrels or neurons, test his argument against panpsychism on an electron test bench, and weigh the strongest objections, with quizzes and spaced review cards throughout.`,
+    summary: `A nine-part course on three pieces by Eliezer Yudkowsky about where consciousness lives: two posts on X (17 April 2026) and a 2026 essay on chickens, AI and qualia. Yudkowsky is a writer on AI risk who helped found the Machine Intelligence Research Institute and the LessWrong blog. Readers rebuild a question-answering machine from wires, pipes, squirrels or neurons, test his argument against panpsychism on an electron test bench, and weigh the strongest objections, with quizzes and spaced review cards throughout.`,
   },
 
 

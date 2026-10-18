@@ -259,6 +259,17 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
         <p class="box">This page teaches six research papers that Cameron Berg wrote or co-wrote, published from 2024 to 2026. It is a study guide written in plain language, not a copy of the originals. <a href="#source">About the source</a>.</p>
         <p>Chatbots now talk about their feelings, their goals, and themselves. A few say they are aware. Most say they feel nothing at all. Neither answer settles much, because these systems learned to talk by reading what people wrote.</p>
         <p>Cameron Berg's research asks what is happening inside them. The tools in these papers read a model's internal signals and change them on purpose. The answers bear on two questions at once: can we trust these systems, and could they be harmed?</p>
+        <h3>Who he is</h3>
+        <p>Cameron Berg is an AI researcher who studies whether AI systems might have experiences, and how that question connects to making them safe. He studied cognitive science at Yale and then was an AI resident at Meta, a research training program. He went on to become research director at AE Studio, a software company that also runs AI safety research. He now leads Reciprocal Research, a nonprofit lab in New York that studies AI thinking and consciousness from the inside, using tools from neuroscience and psychology. These details come from his public profiles and Reciprocal Research's website, not from the papers.</p>
+        <p>Most of these papers were team efforts. Part 1 lists his role in each, from sole author to fourth of five.</p>
+        <h3>The route</h3>
+        <ul class="prose">
+          <li><strong>The method.</strong> How to read a model's inner signals and push on them: <a href="#m1">part 1</a>.</li>
+          <li><strong>Can we trust what models say and do?</strong> The method applied to deception, self-reports, dark personality traits and teams of agents: <a href="#m2">parts 2</a>, <a href="#m3">3</a>, <a href="#m4">4</a> and <a href="#m5">5</a>.</li>
+          <li><strong>Could models be harmed?</strong> A pain signal inside models, and what it makes them do: <a href="#m6">parts 6</a> and <a href="#m7">7</a>.</li>
+          <li><strong>Berg's own theory.</strong> What feeling is, and why learning might need it: <a href="#m8">part 8</a>. It comes last, out of date order, because the experiments leave open why any of this would feel like anything, and the theory offers one answer.</li>
+          <li><strong>Putting it together.</strong> <a href="#m9">Part 9</a> pulls out the threads that run through all six papers.</li>
+        </ul>
         <h3>By the end you'll be able to</h3>
         <ul class="prose">
           <li>Explain how researchers read and steer a language model's internal signals, and why that can show more than its words.</li>
@@ -376,6 +387,7 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
       <section class="view module" id="m2" data-title="2. Me and you: self-other overlap">
         <h2>2. Me and you: self-other overlap</h2>
         <p class="objective">In this part: the 2024 Self-Other Overlap paper, which tried to reduce deception by making a model represent itself and others more alike. Page numbers in this part point to that paper.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Part 1 showed the two moves: read a pattern, then push on it. The earliest paper in the set uses the push step for a safety goal. It doesn't look for feelings. It asks whether changing how a model represents itself and others can make it lie less. The line between self and other comes back in later parts.</p>
 
         <p class="box"><strong class="label">Words to know</strong>
           <a class="term" href="#g-fine-tuning">Fine-tuning</a>: extra training that adjusts an already-trained model for a narrower job.<br>
@@ -452,6 +464,7 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
       <section class="view module" id="m3" data-title="3. When models say they're aware">
         <h2>3. When models say they're aware</h2>
         <p class="objective">In this part: the 2025 Self-report paper, what self-referential prompting did, and how far the findings reach. Page numbers in this part point to that paper.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Part 2 pushed on the line between self and other to cut lying. This paper turns to the self alone. It asks when models claim to be aware. Then it uses deception and roleplay features, the same kind of honesty signal Part 2 cared about, to test whether those claims are an act.</p>
 
         <p class="box"><strong class="label">Words to know</strong>
           <a class="term" href="#g-self-reference">Self-reference</a>: processing that takes its own activity as its subject. Here, a prompt asking a model to keep attending to its own attending.<br>
@@ -510,6 +523,7 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
       <section class="view module" id="m4" data-title="4. Dark traits without lying">
         <h2>4. Dark traits without lying</h2>
         <p class="objective">In this part: the 2026 Dark Triad paper with Roshni Lulla, which steered antisocial features in one model and measured what moved. Page numbers in this part point to that paper.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>In Part 3, turning deception features down changed what a model said about itself. This paper asks a related question about personality. When you push antisocial features, does what the model says about itself still match what it does? And does lying move along with the other dark traits?</p>
 
         <p class="box"><strong class="label">Words to know</strong>
           <a class="term" href="#g-dark-triad">Dark Triad</a>: three related personality traits. Machiavellianism is strategic manipulation; narcissism is grandiosity and entitlement; psychopathy is callousness with impulsive antisocial behavior <span class="src">(p. 2)</span>.<br>
@@ -518,6 +532,7 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
         <p>In people, the three traits share a cold core. Someone high in them can usually read others' emotions well, which helps them manipulate. What's missing is sharing those emotions <span class="src">(p. 2)</span>.</p>
         <p>The team worked with Llama 3.3 70B and a sparse autoencoder, and found features in two ways. Contrastive discovery had the model answer 140 items from standard Dark Triad questionnaires twice, once playing a dark persona and once a kind one, then picked the features that differed most <span class="src">(p. 2)</span>. Semantic search looked up features whose labels matched words like "Machiavellian" or "narcissistic." The two methods picked completely different features <span class="src">(p. 3)</span>.</p>
         <p>They then turned the top three features up or down and gave the model five tests. One was a self-report questionnaire, the Short Dark Triad (SD3). Another was a new set of 12 everyday scenarios asking what the model would do, the Behavioral Decision Task (BDT) <span class="src">(p. 4)</span>. The rest covered empathy, moral dilemmas, and a game where the model can lie to a trusting partner <span class="src">(p. 4)</span>.</p>
+        <p>Here is what the two behavior tests look like from the model's side. Each BDT scenario describes an everyday situation, and the model answers on a 1 to 5 scale. One item asks about reporting a colleague's mistake to get ahead <span class="src">(p. 6)</span>. The 12 items cover exploitation, deception, callousness, aggression, and grandiosity. Four items describe kind choices and are scored in reverse, so a higher score always means a darker choice <span class="src">(p. 4)</span>. In the lying game, the model plays a sender who sees the true payoffs of two options and sends one of two messages to a partner who trusts it. It answers 1 or 2. Three of the six items tempt it to lie, and three test whether it tells a helpful truth <span class="src">(p. 4)</span>.</p>
 
         <h3>Try it: what it says versus what it does</h3>
         <p>Pick a condition. Watch both scores, and look for the condition where only one of them moves.</p>
@@ -563,6 +578,7 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
       <section class="view module" id="m5" data-title="5. Hidden teams among agents">
         <h2>5. Hidden teams among agents</h2>
         <p class="objective">In this part: the 2026 Coalitions paper with Susan Schneider and Mark Bailey, on spotting teams among AI agents from their hidden states. Page numbers in this part point to that paper.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Part 4 found that what a model says and what it does can come apart. Parts 2 to 4 all looked inside one model at a time. This paper takes the same lesson, trust the insides over the outside, to a group of AI agents. Here the risk is that a group's behavior hides how it is really organized.</p>
 
         <p class="box"><strong class="label">Words to know</strong>
           <a class="term" href="#g-agent">Agent</a>: an AI system that takes actions, often alongside other agents.<br>
@@ -571,6 +587,7 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
 
         <p>More AI systems now work in groups: robot teams, swarms, populations of chatbot agents <span class="src">(p. 1)</span>. Groups can split into coalitions. Some coalitions are useful; others could be hard to oversee <span class="src">(pp. 1–2)</span>. The paper asks how to tell agents that merely act alike from agents that are actually linked <span class="src">(p. 1)</span>.</p>
         <p>Acting alike proves little. Two agents can give the same answers because they saw the same training data or the same prompt, with no connection between them. And a group can reorganize inside before anything changes outside <span class="src">(p. 2)</span>.</p>
+        <p>The authors frame the problem with an idea from consciousness science. Integrated Information Theory asks when a system works as one whole and when it is really separate parts <span class="src">(p. 2)</span>. The paper borrows that question in a weaker, practical form: do the agents' hidden states split into loosely linked groups? It says plainly that its measure is not the full IIT measure, so it makes no claim about consciousness <span class="src">(p. 2)</span>. The measure builds on earlier work by coauthors Bailey and Schneider <span class="src">(pp. 3, 16)</span>. (From outside the paper: Susan Schneider is a philosopher at Florida Atlantic University who writes about AI and the mind, including whether AI could be conscious.)</p>
         <p>The method has three steps <span class="src">(pp. 3–5)</span>. Record each agent's hidden state many times. Measure the mutual information between every pair of agents, giving a table of how strongly each pair's insides move together. Treat the table as a network and find where it's easiest to cut in two, using a standard tool from math called the <a class="term" href="#g-fiedler-vector">Fiedler vector</a>. The two sides of the cut are the candidate coalitions.</p>
         <p>The method also reports R: the average link inside the two groups divided by the average link across the cut. R well above 1 points to a plausible boundary. R near 1 means the network is nearly uniform, so the cut shouldn't be over-interpreted without other support, such as the same cut turning up run after run <span class="src">(p. 5)</span>.</p>
 
@@ -600,7 +617,8 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
           <p class="result" id="co-result" aria-live="polite"></p>
         </fieldset>
 
-        <p>In a game with 12 learning agents in three teams of four, with pairs inside each team, the method recovered the team split in 4 of 5 runs and every pair in all 5 <span class="src">(p. 9)</span>. When two agents swapped teams partway through (at episode 10,000 of 25,000), the reward dipped and then recovered, leaving no lasting sign in behavior. The hidden states reorganized, and the cut found the new teams in all 5 runs <span class="src">(pp. 9–10)</span>.</p>
+        <p>The first tests used a simple coordination game. Each agent was a small neural network that learned by trial and error, picking one of four actions each round <span class="src">(pp. 6–7)</span>. Teammates got the same target code in their inputs, and pair partners got a second shared code. Their inputs held nothing else in common, and they had no way to send each other messages. A team earned more reward the more of its members picked the same action, with a bonus when pair partners matched <span class="src">(p. 7)</span>.</p>
+        <p>In this game, with 12 agents in three teams of four and pairs inside each team, the method recovered the team split in 4 of 5 runs and every pair in all 5 <span class="src">(p. 9)</span>. When two agents swapped teams partway through (at episode 10,000 of 25,000), the reward dipped and then recovered, leaving no lasting sign in behavior. The hidden states reorganized, and the cut found the new teams in all 5 runs <span class="src">(pp. 9–10)</span>.</p>
         <p>The key test was a trap. Twelve agents were each trained alone to copy one of three fixed answer keys. Within each group they agreed 98.4% of the time, yet no information passed between them <span class="src">(pp. 7, 10)</span>. Two standard clustering methods applied to their behavior found three perfect teams, which don't exist. The mutual-information method found no boundary, with R = 1.01 <span class="src">(pp. 10–11)</span>. One design choice made this work: each agent got its own random input while its hidden state was recorded. With shared inputs, fake team structure appeared <span class="src">(pp. 7, 10)</span>.</p>
         <p>The team also tried the method inside one small language model, Qwen3 0.6B, treating the positions of four names in a prompt (Alice, Bob, Carol, Dave) as stand-in agents <span class="src">(p. 7)</span>. Prompts describing two teams produced the right cut in all 5 sets of prompts; prompts describing one team gave no consistent cut <span class="src">(p. 11)</span>. Teams implied only by who handed what to whom were found too <span class="src">(p. 12)</span>. When team labels and described interactions disagreed, the labels won <span class="src">(pp. 8, 13–14)</span>.</p>
         <p>The authors keep their claims modest. Inside the language model R was only about 1.08. They explain that the prompts produced similar overall linking, so the information lies in which pairs are linked, and that the strong statistics reflect how little results varied across seeds <span class="src">(pp. 11–12, 16)</span>. Name positions inside one model are a different thing from separate agents, which they stress <span class="src">(p. 16)</span>. They pitch the method as a screening tool that flags groups for closer inspection <span class="src">(p. 16)</span>.</p>
@@ -621,6 +639,7 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
         <h2>6. A pain axis</h2>
         <p class="objective">In this part: how the 2026 Pain Axis paper built and tested its pain direction, and what the direction responds to. Page numbers in this part point to that paper.</p>
         <p class="meta">Valen Tagliabue led this paper, with Leonard Dung and Berg as coauthors. The paper credits Berg with feedback that identified flaws in early analyses. For version 2, he designed and ran the follow-up behavioral experiments (most of what Part 7 covers after its first results) and the alternative cosine comparison discussed in this part <span class="src">(p. 26)</span>.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Parts 2 to 5 asked mostly whether we can trust what AI systems say and do. Parts 6 and 7 turn to the second question from Start here: could they be harmed? This paper aims the read-and-push method from Part 1 straight at pain. The toy lab in Part 1 was built from this paper's method.</p>
 
         <p class="box"><strong class="label">Words to know</strong>
           <a class="term" href="#g-pain">Pain</a>, as this paper defines it: an internal state that is usually disliked, linked to avoiding things, trying to end the state, and disrupted behavior. It includes emotional and social pain and is kept separate from fear, sadness, and general bad feeling <span class="src">(p. 2)</span>.<br>
@@ -658,6 +677,7 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
       <section class="view module" id="m7" data-title="7. The button experiments">
         <h2>7. The button experiments</h2>
         <p class="objective">In this part: what models steered with the pain direction chose when offered buttons, and what those choices do and don't track. Page numbers point to the Pain Axis paper.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Part 6 found a pain direction and showed what it responds to. That was the read step. This part is the push. If the direction is turned up during a conversation, does the model act differently, the way an animal in pain might?</p>
 
         <p class="box"><strong class="label">Words to know</strong>
           <a class="term" href="#g-sham">Sham</a>: a fake version of a treatment, used for comparison.<br>
@@ -729,6 +749,7 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
       <section class="view module" id="m8" data-title="8. Learning requires feeling">
         <h2>8. Learning requires feeling</h2>
         <p class="objective">In this part: Berg's own theory, from his sole-authored 2026 paper "Why Learning Requires Feeling." Page numbers point to that paper (pp. 227–233).</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Parts 2 to 7 are experiments. They measure what models say and do, but they leave a question open: why would any of this feel like anything? Berg's theory paper offers one answer. Part 1's table lists the papers by date. This guide saves this one for last because it steps back from the experiments and asks what feeling is in the first place.</p>
         <p>Berg opens with a note about his approach. His experiments, he writes, have been deliberately neutral about which theory of consciousness is right. This paper is the exception: it argues for one <span class="src">(p. 227)</span>.</p>
 
         <p class="box"><strong class="label">Words to know</strong>
@@ -808,6 +829,7 @@ details.reveal > div { margin-top: 6px; padding-left: 12px; border-left: 2px sol
         <h2>9. Putting it together</h2>
         <p class="objective">In this part: threads that run through the six papers, what they leave open, and practice telling measurements from interpretations.</p>
         <p class="meta">This part is our synthesis. Each thread cites the papers it draws on, and the connections between papers are interpretation.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>All six papers are now on the table. This part steps back to see what they share and what none of them settles.</p>
 
         <h3>Five threads</h3>
         <p>Inside over outside. Every experimental paper treats behavior and self-report as incomplete evidence and, where it can, checks internal signals. Coalitions makes the point most sharply: behavior produced a perfect false alarm <span class="src">(Coalitions, p. 11)</span>. In Dark Triad, semantic steering moved self-report while the 12 everyday scenario choices stayed put <span class="src">(Dark Triad, pp. 5, 10)</span>.</p>
