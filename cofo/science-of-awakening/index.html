@@ -1,0 +1,2192 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Science of Awakening Experience Map</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+<style>
+/* Layout: a single light column on a pale wash. The attendee's path runs top to bottom in phases; each touchpoint shows Expectations beside Exceed. A second tab holds the shared checklist. Light only, matching cofo.org. */
+:root {
+  color-scheme: light;
+  --wash-top: #f1edf4;
+  --wash-bottom: #f8f8f8;
+  --card: #fbfaf8;
+  --ink: #36454f;
+  --text: #5e6a72;
+  --soft: #788e9d;
+  --line: #e6e3e8;
+  --tint: rgba(101, 92, 254, .06);
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body: "DM Sans", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  background-color: var(--wash-bottom);
+  background-image: linear-gradient(180deg, var(--wash-top) 0, var(--wash-bottom) 640px);
+  background-repeat: no-repeat;
+  color: var(--text); font-family: var(--body); font-size: 16px; line-height: 1.6;
+  overflow-x: hidden;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 80px; position: relative; }
+h1, h2, h3 { font-family: var(--display); color: var(--ink); font-weight: 600; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.4rem, 7vw, 3.4rem); line-height: 1.05; letter-spacing: -0.03em; }
+h2 { font-size: 1.6rem; line-height: 1.15; letter-spacing: -0.01em; }
+h3 { font-size: 1.25rem; line-height: 1.25; font-weight: 500; }
+p { margin: 0; }
+button { font: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 8px; }
+.label { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--soft); font-weight: 500; }
+
+/* Hero with fine arcs, like the foundation's site */
+.arcs-box { position: absolute; inset: 0 0 auto 0; height: 520px; overflow: hidden; pointer-events: none; }
+.arcs { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 1400px; max-width: none; height: 520px; }
+.hero { position: relative; text-align: center; padding-block: 72px 40px; display: grid; gap: 16px; justify-items: center; }
+.hero .lede { max-width: 56ch; font-size: 1.05rem; }
+.facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 6px; }
+.fact { background: var(--card); border-radius: 999px; padding: 6px 16px; font-size: .9rem; color: var(--ink); box-shadow: 0 4px 20px rgba(200, 200, 214, .35); }
+.fact span { color: var(--soft); margin-right: 6px; }
+.sample { font-size: .82rem; color: var(--soft); }
+
+/* Tabs */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: flex; justify-content: center; padding-block: 12px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--wash-top); }
+.tabs { display: inline-flex; gap: 4px; background: rgba(251, 250, 248, .94); border-radius: 999px; padding: 4px; box-shadow: 0 4px 20px rgba(200, 200, 214, .45); }
+.tabs button { border: 0; background: transparent; color: var(--text); padding: 8px 20px; border-radius: 999px; cursor: pointer; font-weight: 500; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: #fff; }
+
+/* Journey strip */
+.strip { display: flex; gap: 8px; overflow-x: auto; padding: 8px 2px 18px; scrollbar-width: none; }
+.strip::-webkit-scrollbar { display: none; }
+.strip button { flex: 0 0 auto; border: 2px solid var(--soft); background: transparent; color: var(--ink); border-radius: 999px; padding: 6px 14px; cursor: pointer; font-size: .88rem; white-space: nowrap; }
+.strip button:hover { background: var(--card); }
+
+/* Map */
+.phase { padding-top: 36px; display: grid; gap: 14px; scroll-margin-top: 80px; }
+.phase-head { display: grid; gap: 2px; }
+.tp { background: var(--card); border-radius: 12px; padding: 20px 22px; display: grid; gap: 14px; box-shadow: 0 4px 20px rgba(200, 200, 214, .35); }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.col { border-radius: 10px; padding: 14px 16px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.col.expect { background: #f3f1ee; }
+.col.exceed { background: var(--tint); }
+.col ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.col li { color: var(--ink); }
+.col li b { font-weight: 700; }
+.col li span { color: var(--text); }
+
+/* Checklist */
+.progress { background: var(--card); border-radius: 12px; padding: 20px 22px; display: grid; gap: 12px; box-shadow: 0 4px 20px rgba(200, 200, 214, .35); margin-top: 8px; }
+.progress .row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; }
+.progress .big { font-family: var(--display); font-size: 2rem; color: var(--ink); line-height: 1; font-variant-numeric: tabular-nums; }
+.meter { height: 6px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; background: var(--ink); border-radius: 999px; transition: width .3s; }
+.status { font-size: .85rem; color: var(--soft); }
+.clist { padding-top: 30px; display: grid; gap: 10px; }
+.cphase { padding-top: 22px; }
+.cphase:first-child { padding-top: 0; }
+.pcount { font-family: var(--body); font-size: .85rem; font-weight: 500; color: var(--soft); margin-left: 12px; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.cgroup { background: var(--card); border-radius: 12px; padding: 8px 22px 10px; box-shadow: 0 4px 20px rgba(200, 200, 214, .35); }
+.cgroup h3 { font-family: var(--body); font-size: .95rem; font-weight: 700; color: var(--ink); padding: 12px 0 4px; }
+.item { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; padding: 9px 0; border-top: 1px solid var(--line); cursor: pointer; }
+.cgroup h3 + .item { border-top: 0; }
+.item input { appearance: none; width: 20px; height: 20px; margin: 2px 0 0; border: 2px solid var(--soft); border-radius: 50%; cursor: pointer; display: grid; place-items: center; background: #fff; }
+.item input:checked { background: var(--ink); border-color: var(--ink); }
+.item input:checked::after { content: ""; width: 5px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: translateY(-1px) rotate(45deg); }
+.item input:disabled { opacity: .5; cursor: not-allowed; }
+.item span { color: var(--ink); }
+.item.done span { color: var(--soft); text-decoration: line-through; }
+
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: #fff; padding: 9px 18px; border-radius: 999px; font-size: .88rem; z-index: 20; }
+
+@media (max-width: 640px) {
+  .cols { grid-template-columns: 1fr; }
+  .hero { padding-block: 48px 28px; }
+  .tp, .cgroup, .progress { padding-left: 16px; padding-right: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="arcs-box" aria-hidden="true"><svg class="arcs" viewBox="0 0 1400 520" id="arcs"></svg></div>
+<div class="wrap">
+  <header class="hero" id="hero"></header>
+  <div class="bar"><div class="tabs" role="tablist" id="tabs"></div></div>
+  <section id="v-map" role="tabpanel"></section>
+  <section id="v-check" role="tabpanel" hidden></section>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script type="application/json" id="map-data">
+{
+ "event": {
+  "name": "Science of Awakening Gathering",
+  "type": "Two-day funder gathering",
+  "purpose": "Bring funders of awakening science together with the researchers building the field, so they leave ready to fund it.",
+  "start": "2026-11-13",
+  "end": "2026-11-14",
+  "location": "A private home in Menlo Park, near the Stanford Dish",
+  "headcount": "About 25 (capacity 40)",
+  "budget": 30000,
+  "currency": "USD"
+ },
+ "phases": [
+  {
+   "id": "invite",
+   "when": "Mid to late October",
+   "name": "Invitation"
+  },
+  {
+   "id": "register",
+   "when": "Late October",
+   "name": "Saying yes"
+  },
+  {
+   "id": "prep",
+   "when": "2 to 3 weeks before",
+   "name": "Getting ready"
+  },
+  {
+   "id": "final",
+   "when": "The last few days",
+   "name": "Final days"
+  },
+  {
+   "id": "arrival",
+   "when": "Friday Nov 13, from 4pm",
+   "name": "Arrival"
+  },
+  {
+   "id": "friday",
+   "when": "Friday evening, until 10pm",
+   "name": "Opening night"
+  },
+  {
+   "id": "morning",
+   "when": "Saturday morning",
+   "name": "Overnight and morning"
+  },
+  {
+   "id": "saturday",
+   "when": "Saturday Nov 14, 9am to 5pm",
+   "name": "The main day"
+  },
+  {
+   "id": "close",
+   "when": "Saturday afternoon",
+   "name": "Closing"
+  },
+  {
+   "id": "thanks",
+   "when": "Within a few days",
+   "name": "Thank-you"
+  },
+  {
+   "id": "commit",
+   "when": "1 to 3 weeks after",
+   "name": "Commitment conversations"
+  },
+  {
+   "id": "later",
+   "when": "1 to 3 months after",
+   "name": "What it made possible"
+  }
+ ],
+ "touchpoints": [
+  {
+   "id": "invite",
+   "phase": "invite",
+   "title": "The invitation email",
+   "expectations": [
+    "A short note that says what the gathering is, when, where, and who is hosting.",
+    "Enough about the format to decide whether two days are worth it."
+   ],
+   "exceed": [
+    {
+     "title": "Let the room do the persuading",
+     "detail": "Add one line on who will be there: the researchers building the field and a small group of funders."
+    },
+    {
+     "title": "A first line only the sender could write",
+     "detail": "Every invitation opens with a personal sentence, as the October 11 invitations already do."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "invite-1",
+     "title": "Confirm every funder on the list got an invitation from the person who knows them best"
+    },
+    {
+     "id": "invite-2",
+     "title": "Add the event website link to future invitations once it is live"
+    },
+    {
+     "id": "invite-3",
+     "title": "Log every send and reply in the SF Event sheet"
+    }
+   ]
+  },
+  {
+   "id": "personal",
+   "phase": "invite",
+   "title": "A personal follow-up from someone they know",
+   "expectations": [
+    "A call or text from Josh, Winslow, Kati or Noah, not a second mass email.",
+    "No pressure to decide on the spot."
+   ],
+   "exceed": [
+    {
+     "title": "One reason that fits them",
+     "detail": "Each follow-up names the one talk or researcher this funder would most want to meet."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "personal-1",
+     "title": "Assign every unanswered funder to one follow-up owner"
+    },
+    {
+     "id": "personal-2",
+     "title": "Write one line per funder on why this gathering fits them"
+    },
+    {
+     "id": "personal-3",
+     "title": "Make the follow-up calls or texts to every funder with no reply"
+    }
+   ]
+  },
+  {
+   "id": "noreply",
+   "phase": "invite",
+   "title": "A nudge for people who haven't answered",
+   "expectations": [
+    "One friendly reminder, not repeated chasing."
+   ],
+   "exceed": [
+    {
+     "title": "Share who is coming",
+     "detail": "A single short update naming a few confirmed researchers."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "noreply-1",
+     "title": "List funders with no RSVP and their contact owner"
+    },
+    {
+     "id": "noreply-2",
+     "title": "Send one reminder that names confirmed researchers"
+    },
+    {
+     "id": "noreply-3",
+     "title": "Set the date after which no reply counts as a no"
+    }
+   ]
+  },
+  {
+   "id": "decline",
+   "phase": "invite",
+   "title": "Saying no",
+   "expectations": [
+    "A warm reply that makes declining easy.",
+    "The relationship carries on without guilt."
+   ],
+   "exceed": [
+    {
+     "title": "Bring the room to them",
+     "detail": "After the gathering, send decliners the State of Awakening report with a personal note."
+    },
+    {
+     "title": "First word on London",
+     "detail": "Tell them they will hear first about the London gathering in early 2027."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "decline-1",
+     "title": "Reply personally to every decline within a day"
+    },
+    {
+     "id": "decline-2",
+     "title": "Tag decliners in the sheet for the post-event report mailing"
+    },
+    {
+     "id": "decline-3",
+     "title": "Add decliners who fit to the London 2027 list"
+    }
+   ]
+  },
+  {
+   "id": "plusone",
+   "phase": "invite",
+   "title": "Bringing a partner or guest",
+   "expectations": [
+    "A clear answer on whether a spouse or guest is welcome.",
+    "Guests are treated the same as invitees at the door."
+   ],
+   "exceed": [
+    {
+     "title": "Same name tag for everyone",
+     "detail": "Names handwritten on blank tags, so plus-ones never look different from invitees."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "plusone-1",
+     "title": "Decide the plus-one policy with Josh and McCulloch's team"
+    },
+    {
+     "id": "plusone-2",
+     "title": "Answer the open request for two extra guests in the RSVP sheet"
+    },
+    {
+     "id": "plusone-3",
+     "title": "Add confirmed plus-ones to the headcount and the liability-form list"
+    }
+   ]
+  },
+  {
+   "id": "questions",
+   "phase": "invite",
+   "title": "Who to ask with questions",
+   "expectations": [
+    "A named person who replies within a day."
+   ],
+   "exceed": [
+    {
+     "title": "One inbox, one human",
+     "detail": "Every guest question goes to one named CoFo contact who knows the answers."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "questions-1",
+     "title": "Name the single CoFo contact for guest questions"
+    },
+    {
+     "id": "questions-2",
+     "title": "Put that person's email and phone number in every guest message"
+    }
+   ]
+  },
+  {
+   "id": "rsvp",
+   "phase": "register",
+   "title": "RSVP and confirmation",
+   "expectations": [
+    "A quick confirmation that they are in, with dates, times and the town.",
+    "A calendar hold for both days."
+   ],
+   "exceed": [
+    {
+     "title": "Confirmed by a person",
+     "detail": "A short reply from their contact owner instead of a form receipt."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "rsvp-1",
+     "title": "Send a confirmation with a calendar file to every yes"
+    },
+    {
+     "id": "rsvp-2",
+     "title": "Give Eliza access to the RSVP tracker"
+    },
+    {
+     "id": "rsvp-3",
+     "title": "Move every yes onto the Yes List with the days they're attending"
+    },
+    {
+     "id": "rsvp-4",
+     "title": "Test the calendar file in Google and Apple calendars"
+    }
+   ]
+  },
+  {
+   "id": "days",
+   "phase": "register",
+   "title": "Which days they're coming",
+   "expectations": [
+    "Clarity on Friday evening and Saturday, and on whether Sunday's separate event is open to them."
+   ],
+   "exceed": [
+    {
+     "title": "A simple handoff to Sunday",
+     "detail": "Guests invited for three days get one note explaining that Sunday is McCulloch's Mind Science event and how to join it."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "days-1",
+     "title": "Record Friday, Saturday and Sunday attendance for every yes"
+    },
+    {
+     "id": "days-2",
+     "title": "Confirm with Anna and George which guests are invited to Sunday"
+    },
+    {
+     "id": "days-3",
+     "title": "Write the Sunday handoff note for three-day guests"
+    }
+   ]
+  },
+  {
+   "id": "needs",
+   "phase": "register",
+   "title": "Food and access needs",
+   "expectations": [
+    "Asked once, and handled without having to explain again.",
+    "Their needs kept private."
+   ],
+   "exceed": [
+    {
+     "title": "The right plate, quietly",
+     "detail": "The caterer works from a private card per guest instead of a list read aloud."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "needs-1",
+     "title": "Ask every confirmed guest for dietary and access needs"
+    },
+    {
+     "id": "needs-2",
+     "title": "Keep needs in a private sheet shared only with Revel and the events lead"
+    },
+    {
+     "id": "needs-3",
+     "title": "Confirm with Revel that every need is covered at every meal"
+    }
+   ]
+  },
+  {
+   "id": "travel",
+   "phase": "register",
+   "title": "Travel and hotel for funders coming from afar",
+   "expectations": [
+    "Hotel suggestions near Menlo Park and the nearest airports.",
+    "Help booking if they ask for it."
+   ],
+   "exceed": [
+    {
+     "title": "A short list, booked if wanted",
+     "detail": "Two or three nearby hotels, with an offer to book on their behalf."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "travel-1",
+     "title": "Pick two or three hotels near the house"
+    },
+    {
+     "id": "travel-2",
+     "title": "Ask out-of-town funders whether they want help booking"
+    },
+    {
+     "id": "travel-3",
+     "title": "Track arrival times for anyone flying in"
+    }
+   ]
+  },
+  {
+   "id": "whoelse",
+   "phase": "register",
+   "title": "Who else is coming",
+   "expectations": [
+    "A sense of the room before they arrive."
+   ],
+   "exceed": [
+    {
+     "title": "Attendee list on the website",
+     "detail": "The site Josh is building lists everyone who agreed to be named."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "whoelse-1",
+     "title": "Ask each confirmed guest whether they're happy to be listed"
+    },
+    {
+     "id": "whoelse-2",
+     "title": "Add consenting attendees to the website"
+    }
+   ]
+  },
+  {
+   "id": "capacity",
+   "phase": "register",
+   "title": "Changes, cancellations and the waitlist",
+   "expectations": [
+    "An easy way to cancel without awkwardness."
+   ],
+   "exceed": [
+    {
+     "title": "Fill freed seats",
+     "detail": "Keep a short waitlist of funders to invite when someone drops out."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "capacity-1",
+     "title": "Set the seat cap with Shift Alt and McCulloch's team"
+    },
+    {
+     "id": "capacity-2",
+     "title": "Keep a ranked waitlist of funders"
+    },
+    {
+     "id": "capacity-3",
+     "title": "Decide the last date a freed seat can be offered"
+    }
+   ]
+  },
+  {
+   "id": "precall",
+   "phase": "prep",
+   "title": "Level-setting call with Josh",
+   "expectations": [
+    "A short call that explains what the gathering is for and what CoFo is building.",
+    "No ask on the call."
+   ],
+   "exceed": [
+    {
+     "title": "Ask what would make it worth their time",
+     "detail": "One question about what they want from the two days, used to plan seating and introductions."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "precall-1",
+     "title": "Settle when Josh's pre-calls happen"
+    },
+    {
+     "id": "precall-2",
+     "title": "Schedule a pre-call between Josh and every confirmed funder"
+    },
+    {
+     "id": "precall-3",
+     "title": "Write a one-page brief per funder for Josh"
+    },
+    {
+     "id": "precall-4",
+     "title": "Log what each funder says they want from the gathering"
+    }
+   ]
+  },
+  {
+   "id": "report",
+   "phase": "prep",
+   "title": "The State of Awakening report",
+   "expectations": [
+    "A clear, well-designed summary of the field, what CoFo has done, and where it goes next.",
+    "For their eyes only."
+   ],
+   "exceed": [
+    {
+     "title": "A note inside the cover",
+     "detail": "A short handwritten note from Josh in each printed copy."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "report-1",
+     "title": "Finish the report draft (Kati and Morgan)"
+    },
+    {
+     "id": "report-2",
+     "title": "Get final design from Hannes"
+    },
+    {
+     "id": "report-3",
+     "title": "Decide whether the report goes out ahead or only in print on the day"
+    },
+    {
+     "id": "report-4",
+     "title": "Send print files to Eliza with a printing deadline"
+    },
+    {
+     "id": "report-5",
+     "title": "Proof one printed copy before the full run"
+    }
+   ]
+  },
+  {
+   "id": "deck",
+   "phase": "prep",
+   "title": "The deck question",
+   "expectations": [
+    "Clear information on what their money could do, without feeling sold to at a gathering."
+   ],
+   "exceed": [
+    {
+     "title": "Save it for the commitment call",
+     "detail": "Use the deck after the gathering, in a version shaped to each funder's interests."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "deck-1",
+     "title": "Decide with Josh whether funders see the deck before, after or not at all"
+    },
+    {
+     "id": "deck-2",
+     "title": "If after, make a version per funder interest"
+    }
+   ]
+  },
+  {
+   "id": "website",
+   "phase": "prep",
+   "title": "The event website and schedule",
+   "expectations": [
+    "One page with the schedule, the place, what to bring and who to call."
+   ],
+   "exceed": [
+    {
+     "title": "Speaker bios with one human detail",
+     "detail": "Each researcher's entry has one line on why they do this work."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "website-1",
+     "title": "Finish the funder-facing site (Kathryn)"
+    },
+    {
+     "id": "website-2",
+     "title": "Draft the rough content schedule Eliza asked for"
+    },
+    {
+     "id": "website-3",
+     "title": "Add the schedule and attendees to the site Josh is building"
+    },
+    {
+     "id": "website-4",
+     "title": "Make the QR code and test it on two phones"
+    },
+    {
+     "id": "website-5",
+     "title": "Load the schedule onto the house's Samsung frames"
+    }
+   ]
+  },
+  {
+   "id": "kbyg",
+   "phase": "prep",
+   "title": "Know-before-you-go note",
+   "expectations": [
+    "Address, timing, parking, what to wear, and a phone number.",
+    "Sent once, plain and short."
+   ],
+   "exceed": [
+    {
+     "title": "Warn them about the cold",
+     "detail": "Evenings are forecast around 4 to 9°C. Say so, and say that heaters and blankets will be there."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "kbyg-1",
+     "title": "Get the valet pin from Anna"
+    },
+    {
+     "id": "kbyg-2",
+     "title": "Write the know-before-you-go note"
+    },
+    {
+     "id": "kbyg-3",
+     "title": "Send the note about 10 days out"
+    }
+   ]
+  },
+  {
+   "id": "liability",
+   "phase": "prep",
+   "title": "The liability form",
+   "expectations": [
+    "No surprise paperwork at the door."
+   ],
+   "exceed": [
+    {
+     "title": "Signed before they arrive",
+     "detail": "Send the form with the know-before-you-go note, so most guests arrive already signed."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "liability-1",
+     "title": "Get the final liability form from Anna"
+    },
+    {
+     "id": "liability-2",
+     "title": "Send the form ahead to every guest and plus-one"
+    },
+    {
+     "id": "liability-3",
+     "title": "Track who has signed"
+    },
+    {
+     "id": "liability-4",
+     "title": "Print blank forms for spouses and late additions"
+    }
+   ]
+  },
+  {
+   "id": "hostbrief",
+   "phase": "prep",
+   "title": "CoFo team briefing",
+   "expectations": [
+    "Each CoFo host knows which funders they're looking after and what each one cares about."
+   ],
+   "exceed": [
+    {
+     "title": "One host per funder",
+     "detail": "Every funder has one CoFo person who greets them, makes introductions and checks in."
+    },
+    {
+     "title": "Someone watching the room",
+     "detail": "One CoFo host is named to keep an eye on guests' comfort and make sure anyone can step out of a conversation easily."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "hostbrief-1",
+     "title": "Pair every funder with one CoFo host"
+    },
+    {
+     "id": "hostbrief-2",
+     "title": "Hold a 30-minute host briefing the week before"
+    },
+    {
+     "id": "hostbrief-3",
+     "title": "Name one host to watch guests' comfort across both days"
+    },
+    {
+     "id": "hostbrief-4",
+     "title": "Share funder briefs with hosts only"
+    }
+   ]
+  },
+  {
+   "id": "program",
+   "phase": "prep",
+   "title": "The shape of the program",
+   "expectations": [
+    "A clear shape for both days: a few talks, real discussion, and shared meals, as the invitation promised."
+   ],
+   "exceed": [
+    {
+     "title": "Three talks, not twelve",
+     "detail": "Build the program around the three OG researchers, and offer other researchers something next year."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "program-1",
+     "title": "Confirm the three OG speakers and their talk format"
+    },
+    {
+     "id": "program-2",
+     "title": "Decide whether other researchers give short talks"
+    },
+    {
+     "id": "program-3",
+     "title": "Confirm performers (Josh's options and Anna's)"
+    },
+    {
+     "id": "program-4",
+     "title": "Walk through the production schedule on the October 20 call"
+    },
+    {
+     "id": "program-5",
+     "title": "Ask Shift Alt for a run-of-show template from McCulloch's past events"
+    }
+   ]
+  },
+  {
+   "id": "reminder",
+   "phase": "final",
+   "title": "Reminder a few days out",
+   "expectations": [
+    "A short reminder with the times."
+   ],
+   "exceed": [
+    {
+     "title": "A first look",
+     "detail": "One photo of the garden or the room where they'll gather."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "reminder-1",
+     "title": "Write the reminder"
+    },
+    {
+     "id": "reminder-2",
+     "title": "Take the photo at the October 19 walkthrough"
+    },
+    {
+     "id": "reminder-3",
+     "title": "Send the reminder three days out"
+    }
+   ]
+  },
+  {
+   "id": "daybefore",
+   "phase": "final",
+   "title": "Day-before message",
+   "expectations": [
+    "Exact address, arrival time, where the valet is, and a number to call."
+   ],
+   "exceed": [
+    {
+     "title": "A text from their host",
+     "detail": "Their CoFo host texts them on Thursday instead of a group email."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "daybefore-1",
+     "title": "Write the day-before text"
+    },
+    {
+     "id": "daybefore-2",
+     "title": "Each host texts their funders on Thursday"
+    },
+    {
+     "id": "daybefore-3",
+     "title": "Check that the valet location matches the pin"
+    }
+   ]
+  },
+  {
+   "id": "weather",
+   "phase": "final",
+   "title": "Weather plan",
+   "expectations": [
+    "If it rains or turns cold, they hear early and the gathering is still comfortable."
+   ],
+   "exceed": [
+    {
+     "title": "Blankets on every outdoor chair",
+     "detail": "Heaters lit and blankets out before the first guest arrives."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "weather-1",
+     "title": "Check the forecast on Wednesday"
+    },
+    {
+     "id": "weather-2",
+     "title": "Decide on tents or tarps with Eliza"
+    },
+    {
+     "id": "weather-3",
+     "title": "Confirm propane and test the heaters"
+    },
+    {
+     "id": "weather-4",
+     "title": "Order blankets if the house supply is short"
+    }
+   ]
+  },
+  {
+   "id": "phone",
+   "phase": "final",
+   "title": "A phone a person answers",
+   "expectations": [
+    "One number answered all weekend."
+   ],
+   "exceed": [
+    {
+     "title": "A named person",
+     "detail": "The number belongs to a named CoFo person, not a general line."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "phone-1",
+     "title": "Name who holds the guest phone each day"
+    },
+    {
+     "id": "phone-2",
+     "title": "Put the number on the website, the reminder and the house card"
+    }
+   ]
+  },
+  {
+   "id": "latecancel",
+   "phase": "final",
+   "title": "Late cancellations",
+   "expectations": [
+    "Being able to cancel late without awkwardness."
+   ],
+   "exceed": [
+    {
+     "title": "Keep them close",
+     "detail": "Each late canceller gets a warm note and the report afterward."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "latecancel-1",
+     "title": "Update the headcount with Revel daily in the final week"
+    },
+    {
+     "id": "latecancel-2",
+     "title": "Offer freed seats to the waitlist the same day"
+    },
+    {
+     "id": "latecancel-3",
+     "title": "Give final numbers to Revel by their deadline"
+    }
+   ]
+  },
+  {
+   "id": "getthere",
+   "phase": "arrival",
+   "title": "Getting there and parking",
+   "expectations": [
+    "Easy directions and parking with no circling."
+   ],
+   "exceed": [
+    {
+     "title": "Valet waiting",
+     "detail": "Valet meets each car near the Stanford Dish, so guests walk straight in."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "getthere-1",
+     "title": "Confirm valet start time and staffing"
+    },
+    {
+     "id": "getthere-2",
+     "title": "Put small signs from the street to the door"
+    },
+    {
+     "id": "getthere-3",
+     "title": "Agree a rideshare drop-off spot and tell the valet"
+    }
+   ]
+  },
+  {
+   "id": "door",
+   "phase": "arrival",
+   "title": "Walking in the door",
+   "expectations": [
+    "Someone friendly at the door who knows they're coming."
+   ],
+   "exceed": [
+    {
+     "title": "Greeted by name",
+     "detail": "Each funder's CoFo host meets them at the door."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "door-1",
+     "title": "Station a greeter at the door by 3:30"
+    },
+    {
+     "id": "door-2",
+     "title": "Text hosts when their funder's car arrives"
+    },
+    {
+     "id": "door-3",
+     "title": "Print a door list"
+    }
+   ]
+  },
+  {
+   "id": "checkin",
+   "phase": "arrival",
+   "title": "Name tag and form",
+   "expectations": [
+    "Check-in that takes under a minute."
+   ],
+   "exceed": [
+    {
+     "title": "Lanyards, not pins",
+     "detail": "Lanyards protect guests' clothes. Every name is handwritten the same way."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "checkin-1",
+     "title": "Order lanyards and blank name tags"
+    },
+    {
+     "id": "checkin-2",
+     "title": "Set up the check-in table with pens and the signed-form list"
+    },
+    {
+     "id": "checkin-3",
+     "title": "Have unsigned spouses sign at the table"
+    },
+    {
+     "id": "checkin-4",
+     "title": "Name who writes the name tags"
+    }
+   ]
+  },
+  {
+   "id": "firstdrink",
+   "phase": "arrival",
+   "title": "First drink",
+   "expectations": [
+    "A drink in hand within a few minutes: wine, beer, or something without alcohol."
+   ],
+   "exceed": [
+    {
+     "title": "A real alcohol-free option",
+     "detail": "One thoughtful drink for people who don't drink, not just sparkling water."
+    },
+    {
+     "title": "Donated wine with a story",
+     "detail": "If the wine sponsor comes through, a one-line introduction of where it's from."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "firstdrink-1",
+     "title": "Close the wine sponsor lead or hand it to Eliza"
+    },
+    {
+     "id": "firstdrink-2",
+     "title": "Confirm the beer and wine order with Revel"
+    },
+    {
+     "id": "firstdrink-3",
+     "title": "Add an alcohol-free drink to the bar list"
+    }
+   ]
+  },
+  {
+   "id": "house",
+   "phase": "arrival",
+   "title": "Coats, restrooms and house rules",
+   "expectations": [
+    "Knowing where coats go, where the restrooms are, and any house rules."
+   ],
+   "exceed": [
+    {
+     "title": "A small house card",
+     "detail": "Handed out at check-in: restrooms, wifi, the guest phone number, and a quiet place to step away."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "house-1",
+     "title": "Get the house rules from McCulloch's team"
+    },
+    {
+     "id": "house-2",
+     "title": "Decide where coats go"
+    },
+    {
+     "id": "house-3",
+     "title": "Print the house card"
+    }
+   ]
+  },
+  {
+   "id": "meethost",
+   "phase": "arrival",
+   "title": "Meeting the host",
+   "expectations": [
+    "Being welcomed by the person whose home it is."
+   ],
+   "exceed": [
+    {
+     "title": "A short welcome from the host",
+     "detail": "McCulloch says a two-minute welcome at the opening."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "meethost-1",
+     "title": "Agree with McCulloch's team how he welcomes guests"
+    },
+    {
+     "id": "meethost-2",
+     "title": "Brief him on which funders are coming"
+    }
+   ]
+  },
+  {
+   "id": "opening",
+   "phase": "friday",
+   "title": "The opening",
+   "expectations": [
+    "Starts close to on time, with a clear sense of why they're here and what the two days hold."
+   ],
+   "exceed": [
+    {
+     "title": "Open with the question",
+     "detail": "Josh names the one question the gathering is trying to answer."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "opening-1",
+     "title": "Write Josh's opening, under 10 minutes"
+    },
+    {
+     "id": "opening-2",
+     "title": "Test the mics and the PA"
+    },
+    {
+     "id": "opening-3",
+     "title": "Set the start time and name a cue person"
+    }
+   ]
+  },
+  {
+   "id": "fritalk",
+   "phase": "friday",
+   "title": "The first talk",
+   "expectations": [
+    "A talk a smart non-scientist can follow."
+   ],
+   "exceed": [
+    {
+     "title": "One sentence to repeat",
+     "detail": "Each speaker ends with one sentence a funder could repeat to a friend."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "fritalk-1",
+     "title": "Brief the speakers on who is in the room"
+    },
+    {
+     "id": "fritalk-2",
+     "title": "Test slides on the two projectors"
+    },
+    {
+     "id": "fritalk-3",
+     "title": "Have a backup laptop ready"
+    }
+   ]
+  },
+  {
+   "id": "dinner",
+   "phase": "friday",
+   "title": "Friday dinner",
+   "expectations": [
+    "Good food that handles their dietary needs, with time to talk."
+   ],
+   "exceed": [
+    {
+     "title": "Seated by interest",
+     "detail": "Each table mixes funders with a researcher whose work fits what they said they wanted on the pre-call."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "dinner-1",
+     "title": "Confirm the Friday menu with Revel"
+    },
+    {
+     "id": "dinner-2",
+     "title": "Build the seating plan from pre-call notes"
+    },
+    {
+     "id": "dinner-3",
+     "title": "Print place cards"
+    },
+    {
+     "id": "dinner-4",
+     "title": "Walk the dietary cards with the chef"
+    }
+   ]
+  },
+  {
+   "id": "meet",
+   "phase": "friday",
+   "title": "Meeting researchers and other funders",
+   "expectations": [
+    "Introductions to the people they came to meet."
+   ],
+   "exceed": [
+    {
+     "title": "Planned introductions",
+     "detail": "Each host makes two specific introductions for each of their funders."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "meet-1",
+     "title": "List two introductions per funder"
+    },
+    {
+     "id": "meet-2",
+     "title": "Brief researchers on who they'll meet"
+    }
+   ]
+  },
+  {
+   "id": "music",
+   "phase": "friday",
+   "title": "Live music",
+   "expectations": [
+    "Music that fits the evening and doesn't drown out conversation."
+   ],
+   "exceed": [
+    {
+     "title": "A set after dinner",
+     "detail": "East Forest or a similar performer, if the price fits the budget."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "music-1",
+     "title": "Confirm the performer and fee"
+    },
+    {
+     "id": "music-2",
+     "title": "Check the performer's sound needs against the house PA"
+    },
+    {
+     "id": "music-3",
+     "title": "Put the set time in the run of show"
+    }
+   ]
+  },
+  {
+   "id": "outdoor",
+   "phase": "friday",
+   "title": "Staying warm outside",
+   "expectations": [
+    "Not being cold or stumbling in the dark."
+   ],
+   "exceed": [
+    {
+     "title": "Warm and lit",
+     "detail": "Heaters on, blankets out and soft path lighting in place before dusk."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "outdoor-1",
+     "title": "Book outdoor lighting"
+    },
+    {
+     "id": "outdoor-2",
+     "title": "Test all eight patio heaters"
+    },
+    {
+     "id": "outdoor-3",
+     "title": "Confirm fire extinguishers are on site"
+    },
+    {
+     "id": "outdoor-4",
+     "title": "Name who lights the heaters at 4pm"
+    }
+   ]
+  },
+  {
+   "id": "frihome",
+   "phase": "friday",
+   "title": "Leaving Friday night",
+   "expectations": [
+    "An easy exit around 10pm."
+   ],
+   "exceed": [
+    {
+     "title": "Rides called for them",
+     "detail": "A host calls a ride for anyone who asks and walks them out."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "frihome-1",
+     "title": "Set a clear end time"
+    },
+    {
+     "id": "frihome-2",
+     "title": "Confirm the valet runs until the end"
+    },
+    {
+     "id": "frihome-3",
+     "title": "Name a host to help with rides"
+    }
+   ]
+  },
+  {
+   "id": "satmsg",
+   "phase": "morning",
+   "title": "Saturday morning message",
+   "expectations": [
+    "A short note with the start time."
+   ],
+   "exceed": [
+    {
+     "title": "A line from last night",
+     "detail": "One thing that happened on Friday, in a sentence."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "satmsg-1",
+     "title": "Write the Saturday text on Friday night"
+    },
+    {
+     "id": "satmsg-2",
+     "title": "Send it by 7am"
+    }
+   ]
+  },
+  {
+   "id": "sit",
+   "phase": "morning",
+   "title": "Morning meditation sit",
+   "expectations": [
+    "Optional, short, well led, and comfortable for beginners."
+   ],
+   "exceed": [
+    {
+     "title": "Led by a practitioner-researcher",
+     "detail": "One of the OG researchers leads a 20-minute sit."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "sit-1",
+     "title": "Confirm who leads the sit"
+    },
+    {
+     "id": "sit-2",
+     "title": "Set out cushions and chairs"
+    },
+    {
+     "id": "sit-3",
+     "title": "Pick a quiet indoor room as a backup"
+    }
+   ]
+  },
+  {
+   "id": "breakfast",
+   "phase": "morning",
+   "title": "Coffee and breakfast",
+   "expectations": [
+    "Good coffee when they walk in."
+   ],
+   "exceed": [
+    {
+     "title": "Ready before the sit",
+     "detail": "Coffee and tea out before the first guest arrives."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "breakfast-1",
+     "title": "Confirm breakfast with Revel"
+    },
+    {
+     "id": "breakfast-2",
+     "title": "Confirm the coffee setup and start time"
+    }
+   ]
+  },
+  {
+   "id": "arrive2",
+   "phase": "morning",
+   "title": "Arriving on Saturday",
+   "expectations": [
+    "No second check-in."
+   ],
+   "exceed": [
+    {
+     "title": "Tags waiting",
+     "detail": "Name tags laid out by the door from Friday."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "arrive2-1",
+     "title": "Collect lanyards at the end of Friday"
+    },
+    {
+     "id": "arrive2-2",
+     "title": "Check in Saturday-only arrivals"
+    }
+   ]
+  },
+  {
+   "id": "satopen",
+   "phase": "saturday",
+   "title": "Saturday framing",
+   "expectations": [
+    "A short framing of the day."
+   ],
+   "exceed": [
+    {
+     "title": "Name what Friday surfaced",
+     "detail": "Josh opens with two things hosts heard the night before."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "satopen-1",
+     "title": "Gather notes from hosts on Friday night"
+    },
+    {
+     "id": "satopen-2",
+     "title": "Josh writes a five-minute framing"
+    }
+   ]
+  },
+  {
+   "id": "sattalks",
+   "phase": "saturday",
+   "title": "Saturday talks",
+   "expectations": [
+    "Few talks, clear, and on time."
+   ],
+   "exceed": [
+    {
+     "title": "A funder asks first",
+     "detail": "The first question in each Q and A comes from a funder."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "sattalks-1",
+     "title": "Set the final talk order"
+    },
+    {
+     "id": "sattalks-2",
+     "title": "Name a timekeeper for each talk"
+    },
+    {
+     "id": "sattalks-3",
+     "title": "Test the projectors before 9am"
+    }
+   ]
+  },
+  {
+   "id": "discussion",
+   "phase": "saturday",
+   "title": "Discussion",
+   "expectations": [
+    "Real conversation about how the field grows, where their view matters."
+   ],
+   "exceed": [
+    {
+     "title": "Small circles",
+     "detail": "Groups of about six, each with a researcher and a CoFo host."
+    },
+    {
+     "title": "A relational session",
+     "detail": "A group session with the relational awakening facilitator whose work CoFo funds a study of."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "discussion-1",
+     "title": "Write two or three discussion questions"
+    },
+    {
+     "id": "discussion-2",
+     "title": "Assign researchers and hosts to circles"
+    },
+    {
+     "id": "discussion-3",
+     "title": "Decide whether to include the relational session"
+    },
+    {
+     "id": "discussion-4",
+     "title": "Name a note-taker for each circle"
+    }
+   ]
+  },
+  {
+   "id": "lunch",
+   "phase": "saturday",
+   "title": "Lunch",
+   "expectations": [
+    "Good food with dietary needs handled, and enough time to eat without rushing."
+   ],
+   "exceed": [
+    {
+     "title": "Sit with someone new",
+     "detail": "Lunch seating mixes people who haven't met yet."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "lunch-1",
+     "title": "Confirm Saturday lunch with Revel"
+    },
+    {
+     "id": "lunch-2",
+     "title": "Walk the dietary cards with the chef"
+    },
+    {
+     "id": "lunch-3",
+     "title": "Plan who sits where"
+    }
+   ]
+  },
+  {
+   "id": "breaks",
+   "phase": "saturday",
+   "title": "Breaks and free time",
+   "expectations": [
+    "Time to take a call, walk or rest."
+   ],
+   "exceed": [
+    {
+     "title": "A walk to the Dish",
+     "detail": "An optional short walk with a researcher."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "breaks-1",
+     "title": "Build two breaks of at least 20 minutes into the schedule"
+    },
+    {
+     "id": "breaks-2",
+     "title": "Mark a quiet room for phone calls"
+    }
+   ]
+  },
+  {
+   "id": "photos",
+   "phase": "saturday",
+   "title": "Photos and recording",
+   "expectations": [
+    "Asked before being photographed or recorded. Nothing shared publicly without consent."
+   ],
+   "exceed": [
+    {
+     "title": "A no-photo mark",
+     "detail": "A small sticker on the lanyard for anyone who prefers not to be photographed."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "photos-1",
+     "title": "Confirm the photographer (a volunteer or George)"
+    },
+    {
+     "id": "photos-2",
+     "title": "Decide whether talks are recorded"
+    },
+    {
+     "id": "photos-3",
+     "title": "Put the photo policy in the know-before-you-go note"
+    }
+   ]
+  },
+  {
+   "id": "help",
+   "phase": "saturday",
+   "title": "Help when something goes wrong",
+   "expectations": [
+    "Someone to go to if they feel unwell, need a ride, or something feels off."
+   ],
+   "exceed": [
+    {
+     "title": "A visible person on duty",
+     "detail": "Everyone knows which CoFo person is on duty each day."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "help-1",
+     "title": "Name the on-duty person each day"
+    },
+    {
+     "id": "help-2",
+     "title": "Put a first aid kit on site and note the nearest urgent care"
+    },
+    {
+     "id": "help-3",
+     "title": "Agree with the team what to do if a guest is uncomfortable"
+    }
+   ]
+  },
+  {
+   "id": "shifts",
+   "phase": "saturday",
+   "title": "Schedule changes on the day",
+   "expectations": [
+    "Knowing when the plan changes."
+   ],
+   "exceed": [
+    {
+     "title": "Screens that stay current",
+     "detail": "The Samsung frames show the live schedule."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "shifts-1",
+     "title": "Name who can change the schedule"
+    },
+    {
+     "id": "shifts-2",
+     "title": "Learn how to update the frames during the day"
+    }
+   ]
+  },
+  {
+   "id": "closing",
+   "phase": "close",
+   "title": "The closing moment",
+   "expectations": [
+    "A clear finish at 5pm, as the invitation promised."
+   ],
+   "exceed": [
+    {
+     "title": "One sentence each",
+     "detail": "Each person says what they'll take with them. Hosts write down what their funders say."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "closing-1",
+     "title": "Script the closing"
+    },
+    {
+     "id": "closing-2",
+     "title": "Ask hosts to note what each of their funders says"
+    },
+    {
+     "id": "closing-3",
+     "title": "Name who ends it on time"
+    }
+   ]
+  },
+  {
+   "id": "gift",
+   "phase": "close",
+   "title": "Something to take home",
+   "expectations": [
+    "No gift is expected, so something small and meaningful lands well."
+   ],
+   "exceed": [
+    {
+     "title": "The researcher's children's book",
+     "detail": "Signed by the author, with a short inscription."
+    },
+    {
+     "title": "The report in hand",
+     "detail": "A printed copy of the State of Awakening report goes home with them."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "gift-1",
+     "title": "Confirm the book and the quantity"
+    },
+    {
+     "id": "gift-2",
+     "title": "Ask the author to sign the copies"
+    },
+    {
+     "id": "gift-3",
+     "title": "Order with a buffer for plus-ones"
+    },
+    {
+     "id": "gift-4",
+     "title": "Pack the take-home bags"
+    }
+   ]
+  },
+  {
+   "id": "satnight",
+   "phase": "close",
+   "title": "Saturday evening",
+   "expectations": [
+    "If there is an evening program, they know about it well ahead."
+   ],
+   "exceed": [
+    {
+     "title": "A small dinner for funders",
+     "detail": "If CoFo keeps Saturday night, a short, unhurried dinner with the speakers."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "satnight-1",
+     "title": "Decide whether CoFo uses Saturday night"
+    },
+    {
+     "id": "satnight-2",
+     "title": "If yes, decide who plans dinner and add it to the know-before-you-go note"
+    }
+   ]
+  },
+  {
+   "id": "goodbye",
+   "phase": "close",
+   "title": "Goodbyes and getting home",
+   "expectations": [
+    "A warm goodbye and their car ready."
+   ],
+   "exceed": [
+    {
+     "title": "Walked out by their host",
+     "detail": "Each host walks their funders to the valet."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "goodbye-1",
+     "title": "Have the valet ready at 5pm"
+    },
+    {
+     "id": "goodbye-2",
+     "title": "Ask hosts to walk their funders out"
+    }
+   ]
+  },
+  {
+   "id": "sunday",
+   "phase": "close",
+   "title": "Handoff to Sunday",
+   "expectations": [
+    "Three-day guests know what happens next."
+   ],
+   "exceed": [
+    {
+     "title": "Meet Sunday's hosts",
+     "detail": "Anna or George says a word at the close about Sunday."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "sunday-1",
+     "title": "Confirm Sunday start time and details with Anna and George"
+    },
+    {
+     "id": "sunday-2",
+     "title": "Give three-day guests a Sunday card"
+    }
+   ]
+  },
+  {
+   "id": "thankyou",
+   "phase": "thanks",
+   "title": "Thank-you",
+   "expectations": [
+    "A personal thank-you within two days."
+   ],
+   "exceed": [
+    {
+     "title": "Quote them back",
+     "detail": "The note quotes the sentence they said at the closing."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "thankyou-1",
+     "title": "Collect host notes on Saturday night"
+    },
+    {
+     "id": "thankyou-2",
+     "title": "Hosts send personal thank-yous by Monday"
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "phase": "thanks",
+   "title": "Photos and recap",
+   "expectations": [
+    "A few photos and a short recap."
+   ],
+   "exceed": [
+    {
+     "title": "A recap that teaches",
+     "detail": "Three short paragraphs on what was learned, written for people who weren't in the room."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "recap-1",
+     "title": "Select photos guests consented to"
+    },
+    {
+     "id": "recap-2",
+     "title": "Write the recap"
+    },
+    {
+     "id": "recap-3",
+     "title": "Send the recap within a week"
+    }
+   ]
+  },
+  {
+   "id": "feedback",
+   "phase": "thanks",
+   "title": "Feedback",
+   "expectations": [
+    "Asked briefly, if at all."
+   ],
+   "exceed": [
+    {
+     "title": "Ask in conversation",
+     "detail": "Ask on the commitment call instead of sending a survey."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "feedback-1",
+     "title": "Add two feedback questions to the post-call script"
+    },
+    {
+     "id": "feedback-2",
+     "title": "Collect researcher feedback separately"
+    }
+   ]
+  },
+  {
+   "id": "debrief",
+   "phase": "thanks",
+   "title": "Team debrief",
+   "expectations": [
+    "The CoFo team compares notes while they're fresh."
+   ],
+   "exceed": [
+    {
+     "title": "Funder by funder",
+     "detail": "Debrief one funder at a time, ending with a next step and an owner."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "debrief-1",
+     "title": "Hold a 45-minute debrief within three days"
+    },
+    {
+     "id": "debrief-2",
+     "title": "Write each funder's next step into the CRM"
+    },
+    {
+     "id": "debrief-3",
+     "title": "Thank Shift Alt and McCulloch's team"
+    },
+    {
+     "id": "debrief-4",
+     "title": "Reconcile the shared budget split with McCulloch's side"
+    }
+   ]
+  },
+  {
+   "id": "postcall",
+   "phase": "commit",
+   "title": "Commitment call with Josh",
+   "expectations": [
+    "A follow-up conversation that builds on what they said, with a specific way to be involved."
+   ],
+   "exceed": [
+    {
+     "title": "Built from their own words",
+     "detail": "The proposal starts from what the funder said at the closing and on the pre-call."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "postcall-1",
+     "title": "Schedule a post-call with every attending funder"
+    },
+    {
+     "id": "postcall-2",
+     "title": "Prepare a specific proposal for each funder"
+    },
+    {
+     "id": "postcall-3",
+     "title": "Log the outcome of each call"
+    }
+   ]
+  },
+  {
+   "id": "promises",
+   "phase": "commit",
+   "title": "Follow-up on anything promised",
+   "expectations": [
+    "If someone promised a paper, an introduction or an answer, it arrives."
+   ],
+   "exceed": [
+    {
+     "title": "Closed within a week",
+     "detail": "Every promise made during the gathering is kept within seven days."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "promises-1",
+     "title": "Ask hosts to list every promise made"
+    },
+    {
+     "id": "promises-2",
+     "title": "Close each promise within seven days"
+    }
+   ]
+  },
+  {
+   "id": "materials",
+   "phase": "commit",
+   "title": "Report and materials",
+   "expectations": [
+    "Materials arrive when they want them, not before."
+   ],
+   "exceed": [
+    {
+     "title": "The right version for each",
+     "detail": "A digital copy of the report, plus the deck version that fits their interest."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "materials-1",
+     "title": "Send a digital copy of the report to attendees"
+    },
+    {
+     "id": "materials-2",
+     "title": "Send the deck where it was agreed"
+    }
+   ]
+  },
+  {
+   "id": "updates",
+   "phase": "later",
+   "title": "Updates on what their participation made possible",
+   "expectations": [
+    "Hearing what happened next."
+   ],
+   "exceed": [
+    {
+     "title": "Show the work moving",
+     "detail": "A short update on the awakening RFP grantees and what they're finding."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "updates-1",
+     "title": "Plan a funder update for January"
+    },
+    {
+     "id": "updates-2",
+     "title": "Shape each update to the funder's interest"
+    }
+   ]
+  },
+  {
+   "id": "researchers",
+   "phase": "later",
+   "title": "Staying close to the researchers",
+   "expectations": [
+    "A way to keep learning from the people they met."
+   ],
+   "exceed": [
+    {
+     "title": "A lab visit or call",
+     "detail": "Offer interested funders a call or visit with the researcher they connected with."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "researchers-1",
+     "title": "Ask researchers whether they're open to funder follow-ups"
+    },
+    {
+     "id": "researchers-2",
+     "title": "Offer one researcher connection to each interested funder"
+    }
+   ]
+  },
+  {
+   "id": "london",
+   "phase": "later",
+   "title": "Invitation to the next one",
+   "expectations": [
+    "Early notice of the next gathering."
+   ],
+   "exceed": [
+    {
+     "title": "First invitation to London",
+     "detail": "SF attendees hear about the London gathering before anyone else."
+    }
+   ],
+   "tasks": [
+    {
+     "id": "london-1",
+     "title": "Note which SF funders would travel to London"
+    },
+    {
+     "id": "london-2",
+     "title": "Send the London save-the-date to SF attendees first"
+    },
+    {
+     "id": "london-3",
+     "title": "Reuse the SF run of show for London"
+    }
+   ]
+  }
+ ]
+}
+</script>
+
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("map-data").textContent);
+  var EV = D.event || {}, PHASES = D.phases || [], TPS = D.touchpoints || [];
+
+  function h(tag, attrs) {
+    var el = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) {
+      var v = attrs[k]; if (v == null || v === false) return;
+      if (k === "class") el.className = v; else if (k === "text") el.textContent = v;
+      else if (k.slice(0, 2) === "on") el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? "" : v);
+    });
+    for (var i = 2; i < arguments.length; i++) add(el, arguments[i]);
+    return el;
+  }
+  function add(el, k) { if (k == null || k === false) return; if (Array.isArray(k)) { k.forEach(function (x) { add(el, x); }); return; } el.append(k.nodeType ? k : document.createTextNode(String(k))); }
+  function store(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem(k) || "null"); localStorage.setItem(k, JSON.stringify(v)); } catch (e) { return null; } }
+  var tt; function toast(m) { var t = document.getElementById("toast"); t.textContent = m; t.hidden = false; clearTimeout(tt); tt = setTimeout(function () { t.hidden = true; }, 3000); }
+  function money(n) { if (n == null || n === "") return ""; try { return new Intl.NumberFormat(undefined, { style: "currency", currency: EV.currency || "USD", maximumFractionDigits: 0 }).format(n); } catch (e) { return "$" + n; } }
+  function dateText() {
+    function d(s) { var p = String(s).split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+    if (!EV.start) return EV.date || "";
+    var o = { month: "long", day: "numeric" }, a = d(EV.start);
+    var s = a.toLocaleDateString(undefined, o);
+    if (EV.end && EV.end !== EV.start) s += " to " + d(EV.end).toLocaleDateString(undefined, o);
+    return s + ", " + a.getFullYear();
+  }
+  function itemsOf(tp) { return tp.tasks || []; }
+
+  var KEY = "xmap3:" + (EV.name || "event");
+  var S = { tab: (location.hash || "").slice(1) === "checklist" ? "check" : "map", mode: "pending", checks: {}, db: null };
+  function canTick() { return S.mode === "shared" || S.mode === "local"; }
+
+  /* fine arcs behind the title */
+  (function () {
+    var svg = document.getElementById("arcs"), NS = "http://www.w3.org/2000/svg";
+    for (var i = 0; i < 9; i++) {
+      var e = document.createElementNS(NS, "ellipse");
+      e.setAttribute("cx", 700); e.setAttribute("cy", 540 + i * 16); e.setAttribute("rx", 360 + i * 72); e.setAttribute("ry", 250 + i * 34);
+      e.setAttribute("fill", "none"); e.setAttribute("stroke", "#ffffff"); e.setAttribute("stroke-width", 1.3); e.setAttribute("stroke-opacity", .95 - i * .07);
+      svg.appendChild(e);
+    }
+  })();
+
+  /* basics */
+  (function () {
+    var el = document.getElementById("hero");
+    var facts = [["When", dateText()], ["Where", EV.location], ["Guests", EV.headcount], ["Budget", money(EV.budget)]].filter(function (f) { return f[1] != null && f[1] !== ""; });
+    add(el, [
+      h("span", { class: "label", text: "Experience Map" + (EV.type ? " · " + EV.type : "") }),
+      h("h1", { text: EV.name || "Experience Map" }),
+      EV.purpose ? h("p", { class: "lede", text: EV.purpose }) : null,
+      h("div", { class: "facts" }, facts.map(function (f) { return h("div", { class: "fact" }, h("span", { text: f[0] }), f[1]); })),
+      D.sample ? h("p", { class: "sample", text: "Example data" }) : null
+    ]);
+  })();
+
+  function renderTabs() {
+    var el = document.getElementById("tabs"); el.textContent = "";
+    [["map", "Map"], ["check", "Checklist"]].forEach(function (t) {
+      add(el, h("button", { role: "tab", type: "button", "aria-selected": String(S.tab === t[0]), "aria-controls": "v-" + t[0], onclick: function () {
+        S.tab = t[0]; renderTabs();
+        var top = document.querySelector(".bar").getBoundingClientRect().top + window.scrollY - 8;
+        if (window.scrollY > top) window.scrollTo({ top: top });
+      } }, t[1]));
+    });
+    document.getElementById("v-map").hidden = S.tab !== "map";
+    document.getElementById("v-check").hidden = S.tab !== "check";
+  }
+
+  /* map */
+  function renderMap() {
+    var v = document.getElementById("v-map");
+    var used = PHASES.filter(function (p) { return TPS.some(function (t) { return t.phase === p.id; }); });
+    add(v, h("nav", { class: "strip", "aria-label": "Jump to a phase" }, used.map(function (p) {
+      return h("button", { type: "button", onclick: function () { var s = document.getElementById("p-" + p.id); if (s) s.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); } }, p.when || p.name);
+    })));
+    used.forEach(function (p) {
+      add(v, h("div", { class: "phase", id: "p-" + p.id },
+        h("div", { class: "phase-head" }, p.when ? h("span", { class: "label", text: p.when }) : null, h("h2", { text: p.name })),
+        TPS.filter(function (t) { return t.phase === p.id; }).map(function (t) {
+          return h("article", { class: "tp" },
+            h("h3", { text: t.title }),
+            h("div", { class: "cols" },
+              h("div", { class: "col expect" }, h("span", { class: "label", text: "Expectations" }), h("ul", null, (t.expectations || []).map(function (x) { return h("li", { text: x }); }))),
+              h("div", { class: "col exceed" }, h("span", { class: "label", text: "Exceed" }), h("ul", null, (t.exceed || []).map(function (x) {
+                return typeof x === "string" ? h("li", { text: x }) : h("li", null, h("b", { text: x.title }), x.detail ? h("span", { text: ". " + x.detail }) : null);
+              })))));
+        })));
+    });
+  }
+
+  /* checklist */
+  function renderCheck() {
+    var v = document.getElementById("v-check"); v.textContent = "";
+    var all = []; TPS.forEach(function (t) { itemsOf(t).forEach(function (i) { all.push(i); }); });
+    var done = all.filter(function (i) { return S.checks[i.id] && S.checks[i.id].done; }).length;
+    var pct = all.length ? Math.round(done / all.length * 100) : 0;
+    var bar = h("i"); bar.style.width = pct + "%";
+    add(v, h("div", { class: "progress" },
+      h("div", { class: "row" }, h("div", null, h("div", { class: "big", text: done + " of " + all.length }), h("span", { text: "done" })),
+        h("span", { class: "status", text: { pending: "Connecting…", shared: "Shared with your team", local: "Saved in this browser only", readonly: "View only" }[S.mode] })),
+      h("div", { class: "meter", role: "progressbar", "aria-label": "Checklist progress", "aria-valuenow": pct, "aria-valuemin": 0, "aria-valuemax": 100 }, bar)));
+    var list = h("div", { class: "clist" });
+    PHASES.forEach(function (p) {
+      var tps = TPS.filter(function (t) { return t.phase === p.id && itemsOf(t).length; });
+      if (!tps.length) return;
+      var pItems = []; tps.forEach(function (t) { itemsOf(t).forEach(function (i) { pItems.push(i); }); });
+      var pDone = pItems.filter(function (i) { return S.checks[i.id] && S.checks[i.id].done; }).length;
+      add(list, h("div", { class: "phase-head cphase" }, p.when ? h("span", { class: "label", text: p.when }) : null,
+        h("h2", null, p.name, h("span", { class: "pcount", text: pDone + " of " + pItems.length }))));
+      tps.forEach(function (t) {
+        add(list, h("div", { class: "cgroup" }, h("h3", { text: t.title }), itemsOf(t).map(function (i) {
+          var on = !!(S.checks[i.id] && S.checks[i.id].done);
+          var cb = h("input", { type: "checkbox", id: "c-" + i.id }); cb.checked = on; cb.disabled = !canTick();
+          cb.addEventListener("change", function () { setCheck(i.id, cb.checked); });
+          return h("label", { class: "item" + (on ? " done" : ""), for: "c-" + i.id }, cb, h("span", { text: i.title }));
+        })));
+      });
+    });
+    add(v, list);
+  }
+
+  /* shared state */
+  var chains = {};
+  function serial(k, fn) { var p = (chains[k] || Promise.resolve()).catch(function () {}).then(fn); chains[k] = p; return p; }
+  function setCheck(id, on) {
+    var rec = { done: !!on, at: new Date().toISOString() };
+    S.checks[id] = rec; renderCheck();
+    if (S.mode === "shared") serial(id, function () { return S.db.collection("checks").doc(id).set(rec); }).catch(function (e) {
+      if (e && e.code === "invalid_argument") { S.mode = "readonly"; renderCheck(); toast("This page is view-only for you."); }
+      else toast("That didn't save. Check your connection and try again.");
+    });
+    else if (S.mode === "local") store(KEY, S.checks);
+  }
+  async function connect() {
+    var api = window.claude && typeof window.claude.use === "function" ? window.claude : null;
+    function local() { S.checks = store(KEY) || {}; S.mode = "local"; renderCheck(); }
+    if (!api) return local();
+    var r; try { r = await Promise.all([api.use("db"), api.use("user")]); } catch (e) { r = [null, null]; }
+    if (!r[0]) return local();
+    S.db = r[0];
+    var w = null; if (r[1]) { try { w = await r[1].can("data.write"); } catch (e) { w = null; } }
+    S.mode = w === false ? "readonly" : "shared";
+    S.db.collection("checks").onSnapshot(function (snap) { var n = {}; snap.docs.forEach(function (d) { n[d.id] = d.data(); }); S.checks = n; renderCheck(); },
+      function () { toast("Lost the live connection. Reload to reconnect."); });
+    renderCheck();
+  }
+
+  renderTabs(); renderMap(); renderCheck(); connect();
+})();
+</script>
+</html>
