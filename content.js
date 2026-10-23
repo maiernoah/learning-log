@@ -133,11 +133,11 @@ const ENTRIES = [
   {
     slug: "anil-seth-being-you",
     title: "Anil Seth's Being You",
-    date: "2026-10-05",
-    time: "05:34",
+    date: "2026-10-23",
+    time: "14:46",
     url: "exhibits/anil-seth-being-you/",
     tags: ["neuroscience", "consciousness", "anil seth"],
-    summary: `A ten-part course on Anil Seth's <em>Being You: A New Science of Consciousness</em> (2021) and his case that perception and the self are the brain's best guesses, rooted in keeping the body alive. Readers turn a hallucination dial until a face appears in the clouds, update a Bayesian guess as a gorilla walks closer, race a reactive thermostat against a predictive one, build a readiness potential out of pure noise, and zip a brain's echo to see why complexity alone can't measure consciousness. Quizzes and spaced review cards throughout.`,
+    summary: `A thirteen-part course on Anil Seth's <em>Being You</em> (2021) and his 2026 paper on conscious AI. Readers turn a hallucination dial, update a Bayesian guess as a gorilla walks closer, race two thermostats, and zip a brain's echo. They also sort which computer tasks are real and which only simulated, place views on conscious AI among Seth's five scenarios, and test whether knowing the truth breaks an illusion. Quizzes and spaced review cards throughout.`,
   },
 
   {

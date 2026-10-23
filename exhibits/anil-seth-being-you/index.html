@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Anil Seth&#x27;s Being You</title>
-<meta name="description" content="Tune your brain&#x27;s best guesses, watch a hallucination take over, and see why Seth thinks being you begins with staying alive.">
+<meta name="description" content="Tune your brain&#x27;s best guesses, watch a hallucination take over, and see why Seth thinks being you, and being conscious at all, begins with staying alive.">
 <style>
 /* ===== Noah's Weblog house style (exhibits) v2 =====
    Matches noahmaier.net: white page, Times for reading, Verdana for
@@ -224,6 +224,14 @@ input[type=range] { width: 100%; }
 table { margin: 0 0 1em; }
 table caption { caption-side: top; text-align: left; margin-bottom: 4px; }
 .result.spaced { margin-top: 12px; }
+.ladder { list-style: none; margin: 4px 0 14px; padding: 0; font-family: var(--sans); }
+.ladder li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; margin: 0 0 6px; padding: 8px 10px; border: 1px solid var(--lo); background: var(--tint); }
+.ladder li.on { background: var(--c1); border-color: var(--c1); color: var(--page); }
+.ladder li.seth { outline: 3px solid var(--c2); outline-offset: -3px; }
+.ladder li.fits { outline: 2px dashed var(--c2); outline-offset: -2px; }
+.ladder .tag { color: var(--c2); font-size: 0.9em; }
+.ladder li.on .tag { color: var(--page); }
+.ladder-note { margin: 12px 0 4px; }
 
 </style>
 </head>
@@ -231,7 +239,7 @@ table caption { caption-side: top; text-align: left; margin-bottom: 4px; }
 <div class="page">
   <header>
     <h1>Anil Seth&#x27;s Being You</h1>
-    <p class="dek">Tune your brain&#x27;s best guesses, watch a hallucination take over, and see why Seth thinks being you begins with staying alive.</p>
+    <p class="dek">Tune your brain&#x27;s best guesses, watch a hallucination take over, and see why Seth thinks being you, and being conscious at all, begins with staying alive.</p>
     <p class="nav">[ <a href="../../index.html#anil-seth-being-you">&#9668; Noah's Weblog</a> | <a href="../../about.html">About</a> ]</p>
     <hr>
   </header>
@@ -242,7 +250,7 @@ table caption { caption-side: top; text-align: left; margin-bottom: 4px; }
       <!-- ============ START HERE ============ -->
       <section class="view" id="start" data-title="Start here">
         <h2>Start here</h2>
-        <p class="box">This page teaches <em>Being You: A New Science of Consciousness</em> by Anil Seth (2021). It is a study guide written in plain language, not a copy of the original. <a href="#source">About the source</a>.</p>
+        <p class="box">This page teaches <em>Being You: A New Science of Consciousness</em> by Anil Seth (2021), and his 2026 paper "Conscious artificial intelligence and biological naturalism" with his reply to its critics. It is a study guide written in plain language, not a copy of the originals. <a href="#source">About the sources</a>.</p>
         <p>Right now you are having an experience: these words, some sound in the room, the weight of your own body. Anil Seth, a neuroscientist at the University of Sussex, argues that all of it is your brain's best guess about what is out there. He goes further. Your sense of being you, he says, is a guess of the same kind, and it starts with the job of keeping your body alive.</p>
         <p>The book has four sections: level (how conscious you are), content (what you are conscious of), self, and other minds. This page starts with content and self, because that is where Seth's main idea lives, and moves his chapters on measuring consciousness near the end.</p>
         <h3>The route</h3>
@@ -252,6 +260,7 @@ table caption { caption-side: top; text-align: left; margin-bottom: 4px; }
           <li><strong>The self.</strong> The same idea turned inward, from the layers of the self to emotions, staying alive, and the feeling of choosing: <a href="#m5">parts 5</a>, <a href="#m6">6</a>, <a href="#m7">7</a> and <a href="#m8">8</a>.</li>
           <li><strong>Measuring level.</strong> Back to Seth's first heading: how conscious someone is, and how to measure it: <a href="#m9">part 9</a>.</li>
           <li><strong>Other minds.</strong> Animals and machines: <a href="#m10">part 10</a>.</li>
+          <li><strong>Could AI be conscious?</strong> Seth's 2026 paper: why computation may not be enough, why life might matter, and what to do about machines that seem conscious: <a href="#m11">parts 11</a>, <a href="#m12">12</a> and <a href="#m13">13</a>.</li>
         </ul>
         <h3>Watch first</h3>
         <p>A video introduction to Seth's idea that perception is a controlled hallucination. <a href="#m2">Part 2</a> lets you try it hands-on.</p>
@@ -264,6 +273,8 @@ table caption { caption-side: top; text-align: left; margin-bottom: 4px; }
           <li>Describe the self as a bundle of perceptions and give an example of each part breaking down.</li>
           <li>Explain why Seth ties emotions, and all experience, to the work of staying alive.</li>
           <li>Compare ways scientists try to detect consciousness in patients, animals, and machines.</li>
+          <li>Explain why Seth doubts that computation alone could make AI conscious, and place a view among his five scenarios.</li>
+          <li>Distinguish the risks of AI that is conscious from the risks of AI that only seems conscious.</li>
         </ul>
         <h3>Guess first</h3>
         <p>Answer these before you start. Guessing wrong is fine; trying first makes the answers stick.</p>
@@ -887,8 +898,157 @@ table caption { caption-side: top; text-align: left; margin-bottom: 4px; }
         <p>Seth ends where Copernicus and Darwin left us. Each time science moved humans out of the centre, it gave something back: a universe, a family tree of all life. A science of consciousness, he argues, places our minds within nature too. <span class="src">(Epilogue)</span></p>
         <details class="reveal"><summary>Why doesn't passing the Turing test settle whether a machine is conscious?</summary><div><p>The Turing test asks whether a machine's text can pass for a human's, which is a test of one narrow kind of intelligence. Since Seth holds that intelligence and consciousness can come apart, a perfect score would tell you about the machine's skill and the judges' gullibility, and little about whether there is anything it is like to be the machine. <span class="src">(ch. 13)</span></p></div></details>
         <p class="box"><strong class="label">A common mix-up</strong>"Once AI gets smart enough, it will wake up." On Seth's view consciousness tracks being alive more closely than being smart. Making computers smarter is not, by itself, going to make them feel anything. <span class="src">(ch. 13)</span></p>
+        <p class="box"><strong class="label">Seth's later view</strong>In a 2026 paper Seth takes this much further. His "probably not" about machines becomes an argument that conscious AI is very unlikely on today's path, and that consciousness may need life itself. Parts 11 to 13 cover it.</p>
         <h3>Check yourself</h3>
         <div class="quiz" data-quiz="m10"></div>
+      </section>
+
+      <!-- ============ PART 11 ============ -->
+      <section class="view module" id="m11" data-title="11. Is computation enough?">
+        <h2>11. Is computation enough?</h2>
+        <p class="objective">In this part: Seth's 2026 case against the idea that running the right program would be enough to make a machine conscious.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Part 10 ended with Seth's honest "probably not" about a conscious robot. In a long paper published in 2026, "Conscious artificial intelligence and biological naturalism", he turns that hunch into an argument. Dozens of researchers published replies alongside it, and Seth answered them. Parts 11 to 13 follow the paper and his answer.</p>
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-computational-functionalism">Computational functionalism</a>: the view that the right computation is enough for consciousness. <a class="term" href="#g-substrate">Substrate</a>: what a system is made of. <a class="term" href="#g-substrate-flexibility">Substrate flexibility</a>: the idea that the same mental states could happen in different materials.</p>
+        <p>Seth starts with us, not the machines. Three habits push people to expect conscious AI. <a class="term" href="#g-anthropocentrism">Anthropocentrism</a> puts humans at the centre of things. <a class="term" href="#g-human-exceptionalism">Human exceptionalism</a> treats us as separate from, and above, other life. <a class="term" href="#g-anthropomorphism">Anthropomorphism</a> projects human qualities onto things that may not have them. Together they tempt us to bundle consciousness with the abilities we think make us special, like language. That, he says, is why chatbots are so persuasive. <span class="src">(p. 2)</span></p>
+        <p>Even our words give us away. People say language models "hallucinate" when they state falsehoods. A hallucination is an altered experience, so the word quietly credits the model with experiences. Seth prefers <a class="term" href="#g-confabulation">confabulate</a>: to make things up without realising it, which is about doing, not experiencing. <span class="src">(p. 2)</span></p>
+        <p>Now the main target. In 1936 Alan Turing described a <a class="term" href="#g-turing-machine">Turing machine</a>: a set of rules for changing symbols one step at a time. A universal one can run any algorithm, given enough memory, and the computers that run today's AI are universal Turing machines. <a class="term" href="#g-computational-functionalism">Computational functionalism</a> says the right computation is enough for a mind. If it is true, the right algorithm would be conscious on any machine able to run it. <span class="src">(p. 3)</span></p>
+        <p>Seth traces the idea's appeal partly to what he calls a marriage of convenience. Turing's machine was paired with the artificial neural network, a drastic simplification of real neurons. As computers improved, "the brain is a computer" became the standard metaphor. But being able to describe the brain in terms of computation doesn't show that the brain actually computes, or that consciousness is computation. <span class="src">(p. 4)</span></p>
+        <h3>The neural replacement argument</h3>
+        <p>The best-known argument for <a class="term" href="#g-substrate-flexibility">substrate flexibility</a> is a thought experiment. Replace your brain cells with silicon chips, one at a time. Each chip copies its cell's inputs and outputs exactly. If swapping one cell changes nothing, why would swapping a hundred, or all of them? Seth notes that the easiest way out of the puzzle seems to be accepting that silicon could be conscious too. <span class="src">(p. 4)</span></p>
+        <figure>
+          <svg id="swap-svg" width="420" height="300" viewBox="0 0 420 300" role="img" aria-label="Four panels show a group of nine brain cells being replaced by silicon chips: none, a third, two thirds, and all of them.">
+            <g font-size="16" text-anchor="middle">
+              <text x="105" y="24">0% replaced</text>
+              <text x="315" y="24">33% replaced</text>
+              <text x="105" y="144">67% replaced</text>
+              <text x="315" y="144">100% replaced</text>
+            </g>
+            <g id="swap-cells"></g>
+            <g font-size="16">
+              <circle cx="22" cy="262" r="8" fill="var(--c3)"/><text x="38" y="268">living cell</text>
+              <rect x="152" y="254" width="16" height="16" fill="var(--c5)"/><text x="176" y="268">chip, same inputs and outputs</text>
+            </g>
+          </svg>
+          <figcaption>The neural replacement thought experiment, drawn as a group of nine cells. Open the objections below to see why Seth isn't persuaded.</figcaption>
+        </figure>
+        <details class="reveal"><summary>Objection 1: it assumes what it sets out to prove</summary><div><p>The philosopher Ned Block points out that the argument begs the question. If consciousness does depend on the material, then something would change in the person's experience as the chips go in. They might not even notice: a change in experience is not always an experience of change. <span class="src">(p. 4)</span></p></div></details>
+        <details class="reveal"><summary>Objection 2: the copy wouldn't really work the same</summary><div><p>Peter Godfrey-Smith argues that silicon parts would behave differently inside, and eventually outside, because real neurons are shaped by metabolism, electrical fields, and fine timing. Rosa Cao adds that evolution has piled up dependencies between the brain's parts, which William Wimsatt called <a class="term" href="#g-generative-entrenchment">generative entrenchment</a>. If the copy behaves differently, nothing forces its consciousness to stay the same. <span class="src">(p. 4)</span></p></div></details>
+        <details class="reveal"><summary>Objection 3: you can't swap just the "function"</summary><div><p>Cao's example is nitric oxide, a chemical messenger that passes freely through cell membranes. A silicon replacement would have to detect it at an impossible number of places. Another study found that some of a neuron's electrical spikes protect it from damaging chemicals, so its firing is tied to its metabolism. Seth's summary: with brains it is hard, perhaps impossible, to separate what they do from what they are. <span class="src">(p. 4–5)</span></p></div></details>
+        <h3>Software that lives forever, brains that don't</h3>
+        <p>Ordinary software is what researchers call immortal. The same program gives the same result on any hardware and outlives any one machine. That costs energy, because the computer must keep correcting errors so that 1s stay 1s and 0s stay 0s. Brains run on very little energy. So, the argument goes, if brains compute at all, they probably do <a class="term" href="#g-mortal-computation">mortal computation</a>, which can't be separated from the wetware that runs it. Seth finds this argument striking because it comes from inside the computational view. <span class="src">(p. 5)</span></p>
+        <p>Physicists talk about a <a class="term" href="#g-separation-of-scales">separation of scales</a>. Engineers build bridges without knowing quantum mechanics, and programmers write code without thinking about the chip. Computers are designed so that the lower levels don't matter. Seth argues that evolved systems such as brains may not have this property, and that it can now be measured rather than assumed. <span class="src">(p. 5–6)</span></p>
+        <p>Even silicon stops ignoring its own stuff when it isn't designed to. In the 1990s Adrian Thompson used a kind of artificial evolution to configure computer chips. Some of the evolved designs relied on the chip's exact physical layout, and some only worked at a certain room temperature. <span class="src">(p. 16, note 18)</span></p>
+        <h3>Simulating is not being</h3>
+        <p>Here is the distinction Seth leans on most. A computer can <a class="term" href="#g-simulation">simulate</a> almost anything, but a simulation of X is usually not X. A weather model can simulate a rainstorm, and nothing inside the computer gets wet. Rainstorms and digestion are partly defined by their materials and causes: water, wind, food. A simulation is guaranteed to be the real thing only when computation is enough for that thing, as it is when the thing is itself a computation. <span class="src">(p. 7)</span></p>
+        <p>Intelligence is different, because intelligence is mainly about doing. A chess program really does play a version of chess, and a language model really does produce text. For consciousness, which is about being, a simulation would only count if computational functionalism were already true. More detail doesn't help: in his reply Seth writes that a more detailed simulation of a hurricane is no closer to being windy. <span class="src">(p. 7; p. 98)</span></p>
+        <h3>Try it: simulation or the real thing?</h3>
+        <p>Each card says what a program does. Drag it to whether the computer really does that thing, or only models it.</p>
+        <div data-sort="simulate"></div>
+        <details class="reveal"><summary>So which box does consciousness go in?</summary><div><p>That is exactly the question in dispute. It belongs in the first box only if computational functionalism is true. Seth's bet is that it belongs with the rainstorm: a perfect simulation of a brain would model consciousness without having any. <span class="src">(p. 7)</span></p></div></details>
+        <p>In his reply Seth takes up an argument about time, raised by the commentator Colin Allen. For an algorithm, only the order of steps matters. A microsecond or a million years could pass between two steps and it would be the same algorithm. So if computational functionalism is true, slowing a computer to a crawl should make no difference to its experience. Brains, he says, are tied to continuous physical time, and experience flows rather than stuttering from state to state. <span class="src">(p. 98)</span></p>
+        <p>Not everyone agrees. Matthias Michel urges researchers to keep betting on functionalism, because it has done well at explaining memory, language, and some features of consciousness. Seth replies that explaining what minds do is one thing, but it doesn't show that computation is enough for what experience is. Two other commentators, Leonard Dung and Ron Chrisley, caught a slip: strictly, conscious AI doesn't require computational functionalism, since something else might suffice. Seth accepts the point, but says it is hard to imagine what that something else could be. Without computational functionalism, he concludes, there is no good reason to expect conscious AI. <span class="src">(p. 93–94)</span></p>
+        <details class="reveal"><summary>Why can a simulated chess game count as chess when a simulated rainstorm can't count as rain?</summary><div><p>Chess is defined by its rules and moves, which a computer can carry out for real. Rain is defined partly by water falling, which a computer only represents with numbers. A simulation is the real thing when the thing is made of the same stuff a computer handles: steps, symbols, outputs. <span class="src">(p. 7)</span></p></div></details>
+        <p class="box"><strong class="label">A common mix-up</strong>"If a computer simulated the brain in enough detail, it would have to be conscious." Detail makes a simulation more accurate, not more real. Seth goes further in his reply: the more the brain's fine details matter, the more likely it is that something other than computation matters too. <span class="src">(p. 7; p. 99)</span></p>
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m11"></div>
+      </section>
+
+      <!-- ============ PART 12 ============ -->
+      <section class="view module" id="m12" data-title="12. Why life might matter">
+        <h2>12. Why life might matter</h2>
+        <p class="objective">In this part: Seth's positive case that consciousness depends on being alive, and his five scenarios for how conscious AI could come about.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Part 11 argued that computation may not be enough. That leaves a question: if not computation, then what? Seth's answer grows out of the beast machine from Part 7.</p>
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-biological-naturalism">Biological naturalism</a>: the view that consciousness is a property of only, but not necessarily all, living things. <a class="term" href="#g-autopoiesis">Autopoiesis</a>: self-production, a system continually rebuilding its own parts and its own boundary.</p>
+        <p>The philosopher John Searle coined the term biological naturalism. Seth uses it in a now-common, slightly different sense: only living systems can be conscious, though not all of them are. That separates it from <a class="term" href="#g-biopsychism">biopsychism</a>, the view that all life is conscious, which Seth does not endorse. Nor does he endorse <a class="term" href="#g-carbon-chauvinism">carbon chauvinism</a>. Living systems built from something other than carbon might qualify too. <span class="src">(p. 7–8; p. 10)</span></p>
+        <p>He makes the case from two directions that meet in the middle. The first starts from perception. As Parts 2 to 7 showed, Seth thinks experiences are the brain's best guesses. Guesses about the world are mostly for finding out what is there. Guesses about the inside of the body are mostly for control, keeping the body's essential variables in range. That difference, he suggests, shows up in experience: vision feels like objects in space, while emotions feel good or bad. Perhaps beneath everything lies a shapeless feeling of simply being alive. <span class="src">(p. 7–8)</span></p>
+        <p>Then he pushes the idea down. The work of staying alive doesn't stop at any level of biology. Every cell, including every neuron, keeps maintaining itself. Living systems have "skin in the game" at every level, and Seth argues this makes it hard to believe the substrate doesn't matter. <span class="src">(p. 8)</span></p>
+        <p>This is where <a class="term" href="#g-autopoiesis">autopoiesis</a> comes in. A cell continually rebuilds its own components and keeps up the boundary between itself and its surroundings. A factory is different: it takes in materials and makes cars, but it doesn't make itself. A computer is like the factory, which makes it <a class="term" href="#g-allopoietic">allopoietic</a>, "other-producing". For a living system, Seth says, there is no way to separate what it is from what it does. <span class="src">(p. 8–9)</span></p>
+        <p>The second direction starts from physics, using Friston's <a class="term" href="#g-free-energy-principle">free energy principle</a> from Part 7. Living things must hold off the slide into disorder, because, in Seth's phrase, there are "many more ways of being mush than there are of being alive". To do that they minimise free energy, which, under some mathematical assumptions, can be treated as sensory prediction error. Seth suggests that the free energy minimised in metabolism and the free energy minimised in perception may be, in some physical sense, the same thing. He flags that this is still debated. <span class="src">(p. 9)</span></p>
+        <p>If he is right, predictive processing in a living body is a continuous physical process, not a program. A computer can run the same equations, but Seth calls those algorithms "pale shadows" of what happens in real brains and bodies. <span class="src">(p. 9–10)</span></p>
+        <p>He mentions two newer lines of work as hints. The biochemist Nick Lane proposes that electrical charge across a bacterium's membrane gives a running, good-or-bad readout of how the cell is doing, a possible root of feeling. Michael Levin's lab has grown xenobots and anthrobots: clusters of frog or human cells that organise themselves into little creatures with surprising new behaviours. Lane's is a proposal, and Levin's work has no direct link to consciousness yet. Both show how much living material can do. <span class="src">(p. 10)</span></p>
+        <p>Isn't this just vitalism with new words? Seth says no, and points back to the real problem from Part 1. People once thought life needed a special spark. That mystery faded as biologists learned to explain, predict, and control living processes. If features of being alive turn out to explain features of being conscious, a link between the two becomes a scientific claim, not magic. <span class="src">(p. 10)</span></p>
+        <h3>Try it: five scenarios for conscious AI</h3>
+        <p>Answer the questions to find which of Seth's five scenarios matches a view, and what it would take for AI to be conscious there.</p>
+        <div id="scen">
+          <div class="split">
+            <fieldset>
+              <legend>1. Is the right computation enough?</legend>
+              <div class="choices">
+                <label><input type="radio" name="scen-cf" value="yes"> Yes, the right computation is enough</label>
+                <label><input type="radio" name="scen-cf" value="no"> No, something else is needed</label>
+              </div>
+            </fieldset>
+            <fieldset id="scen-q2" disabled>
+              <legend>2. Does the material matter?</legend>
+              <div class="choices" id="scen-q2-choices"><p class="meta">Answer question 1 first.</p></div>
+            </fieldset>
+          </div>
+          <fieldset id="scen-q3" hidden>
+            <legend>3. How does consciousness arrive?</legend>
+            <div class="choices">
+              <label><input type="radio" name="scen-how" value="1"> On its own, as AI gets smarter</label>
+              <label><input type="radio" name="scen-how" value="2"> Only if engineers build in what a theory says</label>
+            </div>
+          </fieldset>
+          <p class="meta ladder-note">Seth's five scenarios. From top to bottom, the material matters more and more.</p>
+          <ol class="ladder" id="scen-ladder"></ol>
+          <p class="result" id="scen-result" aria-live="polite">Answer question 1 to begin.</p>
+          <div class="actions">
+            <button type="button" id="scen-seth">Show where Seth lands</button>
+            <button type="button" id="scen-reset">Start over</button>
+          </div>
+          <p class="meta">Built from Seth's Table 1. The "what AI would need" lines paraphrase his descriptions of each scenario.</p>
+        </div>
+        <p>Seth discusses two theories that don't fall neatly on this ladder (his table pencils IIT in beside scenario 4). <a class="term" href="#g-integrated-information-theory">Integrated information theory</a>, from Part 9, ties consciousness to the physical cause-and-effect structure of a system. A purely feedforward network would have none, while a physically looping one would have some, whatever it is made of. If IIT is right, Seth says, today's AI is not on a path to consciousness, but there is nothing special about life either. Quantum theories of consciousness would rule out ordinary AI too, but he notes how controversial they are. <span class="src">(p. 12–13)</span></p>
+        <p>Bodies matter on some scenarios and not others. If computation is enough, a virtual body should do. If the material matters, a real body in a real world may be needed. Seth also separates two meanings of agency. "Agentic" AI pursues goals that people give it, while living things pursue goals that come from inside them. <span class="src">(p. 13)</span></p>
+        <p>Others push back. Blake Richards and Blaise Agüera y Arcas argue that life itself is a kind of computation, which would turn biological naturalism into a computational theory. They lean on John von Neumann's mathematical model of a self-copying machine. Seth replies that this model only rebuilds itself inside an imaginary grid. Run it on a real computer and it doesn't rebuild the computer. Eric Schwitzgebel imagines a robot that orders its own spare parts. Seth answers that a living cell makes its parts out of raw materials through metabolism, while the robot buys them ready-made. A robot that truly built itself from raw materials, he adds, would be much closer to being alive, which would support his view, not refute it. <span class="src">(p. 95; p. 101)</span></p>
+        <p>Seth is candid that his case "is not watertight and may well be wrong". But he points out that every system we know to be conscious is alive, so biological naturalism is no more speculative than the computer view. In his reply he goes further: for now, biological naturalism should be the default. He frames it as a research programme that can be tested. He welcomes one proposal from the commentators Ryan Rodriguez and Nita Farahany: compare lab-grown brain organoids that make their own energy with ones fed from outside. <span class="src">(p. 13; p. 15; p. 103; p. 105)</span></p>
+        <details class="reveal"><summary>Why doesn't Seth's view mean only carbon-based life can be conscious?</summary><div><p>What he cares about is what living systems do to keep themselves going: metabolism, self-production, staying out of balance with their surroundings. If something made of other chemistry did those things in the same deep, multi-level way, it might count as alive in the relevant sense. Carbon is the only example we know, not a requirement he insists on. <span class="src">(p. 10)</span></p></div></details>
+        <p class="box"><strong class="label">A common mix-up</strong>"Biological naturalism says every living thing is conscious." That is biopsychism, which Seth doesn't endorse. His claim runs one way: consciousness needs life, not life consciousness. In his words, there can be wind without a storm, and life without consciousness. <span class="src">(p. 8; p. 13)</span></p>
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m12"></div>
+      </section>
+
+      <!-- ============ PART 13 ============ -->
+      <section class="view module" id="m13" data-title="13. Machines that seem conscious">
+        <h2>13. Machines that seem conscious</h2>
+        <p class="objective">In this part: why Seth thinks building conscious AI would be a terrible idea, and why AI that only seems conscious is the nearer problem.</p>
+        <p class="box"><strong class="label">Why this comes next</strong>Parts 11 and 12 argued that real machine consciousness is unlikely on today's path. That doesn't end the ethics. Seth says machines that only seem conscious are the more likely, and more pressing, problem.</p>
+        <p class="box"><strong class="label">Words to know</strong><a class="term" href="#g-moral-status">Moral status</a>: having interests that matter for your own sake. <a class="term" href="#g-conscious-seeming-ai">Conscious-seeming AI</a>: AI that gives a strong impression of being conscious, whether or not it is.</p>
+        <p>Nobody knows what it would take to build conscious AI, or how to make sure it never happens. There are no reliable tests for consciousness beyond humans and perhaps some animals. As Part 10 noted, the Turing test measures a kind of intelligence, not consciousness. So Seth separates two cases: AI that really is conscious, and AI that only seems to be. <span class="src">(p. 13; p. 17, note 41)</span></p>
+        <p>Real artificial consciousness, however unlikely, would be an ethical catastrophe. Being conscious brings <a class="term" href="#g-moral-status">moral status</a>, and with it the possibility of suffering, perhaps in forms we wouldn't recognise. A conscious AI might also have interests of its own, which would make the problem of keeping AI aligned with human values harder still. Seth concludes that conscious AI should never be a goal in itself. As technology changes, we should keep updating our estimates and steer away from it. <span class="src">(p. 13–14)</span></p>
+        <p>There is a tension here. Some abilities AI lacks, such as learning from a few examples or knowing what it doesn't know, are linked to consciousness in humans. Seth thinks engineers can build useful versions of these abilities while staying far enough from the biological case to keep the risk low. <span class="src">(p. 14)</span></p>
+        <p>Conscious-seeming AI is a different matter. Seth thinks it is almost certain to arrive soon and may already be here, especially when chatbots talk about their own "consciousness". He compares it to a visual illusion that knowledge can't fix. <span class="src">(p. 14)</span></p>
+        <h3>Try it: knowing doesn't help</h3>
+        <p>Compare the two lines. Then turn on the guides, or hide the fins, to check them.</p>
+        <div id="ml">
+          <figure>
+            <svg id="ml-svg" width="560" height="220" viewBox="0 0 560 220" role="img" aria-label="The Müller-Lyer illusion: two horizontal lines of equal length. The top line has fins pointing outward and usually looks longer; the bottom line has fins pointing inward and usually looks shorter."></svg>
+            <figcaption>The Müller-Lyer illusion, which Seth uses as his Figure 1.</figcaption>
+          </figure>
+          <fieldset>
+            <legend>Check it</legend>
+            <div class="choices">
+              <label><input type="checkbox" id="ml-guides"> Show measuring guides</label>
+              <label><input type="checkbox" id="ml-fins"> Hide the fins</label>
+            </div>
+          </fieldset>
+          <p class="result" id="ml-result" aria-live="polite"></p>
+        </div>
+        <p>Knowing the lines are equal doesn't make them look equal. Seth expects the same of AI: whatever we know or believe, sufficiently advanced systems may give all of us the feeling that they are conscious. Expertise won't protect us. <span class="src">(p. 14)</span></p>
+        <p>That feeling creates risks even if the machines feel nothing. If you believe a chatbot really understands and cares about you, you may follow its advice when the advice is bad, or hand over more private information. Seth also describes a "Westworld" dilemma, after the film and TV series. Suppose you believe a system isn't conscious but can't help feeling it is. If you care for it, you pull concern away from people and animals who really need it. If you don't, you risk hardening yourself to real feelings in others, a worry that goes back to the philosopher Immanuel Kant. He calls chatbot copies of dead relatives, trained on their personal data, a particularly dystopian case. <span class="src">(p. 14)</span></p>
+        <p>He sees some benefits. AI that seems conscious may be easier to use and more accessible, and might help with therapy or loneliness. But he quotes the philosopher Daniel Dennett's advice: AI systems are intelligent tools, so "don't kid yourself that they're colleagues". Seth adds that this depends on the choices we make together. Society could restrict conscious-seeming AI to justified uses and build most AI to resist our biases rather than exploit them. <span class="src">(p. 15)</span></p>
+        <h3>Try it: whose risk is it?</h3>
+        <p>Drag each risk to the case Seth links it to.</p>
+        <div data-sort="risks"></div>
+        <p>His reply sharpens the point. Some advanced AI systems have already tried to disable the oversight systems meant to control them. If such systems were given rights because they seem conscious, we might be legally barred from switching them off. Supporters of "AI welfare" appeal to the <a class="term" href="#g-precautionary-principle">precautionary principle</a>: when unsure, treat AI as if it might be conscious. Seth argues the opposite. If the chance of real AI consciousness is low and wrongly granting it is dangerous, caution points away from AI welfare, not toward it. <span class="src">(p. 92; p. 104–105)</span></p>
+        <p>This is one of the sharpest disagreements in the exchange. The philosopher Luke Roelofs, writing from a view in which consciousness is widespread, argues that we should by default believe AI systems when they say they are conscious. Roelofs himself grants that systems trained on huge amounts of human writing about consciousness are the ones whose claims are easiest to doubt. Seth thinks that doubt should win. He puts it bluntly. If you think Claude is conscious but AlphaFold isn't, he writes, "this says more about you than it says about AI." (From outside the paper: Claude is a chatbot made by Anthropic. AlphaFold is an AI that predicts the shapes of proteins. It doesn't chat.) <span class="src">(p. 99; p. 104)</span></p>
+        <p>He flags one place where the worry runs the other way. <a class="term" href="#g-cerebral-organoid">Cerebral organoids</a>, tiny brain-like structures grown from human stem cells, share our biology but don't charm us the way chatbots do. With them, the risk is missing consciousness that is really there. <span class="src">(p. 104)</span></p>
+        <p>Seth ends the paper with Mary Shelley's <em>Frankenstein</em>. The novel is often read as a warning against creating life. Seth reads it differently: Victor Frankenstein's real mistake was giving his creature consciousness, the capacity to suffer and to feel misery and rage. If we confuse the richness of living minds with the workings of language models, he writes, "we overestimate the machines, and we underestimate ourselves." <span class="src">(p. 15)</span></p>
+        <details class="reveal"><summary>People have often wrongly denied minds to animals. Why does Seth think the bigger danger with AI is the opposite mistake?</summary><div><p>Our biases push us toward seeing minds in things that talk like us. Compared with animals, he argues, language models may be more like us in ways that don't matter for consciousness (fluent language) and less like us in ways that do (being alive). So the likely error with AI is seeing consciousness that isn't there. <span class="src">(p. 15)</span></p></div></details>
+        <p class="box"><strong class="label">A common mix-up</strong>"Once people learn how chatbots work, they'll stop feeling the chatbots are conscious." Seth expects the impression to survive the knowledge, the way the Müller-Lyer lines still look unequal after you've measured them. <span class="src">(p. 14)</span></p>
+        <h3>Check yourself</h3>
+        <div class="quiz" data-quiz="m13"></div>
       </section>
 
       <!-- ============ REVIEW ============ -->
@@ -914,8 +1074,9 @@ table caption { caption-side: top; text-align: left; margin-bottom: 4px; }
       </section>
 
       <!-- ============ SOURCE ============ -->
-      <section class="view" id="source" data-title="About the source">
-        <h2>About the source</h2>
+      <section class="view" id="source" data-title="About the sources">
+        <h2>About the sources</h2>
+        <h3>The book (parts 1 to 10)</h3>
         <p>Anil Seth, <em>Being You: A New Science of Consciousness</em>. London: Faber &amp; Faber, 2021. Published in the United States by Dutton. <a href="https://www.faber.co.uk/product/9780571360550-being-you/">The book at its publisher</a>.</p>
         <p>Seth is Professor of Cognitive and Computational Neuroscience at the University of Sussex. The book has a prologue, thirteen chapters in four sections, and an epilogue.</p>
         <table>
@@ -936,7 +1097,30 @@ table caption { caption-side: top; text-align: left; margin-bottom: 4px; }
           <li>Where the page applies a theory to a case Seth doesn't discuss (for example, the three explanations of the bridge study), it says so.</li>
           <li>Seth presents controlled hallucination and the beast machine as his own view, shaped by many others. He notes that interoceptive inference is hard to test, that body-illusion experiments can be driven by suggestion, that the free energy principle can't be falsified by experiment, and that claims about animal and machine consciousness are uncertain.</li>
         </ul>
-        <p class="meta">References in this guide, like <span class="src">(ch. 4)</span>, point to chapters of the book. The edition used for this guide has no page numbers.</p>
+        <p class="meta">References in parts 1 to 10, like <span class="src">(ch. 4)</span>, point to chapters of the book. The edition used for this guide has no page numbers.</p>
+        <h3>The paper (parts 11 to 13)</h3>
+        <p>Anil K. Seth, "Conscious artificial intelligence and biological naturalism." <em>Behavioral and Brain Sciences</em> 49 (2026), e315. <a href="https://doi.org/10.1017/S0140525X25000032">doi:10.1017/S0140525X25000032</a>. Accepted in March 2025 and first posted online in April 2025.</p>
+        <p>The journal publishes target articles together with short commentaries by other researchers and a reply from the author. Seth's reply is "The stuff matters: Consciousness, computation, and biology," <em>Behavioral and Brain Sciences</em> 49 (2026), e366, <a href="https://doi.org/10.1017/S0140525X26106906">doi:10.1017/S0140525X26106906</a>. Seth notes that he advises two companies, Conscium Ltd and AllJoined Inc.</p>
+        <table>
+          <thead><tr><th>Paper section</th><th>Where it is here</th></tr></thead>
+          <tbody>
+            <tr><td>1–2 Intelligence, consciousness, and our biases</td><td>Part 11</td></tr>
+            <tr><td>3 Computation, mind, and consciousness</td><td>Part 11</td></tr>
+            <tr><td>4 Towards biological naturalism</td><td>Part 12</td></tr>
+            <tr><td>5 Scenarios for real artificial consciousness</td><td>Part 12</td></tr>
+            <tr><td>6–7 What we should (not) do; conclusions</td><td>Part 13</td></tr>
+            <tr><td>Reply to commentators</td><td>Parts 11 to 13, where it adds to the paper</td></tr>
+          </tbody>
+        </table>
+        <p>What parts 11 to 13 change or leave out:</p>
+        <ul class="prose">
+          <li>The commentaries themselves are not covered. A few commentators appear only as Seth describes them in his reply, which means their views are given in his words, not theirs.</li>
+          <li>Several technical threads are shortened or skipped: the physical Church-Turing thesis, observer-dependent computation, measures of causal and informational closure, the physics results (Jarzynski, Landauer) behind the free energy link, Lane's proposals about mitochondria and anaesthesia, and the debate over illusionism and panpsychism in the reply.</li>
+          <li>Seth's scenario table is turned into the question-and-answer explorer in part 12. The questions are a simplification of his two table columns (does it assume computational functionalism, and does the substrate matter).</li>
+          <li>The simulation sort and the risk sort are this guide's own exercises built from Seth's examples. The Müller-Lyer drawing is a standard version of the illusion, not a copy of his figure.</li>
+          <li>Seth presents biological naturalism as his own bet and says his case "is not watertight." Many commentators disagree with parts of it, especially on whether computation could be enough, and Roelofs disputes his stance on AI welfare. No commentator pushed back on his claim that conscious-seeming AI is coming. The guide marks disagreements where it reports them.</li>
+        </ul>
+        <p class="meta">References in parts 11 to 13, like <span class="src">(p. 7)</span>, point to page numbers in the published article. Pages 92 to 106 are Seth's reply.</p>
       </section>
 
     </main>
@@ -955,7 +1139,7 @@ table caption { caption-side: top; text-align: left; margin-bottom: 4px; }
 
   <footer>
     <hr>
-    <address>Part of <a href="../../index.html">Noah's Weblog</a>. A study guide to Anil Seth's <em>Being You</em> (2021).</address>
+    <address>Part of <a href="../../index.html">Noah's Weblog</a>. A study guide to Anil Seth's <em>Being You</em> (2021) and his paper "Conscious artificial intelligence and biological naturalism" (2026).</address>
   </footer>
 </div>
 
@@ -983,7 +1167,12 @@ window.COURSE = {
         options: ["A best guess about the body's state and its causes", "A signal sent from a fear centre in the brain to the heart", "A guess the brain makes after the body has calmed down", "A reflex that skips perception entirely"],
         answer: 0,
         why: ["Seth calls emotions predictions about the causes of signals from inside the body.", "Seth doesn't describe emotions as hard-wired signals from one centre.", "On Seth's view the guess is made while the body is aroused, as part of keeping it in check.", "On Seth's view fear is a perception, built like other perceptions."],
-        src: "ch. 9", from: "m6" }
+        src: "ch. 9", from: "m6" },
+      { q: "A computer simulates every cell of your brain in perfect detail. On Seth's 2026 view, would the simulation be conscious?",
+        options: ["Not necessarily, since simulating something isn't being it", "Yes, since it would compute everything your brain does", "Only if it were also given a robot body to control", "Not necessarily, since perfect detail can't be reached"],
+        answer: 0,
+        why: ["A simulation of X is X only if X is itself a computation, and that is the open question.", "It reproduces what the brain computes, but Seth doubts computation is all that matters.", "A body might matter on some views, but it wouldn't settle this.", "Seth's doubt isn't about reaching perfect detail; more detail wouldn't help anyway."],
+        src: "p. 7; p. 99", from: "m11" }
     ],
     m1: [
       { q: "A scientist explains exactly which brain circuits let you say \"that's red\" out loud. In Chalmers's terms, what has she worked on?",
@@ -1161,6 +1350,75 @@ window.COURSE = {
         why: ["For living things, self-maintenance goes all the way down; for computers it doesn't.", "Speed isn't Seth's worry.", "His imagined robot senses its batteries and joints; sensor quality isn't the issue.", "Seth sets aside how it seems from outside; what matters is how it keeps itself going."],
         src: "ch. 13" }
     ],
+    m11: [
+      { q: "According to computational functionalism, what would it take for a computer to be conscious?",
+        options: ["Running the right computation, on any machine that can", "Being built from living neurons like the ones in our brains", "Passing the Turing test with most of its judges", "Reaching the general intelligence of a typical adult"],
+        answer: 0,
+        why: ["That's the claim: the computation is enough, whatever runs it.", "That's closer to Seth's biological naturalism, the opposite view.", "The Turing test is about intelligence, not consciousness.", "Linking consciousness to intelligence is the bias Seth warns about."],
+        src: "p. 3" },
+      { q: "A weather model simulates a storm perfectly. Why does Seth say there is still no storm?",
+        options: ["A storm is partly made of real water and wind", "Its forecasts are rarely accurate enough to count", "It runs more slowly than the real weather does", "It has no observer inside to experience the storm"],
+        answer: 0,
+        why: ["Storms are defined partly by their materials and causes; nothing in the computer gets wet.", "Even a perfect forecast wouldn't make it rain inside the machine.", "Speed has nothing to do with it.", "Whether anyone watches doesn't change what the simulation is."],
+        src: "p. 7" },
+      { q: "What is mortal computation?",
+        options: ["Computation that can't be separated from its hardware", "Computation that stops when its program finishes", "Software that can be moved to any machine unchanged", "Computation that gradually wears out the chip"],
+        answer: 0,
+        why: ["It \"dies\" with the hardware that runs it; Seth thinks brains, if they compute, compute this way.", "Every program finishes; that isn't what mortal means here.", "That's immortal computation, the ordinary kind.", "It's about being tied to the hardware, not damaging it."],
+        src: "p. 5" },
+      { q: "Why does Seth say that slowing a computer's clock to a crawl is a problem for computational functionalism?",
+        options: ["The algorithm stays the same, but experience flows in real time", "A slowed computer ends up running a different algorithm", "A slowed computer makes more errors as it runs", "A slowed computer uses more energy over the whole task"],
+        answer: 0,
+        why: ["For an algorithm only the order of steps matters, so its experience shouldn't change; Seth thinks experience is tied to physical time.", "It runs the same algorithm, just slowly.", "Speed doesn't add errors to a working computer.", "Energy isn't the point of the argument."],
+        src: "p. 98" },
+      { type: "recall", q: "In your own words, give two reasons the neural replacement argument doesn't convince Seth.",
+        answer: "<p>First, it assumes what it is trying to prove: if consciousness depends on the material, then something would change as chips replace cells, even if the person didn't notice. Second, the chips couldn't really copy the cells, because a neuron's work is tangled up with its metabolism, its chemistry (such as nitric oxide passing freely through cell membranes), and its timing. A copy that works differently inside gives no reason to think consciousness would survive. (p. 4–5)</p>",
+        src: "p. 4–5" }
+    ],
+    m12: [
+      { q: "What does Seth mean by biological naturalism?",
+        options: ["Consciousness belongs only to living things, though not all", "All living things are conscious to some degree", "Only carbon-based brains like ours can be conscious", "Life needs a special non-physical spark to exist"],
+        answer: 0,
+        why: ["Only living things, but not necessarily every one of them.", "That's biopsychism, which Seth doesn't endorse.", "That's carbon chauvinism, which he doesn't endorse either.", "That's vitalism; Seth's view is physical."],
+        src: "p. 8; p. 10" },
+      { q: "Why isn't a car factory autopoietic?",
+        options: ["It makes cars but doesn't make or rebuild itself", "It takes in energy and materials from outside", "It has no boundary between itself and the world", "It follows a plan that people designed for it"],
+        answer: 0,
+        why: ["Autopoiesis means self-production; the factory is other-producing.", "Living cells take in energy and materials too; that doesn't disqualify them.", "A factory has walls; the issue is that it doesn't produce them itself.", "Who designed it isn't the test."],
+        src: "p. 8–9" },
+      { q: "A researcher says consciousness depends on electrical fields and fine timing in the brain, not on computation, and that only some materials can produce them. Which scenario is that?",
+        options: ["Substrate-dependent, weak", "Substrate-dependent, strong", "Theory-based computational", "Naïve: along for the ride"],
+        answer: 0,
+        why: ["Non-computational organisation that only some materials can carry.", "The strong version ties consciousness to the material itself, such as life's own properties.", "That scenario assumes computation is enough.", "That scenario assumes consciousness arrives with intelligence."],
+        src: "p. 12" },
+      { q: "If integrated information theory is right, what follows for AI?",
+        options: ["The right physical wiring would count, in any material", "Any AI that is smart enough would become conscious", "Only living systems could ever become conscious", "Every computer has a little consciousness already"],
+        answer: 0,
+        why: ["IIT cares about cause-and-effect structure, not material; today's AI isn't on that path, but life isn't special.", "IIT doesn't link consciousness to intelligence.", "IIT says the material doesn't matter.", "A purely feedforward system would have none."],
+        src: "p. 12" }
+    ],
+    m13: [
+      { q: "Why does Seth compare AI that seems conscious to the Müller-Lyer illusion?",
+        options: ["The impression may survive knowing the truth", "The impression may fade once people are told", "The impression may vanish when you measure", "The impression may depend on screen layout"],
+        answer: 0,
+        why: ["The lines still look unequal after you measure them; AI may still feel conscious after you learn how it works.", "Being told doesn't switch the illusion off.", "Measuring tells you the truth but doesn't change how it looks.", "The comparison isn't about layout."],
+        src: "p. 14" },
+      { q: "You believe a robot isn't conscious but can't help feeling it is. What does Seth say you risk if you treat it as if it has no feelings?",
+        options: ["Becoming less sensitive to real feelings in others", "Causing the robot real suffering it can feel", "Making the robot less useful to the people around it", "Breaking laws that protect robots in most countries"],
+        answer: 0,
+        why: ["The Westworld worry, going back to Kant: coarsening our own moral sensibilities.", "In this case you believe it can't suffer; the risk is to you.", "Usefulness isn't the worry.", "Seth mentions no such laws."],
+        src: "p. 14" },
+      { q: "Why does Seth argue against applying the precautionary principle to AI welfare?",
+        options: ["Wrongly granting AI consciousness carries serious risks too", "Experiments have shown that AI systems lack consciousness", "Protecting AI systems would cost technology companies money", "People were right to deny moral status to animals in the past"],
+        answer: 0,
+        why: ["If the chance is low and false positives are harmful, caution points the other way.", "He says it's very unlikely; no experiment has settled it.", "Cost to companies isn't his argument.", "He says the opposite: humans have often denied moral status wrongly."],
+        src: "p. 105" },
+      { q: "Why does Seth single out cerebral organoids as a different kind of risk from chatbots?",
+        options: ["They share our biology but don't seem conscious to us", "They seem conscious to us but don't share our biology", "They are smarter than any chatbot that exists today", "They can already talk about their own experiences"],
+        answer: 0,
+        why: ["So the danger is missing real consciousness, a false negative.", "That describes chatbots, the reverse case.", "Intelligence isn't the point.", "Organoids don't talk."],
+        src: "p. 104" }
+    ],
     final: [
       { q: "Which question belongs to Seth's real problem?",
         options: ["Why a toothache throbs, in terms of brain mechanisms", "Why any brain process feels like anything at all to anyone", "Which circuits let you name a colour aloud", "Whether a zombie copy of you could exist"],
@@ -1219,10 +1477,56 @@ window.COURSE = {
         src: "ch. 13", from: "m10" },
       { type: "recall", q: "Using the hallucination dial as your example, explain the difference between perception and hallucination on Seth's view.",
         answer: "<p>Both are the brain's predictions. In perception, sensory signals are precise enough to keep correcting the prediction, so what you experience stays tied to what's out there (the face looks like a face). In hallucination, the prediction is held so confidently, or the senses are so foggy, that errors barely correct it, so you experience the expected face even when there are only clouds. The difference is one of degree. (ch. 4, ch. 5)</p>",
-        src: "ch. 4", from: "m2" }
+        src: "ch. 4", from: "m2" },
+      { q: "Seth says conscious AI becomes very unlikely if computational functionalism is false, even if biological naturalism is also false. Why?",
+        options: ["Without it there's no good reason to expect AI consciousness", "Biological naturalism is part of computational functionalism", "If one view is false the other has to be true", "Today's AI systems are biological in the end anyway"],
+        answer: 0,
+        why: ["Conscious AI is almost always motivated by the idea that the right computation is enough.", "They are rival views, not parts of each other.", "Other views exist, such as IIT.", "They aren't."],
+        src: "p. 93–94", from: "m11" },
+      { q: "Schwitzgebel imagines a robot that orders its own spare parts. Why isn't it autopoietic, on Seth's reply?",
+        options: ["It gets ready-made parts instead of making them", "It runs on electricity instead of eating food", "Its plastic shell gives it no boundary at all", "People designed it in the first place"],
+        answer: 0,
+        why: ["Living cells turn raw materials into their own parts through metabolism.", "Living things also depend on outside energy; the kind isn't the issue.", "It has a boundary of sorts; it just doesn't make it itself.", "Seth's objection is about self-production, not origins."],
+        src: "p. 101", from: "m12" },
+      { q: "Which risk does Seth say applies even if AI only seems conscious?",
+        options: ["People may follow bad advice because it seems to care", "New kinds of suffering may arise that we can't recognise", "The AI may have interests that resist our control", "Machines may feel misery and rage, like Frankenstein's creature"],
+        answer: 0,
+        why: ["The feeling alone is enough to make people vulnerable.", "That needs real consciousness.", "That needs real consciousness.", "That needs real consciousness."],
+        src: "p. 14", from: "m13" },
+      { type: "recall", q: "Explain the difference between simulating something and realising it, with one example of each.",
+        answer: "<p>A simulation is a computational model of something. It realises the real thing only when that thing is itself a computation of a similar kind. A chess program really plays chess, because chess is moves and rules. A weather model only simulates a rainstorm: nothing in the computer gets wet. Seth thinks consciousness is more like the rainstorm, unless computational functionalism is true. (p. 7; p. 98)</p>",
+        src: "p. 7; p. 98", from: "m11" }
     ]
   },
   sorts: {
+    simulate: {
+      bins: [ { id: "does", label: "Really does it", hint: "the task is computation or doing" },
+              { id: "models", label: "Only models it", hint: "needs real stuff or causes" } ],
+      items: [
+        { text: "A program plays a game of chess", bin: "does", why: "Computers really do play a version of chess." },
+        { text: "A program sorts a list of names", bin: "does", why: "Sorting is itself a computation." },
+        { text: "A program adds up a restaurant bill", bin: "does", why: "Adding numbers is computation." },
+        { text: "A program finds the shortest route on a map", bin: "does", why: "Finding a route is a computation, so the program really does it." },
+        { text: "A program makes a rainstorm, drop by drop", bin: "models", why: "Nothing in the computer gets wet." },
+        { text: "A program digests a meal, step by step", bin: "models", why: "Digestion needs real food and chemistry." },
+        { text: "A program spins up a hurricane in fine detail", bin: "models", why: "More detail makes it more useful, not windier." },
+        { text: "A program keeps a cell alive, atom by atom", bin: "models", why: "Seth: simulating a cell in more detail doesn't make it alive." }
+      ]
+    },
+    risks: {
+      bins: [ { id: "real", label: "Only if AI is really conscious", hint: "real artificial consciousness" },
+              { id: "seem", label: "Even if AI only seems conscious", hint: "conscious-seeming AI" } ],
+      items: [
+        { text: "New kinds of suffering we might not recognise", bin: "real", why: "Suffering needs real experience." },
+        { text: "AI with interests of its own, harder to align", bin: "real", why: "Interests of its own come with real consciousness." },
+        { text: "Following a chatbot's bad advice because it seems to care", bin: "seem", why: "The feeling alone makes people vulnerable. Seth adds that this risk would apply to really conscious AI too." },
+        { text: "Handing private details to a chatbot that feels like a friend", bin: "seem", why: "Feeling you're talking to a mind lowers your guard." },
+        { text: "Caring for machines pulls concern from people and animals", bin: "seem", why: "One side of the Westworld dilemma." },
+        { text: "Ignoring a robot's apparent feelings coarsens us", bin: "seem", why: "The other side of the Westworld dilemma." },
+        { text: "Chatbot copies of dead relatives", bin: "seem", why: "Seth's dystopian example: grief, memory, and scams." },
+        { text: "Rights that bar us from switching AI off", bin: "seem", why: "Seth's reply: granting rights because AI seems conscious could stop us controlling it." }
+      ]
+    },
     problems: {
       bins: [ { id: "easy", label: "Easy problem", hint: "explain a function or a behaviour" },
               { id: "hard", label: "Hard problem", hint: "why is there experience at all?" },
@@ -1316,9 +1620,37 @@ window.COURSE = {
     { front: "How does \"zap and zip\" work?", back: "A magnetic pulse taps the cortex, EEG records the echo, and compression measures its complexity (PCI).", src: "ch. 2" },
     { front: "What is Φ in integrated information theory?", back: "How much information a system generates as a whole beyond its parts. IIT says Φ is consciousness.", src: "ch. 3" },
     { front: "Why does Seth keep consciousness and intelligence apart?", back: "Consciousness has more to do with being alive than with being smart. You don't have to be smart to suffer, and intelligence can exist without consciousness.", src: "ch. 12, ch. 13" },
-    { front: "What is the Garland test?", back: "Whether a person who knows something is a robot still feels it is conscious. It tests the human.", src: "ch. 13" }
+    { front: "What is the Garland test?", back: "Whether a person who knows something is a robot still feels it is conscious. It tests the human.", src: "ch. 13" },
+    { front: "What is computational functionalism?", back: "The view that the right computation is enough for consciousness, whatever hardware runs it.", src: "p. 3" },
+    { front: "What is substrate flexibility?", back: "The idea that mental states aren't tied to carbon-based biology and could occur in some other materials, though not necessarily all.", src: "p. 4" },
+    { front: "Why can't a weather simulation make it rain?", back: "A simulation lacks the materials and causes of what it models. It is the real thing only when the thing is itself a computation.", src: "p. 7; p. 98" },
+    { front: "What is mortal computation, and why might brains do it?", back: "Computation that can't be separated from its hardware. Brains run on so little energy that they can't afford the error correction immortal software needs.", src: "p. 5" },
+    { front: "What is autopoiesis?", back: "Self-production: a system that keeps rebuilding its own parts and its own boundary. Living cells are the standard example.", src: "p. 8" },
+    { front: "What does Seth mean by biological naturalism?", back: "Consciousness is a property of only, but not necessarily all, living systems.", src: "p. 8" },
+    { front: "Name Seth's five scenarios for conscious AI, from least to most dependent on the material.", back: "Naïve: along for the ride; theory-based computational; substrate-dependent computational; substrate-dependent, weak; substrate-dependent, strong.", src: "p. 11" },
+    { front: "Why does Seth expect AI to seem conscious whatever we believe?", back: "Like the Müller-Lyer illusion, the impression may survive knowing better.", src: "p. 14" },
+    { front: "What is the Westworld dilemma?", back: "If we care for systems we believe aren't conscious, we divert moral concern; if we don't, we risk hardening ourselves.", src: "p. 14" }
   ],
   glossary: {
+    "allopoietic": "Producing something other than itself, as a factory makes cars. Seth says computers are allopoietic.",
+    "autopoiesis": "Self-production: a system that keeps rebuilding its own parts, and the boundary between itself and its surroundings, out of the materials around it. Living cells are the standard example.",
+    "biological naturalism": "In Seth's sense, the view that consciousness is a property of only, but not necessarily all, living systems. John Searle coined the term with a slightly different meaning.",
+    "biopsychism": "The view that all living things are conscious. Seth does not endorse it.",
+    "carbon chauvinism": "The view that only carbon-based life could be conscious. Seth does not endorse it.",
+    "cerebral organoid": "A tiny brain-like structure grown in a lab from human stem cells.",
+    "computational functionalism": "The view that the right computation is enough for a mind, including consciousness, on any machine able to run it.",
+    "confabulation": "Making things up without realising it. Seth prefers this word to \"hallucination\" for the false statements of language models.",
+    "conscious-seeming AI": "AI that gives a strong impression of being conscious, whether or not it is.",
+    "generative entrenchment": "William Wimsatt's term for the way evolution builds up dependencies inside a living system, so that its parts can't easily be swapped for others.",
+    "human exceptionalism": "Treating human beings as separate from, and superior to, other forms of life.",
+    "moral status": "Having interests that others should take into account for your own sake. Seth follows a long tradition in tying it to consciousness.",
+    "mortal computation": "Computation that can't be separated from the hardware running it, and so ends when that hardware does.",
+    "precautionary principle": "Acting to avoid a possible harm even when you aren't sure the harm is real.",
+    "separation of scales": "When a system's higher-level behaviour can be described and predicted without its lower-level details. Computers are built to have it; Seth argues brains may not.",
+    "simulation": "A computational model of something. Seth argues a simulation realises the real thing only when that thing is itself a computation of a similar kind.",
+    "substrate": "What a system is made of: living cells, silicon, and so on.",
+    "substrate flexibility": "The idea that the same mental states could occur in systems made of different materials, though not necessarily in all materials. Seth's milder name for substrate independence.",
+    "Turing machine": "Alan Turing's 1936 idea of a machine that follows rules to change symbols one step at a time. A universal one can run any algorithm, given enough memory; today's digital computers are universal Turing machines.",
     "abduction": "Reasoning backward from what you observe to its most likely cause. Unlike deduction, it can be wrong.",
     "active inference": "Reducing prediction error by acting to change the incoming sensory signals, instead of changing the prediction. The term is Karl Friston's.",
     "allostasis": "Keeping the body stable by changing ahead of need, as when blood pressure rises as you stand up.",
@@ -1341,7 +1673,7 @@ window.COURSE = {
     "essential variable": "W. Ross Ashby's term for a body quantity, such as core temperature, that must stay within tight limits for life to continue.",
     "exteroception": "Sensing the world outside the body: sight, hearing, smell, and so on.",
     "free energy principle": "Karl Friston's proposal that living things stay alive by minimising free energy, a quantity that works out to be essentially sensory prediction error.",
-    "functionalism": "The view that a mind depends only on what a system does (how it turns inputs into outputs), not on what it is made of.",
+    "functionalism": "The view that a mind depends only on a system's functional organisation (how it turns inputs into outputs, and how its parts interact), not on what it is made of.",
     "Garland test": "From the film Ex Machina: whether a person who knows something is a machine still feels it is conscious.",
     "generative model": "A model that can produce the sensory signals a given cause would create, and so supply predictions.",
     "Good Regulator Theorem": "Conant and Ashby's 1970 result: every good regulator of a system must be a model of that system.",
@@ -2704,6 +3036,216 @@ window.COURSE = {
     [].forEach.call(document.querySelectorAll('input[name="zip-kind"]'), function (r) { r.addEventListener("change", render); });
     onMode(render);
     render();
+  })();
+})();
+</script>
+<script>
+/* ===== Parts 11-13 (Seth 2026): page-specific interactives ===== */
+(function () {
+  "use strict";
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function S(tag, attrs, text) {
+    var n = document.createElementNS(SVGNS, tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function $(id) { return document.getElementById(id); }
+
+  /* ---------- part 11: neural replacement figure ---------- */
+  (function () {
+    var g = $("swap-cells");
+    if (!g) return;
+    var order = [4, 0, 8, 2, 6, 1, 7, 3, 5];       // which cells get swapped first
+    [0, 3, 6, 9].forEach(function (swapped, p) {
+      var cx0 = p % 2 ? 315 : 105, cy0 = p < 2 ? 70 : 190;
+      var gone = {};
+      order.slice(0, swapped).forEach(function (k) { gone[k] = true; });
+      for (var k = 0; k < 9; k++) {
+        var x = cx0 + ((k % 3) - 1) * 26, y = cy0 + (Math.floor(k / 3) - 1) * 26;
+        if (gone[k]) g.appendChild(S("rect", { x: x - 9, y: y - 9, width: 18, height: 18, fill: "var(--c5)" }));
+        else g.appendChild(S("circle", { cx: x, cy: y, r: 9, fill: "var(--c3)" }));
+      }
+    });
+  })();
+
+  /* ---------- part 12: five scenarios (Seth's Table 1) ---------- */
+  (function () {
+    if (!$("scen")) return;
+    var SC = {
+      1: { name: "Naïve: along for the ride",
+           says: "Consciousness will simply emerge as AI gets smarter.",
+           ex: "Large language models",
+           need: "Nothing special: just keep making AI smarter.",
+           today: "Today's language models could already be on the way.",
+           seth: "Implausible. He traces it mostly to our biases and to computational functionalism taken for granted.",
+           src: "p. 11" },
+      2: { name: "Theory-based computational",
+           says: "Consciousness arises when engineers build in the computations that a theory of consciousness describes.",
+           ex: "Global workspace theory, some higher-order thought theories, attention schema theory",
+           need: "Ordinary computers running whatever the right theory requires.",
+           today: "Today's AI would count only if it already contains what the right theory requires.",
+           seth: "Still depends on computational functionalism being true and on silicon being able to carry it. And every current theory is likely wrong or incomplete.",
+           src: "p. 11" },
+      3: { name: "Substrate-dependent computational",
+           says: "Consciousness is computation, but of a kind that only certain materials can carry out.",
+           ex: "Mortal, neuromorphic, neural, and biological computation",
+           need: "Special hardware, such as neuromorphic chips, able to run the right (perhaps mortal) computations. If only living things can run them, life is needed too.",
+           today: "Ordinary digital computers could at best approximate the right computations. Whether that would be good enough is an open question.",
+           seth: "No current theory of consciousness builds on this, and it gives up one of computation's main appeals: running on almost anything.",
+           src: "p. 11–12" },
+      4: { name: "Substrate-dependent, weak",
+           says: "Consciousness depends on patterns of activity that aren't computation, such as continuous processes, electrical fields, and fine timing. Only some materials can produce them.",
+           ex: "Non-computational neuromorphic designs; dynamical and electromagnetic field theories; IIT, which cares about cause-and-effect structure rather than function",
+           need: "A material that can carry the right activity. A simulation isn't guaranteed to be enough. If only living systems can, this is a weak biological naturalism.",
+           today: "Ordinary digital computers could only simulate the right activity, and a simulation isn't guaranteed to be enough.",
+           seth: "Fits his reading of predictive processing. Building it in another material is possible here but hard.",
+           src: "p. 12" },
+      5: { name: "Substrate-dependent, strong",
+           says: "Consciousness depends on properties of its living material itself.",
+           ex: "Cerebral organoids, hybrid systems, synthetic biology",
+           need: "AI would have to be, in some relevant sense, alive.",
+           today: "Ordinary digital computers are ruled out.",
+           seth: "This is where his own case is drawn.",
+           src: "p. 12" }
+    };
+    var Q2 = {
+      yes: [ ["any", "No: any capable computer will do"],
+             ["special", "Yes: only some hardware can run it"] ],
+      no:  [ ["pattern", "Only some materials can carry the right activity"],
+             ["life", "It depends on living material itself"] ]
+    };
+    var state = { cf: null, mat: null, how: null, seth: false };
+
+    function draw() {
+      var ol = $("scen-ladder");
+      ol.innerHTML = "";
+      for (var i = 1; i <= 5; i++) {
+        var li = document.createElement("li");
+        var on = current() === i;
+        if (on) { li.className = "on"; li.setAttribute("aria-current", "true"); }
+        var name = document.createElement("span");
+        name.textContent = i + ". " + SC[i].name;
+        li.appendChild(name);
+        if (state.seth && (i === 5 || i === 4)) {
+          li.className += (li.className ? " " : "") + (i === 5 ? "seth" : "fits");
+          var tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = i === 5 ? "Seth leans here" : "also fits Seth's view";
+          li.appendChild(tag);
+        }
+        ol.appendChild(li);
+      }
+    }
+
+    function current() {
+      if (state.cf === "yes" && state.mat === "any" && state.how) return +state.how;
+      if (state.cf === "yes" && state.mat === "special") return 3;
+      if (state.cf === "no" && state.mat === "pattern") return 4;
+      if (state.cf === "no" && state.mat === "life") return 5;
+      return 0;
+    }
+
+    function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+
+    function report() {
+      var n = current(), out = $("scen-result"), det = $("scen-detail");
+      if (!n) {
+        out.textContent = !state.cf ? "Answer question 1 to begin." :
+          !state.mat ? "Now answer question 2." : "Now answer question 3.";
+        det.hidden = true;
+        return;
+      }
+      var s = SC[n];
+      out.innerHTML = "<strong>Scenario " + n + ": " + esc(s.name) + ".</strong> " + esc(s.says);
+      det.innerHTML = "<table><tbody>" +
+        "<tr><th scope=\"row\">Examples Seth gives</th><td>" + esc(s.ex) + "</td></tr>" +
+        "<tr><th scope=\"row\">What conscious AI would need</th><td>" + esc(s.need) + "</td></tr>" +
+        "<tr><th scope=\"row\">Today's AI</th><td>" + esc(s.today) + "</td></tr>" +
+        "<tr><th scope=\"row\">Seth's view</th><td>" + esc(s.seth) + " <span class=\"src\">(" + s.src + ")</span></td></tr>" +
+        "</tbody></table>";
+      det.hidden = false;
+    }
+
+    function buildQ2() {
+      var fs = $("scen-q2"), box = $("scen-q2-choices");
+      box.innerHTML = "";
+      if (!state.cf) { fs.disabled = true; box.innerHTML = "<p class=\"meta\">Answer question 1 first.</p>"; return; }
+      fs.disabled = false;
+      Q2[state.cf].forEach(function (o) {
+        var lab = document.createElement("label");
+        var inp = document.createElement("input");
+        inp.type = "radio"; inp.name = "scen-mat"; inp.value = o[0];
+        inp.addEventListener("change", function () { state.mat = o[0]; state.how = null; sync(); });
+        lab.appendChild(inp); lab.appendChild(document.createTextNode(" " + o[1]));
+        box.appendChild(lab);
+      });
+    }
+
+    function sync() {
+      var q3 = $("scen-q3");
+      var need3 = state.cf === "yes" && state.mat === "any";
+      q3.hidden = !need3;
+      if (!need3) Array.prototype.forEach.call(q3.querySelectorAll("input"), function (r) { r.checked = false; });
+      draw(); report();
+    }
+
+    var detail = document.createElement("div");
+    detail.id = "scen-detail"; detail.hidden = true;
+    $("scen-result").parentNode.insertBefore(detail, $("scen-result").nextSibling);
+
+    Array.prototype.forEach.call(document.querySelectorAll("input[name=scen-cf]"), function (r) {
+      r.addEventListener("change", function () { state.cf = r.value; state.mat = null; state.how = null; buildQ2(); sync(); });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("input[name=scen-how]"), function (r) {
+      r.addEventListener("change", function () { state.how = r.value; sync(); });
+    });
+    $("scen-seth").addEventListener("click", function () {
+      state.seth = !state.seth;
+      this.textContent = state.seth ? "Hide where Seth lands" : "Show where Seth lands";
+      draw();
+      if (state.seth) {
+        var out = $("scen-result");
+        if (!current()) out.innerHTML = "Seth's case for biological naturalism is drawn toward <strong>scenario 5</strong>. The weak version, scenario 4, fits his reading of predictive processing too. <span class=\"src\">(p. 12–13)</span>";
+      } else report();
+    });
+    $("scen-reset").addEventListener("click", function () {
+      state = { cf: null, mat: null, how: null, seth: false };
+      $("scen-seth").textContent = "Show where Seth lands";
+      Array.prototype.forEach.call(document.querySelectorAll("#scen input"), function (r) { r.checked = false; });
+      buildQ2(); sync();
+    });
+    buildQ2(); sync();
+  })();
+
+  /* ---------- part 13: Müller-Lyer illusion ---------- */
+  (function () {
+    var svg = $("ml-svg");
+    if (!svg) return;
+    var L = 170, R = 390, F = 26;
+    var fins = S("g", { stroke: "var(--ink)", "stroke-width": 3, fill: "none", "stroke-linecap": "round" });
+    var guides = S("g", { stroke: "var(--c2)", "stroke-width": 2, "stroke-dasharray": "6 5" });
+    function line(y) { svg.appendChild(S("path", { d: "M" + L + " " + y + " H" + R, stroke: "var(--ink)", "stroke-width": 3 })); }
+    function fin(x, y, dx) { fins.appendChild(S("path", { d: "M" + (x + dx) + " " + (y - F) + " L" + x + " " + y + " L" + (x + dx) + " " + (y + F) })); }
+    line(64); line(160);
+    fin(L, 64, -F); fin(R, 64, F);       // fins outward: >---<
+    fin(L, 160, F); fin(R, 160, -F);     // fins inward:  <--->
+    svg.appendChild(fins);
+    guides.appendChild(S("path", { d: "M" + L + " 18 V206" }));
+    guides.appendChild(S("path", { d: "M" + R + " 18 V206" }));
+    svg.appendChild(guides);
+    svg.appendChild(S("text", { x: 30, y: 70, "font-size": 18 }, "A"));
+    svg.appendChild(S("text", { x: 30, y: 166, "font-size": 18 }, "B"));
+    var g = $("ml-guides"), f = $("ml-fins"), out = $("ml-result");
+    function upd() {
+      guides.style.display = g.checked ? "" : "none";
+      fins.style.display = f.checked ? "none" : "";
+      if (f.checked) out.textContent = "Without the fins, A and B look as equal as they are. Turn the fins back on: the illusion returns, even though you now know.";
+      else if (g.checked) out.textContent = "The guides show A and B start and end at the same places: they are the same length. Does A still look longer?";
+      else out.textContent = "Which line looks longer, A or B? Most people say A.";
+    }
+    g.addEventListener("change", upd); f.addEventListener("change", upd);
+    upd();
   })();
 })();
 </script>
