@@ -6,7 +6,17 @@
   <description>Webpages, notes, and videos to help me learn complicated things.</description>
   <language>en-us</language>
   <atom:link href="https://noahmaier.net/feed.xml" rel="self" type="application/rss+xml"/>
-  <lastBuildDate>Thu, 15 Oct 2026 20:12:00 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 23 Oct 2026 20:46:00 GMT</lastBuildDate>
+  <item>
+    <title>Anil Seth's Being You</title>
+    <link>https://noahmaier.net/exhibits/anil-seth-being-you/</link>
+    <guid isPermaLink="false">https://noahmaier.net/#anil-seth-being-you</guid>
+    <pubDate>Fri, 23 Oct 2026 20:46:00 GMT</pubDate>
+    <category>neuroscience</category>
+    <category>consciousness</category>
+    <category>anil seth</category>
+    <description><![CDATA[<p>A thirteen-part course on Anil Seth's <em>Being You</em> (2021) and his 2026 paper on conscious AI. Readers turn a hallucination dial, update a Bayesian guess as a gorilla walks closer, race two thermostats, and zip a brain's echo. They also sort which computer tasks are real and which only simulated, place views on conscious AI among Seth's five scenarios, and test whether knowing the truth breaks an illusion. Quizzes and spaced review cards throughout.</p><p><a href="https://noahmaier.net/exhibits/anil-seth-being-you/">Open the interactive page</a></p>]]></description>
+  </item>
   <item>
     <title>Mind Like Water</title>
     <link>https://noahmaier.net/exhibits/mind-like-water/</link>
@@ -55,16 +65,6 @@
     <category>consciousness</category>
     <category>daniel dennett</category>
     <description><![CDATA[<p>A ten-part course on Daniel C. Dennett's <em>Consciousness Explained</em> (1991), the book that argues there is no inner screen or watcher in the head, yet takes experience seriously as something to explain. Readers run the color phi experiment, probe the brain's drafts at different moments, move the line between Orwellian and Stalinesque stories, tap the cutaneous rabbit, evolve learners in a Baldwin-effect simulation, find their own blind spot, and pick out their own boat on a shared radar screen. Quizzes and spaced review cards throughout.</p><p><a href="https://noahmaier.net/exhibits/dennett-consciousness-explained/">Open the interactive page</a></p>]]></description>
-  </item>
-  <item>
-    <title>Anil Seth's Being You</title>
-    <link>https://noahmaier.net/exhibits/anil-seth-being-you/</link>
-    <guid isPermaLink="false">https://noahmaier.net/#anil-seth-being-you</guid>
-    <pubDate>Mon, 05 Oct 2026 11:34:00 GMT</pubDate>
-    <category>neuroscience</category>
-    <category>consciousness</category>
-    <category>anil seth</category>
-    <description><![CDATA[<p>A ten-part course on Anil Seth's <em>Being You: A New Science of Consciousness</em> (2021) and his case that perception and the self are the brain's best guesses, rooted in keeping the body alive. Readers turn a hallucination dial until a face appears in the clouds, update a Bayesian guess as a gorilla walks closer, race a reactive thermostat against a predictive one, build a readiness potential out of pure noise, and zip a brain's echo to see why complexity alone can't measure consciousness. Quizzes and spaced review cards throughout.</p><p><a href="https://noahmaier.net/exhibits/anil-seth-being-you/">Open the interactive page</a></p>]]></description>
   </item>
   <item>
     <title>Chalmers and the Hard Problem</title>
