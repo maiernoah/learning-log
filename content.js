@@ -230,7 +230,7 @@ const ENTRIES = [
     time: "20:19",
     url: "diligence/aclu-of-northern-california/",
     tags: ["fundraising", "philanthropy"],
-    summary: `A sample dossier on the ACLU of Northern California: the 501(c)(3) and 501(c)(4) pair, fifteen years of 990 numbers, the ratio flags, nine court outcomes ranked by significance and shared credit beside ten losses and reversals, four futures on the legal channel and the money, and a verdict that scores it 67 of 100 and names a second quiet retrenchment as the most likely failure.`,
+    summary: `A sample dossier on the ACLU of Northern California: the 501(c)(3) and 501(c)(4) pair, fifteen years of 990 numbers, the ratio flags, nine court outcomes ranked by significance and shared credit beside ten losses and reversals, four futures on the legal channel and the money, and a verdict that names a second quiet retrenchment as the most likely failure. Password-protected.`,
   },
 
   {
@@ -241,7 +241,7 @@ const ENTRIES = [
     time: "20:18",
     url: "diligence/the-consciousness-foundation/",
     tags: ["fundraising", "philanthropy", "consciousness"],
-    summary: `A sample dossier on The Consciousness Foundation, a fifteen-month-old grantmaker for awakening science with no Form 990 yet. It shows what the method does with a young organization: an honest 37 of 100 that grades evidenced health rather than promise, a results ledger that says everything is too early to judge, two promised reports that slipped, and a verdict that a gift is good for a small, staged, restricted bet on shared measures.`,
+    summary: `A sample dossier on The Consciousness Foundation, a fifteen-month-old grantmaker for awakening science with no Form 990 yet. It shows what the method does with a young organization: a score that grades evidenced health rather than promise, a results ledger that says everything is too early to judge, and a verdict on what kind of gift fits. Password-protected.`,
   },
 
   {
@@ -252,6 +252,6 @@ const ENTRIES = [
     time: "21:35",
     url: "diligence/fungi-foundation/",
     tags: ["fundraising", "philanthropy", "environment"],
-    summary: `A sample dossier on the Fungi Foundation, a small founder-led charity in New York built on top of a Chilean foundation from 2012. Four years of 990s show three straight deficits and about two months of reserves beside real wins in getting fungi written into conservation language and pledges. The dossier reads the founder's own writing across 31 pieces, sets the futures on state commitment to fungal conservation and the reach of private nature capital, and scores it 47 of 100 with a quiet stall as the most likely failure.`,
+    summary: `A sample dossier on the Fungi Foundation, a small founder-led charity in New York built on top of a Chilean foundation from 2012. Four years of 990s show three straight deficits and about two months of reserves beside real wins in getting fungi written into conservation language and pledges. The dossier reads the founder's own writing across 31 pieces, sets the futures on state commitment to fungal conservation and the reach of private nature capital, and names a quiet stall as the most likely failure. Password-protected.`,
   },
 ];
