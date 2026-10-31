@@ -50,7 +50,7 @@ const SITE = {
     "due-diligence": {
       title: "Due Diligence",
       intro: `Dossiers on nonprofits, compiled from the public record. Start with
-              <a href="exhibits/dossier/">what a dossier is and what it costs</a>.`,
+              <a href="diligence/">what a dossier is and what it costs</a>.`,
     },
   },
 };
@@ -212,34 +212,34 @@ const ENTRIES = [
   },
 
   {
-    slug: "dossier",
+    slug: "diligence",
     section: "due-diligence",
     title: "Dossier",
     date: "2026-10-30",
     time: "20:20",
-    url: "exhibits/dossier/",
+    url: "diligence/",
     tags: ["fundraising", "philanthropy"],
     summary: `A due-diligence dossier on any U.S. nonprofit, compiled by research agents from the public record: identity and structure, the money, the ratios, the public record, what actually changed because of the organization, the field, the culture, four futures, and a verdict with a health score, a pre-mortem and the questions to ask before giving. Every claim is tagged evidence, inference or speculation. Two sample dossiers and the pricing are on the page.`,
   },
 
   {
-    slug: "dossier-aclu-of-northern-california",
+    slug: "diligence-aclu-of-northern-california",
     section: "due-diligence",
     title: "Dossier: ACLU of Northern California",
     date: "2026-10-30",
     time: "20:19",
-    url: "exhibits/dossier-aclu-of-northern-california/",
+    url: "diligence/aclu-of-northern-california/",
     tags: ["fundraising", "philanthropy"],
     summary: `A sample dossier on the ACLU of Northern California: the 501(c)(3) and 501(c)(4) pair, fifteen years of 990 numbers, the ratio flags, nine court outcomes ranked by significance and shared credit beside ten losses and reversals, four futures on the legal channel and the money, and a verdict that scores it 67 of 100 and names a second quiet retrenchment as the most likely failure.`,
   },
 
   {
-    slug: "dossier-the-consciousness-foundation",
+    slug: "diligence-the-consciousness-foundation",
     section: "due-diligence",
     title: "Dossier: The Consciousness Foundation",
     date: "2026-10-30",
     time: "20:18",
-    url: "exhibits/dossier-the-consciousness-foundation/",
+    url: "diligence/the-consciousness-foundation/",
     tags: ["fundraising", "philanthropy", "consciousness"],
     summary: `A sample dossier on The Consciousness Foundation, a fifteen-month-old grantmaker for awakening science with no Form 990 yet. It shows what the method does with a young organization: an honest 37 of 100 that grades evidenced health rather than promise, a results ledger that says everything is too early to judge, two promised reports that slipped, and a verdict that a gift is good for a small, staged, restricted bet on shared measures.`,
   },
