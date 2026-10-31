@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dossier</title>
+<meta name="description" content="A due-diligence dossier on any U.S. nonprofit, compiled from the public record in about an hour.">
+<style>
+/* ===== Noah's Weblog house style (exhibits) v2 =====
+   Matches noahmaier.net: white page, Times for reading, Verdana for
+   controls, blue underlined links, two-tone rules, gray beveled buttons. */
+:root {
+  --page: #ffffff;
+  --ink: #000000;
+  --ink-soft: #2b2b2b;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --active: #ff0000;
+  --lo: #999999;          /* rule, border, axis */
+  --hi: #e2e2e2;          /* rule highlight, gridline */
+  --tint: #f2f2f2;        /* callout and table-header fill */
+  --field: #6e6e6e;       /* input border */
+  --btn: #c0c0c0;         /* button face */
+  --btn-face: #dfdfdf;
+  --btn-lo: #808080;
+  --btn-dark: #0a0a0a;
+  --new: #cc0000;
+  /* data colors, in order: classic HTML named colors */
+  --c1: #000080;  /* navy */
+  --c2: #800000;  /* maroon */
+  --c3: #008080;  /* teal */
+  --c4: #808000;  /* olive (marks only; too light for text) */
+  --c5: #800080;  /* purple */
+  --c6: #008000;  /* green */
+  --serif: "Times New Roman", Times, serif;
+  --sans: Verdana, Geneva, Tahoma, sans-serif;
+  --mono: "Courier New", Courier, monospace;
+  --measure: 42.75rem;    /* one column width (684px): text, boxes, questions, tables, figures */
+}
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body { margin: 0; padding: 10px 16px 32px; background: var(--page); color: var(--ink);
+       font: 18px/1.45 var(--serif); -webkit-text-size-adjust: 100%; }
+.page { max-width: 1020px; }
+/* Text, boxes, questions, tables and figures share one column width, so their left and
+   right edges line up. Add class="wide" only to something that genuinely needs more room. */
+main p, main ul, main ol, main dl, main blockquote, main table, main fieldset, main figure,
+main details, main .box, main h2, main h3, main .view > *, .prose { max-width: var(--measure); }
+.wide { max-width: none !important; }
+a { color: var(--link); } a:visited { color: var(--visited); } a:active { color: var(--active); }
+:focus-visible { outline: 2px dotted var(--ink); outline-offset: 2px; }
+
+h1 { font-size: 2.3em; line-height: 1.1; margin: 0.35em 0 0.15em; }
+h2 { font-size: 1em; font-weight: bold; margin: 1.6em 0 0.7em; padding-bottom: 2px;
+     border-bottom: 1px solid var(--lo); }
+h3 { font-size: 1.15em; line-height: 1.25; margin: 1.2em 0 0.3em; }
+p { margin: 0 0 0.8em; }
+.dek { font-style: italic; margin: 0 0 0.5em; }
+.nav { font: 13px/1.6 var(--sans); margin: 0; }
+hr { border: 0; border-top: 1px solid var(--lo); border-bottom: 1px solid var(--hi);
+     height: 0; margin: 10px 0 14px; }
+code, pre, kbd { font-family: var(--mono); font-size: 0.9em; }
+
+/* controls and small text use Verdana */
+label, legend, button, input, select, textarea, table, figcaption, output, .ui, .meta {
+  font-family: var(--sans); }
+.ui, .meta, figcaption { font-size: 13px; line-height: 1.5; }
+.meta { color: var(--ink-soft); }
+p.meta { margin: 6px 0 12px; }
+
+fieldset { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi);
+           margin: 0 0 16px; padding: 10px 12px 12px; min-width: 0; }
+/* The legend sits inside the box as its first line, so long legends wrap cleanly
+   instead of breaking through the border. */
+legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; font-size: 13px; font-weight: bold; }
+legend + * { clear: both; }
+label { font-size: 13px; }
+.choices { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.choices label { display: inline-flex; align-items: center; gap: 5px; }
+input[type=radio], input[type=checkbox], input[type=range] { accent-color: var(--c1); }
+
+button {
+  font-size: 13px; line-height: 1.2; color: #000; background: var(--btn);
+  border: 0; border-radius: 0; padding: 6px 12px; cursor: pointer;
+  box-shadow: inset -1px -1px var(--btn-dark), inset 1px 1px #fff,
+              inset -2px -2px var(--btn-lo), inset 2px 2px var(--btn-face);
+}
+button:active, button[aria-pressed="true"] {
+  box-shadow: inset 1px 1px var(--btn-dark), inset -1px -1px #fff,
+              inset 2px 2px var(--btn-lo), inset -2px -2px var(--btn-face);
+  padding: 7px 11px 5px 13px;
+}
+button:disabled { color: var(--btn-lo); text-shadow: 1px 1px #fff; cursor: default; }
+button.primary { font-weight: bold; }
+
+input[type=text], input[type=number], input[type=search], input[type=email],
+select, textarea {
+  font-size: 14px; color: var(--ink); background: #fff; border: 1px solid var(--field);
+  border-radius: 0; box-shadow: inset 1px 1px 0 #b4b4b4; padding: 4px 6px;
+}
+
+table { border-collapse: collapse; font-size: 13px; line-height: 1.4; }
+main table { width: 100%; }
+th, td { border: 1px solid var(--lo); padding: 4px 8px; text-align: left; vertical-align: top; }
+th { background: var(--tint); }
+
+.box { background: var(--tint); box-shadow: inset 1px 1px var(--lo), inset -1px -1px var(--hi);
+       padding: 8px 10px; margin: 0 0 1em; font: 13px/1.5 var(--sans); }
+.result { font-size: 1.15em; }
+.result strong { font-variant-numeric: tabular-nums; }
+
+.meter { height: 16px; background: #fff; border: 1px solid var(--field);
+         box-shadow: inset 1px 1px 0 #b4b4b4; }
+.meter > div { height: 100%; width: 0; background: var(--c1); }
+
+footer address { font-style: normal; font-size: 0.85em; }
+
+@media (max-width: 780px) { body { font-size: 17px; padding: 8px 16px 28px; } h1 { font-size: 1.8em; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media print { .nav { display: none; } }
+
+/* ===== page-specific rules ===== */
+td.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+main h2:first-child { margin-top: 0.8em; }
+.tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: var(--measure); }
+.tiers fieldset { margin: 0; }
+.tiers ul { margin: 0; padding-left: 18px; font: 13px/1.5 var(--sans); }
+@media (max-width: 780px) { .tiers { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>Dossier</h1>
+    <p class="dek">A due-diligence dossier on any U.S. nonprofit, compiled from the public record in about an hour.</p>
+    <p class="nav">[ <a href="../../index.html#dossier">&#9668; Noah's Weblog</a> | <a href="../../about.html">About</a> ]</p>
+    <hr>
+  </header>
+  <main>
+    <p class="box">Ordering opens soon. Two sample dossiers are below.</p>
+
+    <h2>What it is</h2>
+    <p>Before you give to a nonprofit you can read its 990, its annual report and a rating site. That tells you how it spends. It does not tell you what changed in the world because of it, how it is most likely to go wrong, what a gift is good for, or whether someone else already does the work better. A dossier answers those questions, in writing, with every claim tagged by how well it is supported and linked to its source.</p>
+    <p>The dossier is built in nine passes: identity and structure, the money, the ratios, the public record, the results, the field, the culture, four futures, and the verdict. Research agents gather and read; the arithmetic on filed numbers is done by code, not by a model, so every number traces to a filing. The verdict is the part you will actually read: a health score with its reasoning, a pre-mortem of the most likely failures, the risk of each kind of gift, and the questions to ask before you give.</p>
+
+    <h2>Sample dossiers</h2>
+    <table>
+      <tr><th>Organization</th><th class="num">Health</th><th>Bottom line</th></tr>
+      <tr><td><a href="../dossier-aclu-of-northern-california/">ACLU of Northern California</a><br><span class="meta">2026-10-30</span></td><td class="num"><strong>67</strong> C+</td><td>ACLU of Northern California is a solvent, well-governed regional civil-liberties law shop, spending about $25M a year, whose court wins are real but shared and often provisional. The thing most likely to go wrong is not collapse: the 2025 donor surge fades, as the FY22 spike did, and the organization quietly cuts capacity again even with large reserves. A gift is best used for a named, staged, multi-year capacity that reaches past January 2029, because an unrestricted gift today mostly adds to a cushion of about 23 months.</td></tr><tr><td><a href="../dossier-the-consciousness-foundation/">The Consciousness Foundation</a><br><span class="meta">2026-10-30</span></td><td class="num"><strong>37</strong> D+</td><td>The Consciousness Foundation is about 15 months past its public launch. It is a small grantmaker for awakening science, probably funded mainly by its chair, and it has run one real grant round but has no published financials, research results or conflict controls. The likeliest failure is that it stays dependent on one patron while 14 grants become 14 separate studies, not the shared measures that justify paying an intermediary. A gift is good for a small or staged, restricted bet on public shared measures and data, after seeing documents; it is not yet good for large unrestricted, long-pledge or endowment money.</td></tr>
+    </table>
+    <p class="meta">Sample dossier, published to show what the service produces. The organization did not commission it and has not reviewed it. All figures come from public filings and published sources linked in each section.</p>
+
+    <h2>What a dossier costs</h2>
+    <div class="tiers"><fieldset><legend>Standard · $25</legend><p class="meta">About an hour</p><ul><li>Identity and structure, including affiliated c3/c4 entities</li><li>Up to 25 years of Form 990 numbers and the named pay table</li><li>The ratio check, scaled to budget size, against named peers</li><li>Public-record scan: ratings, audits, governance answers, legal, funders</li><li>Results ledger: what changed because of them, judged on significance, credit and durability</li><li>The field: who else does this, the counterfactual, the right unit to fund</li><li>Culture read from public professional material</li><li>Four futures on a 2x2 of the two critical uncertainties</li><li>The verdict: health score, pre-mortem, gift risk by gift type, the questions to ask</li></ul></fieldset><fieldset><legend>Deep · $50</legend><p class="meta">Same day, with a second verdict after your interview</p><ul><li>Everything in Standard, researched at the highest setting</li><li>Your supplied documents read and cited: audits, strategic plans, board decks, proposals</li><li>An interview sheet built from the verdict&#x27;s questions</li><li>A second verdict after your conversation with the organization, showing what changed</li></ul></fieldset></div>
+
+    <h2>What it will not do</h2>
+    <ul><li>Psychological profiles of individuals. Culture is read at the level of the organization, from public professional material only.</li><li>Private or leaked material.</li><li>A recommendation to give or not give. The dossier lays out the risks, the strengths and the questions; the decision stays yours.</li></ul>
+
+    <h2>How to read one</h2>
+    <p>Every claim carries a tag. <em>Evidence</em> means an agent saw it in a source it fetched. <em>Inference</em> is a reading of evidence, and says what it rests on. <em>Speculation</em> is a hypothesis worth checking; those lines are blacked out until you click them. A filter on each page hides the weaker tiers. When something could not be found, the dossier says so and names what it looked for.</p>
+
+    <h2>Corrections</h2>
+    <p>Organizations and readers may request a correction to any factual claim. Corrections that check out are made and noted on the page.</p>
+
+    <h2>The fine print</h2>
+    <p class="meta">Dossiers are compiled from public records by research agents and arithmetic on filed numbers. Every claim is tagged evidence, inference or speculation and carries its sources. Nothing in a dossier is legal, financial, tax or investment advice, and the organization assessed has not reviewed it. Verify anything you intend to act on.</p>
+  </main>
+  <footer>
+    <hr>
+    <address>Dossier is a service of <a href="../../about.html">Noah Maier</a>. Part of <a href="../../index.html#dossier">Noah's Weblog</a>.</address>
+  </footer>
+</div>
+</body>
+</html>

@@ -199,4 +199,34 @@ const ENTRIES = [
     tags: ["productivity", "meditation", "david allen"],
     summary: `An eight-part course that reads David Allen's <em>Getting Things Done</em> and <em>Ready for Anything</em>, plus five recorded conversations with Allen, as a householder's practice of presence rather than a productivity hack. Readers clear a rippling pond by running eight worries through Allen's two questions, sort items into his buckets, order the weekly review, climb from one chemistry assignment to purpose, filter next actions by context and energy, and set a sitting practice beside Allen's own words on what he does and does not teach. Quizzes and spaced review cards throughout.`,
   },
+
+  {
+    slug: "dossier",
+    title: "Dossier",
+    date: "2026-10-30",
+    time: "20:20",
+    url: "exhibits/dossier/",
+    tags: ["fundraising", "philanthropy"],
+    summary: `A due-diligence dossier on any U.S. nonprofit, compiled by research agents from the public record: identity and structure, the money, the ratios, the public record, what actually changed because of the organization, the field, the culture, four futures, and a verdict with a health score, a pre-mortem and the questions to ask before giving. Every claim is tagged evidence, inference or speculation. Two sample dossiers and the pricing are on the page.`,
+  },
+
+  {
+    slug: "dossier-aclu-of-northern-california",
+    title: "Dossier: ACLU of Northern California",
+    date: "2026-10-30",
+    time: "20:19",
+    url: "exhibits/dossier-aclu-of-northern-california/",
+    tags: ["fundraising", "philanthropy"],
+    summary: `A sample dossier on the ACLU of Northern California: the 501(c)(3) and 501(c)(4) pair, fifteen years of 990 numbers, the ratio flags, nine court outcomes ranked by significance and shared credit beside ten losses and reversals, four futures on the legal channel and the money, and a verdict that scores it 67 of 100 and names a second quiet retrenchment as the most likely failure.`,
+  },
+
+  {
+    slug: "dossier-the-consciousness-foundation",
+    title: "Dossier: The Consciousness Foundation",
+    date: "2026-10-30",
+    time: "20:18",
+    url: "exhibits/dossier-the-consciousness-foundation/",
+    tags: ["fundraising", "philanthropy", "consciousness"],
+    summary: `A sample dossier on The Consciousness Foundation, a fifteen-month-old grantmaker for awakening science with no Form 990 yet. It shows what the method does with a young organization: an honest 37 of 100 that grades evidenced health rather than promise, a results ledger that says everything is too early to judge, two promised reports that slipped, and a verdict that a gift is good for a small, staged, restricted bet on shared measures.`,
+  },
 ];
