@@ -123,37 +123,37 @@ footer address { font-style: normal; font-size: 0.85em; }
 body { line-height: 1.5; }
 header h1 { font-size: 2.4em; letter-spacing: -0.01em; }
 header .dek { font-size: 1.05em; }
-h2 { font-size: 0.85em; letter-spacing: 0.02em; color: var(--ink-soft); margin: 2.2em 0 0.8em; }
+h2 { font-size: 1.05em; margin: 2em 0 0.7em; }
 .lede { font-size: 1.2em; line-height: 1.42; max-width: var(--measure); }
 form { max-width: var(--measure); margin: 0 0 8px; }
 form fieldset { padding: 12px 14px 14px; }
-form label.field { display: block; font-size: 13px; font-weight: bold; margin: 0 0 4px; }
-form .hint { font: 12px/1.5 var(--sans); color: var(--ink-soft); margin: 4px 0 0; }
-.hint-inline { font: 12px/1.5 var(--sans); color: var(--ink-soft); }
+form label.field { display: block; font-size: 13px; font-weight: normal; margin: 0 0 4px; }
+form .hint { font: 13px/1.5 var(--sans); color: var(--ink-soft); margin: 4px 0 0; }
+.hint-inline { font: 13px/1.5 var(--sans); color: var(--ink-soft); }
 form input[type=email], form input[type=text] { width: 100%; max-width: 26em; font-size: 16px; padding: 6px 8px; }
 form input[type=file] { font: 13px var(--sans); }
 .tiers-inline label { display: block; font: 13px/1.6 var(--sans); margin: 2px 0; }
 .found { font: 13px/1.5 var(--sans); margin: 6px 0 0; }
-.files { font: 12.5px/1.5 var(--sans); margin: 8px 0 0; padding-left: 18px; }
+.files { font: 13px/1.5 var(--sans); margin: 8px 0 0; padding-left: 18px; }
 .actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 6px 0 0; }
 .box { border-left: 3px solid var(--lo); box-shadow: none; padding: 9px 12px; }
 .done { border-left-color: var(--c6); }
-.samples { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; max-width: var(--measure); margin: 0 0 10px; }
-.sample { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi); padding: 12px 14px 10px; }
+.samples { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 18px; max-width: var(--measure); margin: 0 0 10px; }
+.sample { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi); padding: 10px 14px; }
 .sample .score { font: bold 2.2em/1 var(--serif); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
 .sample .score small { font: 12px var(--sans); color: var(--ink-soft); margin-left: 6px; letter-spacing: 0; }
-.sample .score.locked { font: bold 1.05em/1 var(--sans); color: var(--ink-soft); padding: 8px 0 10px; }
-.sample h3 { margin: 8px 0 6px; font-size: 1.05em; }
+.sample .score.locked { display: none; }
+.sample h3 { margin: 0 0 2px; font-size: 1.05em; }
 .sample p { font-size: 0.85em; line-height: 1.45; margin: 0 0 8px; }
-.sample p.meta { margin: 0; }
+.sample p.meta { margin: 0; font-size: 13px; line-height: 1.5; }
 .uses, .steps { max-width: var(--measure); padding-left: 1.4em; }
 .uses li, .steps li { margin: 0 0 6px; }
 .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: var(--measure); }
 .tiers fieldset { margin: 0; padding: 12px 14px 12px; }
 .tiers legend { font-size: 1.05em; font-family: var(--serif); font-weight: bold; }
 .tiers .price { font: bold 1.9em/1 var(--serif); margin: 2px 0 2px; }
-.tiers .price small { font: 12px var(--sans); color: var(--ink-soft); font-weight: normal; margin-left: 6px; }
-.tiers ul { margin: 8px 0 0; padding-left: 18px; font: 12.5px/1.5 var(--sans); }
+.tiers .price small { display: block; font: 13px/1.4 var(--sans); color: var(--ink-soft); font-weight: normal; margin-top: 6px; }
+.tiers ul { margin: 10px 0 0; padding-left: 18px; font: 16px/1.4 var(--serif); }
 .tiers ul li { margin: 0 0 3px; }
 @media (max-width: 780px) { .tiers, .samples { grid-template-columns: 1fr; } }
 </style>
@@ -188,7 +188,7 @@ form input[type=file] { font: 13px var(--sans); }
     </ul>
 
     <h2>Sample dossiers</h2>
-    <div class="samples"><div class="sample"><div class="score locked">Locked</div><h3><a href="the-consciousness-foundation/">The Consciousness Foundation</a></h3><p class="meta">Compiled 2026-10-31</p></div><div class="sample"><div class="score locked">Locked</div><h3><a href="just-impact/">Just Impact</a></h3><p class="meta">Compiled 2026-10-31</p></div><div class="sample"><div class="score locked">Locked</div><h3><a href="fungi-foundation/">Fungi Foundation</a></h3><p class="meta">Compiled 2026-10-31</p></div><div class="sample"><div class="score locked">Locked</div><h3><a href="aclu-of-northern-california/">ACLU of Northern California</a></h3><p class="meta">Compiled 2026-10-31</p></div></div>
+    <div class="samples"><div class="sample"><div class="score locked">Locked</div><h3><a href="the-consciousness-foundation/">The Consciousness Foundation</a></h3><p class="meta">Password-protected. Compiled 2026-10-31</p></div><div class="sample"><div class="score locked">Locked</div><h3><a href="just-impact/">Just Impact</a></h3><p class="meta">Password-protected. Compiled 2026-10-31</p></div><div class="sample"><div class="score locked">Locked</div><h3><a href="fungi-foundation/">Fungi Foundation</a></h3><p class="meta">Password-protected. Compiled 2026-10-31</p></div><div class="sample"><div class="score locked">Locked</div><h3><a href="aclu-of-northern-california/">ACLU of Northern California</a></h3><p class="meta">Password-protected. Compiled 2026-10-31</p></div></div>
     <p class="meta">Sample dossier, published to show what the service produces. The organization did not commission it and has not reviewed it. All figures come from public filings and published sources linked in each section. Samples on organizations that are clients or partners are password-protected.</p>
     <p class="meta"><a href="../index.html#due-diligence">All dossiers</a></p>
 
@@ -196,7 +196,7 @@ form input[type=file] { font: 13px var(--sans); }
     <div class="tiers"><fieldset><legend>Standard</legend><div class="price">$25<small>Usually within a day</small></div><ul><li>Advisor prep, for you only: what to tell your client, how to raise the hard part, co-funding, who to call</li><li>A two-page client brief, ready to forward as a PDF</li><li>Which entity a gift reaches, including affiliated c3 and c4 organizations</li><li>Up to 25 years of Form 990 numbers and the named pay table</li><li>Pay, reserves and fundraising ratios, scaled to budget and set against named peers</li><li>The public record: ratings, audits, governance, legal history, funders</li><li>What actually changed because of them, and how much credit they can claim</li><li>The field: who else does this, what would be lost, and whether this is the right place to give</li><li>Culture and leadership, read from public professional material</li><li>Four possible futures and what each would do to the organization</li><li>The verdict: health score, likeliest failures, risk by type of gift, questions to ask</li></ul></fieldset><fieldset><legend>Deep</legend><div class="price">$50<small>Usually within a day, with a second verdict after your interview</small></div><ul><li>Everything in Standard, researched at the highest setting</li><li>The documents you supply, read and cited</li><li>An interview sheet built from the verdict&#x27;s questions</li><li>A second verdict after you talk with the organization, showing what changed</li></ul></fieldset></div>
 
     <h2>What it will not do</h2>
-    <ul><li>A character verdict on anyone. The leader read covers how a senior leader handles money, risk and criticism, from their own public professional words, with no diagnosis and nothing private.</li><li>Private or leaked material.</li><li>A recommendation to give or not give. The dossier sets out the risks, the strengths and the questions; the judgment stays yours.</li></ul>
+    <ul class="uses"><li>A character verdict on anyone. The leader read covers how a senior leader handles money, risk and criticism, from their own public professional words, with no diagnosis and nothing private.</li><li>Private or leaked material.</li><li>A recommendation to give or not give. The dossier sets out the risks, the strengths and the questions; the judgment stays yours.</li></ul>
 
     <h2>Order a dossier</h2>
     <form id="order" method="post" enctype="multipart/form-data" action="https://script.google.com/macros/s/AKfycbws9OZUU4Zisq9QRi-sAbvI5UBMqAivf2NmgoFTBlqMQqunOQXD6AsA7E2mA9rQy67r/exec" novalidate>
