@@ -119,43 +119,61 @@ footer address { font-style: normal; font-size: 0.85em; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 @media print { .nav { display: none; } }
 
+/* ===== the dossier's own look: Times throughout, flat controls, structure from space =====
+   The weblog's house style (Verdana controls, beveled buttons) is loaded above for its tokens
+   and reset; these rules bring the product page in line with the dossier pages it sells. */
+:root { --line: #d4d4d4; --tint: #f3f3f3; --soft: #4a4a4a; --sans: var(--serif); }
+body { padding: 16px; font-size: 18px; line-height: 1.5; }
+.page { max-width: 960px; }
+label, legend, button, input, select, textarea, table, figcaption, output, .ui, .meta, .hint, .hint-inline, .found, .files, .tiers-inline label { font-family: var(--serif); }
+.ui, .meta, figcaption, label, .hint, .hint-inline, .found, .files { font-size: 15px; line-height: 1.5; }
+.meta, .hint, .hint-inline { color: var(--soft); }
+hr { border: 0; border-top: 1px solid var(--line); height: 0; margin: 12px 0 28px; }
+h2 { font-size: 21px; font-weight: bold; margin: 48px 0 12px; padding: 0; border: 0; }
+fieldset { border: 1px solid var(--line); box-shadow: none; padding: 12px 14px 14px; }
+legend { font-size: 15px; }
+button { font-size: 15px; line-height: 1.2; padding: 7px 12px; background: var(--tint); border: 1px solid var(--line); box-shadow: none; }
+button:hover { background: var(--line); }
+button:active, button[aria-pressed="true"] { box-shadow: none; padding: 7px 12px; background: var(--line); }
+input[type=text], input[type=number], input[type=search], input[type=email], select, textarea { font-size: 16px; border: 1px solid var(--line); box-shadow: none; padding: 5px 6px; }
+input[type=radio], input[type=checkbox] { accent-color: var(--ink); }
+table { font-size: 15px; }
+th, td { border: 0; border-bottom: 1px solid var(--line); padding: 6px 8px; }
+th { background: none; }
 /* ===== page-specific rules ===== */
-body { line-height: 1.5; }
-header h1 { font-size: 2.4em; letter-spacing: -0.01em; }
-header .dek { font-size: 1.05em; }
-h2 { font-size: 1.05em; margin: 2em 0 0.7em; }
-.lede { font-size: 1.2em; line-height: 1.42; max-width: var(--measure); }
+header h1 { font-size: 34px; line-height: 1.15; letter-spacing: 0; margin: 0 0 4px; }
+header .dek { font-size: 15px; color: var(--soft); font-style: normal; }
+.nav { font-size: 15px; }
+.lede { font-size: 21px; line-height: 1.4; max-width: var(--measure); margin: 0 0 24px; }
 form { max-width: var(--measure); margin: 0 0 8px; }
-form fieldset { padding: 12px 14px 14px; }
-form label.field { display: block; font-size: 13px; font-weight: normal; margin: 0 0 4px; }
-form .hint { font: 13px/1.5 var(--sans); color: var(--ink-soft); margin: 4px 0 0; }
-.hint-inline { font: 13px/1.5 var(--sans); color: var(--ink-soft); }
-form input[type=email], form input[type=text] { width: 100%; max-width: 26em; font-size: 16px; padding: 6px 8px; }
-form input[type=file] { font: 13px var(--sans); }
-.tiers-inline label { display: block; font: 13px/1.6 var(--sans); margin: 2px 0; }
-.found { font: 13px/1.5 var(--sans); margin: 6px 0 0; }
-.files { font: 13px/1.5 var(--sans); margin: 8px 0 0; padding-left: 18px; }
+form label.field { display: block; font-size: 15px; font-weight: normal; margin: 0 0 4px; }
+form .hint { margin: 4px 0 0; }
+form input[type=email], form input[type=text] { width: 100%; max-width: 26em; }
+form input[type=file] { font: 15px var(--serif); }
+.tiers-inline label { display: block; line-height: 1.6; margin: 2px 0; }
+.found { margin: 6px 0 0; }
+.files { margin: 8px 0 0; padding-left: 18px; }
 .actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 6px 0 0; }
-.box { border-left: 3px solid var(--lo); box-shadow: none; padding: 9px 12px; }
+.box { background: none; border-left: 3px solid var(--line); box-shadow: none; padding: 9px 12px; font: 15px/1.5 var(--serif); }
 .done { border-left-color: var(--c6); }
 .samples { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 18px; max-width: var(--measure); margin: 0 0 10px; }
-.sample { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi); padding: 10px 14px; }
+.sample { border: 1px solid var(--line); box-shadow: none; padding: 10px 14px; }
 .sample .score { font: bold 2.2em/1 var(--serif); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
-.sample .score small { font: 12px var(--sans); color: var(--ink-soft); margin-left: 6px; letter-spacing: 0; }
+.sample .score small { font: 15px var(--serif); color: var(--soft); margin-left: 6px; letter-spacing: 0; }
 .sample .score.locked { display: none; }
-.sample h3 { margin: 0 0 2px; font-size: 1.05em; }
-.sample p { font-size: 0.85em; line-height: 1.45; margin: 0 0 8px; }
-.sample p.meta { margin: 0; font-size: 13px; line-height: 1.5; }
+.sample h3 { margin: 0 0 2px; font-size: 18px; }
+.sample p { font-size: 15px; line-height: 1.45; margin: 0 0 8px; }
+.sample p.meta { margin: 0; }
 .uses, .steps { max-width: var(--measure); padding-left: 1.4em; }
 .uses li, .steps li { margin: 0 0 6px; }
 .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: var(--measure); }
 .tiers fieldset { margin: 0; padding: 12px 14px 12px; }
-.tiers legend { font-size: 1.05em; font-family: var(--serif); font-weight: bold; }
+.tiers legend { font-size: 18px; font-weight: bold; }
 .tiers .price { font: bold 1.9em/1 var(--serif); margin: 2px 0 2px; }
-.tiers .price small { display: block; font: 13px/1.4 var(--sans); color: var(--ink-soft); font-weight: normal; margin-top: 6px; }
+.tiers .price small { display: block; font: 15px/1.4 var(--serif); color: var(--soft); font-weight: normal; margin-top: 6px; }
 .tiers ul { margin: 10px 0 0; padding-left: 18px; font: 16px/1.4 var(--serif); }
 .tiers ul li { margin: 0 0 3px; }
-@media (max-width: 780px) { .tiers, .samples { grid-template-columns: 1fr; } }
+@media (max-width: 780px) { .tiers, .samples { grid-template-columns: 1fr; } body { font-size: 17px; } header h1 { font-size: 28px; } .lede { font-size: 19px; } }
 </style>
 </head>
 <body>
@@ -242,7 +260,7 @@ form input[type=file] { font: 13px var(--sans); }
     <ol class="steps">
       <li>Noah reviews your order and confirms it, and payment, with you by email.</li>
       <li>The EIN is checked against the IRS record and the organization's own site. If they disagree, you get an email asking which organization you meant, and nothing else happens until you answer.</li>
-      <li>Research agents read the filings and the public record, and your files if you attached any. Code does the arithmetic on filed numbers, so every number traces to a filing. Nobody reviews the result by hand, so check anything you plan to repeat.</li>
+      <li>Research agents read the filings and the public record, and your files if you attached any. Code does the arithmetic on filed numbers, so every number traces to a filing. Noah reads the front of every dossier before it goes out, and the Advisor prep page says when. Check anything you plan to repeat against its source; every claim links to one.</li>
       <li>You receive one password-protected page by email, and you can make PDFs from it for you and your client.</li>
     </ol>
 
