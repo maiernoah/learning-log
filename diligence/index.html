@@ -295,7 +295,7 @@ form input[type=file] { font: 13px var(--sans); }
       return fetch(ENDPOINT, { method: "POST", body: JSON.stringify(payload), headers: { "Content-Type": "text/plain;charset=utf-8" } });
     }).then(function (r) { return r.json(); }).then(function (j) {
       if (!j || !j.ok) throw new Error(j && j.error || "rejected");
-      form.hidden = true; var t = document.getElementById("thanks"); t.hidden = false; if (j.id && j.id !== "ok") t.insertAdjacentHTML("beforeend", " Order <b>" + j.id + "</b>.");
+      form.hidden = true; var t = document.getElementById("thanks"); t.hidden = false; if (j.id && j.id !== "ok") { t.insertAdjacentHTML("beforeend", " Order <b>" + j.id + "</b>. <a href="status/?id=" + encodeURIComponent(j.id) + "">Watch it being built</a>."); location.href = "status/?id=" + encodeURIComponent(j.id); }
     }).catch(function (err) { submit.disabled = false; msg.textContent = (err && err.message && err.message !== "rejected" && err.message !== "Failed to fetch") ? err.message : "That did not send. Please try again in a moment."; });
   });
 })();
