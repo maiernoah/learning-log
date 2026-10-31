@@ -10,6 +10,9 @@
   var ON_LOG = PAGE === "log";
   var HOME = IS_FILE ? "index.html" : "./";
   var RESERVED = ["all", "topics", "archives", "topics-box", "archives-box", "find", "about-box", "elsewhere", "subscribe", "log"];
+  /* Sections: entries with a `section` key stay off the front page, Topics and Archives,
+     and get their own page in the nav (next to Archives). Titles come from SITE.sections. */
+  var SECTIONS = {};
   var DAY_MS = 86400000;
 
   /* ---------- load content.js safely ---------- */
@@ -22,15 +25,24 @@
 
   site = Object.assign(
     { title: "Noah's Weblog", tagline: "", author: "", email: "", blurb: "",
-      frontPageCount: 10, newForDays: 14, links: [] },
+      frontPageCount: 10, newForDays: 14, links: [], sections: {} },
     site || {}
   );
+  Object.keys(site.sections || {}).forEach(function (k) {
+    var key = String(k).trim().toLowerCase();
+    var v = site.sections[k] || {};
+    SECTIONS[key] = { title: v.title || key, intro: v.intro || "" };
+    if (RESERVED.indexOf(key) === -1) RESERVED.push(key);
+  });
 
-  var entries = dropDuplicates((raw || []).map(normalize).filter(Boolean));
-  entries.sort(function (a, b) { return b.when - a.when || a.order - b.order; });
+  var all = dropDuplicates((raw || []).map(normalize).filter(Boolean));
+  all.sort(function (a, b) { return b.when - a.when || a.order - b.order; });
+  var entries = all.filter(function (e) { return !e.section; });
+  var sectioned = all.filter(function (e) { return e.section; });
 
   var bySlug = {};
-  entries.forEach(function (e, i) { bySlug[e.slug] = e; e.rank = i; });
+  all.forEach(function (e) { bySlug[e.slug] = e; });
+  entries.forEach(function (e, i) { e.rank = i; });
 
   /* ---------- helpers ---------- */
 
@@ -103,6 +115,11 @@
       .map(function (t) { return String(t).trim().toLowerCase(); })
       .filter(Boolean);
     var summary = e.summary ? String(e.summary).trim() : "";
+    var section = e.section ? String(e.section).trim().toLowerCase() : "";
+    if (section && !SECTIONS[section]) {
+      problems.push(where + ": section “" + section + "” isn't listed under SITE.sections in content.js.");
+      section = "";
+    }
     var video = e.video ? String(e.video).trim() : "";
     if (video && window.WeblogVideo && !window.WeblogVideo.idFrom(video)) {
       problems.push(where + ": video “" + video + "” isn't a YouTube link. Paste the address from YouTube's Share button.");
@@ -118,6 +135,7 @@
       tags: tags,
       summary: summary,
       video: video,
+      section: section,
       length: e.length ? String(e.length).trim() : "",
       order: i,
       haystack: (e.title + " " + stripHtml(summary) + " " + tags.join(" ") + (video ? " video" : "")).toLowerCase()
@@ -207,6 +225,7 @@
       ["Topics", logLink("topics"), false],
       ["Archives", logLink("archives"), false]
     ];
+    Object.keys(SECTIONS).forEach(function (k) { items.push([SECTIONS[k].title, logLink(k), false]); });
     var nav = h("nav", { class: "nav", "aria-label": "Site" }, ["[ "]);
     items.forEach(function (it, i) {
       if (i) nav.appendChild(document.createTextNode(" | "));
@@ -296,6 +315,8 @@
     if (hash.indexOf("month=") === 0) return { kind: "month", value: hash.slice(6) };
     if (hash === "all") return { kind: "all" };
     if (hash === "topics" || hash === "archives") return { kind: hash };
+    if (SECTIONS[hash]) return { kind: "section", value: hash };
+    if (bySlug[hash] && bySlug[hash].section) return { kind: "section", value: bySlug[hash].section };
     if (bySlug[hash] && bySlug[hash].rank >= site.frontPageCount) return { kind: "all" };
     return { kind: "front" };
   }
@@ -306,7 +327,7 @@
   }
 
   function isLogHash(hash) {
-    return hash === "" || hash === "all" || hash === "topics" || hash === "archives" || hash.indexOf("tag=") === 0 ||
+    return hash === "" || hash === "all" || hash === "topics" || hash === "archives" || !!SECTIONS[hash] || hash.indexOf("tag=") === 0 ||
       hash.indexOf("month=") === 0 || hash.indexOf("find=") === 0 || !!bySlug[hash];
   }
 
@@ -314,9 +335,11 @@
     switch (view.kind) {
       case "find":
         var words = view.value.toLowerCase().split(/\s+/);
-        return entries.filter(function (e) {
+        return all.filter(function (e) {
           return words.every(function (w) { return e.haystack.indexOf(w) !== -1; });
         });
+      case "section":
+        return sectioned.filter(function (e) { return e.section === view.value; });
       case "tag":
         return entries.filter(function (e) { return e.tags.indexOf(view.value) !== -1; });
       case "month":
@@ -334,6 +357,12 @@
     if (view.kind === "topics" || view.kind === "archives") {
       p.appendChild(document.createTextNode(view.kind === "topics"
         ? "Every topic on the log, with its entries. " : "Every month on the log, with its entries. "));
+      p.appendChild(h("a", { href: "#", text: "Back to the front page" }));
+      return p;
+    }
+    if (view.kind === "section") {
+      var sec = SECTIONS[view.value] || {};
+      if (sec.intro) p.appendChild(h("span", { html: sec.intro + " " }));
       p.appendChild(h("a", { href: "#", text: "Back to the front page" }));
       return p;
     }
@@ -439,6 +468,7 @@
     var list = select(view);
     var status = statusLine(view, list.length);
     if (status) main.appendChild(status);
+    if (view.kind === "section") document.title = (SECTIONS[view.value] || {}).title + " | " + site.title;
 
     if (!entries.length) {
       main.appendChild(h("p", { class: "empty", text: "No entries yet. Add one in content.js." }));
@@ -585,7 +615,8 @@
     navLinks.forEach(function (a) {
       var t = a.textContent;
       var on = (t === "Topics" && view.kind === "topics") || (t === "Archives" && view.kind === "archives") ||
-               (t === "Home" && ON_LOG && view.kind !== "topics" && view.kind !== "archives");
+               (view.kind === "section" && SECTIONS[view.value] && t === SECTIONS[view.value].title) ||
+               (t === "Home" && ON_LOG && view.kind !== "topics" && view.kind !== "archives" && view.kind !== "section");
       if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
     var nodes = document.querySelectorAll("#sidebar li[data-tag], #sidebar li[data-month]");

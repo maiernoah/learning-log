@@ -42,6 +42,17 @@ const SITE = {
   links: [
     // { label: "Some site I like", url: "https://example.com" },
   ],
+
+  // Sections: a separate page in the nav, next to Archives. An entry with
+  // section: "due-diligence" shows only there, not on the front page, Topics,
+  // Archives or the RSS feed.
+  sections: {
+    "due-diligence": {
+      title: "Due Diligence",
+      intro: `Dossiers on nonprofits, compiled from the public record. Start with
+              <a href="exhibits/dossier/">what a dossier is and what it costs</a>.`,
+    },
+  },
 };
 
 const ENTRIES = [
@@ -202,6 +213,7 @@ const ENTRIES = [
 
   {
     slug: "dossier",
+    section: "due-diligence",
     title: "Dossier",
     date: "2026-10-30",
     time: "20:20",
@@ -212,6 +224,7 @@ const ENTRIES = [
 
   {
     slug: "dossier-aclu-of-northern-california",
+    section: "due-diligence",
     title: "Dossier: ACLU of Northern California",
     date: "2026-10-30",
     time: "20:19",
@@ -222,6 +235,7 @@ const ENTRIES = [
 
   {
     slug: "dossier-the-consciousness-foundation",
+    section: "due-diligence",
     title: "Dossier: The Consciousness Foundation",
     date: "2026-10-30",
     time: "20:18",

@@ -66,6 +66,7 @@ function main() {
   const items = entries
     .map((e, i) => ({ e, i }))
     .filter(({ e }) => e && e.slug && e.title && /^\d{4}-\d{2}-\d{2}$/.test(e.date || ""))
+    .filter(({ e }) => !e.section)   // sectioned entries (Due Diligence) stay off the main feed
     .map(({ e, i }) => ({ e, i, when: zonedTime(e.date, e.time) }))
     .sort((a, b) => b.when - a.when || a.i - b.i)
     .slice(0, MAX_ITEMS);
