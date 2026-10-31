@@ -265,4 +265,14 @@ const ENTRIES = [
     tags: ["fundraising", "philanthropy"],
     summary: `A sample dossier on Just Impact, a small advisory group in US criminal justice reform: its 501(c)(4) and its 501(c)(3) fund, the 990 numbers and ratio flags, the funders, the field, and a verdict on what kind of gift fits. Password-protected.`,
   },
+  {
+    slug: "diligence-financing-alliance-for-health",
+    section: "due-diligence",
+    title: "Dossier: Financing Alliance for Health",
+    date: "2026-10-31",
+    time: "07:58",
+    url: "diligence/financing-alliance-for-health/",
+    tags: ["fundraising", "philanthropy"],
+    summary: `A dossier on Financing Alliance for Health: identity and structure, the money and its ratios, the public record, what the organization has actually changed, its field, its leadership, four futures on external trends, and a verdict. Password-protected.`,
+  },
 ];
