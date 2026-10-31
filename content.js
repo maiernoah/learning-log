@@ -255,4 +255,14 @@ const ENTRIES = [
     tags: ["fundraising", "philanthropy", "environment"],
     summary: `A sample dossier on the Fungi Foundation, a small founder-led charity in New York built on top of a Chilean foundation from 2012. Four years of 990s show three straight deficits and about two months of reserves beside real wins in getting fungi written into conservation language and pledges. The dossier reads the founder's own writing across 31 pieces, sets the futures on state commitment to fungal conservation and the reach of private nature capital, and names a quiet stall as the most likely failure. Password-protected.`,
   },
+  {
+    slug: "diligence-just-impact",
+    section: "due-diligence",
+    title: "Dossier: Just Impact",
+    date: "2026-10-31",
+    time: "05:26",
+    url: "diligence/just-impact/",
+    tags: ["fundraising", "philanthropy"],
+    summary: `Just Impact sent $1,470,000 of its $2,870,000 in FY2025 grants to one PAC, Working Families Party National PAC; its website does not show this. Neither the website nor the 990's grant wording shows it, so a check here can fund a political committee, not just reform advising. A dossier on Just Impact, password-protected.`,
+  },
 ];
