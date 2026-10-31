@@ -124,19 +124,30 @@ body { line-height: 1.5; }
 header h1 { font-size: 2.4em; letter-spacing: -0.01em; }
 header .dek { font-size: 1.05em; }
 h2 { font-size: 0.85em; letter-spacing: 0.02em; color: var(--ink-soft); margin: 2.2em 0 0.8em; }
-.box { border-left: 3px solid var(--lo); box-shadow: none; padding: 9px 12px; }
 .lede { font-size: 1.2em; line-height: 1.42; max-width: var(--measure); }
-.samples { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: var(--measure); margin: 0 0 10px; }
+form { max-width: var(--measure); margin: 0 0 8px; }
+form fieldset { padding: 12px 14px 14px; }
+form label.field { display: block; font-size: 13px; font-weight: bold; margin: 0 0 4px; }
+form .hint { font: 12px/1.5 var(--sans); color: var(--ink-soft); margin: 4px 0 0; }
+.hint-inline { font: 12px/1.5 var(--sans); color: var(--ink-soft); }
+form input[type=email], form input[type=text] { width: 100%; max-width: 26em; font-size: 16px; padding: 6px 8px; }
+form input[type=file] { font: 13px var(--sans); }
+.tiers-inline label { display: block; font: 13px/1.6 var(--sans); margin: 2px 0; }
+.found { font: 13px/1.5 var(--sans); margin: 6px 0 0; }
+.files { font: 12.5px/1.5 var(--sans); margin: 8px 0 0; padding-left: 18px; }
+.actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 6px 0 0; }
+.box { border-left: 3px solid var(--lo); box-shadow: none; padding: 9px 12px; }
+.done { border-left-color: var(--c6); }
+.samples { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; max-width: var(--measure); margin: 0 0 10px; }
 .sample { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi); padding: 12px 14px 10px; }
-.sample .score { font: bold 2.4em/1 var(--serif); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.sample .score { font: bold 2.2em/1 var(--serif); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
 .sample .score small { font: 12px var(--sans); color: var(--ink-soft); margin-left: 6px; letter-spacing: 0; }
-.sample .score.locked { font: bold 1.1em/1 var(--sans); color: var(--ink-soft); padding: 8px 0 10px; }
-.sample h3 { margin: 8px 0 6px; font-size: 1.1em; }
+.sample .score.locked { font: bold 1.05em/1 var(--sans); color: var(--ink-soft); padding: 8px 0 10px; }
+.sample h3 { margin: 8px 0 6px; font-size: 1.05em; }
 .sample p { font-size: 0.85em; line-height: 1.45; margin: 0 0 8px; }
 .sample p.meta { margin: 0; }
-.passes { max-width: var(--measure); padding-left: 1.4em; }
-.passes li { margin: 0 0 6px; }
-.passes b { font-weight: bold; }
+.passes, .steps { max-width: var(--measure); padding-left: 1.4em; }
+.passes li, .steps li { margin: 0 0 6px; }
 .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: var(--measure); }
 .tiers fieldset { margin: 0; padding: 12px 14px 12px; }
 .tiers legend { font-size: 1.05em; font-family: var(--serif); font-weight: bold; }
@@ -152,18 +163,64 @@ h2 { font-size: 0.85em; letter-spacing: 0.02em; color: var(--ink-soft); margin: 
   <header>
     <h1>Dossier</h1>
     <p class="dek">A due-diligence dossier on any U.S. nonprofit, compiled from the public record in about an hour.</p>
-    <p class="nav">[ <a href="../index.html#diligence">&#9668; Noah's Weblog</a> | <a href="../about.html">About</a> ]</p>
+    <p class="nav">[ <a href="../index.html">&#9668; Noah's Weblog</a> | <a href="../about.html">About</a> ]</p>
     <hr>
   </header>
   <main>
-    <p class="box">Ordering opens soon. Two sample dossiers are below. <a href="request/">Request a dossier</a>.</p>
-
     <p class="lede">Before you give to a nonprofit you can read its 990, its annual report and a rating site. That tells you how it spends. It does not tell you what changed in the world because of it, how it is most likely to go wrong, what a gift is good for, or whether someone else already does the work better.</p>
-    <p>A dossier answers those questions in writing, with every claim tagged by how well it is supported and linked to its source. The verdict is the part you will actually read: a health score with its reasoning, a pre-mortem of the most likely failures, the risk of each kind of gift, and the questions to ask before you give.</p>
+    <p>A dossier answers those questions in writing, with every claim tagged by how well it is supported and linked to its source. Name the organization by its EIN below. The dossier compiles on its own and arrives by email, usually within an hour, as a single password-protected page you can read anywhere, print, or save as a designed PDF.</p>
+
+    <h2>Order a dossier</h2>
+    <form id="order" method="post" enctype="multipart/form-data" action="#" novalidate>
+      <fieldset>
+        <legend>Which organization</legend>
+        <label class="field" for="ein">Employer identification number (EIN)</label>
+        <input type="text" id="ein" name="ein" inputmode="numeric" autocomplete="off" required placeholder="12-3456789" maxlength="10">
+        <p class="hint">Nine digits. It is on the organization's donate page, its Form 990, or <a href="https://projects.propublica.org/nonprofits/" target="_blank" rel="noopener">ProPublica's Nonprofit Explorer</a>. The EIN, not the name, keeps two organizations with similar names apart.</p>
+        <p class="found" id="ein-status" aria-live="polite"></p>
+        <label class="field" for="orgname" style="margin-top:10px">Organization name, as you know it</label>
+        <input type="text" id="orgname" name="org_name" autocomplete="organization" placeholder="Optional, helps confirm the EIN">
+      </fieldset>
+      <fieldset>
+        <legend>Which dossier</legend>
+        <div class="tiers-inline"><label><input type="radio" name="tier" value="standard" checked> <b>Standard</b>, $25 <span class="hint-inline">About an hour</span></label><label><input type="radio" name="tier" value="deep"> <b>Deep</b>, $50 <span class="hint-inline">Same day, with a second verdict after your interview</span></label></div>
+        <p class="hint">What each includes is listed under prices below. Payment by card is added when ordering opens; nothing is charged on this page today.</p>
+      </fieldset>
+      <fieldset>
+        <legend>Where to send it</legend>
+        <label class="field" for="email">Email address</label>
+        <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@example.org">
+        <p class="hint">The finished dossier and its password are sent here. Nothing else is.</p>
+      </fieldset>
+      <fieldset>
+        <legend>Internal documents, if you have them</legend>
+        <label class="field" for="docs">Attach files</label>
+        <input type="file" id="docs" name="documents" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.md,.csv">
+        <p class="hint">Optional. Audits, annual reports, strategic plans, board decks, grant proposals or reports the organization has shared with you. PDF, Word, Excel, PowerPoint or text, up to 10 MB each. Documents are read only for your dossier and are never published.</p>
+        <ul class="files" id="file-list"></ul>
+      </fieldset>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+      <input type="hidden" name="_subject" value="Dossier order">
+      <div class="actions">
+        <button type="submit" class="primary" id="submit">Ordering opens soon</button>
+        <span class="hint" id="status"></span>
+      </div>
+    </form>
+    <div id="thanks" class="box done" hidden><strong>Order received.</strong> The dossier is compiling. The page and its password will arrive at the address you gave, usually within an hour.</div>
+
+    <h2>What happens when you submit</h2>
+    <ol class="steps">
+      <li>The EIN is checked against the IRS record and the organization's own site. If they disagree, you get an email asking which organization you meant, and nothing else happens until you answer.</li>
+      <li>The dossier compiles: public filings, the public record, what the organization has actually changed, its field, its leadership, four futures and a verdict. Your documents are read alongside the public record and cited as supplied. Nobody reviews it by hand.</li>
+      <li>You receive one self-contained page, password-protected, with every claim tagged and sourced. It prints as a designed PDF.</li>
+    </ol>
 
     <h2>Sample dossiers</h2>
-    <div class="samples"><div class="sample"><div class="score locked">Locked</div><h3><a href="the-consciousness-foundation/">The Consciousness Foundation</a></h3><p>Password-protected. The dossier opens in the browser with its password; nothing readable is on the server.</p><p class="meta">Compiled 2026-10-31 · <a href="the-consciousness-foundation/">Open with password</a></p></div><div class="sample"><div class="score locked">Locked</div><h3><a href="fungi-foundation/">Fungi Foundation</a></h3><p>Password-protected. The dossier opens in the browser with its password; nothing readable is on the server.</p><p class="meta">Compiled 2026-10-31 · <a href="fungi-foundation/">Open with password</a></p></div><div class="sample"><div class="score locked">Locked</div><h3><a href="aclu-of-northern-california/">ACLU of Northern California</a></h3><p>Password-protected. The dossier opens in the browser with its password; nothing readable is on the server.</p><p class="meta">Compiled 2026-10-31 · <a href="aclu-of-northern-california/">Open with password</a></p></div></div>
-    <p class="meta">Sample dossier, published to show what the service produces. The organization did not commission it and has not reviewed it. All figures come from public filings and published sources linked in each section. Sample dossiers on organizations that are clients or partners are password-protected; ask for access.</p>
+    <div class="samples"><div class="sample"><div class="score locked">Locked</div><h3><a href="the-consciousness-foundation/">The Consciousness Foundation</a></h3><p>Password-protected. The dossier opens in the browser with its password; nothing readable is on the server.</p><p class="meta">Compiled 2026-10-31</p></div><div class="sample"><div class="score locked">Locked</div><h3><a href="fungi-foundation/">Fungi Foundation</a></h3><p>Password-protected. The dossier opens in the browser with its password; nothing readable is on the server.</p><p class="meta">Compiled 2026-10-31</p></div><div class="sample"><div class="score locked">Locked</div><h3><a href="aclu-of-northern-california/">ACLU of Northern California</a></h3><p>Password-protected. The dossier opens in the browser with its password; nothing readable is on the server.</p><p class="meta">Compiled 2026-10-31</p></div></div>
+    <p class="meta">Sample dossier, published to show what the service produces. The organization did not commission it and has not reviewed it. All figures come from public filings and published sources linked in each section. Samples on organizations that are clients or partners are password-protected.</p>
+
+    <h2>Prices</h2>
+    <div class="tiers"><fieldset><legend>Standard</legend><div class="price">$25<small>About an hour</small></div><ul><li>Identity and structure, including affiliated c3/c4 entities</li><li>Up to 25 years of Form 990 numbers and the named pay table</li><li>The ratio check, scaled to budget size, against named peers</li><li>Public-record scan: ratings, audits, governance answers, legal, funders</li><li>Results ledger: what changed because of them, judged on significance, credit and durability</li><li>The field: who else does this, the counterfactual, the right unit to fund</li><li>Culture read from public professional material</li><li>Four futures on a 2x2 of the two critical uncertainties</li><li>The verdict: health score, pre-mortem, gift risk by gift type, the questions to ask</li></ul></fieldset><fieldset><legend>Deep</legend><div class="price">$50<small>Same day, with a second verdict after your interview</small></div><ul><li>Everything in Standard, researched at the highest setting</li><li>Your supplied documents read and cited: audits, strategic plans, board decks, proposals</li><li>An interview sheet built from the verdict&#x27;s questions</li><li>A second verdict after your conversation with the organization, showing what changed</li></ul></fieldset></div>
 
     <h2>How a dossier is built</h2>
     <ol class="passes">
@@ -173,20 +230,17 @@ h2 { font-size: 0.85em; letter-spacing: 0.02em; color: var(--ink-soft); margin: 
       <li><b>The public record.</b> Ratings, audits, governance answers, legal history, funders, and the organization's claims against the evidence.</li>
       <li><b>The results.</b> What actually changed because of the organization, judged on significance, credit and durability, with failures beside successes.</li>
       <li><b>The field.</b> Who else does this, what would be lost if the organization vanished, and whether it is the right unit to fund.</li>
-      <li><b>The culture.</b> How the leadership thinks about money, risk and growth, read from public professional material at the level of the organization.</li>
-      <li><b>Four futures.</b> The two uncertainties that matter most, and what each quadrant does to this organization.</li>
+      <li><b>The culture and the leader.</b> How the leadership thinks about money, risk, loss and power, read from public professional material.</li>
+      <li><b>Four futures.</b> Two strong external trends as axes, and what each quadrant does to this organization.</li>
       <li><b>The verdict.</b> Health score, pre-mortem, gift risk by gift type, and the questions to ask before giving.</li>
     </ol>
-    <p>Research agents gather and read. The arithmetic on filed numbers is done by code, not by a model, so every number traces to a filing.</p>
-
-    <h2>What a dossier costs</h2>
-    <div class="tiers"><fieldset><legend>Standard</legend><div class="price">$25<small>About an hour</small></div><ul><li>Identity and structure, including affiliated c3/c4 entities</li><li>Up to 25 years of Form 990 numbers and the named pay table</li><li>The ratio check, scaled to budget size, against named peers</li><li>Public-record scan: ratings, audits, governance answers, legal, funders</li><li>Results ledger: what changed because of them, judged on significance, credit and durability</li><li>The field: who else does this, the counterfactual, the right unit to fund</li><li>Culture read from public professional material</li><li>Four futures on a 2x2 of the two critical uncertainties</li><li>The verdict: health score, pre-mortem, gift risk by gift type, the questions to ask</li></ul></fieldset><fieldset><legend>Deep</legend><div class="price">$50<small>Same day, with a second verdict after your interview</small></div><ul><li>Everything in Standard, researched at the highest setting</li><li>Your supplied documents read and cited: audits, strategic plans, board decks, proposals</li><li>An interview sheet built from the verdict&#x27;s questions</li><li>A second verdict after your conversation with the organization, showing what changed</li></ul></fieldset></div>
+    <p>Research agents gather and read; an editor pass makes every passage say its point. The arithmetic on filed numbers is done by code, not by a model, so every number traces to a filing.</p>
 
     <h2>What it will not do</h2>
     <ul><li>Psychological profiles of individuals. Culture is read at the level of the organization, from public professional material only.</li><li>Private or leaked material.</li><li>A recommendation to give or not give. The dossier lays out the risks, the strengths and the questions; the decision stays yours.</li></ul>
 
     <h2>How to read one</h2>
-    <p>Every claim carries a tag. <em>Evidence</em> means an agent saw it in a source it fetched. <em>Inference</em> is a reading of evidence, and says what it rests on. <em>Speculation</em> is a hypothesis worth checking; those lines are blacked out until you click them. A filter on each page hides the weaker tiers. When something could not be found, the dossier says so and names what it looked for.</p>
+    <p>Every claim carries a tag. <em>Evidence</em> means an agent saw it in a source it fetched. <em>Inference</em> is a reading of evidence, and says what it rests on. <em>Speculation</em> is a hypothesis worth checking; those lines are blacked out until you click them. When something could not be found, the dossier says so and names what it looked for.</p>
 
     <h2>Corrections</h2>
     <p>Organizations and readers may request a correction to any factual claim. Corrections that check out are made and noted on the page.</p>
@@ -196,8 +250,48 @@ h2 { font-size: 0.85em; letter-spacing: 0.02em; color: var(--ink-soft); margin: 
   </main>
   <footer>
     <hr>
-    <address>Dossier is a service of <a href="../about.html">Noah Maier</a>. Part of <a href="../index.html#diligence">Noah's Weblog</a>.</address>
+    <address>Dossier is a service of <a href="../about.html">Noah Maier</a>. Part of <a href="../index.html">Noah's Weblog</a>.</address>
   </footer>
 </div>
+<script>
+(function () {
+  var ENDPOINT = "";
+  var form = document.getElementById("order"), ein = document.getElementById("ein"), status = document.getElementById("ein-status");
+  var files = document.getElementById("docs"), list = document.getElementById("file-list"), submit = document.getElementById("submit"), msg = document.getElementById("status");
+  var MAX = 10 * 1024 * 1024;
+  function digits(v) { return (v || "").replace(/\D/g, "").slice(0, 9); }
+  function fmt(d) { return d.length > 2 ? d.slice(0, 2) + "-" + d.slice(2) : d; }
+  ein.addEventListener("input", function () {
+    var d = digits(ein.value); ein.value = fmt(d);
+    if (!d) { status.textContent = ""; return; }
+    if (d.length < 9) { status.textContent = (9 - d.length) + " more digit" + (9 - d.length === 1 ? "" : "s") + "."; return; }
+    status.innerHTML = "Looks like an EIN. Check it on <a href=\"https://projects.propublica.org/nonprofits/organizations/" + d + "\" target=\"_blank\" rel=\"noopener\">ProPublica</a> before you send; the dossier is keyed to it.";
+  });
+  files.addEventListener("change", function () {
+    list.innerHTML = ""; var tooBig = false;
+    Array.prototype.forEach.call(files.files, function (f) {
+      var li = document.createElement("li"); var big = f.size > MAX; tooBig = tooBig || big;
+      li.textContent = f.name + " (" + (f.size / 1048576).toFixed(1) + " MB)" + (big ? ": over 10 MB, please shrink or leave it out" : "");
+      if (big) li.style.color = "#800000"; list.appendChild(li);
+    });
+    files.setCustomValidity(tooBig ? "A file is over 10 MB." : "");
+  });
+  if (!ENDPOINT) { submit.disabled = true; msg.textContent = "Ordering opens soon. The form is here so you can see what is asked."; }
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var d = digits(ein.value);
+    if (d.length !== 9) { msg.textContent = "The EIN needs nine digits."; ein.focus(); return; }
+    if (!form.email.checkValidity()) { msg.textContent = "Please enter a valid email address."; form.email.focus(); return; }
+    if (files.validationMessage) { msg.textContent = files.validationMessage; return; }
+    if (!ENDPOINT) { msg.textContent = "Ordering opens soon."; return; }
+    submit.disabled = true; msg.textContent = "Sending\u2026";
+    var data = new FormData(form); data.set("ein", fmt(d));
+    fetch(ENDPOINT, { method: "POST", body: data, headers: { "Accept": "application/json" } }).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      form.hidden = true; document.getElementById("thanks").hidden = false;
+    }).catch(function () { submit.disabled = false; msg.textContent = "That did not send. Please try again in a moment."; });
+  });
+})();
+</script>
 </body>
 </html>

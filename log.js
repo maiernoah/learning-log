@@ -31,7 +31,7 @@
   Object.keys(site.sections || {}).forEach(function (k) {
     var key = String(k).trim().toLowerCase();
     var v = site.sections[k] || {};
-    SECTIONS[key] = { title: v.title || key, intro: v.intro || "" };
+    SECTIONS[key] = { title: v.title || key, intro: v.intro || "", href: v.href || "" };
     if (RESERVED.indexOf(key) === -1) RESERVED.push(key);
   });
 
@@ -225,7 +225,11 @@
       ["Topics", logLink("topics"), false],
       ["Archives", logLink("archives"), false]
     ];
-    Object.keys(SECTIONS).forEach(function (k) { items.push([SECTIONS[k].title, logLink(k), false]); });
+    Object.keys(SECTIONS).forEach(function (k) {
+      var sec = SECTIONS[k];
+      // A section with its own page (href) links there; otherwise to the section view on the log.
+      items.push([sec.title, sec.href ? (ON_LOG ? "" : HOME.replace(/index\.html$|\.\/$/, "")) + sec.href : logLink(k), false]);
+    });
     var nav = h("nav", { class: "nav", "aria-label": "Site" }, ["[ "]);
     items.forEach(function (it, i) {
       if (i) nav.appendChild(document.createTextNode(" | "));

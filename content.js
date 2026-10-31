@@ -48,9 +48,10 @@ const SITE = {
   // Archives or the RSS feed.
   sections: {
     "due-diligence": {
-      title: "Due Diligence",
-      intro: `Dossiers on nonprofits, compiled from the public record. Start with
-              <a href="diligence/">what a dossier is and what it costs</a>.`,
+      title: "Dossier",
+      href: "diligence/",   // the nav item opens this page instead of the log's section view
+      intro: `Dossiers on nonprofits, compiled from the public record. Order one, or read about
+              the method, on <a href="diligence/">the Dossier page</a>.`,
     },
   },
 };
