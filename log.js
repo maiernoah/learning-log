@@ -619,7 +619,7 @@
     navLinks.forEach(function (a) {
       var t = a.textContent;
       var on = (t === "Topics" && view.kind === "topics") || (t === "Archives" && view.kind === "archives") ||
-               (view.kind === "section" && SECTIONS[view.value] && t === SECTIONS[view.value].title) ||
+               (view.kind === "section" && SECTIONS[view.value] && !SECTIONS[view.value].href && t === SECTIONS[view.value].title) ||
                (t === "Home" && ON_LOG && view.kind !== "topics" && view.kind !== "archives" && view.kind !== "section");
       if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
