@@ -252,6 +252,77 @@ button.b { font: 12px var(--sans); padding: 5px 10px; }
   .cover-grid { grid-template-columns: 1fr 160px; }
   a { color: var(--ink); text-decoration: none; }
 }
+
+/* ===== polish pass: same palette and type, finer rhythm ===== */
+body { line-height: 1.5; }
+.page { max-width: 1040px; }
+header h1 { font-size: 2.2em; letter-spacing: -0.01em; margin-bottom: 0.1em; }
+header .dek { font-size: 0.95em; color: var(--ink-soft); }
+.notice { padding: 9px 12px; line-height: 1.55; border-left: 3px solid var(--lo); box-shadow: none; }
+.shell { gap: 40px; }
+.shell > main > section > h1 { font-size: 1.75em; margin: 0.2em 0 0.1em; }
+.sub { margin: 0 0 18px; }
+h2 { font-size: 0.85em; letter-spacing: 0.02em; color: var(--ink-soft); margin: 2em 0 0.8em; padding-bottom: 3px; }
+h3 { font-size: 1.05em; margin: 1.3em 0 0.35em; }
+.prose, .lede, .pre, .claim .body, .failure, details .in p { max-width: var(--measure); }
+.lede { font-size: 1.2em; line-height: 1.42; }
+/* tables: horizontal rules only, numbers aligned, tinted head */
+table { font-size: 12.5px; line-height: 1.45; margin: 6px 0 10px; }
+main table { max-width: none; }
+td.wrap { min-width: 9em; }
+th, td { border: 0; border-bottom: 1px solid var(--hi); padding: 6px 10px 6px 0; }
+th { border-bottom: 1px solid var(--lo); background: transparent; font-weight: bold; color: var(--ink-soft); }
+tr:last-child td { border-bottom: 1px solid var(--lo); }
+/* health panel on the cover */
+.health { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi); padding: 12px 14px 10px; font: 12.5px/1.45 var(--sans); }
+.health .n { font: bold 3em/1 var(--serif); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.health .n small { font: 13px var(--sans); color: var(--ink-soft); margin-left: 6px; letter-spacing: 0; }
+.health .g { margin: 4px 0 10px; color: var(--ink-soft); }
+.health table { margin: 0; font-size: 12px; }
+.health td { padding: 3px 0; border-bottom: 1px solid var(--hi); }
+.health td.num { padding-left: 10px; }
+.health tr:last-child td { border-bottom: 0; }
+.health .bar { height: 5px; background: var(--hi); margin-top: 3px; }
+.health .bar > i { display: block; height: 100%; background: var(--c1); }
+.stamp { display: none; }
+.failure { padding: 14px 16px; margin: 18px 0; border-left: 3px solid var(--c2); box-shadow: none; }
+.failure .f { font-size: 1.3em; }
+.kv { gap: 4px 18px; margin: 12px 0 16px; }
+/* claims */
+.claim { padding: 2px 0 2px 12px; margin: 12px 0; }
+.claim .head { font: 12px/1.5 var(--sans); gap: 6px; }
+.b { font-size: 10.5px; padding: 0 5px; }
+/* ratio cards */
+.ratios { gap: 12px; }
+.ratio { padding: 10px 12px 10px; background: #fff; }
+.ratio .l { font-size: 12px; color: var(--ink-soft); min-height: 2.6em; }
+.ratio .v { font-size: 1.75em; margin: 6px 0 2px; }
+.ratio .why { color: var(--ink); }
+/* scenario tiles as panels, not buttons */
+.quad { gap: 8px; }
+button.q, button.q:active, button.q[aria-pressed="true"] { background: #fff; color: var(--ink); border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi); padding: 12px 14px; }
+button.q:hover { border-color: var(--field); }
+button.q[aria-pressed="true"] { border-color: var(--c1); box-shadow: inset 3px 0 0 var(--c1), inset 1px 1px 0 var(--hi); }
+.q .nm { font-size: 1.15em; }
+.q .qd { font-size: 10.5px; }
+.scen-detail { padding: 14px 16px 16px; }
+/* expanders */
+details { border: 0; border-top: 1px solid var(--hi); margin: 0; }
+details:last-of-type { border-bottom: 1px solid var(--hi); }
+summary { padding: 10px 4px; grid-template-columns: 28px minmax(0, 1fr) auto; }
+summary .r { color: var(--c1); }
+summary .fm { font-size: 1.05em; }
+details[open] summary { background: transparent; border-bottom: 0; }
+details .in { padding: 0 4px 14px 32px; }
+/* score bars */
+.bars { gap: 7px 14px; }
+.bars .track { height: 9px; box-shadow: none; border-color: var(--lo); }
+/* contents */
+.menu fieldset { padding: 10px 12px 10px; }
+.menu ol { line-height: 1.8; }
+.menu .n { font-size: 10.5px; }
+/* footer */
+.statusline { line-height: 1.55; }
 </style>
 </head>
 <body>
@@ -332,7 +403,7 @@ function section(key, label, html){ sections.push({key,label,html}); }
     <div>Identity confidence</div><div>${I?Math.round((I.identity_confidence||0)*100)+'%':'—'}</div>
     ${SUP&&SUP.length?`<div>Supplied documents</div><div>${SUP.map(s=>esc(s.file)).join(', ')}</div>`:''}
   </div></div>`;
-  h += `<div>${hs?`<div class="stamp"><div class="n">${hs.score}</div><div class="g">Health ${esc(grade(hs.grade))} / 100</div><div class="l">Weighted across financial resilience, governance, change delivered, position, culture, readiness</div></div>`:''}</div></div>`;
+  h += `<div>${hs?`<div class="health"><div class="n">${hs.score}<small>of 100 · ${esc(grade(hs.grade))}</small></div><div class="g">Health score, weighted</div><table>${(hs.components||[]).map(c=>`<tr><td>${esc(c.name)}<div class="bar"><i style="width:${c.score}%"></i></div></td><td class="num">${c.score}</td></tr>`).join('')}</table></div>`:''}</div></div>`;
   h += `<h2>How to read this</h2><div class="prose"><p>Every claim carries a tag. <span class="b evidence">evidence</span> means an agent saw it in a fetched source. <span class="b inference">inference</span> is a reading of evidence. <span class="b speculation">speculation</span> is a hypothesis worth checking; those lines are redacted until you click them. The filter in the menu hides the weaker tiers. The ratio section is pure arithmetic on Form 990 numbers and involves no model judgment.</p></div>`;
   section('cover','Cover',h);
 })();
