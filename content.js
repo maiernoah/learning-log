@@ -243,4 +243,15 @@ const ENTRIES = [
     tags: ["fundraising", "philanthropy", "consciousness"],
     summary: `A sample dossier on The Consciousness Foundation, a fifteen-month-old grantmaker for awakening science with no Form 990 yet. It shows what the method does with a young organization: an honest 37 of 100 that grades evidenced health rather than promise, a results ledger that says everything is too early to judge, two promised reports that slipped, and a verdict that a gift is good for a small, staged, restricted bet on shared measures.`,
   },
+
+  {
+    slug: "diligence-fungi-foundation",
+    section: "due-diligence",
+    title: "Dossier: Fungi Foundation",
+    date: "2026-10-30",
+    time: "21:35",
+    url: "diligence/fungi-foundation/",
+    tags: ["fundraising", "philanthropy", "environment"],
+    summary: `A sample dossier on the Fungi Foundation, a small founder-led charity in New York built on top of a Chilean foundation from 2012. Four years of 990s show three straight deficits and about two months of reserves beside real wins in getting fungi written into conservation language and pledges. The dossier reads the founder's own writing across 31 pieces, sets the futures on state commitment to fungal conservation and the reach of private nature capital, and scores it 47 of 100 with a quiet stall as the most likely failure.`,
+  },
 ];
