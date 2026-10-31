@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request a dossier</title>
+<meta name="description" content="Request a due-diligence dossier on a U.S. nonprofit by EIN.">
+<style>
+/* ===== Noah's Weblog house style (exhibits) v2 =====
+   Matches noahmaier.net: white page, Times for reading, Verdana for
+   controls, blue underlined links, two-tone rules, gray beveled buttons. */
+:root {
+  --page: #ffffff;
+  --ink: #000000;
+  --ink-soft: #2b2b2b;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --active: #ff0000;
+  --lo: #999999;          /* rule, border, axis */
+  --hi: #e2e2e2;          /* rule highlight, gridline */
+  --tint: #f2f2f2;        /* callout and table-header fill */
+  --field: #6e6e6e;       /* input border */
+  --btn: #c0c0c0;         /* button face */
+  --btn-face: #dfdfdf;
+  --btn-lo: #808080;
+  --btn-dark: #0a0a0a;
+  --new: #cc0000;
+  /* data colors, in order: classic HTML named colors */
+  --c1: #000080;  /* navy */
+  --c2: #800000;  /* maroon */
+  --c3: #008080;  /* teal */
+  --c4: #808000;  /* olive (marks only; too light for text) */
+  --c5: #800080;  /* purple */
+  --c6: #008000;  /* green */
+  --serif: "Times New Roman", Times, serif;
+  --sans: Verdana, Geneva, Tahoma, sans-serif;
+  --mono: "Courier New", Courier, monospace;
+  --measure: 42.75rem;    /* one column width (684px): text, boxes, questions, tables, figures */
+}
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body { margin: 0; padding: 10px 16px 32px; background: var(--page); color: var(--ink);
+       font: 18px/1.45 var(--serif); -webkit-text-size-adjust: 100%; }
+.page { max-width: 1020px; }
+/* Text, boxes, questions, tables and figures share one column width, so their left and
+   right edges line up. Add class="wide" only to something that genuinely needs more room. */
+main p, main ul, main ol, main dl, main blockquote, main table, main fieldset, main figure,
+main details, main .box, main h2, main h3, main .view > *, .prose { max-width: var(--measure); }
+.wide { max-width: none !important; }
+a { color: var(--link); } a:visited { color: var(--visited); } a:active { color: var(--active); }
+:focus-visible { outline: 2px dotted var(--ink); outline-offset: 2px; }
+
+h1 { font-size: 2.3em; line-height: 1.1; margin: 0.35em 0 0.15em; }
+h2 { font-size: 1em; font-weight: bold; margin: 1.6em 0 0.7em; padding-bottom: 2px;
+     border-bottom: 1px solid var(--lo); }
+h3 { font-size: 1.15em; line-height: 1.25; margin: 1.2em 0 0.3em; }
+p { margin: 0 0 0.8em; }
+.dek { font-style: italic; margin: 0 0 0.5em; }
+.nav { font: 13px/1.6 var(--sans); margin: 0; }
+hr { border: 0; border-top: 1px solid var(--lo); border-bottom: 1px solid var(--hi);
+     height: 0; margin: 10px 0 14px; }
+code, pre, kbd { font-family: var(--mono); font-size: 0.9em; }
+
+/* controls and small text use Verdana */
+label, legend, button, input, select, textarea, table, figcaption, output, .ui, .meta {
+  font-family: var(--sans); }
+.ui, .meta, figcaption { font-size: 13px; line-height: 1.5; }
+.meta { color: var(--ink-soft); }
+p.meta { margin: 6px 0 12px; }
+
+fieldset { border: 1px solid var(--lo); box-shadow: inset 1px 1px 0 var(--hi);
+           margin: 0 0 16px; padding: 10px 12px 12px; min-width: 0; }
+/* The legend sits inside the box as its first line, so long legends wrap cleanly
+   instead of breaking through the border. */
+legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; font-size: 13px; font-weight: bold; }
+legend + * { clear: both; }
+label { font-size: 13px; }
+.choices { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.choices label { display: inline-flex; align-items: center; gap: 5px; }
+input[type=radio], input[type=checkbox], input[type=range] { accent-color: var(--c1); }
+
+button {
+  font-size: 13px; line-height: 1.2; color: #000; background: var(--btn);
+  border: 0; border-radius: 0; padding: 6px 12px; cursor: pointer;
+  box-shadow: inset -1px -1px var(--btn-dark), inset 1px 1px #fff,
+              inset -2px -2px var(--btn-lo), inset 2px 2px var(--btn-face);
+}
+button:active, button[aria-pressed="true"] {
+  box-shadow: inset 1px 1px var(--btn-dark), inset -1px -1px #fff,
+              inset 2px 2px var(--btn-lo), inset -2px -2px var(--btn-face);
+  padding: 7px 11px 5px 13px;
+}
+button:disabled { color: var(--btn-lo); text-shadow: 1px 1px #fff; cursor: default; }
+button.primary { font-weight: bold; }
+
+input[type=text], input[type=number], input[type=search], input[type=email],
+select, textarea {
+  font-size: 14px; color: var(--ink); background: #fff; border: 1px solid var(--field);
+  border-radius: 0; box-shadow: inset 1px 1px 0 #b4b4b4; padding: 4px 6px;
+}
+
+table { border-collapse: collapse; font-size: 13px; line-height: 1.4; }
+main table { width: 100%; }
+th, td { border: 1px solid var(--lo); padding: 4px 8px; text-align: left; vertical-align: top; }
+th { background: var(--tint); }
+
+.box { background: var(--tint); box-shadow: inset 1px 1px var(--lo), inset -1px -1px var(--hi);
+       padding: 8px 10px; margin: 0 0 1em; font: 13px/1.5 var(--sans); }
+.result { font-size: 1.15em; }
+.result strong { font-variant-numeric: tabular-nums; }
+
+.meter { height: 16px; background: #fff; border: 1px solid var(--field);
+         box-shadow: inset 1px 1px 0 #b4b4b4; }
+.meter > div { height: 100%; width: 0; background: var(--c1); }
+
+footer address { font-style: normal; font-size: 0.85em; }
+
+@media (max-width: 780px) { body { font-size: 17px; padding: 8px 16px 28px; } h1 { font-size: 1.8em; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media print { .nav { display: none; } }
+
+/* ===== page-specific rules ===== */
+body { line-height: 1.5; }
+header h1 { font-size: 2.2em; letter-spacing: -0.01em; }
+h2 { font-size: 0.85em; letter-spacing: 0.02em; color: var(--ink-soft); margin: 2em 0 0.8em; }
+form { max-width: var(--measure); }
+form fieldset { padding: 12px 14px 14px; }
+form label.field { display: block; font-size: 13px; font-weight: bold; margin: 0 0 4px; }
+form .hint { font: 12px/1.5 var(--sans); color: var(--ink-soft); margin: 4px 0 0; }
+form input[type=email], form input[type=text] { width: 100%; max-width: 26em; font-size: 16px; padding: 6px 8px; }
+form input[type=file] { font: 13px var(--sans); }
+.found { font: 13px/1.5 var(--sans); margin: 6px 0 0; }
+.found.bad { color: var(--c2); }
+.files { font: 12.5px/1.5 var(--sans); margin: 8px 0 0; padding-left: 18px; }
+.actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 6px 0 0; }
+.box { border-left: 3px solid var(--lo); box-shadow: none; padding: 9px 12px; }
+.done { border-left-color: var(--c6); }
+.err { border-left-color: var(--c2); }
+.steps { max-width: var(--measure); padding-left: 1.4em; }
+.steps li { margin: 0 0 6px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>Request a dossier</h1>
+    <p class="dek">A due-diligence dossier on any U.S. nonprofit, compiled from the public record in about an hour.</p>
+    <p class="nav">[ <a href="../../index.html#diligence">&#9668; Noah's Weblog</a> | <a href="../">About Dossier</a> | <a href="../../about.html">About</a> ]</p>
+    <hr>
+  </header>
+  <main>
+    <p>Three things: where to send the dossier, which organization, and anything the organization has given you that the public record would not show. $25 for Standard or $50 for Deep. You will hear from Noah by email within one business day to confirm the organization and the price before any work starts. Nothing is charged on this page.</p>
+
+    <form id="order" method="post" enctype="multipart/form-data" action="#" novalidate>
+      <fieldset>
+        <legend>1. Your email</legend>
+        <label class="field" for="email">Email address</label>
+        <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@example.org">
+        <p class="hint">The finished dossier is sent here. Nothing else is.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. The organization's EIN</legend>
+        <label class="field" for="ein">Employer identification number</label>
+        <input type="text" id="ein" name="ein" inputmode="numeric" autocomplete="off" required placeholder="12-3456789" maxlength="10">
+        <p class="hint">Nine digits. Every U.S. nonprofit has one; it is on the organization's donate page, its Form 990, or <a href="https://projects.propublica.org/nonprofits/" target="_blank" rel="noopener">ProPublica's Nonprofit Explorer</a>. The EIN, not the name, is what keeps two organizations with similar names apart.</p>
+        <p class="found" id="ein-status" aria-live="polite"></p>
+        <label class="field" for="orgname" style="margin-top:10px">Organization name, as you know it</label>
+        <input type="text" id="orgname" name="org_name" autocomplete="organization" placeholder="Optional, helps confirm the EIN">
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Internal documents</legend>
+        <label class="field" for="docs">Attach files</label>
+        <input type="file" id="docs" name="documents" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.md,.csv">
+        <p class="hint">Optional. Audits, annual reports, strategic plans, board decks, grant proposals or reports the organization has shared with you. PDF, Word, Excel, PowerPoint or text, up to 10 MB each. Documents are read only for your dossier and are not published.</p>
+        <ul class="files" id="file-list"></ul>
+      </fieldset>
+
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+      <input type="hidden" name="_subject" value="Dossier request">
+      <div class="actions">
+        <button type="submit" class="primary" id="submit">Ordering opens soon</button>
+        <span class="hint" id="status"></span>
+      </div>
+      <p class="hint" style="margin-top:12px">Organizations and readers may request a correction to any factual claim. Corrections that check out are made and noted on the page.</p>
+    </form>
+
+    <div id="thanks" class="box done" hidden>
+      <strong>Request received.</strong> Noah will confirm the organization and the price by email before any work starts. Keep your documents; if the request needs anything more, the email will say so.
+    </div>
+
+    <h2>What happens next</h2>
+    <ol class="steps">
+      <li>Noah confirms the organization behind the EIN and the price with you by email.</li>
+      <li>The dossier is compiled: public filings, the public record, what the organization has actually changed, its field, its leadership, four futures and a verdict. Your documents are read alongside the public record and cited as supplied.</li>
+      <li>You receive one self-contained web page you can open anywhere, print, or save as a PDF, with every claim tagged and sourced.</li>
+    </ol>
+
+    <h2>The fine print</h2>
+    <p class="meta">Dossiers are compiled from public records by research agents and arithmetic on filed numbers. Every claim is tagged evidence, inference or speculation and carries its sources. Nothing in a dossier is legal, financial, tax or investment advice, and the organization assessed has not reviewed it. Verify anything you intend to act on.</p>
+  </main>
+  <footer>
+    <hr>
+    <address>Dossier is a service of <a href="../../about.html">Noah Maier</a>. Part of <a href="../../index.html#diligence">Noah's Weblog</a>.</address>
+  </footer>
+</div>
+<script>
+(function () {
+  var ENDPOINT = "";
+  var form = document.getElementById("order"), ein = document.getElementById("ein"), status = document.getElementById("ein-status");
+  var files = document.getElementById("docs"), list = document.getElementById("file-list"), submit = document.getElementById("submit"), msg = document.getElementById("status");
+  var MAX = 10 * 1024 * 1024;
+  function digits(v) { return (v || "").replace(/\D/g, "").slice(0, 9); }
+  function fmt(d) { return d.length > 2 ? d.slice(0, 2) + "-" + d.slice(2) : d; }
+  ein.addEventListener("input", function () {
+    var d = digits(ein.value); ein.value = fmt(d);
+    if (!d) { status.textContent = ""; status.className = "found"; return; }
+    if (d.length < 9) { status.textContent = (9 - d.length) + " more digit" + (9 - d.length === 1 ? "" : "s") + "."; status.className = "found"; return; }
+    status.innerHTML = "Looks like an EIN. Check it on <a href=\"https://projects.propublica.org/nonprofits/organizations/" + d + "\" target=\"_blank\" rel=\"noopener\">ProPublica</a> before you send; the dossier is keyed to it.";
+    status.className = "found";
+  });
+  files.addEventListener("change", function () {
+    list.innerHTML = "";
+    var tooBig = false;
+    Array.prototype.forEach.call(files.files, function (f) {
+      var li = document.createElement("li"); var big = f.size > MAX; tooBig = tooBig || big;
+      li.textContent = f.name + " (" + (f.size / 1048576).toFixed(1) + " MB)" + (big ? ": over 10 MB, please shrink or leave it out" : "");
+      if (big) li.style.color = "#800000";
+      list.appendChild(li);
+    });
+    files.setCustomValidity(tooBig ? "A file is over 10 MB." : "");
+  });
+  if (!ENDPOINT) { submit.disabled = true; msg.textContent = "Ordering opens soon. The form is here so you can see what is asked."; }
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var d = digits(ein.value);
+    if (!form.email.checkValidity()) { msg.textContent = "Please enter a valid email address."; form.email.focus(); return; }
+    if (d.length !== 9) { msg.textContent = "The EIN needs nine digits."; ein.focus(); return; }
+    if (files.validationMessage) { msg.textContent = files.validationMessage; return; }
+    if (!ENDPOINT) { msg.textContent = "Ordering opens soon."; return; }
+    submit.disabled = true; msg.textContent = "Sending\u2026";
+    var data = new FormData(form); data.set("ein", fmt(d));
+    fetch(ENDPOINT, { method: "POST", body: data, headers: { "Accept": "application/json" } }).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      form.hidden = true; document.getElementById("thanks").hidden = false;
+    }).catch(function () {
+      submit.disabled = false; msg.textContent = "That did not send. Please try again in a moment.";
+    });
+  });
+})();
+</script>
+</body>
+</html>
