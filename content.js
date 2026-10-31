@@ -275,4 +275,14 @@ const ENTRIES = [
     tags: ["fundraising", "philanthropy"],
     summary: `A dossier on Financing Alliance for Health: identity and structure, the money and its ratios, the public record, what the organization has actually changed, its field, its leadership, four futures on external trends, and a verdict. Password-protected.`,
   },
+  {
+    slug: "diligence-durango-devo",
+    section: "due-diligence",
+    title: "Dossier: Durango Devo",
+    date: "2026-10-31",
+    time: "08:02",
+    url: "diligence/durango-devo/",
+    tags: ["fundraising", "philanthropy"],
+    summary: `A dossier on Durango Devo: identity and structure, the money and its ratios, the public record, what the organization has actually changed, its field, its leadership, four futures on external trends, and a verdict. Password-protected.`,
+  },
 ];
