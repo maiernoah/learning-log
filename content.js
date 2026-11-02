@@ -285,4 +285,14 @@ const ENTRIES = [
     tags: ["fundraising", "philanthropy"],
     summary: `A dossier on Durango Devo: identity and structure, the money and its ratios, the public record, what the organization has actually changed, its field, its leadership, four futures on external trends, and a verdict. Password-protected.`,
   },
+  {
+    slug: "diligence-renaissance-philanthropy-fund",
+    section: "due-diligence",
+    title: "Dossier: Renaissance Philanthropy",
+    date: "2026-11-02",
+    time: "11:49",
+    url: "diligence/renaissance-philanthropy-fund/",
+    tags: ["fundraising", "philanthropy"],
+    summary: `A dossier on Renaissance Philanthropy: identity and structure, the money and its ratios, the public record, what the organization has actually changed, its field, its leadership, four futures on external trends, and a verdict. Password-protected.`,
+  },
 ];
