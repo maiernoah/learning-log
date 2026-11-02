@@ -295,4 +295,14 @@ const ENTRIES = [
     tags: ["fundraising", "philanthropy"],
     summary: `A dossier on Renaissance Philanthropy: identity and structure, the money and its ratios, the public record, what the organization has actually changed, its field, its leadership, four futures on external trends, and a verdict. Password-protected.`,
   },
+  {
+    slug: "diligence-hanley-foundation",
+    section: "due-diligence",
+    title: "Dossier: Hanley Foundation",
+    date: "2026-11-02",
+    time: "12:00",
+    url: "diligence/hanley-foundation/",
+    tags: ["fundraising", "philanthropy"],
+    summary: `A dossier on Hanley Foundation: identity and structure, the money and its ratios, the public record, what the organization has actually changed, its field, its leadership, four futures on external trends, and a verdict. Password-protected.`,
+  },
 ];
